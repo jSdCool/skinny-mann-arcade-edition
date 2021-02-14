@@ -3,6 +3,26 @@ this is a crappy 2D platform game
 
 change log
 ===================================================================================================================  
+0.1.0_ALFA  
+-changed: redone level structure  
+-removed: all beta levels  
+-changed: player moment speed is no longer linked to frame rate  
+-changed: jump height is now much higher and speed is now independent of the frame rate all of this is subject to change  
+-changed: player collisions are now calculated at multiple points around the edge of the player instead of 1 point at the bottom middle and 1 point at the top middle  
+-added: COINS $$$$$$$$$ -no use yet  
+-added: interdenominational portal  
+-added: sub stages  
+-added: update detection system (applied retroactively)  
+-changed: pause button is now escape  
+-added: additional functionality to the escape button  
+-fixed: how to play now scales properly at different resolutions  
+-added: characters to the main menu  
+-added: ALFA under the title  
+-removed: local multiplayer  
+-changed: checkpoint pole now turn yellow when activated  
+-added: level 1  
+-added: level 2  
+===================================================================================================================    
 0.0.2_bata(10/24/2020)  
 -added: level 5, bewhare the lava  
 -note: this is the last update before ALFA  
