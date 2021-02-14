@@ -3,7 +3,7 @@ this is a crappy 2D platform game
 
 change log
 ===================================================================================================================  
-0.1.0_ALFA  
+0.1.0_ALFA(2/14/2021)  
 -changed: redone level structure  
 -removed: all beta levels  
 -changed: player moment speed is no longer linked to frame rate  
