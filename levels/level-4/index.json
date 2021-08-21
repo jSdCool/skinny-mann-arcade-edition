@@ -1,0 +1,38 @@
+[
+  {
+    "mainStage": 2,
+    "coins": 1,
+    "level_id": 4,
+    "name": "level-4",
+    "spawnX": 400,
+    "spawn pointX": 400,
+    "game version": "0.2.0_ALFA",
+    "spawn pointY": -690,
+    "spawnY": -690
+  },
+  {
+    "name": "coins",
+    "location": "\\coins.json",
+    "type": "coins"
+  },
+  {
+    "name": "stage 1",
+    "location": "\\stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "\\stage 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 3",
+    "location": "\\stage 3.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 4",
+    "location": "\\stage 4.json",
+    "type": "stage"
+  }
+]

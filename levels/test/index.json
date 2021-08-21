@@ -1,0 +1,38 @@
+[
+  {
+    "mainStage": 2,
+    "coins": 1,
+    "level_id": 765319749,
+    "name": "test",
+    "spawnX": 20,
+    "spawn pointX": 20,
+    "game version": "0.1.0_ALFA",
+    "spawn pointY": 700,
+    "spawnY": 700
+  },
+  {
+    "name": "coins",
+    "location": "\\coins.json",
+    "type": "coins"
+  },
+  {
+    "name": "test stage 1",
+    "location": "\\test stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "test 3",
+    "location": "\\test 3.json",
+    "type": "stage"
+  },
+  {
+    "name": "teaters 334",
+    "location": "\\teaters 334.json",
+    "type": "stage"
+  },
+  {
+    "name": "end stage",
+    "location": "\\end stage.json",
+    "type": "stage"
+  }
+]

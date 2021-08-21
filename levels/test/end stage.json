@@ -1,0 +1,35 @@
+[
+  {
+    "name": "end stage",
+    "type": "stage"
+  },
+  {
+    "dx": 1270,
+    "color": -16732415,
+    "dy": 270,
+    "x": 0,
+    "y": 450,
+    "type": "ground"
+  },
+  {
+    "x": 850,
+    "y": 451,
+    "type": "goal"
+  },
+  {
+    "dx": 160,
+    "color": -7254783,
+    "dy": 450,
+    "x": 1110,
+    "y": 0,
+    "type": "ground"
+  },
+  {
+    "link Index": 4,
+    "x": 29,
+    "y": 307,
+    "type": "interdimentional Portal",
+    "linkY": 1,
+    "linkX": 1713
+  }
+]
