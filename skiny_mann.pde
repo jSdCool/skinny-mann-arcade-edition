@@ -110,7 +110,7 @@ PShape coin3D;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false;
-String Menue ="creds",level="n",version="0.2.1_ALFA",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="";
+String Menue ="creds",level="n",version="0.2.2_PRE_SOURSE_RELEASE",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="";
 
 float Scale =1,Scale2=1;
 Player player1 =new Player(20,699,1,"red");
