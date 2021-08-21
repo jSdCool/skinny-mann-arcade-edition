@@ -5,7 +5,7 @@
     textAlign(CENTER);
     text("UPDATE!!!",width/2,height/7);
     textSize(20*Scale);
-    text("A new version of this game has been released!!!",width/2,height/6);
+    text("A new version of this game has been released!!!\n\nignore this this is an unofficial source release",width/2,height/6);
     fill(#FF0004);
     stroke(#FFF300);
     strokeWeight(10*Scale);
