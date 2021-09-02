@@ -2,6 +2,10 @@
 this is a crappy 2D platform game ...... or is it
 
 change log  
+0.3.1_ALFA  
+-fixed: progress file would not be created if it did not exist
+
+
 0.3.0_ALFA  
 +added: 3D stages  
 +added: level-5  
