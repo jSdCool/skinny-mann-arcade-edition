@@ -1,0 +1,29 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 292,
+    "author": "jSdCool",
+    "level_id": 3,
+    "spawnX": 20,
+    "name": "level-3",
+    "spawn pointX": 20,
+    "spawn pointY": 580,
+    "game version": "0.2.0_ALFA",
+    "spawnY": 580
+  },
+  {
+    "name": "in the feilds",
+    "location": "\\in the feilds.json",
+    "type": "stage"
+  },
+  {
+    "name": "the suburbs",
+    "location": "\\the suburbs.json",
+    "type": "stage"
+  },
+  {
+    "name": "finally",
+    "location": "\\finally.json",
+    "type": "stage"
+  }
+]

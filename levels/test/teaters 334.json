@@ -1,0 +1,470 @@
+[
+  {
+    "name": "teaters 334",
+    "type": "stage"
+  },
+  {
+    "dx": 1200,
+    "color": -16449724,
+    "dy": 70,
+    "x": 0,
+    "y": 690,
+    "type": "ground"
+  },
+  {
+    "coin id": 13,
+    "x": 270,
+    "y": 466,
+    "type": "coin"
+  },
+  {
+    "coin id": 14,
+    "x": 231,
+    "y": 458,
+    "type": "coin"
+  },
+  {
+    "coin id": 15,
+    "x": 187,
+    "y": 469,
+    "type": "coin"
+  },
+  {
+    "coin id": 16,
+    "x": 174,
+    "y": 498,
+    "type": "coin"
+  },
+  {
+    "coin id": 17,
+    "x": 160,
+    "y": 569,
+    "type": "coin"
+  },
+  {
+    "coin id": 18,
+    "x": 175,
+    "y": 635,
+    "type": "coin"
+  },
+  {
+    "coin id": 19,
+    "x": 316,
+    "y": 647,
+    "type": "coin"
+  },
+  {
+    "coin id": 20,
+    "x": 212,
+    "y": 658,
+    "type": "coin"
+  },
+  {
+    "coin id": 21,
+    "x": 265,
+    "y": 659,
+    "type": "coin"
+  },
+  {
+    "coin id": 22,
+    "x": 164,
+    "y": 604,
+    "type": "coin"
+  },
+  {
+    "coin id": 23,
+    "x": 157,
+    "y": 531,
+    "type": "coin"
+  },
+  {
+    "coin id": 24,
+    "x": 482,
+    "y": 503,
+    "type": "coin"
+  },
+  {
+    "coin id": 25,
+    "x": 443,
+    "y": 528,
+    "type": "coin"
+  },
+  {
+    "coin id": 26,
+    "x": 432,
+    "y": 582,
+    "type": "coin"
+  },
+  {
+    "coin id": 27,
+    "x": 438,
+    "y": 621,
+    "type": "coin"
+  },
+  {
+    "coin id": 28,
+    "x": 461,
+    "y": 648,
+    "type": "coin"
+  },
+  {
+    "coin id": 29,
+    "x": 494,
+    "y": 656,
+    "type": "coin"
+  },
+  {
+    "coin id": 30,
+    "x": 532,
+    "y": 643,
+    "type": "coin"
+  },
+  {
+    "coin id": 31,
+    "x": 550,
+    "y": 603,
+    "type": "coin"
+  },
+  {
+    "coin id": 32,
+    "x": 546,
+    "y": 556,
+    "type": "coin"
+  },
+  {
+    "coin id": 33,
+    "x": 531,
+    "y": 524,
+    "type": "coin"
+  },
+  {
+    "coin id": 34,
+    "x": 672,
+    "y": 497,
+    "type": "coin"
+  },
+  {
+    "coin id": 35,
+    "x": 674,
+    "y": 562,
+    "type": "coin"
+  },
+  {
+    "coin id": 36,
+    "x": 676,
+    "y": 592,
+    "type": "coin"
+  },
+  {
+    "coin id": 37,
+    "x": 676,
+    "y": 618,
+    "type": "coin"
+  },
+  {
+    "coin id": 38,
+    "x": 676,
+    "y": 658,
+    "type": "coin"
+  },
+  {
+    "coin id": 39,
+    "x": 675,
+    "y": 638,
+    "type": "coin"
+  },
+  {
+    "coin id": 40,
+    "x": 821,
+    "y": 663,
+    "type": "coin"
+  },
+  {
+    "coin id": 41,
+    "x": 819,
+    "y": 633,
+    "type": "coin"
+  },
+  {
+    "coin id": 42,
+    "x": 819,
+    "y": 593,
+    "type": "coin"
+  },
+  {
+    "coin id": 43,
+    "x": 816,
+    "y": 551,
+    "type": "coin"
+  },
+  {
+    "coin id": 44,
+    "x": 816,
+    "y": 526,
+    "type": "coin"
+  },
+  {
+    "coin id": 45,
+    "x": 821,
+    "y": 624,
+    "type": "coin"
+  },
+  {
+    "coin id": 46,
+    "x": 813,
+    "y": 573,
+    "type": "coin"
+  },
+  {
+    "coin id": 47,
+    "x": 832,
+    "y": 575,
+    "type": "coin"
+  },
+  {
+    "coin id": 48,
+    "x": 851,
+    "y": 556,
+    "type": "coin"
+  },
+  {
+    "coin id": 49,
+    "x": 889,
+    "y": 551,
+    "type": "coin"
+  },
+  {
+    "coin id": 50,
+    "x": 913,
+    "y": 561,
+    "type": "coin"
+  },
+  {
+    "coin id": 51,
+    "x": 925,
+    "y": 584,
+    "type": "coin"
+  },
+  {
+    "coin id": 52,
+    "x": 930,
+    "y": 615,
+    "type": "coin"
+  },
+  {
+    "coin id": 53,
+    "x": 935,
+    "y": 646,
+    "type": "coin"
+  },
+  {
+    "coin id": 54,
+    "x": 936,
+    "y": 675,
+    "type": "coin"
+  },
+  {
+    "coin id": 55,
+    "x": 933,
+    "y": 631,
+    "type": "coin"
+  },
+  {
+    "link Index": 2,
+    "x": 1111,
+    "y": 632,
+    "type": "interdimentional Portal",
+    "linkY": 630,
+    "linkX": 1113
+  },
+  {
+    "dx": 580,
+    "color": -16732415,
+    "dy": 40,
+    "x": 1260,
+    "y": 690,
+    "type": "ground"
+  },
+  {
+    "dx": 80,
+    "color": -7254783,
+    "dy": 690,
+    "x": 1760,
+    "y": 0,
+    "type": "ground"
+  },
+  {
+    "dx": 10,
+    "color": -7254783,
+    "dy": 60,
+    "x": 2160,
+    "y": 420,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2390,
+    "y": 390,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 30,
+    "x": 2410,
+    "y": 400,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 10,
+    "x": 2390,
+    "y": 420,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 30,
+    "x": 2380,
+    "y": 430,
+    "type": "ground"
+  },
+  {
+    "dx": 50,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2390,
+    "y": 460,
+    "type": "ground"
+  },
+  {
+    "dx": 50,
+    "color": -7254783,
+    "dy": 10,
+    "x": 2410,
+    "y": 190,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 60,
+    "x": 2410,
+    "y": 190,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2420,
+    "y": 210,
+    "type": "ground"
+  },
+  {
+    "dx": 40,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2420,
+    "y": 240,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 30,
+    "x": 2100,
+    "y": 220,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2110,
+    "y": 240,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 50,
+    "x": 2130,
+    "y": 220,
+    "type": "ground"
+  },
+  {
+    "color": -7254783,
+    "rotation": 3,
+    "y1": 490,
+    "x1": 1480,
+    "y2": 700,
+    "x2": 1760,
+    "type": "sloap"
+  },
+  {
+    "color": -7254783,
+    "rotation": 3,
+    "y1": 370,
+    "x1": 1560,
+    "y2": 680,
+    "x2": 1760,
+    "type": "sloap"
+  },
+  {
+    "color": -7254783,
+    "rotation": 3,
+    "y1": 190,
+    "x1": 1640,
+    "y2": 690,
+    "x2": 1760,
+    "type": "sloap"
+  },
+  {
+    "color": -7254783,
+    "rotation": 3,
+    "y1": 30,
+    "x1": 1690,
+    "y2": 690,
+    "x2": 1760,
+    "type": "sloap"
+  },
+  {
+    "color": -7254783,
+    "rotation": 1,
+    "y1": 284,
+    "x1": 1403,
+    "y2": 426,
+    "x2": 1642,
+    "type": "sloap"
+  },
+  {
+    "dx": 600,
+    "color": -9360373,
+    "dy": 90,
+    "x": 2590,
+    "y": 600,
+    "type": "ground"
+  },
+  {
+    "color": -9360373,
+    "rotation": 3,
+    "y1": 490,
+    "x1": 2720,
+    "y2": 580,
+    "x2": 2940,
+    "type": "sloap"
+  },
+  {
+    "link Index": 6,
+    "x": 1429,
+    "y": 233,
+    "type": "interdimentional Portal",
+    "linkY": 638,
+    "linkX": 32
+  }
+]

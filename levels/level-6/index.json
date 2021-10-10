@@ -1,0 +1,34 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 388,
+    "author": "jSdCool",
+    "level_id": 6,
+    "spawnX": 20,
+    "name": "level-6",
+    "spawn pointX": 20,
+    "spawn pointY": 700,
+    "game version": "0.3.0_ALFA",
+    "spawnY": 700
+  },
+  {
+    "name": "stage 1",
+    "location": "\\stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "\\stage 2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 3",
+    "location": "\\stage 3.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 4",
+    "location": "\\stage 4.json",
+    "type": "stage"
+  }
+]
