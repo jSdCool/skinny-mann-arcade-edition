@@ -2,6 +2,19 @@
 this is a crappy 2D platform game ...... or is it
 
 change log  
+
+0.4.0_Early_Access
+-changed: JSON Arrays are no longer used internally for storing game objects and processing calculations  
+-human seek: massively improved performance   
+-added: 3D shadow  
+-changed: when standing at a portal the text "Press E" now appears in your face  
+-removed: how to play menu  
+-added: narrated tutorial   
+-changed: main menu now says Early Access  
+-added: 3D shadow setting  
+-added: tutorial narration mode setting  
+
+
 0.3.1_ALFA  
 -fixed: progress file would not be created if it did not exist
 
