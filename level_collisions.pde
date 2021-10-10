@@ -1,182 +1,26 @@
-int xangle=25+180,yangle=15,dist=700;//camera presets
+//===================================================================================
+          int xangle=25+180,yangle=15,dist=700;//camera presets
          float DY=sin(radians(yangle))*dist,hd=cos(radians(yangle))*dist,DX=sin(radians(xangle))*hd,DZ=cos(radians(xangle))*hd;//camera rotation
          
 void stageLevelDraw(){
-  level_terain=loadJSONArray(file_path);
-  stageType=level_terain.getJSONObject(0).getString("type");
-  if(stageType.equals("stage")){
+  Stage stage=level.stages.get(currentStageIndex);
+  if(stage.type.equals("stage")){
     e3DMode=false;
       camera();
-         for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-          strokeWeight(0);
-          if(type.equals("ground")){
-            int Color = block.getInt("color");
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(Color);
-            stroke(Color);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("holo")){
-            int Color = block.getInt("color");
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(Color);
-            stroke(Color);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("dethPlane")){
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(-114431);
-            stroke(-114431);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("check point")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX();
-            boolean po=false;
-            if(playx>=x-5 && playx<= x+5 && y-50 <= player1.getY() && y>=player1.getY()-10){
-              respawnX=(int)x;
-             respawnY=(int)y;
-             respawnStage=stageIndex;
-             po=true;
-             checkpointIn3DStage=false;
-            }
-            
-            x-=camPos;
-            y+=camPosY;
-            if(po)
-            fill(#E5C402);
-            else
-            fill(#B9B9B9);
-            strokeWeight(0);
-            rect((x-3)*Scale,(y-60)*Scale,5*Scale,60*Scale);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            triangle(x*Scale,(y-60)*Scale,x*Scale,(y-40)*Scale,(x+30)*Scale,(y-50)*Scale);
-          }
-          
-          if(type.equals("goal")){
-            float x = block.getFloat("x")-camPos,y = block.getFloat("y");
-            fill(255);
-            stroke(255);
-            rect(Scale*x,Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+100),Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+200),Scale*(y+camPosY),Scale*50,Scale*50);
-            fill(0);
-            stroke(0);
-            rect(Scale*(x+50),Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+150),Scale*(y+camPosY),Scale*50,Scale*50);
-            {
-               float px =player1.getX(),py=player1.getY();
-               
-               if(px >= x+camPos && px <= x+camPos + 250 && py >= y - 50 && py <= y + 50){
-                level_complete=true; 
-               }
-            
-          }
+         for(int i=0;stageLoopCondishen(i,stage);i++){
+           strokeWeight(0);
+           noStroke();
+          stage.parts.get(i).draw(); 
          }
          
-         if(type.equals("coin")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX(),playy=player1.getY();
-            boolean collected=coins.getJSONObject(block.getInt("coin id")).getBoolean("collected");
-            JSONObject cic= coins.getJSONObject(block.getInt("coin id"));
-            x-=camPos;
-            if(!collected){
-             drawCoin(Scale*x,Scale*(y+camPosY),Scale*3);
-             if(Math.sqrt(Math.pow(playx-camPos-x,2)+Math.pow(playy-y,2))<30){
-               cic.setBoolean("collected",true);
-               coins.setJSONObject(block.getInt("coin id"),cic);
-               coinCount++;
-             }
-            }
-          }
-          if(type.equals("interdimentional Portal")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX(),playy=player1.getY();
-            x-=camPos;
-            drawPortal(Scale*x,Scale*(y+camPosY),Scale*1);
-            x+=camPos;
-            if((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)){
-             fill(255);
-             textSize(Scale*20);
-             textAlign(CENTER,CENTER);
-             text("press E",Scale*(playx-camPos),Scale*(playy-90+camPosY));
-            }
-            if(E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)){
-              E_pressed=false;
-              int newX=block.getInt("linkX"),newY=block.getInt("linkY");
-              file_path=rootPath+mainIndex.getJSONObject(block.getInt("link Index")).getString("location");
-              stageIndex=block.getInt("link Index");
-              level_terain=loadJSONArray(file_path);
-              background(0);
-              try{
-                setPlayerPosZ=block.getInt("linkZ");
-                player1.z=block.getInt("linkZ");
-              }catch(Throwable e){
-                
-              }
-              player1.setX(newX).setY(newY);
-              setPlayerPosTo=true;
-              setPlayerPosX=newX;
-              setPlayerPosY=newY;
-              gmillis=millis()+850;
-            }
-           
-            
-          }
-          
-          if(type.equals("sloap")){
-            int Color = block.getInt("color");
-            float x1 = block.getFloat("x1")-1,y1 = block.getFloat("y1")-1,x2 = block.getFloat("x2")+2,y2 = block.getFloat("y2")+2;
-            int direction= block.getInt("rotation");
-            fill(Color);
-            stroke(Color);
-           if(direction==0){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==1){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==2){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY)); 
-           }
-           if(direction==3){
-            triangle(Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-          }
-           
-          if(type.equals("holoTriangle")){
-            int Color = block.getInt("color");
-            float x1 = block.getFloat("x1")-1,y1 = block.getFloat("y1")-1,x2 = block.getFloat("x2")+2,y2 = block.getFloat("y2")+2;
-            int direction= block.getInt("rotation");
-            fill(Color);
-            stroke(Color);
-           if(direction==0){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==1){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==2){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY)); 
-           }
-           if(direction==3){
-            triangle(Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-          }
-          
-         }
+         
          draw_mann(Scale*(player1.getX()-camPos),Scale*(player1.getY()+camPosY),player1.getPose(),Scale*player1.getScale(),player1.getColor());
          //====================================================================================================================================================================================================
          //====================================================================================================================================================================================================
          //====================================================================================================================================================================================================
          //====================================================================================================================================================================================================
          //====================================================================================================================================================================================================
-  }else if(stageType.equals("3Dstage")){
+  }else if(stage.type.equals("3Dstage")){
     if(e3DMode){//render the level in 3D
     camera(player1.x+DX,player1.y-DY,player1.z-DZ,player1.x,player1.y,player1.z,0,1,0);
         directionalLight(255, 255, 255, 0.8, 1, -0.35);
@@ -184,349 +28,58 @@ void stageLevelDraw(){
         coinRotation+=3;
         if(coinRotation>360)
         coinRotation-=360;
-      for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-          strokeWeight(0);
-          if(type.equals("ground")||type.equals("holo")){
-            int Color = block.getInt("color");
-            float x = block.getFloat("x"),y = block.getFloat("y"),z=block.getFloat("z"),dx = block.getFloat("dx"),dy = block.getFloat("dy"),dz = block.getFloat("dz");
-            fill(Color);
-            strokeWeight(0);
-           translate(x+dx/2,y+dy/2,z+dz/2);
-           box(dx,dy,dz);
-           translate(-1*(x+dx/2),-1*(y+dy/2),-1*(z+dz/2));
-          }
-          
-          
-          if(type.equals("check point")){
-            float x = block.getFloat("x"),y = block.getFloat("y"),z = block.getFloat("z");
-            float playx=player1.getX();
-            boolean po=false;
-            if(playx>=x-20 && playx<= x+20 && y-50 <= player1.getY() && y>=player1.getY()-10 && player1.z >= z-20 && player1.z <= z+20){
-              respawnX=(int)x;
-             respawnY=(int)y;
-             respawnZ=(int)player1.z;
-             respawnStage=stageIndex;
-             checkpointIn3DStage=true;
-             po=true;
-            }
-            
-
-            if(po)
-            fill(#E5C402);
-            else
-            fill(#B9B9B9);
-            strokeWeight(0);
-            translate(x,y-30,z);
-            box(4,60,4);
-            translate(-x,-(y-30),-z);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            translate(x+10,y-50,z);
-            box(20,20,2);
-            translate(-(x+10),-(y-50),-z);
-            
-          }
-          
-            if(type.equals("coin")){
-            float x = block.getFloat("x"),y = block.getFloat("y"),z = block.getFloat("z");
-            float playx=player1.getX(),playy=player1.getY(),playz=player1.z;
-            boolean collected=coins.getJSONObject(block.getInt("coin id")).getBoolean("collected");
-            JSONObject cic= coins.getJSONObject(block.getInt("coin id"));
-            if(!collected){
-             translate(x,y,z);
-             rotateY(radians(coinRotation));
-             shape(coin3D);
-             rotateY(radians(-coinRotation));
-             translate(-x,-y,-z);
-             if(Math.sqrt(Math.pow(playx-x,2)+Math.pow(playy-y,2)+Math.pow(playz-z,2))<35){
-               cic.setBoolean("collected",true);
-               coins.setJSONObject(block.getInt("coin id"),cic);
-               coinCount++;
-             }
-            }
-          }
-          
-          if(type.equals("interdimentional Portal")){
-            float x = block.getFloat("x"),y = block.getFloat("y"),z=0;
-            try{
-              z=block.getFloat("z");
-            }catch(Throwable e){}
-            float playx=player1.getX(),playy=player1.getY();
-            
-            translate(0,0,z);
-            drawPortal(x,y,1);
-           translate(0,0,-z);
-            if((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60&& player1.z >= z-20 && player1.z <= z+20)){
-             fill(255);
-             textSize(20);
-             textAlign(CENTER,CENTER);
-             translate(0,0,player1.z);
-             text("press E",(playx),(playy-90));
-             translate(0,0,-player1.z);
-            }
-            
-            if(E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60&& player1.z >= z-20 && player1.z <= z+20)){
-              E_pressed=false;
-              int newX=block.getInt("linkX"),newY=block.getInt("linkY");
-              file_path=rootPath+mainIndex.getJSONObject(block.getInt("link Index")).getString("location");
-              stageIndex=block.getInt("link Index");
-              level_terain=loadJSONArray(file_path);
-              background(0);
-              try{
-                setPlayerPosZ=block.getInt("linkZ");
-                player1.z=block.getInt("linkZ");
-              }catch(Throwable e){
-                
-              }
-              player1.setX(newX).setY(newY);
-              setPlayerPosTo=true;
-              setPlayerPosX=newX;
-              setPlayerPosY=newY;
-              gmillis=millis()+850;
-              return;
-            }
-          }
-          
-          if(type.equals("3DonSW")){
-            float x = block.getFloat("x"),y = block.getFloat("y"),z=block.getFloat("z");
-            draw3DSwitch1(x,y,z,Scale);
-          }
-          
-          if(type.equals("3DoffSW")){
-            float x = block.getFloat("x"),y = block.getFloat("y"),z=block.getFloat("z");
-            draw3DSwitch2(x,y,z,Scale);
-            if(player1.x>=x-10&&player1.x<=x+10&&player1.y >=y-10&&player1.y<= y+2 && player1.z >= z-10 && player1.z <= z+10){
-              e3DMode=false;
-              WPressed=false;
-              SPressed=false;
-              gmillis=millis()+1200;
-            }
-          }
-          
-          fill(255);
-         }//end of for loop
+      
+      for(int i=0;stageLoopCondishen(i,stage);i++){
+        strokeWeight(0);
+        noStroke();
+          stage.parts.get(i).draw3D(); 
+         }
          
          draw_mann_3D(player1.x,player1.y,player1.z,player1.getPose(),player1.getScale(),player1.getColor());
          
-         
-         
-         //camera(player1.x+DX,player1.y-DY,player1.z-DZ,player1.x,player1.y,player1.z,0,1,0);
-         
+         if(shadow3D){
+           float shadowAltitude=player1.y;
+           boolean shadowHit=false;
+           for(int i=0;i<500&&!shadowHit;i++){//ray cast to find solid ground underneath the player
+            if(level_colide(player1.x,shadowAltitude+i,player1.z)){
+              shadowAltitude+=i;
+              shadowHit=true;
+              continue;
+            }
+           }
+           if(shadowHit){//if solid ground was found under the player then draw the shadow
+            translate(player1.x,shadowAltitude-1,player1.z);
+            fill(0,127);
+            rotateX(radians(90));
+            ellipse(0,0,40,40);
+            rotateX(radians(-90));
+            translate(-player1.x,-(shadowAltitude-1),-player1.z);
+           }
+         }
+
     }else{//redner the level in 2D
     camera();
-      for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-          strokeWeight(0);
-          if(type.equals("ground")){
-            int Color = block.getInt("color");
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(Color);
-            stroke(Color);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("holo")){
-            int Color = block.getInt("color");
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(Color);
-            stroke(Color);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("dethPlane")){
-            float x = block.getFloat("x")-1,y = block.getFloat("y")-1,dx = block.getFloat("dx")+2,dy = block.getFloat("dy")+2;
-            fill(-114431);
-            stroke(-114431);
-           rect(Scale*(x-camPos),Scale*(y+camPosY),Scale*dx,Scale*dy); 
-          }
-          if(type.equals("check point")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX();
-            boolean po=false;
-            if(playx>=x-5 && playx<= x+5 && y-50 <= player1.getY() && y>=player1.getY()-10){
-              respawnX=(int)x;
-             respawnY=(int)y;
-             respawnZ=(int)player1.z;
-             respawnStage=stageIndex;
-             checkpointIn3DStage=true;
-             po=true;
-            }
-            
-            x-=camPos;
-            y+=camPosY;
-            if(po)
-            fill(#E5C402);
-            else
-            fill(#B9B9B9);
-            strokeWeight(0);
-            rect((x-3)*Scale,(y-60)*Scale,5*Scale,60*Scale);
-            //line(x*Scale,y*Scale,x*Scale,(y-60)*Scale);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            triangle(x*Scale,(y-60)*Scale,x*Scale,(y-40)*Scale,(x+30)*Scale,(y-50)*Scale);
-          }
-          
-          if(type.equals("goal")){
-            float x = block.getFloat("x")-camPos,y = block.getFloat("y");
-            fill(255);
-            stroke(255);
-            rect(Scale*x,Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+100),Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+200),Scale*(y+camPosY),Scale*50,Scale*50);
-            fill(0);
-            stroke(0);
-            rect(Scale*(x+50),Scale*(y+camPosY),Scale*50,Scale*50);
-            rect(Scale*(x+150),Scale*(y+camPosY),Scale*50,Scale*50);
-            {
-               float px =player1.getX(),py=player1.getY();
-               
-               if(px >= x+camPos && px <= x+camPos + 250 && py >= y - 50 && py <= y + 50){
-                level_complete=true; 
-               }
-            
-          }
-         }
-         
-         if(type.equals("coin")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX(),playy=player1.getY();
-            boolean collected=coins.getJSONObject(block.getInt("coin id")).getBoolean("collected");
-            JSONObject cic= coins.getJSONObject(block.getInt("coin id"));
-            x-=camPos;
-            if(!collected){
-             drawCoin(Scale*x,Scale*(y+camPosY),Scale*3);
-             if(Math.sqrt(Math.pow(playx-camPos-x,2)+Math.pow(playy-y,2))<30){
-               cic.setBoolean("collected",true);
-               coins.setJSONObject(block.getInt("coin id"),cic);
-               coinCount++;
-             }
-            }
-          }
-          if(type.equals("interdimentional Portal")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            float playx=player1.getX(),playy=player1.getY();
-            x-=camPos;
-            drawPortal(Scale*x,Scale*(y+camPosY),Scale*1);
-            x+=camPos;
-            if((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)){
-             fill(255);
-             textSize(Scale*20);
-             textAlign(CENTER,CENTER);
-             text("press E",Scale*(playx-camPos),Scale*(playy-90+camPosY));
-            }
-            if(E_pressed&&(playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)){
-              E_pressed=false;
-              int newX=block.getInt("linkX"),newY=block.getInt("linkY");
-              file_path=rootPath+mainIndex.getJSONObject(block.getInt("link Index")).getString("location");
-              stageIndex=block.getInt("link Index");
-              level_terain=loadJSONArray(file_path);
-              background(0);
-              try{
-                setPlayerPosZ=block.getInt("linkZ");
-                player1.z=block.getInt("linkZ");
-              }catch(Throwable e){
-                
-              }
-              player1.setX(newX).setY(newY);
-              setPlayerPosTo=true;
-              setPlayerPosX=newX;
-              setPlayerPosY=newY;
-              gmillis=millis()+850;
-              return;
-              
-            }
-           
-            
-          }
-          
-          if(type.equals("sloap")){
-            int Color = block.getInt("color");
-            float x1 = block.getFloat("x1")-1,y1 = block.getFloat("y1")-1,x2 = block.getFloat("x2")+2,y2 = block.getFloat("y2")+2;
-            int direction= block.getInt("rotation");
-            fill(Color);
-            stroke(Color);
-           if(direction==0){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==1){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==2){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY)); 
-           }
-           if(direction==3){
-            triangle(Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-          }
-           
-          if(type.equals("holoTriangle")){
-            int Color = block.getInt("color");
-            float x1 = block.getFloat("x1")-1,y1 = block.getFloat("y1")-1,x2 = block.getFloat("x2")+2,y2 = block.getFloat("y2")+2;
-            int direction= block.getInt("rotation");
-            fill(Color);
-            stroke(Color);
-           if(direction==0){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==1){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-           if(direction==2){
-            triangle(Scale*(x1-camPos),Scale*(y1+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x1-camPos),Scale*(y2+camPosY)); 
-           }
-           if(direction==3){
-            triangle(Scale*(x1-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y2+camPosY),Scale*(x2-camPos),Scale*(y1+camPosY)); 
-           }
-          }
-          
-          if(type.equals("3DonSW")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            draw3DSwitch1((x-camPos)*Scale,(y+camPosY)*Scale,Scale);
-            if(player1.x>=x-10&&player1.x<=x+10&&player1.y >=y-10&&player1.y<= y+2){
-              player1.z=block.getFloat("z");
-              e3DMode=true;
-              gmillis=millis()+1200;
-            }
-          }
-          
-          if(type.equals("3DoffSW")){
-            float x = block.getFloat("x"),y = block.getFloat("y");
-            draw3DSwitch2((x-camPos)*Scale,(y+camPosY)*Scale,Scale);
-            
-          }
-          
+      for(int i=0;stageLoopCondishen(i,stage);i++){
+          stage.parts.get(i).draw(); 
          }
          draw_mann(Scale*(player1.getX()-camPos),Scale*(player1.getY()+camPosY),player1.getPose(),Scale*player1.getScale(),player1.getColor());
     }
   }
          
-         
-         
-         
-         
-         
-         
-         
+
          if(level_complete){
-           textAlign(LEFT,BOTTOM);
+           textAlign(BOTTOM,LEFT);
           textSize(Scale*100);
          fill(255,255,0);
          text("LEVEL COMPLETE!!!",Scale*200,Scale*400);
          
-         
-         strokeWeight(0);
-         fill(255,0,0);
-         rect(Scale*540,Scale*440,Scale*220,Scale*60);
          fill(255,126,0);
+         stroke(255,0,0);
+         strokeWeight(Scale*10);
          rect(Scale*550,Scale*450,Scale*200,Scale*40);
          fill(0);
          textSize(Scale*40);
-         text("continue",Scale*565,Scale*490);
+         text("continue",Scale*565,Scale*480);
         }
         
 }
@@ -695,7 +248,8 @@ if(!e3DMode){
          }
          
          if(player_kill(player1.getX()-10,player1.getY()+1)||player_kill(player1.getX()-5,player1.getY()+1)||player_kill(player1.getX(),player1.getY()+1)||player_kill(player1.getX()+5,player1.getY()+1)||player_kill(player1.getX()+10,player1.getY()+1)){
-           dead=true;          
+           dead=true;       
+           death_cool_down=0;
          }
          
          
@@ -743,12 +297,12 @@ if(!e3DMode){
            camPos=(int)(player1.getX()-eadgeScroleDist);
          }
          
-         if(player1.getY()+camPosY>720-eadgeScroleDist&&camPosY>0){
-           camPosY-=player1.getY()+camPosY-(720-eadgeScroleDist);
+         if(player1.getY()+camPosY>720-eadgeScroleDistV&&camPosY>0){
+           camPosY-=player1.getY()+camPosY-(720-eadgeScroleDistV);
          }  
          
-         if(player1.getY()+camPosY<eadgeScroleDist+75){
-           camPosY-=player1.getY()+camPosY-(eadgeScroleDist+75);
+         if(player1.getY()+camPosY<eadgeScroleDistV+75){
+           camPosY-=player1.getY()+camPosY-(eadgeScroleDistV+75);
            
          }
          if(camPos<0)
@@ -757,7 +311,7 @@ if(!e3DMode){
          camPosY=0;
          
          
-}else{//end of not 3D mode
+    }else{//end of not 3D mode
 
 
          if(player1_moving_right){//move the player right
@@ -810,6 +364,10 @@ if(!e3DMode){
            else if(!level_colide(newpos-10,player1.getY()-10,player1.z)){
              player1.setX(newpos);
              player1.setY(player1.getY()-10);
+           }
+           else if(!level_colide(newpos-10,player1.getY()-11,player1.z)){
+             player1.setX(newpos);
+             player1.setY(player1.getY()-11);
            }
           }
           
@@ -874,6 +432,10 @@ if(!e3DMode){
              player1.setX(newpos);
              player1.setY(player1.getY()-10);
            }
+           else if(!level_colide(newpos-10,player1.getY()-11,player1.z)){
+             player1.setX(newpos);
+             player1.setY(player1.getY()-11);
+           }
           }
           
           if(player1.getAnimationCooldown()<=0){//change the playerb pose to make them look lie there walking
@@ -937,6 +499,10 @@ if(!e3DMode){
              player1.z=newpos;
              player1.setY(player1.getY()-10);
            }
+           else if(!level_colide(player1.x,player1.getY()-11,newpos-10)){
+             player1.z=newpos;
+             player1.setY(player1.getY()-11);
+           }
           }
           
           if(player1.getAnimationCooldown()<=0){//change the playerb pose to make them look lie there walking
@@ -999,6 +565,10 @@ if(!e3DMode){
            else if(!level_colide(player1.x,player1.getY()-10,newpos+10)){
              player1.z=newpos;
              player1.setY(player1.getY()-10);
+           }
+           else if(!level_colide(player1.x,player1.getY()-11,newpos+10)){
+             player1.z=newpos;
+             player1.setY(player1.getY()-11);
            }
           }
           
@@ -1088,10 +658,13 @@ if(!e3DMode){
 }//end of 3D mode
          if(player1.getY()>720){
           dead=true; 
+          death_cool_down=0;
          }
+         
          if(dead){
-           file_path=rootPath+mainIndex.getJSONObject(respawnStage).getString("location");
-              level_terain=loadJSONArray(file_path);
+           //file_path=rootPath+mainIndex.getJSONObject(respawnStage).getString("location");
+              //level_terain=loadJSONArray(file_path);
+              currentStageIndex=respawnStage;
               stageIndex=respawnStage;
               
           player1.setX(respawnX);
@@ -1099,7 +672,7 @@ if(!e3DMode){
           if(checkpointIn3DStage){
            player1.z=respawnZ; 
           }
-          dead=false;
+          //dead=false;
          }
          if(setPlayerPosTo){
               player1.setX(setPlayerPosX).setY(setPlayerPosY);
@@ -1110,6 +683,52 @@ if(!e3DMode){
          
          
           
+}
+
+boolean level_colide(float x,float y){
+  Stage stage=level.stages.get(currentStageIndex);
+  for(int i=0;stageLoopCondishen(i,stage);i++){
+    if(stage.parts.get(i).colide(x,y,false)){
+      return true; 
+    }
+  }
+         
+  
+  
+  return false;
+}
+
+boolean level_colide(float x,float y,float z){//3d collions 
+Stage stage=level.stages.get(currentStageIndex);
+  for(int i=0;stageLoopCondishen(i,stage);i++){
+    if(stage.parts.get(i).colide(x,y,z)){
+      
+      return true; 
+    }
+  }
+         return false;
+  
+}
+
+boolean player_kill(float x,float y){
+  Stage stage=level.stages.get(currentStageIndex);
+  for(int i=0;stageLoopCondishen(i,stage);i++){
+    if(stage.parts.get(i).colideDethPlane(x,y)){
+      return true; 
+    }
+  }
+  
+  return false;
+}
+
+int colid_index(float x,float y){
+ Stage stage=level.stages.get(currentStageIndex);
+  for(int i=stage.parts.size()-1;i>=0;i++){
+    if(stage.parts.get(i).colide(x,y,true)){
+      return i; 
+    }
+  }
+ return -1;
 }
 
 void glitchEffect(){
@@ -1277,100 +896,15 @@ void disEngageHUDPosition(){
          //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));  
          hint(ENABLE_DEPTH_TEST); 
 }
-//////////////////////
 
-
-
-
-
-/////////////////////
-
-boolean level_colide(float x,float y){
-  level_terain=loadJSONArray(file_path);
-         for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-         
-          if(type.equals("ground")||type.equals("dethPlane")){
-             float tx = block.getFloat("x"),ty = block.getFloat("y"),dx = block.getFloat("dx"),dy = block.getFloat("dy");
-          float x2 = tx+dx,y2=ty+dy;
-            if(x >= tx && x <= x2 && y >= ty && y <= y2/* terain hit box*/){
-                return true;
-            }
-           
-          }
-          if(type.equals("sloap")){
-            float x1 = block.getFloat("x1"),y1 = block.getFloat("y1"),x2 = block.getFloat("x2"),y2 = block.getFloat("y2");
-            int rot=block.getInt("rotation");
-           if(rot==0){
-             if(x<=x2&&y>=y1&&y<=x*((y2-y1)/(x2-x1)) + (y2-(x2*((y2-y1)/(x2-x1))))  ){
-              return true; 
-             }
-            //triangle(X1,Y1,X2,Y2,X2,Y1); 
-           }
-           if(rot==1){
-             if(x>=x1&&y>=y1&&y<=x*((y2-y1)/(x1-x2)) + ( y1-(x2*((y2-y1)/(x1-x2))))  ){
-              return true; 
-             }
-            //triangle(X1,Y1,X1,Y2,X2,Y1); 
-           }
-           if(rot==2){
-             if(x>=x1&&y<=y2&&y>=x*((y2-y1)/(x2-x1)) + ( y2-(x2*((y2-y1)/(x2-x1))))  ){
-              return true; 
-             }
-            //triangle(X1,Y1,X2,Y2,X1,Y2); 
-           }
-           if(rot==3){
-             if(x<=x2&&y<=y2&&y>=x*((y2-y1)/(x1-x2)) + ( y1-(x2*((y2-y1)/(x1-x2))))  ){
-              return true; 
-             }
-            //triangle(X1,Y2,X2,Y2,X2,Y1); 
-           }
-          }
-         }
-         
-  
-  
-  return false;
-}
-
-boolean level_colide(float x,float y,float z){//3d collions 
-  for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-         
-          if(type.equals("ground")||type.equals("dethPlane")||type.equals("holo")){
-             float tx = block.getFloat("x"),ty = block.getFloat("y"),tz = block.getFloat("z"),dx = block.getFloat("dx"),dy = block.getFloat("dy"),dz = block.getFloat("dz");
-          float x2 = tx+dx,y2=ty+dy,z2=tz+dz;
-            if(x >= tx && x <= x2 && y >= ty && y <= y2 && z>=tz && z<=z2/* terain hit box*/){
-                return true;
-            }
-           
-          }
-         }
-         return false;
-  
-}
-
-boolean player_kill(float x,float y){
-  level_terain=loadJSONArray(file_path);
-         for(int i=1;i<level_terain.size();i++){
-          JSONObject block=level_terain.getJSONObject(i); 
-          String type=block.getString("type");
-          
-         
-          if(type.equals("dethPlane")){
-             float tx = block.getFloat("x"),ty = block.getFloat("y"),dx = block.getFloat("dx"),dy = block.getFloat("dy");
-          float x2 = tx+dx,y2=ty+dy;
-            if(x >= tx && x <= x2 && y >= ty && y <= y2/* terain hit box*/){
-              
-                return true;
-            }
-           
-          }
-         }
-  
-  return false;
+boolean stageLoopCondishen(int i,Stage stage){
+  if(!tutorialMode){
+    return i<stage.parts.size();
+  }else{
+    if(tutorialDrawLimit<stage.parts.size()){
+      return i<tutorialDrawLimit;
+    }else{
+      return i<stage.parts.size();
+    }
+  }
 }
