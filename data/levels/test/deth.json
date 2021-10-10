@@ -1,0 +1,71 @@
+[
+  {
+    "name": "deth",
+    "type": "stage"
+  },
+  {
+    "dx": 670,
+    "color": -16732415,
+    "dy": 20,
+    "x": 0,
+    "y": 700,
+    "type": "ground"
+  },
+  {
+    "dx": 180,
+    "dy": 20,
+    "x": 670,
+    "y": 700,
+    "type": "dethPlane"
+  },
+  {
+    "dx": 310,
+    "color": -16732415,
+    "dy": 20,
+    "x": 850,
+    "y": 700,
+    "type": "ground"
+  },
+  {
+    "color": -16777215,
+    "rotation": 0,
+    "y1": 32,
+    "x1": 517,
+    "y2": 147,
+    "x2": 662,
+    "type": "sloap"
+  },
+  {
+    "color": -16777215,
+    "rotation": 2,
+    "y1": -10,
+    "x1": 790,
+    "y2": 110,
+    "x2": 920,
+    "type": "sloap"
+  },
+  {
+    "dx": 170,
+    "color": -16777215,
+    "dy": 170,
+    "x": 1080,
+    "y": -50,
+    "type": "ground"
+  },
+  {
+    "dx": 150,
+    "color": -16777215,
+    "dy": 130,
+    "x": 940,
+    "y": 210,
+    "type": "ground"
+  },
+  {
+    "link Index": 8,
+    "x": 178,
+    "y": 642,
+    "type": "interdimentional Portal",
+    "linkY": 648,
+    "linkX": 69
+  }
+]

@@ -1,0 +1,76 @@
+[
+  {
+    "name": "stage 3 final",
+    "type": "3Dstage"
+  },
+  {
+    "dx": 1290,
+    "color": -16732415,
+    "dy": 20,
+    "dz": 300,
+    "x": 0,
+    "y": 700,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 180,
+    "dz": 50,
+    "x": 120,
+    "y": 520,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "dx": 1070,
+    "color": -7254783,
+    "dy": 30,
+    "dz": 50,
+    "x": 150,
+    "y": 520,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 150,
+    "dz": 50,
+    "x": 1190,
+    "y": 550,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "link Index": 2,
+    "linkZ": 100,
+    "x": 688,
+    "y": 641,
+    "z": 100,
+    "type": "interdimentional Portal",
+    "linkY": -861,
+    "linkX": 10285
+  },
+  {
+    "dx": 500,
+    "color": -16732415,
+    "dy": 30,
+    "dz": 300,
+    "x": 1510,
+    "y": 690,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "link Index": 5,
+    "linkZ": -1,
+    "x": 1911,
+    "y": 637,
+    "z": 100,
+    "type": "interdimentional Portal",
+    "linkY": 496,
+    "linkX": 51
+  }
+]
