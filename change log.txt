@@ -1,3 +1,17 @@
+0.4.0_Early_Access
+-changed: JSON Arrays are no longer used internaly for storing game objects and processing calculations
+-human speek: massively improved performance 
+-added: 3D shaddow
+-changed: when staning at a portal the text "Press E" now appers in your face
+-removed: how to play menue
+-added: narrated tutorial 
+-cahnged: main menue now sais Early Access
+-added: 3D shadow setting
+-added: tutorial naration mode setting
+
+0.3.1_ALFA
+-fixed: progress file would not be created if it did not exist
+
 0.3.0_ALFA
 +added: 3D stages
 +added: level-5
@@ -7,6 +21,14 @@
 =updated to java 11, open JDK 11 or higher will be required to run the game without java included
 +added: glitch effect
 -changed: startup screen is now 3D
+-changed: settings menue now has multple screens
+-removed: screen scrolling location setting
++added: horozontal screen scrolling location setting
++added: vertical screen scrolling location setting
++added: music
++added: music volume slider
++added: sfx volume slider
++added: level complete sound
 
 
 0.2.1_ALFA
