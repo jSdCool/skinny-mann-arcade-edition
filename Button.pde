@@ -1,6 +1,6 @@
 //button class V1.0.5
 class Button{
-  private int x,y,lengthX,lengthY,fColor=#FFFFFF,sColor=#AAAAAA,textcolor=0,sw=3;
+  protected int x,y,lengthX,lengthY,fColor=#FFFFFF,sColor=#AAAAAA,textcolor=0,sw=3;
   private String text="";
   private float textScaleFactor=2.903;
   Button(int X,int Y,int DX,int DY){
@@ -79,8 +79,8 @@ class Button{
    textcolor=c;
     return this;
   }
-  public Button setStrokeWeight(int s){
-   sw=s;
+  public Button setStrokeWeight(float s){
+   sw=(int)s;
    return this;
   }
 }

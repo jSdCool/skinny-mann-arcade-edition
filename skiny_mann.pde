@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.awt.Desktop;
 
 void settings(){//first function called
   try{
@@ -137,6 +138,11 @@ shadowOn = new Button((int)(1200*Scale),(int)(330*Scale),(int)(40*Scale),(int)(4
 shadowOff = new Button((int)(1130*Scale),(int)(330*Scale),(int)(40*Scale),(int)(40*Scale),255,0).setStrokeWeight(5*Scale);
 narrationMode1 =new Button((int)(1200*Scale),(int)(460*Scale),(int)(40*Scale),(int)(40*Scale),255,0).setStrokeWeight(5*Scale);
 narrationMode0 = new Button((int)(1130*Scale),(int)(460*Scale),(int)(40*Scale),(int)(40*Scale),255,0).setStrokeWeight(5*Scale);
+select_lvl_UGC=new Button((int)(350*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"UGC",-59135,-1791).setStrokeWeight((int)(10*Scale));
+UGC_open_folder=new Button((int)(350*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"open folder",-59135,-1791).setStrokeWeight((int)(10*Scale)).setTextFactor(10);
+UGC_lvls_next=new Button((int)(1030*Scale),(int)(335*Scale),(int)(200*Scale),(int)(50*Scale),"next",-59135,-1791).setStrokeWeight((int)(10*Scale));
+UGC_lvls_prev=new Button((int)(50*Scale),(int)(335*Scale),(int)(200*Scale),(int)(50*Scale),"prevous",-59135,-1791).setStrokeWeight((int)(10*Scale)).setTextFactor(4);
+UGC_lvl_play=new Button((int)(600*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"play",-59135,-1791).setStrokeWeight((int)(10*Scale));
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -154,9 +160,10 @@ PImage CBi,icon,discordIcon;
 PShape coin3D;
 Server s;
 Client c;
-boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true;
+boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false;
 String Menue ="creds"/*,level="n"*/,version="0.4.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
 ArrayList<Boolean> coins;
+ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1;
 Player player1 =new Player(20,699,1,"red");
 /*player array info
@@ -171,9 +178,9 @@ players by index position
 */
 
 //^^^ literaly level 1 ^^^^
-int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0;
+int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0;
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play;
 String[] musicTracks ={"data\\music\\track1.wav","data\\music\\track2.wav","data\\music\\track3.wav"},sfxTracks={"data/sounds/level complete.wav"};
 SoundHandler soundHandler;
 Level level;
@@ -306,6 +313,31 @@ void draw(){// the function that is called every fraim
         select_lvl_5.draw();
         select_lvl_6.draw();
         select_lvl_back.draw();
+        select_lvl_UGC.draw();
+     }
+     if(Menue.equals("level select UGC")){
+       background(7646207);
+       textSize(35*Scale);
+       fill(0);
+       textAlign(LEFT,BOTTOM);
+        text("User Generated Levels",484*Scale,54*Scale);//menue title
+        select_lvl_back.draw();
+        UGC_open_folder.draw();
+        fill(0);
+        textSize(50*Scale);
+        textAlign(CENTER,CENTER);
+        if(UGCNames.size()==0){
+         text("no levels found",width/2,height/2); 
+        }else{
+          text(UGCNames.get(UGC_lvl_indx),width/2,height/2);
+          if(UGC_lvl_indx<UGCNames.size()-1){
+          UGC_lvls_next.draw();
+          }
+          if(UGC_lvl_indx>0){
+          UGC_lvls_prev.draw();
+          }
+          UGC_lvl_play.draw();
+        }
      }
      if(Menue.equals("pause")){//when in the pause emnue cancle all motion
        player1_moving_right=false;
@@ -686,7 +718,51 @@ void mouseClicked(){// when you click the mouse
          if(select_lvl_back.isMouseOver()){
            Menue="main";
          }
+         if(select_lvl_UGC.isMouseOver()){
+           Menue="level select UGC";
+           String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
+           UGCNames=new ArrayList<String>();
+           for(int i=0;i<files.length;i++){
+            if(FileIsLevel(files[i])){
+              UGCNames.add(files[i]);
+            }
+           }
+           UGC_lvl_indx=0;
+         }
+         
+         
+         return;
      }
+     if(Menue.equals("level select UGC")){
+       if(select_lvl_back.isMouseOver()){
+           Menue="level select";
+         }
+         if(UGC_open_folder.isMouseOver()){
+           openUGCFolder();
+         }
+         
+         if(UGCNames.size()==0){
+        }else{
+          if(UGC_lvl_indx<UGCNames.size()-1){
+            if(UGC_lvls_next.isMouseOver()){
+              UGC_lvl_indx++;
+            }  
+          }
+          if(UGC_lvl_indx>0){
+            if(UGC_lvls_prev.isMouseOver()){
+              UGC_lvl_indx--;
+            }
+          }
+          if(UGC_lvl_play.isMouseOver()){
+            loadLevel(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
+            UGC_lvl=true;
+            inGame=true;
+            menue=false;
+          }
+          
+        }
+     
+    }
      
      if(Menue.equals("pause")&&!start_host){//if that menue is pause
        if(mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 200*Scale && mouseY <= 260*Scale){//resume game button
@@ -942,15 +1018,20 @@ void mouseClicked(){// when you click the mouse
            inGame=false;
            Menue="level select";
            level_complete=false;
+           
+           if(!UGC_lvl){
            JSONObject lvlinfo=mainIndex.getJSONObject(0);
-           if(lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")){
-             JSONObject p=new JSONObject();
-             p.setInt("progress",levelProgress.getJSONObject(0).getInt("progress")+1);
-             levelProgress.setJSONObject(0,p);
-             saveJSONArray(levelProgress,System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+             if(lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")){
+               JSONObject p=new JSONObject();
+               p.setInt("progress",levelProgress.getJSONObject(0).getInt("progress")+1);
+               levelProgress.setJSONObject(0,p);
+               saveJSONArray(levelProgress,System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+             }
+           }else{
+             UGC_lvl=false;
            }
          }
-  }
+      }
     
 
   
@@ -995,6 +1076,12 @@ if(menue){
     if (key == ESC) {
     key = 0;  //clear the key so it doesnt close the program
     Menue="main";
+  }
+  }
+  if(Menue.equals("level select UGC")){
+    if (key == ESC) {
+    key = 0;  //clear the key so it doesnt close the program
+    Menue="level select";
   }
   }
   if(Menue.equals("settings")){
@@ -1388,7 +1475,26 @@ void tutorialLogic(){
       tutorialMode=false;
     }
   }
-  
-  
-  
+}
+
+void openUGCFolder(){
+         Desktop desktop = Desktop.getDesktop();
+        File dirToOpen = null;
+        try {
+            dirToOpen = new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels");
+            desktop.open(dirToOpen);
+        } catch (Throwable iae) {
+            System.out.println("folder Not Found, creating folder");
+            new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+            openUGCFolder();
+        }
+}
+
+boolean FileIsLevel(String fil){
+  try{
+    loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
+  }catch(Throwable e){
+    return false;
+  }
+  return true;
 }
