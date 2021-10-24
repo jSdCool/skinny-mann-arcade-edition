@@ -143,6 +143,7 @@ UGC_open_folder=new Button((int)(350*Scale),(int)(600*Scale),(int)(200*Scale),(i
 UGC_lvls_next=new Button((int)(1030*Scale),(int)(335*Scale),(int)(200*Scale),(int)(50*Scale),"next",-59135,-1791).setStrokeWeight((int)(10*Scale));
 UGC_lvls_prev=new Button((int)(50*Scale),(int)(335*Scale),(int)(200*Scale),(int)(50*Scale),"prevous",-59135,-1791).setStrokeWeight((int)(10*Scale)).setTextFactor(4);
 UGC_lvl_play=new Button((int)(600*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"play",-59135,-1791).setStrokeWeight((int)(10*Scale));
+levelcreatorLink=new Button((int)(980*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"create",-59135,-1791).setStrokeWeight((int)(10*Scale));
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -161,7 +162,7 @@ PShape coin3D;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false;
-String Menue ="creds"/*,level="n"*/,version="0.4.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
+String Menue ="creds"/*,level="n"*/,version="0.4.1_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1;
@@ -180,7 +181,7 @@ players by index position
 //^^^ literaly level 1 ^^^^
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play;
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink;
 String[] musicTracks ={"data\\music\\track1.wav","data\\music\\track2.wav","data\\music\\track3.wav"},sfxTracks={"data/sounds/level complete.wav"};
 SoundHandler soundHandler;
 Level level;
@@ -323,6 +324,7 @@ void draw(){// the function that is called every fraim
         text("User Generated Levels",484*Scale,54*Scale);//menue title
         select_lvl_back.draw();
         UGC_open_folder.draw();
+        levelcreatorLink.draw();
         fill(0);
         textSize(50*Scale);
         textAlign(CENTER,CENTER);
@@ -760,7 +762,11 @@ void mouseClicked(){// when you click the mouse
             menue=false;
           }
           
+          
         }
+        if(levelcreatorLink.isMouseOver()){
+            link("https://cbi-games.glitch.me/level%20creator.html");
+          }
      
     }
      
