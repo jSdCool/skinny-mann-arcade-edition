@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.awt.Desktop;
+import javax.swing.*;
 
 void settings(){//first function called
   try{
@@ -162,7 +163,7 @@ PShape coin3D;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false;
-String Menue ="creds"/*,level="n"*/,version="0.4.1_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
+String Menue ="creds"/*,level="n"*/,version="0.4.2_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1;
@@ -188,6 +189,8 @@ Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];
 //▄
 void draw(){// the function that is called every fraim
+
+try{//catch all fatal errors and display them
 
   if(menue){//when in a menue
     if(Menue.equals("creds")){//the inital loading screen 
@@ -655,9 +658,26 @@ if(millis()<gmillis){
   }
 
 disEngageHUDPosition();
+
+
+  }catch(Throwable e){//cath and display all the fatail errors that occor
+            e.printStackTrace();
+            StackTraceElement[] elements = e.getStackTrace();
+            String stack="";
+            for(int ele=0;ele<elements.length;ele++){
+                stack+=elements[ele].toString()+"\n";
+            }
+            JOptionPane.showMessageDialog(null,stack,e.toString(),JOptionPane.ERROR_MESSAGE);
+            exit();
+        }
 }
 
+
+
+
 void mouseClicked(){// when you click the mouse
+
+try{
   if(menue){//if your in a menue
      if(Menue.equals("main")){//if that menue is the main menue
        if(mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 310*Scale && mouseY <= 360*Scale){//level select button
@@ -722,6 +742,7 @@ void mouseClicked(){// when you click the mouse
          }
          if(select_lvl_UGC.isMouseOver()){
            Menue="level select UGC";
+           new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
            String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
            UGCNames=new ArrayList<String>();
            for(int i=0;i<files.length;i++){
@@ -730,6 +751,7 @@ void mouseClicked(){// when you click the mouse
             }
            }
            UGC_lvl_indx=0;
+           return;
          }
          
          
@@ -1039,7 +1061,16 @@ void mouseClicked(){// when you click the mouse
          }
       }
     
-
+  }catch(Throwable e){
+            e.printStackTrace();
+            StackTraceElement[] elements = e.getStackTrace();
+            String stack="";
+            for(int ele=0;ele<elements.length;ele++){
+                stack+=elements[ele].toString()+"\n";
+            }
+            JOptionPane.showMessageDialog(null,stack,e.toString(),JOptionPane.ERROR_MESSAGE);
+            exit();
+        }
   
   }
 

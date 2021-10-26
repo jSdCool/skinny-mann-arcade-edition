@@ -1,5 +1,9 @@
+0.4.2_Early_Access
+-fixed: game crash when trying to view UGC levels when the folder does not exsist.
+-added: if a fatal error occors then a window will pop up with the error
+
 0.4.1_Early_Access
--fixed: tutorial nolonger contuributes to progress
+-fixed: tutorial no longer contributes to progress
 -added: user generated levels
 
 0.4.0_Early_Access
