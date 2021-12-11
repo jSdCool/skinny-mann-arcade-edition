@@ -808,6 +808,7 @@ try{
          tutorialMode=false;
          Menue="level select";
          soundHandler.setMusicVolume(musicVolume);
+         coinCount=0;
        }
        
      }
