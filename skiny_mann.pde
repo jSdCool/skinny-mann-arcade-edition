@@ -645,6 +645,7 @@ if(displayDebugInfo){
   text("player pose: "+ player1.pose,1275*Scale,70*Scale);
   text("camera x: "+camPos,1275*Scale,80*Scale);
   text("camera y: "+camPosY,1275*Scale,90*Scale);
+  text("tutorial position: "+tutorialPos,1275*Scale,100*Scale);
 }
 
 if(millis()<gmillis){
@@ -1399,28 +1400,36 @@ void tutorialLogic(){
     }
   }
   if(tutorialPos==9){
+    player1_moving_left=false;
+    player1_moving_right=false;
     player1_jumping=false;
-    if(dead&&!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()){
+    if(!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()){
+      tutorialPos++;
+    }
+  }
+  if(tutorialPos==10){
+    player1_jumping=false;
+    if(dead){
       currentTutorialSound=8;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
-  if(tutorialPos==10){
+  if(tutorialPos==11){
     if(player1.x>=1819){
       currentTutorialSound=9;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
-  if(tutorialPos==11){
+  if(tutorialPos==12){
     if(player1.x>=3875){
       currentTutorialSound=10;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
-  if(tutorialPos==12){
+  if(tutorialPos==13){
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
@@ -1430,14 +1439,14 @@ void tutorialLogic(){
     }
   }
   
-  if(tutorialPos==13){
+  if(tutorialPos==14){
     if(player1.x>=5338){
       currentTutorialSound=11;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
-  if(tutorialPos==14){
+  if(tutorialPos==15){
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
@@ -1446,14 +1455,14 @@ void tutorialLogic(){
     }
   }
   
-  if(tutorialPos==15){
+  if(tutorialPos==16){
     if(coinCount>=10){
       currentTutorialSound=12;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
-  if(tutorialPos==16){
+  if(tutorialPos==17){
     if(!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()){
       currentTutorialSound=13;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
@@ -1461,20 +1470,20 @@ void tutorialLogic(){
       coinCount=0;
     }
   }
-  if(tutorialPos==17){
+  if(tutorialPos==18){
     if(!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()){
       tutorialPos++;
       tutorialDrawLimit=51;
     }
   }
-  if(tutorialPos==18){
+  if(tutorialPos==19){
     if(player1.x>=7315){
       tutorialPos++;
       currentTutorialSound=14;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
     }
   }
-  if(tutorialPos==19){
+  if(tutorialPos==20){
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
@@ -1483,19 +1492,19 @@ void tutorialLogic(){
       tutorialDrawLimit=600;
     }
   }
-  if(tutorialPos==20){
+  if(tutorialPos==21){
     if(currentStageIndex==1){
       tutorialPos++;
       currentTutorialSound=15;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
     }
   }
-  if(tutorialPos==21){
+  if(tutorialPos==22){
     if(!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()){
       tutorialPos++;
     }
   }
-  if(tutorialPos==22){
+  if(tutorialPos==23){
     if(player1.x>=6739){
       tutorialPos++;
       currentTutorialSound=16;
@@ -1503,7 +1512,7 @@ void tutorialLogic(){
     }
   }
   
-  if(tutorialPos==23){
+  if(tutorialPos==24){
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
