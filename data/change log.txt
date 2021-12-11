@@ -1,3 +1,9 @@
+0.4.3_Early_Access
+-changed: file paths now compatible with linux
+-changed: in tutorial when the narrator is talking about jumping you can nolonger move
+-fixed: coins would carry over from one level to another
+
+
 0.4.2_Early_Access
 -fixed: game crash when trying to view UGC levels when the folder does not exsist.
 -added: if a fatal error occors then a window will pop up with the error
