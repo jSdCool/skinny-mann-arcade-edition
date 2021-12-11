@@ -60,7 +60,7 @@ class Level{
     stg.setString("location",stages.get(i-1).save());
     index.setJSONObject(i,stg);
    }
-   saveJSONArray(index,rootPath+"\\index.json");
+   saveJSONArray(index,rootPath+"/index.json");
  }
 }
 
@@ -136,8 +136,8 @@ class Stage{
    for(int i=0;i<parts.size();i++){
      staeg.setJSONObject(i+1,parts.get(i).save(is3D));
    }
-   saveJSONArray(staeg,rootPath+"\\"+name+".json");
-    return "\\"+name+".json";
+   saveJSONArray(staeg,rootPath+"/"+name+".json");
+    return "/"+name+".json";
   }
   
 }

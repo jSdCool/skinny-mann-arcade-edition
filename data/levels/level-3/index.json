@@ -13,17 +13,17 @@
   },
   {
     "name": "in the feilds",
-    "location": "\\in the feilds.json",
+    "location": "/in the feilds.json",
     "type": "stage"
   },
   {
     "name": "the suburbs",
-    "location": "\\the suburbs.json",
+    "location": "/the suburbs.json",
     "type": "stage"
   },
   {
     "name": "finally",
-    "location": "\\finally.json",
+    "location": "/finally.json",
     "type": "stage"
   }
 ]

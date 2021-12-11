@@ -7,17 +7,17 @@
     "name": "tutorial",
     "spawn pointX": 20,
     "spawn pointY": 380,
-    "game version": "0.4.0_Early_Access",
+    "game version": "0.4.2_Early_Access",
     "spawnY": 380
   },
   {
     "name": "stage1",
-    "location": "\\stage1.json",
+    "location": "/stage1.json",
     "type": "stage"
   },
   {
     "name": "stage 2",
-    "location": "\\stage 2.json",
+    "location": "/stage 2.json",
     "type": "stage"
   }
 ]

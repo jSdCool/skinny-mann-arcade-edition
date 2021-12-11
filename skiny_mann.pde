@@ -36,7 +36,7 @@ void settings(){//first function called
    fullScreen(P3D,rez.getInt("full_Screen_diplay"));//if full screen then turn full screen on
    
   }
-  PJOGL.setIcon("data\\assets\\skinny mann face.PNG");
+  PJOGL.setIcon("data/assets/skinny mann face.PNG");
 }
 
 
@@ -52,16 +52,16 @@ void setup(){//seccond function called
  }
  println(height);//debung info
 
- CBi = loadImage("data\\assets\\CBi.png");//load the CBi logo
+ CBi = loadImage("data/assets/CBi.png");//load the CBi logo
  CBi.resize((int)(500*Scale),(int)(500*Scale));//scale the CBi logo
  
- discordIcon=loadImage("data\\assets\\discord.png");
+ discordIcon=loadImage("data/assets/discord.png");
  discordIcon.resize((int)(50*Scale),(int)(50*Scale));
  
- coin3D=loadShape("data\\modles\\coin\\tinker.obj");
+ coin3D=loadShape("data/modles/coin/tinker.obj");
  coin3D.scale(3);
     
- icon = loadImage("data\\assets\\skinny mann face.PNG");//load the window icon
+ icon = loadImage("data/assets/skinny mann face.PNG");//load the window icon
  //surface.setIcon(icon);//set the window icon
  
  JSONObject scroll=settings.getJSONObject(1);//load in the settings
@@ -183,7 +183,7 @@ players by index position
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx;
 JSONArray  settings,mainIndex,levelProgress;
 Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink;
-String[] musicTracks ={"data\\music\\track1.wav","data\\music\\track2.wav","data\\music\\track3.wav"},sfxTracks={"data/sounds/level complete.wav"};
+String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"};
 SoundHandler soundHandler;
 Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];

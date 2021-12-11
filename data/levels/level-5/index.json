@@ -13,27 +13,27 @@
   },
   {
     "name": "stage 1",
-    "location": "\\stage 1.json",
+    "location": "/stage 1.json",
     "type": "stage"
   },
   {
     "name": "stage 2",
-    "location": "\\stage 2.json",
+    "location": "/stage 2.json",
     "type": "3Dstage"
   },
   {
     "name": "stage 3 final",
-    "location": "\\stage 3 final.json",
+    "location": "/stage 3 final.json",
     "type": "3Dstage"
   },
   {
     "name": "stage 4",
-    "location": "\\stage 4.json",
+    "location": "/stage 4.json",
     "type": "3Dstage"
   },
   {
     "name": "end",
-    "location": "\\end.json",
+    "location": "/end.json",
     "type": "stage"
   }
 ]
