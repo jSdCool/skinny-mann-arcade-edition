@@ -163,7 +163,7 @@ PShape coin3D;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false;
-String Menue ="creds"/*,level="n"*/,version="0.4.2_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
+String Menue ="creds"/*,level="n"*/,version="0.4.3_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1;
