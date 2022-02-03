@@ -1,6 +1,7 @@
 [
   {
     "name": "stage 2",
+    "sky color": -9131009,
     "type": "3Dstage"
   },
   {
@@ -135,16 +136,6 @@
     "dy": 260,
     "dz": 40,
     "x": 370,
-    "y": -900,
-    "z": 0,
-    "type": "ground"
-  },
-  {
-    "dx": 90,
-    "color": -7254783,
-    "dy": 20,
-    "dz": 40,
-    "x": 390,
     "y": -900,
     "z": 0,
     "type": "ground"
@@ -1506,5 +1497,25 @@
     "type": "interdimentional Portal",
     "linkY": 654,
     "linkX": 34
+  },
+  {
+    "dx": 110,
+    "color": -7254783,
+    "dy": 20,
+    "dz": 5,
+    "x": 370,
+    "y": -920,
+    "z": 0,
+    "type": "ground"
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 20,
+    "dz": 5,
+    "x": 460,
+    "y": -900,
+    "z": 0,
+    "type": "ground"
   }
 ]

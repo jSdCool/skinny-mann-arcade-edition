@@ -1,0 +1,18 @@
+[
+  {
+    "mainStage": -1,
+    "coins": 0,
+    "level_id": 707313637,
+    "spawnX": 20,
+    "name": "level-8",
+    "spawn pointX": 20,
+    "spawn pointY": 700,
+    "game version": "0.5.0_Early_Access",
+    "spawnY": 700
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  }
+]

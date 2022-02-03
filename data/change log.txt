@@ -1,3 +1,10 @@
+0.5.0_Early_Access
+-changed: doubled movemet speed
+-changed: jumping/gravity is now more reslistic 
+-added: signs
+-added: changable sky color
+-added: sound hit boxes
+
 0.4.3_Early_Access
 -changed: file paths now compatible with linux
 -changed: in tutorial when the narrator is talking about jumping you can no longer move

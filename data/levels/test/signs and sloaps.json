@@ -1,0 +1,105 @@
+[
+  {
+    "name": "signs and sloaps",
+    "sky color": -5603839,
+    "type": "stage"
+  },
+  {
+    "dx": 1230,
+    "color": -16732415,
+    "dy": 430,
+    "x": 0,
+    "y": 290,
+    "type": "ground"
+  },
+  {
+    "color": -16732415,
+    "rotation": 3,
+    "y1": 230,
+    "x1": 570,
+    "y2": 300,
+    "x2": 730,
+    "type": "sloap"
+  },
+  {
+    "color": -16732415,
+    "rotation": 2,
+    "y1": 230,
+    "x1": 730,
+    "y2": 290,
+    "x2": 910,
+    "type": "sloap"
+  },
+  {
+    "color": -16732415,
+    "rotation": 3,
+    "y1": 170,
+    "x1": 900,
+    "y2": 290,
+    "x2": 980,
+    "type": "sloap"
+  },
+  {
+    "color": -16732415,
+    "rotation": 3,
+    "y1": 100,
+    "x1": 970,
+    "y2": 180,
+    "x2": 1140,
+    "type": "sloap"
+  },
+  {
+    "color": -16732415,
+    "rotation": 2,
+    "y1": 100,
+    "x1": 1130,
+    "y2": 210,
+    "x2": 1310,
+    "type": "sloap"
+  },
+  {
+    "color": -16732415,
+    "rotation": 1,
+    "y1": 210,
+    "x1": 1220,
+    "y2": 290,
+    "x2": 1320,
+    "type": "sloap"
+  },
+  {
+    "contents": "hello",
+    "x": 1100,
+    "y": 120,
+    "type": "WritableSign"
+  },
+  {
+    "contents": "how did you get here",
+    "x": 1050,
+    "y": 290,
+    "type": "WritableSign"
+  },
+  {
+    "contents": "hill",
+    "x": 760,
+    "y": 250,
+    "type": "WritableSign"
+  },
+  {
+    "contents": "get  recked lol",
+    "x": 270,
+    "y": 290,
+    "type": "WritableSign"
+  },
+  {
+    "contents": "I am up high\nthanks for visiting",
+    "x": 460,
+    "y": 20,
+    "type": "WritableSign"
+  },
+  {
+    "contents": "your dead now",
+    "x": 1330,
+    "y": 210,
+    "type": "WritableSign"
+  }
+]

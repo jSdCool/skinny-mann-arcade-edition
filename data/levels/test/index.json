@@ -8,47 +8,72 @@
     "name": "test",
     "spawn pointX": 20,
     "spawn pointY": 700,
-    "game version": "0.1.0_ALFA",
+    "game version": "0.5.0_Early_Access",
     "spawnY": 700
   },
   {
     "name": "test stage 1",
-    "location": "\\test stage 1.json",
+    "location": "/test stage 1.json",
     "type": "stage"
   },
   {
     "name": "test 3",
-    "location": "\\test 3.json",
+    "location": "/test 3.json",
     "type": "stage"
   },
   {
     "name": "teaters 334",
-    "location": "\\teaters 334.json",
+    "location": "/teaters 334.json",
     "type": "stage"
   },
   {
     "name": "end stage",
-    "location": "\\end stage.json",
+    "location": "/end stage.json",
     "type": "stage"
   },
   {
     "name": "deth",
-    "location": "\\deth.json",
+    "location": "/deth.json",
     "type": "stage"
   },
   {
     "name": "3D test 1",
-    "location": "\\3D test 1.json",
+    "location": "/3D test 1.json",
     "type": "3Dstage"
   },
   {
     "name": "3D test 2",
-    "location": "\\3D test 2.json",
+    "location": "/3D test 2.json",
     "type": "3Dstage"
   },
   {
     "name": "sagasdaserghw",
-    "location": "\\sagasdaserghw.json",
+    "location": "/sagasdaserghw.json",
     "type": "stage"
+  },
+  {
+    "name": "signs and sloaps",
+    "location": "/signs and sloaps.json",
+    "type": "stage"
+  },
+  {
+    "name": "yoho",
+    "location": "/yoho.json",
+    "type": "stage"
+  },
+  {
+    "name": "boop",
+    "location": "/smpl.wav",
+    "type": "sound"
+  },
+  {
+    "name": "boop3",
+    "location": "/smpl.wav",
+    "type": "sound"
+  },
+  {
+    "name": "boop2",
+    "location": "/smpl.wav",
+    "type": "sound"
   }
 ]
