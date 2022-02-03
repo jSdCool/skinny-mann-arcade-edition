@@ -4,6 +4,9 @@
 -added: signs
 -added: changable sky color
 -added: sound hit boxes
+-added: level-7
+-added: level-8
+-fixed: parts of levels randomly bliping up
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux
