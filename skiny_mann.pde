@@ -145,6 +145,8 @@ UGC_lvls_next=new Button((int)(1030*Scale),(int)(335*Scale),(int)(200*Scale),(in
 UGC_lvls_prev=new Button((int)(50*Scale),(int)(335*Scale),(int)(200*Scale),(int)(50*Scale),"prevous",-59135,-1791).setStrokeWeight((int)(10*Scale)).setTextFactor(4);
 UGC_lvl_play=new Button((int)(600*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"play",-59135,-1791).setStrokeWeight((int)(10*Scale));
 levelcreatorLink=new Button((int)(980*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"create",-59135,-1791).setStrokeWeight((int)(10*Scale));
+select_lvl_7=new Button((int)(600*Scale),(int)(250*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 7",-59135,-1791).setStrokeWeight((int)(10*Scale));
+select_lvl_8 =new Button((int)(850*Scale),(int)(250*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 8",-59135,-1791).setStrokeWeight((int)(10*Scale));
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -183,7 +185,7 @@ players by index position
 //^^^ literaly level 1 ^^^^
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink;
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8;
 String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.5.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -314,12 +316,24 @@ try{//catch all fatal errors and display them
         }else{
           select_lvl_6.setColor(-59135,-1791);
         }
+        if(progress<7){
+          select_lvl_7.setColor(#B40F00,#B4AF00);
+        }else{
+          select_lvl_7.setColor(-59135,-1791);
+        }
+        if(progress<8){
+          select_lvl_8.setColor(#B40F00,#B4AF00);
+        }else{
+          select_lvl_8.setColor(-59135,-1791);
+        }
         select_lvl_1.draw();
         select_lvl_2.draw();
         select_lvl_3.draw();
         select_lvl_4.draw();
         select_lvl_5.draw();
         select_lvl_6.draw();
+        select_lvl_7.draw();
+        select_lvl_8.draw();
         select_lvl_back.draw();
         select_lvl_UGC.draw();
      }
@@ -716,27 +730,37 @@ try{
            inGame=true;
          }
          if(select_lvl_2.isMouseOver()&&progress>=2){
-           loadLevel("/data/levels/level-2");
+           loadLevel("data/levels/level-2");
            menue=false;
            inGame=true;
          }
          if(select_lvl_3.isMouseOver()&&progress>=3){
-           loadLevel("/data/levels/level-3");
+           loadLevel("data/levels/level-3");
            menue=false;
            inGame=true;
          }
          if(select_lvl_4.isMouseOver()&&progress>=4){
-           loadLevel("/data/levels/level-4");
+           loadLevel("data/levels/level-4");
            menue=false;
            inGame=true;
          }
-         if(select_lvl_5.isMouseOver()&&progress>=3){
-           loadLevel("/data/levels/level-5");
+         if(select_lvl_5.isMouseOver()&&progress>=5){
+           loadLevel("data/levels/level-5");
            menue=false;
            inGame=true;
          }
-         if(select_lvl_6.isMouseOver()&&progress>=4){
-           loadLevel("/data/levels/level-6");
+         if(select_lvl_6.isMouseOver()&&progress>=6){
+           loadLevel("data/levels/level-6");
+           menue=false;
+           inGame=true;
+         }
+         if(select_lvl_7.isMouseOver()&&progress>=7){
+           loadLevel("data/levels/level-7");
+           menue=false;
+           inGame=true;
+         }
+         if(select_lvl_8.isMouseOver()&&progress>=8){
+           loadLevel("data/levels/level-8");
            menue=false;
            inGame=true;
          }
