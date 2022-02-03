@@ -59,7 +59,7 @@ void stageLevelDraw() {
       }
       }
 
-      draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), Scale*player1.getScale(), player1.getColor());
+      draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());
 
       if (shadow3D) {
         float shadowAltitude=player1.y;
@@ -127,7 +127,7 @@ void stageLevelDraw() {
      rect(width*0.05,height*0.05,width*0.9,height*0.9);
      fill(#C4C4C4);
      rect(width*0.1,height*0.1,width*0.8,height*0.8);
-     textAlign(BOTTOM,LEFT);
+     textAlign(CENTER,CENTER);
      textSize(50*Scale);
      fill(0);
      text(item.getData(),width/2,height/2);

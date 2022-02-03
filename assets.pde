@@ -76,16 +76,16 @@ void draw3DSwitch2(float x,float y,float z,float Scale){
 
 void drawSign(float x, float y, float Scale) {
   fill(#A54A00);
-  rect((x-5)*Scale, (y-30)*Scale, 10*Scale, 30*Scale);
-  rect((x-35)*Scale, (y-65)*Scale, 70*Scale, 40*Scale);
+  rect(x-5*Scale, y-30*Scale, 10*Scale, 30*Scale);
+  rect(x-35*Scale, y-65*Scale, 70*Scale, 40*Scale);
   fill(#C4C4C4);
-  rect((x-33)*Scale, (y-63)*Scale, 66*Scale, 36*Scale);
+  rect(x-33*Scale, y-63*Scale, 66*Scale, 36*Scale);
   fill(#767675);
-  rect((x-30)*Scale, (y-58)*Scale, 60*Scale, 2*Scale);
-  rect((x-30)*Scale, (y-52)*Scale, 60*Scale, 2*Scale);
-  rect((x-30)*Scale, (y-46)*Scale, 60*Scale, 2*Scale);
-  rect((x-30)*Scale, (y-40)*Scale, 60*Scale, 2*Scale);
-  rect((x-30)*Scale, (y-34)*Scale, 60*Scale, 2*Scale);
+  rect(x-30*Scale, y-58*Scale, 60*Scale, 2*Scale);
+  rect(x-30*Scale, y-52*Scale, 60*Scale, 2*Scale);
+  rect(x-30*Scale, y-46*Scale, 60*Scale, 2*Scale);
+  rect(x-30*Scale, y-40*Scale, 60*Scale, 2*Scale);
+  rect(x-30*Scale, y-34*Scale, 60*Scale, 2*Scale);
 }
 
 void drawSign(float x, float y, float z, float Scale) {

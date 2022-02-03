@@ -1075,7 +1075,7 @@ try{
            inGame=false;
            Menue="level select";
            level_complete=false;
-           
+           coinCount=0;
            if(!UGC_lvl){
            JSONObject lvlinfo=mainIndex.getJSONObject(0);
              if(lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")){
