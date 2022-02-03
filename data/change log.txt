@@ -10,6 +10,7 @@
 -fixed: sound file would not get set while loading settings
 -added: sign to level 5 explaining how to move back and forth in 3D
 -added: platform in level 4 to assist with first jump
+-added: user generated levels now muct be of a compatible game version
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux

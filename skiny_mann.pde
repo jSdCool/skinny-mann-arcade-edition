@@ -192,6 +192,7 @@ Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];
 float [] tpCords=new float[3];
 Stage workingBlueprint;
+ArrayList<Boolean> compatibles;
 //▄
 void draw(){// the function that is called every fraim
 
@@ -353,6 +354,9 @@ try{//catch all fatal errors and display them
          text("no levels found",width/2,height/2); 
         }else{
           text(UGCNames.get(UGC_lvl_indx),width/2,height/2);
+          if((boolean)compatibles.get(UGC_lvl_indx)){
+           text("this level is not compatible with this version of the game",width/2,height/2+height*0.1); 
+          }
           if(UGC_lvl_indx<UGCNames.size()-1){
           UGC_lvls_next.draw();
           }
@@ -772,10 +776,17 @@ try{
            Menue="level select UGC";
            new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
            String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
-           UGCNames=new ArrayList<String>();
+           compatibles=new ArrayList<>();
+           UGCNames=new ArrayList<>();
            for(int i=0;i<files.length;i++){
             if(FileIsLevel(files[i])){
               UGCNames.add(files[i]);
+              if(levelCompatible){
+                compatibles.add(false);
+              }else{
+                compatibles.add(true);
+              }
+              
             }
            }
            UGC_lvl_indx=0;
@@ -807,6 +818,10 @@ try{
           }
           if(UGC_lvl_play.isMouseOver()){
             loadLevel(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
+            if(!levelCompatible){
+              Menue="level select";
+              return;
+            }
             UGC_lvl=true;
             inGame=true;
             menue=false;
@@ -1566,7 +1581,13 @@ void openUGCFolder(){
 
 boolean FileIsLevel(String fil){
   try{
-    loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
+    JSONObject job =loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
+    String createdVersion=job.getString("game version");
+    if(gameVersionCompatibilityCheck(createdVersion)){
+     levelCompatible=true; 
+    }else{
+     levelCompatible=false; 
+    }
   }catch(Throwable e){
     return false;
   }
