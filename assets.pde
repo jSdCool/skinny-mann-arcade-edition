@@ -73,3 +73,50 @@ void draw3DSwitch2(float x,float y,float z,float Scale){
  box(20,5,20);
  translate(-x,-(y-7.5),-z);
 }
+
+void drawSign(float x, float y, float Scale) {
+  fill(#A54A00);
+  rect((x-5)*Scale, (y-30)*Scale, 10*Scale, 30*Scale);
+  rect((x-35)*Scale, (y-65)*Scale, 70*Scale, 40*Scale);
+  fill(#C4C4C4);
+  rect((x-33)*Scale, (y-63)*Scale, 66*Scale, 36*Scale);
+  fill(#767675);
+  rect((x-30)*Scale, (y-58)*Scale, 60*Scale, 2*Scale);
+  rect((x-30)*Scale, (y-52)*Scale, 60*Scale, 2*Scale);
+  rect((x-30)*Scale, (y-46)*Scale, 60*Scale, 2*Scale);
+  rect((x-30)*Scale, (y-40)*Scale, 60*Scale, 2*Scale);
+  rect((x-30)*Scale, (y-34)*Scale, 60*Scale, 2*Scale);
+}
+
+void drawSign(float x, float y, float z, float Scale) {
+  translate(x, y, z);
+  fill(#A54A00);
+  translate(0, -15, 0);
+  box(10, 30, 10);
+  translate(0, -20, 0);
+  box(70, 40, 10);
+  fill(#C4C4C4);
+  translate(0, 0, 6);
+  box(66, 36, 1);
+  translate(0, -13, 1);
+  fill(#767675);
+  box(60, 2, 1);
+  translate(0, 6, 0);
+  box(60, 2, 1);
+  translate(0, 6, 0);
+  box(60, 2, 1);
+  translate(0, 6, 0);
+  box(60, 2, 1);
+  translate(0, 6, 0);
+  box(60, 2, 1);
+
+  translate(0, -6, 0);
+  translate(0, -6, 0);
+  translate(0, -6, 0);
+  translate(0, -6, 0);
+  translate(0, 13, -1);
+  translate(0, 0, -6);
+  translate(0, 20, 0);
+  translate(0, 15, 0);
+  translate(-x, -y, -z);
+}

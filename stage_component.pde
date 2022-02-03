@@ -60,7 +60,7 @@ class Level {
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", GAME_version);
+    head.setString("game version", version);
     head.setString("author", author);
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {

@@ -126,7 +126,7 @@ void stageLevelDraw() {
      rect(width*0.05,height*0.05,width*0.9,height*0.9);
      fill(#C4C4C4);
      rect(width*0.1,height*0.1,width*0.8,height*0.8);
-     textAlign(CENTER,CENTER);
+     textAlign(BOTTOM,LEFT);
      textSize(50*Scale);
      fill(0);
      text(item.getData(),width/2,height/2);
@@ -296,7 +296,7 @@ void playerPhysics() {
     }
 
 
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
       if (true) {//gravity
         float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+player1.y;//calculate the new verticle position the player shoud be at
 
@@ -335,20 +335,20 @@ void playerPhysics() {
     }
 
 
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
       if (player1.getX()-camPos>(1280-eadgeScroleDist)) {
         camPos=(int)(player1.getX()-(1280-eadgeScroleDist));
       }
 
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
       if (player1.getX()-camPos<eadgeScroleDist&&camPos>0) {
         camPos=(int)(player1.getX()-eadgeScroleDist);
       }
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
       if (player1.getY()+camPosY>720-eadgeScroleDistV&&camPosY>0) {
         camPosY-=player1.getY()+camPosY-(720-eadgeScroleDistV);
       }
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
       if (player1.getY()+camPosY<eadgeScroleDistV+75) {
         camPosY-=player1.getY()+camPosY-(eadgeScroleDistV+75);
       }
@@ -598,7 +598,7 @@ void playerPhysics() {
     }
 
 
-    if (simulating)//--------------------------------------------------------------------------------------------------remove this line in the final game
+    
 
       if (true) {//gravity
         float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+player1.y;//calculate the new verticle position the player shoud be at

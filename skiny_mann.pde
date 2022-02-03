@@ -160,13 +160,14 @@ thread("thrdCalc2");
 //define a shit tone of varibles
 PImage CBi,icon,discordIcon;
 PShape coin3D;
+PApplet primaryWindow=this;
 Server s;
 Client c;
-boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false;
+boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false;
 String Menue ="creds"/*,level="n"*/,version="0.4.3_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
-float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1;
+float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1,gravity=0.001;
 Player player1 =new Player(20,699,1,"red");
 /*player array info
 players by index position
@@ -180,13 +181,15 @@ players by index position
 */
 
 //^^^ literaly level 1 ^^^^
-int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx;
+int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1;
 JSONArray  settings,mainIndex,levelProgress;
 Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink;
-String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"};
+String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.5.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];
+float [] tpCords=new float[3];
+Stage workingBlueprint;
 //▄
 void draw(){// the function that is called every fraim
 
@@ -639,13 +642,12 @@ if(displayDebugInfo){
   text("mspc: "+ mspc,1275*Scale,10*Scale);
   text("player X: "+ player1.x,1275*Scale,20*Scale);
   text("player Y: "+ player1.y,1275*Scale,30*Scale);
-  text("player time in air: "+ player1.timeInAir,1275*Scale,40*Scale);
-  text("player jump distance: "+ player1.jumpDist,1275*Scale,50*Scale);
-  text("player animation Cooldown: "+ player1.animationCooldown,1275*Scale,60*Scale);
-  text("player pose: "+ player1.pose,1275*Scale,70*Scale);
-  text("camera x: "+camPos,1275*Scale,80*Scale);
-  text("camera y: "+camPosY,1275*Scale,90*Scale);
-  text("tutorial position: "+tutorialPos,1275*Scale,100*Scale);
+  text("player vertical velocity: "+ player1.verticalVelocity,1275*Scale,40*Scale);
+  text("player animation Cooldown: "+ player1.animationCooldown,1275*Scale,50*Scale);
+  text("player pose: "+ player1.pose,1275*Scale,60*Scale);
+  text("camera x: "+camPos,1275*Scale,70*Scale);
+  text("camera y: "+camPosY,1275*Scale,80*Scale);
+  text("tutorial position: "+tutorialPos,1275*Scale,90*Scale);
 }
 
 if(millis()<gmillis){
@@ -1544,4 +1546,180 @@ boolean FileIsLevel(String fil){
     return false;
   }
   return true;
+}
+
+boolean gameVersionCompatibilityCheck(String vers){//returns ture if the inputed version id compatible
+for(int i=0;i<compatibleVersions.length;i++){
+  if(vers.equals(compatibleVersions[i])){
+    levelCompatible=true;
+   return true; 
+  }
+}
+levelCompatible=false;
+ return false; 
+}
+void drawSoundBox(float x,float y){
+}
+void engageHUDPosition() {
+  //translate(player1.x+DX,player1.y-DY,player1.z-DZ);
+  //rotateY(radians(-(xangle-180)));
+  //rotateX(radians(yangle));
+  //translate(-640,-360,-623);
+  camera();
+  hint(DISABLE_DEPTH_TEST);
+  noLights();
+}
+
+void disEngageHUDPosition() {
+  //translate(640,360,623);
+  //rotateX(radians(-yangle));
+  //rotateY(radians((xangle-180)));
+  //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));
+  hint(ENABLE_DEPTH_TEST);
+}
+
+void glitchEffect() {
+  int n=millis()/100%10;
+  //n=9;
+  strokeWeight(0);
+  if (n==0) {
+    fill(0, 255, 0, 120);
+    rect(12*Scale, 30*Scale, 200*Scale, 80*Scale);
+    rect(800*Scale, 300*Scale, 100*Scale, 300*Scale);
+    rect(400*Scale, 240*Scale, 500*Scale, 20*Scale);
+    fill(124, 0, 250, 120);
+    rect(620*Scale, 530*Scale, 240*Scale, 50*Scale);
+    rect(100*Scale, 400*Scale, 300*Scale, 40*Scale);
+    rect(50*Scale, 600*Scale, 550*Scale, 20*Scale);
+    fill(115, 0, 58, 120);
+    rect(720*Scale, 90*Scale, 360*Scale, 112*Scale);
+    rect(150*Scale, 619*Scale, 203*Scale, 90*Scale);
+    rect(526*Scale, 306*Scale, 266*Scale, 165*Scale);
+  }
+  if (n==1) {
+    fill(0, 255, 0, 120);
+    rect(925*Scale, 60*Scale, 89*Scale, 96*Scale);
+    rect(305*Scale, 522*Scale, 84*Scale, 140*Scale);
+    rect(13*Scale, 332*Scale, 234*Scale, 313*Scale);
+    fill(124, 0, 250, 120);
+    rect(716*Scale, 527*Scale, 317*Scale, 111*Scale);
+    rect(318*Scale, 539*Scale, 233*Scale, 118*Scale);
+    rect(902*Scale, 3*Scale, 255*Scale, 42*Scale);
+    fill(115, 0, 58, 120);
+    rect(163*Scale, 150*Scale, 221*Scale, 127*Scale);
+    rect(216*Scale, 142*Scale, 7*Scale, 49*Scale);
+    rect(538*Scale, 224*Scale, 41*Scale, 48*Scale);
+  }
+  if (n==2) {
+    fill(0, 255, 0, 120);
+    rect(410*Scale, 335*Scale, 94*Scale, 74*Scale);
+    rect(45*Scale, 222*Scale, 276*Scale, 90*Scale);
+    rect(871*Scale, 287*Scale, 268*Scale, 174*Scale);
+    fill(124, 0, 250, 120);
+    rect(996*Scale, 535*Scale, 18*Scale, 28*Scale);
+    rect(722*Scale, 523*Scale, 82*Scale, 107*Scale);
+    rect(263*Scale, 201*Scale, 161*Scale, 88*Scale);
+    fill(115, 0, 58, 120);
+    rect(697*Scale, 436*Scale, 165*Scale, 44*Scale);
+    rect(843*Scale, 486*Scale, 98*Scale, 105*Scale);
+    rect(755*Scale, 20*Scale, 151*Scale, 51*Scale);
+  }
+  if (n==3) {
+    fill(0, 255, 0, 120);
+    rect(5*Scale, 228*Scale, 226*Scale, 131*Scale);
+    rect(813*Scale, 428*Scale, 83*Scale, 60*Scale);
+    rect(285*Scale, 452*Scale, 166*Scale, 135*Scale);
+    fill(124, 0, 250, 120);
+    rect(277*Scale, 514*Scale, 11*Scale, 87*Scale);
+    rect(905*Scale, 152*Scale, 8*Scale, 160*Scale);
+    rect(369*Scale, 80*Scale, 279*Scale, 153*Scale);
+    fill(115, 0, 58, 120);
+    rect(179*Scale, 96*Scale, 159*Scale, 65*Scale);
+    rect(432*Scale, 296*Scale, 47*Scale, 12*Scale);
+    rect(944*Scale, 412*Scale, 22*Scale, 50*Scale);
+  }
+  if (n==4) {
+    fill(0, 255, 0, 120);
+    rect(679*Scale, 159*Scale, 76*Scale, 168*Scale);
+    rect(144*Scale, 58*Scale, 180*Scale, 61*Scale);
+    rect(950*Scale, 89*Scale, 155*Scale, 13*Scale);
+    fill(124, 0, 250, 120);
+    rect(542*Scale, 463*Scale, 177*Scale, 156*Scale);
+    rect(527*Scale, 70*Scale, 115*Scale, 28*Scale);
+    rect(211*Scale, 151*Scale, 58*Scale, 164*Scale);
+    fill(115, 0, 58, 120);
+    rect(88*Scale, 440*Scale, 278*Scale, 23*Scale);
+    rect(642*Scale, 440*Scale, 231*Scale, 91*Scale);
+    rect(737*Scale, 524*Scale, 69*Scale, 71*Scale);
+  }
+  if (n==5) {
+    fill(0, 255, 0, 120);
+    rect(226*Scale, 71*Scale, 291*Scale, 37*Scale);
+    rect(91*Scale, 436*Scale, 210*Scale, 8*Scale);
+    rect(396*Scale, 72*Scale, 10*Scale, 136*Scale);
+    fill(124, 0, 250, 120);
+    rect(666*Scale, 274*Scale, 175*Scale, 171*Scale);
+    rect(251*Scale, 513*Scale, 280*Scale, 13*Scale);
+    rect(663*Scale, 141*Scale, 290*Scale, 33*Scale);
+    fill(115, 0, 58, 120);
+    rect(900*Scale, 47*Scale, 315*Scale, 125*Scale);
+    rect(10*Scale, 156*Scale, 231*Scale, 73*Scale);
+    rect(377*Scale, 253*Scale, 175*Scale, 22*Scale);
+  }
+  if (n==6) {
+    fill(0, 255, 0, 120);
+    rect(756*Scale, 447*Scale, 205*Scale, 161*Scale);
+    rect(304*Scale, 341*Scale, 276*Scale, 144*Scale);
+    rect(4*Scale, 141*Scale, 35*Scale, 176*Scale);
+    fill(124, 0, 250, 120);
+    rect(307*Scale, 98*Scale, 204*Scale, 89*Scale);
+    rect(478*Scale, 476*Scale, 44*Scale, 52*Scale);
+    rect(620*Scale, 57*Scale, 242*Scale, 144*Scale);
+    fill(115, 0, 58, 120);
+    rect(495*Scale, 374*Scale, 199*Scale, 62*Scale);
+    rect(724*Scale, 71*Scale, 34*Scale, 2*Scale);
+    rect(853*Scale, 88*Scale, 199*Scale, 114*Scale);
+  }
+  if (n==7) {
+    fill(0, 255, 0, 120);
+    rect(276*Scale, 181*Scale, 220*Scale, 38*Scale);
+    rect(955*Scale, 514*Scale, 33*Scale, 51*Scale);
+    rect(621*Scale, 135*Scale, 100*Scale, 74*Scale);
+    fill(124, 0, 250, 120);
+    rect(200*Scale, 333*Scale, 165*Scale, 99*Scale);
+    rect(709*Scale, 503*Scale, 84*Scale, 117*Scale);
+    rect(212*Scale, 275*Scale, 238*Scale, 27*Scale);
+    fill(115, 0, 58, 120);
+    rect(787*Scale, 477*Scale, 115*Scale, 9*Scale);
+    rect(239*Scale, 443*Scale, 155*Scale, 149*Scale);
+    rect(794*Scale, 267*Scale, 185*Scale, 80*Scale);
+  }
+  if (n==8) {
+    fill(0, 255, 0, 120);
+    rect(543*Scale, 498*Scale, 22*Scale, 125*Scale);
+    rect(749*Scale, 151*Scale, 79*Scale, 174*Scale);
+    rect(667*Scale, 380*Scale, 311*Scale, 45*Scale);
+    fill(124, 0, 250, 120);
+    rect(886*Scale, 193*Scale, 87*Scale, 50*Scale);
+    rect(135*Scale, 128*Scale, 151*Scale, 83*Scale);
+    rect(651*Scale, 128*Scale, 20*Scale, 85*Scale);
+    fill(115, 0, 58, 120);
+    rect(862*Scale, 374*Scale, 319*Scale, 136*Scale);
+    rect(258*Scale, 149*Scale, 65*Scale, 143*Scale);
+    rect(299*Scale, 63*Scale, 297*Scale, 152*Scale);
+  }
+  if (n==9) {
+    fill(0, 255, 0, 120);
+    rect(953*Scale, 386*Scale, 11*Scale, 30*Scale);
+    rect(453*Scale, 104*Scale, 50*Scale, 95*Scale);
+    rect(71*Scale, 157*Scale, 23*Scale, 49*Scale);
+    fill(124, 0, 250, 120);
+    rect(373*Scale, 447*Scale, 28*Scale, 136*Scale);
+    rect(598*Scale, 321*Scale, 227*Scale, 19*Scale);
+    rect(500*Scale, 314*Scale, 218*Scale, 113*Scale);
+    fill(115, 0, 58, 120);
+    rect(423*Scale, 512*Scale, 295*Scale, 30*Scale);
+    rect(186*Scale, 489*Scale, 208*Scale, 76*Scale);
+    rect(178*Scale, 269*Scale, 117*Scale, 133*Scale);
+  }
 }
