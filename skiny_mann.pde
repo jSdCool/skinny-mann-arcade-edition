@@ -210,6 +210,7 @@ try{//catch all fatal errors and display them
         
       if(start_wate>=2){// display it for 100  fraims 
       soundHandler.setMusicVolume(musicVolume);
+      soundHandler.setSoundsVolume(sfxVolume);
         try{
           String inver =get_git_version();//check for updates
           inver =inver.substring(0,inver.length()-1);

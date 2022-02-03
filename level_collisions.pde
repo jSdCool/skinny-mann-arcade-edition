@@ -105,6 +105,7 @@ void stageLevelDraw() {
 
 
   if (level_complete) {
+    textAlign(BOTTOM,LEFT);
     textSize(Scale*100);
     fill(255, 255, 0);
     text("LEVEL COMPLETE!!!", Scale*200, Scale*400);
