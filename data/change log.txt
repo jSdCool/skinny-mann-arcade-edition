@@ -7,6 +7,7 @@
 -added: level-7
 -added: level-8
 -fixed: parts of levels randomly bliping up
+-fixed: sound file would not get set while loading settings
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux
