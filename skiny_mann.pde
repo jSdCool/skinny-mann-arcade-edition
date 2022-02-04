@@ -776,8 +776,15 @@ try{
            Menue="level select UGC";
            new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
            String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
+           
            compatibles=new ArrayList<>();
            UGCNames=new ArrayList<>();
+           try{
+           if(files.length==0)
+           return;
+           }catch(NullPointerException e){
+             return;
+           }
            for(int i=0;i<files.length;i++){
             if(FileIsLevel(files[i])){
               UGCNames.add(files[i]);
