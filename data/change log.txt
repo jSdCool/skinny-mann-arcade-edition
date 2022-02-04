@@ -12,6 +12,7 @@
 -added: platform in level 4 to assist with first jump
 -added: user generated levels now muct be of a compatible game version
 -changed: default screen srcolling locations
+-added: information to the "options" menue during the tutorial
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux

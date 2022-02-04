@@ -17,6 +17,8 @@ void stageLevelDraw() {
   if (stage.type.equals("stage")) {
     e3DMode=false;
     camera();
+    drawCamPosX=camPos;
+    drawCamPosY=camPosY;
     for (int i=0; stageLoopCondishen(i, stage); i++) {
       strokeWeight(0);
       noStroke();
@@ -49,7 +51,8 @@ void stageLevelDraw() {
       coinRotation+=3;
       if (coinRotation>360)
         coinRotation-=360;
-
+      drawCamPosX=camPos;
+    drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
         noStroke();
@@ -82,6 +85,8 @@ void stageLevelDraw() {
       }
     } else {//redner the level in 2D
       camera();
+      drawCamPosX=camPos;
+    drawCamPosY=camPosY;
       for (int i=0; stageLoopCondishen(i, stage); i++) {
         strokeWeight(0);
        noStroke(); 
@@ -147,6 +152,8 @@ void blueprintEditDraw(){
   if (workingBlueprint.type.equals("blueprint")) {
     e3DMode=false;
     camera();
+    drawCamPosX=camPos;
+    drawCamPosY=camPosY;
     for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {
       strokeWeight(0);
       noStroke();

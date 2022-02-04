@@ -183,7 +183,7 @@ players by index position
 */
 
 //^^^ literaly level 1 ^^^^
-int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1;
+int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0;
 JSONArray  settings,mainIndex,levelProgress;
 Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8;
 String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.5.0_Early_Access"};
@@ -584,11 +584,21 @@ try{//catch all fatal errors and display them
   }
   
   if(tutorialMode&&!inGame){
+    if(Menue.equals("settings")){
+      background(0);
+   fill(255);
+   textSize(50*Scale);
+   textAlign(CENTER,CENTER);
+   text("this feture is disabled during the tutorial\npres ECS to return",width/2,height/2);
+    }else{
    background(0);
    fill(255);
    textSize(50*Scale);
    textAlign(CENTER,CENTER);
    text("ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!",width/2,height/2);
+   textSize(25*Scale);
+   text("press ESC to close",width/2,height*0.97);
+    }
   }
   engageHUDPosition();//anything hud
   

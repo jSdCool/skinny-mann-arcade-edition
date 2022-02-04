@@ -60,7 +60,7 @@ class Level {
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", version);
+    head.setString("game version", GAME_version);
     head.setString("author", author);
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {
@@ -252,7 +252,7 @@ class Ground extends StageComponent {//ground component
 
   void draw() {
     fill(ccolor);
-    rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
@@ -332,7 +332,7 @@ class Holo extends StageComponent {//ground component
 
   void draw() {
     fill(ccolor);
-    rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
@@ -401,7 +401,7 @@ class DethPlane extends StageComponent {//ground component
 
   void draw() {
     fill(-114431);
-    rect(Scale*(x-camPos)-1, Scale*(y+camPosY)-1, Scale*dx+2, Scale*dy+2);
+    rect(Scale*(x-drawCamPosX)-1, Scale*(y+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
   }
 
   void draw3D() {
@@ -477,8 +477,8 @@ class CheckPoint extends StageComponent {//ground component
       checkpointIn3DStage=false;
     }
 
-    float x2=x-camPos;
-    float y2=y+camPosY;
+    float x2=x-drawCamPosX;
+    float y2=y+drawCamPosY;
     if (po)
       fill(#E5C402);
     else
@@ -559,18 +559,18 @@ class Goal extends StageComponent {//ground component
   }
 
   void draw() {
-    float x2 = x-camPos, y2 = y;
+    float x2 = x-drawCamPosX, y2 = y;
     fill(255);
-    rect(Scale*x2, Scale*(y2+camPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+100), Scale*(y2+camPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+200), Scale*(y2+camPosY), Scale*50, Scale*50);
+    rect(Scale*x2, Scale*(y2+drawCamPosY), Scale*50, Scale*50);
+    rect(Scale*(x2+100), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
+    rect(Scale*(x2+200), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
     fill(0);
-    rect(Scale*(x2+50), Scale*(y2+camPosY), Scale*50, Scale*50);
-    rect(Scale*(x2+150), Scale*(y2+camPosY), Scale*50, Scale*50);
+    rect(Scale*(x2+50), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
+    rect(Scale*(x2+150), Scale*(y2+drawCamPosY), Scale*50, Scale*50);
 
     float px =player1.getX(), py=player1.getY();
 
-    if (px >= x2+camPos && px <= x2+camPos + 250 && py >= y2 - 50 && py <= y2 + 50) {
+    if (px >= x2+drawCamPosX && px <= x2+drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
       level_complete=true;
     }
   }
@@ -635,10 +635,10 @@ class Coin extends StageComponent {//ground component
     } else {
       collected=coins.get(coinId);
     }
-    float x2=x-camPos;
+    float x2=x-drawCamPosX;
     if (!collected) {
-      drawCoin(Scale*x2, Scale*(y+camPosY), Scale*3);
-      if (Math.sqrt(Math.pow(playx-camPos-x2, 2)+Math.pow(playy-y, 2))<30) {
+      drawCoin(Scale*x2, Scale*(y+drawCamPosY), Scale*3);
+      if (Math.sqrt(Math.pow(playx-drawCamPosX-x2, 2)+Math.pow(playy-y, 2))<30) {
         coins.set(coinId, true);
         coinCount++;
       }
@@ -713,7 +713,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
 
   void draw() {
     float playx=player1.getX(), playy=player1.getY();
-    drawPortal(Scale*(x-camPos), Scale*(y+camPosY), Scale*1);
+    drawPortal(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*1);
     if ((playx>x-25&&playx<x+25&&playy>y-50&&playy<y+60)) {
       fill(255);
       textSize(Scale*20);
@@ -829,16 +829,16 @@ class Sloap extends StageComponent {//ground component
   void draw() {
     fill(ccolor);
     if (direction==0) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
     if (direction==1) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(x-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
     if (direction==2) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(x-camPos), Scale*(dy+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY));
     }
     if (direction==3) {
-      triangle(Scale*(x-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
   }
 
@@ -923,16 +923,16 @@ class HoloTriangle extends StageComponent {//ground component
   void draw() {
     fill(ccolor);
     if (direction==0) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
     if (direction==1) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(x-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
     if (direction==2) {
-      triangle(Scale*(x-camPos), Scale*(y+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(x-camPos), Scale*(dy+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY));
     }
     if (direction==3) {
-      triangle(Scale*(x-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(dy+camPosY), Scale*(dx-camPos), Scale*(y+camPosY));
+      triangle(Scale*(x-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(dy+drawCamPosY), Scale*(dx-drawCamPosX), Scale*(y+drawCamPosY));
     }
   }
 
@@ -1007,7 +1007,7 @@ class SWon3D extends StageComponent {//ground component
   }
 
   void draw() {
-    draw3DSwitch1((x-camPos)*Scale, (y+camPosY)*Scale, Scale);
+    draw3DSwitch1((x-drawCamPosX)*Scale, (y+drawCamPosY)*Scale, Scale);
     if (player1.x>=x-10&&player1.x<=x+10&&player1.y >=y-10&&player1.y<= y+2) {
       player1.z=z;
       e3DMode=true;
@@ -1060,7 +1060,7 @@ class SWoff3D extends StageComponent {//ground component
   }
 
   void draw() {
-    draw3DSwitch2((x-camPos)*Scale, (y+camPosY)*Scale, Scale);
+    draw3DSwitch2((x-drawCamPosX)*Scale, (y+drawCamPosY)*Scale, Scale);
   }
 
   void draw3D() {
@@ -1114,7 +1114,7 @@ class WritableSign extends StageComponent {
   }
 
   void draw() {
-    drawSign(Scale*(x-camPos), Scale*(y+camPosY), Scale);
+    drawSign(Scale*(x-drawCamPosX), Scale*(y+drawCamPosY), Scale);
 
     float playx=player1.getX(), playy=player1.getY();
     if (playx>x-35&&playx<x+35&&playy>y-40&&playy<y) {//display the press e message to the player
@@ -1190,7 +1190,7 @@ class SoundBox extends StageComponent {
   }
 
   void draw() {
-    drawSoundBox(x-camPos, y+camPosY);
+    drawSoundBox(x-drawCamPosX, y+drawCamPosY);
     if (player1.getX()>=x-30&&player1.getX()<=x+30&&player1.y>=y-30&&player1.getY()<y+30) {
       displayText="Press E";
       displayTextUntill=millis()+100;
@@ -1198,7 +1198,7 @@ class SoundBox extends StageComponent {
       try {
         StageSound sound = level.sounds.get(soundKey);
         if (!sound.sound.isPlaying()) {
-          sound.sound.play(1,sfxVolume);
+          sound.sound.play();
         }
       }catch(Exception e) {}
     }}
