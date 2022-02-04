@@ -729,7 +729,7 @@ try{
     if(Menue.equals("level select")&&!start_host){//if that menue is level select
     int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
          if(select_lvl_1.isMouseOver()){
-           loadLevel("/data/levels/level-1");
+           loadLevel("data/levels/level-1");
            menue=false;
            inGame=true;
          }
@@ -1323,8 +1323,8 @@ void generateSettings(){
     settings.setJSONObject(0,header);
  
     scrolling.setString("lable", "scroling location");
-    scrolling.setFloat("horozontal", 100);
-    scrolling.setFloat("vertical",100);
+    scrolling.setFloat("horozontal", 360);
+    scrolling.setFloat("vertical",250);
     settings.setJSONObject(1,scrolling);
           
     rez.setString("lable","resolution stuff");
