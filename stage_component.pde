@@ -1198,7 +1198,7 @@ class SoundBox extends StageComponent {
       try {
         StageSound sound = level.sounds.get(soundKey);
         if (!sound.sound.isPlaying()) {
-          sound.sound.play();
+          sound.sound.play(1,sfxVolume);
         }
       }catch(Exception e) {}
     }}
