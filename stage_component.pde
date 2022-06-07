@@ -56,7 +56,7 @@ class Level {
     println("checking game version compatablility");
     if (!gameVersionCompatibilityCheck(createdVersion)) {
       println("game version not compatable with the verion of this level");
-      return;
+      throw new RuntimeException("this level is not compatable with this version of the game");
     }
     println("game version is compatable with this level");
     println("loading level components");

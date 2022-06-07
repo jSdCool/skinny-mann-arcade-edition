@@ -14,6 +14,7 @@ import java.awt.Desktop;
 import javax.swing.*;
 
 void settings(){//first function called
+try{
   try{
     settings =loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");//load the settings
     JSONObject vers=settings.getJSONObject(0);
@@ -37,11 +38,16 @@ void settings(){//first function called
    
   }
   PJOGL.setIcon("data/assets/skinny mann face.PNG");
+}catch(Throwable e){
+  println("an error orrored in the settings function");
+  handleError(e);
+}
 }
 
 
 
 void setup(){//seccond function called
+try{
  frameRate(60);//limet the frame reate
    background(0);
  if(fs){//get and set some data
@@ -160,6 +166,10 @@ ptsW=100;
   ptsH=100;
 initializeSphere(ptsW, ptsH);
 thread("thrdCalc2");
+}catch(Throwable e){
+  println("an error occored in the setup function");
+ handleError(e); 
+}
 }
 //define a shit tone of varibles
 PImage CBi,icon,discordIcon;
@@ -590,7 +600,6 @@ try{//catch all fatal errors and display them
         //================================================================================================
         background(7646207);
           stageLevelDraw();
-          //playerPhysics();
           if(level_complete&&!levelCompleteSoundPlayed){
             soundHandler.addToQueue(0);
             levelCompleteSoundPlayed=true;
@@ -708,14 +717,7 @@ disEngageHUDPosition();
 
 
   }catch(Throwable e){//cath and display all the fatail errors that occor
-            e.printStackTrace();
-            StackTraceElement[] elements = e.getStackTrace();
-            String stack="";
-            for(int ele=0;ele<elements.length;ele++){
-                stack+=elements[ele].toString()+"\n";
-            }
-            JOptionPane.showMessageDialog(null,stack,e.toString(),JOptionPane.ERROR_MESSAGE);
-            exit();
+            handleError(e);
         }
 }
 
@@ -732,7 +734,7 @@ try{
          return;
        }
        if(mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 470*Scale && mouseY <= 510*Scale){//exit button
-         exit();
+         exit(1);
        }
        if((mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 390*Scale && mouseY <= 440*Scale)&&!hosting&&!joined){//join game button
           link("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
@@ -1148,20 +1150,14 @@ try{
       }
     
   }catch(Throwable e){
-            e.printStackTrace();
-            StackTraceElement[] elements = e.getStackTrace();
-            String stack="";
-            for(int ele=0;ele<elements.length;ele++){
-                stack+=elements[ele].toString()+"\n";
-            }
-            JOptionPane.showMessageDialog(null,stack,e.toString(),JOptionPane.ERROR_MESSAGE);
-            exit();
-        }
+    handleError(e);
+  }
   
   }
 
 
 void keyPressed(){// when a key is pressed
+try{
   if(inGame){//if in game
   if (key == ESC) {
     key = 0;  //clear the key so it doesnt close the program
@@ -1225,13 +1221,20 @@ if(menue){
     key = 0;  //clear the key so it doesnt close the program
     Menue="main";
   }
+  if(Menue.equals("main")){
+   exit(0); 
+  }
   }
 }
   
 //System.out.println(keyCode);
+}catch(Throwable e){
+ handleError(e); 
+}
 }
 
 void keyReleased(){//when you release a key
+try{
   if(inGame){//whehn in game
     if(keyCode==65){//if A is released
       player1_moving_left=false;
@@ -1254,9 +1257,13 @@ void keyReleased(){//when you release a key
   }
   }//end of 3d mode
   }
+}catch(Throwable e){
+ handleError(e); 
+}
 }
 
 void mouseDragged(){
+  try{
   if(Menue.equals("settings")){
     if(settingsMenue.equals("game play")){
      if(sdSlider.isMouseOver()){
@@ -1322,13 +1329,20 @@ void mouseDragged(){
        } 
     }
   }
+  }catch(Throwable e){
+   handleError(e); 
+  }
 }
 
 void loadLevel(String fdp){
+  try{
  rootPath=fdp;
  mainIndex=loadJSONArray(rootPath+"/index.json");
  level=new Level(mainIndex);
  level.logicBoards.get(level.loadBoard).superTick();
+  }catch(Throwable e){
+   handleError(e); 
+  }
 }
 
 int curMills=0,lasMills=0,mspc=0;
@@ -1668,6 +1682,27 @@ void disEngageHUDPosition() {
   //rotateY(radians((xangle-180)));
   //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));
   hint(ENABLE_DEPTH_TEST);
+}
+
+void handleError(Throwable e){
+ e.printStackTrace();
+ StackTraceElement[] elements = e.getStackTrace();
+ String stack="";
+ for(int ele=0;ele<elements.length;ele++){
+    stack+=elements[ele].toString()+"\n";
+ }
+ stack+="\nyou may wish to take a screenshot of this window and resport this as an issue on github";
+ JOptionPane.showMessageDialog(null,stack,e.toString(),JOptionPane.ERROR_MESSAGE);
+ exit(-1); 
+}
+
+void exit(){
+  println("somehitng attempted to close the program");
+}
+
+void exit(int i){
+ println("exited with code: "+i);
+ super.exit();
 }
 
 void glitchEffect() {
