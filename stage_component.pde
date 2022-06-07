@@ -35,6 +35,7 @@ class Level {
         variables.add(false);
       }
       println("loaded "+variables.size()+" variables");
+    }
     if(!job.isNull("groups")){
      JSONArray gps= job.getJSONArray("groups");
      for(int i=0;i<gps.size();i++){
