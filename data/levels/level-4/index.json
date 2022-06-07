@@ -4,11 +4,13 @@
     "coins": 73,
     "author": "jSdCool",
     "level_id": 4,
+    "number of variable": 5,
     "spawnX": 400,
     "name": "level-4",
     "spawn pointX": 400,
+    "groups": ["group 0"],
     "spawn pointY": -690,
-    "game version": "0.5.0_Early_Access",
+    "game version": "0.6.0_Early_Access",
     "spawnY": -690
   },
   {
@@ -30,5 +32,20 @@
     "name": "stage 4",
     "location": "/stage 4.json",
     "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
   }
 ]

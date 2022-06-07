@@ -4,11 +4,34 @@
     "coins": 69,
     "author": "jSdCool",
     "level_id": 765319749,
+    "number of variable": 50,
     "spawnX": 20,
     "name": "test",
     "spawn pointX": 20,
+    "groups": [
+      "first lol",
+      "number 2!!!!",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
     "spawn pointY": 700,
-    "game version": "0.5.0_Early_Access",
+    "game version": "0.6.0_Early_Access",
     "spawnY": 700
   },
   {
@@ -62,6 +85,11 @@
     "type": "stage"
   },
   {
+    "name": "logic",
+    "location": "/logic.json",
+    "type": "3Dstage"
+  },
+  {
     "name": "boop",
     "location": "/smpl.wav",
     "type": "sound"
@@ -75,5 +103,25 @@
     "name": "boop2",
     "location": "/smpl.wav",
     "type": "sound"
+  },
+  {
+    "name": "eee",
+    "location": "/eee.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
   }
 ]

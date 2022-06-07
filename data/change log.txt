@@ -1,3 +1,11 @@
+0.6.0_Early_Access
+-changed: upgraded Button to 1.2.0
+-added: logic to levels
+-added: level-9
+-added: level-10
+-added: logic interactive buttons
+
+
 0.5.0_Early_Access
 -changed: doubled movemet speed
 -changed: jumping/gravity is now more reslistic 

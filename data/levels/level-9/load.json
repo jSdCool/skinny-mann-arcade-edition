@@ -1,0 +1,88 @@
+[
+  {"name": "load"},
+  {
+    "x": 293,
+    "y": 14,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 283,
+    "y": 88,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 281,
+    "y": 153,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 268,
+    "y": 217,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 64,
+    "y": 130,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 0,
+        "terminal": 0
+      },
+      {
+        "index": 1,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 3,
+        "terminal": 0
+      },
+      {
+        "index": 5,
+        "terminal": 1
+      },
+      {
+        "index": 6,
+        "terminal": 1
+      },
+      {
+        "index": 7,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 263,
+    "y": 305,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 261,
+    "y": 422,
+    "group number": 12,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "offset": -20,
+    "x": 272,
+    "y": 366,
+    "group number": 11,
+    "type": "z-offset",
+    "connections": []
+  }
+]

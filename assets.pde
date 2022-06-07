@@ -120,3 +120,23 @@ void drawSign(float x, float y, float z, float Scale) {
   translate(0, 15, 0);
   translate(-x, -y, -z);
 }
+
+void drawLogicButton(PApplet screen,float x, float y, float Scale,boolean pressed) {
+  screen.fill(196);
+  screen.rect((x-20)*Scale, (y-5)*Scale, 40*Scale, 5*Scale);
+  if(!pressed){
+    screen.fill(#FC2121);
+    screen.rect((x-10)*Scale, (y-10)*Scale, 20*Scale, 5*Scale);
+  }
+}
+void drawLogicButton(float x, float y, float z, float Scale,boolean pressed) {
+  fill(196);
+  strokeWeight(0);
+  translate(x, y-2.5, z);
+  box(40, 5, 40);
+  fill(#FC2121);
+  translate(0, -5, 0);
+  if(!pressed)
+    box(20, 5, 20);
+  translate(-x, -(y-7.5), -z);
+}

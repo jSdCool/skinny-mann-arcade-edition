@@ -1,0 +1,36 @@
+[
+  {"name": "level complete"},
+  {
+    "x": 426,
+    "y": 157,
+    "group number": 12,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 144,
+    "y": 177,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 0,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 7,
+    "x": 426,
+    "y": 267,
+    "type": "set var",
+    "connections": []
+  }
+]

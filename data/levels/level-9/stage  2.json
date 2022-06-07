@@ -1,0 +1,477 @@
+[
+  {
+    "name": "stage  2",
+    "sky color": -7303023,
+    "type": "3Dstage"
+  },
+  {
+    "dx": 1280,
+    "color": -12237498,
+    "dy": 40,
+    "dz": 1000,
+    "x": 0,
+    "y": 680,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 60,
+    "y": 680,
+    "z": 300,
+    "type": "3DonSW",
+    "group": -1
+  },
+  {
+    "x": 60,
+    "y": 680,
+    "z": 300,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "link Index": 1,
+    "linkZ": 0,
+    "x": 60,
+    "y": 630,
+    "z": 300,
+    "type": "interdimentional Portal",
+    "linkY": 620,
+    "linkX": 2390,
+    "group": -1
+  },
+  {
+    "contents": "find this button 5 times",
+    "x": 150,
+    "y": 680,
+    "z": 300,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "x": 270,
+    "variable": 3,
+    "y": 680,
+    "z": 300,
+    "type": "logic button",
+    "group": 7
+  },
+  {
+    "dx": 150,
+    "color": -8900351,
+    "dy": 630,
+    "dz": 100,
+    "x": 330,
+    "y": 50,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 360,
+    "color": -8900351,
+    "dy": 260,
+    "dz": 300,
+    "x": 420,
+    "y": 420,
+    "z": 480,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -8900351,
+    "dy": 70,
+    "dz": 140,
+    "x": 700,
+    "y": 150,
+    "z": 100,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 330,
+    "color": -8900351,
+    "dy": 60,
+    "dz": 140,
+    "x": 790,
+    "y": 210,
+    "z": 740,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 3,
+    "linkZ": 400,
+    "x": 1240,
+    "y": 630,
+    "z": 400,
+    "type": "interdimentional Portal",
+    "linkY": 630,
+    "linkX": 30,
+    "group": 8
+  },
+  {
+    "contents": "splashing all day in the sun\nit was always fun",
+    "x": 410,
+    "y": 680,
+    "z": 0,
+    "type": "WritableSign",
+    "group": 11
+  },
+  {
+    "dx": 100,
+    "color": -8900351,
+    "dy": 80,
+    "dz": 5,
+    "x": 360,
+    "y": 600,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "coin id": 2,
+    "x": 310,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 3,
+    "x": 230,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 4,
+    "x": 180,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 5,
+    "x": 120,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 6,
+    "x": 360,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 7,
+    "x": 410,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 8,
+    "x": 460,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 9,
+    "x": 510,
+    "y": 660,
+    "z": 300,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 15,
+    "x": 350,
+    "y": 30,
+    "z": 50,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 16,
+    "x": 390,
+    "y": 30,
+    "z": 50,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 17,
+    "x": 430,
+    "y": 30,
+    "z": 50,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 18,
+    "x": 470,
+    "y": 30,
+    "z": 50,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 21,
+    "x": 730,
+    "y": 130,
+    "z": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 22,
+    "x": 770,
+    "y": 130,
+    "z": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 23,
+    "x": 810,
+    "y": 130,
+    "z": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 24,
+    "x": 850,
+    "y": 130,
+    "z": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 26,
+    "x": 810,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 27,
+    "x": 860,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 28,
+    "x": 910,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 29,
+    "x": 960,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 30,
+    "x": 1000,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 31,
+    "x": 1040,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 32,
+    "x": 1090,
+    "y": 190,
+    "z": 825,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 36,
+    "x": 450,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 37,
+    "x": 500,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 38,
+    "x": 550,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 39,
+    "x": 600,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 40,
+    "x": 650,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 41,
+    "x": 700,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 42,
+    "x": 750,
+    "y": 400,
+    "z": 530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 44,
+    "x": 450,
+    "y": 400,
+    "z": 580,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 45,
+    "x": 750,
+    "y": 400,
+    "z": 580,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 46,
+    "x": 450,
+    "y": 400,
+    "z": 630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 47,
+    "x": 750,
+    "y": 400,
+    "z": 630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 48,
+    "x": 450,
+    "y": 400,
+    "z": 680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 49,
+    "x": 750,
+    "y": 400,
+    "z": 680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 50,
+    "x": 450,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 51,
+    "x": 750,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 52,
+    "x": 500,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 53,
+    "x": 550,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 54,
+    "x": 600,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 55,
+    "x": 650,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 56,
+    "x": 700,
+    "y": 400,
+    "z": 730,
+    "type": "coin",
+    "group": -1
+  }
+]

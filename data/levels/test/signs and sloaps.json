@@ -10,7 +10,8 @@
     "dy": 430,
     "x": 0,
     "y": 290,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -19,7 +20,8 @@
     "x1": 570,
     "y2": 300,
     "x2": 730,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -28,7 +30,8 @@
     "x1": 730,
     "y2": 290,
     "x2": 910,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -37,7 +40,8 @@
     "x1": 900,
     "y2": 290,
     "x2": 980,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -46,7 +50,8 @@
     "x1": 970,
     "y2": 180,
     "x2": 1140,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -55,7 +60,8 @@
     "x1": 1130,
     "y2": 210,
     "x2": 1310,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16732415,
@@ -64,42 +70,49 @@
     "x1": 1220,
     "y2": 290,
     "x2": 1320,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "contents": "hello",
     "x": 1100,
     "y": 120,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   },
   {
     "contents": "how did you get here",
     "x": 1050,
     "y": 290,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   },
   {
     "contents": "hill",
     "x": 760,
     "y": 250,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   },
   {
     "contents": "get  recked lol",
     "x": 270,
     "y": 290,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   },
   {
     "contents": "I am up high\nthanks for visiting",
     "x": 460,
     "y": 20,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   },
   {
     "contents": "your dead now",
     "x": 1330,
     "y": 210,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   }
 ]

@@ -10,12 +10,14 @@
     "dy": 170,
     "x": 0,
     "y": 550,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "x": 630,
     "y": 550,
-    "type": "goal"
+    "type": "goal",
+    "group": -1
   },
   {
     "link Index": 3,
@@ -23,6 +25,7 @@
     "y": 496,
     "type": "interdimentional Portal",
     "linkY": 637,
-    "linkX": 1911
+    "linkX": 1911,
+    "group": -1
   }
 ]

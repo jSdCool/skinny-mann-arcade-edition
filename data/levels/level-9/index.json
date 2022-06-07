@@ -1,0 +1,65 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 184,
+	"author": "jSdCool",
+    "level_id": 9,
+    "number of variable": 12,
+    "spawnX": 20,
+    "name": "level-9",
+    "spawn pointX": 20,
+    "groups": [
+      "group 0",
+      "main door 1",
+      "main door 2",
+      "main door 3",
+      "main door 4",
+      "coloms 1",
+      "coloms 2",
+      "find the button",
+      "stage 2 exit portal",
+      "fast jumps 1",
+      "fast jumps 2",
+      "thing",
+      "end"
+    ],
+    "spawn pointY": 700,
+    "game version": "0.6.0_Early_Access",
+    "spawnY": 700
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage  2",
+    "location": "/stage  2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 4",
+    "location": "/stage 4.json",
+    "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

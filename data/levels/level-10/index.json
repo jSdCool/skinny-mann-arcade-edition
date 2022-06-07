@@ -1,0 +1,60 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 216,
+    "level_id": 10,
+	"author":"jSdCool",
+    "number of variable": 15,
+    "spawnX": 50,
+    "name": "level-10",
+    "spawn pointX": 50,
+    "groups": [
+      "group 0",
+      "rong button",
+      "solution"
+    ],
+    "spawn pointY": 659,
+    "game version": "0.6.0_Early_Access",
+    "spawnY": 659
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "/stage 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 4",
+    "location": "/stage 4.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 5",
+    "location": "/stage 5.json",
+    "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

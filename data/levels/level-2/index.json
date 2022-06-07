@@ -4,11 +4,13 @@
     "coins": 587,
     "author": "jSdCool",
     "level_id": 2,
+    "number of variable": 5,
     "spawnX": 20,
     "name": "level-2",
     "spawn pointX": 20,
+    "groups": ["group 0"],
     "spawn pointY": 620,
-    "game version": "0.5.0_Early_Access",
+    "game version": "0.6.0_Early_Access",
     "spawnY": 620
   },
   {
@@ -25,5 +27,20 @@
     "name": "stage 3",
     "location": "/stage 3.json",
     "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
   }
 ]

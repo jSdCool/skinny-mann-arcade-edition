@@ -12,7 +12,8 @@
     "x": 0,
     "y": 690,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 150,
@@ -22,7 +23,8 @@
     "x": 540,
     "y": 490,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 160,
@@ -32,7 +34,8 @@
     "x": 830,
     "y": 370,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 1060,
@@ -42,7 +45,8 @@
     "x": 1100,
     "y": 680,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 60,
@@ -52,7 +56,8 @@
     "x": 1590,
     "y": 430,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 160,
@@ -62,7 +67,8 @@
     "x": 1950,
     "y": 610,
     "z": 80,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 960,
@@ -72,7 +78,8 @@
     "x": 2370,
     "y": 680,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 620,
@@ -82,7 +89,8 @@
     "x": 3330,
     "y": 680,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 70,
@@ -92,7 +100,8 @@
     "x": 2800,
     "y": 440,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 260,
@@ -102,7 +111,8 @@
     "x": 2870,
     "y": 440,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 70,
@@ -112,7 +122,8 @@
     "x": 3130,
     "y": 440,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 140,
@@ -122,7 +133,8 @@
     "x": 3460,
     "y": 580,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 270,
@@ -132,19 +144,22 @@
     "x": 3600,
     "y": 320,
     "z": 800,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "x": 411,
     "y": 689,
     "z": 50,
-    "type": "3DonSW"
+    "type": "3DonSW",
+    "group": -1
   },
   {
     "x": 2615,
     "y": 680,
     "z": 200,
-    "type": "3DonSW"
+    "type": "3DonSW",
+    "group": -1
   },
   {
     "dx": 320,
@@ -154,25 +169,29 @@
     "x": 4000,
     "y": 190,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "x": 3913,
     "y": 679,
     "z": 100,
-    "type": "3DonSW"
+    "type": "3DonSW",
+    "group": -1
   },
   {
     "x": 3360,
     "y": 679,
     "z": 200,
-    "type": "3DoffSW"
+    "type": "3DoffSW",
+    "group": -1
   },
   {
     "x": 2471,
     "y": 678,
     "z": 305,
-    "type": "check point"
+    "type": "check point",
+    "group": -1
   },
   {
     "link Index": 3,
@@ -182,7 +201,8 @@
     "z": 50,
     "type": "interdimentional Portal",
     "linkY": 233,
-    "linkX": 1429
+    "linkX": 1429,
+    "group": -1
   },
   {
     "link Index": 7,
@@ -192,6 +212,7 @@
     "z": 300,
     "type": "interdimentional Portal",
     "linkY": 548,
-    "linkX": 37
+    "linkX": 37,
+    "group": -1
   }
 ]

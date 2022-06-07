@@ -1,0 +1,1099 @@
+[
+  {"name": "tick"},
+  {
+    "x": 346,
+    "y": 10,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 345,
+    "y": 96,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 346,
+    "y": 181,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 346,
+    "y": 266,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 0,
+    "x": 25,
+    "y": 393,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 5,
+        "terminal": 0
+      },
+      {
+        "index": 10,
+        "terminal": 1
+      },
+      {
+        "index": 10,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 169,
+    "y": 16,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 6,
+        "terminal": 0
+      },
+      {
+        "index": 0,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 165,
+    "y": 104,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 7,
+        "terminal": 0
+      },
+      {
+        "index": 1,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 164,
+    "y": 192,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 8,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 164,
+    "y": 275,
+    "type": "delay",
+    "connections": [{
+      "index": 3,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 17,
+    "y": 512,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 1
+      },
+      {
+        "index": 17,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 1,
+    "x": 174,
+    "y": 383,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "delay": 50,
+    "x": 794,
+    "y": 337,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 12,
+        "terminal": 0
+      },
+      {
+        "index": 15,
+        "terminal": 0
+      },
+      {
+        "index": 13,
+        "terminal": 1
+      },
+      {
+        "index": 17,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 985,
+    "y": 372,
+    "group number": 5,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 975,
+    "y": 467,
+    "group number": 6,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 481,
+    "y": 355,
+    "type": "AND",
+    "connections": [{
+      "index": 11,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 616,
+    "y": 439,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 0
+      },
+      {
+        "index": 12,
+        "terminal": 1
+      },
+      {
+        "index": 13,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 0,
+    "x": 606,
+    "y": 560,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 11,
+        "terminal": 1
+      },
+      {
+        "index": 51,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 2,
+    "x": 792,
+    "y": 526,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 3,
+    "x": 5,
+    "y": 681,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 24,
+        "terminal": 0
+      },
+      {
+        "index": 25,
+        "terminal": 1
+      },
+      {
+        "index": 26,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 626,
+    "y": 670,
+    "type": "AND",
+    "connections": [{
+      "index": 61,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 624,
+    "y": 859,
+    "type": "AND",
+    "connections": [{
+      "index": 62,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 609,
+    "y": 1032,
+    "type": "AND",
+    "connections": [{
+      "index": 63,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 603,
+    "y": 1238,
+    "type": "AND",
+    "connections": [{
+      "index": 64,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 608,
+    "y": 1465,
+    "type": "AND",
+    "connections": [{
+      "index": 65,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 1,
+    "x": 136,
+    "y": 668,
+    "type": "delay",
+    "connections": [{
+      "index": 25,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 251,
+    "y": 670,
+    "type": "XOR",
+    "connections": [{
+      "index": 26,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 365,
+    "y": 671,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 59,
+        "terminal": 0
+      },
+      {
+        "index": 72,
+        "terminal": 0
+      },
+      {
+        "index": 73,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1070,
+    "y": 638,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 28,
+        "terminal": 1
+      },
+      {
+        "index": 67,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1070,
+    "y": 723,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 27,
+        "terminal": 1
+      },
+      {
+        "index": 20,
+        "terminal": 0
+      },
+      {
+        "index": 52,
+        "terminal": 1
+      },
+      {
+        "index": 67,
+        "terminal": 1
+      },
+      {
+        "index": 74,
+        "terminal": 1
+      },
+      {
+        "index": 76,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 1067,
+    "y": 823,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 30,
+        "terminal": 1
+      },
+      {
+        "index": 68,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1068,
+    "y": 909,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 29,
+        "terminal": 1
+      },
+      {
+        "index": 21,
+        "terminal": 0
+      },
+      {
+        "index": 38,
+        "terminal": 0
+      },
+      {
+        "index": 53,
+        "terminal": 0
+      },
+      {
+        "index": 68,
+        "terminal": 1
+      },
+      {
+        "index": 74,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1065,
+    "y": 1015,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 32,
+        "terminal": 1
+      },
+      {
+        "index": 69,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1064,
+    "y": 1099,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 31,
+        "terminal": 1
+      },
+      {
+        "index": 22,
+        "terminal": 0
+      },
+      {
+        "index": 40,
+        "terminal": 0
+      },
+      {
+        "index": 54,
+        "terminal": 0
+      },
+      {
+        "index": 69,
+        "terminal": 1
+      },
+      {
+        "index": 75,
+        "terminal": 0
+      },
+      {
+        "index": 76,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1059,
+    "y": 1220,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 34,
+        "terminal": 1
+      },
+      {
+        "index": 70,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1059,
+    "y": 1303,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 33,
+        "terminal": 1
+      },
+      {
+        "index": 23,
+        "terminal": 0
+      },
+      {
+        "index": 42,
+        "terminal": 0
+      },
+      {
+        "index": 55,
+        "terminal": 0
+      },
+      {
+        "index": 70,
+        "terminal": 1
+      },
+      {
+        "index": 77,
+        "terminal": 0
+      },
+      {
+        "index": 78,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1057,
+    "y": 1432,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 36,
+        "terminal": 1
+      },
+      {
+        "index": 71,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1057,
+    "y": 1516,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 35,
+        "terminal": 1
+      },
+      {
+        "index": 44,
+        "terminal": 0
+      },
+      {
+        "index": 56,
+        "terminal": 0
+      },
+      {
+        "index": 66,
+        "terminal": 0
+      },
+      {
+        "index": 71,
+        "terminal": 1
+      },
+      {
+        "index": 80,
+        "terminal": 0
+      },
+      {
+        "index": 79,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 931,
+    "y": 620,
+    "type": "OR",
+    "connections": [{
+      "index": 27,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 931,
+    "y": 705,
+    "type": "OR",
+    "connections": [{
+      "index": 28,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 929,
+    "y": 804,
+    "type": "OR",
+    "connections": [{
+      "index": 29,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 929,
+    "y": 888,
+    "type": "OR",
+    "connections": [{
+      "index": 30,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 929,
+    "y": 997,
+    "type": "OR",
+    "connections": [{
+      "index": 31,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 929,
+    "y": 1081,
+    "type": "OR",
+    "connections": [{
+      "index": 32,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 928,
+    "y": 1199,
+    "type": "OR",
+    "connections": [{
+      "index": 33,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 929,
+    "y": 1283,
+    "type": "OR",
+    "connections": [{
+      "index": 34,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 924,
+    "y": 1413,
+    "type": "OR",
+    "connections": [{
+      "index": 35,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 924,
+    "y": 1498,
+    "type": "OR",
+    "connections": [{
+      "index": 36,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 315,
+    "y": 1672,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 48,
+        "terminal": 0
+      },
+      {
+        "index": 49,
+        "terminal": 1
+      },
+      {
+        "index": 50,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 5,
+    "x": 423,
+    "y": 1650,
+    "type": "delay",
+    "connections": [{
+      "index": 49,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 528,
+    "y": 1650,
+    "type": "XOR",
+    "connections": [{
+      "index": 50,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 634,
+    "y": 1651,
+    "type": "AND",
+    "connections": [{
+      "index": 51,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 670,
+    "y": 1766,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 46,
+        "terminal": 1
+      },
+      {
+        "index": 44,
+        "terminal": 1
+      },
+      {
+        "index": 42,
+        "terminal": 1
+      },
+      {
+        "index": 40,
+        "terminal": 1
+      },
+      {
+        "index": 37,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "offset": 0,
+    "x": 1305,
+    "y": 708,
+    "group number": 7,
+    "type": "x-offset",
+    "connections": []
+  },
+  {
+    "offset": 240,
+    "x": 1312,
+    "y": 885,
+    "group number": 7,
+    "type": "x-offset",
+    "connections": []
+  },
+  {
+    "offset": 350,
+    "x": 1321,
+    "y": 1086,
+    "group number": 7,
+    "type": "x-offset",
+    "connections": []
+  },
+  {
+    "offset": 120,
+    "x": 1303,
+    "y": 1294,
+    "group number": 7,
+    "type": "x-offset",
+    "connections": []
+  },
+  {
+    "offset": 700,
+    "x": 1303,
+    "y": 1508,
+    "group number": 7,
+    "type": "x-offset",
+    "connections": []
+  },
+  {
+    "variable number": 9,
+    "x": 8,
+    "y": 991,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 10,
+    "x": 2,
+    "y": 1042,
+    "type": "read var",
+    "connections": []
+  },
+  {
+    "variable number": 11,
+    "x": 327,
+    "y": 1015,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 312,
+    "y": 1134,
+    "type": "ON",
+    "connections": [{
+      "index": 59,
+      "terminal": 1
+    }]
+  },
+  {
+    "delay": 3,
+    "x": 749,
+    "y": 691,
+    "type": "delay",
+    "connections": [{
+      "index": 37,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 3,
+    "x": 743,
+    "y": 880,
+    "type": "delay",
+    "connections": [{
+      "index": 39,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 3,
+    "x": 728,
+    "y": 1051,
+    "type": "delay",
+    "connections": [{
+      "index": 41,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 3,
+    "x": 723,
+    "y": 1258,
+    "type": "delay",
+    "connections": [{
+      "index": 43,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 3,
+    "x": 730,
+    "y": 1484,
+    "type": "delay",
+    "connections": [{
+      "index": 45,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 605,
+    "y": 1549,
+    "type": "AND",
+    "connections": [{
+      "index": 81,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1193,
+    "y": 629,
+    "type": "AND",
+    "connections": [{
+      "index": 38,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1192,
+    "y": 802,
+    "type": "AND",
+    "connections": [{
+      "index": 39,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1195,
+    "y": 1010,
+    "type": "AND",
+    "connections": [{
+      "index": 41,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1191,
+    "y": 1215,
+    "type": "AND",
+    "connections": [{
+      "index": 43,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1187,
+    "y": 1425,
+    "type": "AND",
+    "connections": [{
+      "index": 45,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 254,
+    "y": 761,
+    "type": "OR",
+    "connections": [{
+      "index": 73,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 370,
+    "y": 768,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 19,
+        "terminal": 1
+      },
+      {
+        "index": 20,
+        "terminal": 1
+      },
+      {
+        "index": 21,
+        "terminal": 1
+      },
+      {
+        "index": 22,
+        "terminal": 1
+      },
+      {
+        "index": 23,
+        "terminal": 1
+      },
+      {
+        "index": 66,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "offset": -250,
+    "x": 1431,
+    "y": 802,
+    "group number": 7,
+    "type": "z-offset",
+    "connections": []
+  },
+  {
+    "offset": 300,
+    "x": 1331,
+    "y": 1031,
+    "group number": 7,
+    "type": "z-offset",
+    "connections": []
+  },
+  {
+    "offset": 260,
+    "x": 1443,
+    "y": 1116,
+    "group number": 7,
+    "type": "y-offset",
+    "connections": []
+  },
+  {
+    "offset": -250,
+    "x": 1411,
+    "y": 1237,
+    "group number": 7,
+    "type": "z-offset",
+    "connections": []
+  },
+  {
+    "offset": 630,
+    "x": 1407,
+    "y": 1325,
+    "group number": 7,
+    "type": "y-offset",
+    "connections": []
+  },
+  {
+    "offset": 470,
+    "x": 1440,
+    "y": 1543,
+    "group number": 7,
+    "type": "y-offset",
+    "connections": []
+  },
+  {
+    "offset": 500,
+    "x": 1428,
+    "y": 1454,
+    "group number": 7,
+    "type": "z-offset",
+    "connections": []
+  },
+  {
+    "x": 949,
+    "y": 1616,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 4,
+    "x": 637,
+    "y": 77,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 84,
+        "terminal": 0
+      },
+      {
+        "index": 85,
+        "terminal": 1
+      },
+      {
+        "index": 83,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1255,
+    "y": 23,
+    "group number": 9,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 763,
+    "y": 24,
+    "type": "NOR",
+    "connections": [{
+      "index": 85,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 600,
+    "x": 1006,
+    "y": 40,
+    "type": "delay",
+    "connections": [{
+      "index": 83,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 5,
+    "x": 633,
+    "y": 180,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 87,
+        "terminal": 1
+      },
+      {
+        "index": 88,
+        "terminal": 1
+      },
+      {
+        "index": 89,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 757,
+    "y": 131,
+    "type": "NOR",
+    "connections": [{
+      "index": 88,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 600,
+    "x": 945,
+    "y": 136,
+    "type": "delay",
+    "connections": [{
+      "index": 89,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1156,
+    "y": 130,
+    "group number": 10,
+    "type": "set visable",
+    "connections": []
+  }
+]

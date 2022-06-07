@@ -10,7 +10,8 @@
     "dy": 30,
     "x": 0,
     "y": 690,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 190,
@@ -18,7 +19,8 @@
     "dy": 30,
     "x": 480,
     "y": 330,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 120,
@@ -26,7 +28,8 @@
     "dy": 30,
     "x": 510,
     "y": 350,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -34,7 +37,8 @@
     "dy": 20,
     "x": 460,
     "y": 180,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -42,7 +46,8 @@
     "dy": 20,
     "x": 470,
     "y": 190,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -50,7 +55,8 @@
     "dy": 20,
     "x": 480,
     "y": 200,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -58,7 +64,8 @@
     "dy": 30,
     "x": 500,
     "y": 210,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -66,7 +73,8 @@
     "dy": 20,
     "x": 490,
     "y": 210,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -74,7 +82,8 @@
     "dy": 20,
     "x": 640,
     "y": 200,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 30,
@@ -82,7 +91,8 @@
     "dy": 20,
     "x": 620,
     "y": 210,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -90,7 +100,8 @@
     "dy": 20,
     "x": 610,
     "y": 220,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -98,7 +109,8 @@
     "dy": 20,
     "x": 600,
     "y": 230,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "link Index": 1,
@@ -106,7 +118,8 @@
     "y": 269,
     "type": "interdimentional Portal",
     "linkY": 419,
-    "linkX": 1235
+    "linkX": 1235,
+    "group": -1
   },
   {
     "link Index": 1,
@@ -114,7 +127,8 @@
     "y": 392,
     "type": "interdimentional Portal",
     "linkY": 583,
-    "linkX": 2093
+    "linkX": 2093,
+    "group": -1
   },
   {
     "dx": 30,
@@ -122,7 +136,8 @@
     "dy": 150,
     "x": 1750,
     "y": 180,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 30,
@@ -130,7 +145,8 @@
     "dy": 30,
     "x": 1770,
     "y": 190,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 20,
@@ -138,7 +154,8 @@
     "dy": 30,
     "x": 1790,
     "y": 210,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 30,
@@ -146,7 +163,8 @@
     "dy": 40,
     "x": 1800,
     "y": 230,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 20,
@@ -154,7 +172,8 @@
     "dy": 20,
     "x": 1820,
     "y": 260,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 20,
@@ -162,7 +181,8 @@
     "dy": 30,
     "x": 1830,
     "y": 280,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 20,
@@ -170,7 +190,8 @@
     "dy": 20,
     "x": 1840,
     "y": 300,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 20,
@@ -178,7 +199,8 @@
     "dy": 140,
     "x": 1850,
     "y": 180,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 50,
@@ -186,7 +208,8 @@
     "dy": 20,
     "x": 1980,
     "y": 190,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 40,
@@ -194,7 +217,8 @@
     "dy": 100,
     "x": 1950,
     "y": 210,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 70,
@@ -202,7 +226,8 @@
     "dy": 30,
     "x": 1970,
     "y": 300,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 40,
@@ -210,7 +235,8 @@
     "dy": 120,
     "x": 2030,
     "y": 200,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "dx": 160,
@@ -218,7 +244,8 @@
     "dy": 40,
     "x": 280,
     "y": 170,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "link Index": 3,
@@ -226,7 +253,8 @@
     "y": 630,
     "type": "interdimentional Portal",
     "linkY": 632,
-    "linkX": 1111
+    "linkX": 1111,
+    "group": -1
   },
   {
     "link Index": 1,
@@ -234,11 +262,13 @@
     "y": 640,
     "type": "interdimentional Portal",
     "linkY": 4,
-    "linkX": 28
+    "linkX": 28,
+    "group": -1
   },
   {
     "x": 844,
     "y": 688,
-    "type": "check point"
+    "type": "check point",
+    "group": -1
   }
 ]

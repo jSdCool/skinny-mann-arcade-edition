@@ -1,0 +1,160 @@
+[
+  {"name": "level complete"},
+  {
+    "variable number": 0,
+    "x": 99,
+    "y": 99,
+    "type": "read var",
+    "connections": [{
+      "index": 5,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 101,
+    "y": 154,
+    "type": "read var",
+    "connections": [{
+      "index": 6,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 2,
+    "x": 94,
+    "y": 212,
+    "type": "read var",
+    "connections": [{
+      "index": 7,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 3,
+    "x": 94,
+    "y": 263,
+    "type": "read var",
+    "connections": [{
+      "index": 8,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 4,
+    "x": 87,
+    "y": 321,
+    "type": "read var",
+    "connections": [{
+      "index": 9,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 296,
+    "y": 76,
+    "type": "NOR",
+    "connections": [{
+      "index": 10,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 291,
+    "y": 156,
+    "type": "NOR",
+    "connections": [{
+      "index": 11,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 287,
+    "y": 232,
+    "type": "NOR",
+    "connections": [{
+      "index": 12,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 285,
+    "y": 300,
+    "type": "NOR",
+    "connections": [{
+      "index": 13,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 280,
+    "y": 373,
+    "type": "NOR",
+    "connections": [{
+      "index": 14,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 0,
+    "x": 509,
+    "y": 97,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 1,
+    "x": 519,
+    "y": 193,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 2,
+    "x": 519,
+    "y": 290,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 3,
+    "x": 511,
+    "y": 394,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 4,
+    "x": 507,
+    "y": 493,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 280,
+    "y": 467,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 1
+      },
+      {
+        "index": 13,
+        "terminal": 1
+      },
+      {
+        "index": 12,
+        "terminal": 1
+      },
+      {
+        "index": 11,
+        "terminal": 1
+      },
+      {
+        "index": 10,
+        "terminal": 1
+      }
+    ]
+  }
+]

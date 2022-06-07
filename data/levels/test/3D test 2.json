@@ -12,7 +12,8 @@
     "x": 0,
     "y": 600,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 1260,
@@ -22,7 +23,8 @@
     "x": 1280,
     "y": 600,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 40,
@@ -32,13 +34,15 @@
     "x": 140,
     "y": 0,
     "z": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "x": 117,
     "y": 599,
     "z": 40,
-    "type": "3DonSW"
+    "type": "3DonSW",
+    "group": -1
   },
   {
     "dx": 370,
@@ -48,7 +52,8 @@
     "x": 590,
     "y": 360,
     "z": 50,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 380,
@@ -58,7 +63,8 @@
     "x": 580,
     "y": 420,
     "z": 100,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 380,
@@ -68,7 +74,8 @@
     "x": 580,
     "y": 490,
     "z": 150,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 380,
@@ -78,7 +85,8 @@
     "x": 580,
     "y": 560,
     "z": 200,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 180,
@@ -88,104 +96,119 @@
     "x": 1240,
     "y": 160,
     "z": 45,
-    "type": "holo"
+    "type": "holo",
+    "group": -1
   },
   {
     "x": 1083,
     "y": 600,
     "z": 300,
-    "type": "check point"
+    "type": "check point",
+    "group": -1
   },
   {
     "coin id": 56,
     "x": 239,
     "y": 574,
     "z": 95,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 57,
     "x": 281,
     "y": 574,
     "z": 95,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 58,
     "x": 326,
     "y": 574,
     "z": 95,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 59,
     "x": 373,
     "y": 575,
     "z": 160,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 60,
     "x": 417,
     "y": 575,
     "z": 160,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 61,
     "x": 465,
     "y": 576,
     "z": 160,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 62,
     "x": 617,
     "y": 338,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 63,
     "x": 662,
     "y": 340,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 64,
     "x": 708,
     "y": 338,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 65,
     "x": 758,
     "y": 338,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 66,
     "x": 803,
     "y": 338,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 67,
     "x": 846,
     "y": 340,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 68,
     "x": 898,
     "y": 339,
     "z": 55,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "dx": 270,
@@ -195,7 +218,8 @@
     "x": 1940,
     "y": 420,
     "z": 200,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "link Index": 4,
@@ -205,7 +229,8 @@
     "z": 0,
     "type": "interdimentional Portal",
     "linkY": 269,
-    "linkX": 31
+    "linkX": 31,
+    "group": -1
   },
   {
     "link Index": 6,
@@ -215,13 +240,15 @@
     "z": 160,
     "type": "interdimentional Portal",
     "linkY": 136,
-    "linkX": 4158
+    "linkX": 4158,
+    "group": -1
   },
   {
     "contents": "hey this is a test\nhey this is a new line",
     "x": 460,
     "y": 600,
     "z": 470,
-    "type": "WritableSign"
+    "type": "WritableSign",
+    "group": -1
   }
 ]

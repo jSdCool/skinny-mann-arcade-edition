@@ -10,265 +10,309 @@
     "dy": 70,
     "x": 0,
     "y": 690,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "coin id": 13,
     "x": 270,
     "y": 466,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 14,
     "x": 231,
     "y": 458,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 15,
     "x": 187,
     "y": 469,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 16,
     "x": 174,
     "y": 498,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 17,
     "x": 160,
     "y": 569,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 18,
     "x": 175,
     "y": 635,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 19,
     "x": 316,
     "y": 647,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 20,
     "x": 212,
     "y": 658,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 21,
     "x": 265,
     "y": 659,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 22,
     "x": 164,
     "y": 604,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 23,
     "x": 157,
     "y": 531,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 24,
     "x": 482,
     "y": 503,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 25,
     "x": 443,
     "y": 528,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 26,
     "x": 432,
     "y": 582,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 27,
     "x": 438,
     "y": 621,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 28,
     "x": 461,
     "y": 648,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 29,
     "x": 494,
     "y": 656,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 30,
     "x": 532,
     "y": 643,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 31,
     "x": 550,
     "y": 603,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 32,
     "x": 546,
     "y": 556,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 33,
     "x": 531,
     "y": 524,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 34,
     "x": 672,
     "y": 497,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 35,
     "x": 674,
     "y": 562,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 36,
     "x": 676,
     "y": 592,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 37,
     "x": 676,
     "y": 618,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 38,
     "x": 676,
     "y": 658,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 39,
     "x": 675,
     "y": 638,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 40,
     "x": 821,
     "y": 663,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 41,
     "x": 819,
     "y": 633,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 42,
     "x": 819,
     "y": 593,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 43,
     "x": 816,
     "y": 551,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 44,
     "x": 816,
     "y": 526,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 45,
     "x": 821,
     "y": 624,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 46,
     "x": 813,
     "y": 573,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 47,
     "x": 832,
     "y": 575,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 48,
     "x": 851,
     "y": 556,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 49,
     "x": 889,
     "y": 551,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 50,
     "x": 913,
     "y": 561,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 51,
     "x": 925,
     "y": 584,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 52,
     "x": 930,
     "y": 615,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 53,
     "x": 935,
     "y": 646,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 54,
     "x": 936,
     "y": 675,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "coin id": 55,
     "x": 933,
     "y": 631,
-    "type": "coin"
+    "type": "coin",
+    "group": -1
   },
   {
     "link Index": 2,
@@ -276,7 +320,8 @@
     "y": 632,
     "type": "interdimentional Portal",
     "linkY": 630,
-    "linkX": 1113
+    "linkX": 1113,
+    "group": -1
   },
   {
     "dx": 580,
@@ -284,7 +329,8 @@
     "dy": 40,
     "x": 1260,
     "y": 690,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 80,
@@ -292,7 +338,8 @@
     "dy": 690,
     "x": 1760,
     "y": 0,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 10,
@@ -300,7 +347,8 @@
     "dy": 60,
     "x": 2160,
     "y": 420,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 30,
@@ -308,7 +356,8 @@
     "dy": 20,
     "x": 2390,
     "y": 390,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -316,7 +365,8 @@
     "dy": 30,
     "x": 2410,
     "y": 400,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 30,
@@ -324,7 +374,8 @@
     "dy": 10,
     "x": 2390,
     "y": 420,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -332,7 +383,8 @@
     "dy": 30,
     "x": 2380,
     "y": 430,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 50,
@@ -340,7 +392,8 @@
     "dy": 20,
     "x": 2390,
     "y": 460,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 50,
@@ -348,7 +401,8 @@
     "dy": 10,
     "x": 2410,
     "y": 190,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -356,7 +410,8 @@
     "dy": 60,
     "x": 2410,
     "y": 190,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 30,
@@ -364,7 +419,8 @@
     "dy": 20,
     "x": 2420,
     "y": 210,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 40,
@@ -372,7 +428,8 @@
     "dy": 20,
     "x": 2420,
     "y": 240,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -380,7 +437,8 @@
     "dy": 30,
     "x": 2100,
     "y": 220,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 30,
@@ -388,7 +446,8 @@
     "dy": 20,
     "x": 2110,
     "y": 240,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 20,
@@ -396,7 +455,8 @@
     "dy": 50,
     "x": 2130,
     "y": 220,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "color": -7254783,
@@ -405,7 +465,8 @@
     "x1": 1480,
     "y2": 700,
     "x2": 1760,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -7254783,
@@ -414,7 +475,8 @@
     "x1": 1560,
     "y2": 680,
     "x2": 1760,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -7254783,
@@ -423,7 +485,8 @@
     "x1": 1640,
     "y2": 690,
     "x2": 1760,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -7254783,
@@ -432,7 +495,8 @@
     "x1": 1690,
     "y2": 690,
     "x2": 1760,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -7254783,
@@ -441,7 +505,8 @@
     "x1": 1403,
     "y2": 426,
     "x2": 1642,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "dx": 600,
@@ -449,7 +514,8 @@
     "dy": 90,
     "x": 2590,
     "y": 600,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "color": -9360373,
@@ -458,7 +524,8 @@
     "x1": 2720,
     "y2": 580,
     "x2": 2940,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "link Index": 6,
@@ -466,6 +533,7 @@
     "y": 233,
     "type": "interdimentional Portal",
     "linkY": 638,
-    "linkX": 32
+    "linkX": 32,
+    "group": -1
   }
 ]

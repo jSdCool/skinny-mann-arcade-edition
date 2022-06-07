@@ -1,0 +1,146 @@
+[
+  {"name": "eee"},
+  {
+    "x": 80,
+    "y": 80,
+    "type": "generic",
+    "connections": [{
+      "index": 1,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 580,
+    "y": 360,
+    "type": "generic",
+    "connections": []
+  },
+  {
+    "x": 35,
+    "y": 542,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 4,
+        "terminal": 0
+      },
+      {
+        "index": 5,
+        "terminal": 0
+      },
+      {
+        "index": 3,
+        "terminal": 1
+      },
+      {
+        "index": 3,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 181,
+    "y": 562,
+    "type": "OR",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 307,
+    "y": 563,
+    "type": "XOR",
+    "connections": [{
+      "index": 5,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 421,
+    "y": 564,
+    "type": "AND",
+    "connections": []
+  },
+  {
+    "x": 660,
+    "y": 37,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 7,
+        "terminal": 0
+      },
+      {
+        "index": 9,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 661,
+    "y": 122,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 6,
+        "terminal": 1
+      },
+      {
+        "index": 9,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 505,
+    "y": 39,
+    "type": "OR",
+    "connections": [{
+      "index": 6,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 811,
+    "y": 78,
+    "type": "AND",
+    "connections": [{
+      "index": 8,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 3,
+    "x": 872,
+    "y": 285,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 2,
+    "x": 697,
+    "y": 278,
+    "type": "read var",
+    "connections": [{
+      "index": 10,
+      "terminal": 0
+    }]
+  },
+  {
+    "offset": 0,
+    "x": 801,
+    "y": 460,
+    "group number": 0,
+    "type": "y-offset",
+    "connections": []
+  },
+  {
+    "offset": 0,
+    "x": 763,
+    "y": 548,
+    "group number": 0,
+    "type": "x-offset",
+    "connections": []
+  }
+]

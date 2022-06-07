@@ -10,14 +10,16 @@
     "dy": 20,
     "x": 0,
     "y": 700,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 180,
     "dy": 20,
     "x": 670,
     "y": 700,
-    "type": "dethPlane"
+    "type": "dethPlane",
+    "group": -1
   },
   {
     "dx": 310,
@@ -25,7 +27,8 @@
     "dy": 20,
     "x": 850,
     "y": 700,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "color": -16777215,
@@ -34,7 +37,8 @@
     "x1": 517,
     "y2": 147,
     "x2": 662,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "color": -16777215,
@@ -43,7 +47,8 @@
     "x1": 790,
     "y2": 110,
     "x2": 920,
-    "type": "sloap"
+    "type": "sloap",
+    "group": -1
   },
   {
     "dx": 170,
@@ -51,7 +56,8 @@
     "dy": 170,
     "x": 1080,
     "y": -50,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "dx": 150,
@@ -59,7 +65,8 @@
     "dy": 130,
     "x": 940,
     "y": 210,
-    "type": "ground"
+    "type": "ground",
+    "group": -1
   },
   {
     "link Index": 8,
@@ -67,6 +74,7 @@
     "y": 642,
     "type": "interdimentional Portal",
     "linkY": 648,
-    "linkX": 69
+    "linkX": 69,
+    "group": -1
   }
 ]

@@ -1,0 +1,96 @@
+[
+  {"name": "load"},
+  {
+    "x": 86,
+    "y": 241,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 0
+      },
+      {
+        "index": 1,
+        "terminal": 1
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      },
+      {
+        "index": 3,
+        "terminal": 0
+      },
+      {
+        "index": 3,
+        "terminal": 1
+      },
+      {
+        "index": 4,
+        "terminal": 0
+      },
+      {
+        "index": 4,
+        "terminal": 1
+      },
+      {
+        "index": 5,
+        "terminal": 0
+      },
+      {
+        "index": 5,
+        "terminal": 1
+      },
+      {
+        "index": 6,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 4,
+    "x": 314,
+    "y": 100,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 5,
+    "x": 334,
+    "y": 218,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 6,
+    "x": 344,
+    "y": 334,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 7,
+    "x": 344,
+    "y": 447,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 8,
+    "x": 339,
+    "y": 556,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 723,
+    "y": 209,
+    "group number": 0,
+    "type": "set visable",
+    "connections": []
+  }
+]

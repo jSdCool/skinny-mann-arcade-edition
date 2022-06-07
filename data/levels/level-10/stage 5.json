@@ -1,0 +1,580 @@
+[
+  {
+    "name": "stage 5",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 690,
+    "color": -16732415,
+    "dy": 90,
+    "x": 0,
+    "y": 630,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 1,
+    "x": 80,
+    "y": 580,
+    "type": "interdimentional Portal",
+    "linkY": 590,
+    "linkX": 4670,
+    "group": -1
+  },
+  {
+    "dx": 170,
+    "color": -7254783,
+    "dy": 20,
+    "x": 830,
+    "y": 530,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 150,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1210,
+    "y": 490,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 170,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1520,
+    "y": 450,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 330,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1870,
+    "y": 420,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 110,
+    "color": -8900351,
+    "dy": 100,
+    "x": 1990,
+    "y": 320,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "color": -7254783,
+    "rotation": 1,
+    "y1": 330,
+    "x1": 2000,
+    "y2": 400,
+    "x2": 2080,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -7254783,
+    "rotation": 3,
+    "y1": 340,
+    "x1": 2010,
+    "y2": 410,
+    "x2": 2090,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "dx": 170,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2410,
+    "y": 460,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 160,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2800,
+    "y": 390,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 230,
+    "color": -7254783,
+    "dy": 20,
+    "x": 3080,
+    "y": 270,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 170,
+    "color": -7254783,
+    "dy": 20,
+    "x": 3420,
+    "y": 170,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 200,
+    "color": -7254783,
+    "dy": 20,
+    "x": 3790,
+    "y": 200,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 180,
+    "color": -7254783,
+    "dy": 20,
+    "x": 4130,
+    "y": 260,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -7254783,
+    "dy": 20,
+    "x": 4490,
+    "y": 330,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 230,
+    "color": -7254783,
+    "dy": 20,
+    "x": 4830,
+    "y": 380,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 160,
+    "color": -7254783,
+    "dy": 20,
+    "x": 5230,
+    "y": 290,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -7254783,
+    "dy": 20,
+    "x": 5730,
+    "y": 290,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 770,
+    "color": -16732415,
+    "dy": 390,
+    "x": 6230,
+    "y": 260,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 6580,
+    "y": 260,
+    "type": "goal",
+    "group": -1
+  },
+  {
+    "coin id": 77,
+    "x": 190,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 78,
+    "x": 230,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 79,
+    "x": 270,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 80,
+    "x": 310,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 81,
+    "x": 660,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 82,
+    "x": 620,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 83,
+    "x": 580,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 84,
+    "x": 540,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 85,
+    "x": 850,
+    "y": 510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 86,
+    "x": 890,
+    "y": 510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 87,
+    "x": 930,
+    "y": 510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 88,
+    "x": 970,
+    "y": 510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 89,
+    "x": 1230,
+    "y": 470,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 90,
+    "x": 1270,
+    "y": 470,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 91,
+    "x": 1310,
+    "y": 470,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 92,
+    "x": 1660,
+    "y": 430,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 93,
+    "x": 1540,
+    "y": 430,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 94,
+    "x": 1600,
+    "y": 430,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 95,
+    "x": 1970,
+    "y": 400,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 96,
+    "x": 1920,
+    "y": 400,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 97,
+    "x": 2120,
+    "y": 400,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 98,
+    "x": 2170,
+    "y": 400,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 99,
+    "x": 2430,
+    "y": 440,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 100,
+    "x": 2560,
+    "y": 440,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 101,
+    "x": 2490,
+    "y": 440,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 102,
+    "x": 2820,
+    "y": 370,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 103,
+    "x": 2940,
+    "y": 370,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 104,
+    "x": 2880,
+    "y": 370,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 105,
+    "x": 3100,
+    "y": 250,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 106,
+    "x": 3290,
+    "y": 250,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 107,
+    "x": 3250,
+    "y": 250,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 108,
+    "x": 3140,
+    "y": 250,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 109,
+    "x": 3200,
+    "y": 250,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 110,
+    "x": 3440,
+    "y": 150,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 111,
+    "x": 3570,
+    "y": 150,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 112,
+    "x": 3500,
+    "y": 150,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 113,
+    "x": 3810,
+    "y": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 114,
+    "x": 3960,
+    "y": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 115,
+    "x": 3890,
+    "y": 180,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 116,
+    "x": 4160,
+    "y": 240,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 117,
+    "x": 4280,
+    "y": 240,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 118,
+    "x": 4220,
+    "y": 240,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 119,
+    "x": 4510,
+    "y": 310,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 120,
+    "x": 4650,
+    "y": 310,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 121,
+    "x": 4580,
+    "y": 310,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 122,
+    "x": 4850,
+    "y": 360,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 123,
+    "x": 5030,
+    "y": 360,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 124,
+    "x": 4940,
+    "y": 360,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 125,
+    "x": 5250,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 126,
+    "x": 5360,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 127,
+    "x": 5310,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 128,
+    "x": 5750,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 129,
+    "x": 5900,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 130,
+    "x": 5830,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 131,
+    "x": 5790,
+    "y": 270,
+    "type": "coin",
+    "group": -1
+  }
+]

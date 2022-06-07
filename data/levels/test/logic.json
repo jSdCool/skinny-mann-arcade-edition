@@ -1,0 +1,59 @@
+[
+  {
+    "name": "logic",
+    "sky color": -9131009,
+    "type": "3Dstage"
+  },
+  {
+    "dx": 420,
+    "color": -16732415,
+    "dy": 50,
+    "dz": 300,
+    "x": 0,
+    "y": 670,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 210,
+    "variable": 0,
+    "y": 670,
+    "z": 150,
+    "type": "logic button",
+    "group": 1
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 150,
+    "dz": 300,
+    "x": 270,
+    "y": 520,
+    "z": 0,
+    "type": "ground",
+    "group": 0
+  },
+  {
+    "dx": 30,
+    "color": -7254783,
+    "dy": 150,
+    "dz": 300,
+    "x": 100,
+    "y": 520,
+    "z": 0,
+    "type": "ground",
+    "group": 0
+  },
+  {
+    "dx": 140,
+    "color": -7254783,
+    "dy": 30,
+    "dz": 300,
+    "x": 130,
+    "y": 520,
+    "z": 0,
+    "type": "ground",
+    "group": 0
+  }
+]

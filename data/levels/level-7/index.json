@@ -3,11 +3,13 @@
     "mainStage": 0,
     "coins": 202,
     "level_id": 7,
+    "number of variable": 5,
     "spawnX": 20,
     "name": "level-6",
     "spawn pointX": 20,
+    "groups": ["group 0"],
     "spawn pointY": 700,
-    "game version": "0.5.0_Early_Access",
+    "game version": "0.6.0_Early_Access",
     "spawnY": 700
   },
   {
@@ -54,5 +56,20 @@
     "name": "pirate narration 5",
     "location": "/L7p5a.wav",
     "type": "sound"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
   }
 ]
