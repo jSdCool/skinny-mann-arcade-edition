@@ -155,6 +155,11 @@ select_lvl_7=new Button(this,(int)(600*Scale),(int)(250*Scale),(int)(200*Scale),
 select_lvl_8 =new Button(this,(int)(850*Scale),(int)(250*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 8",-59135,-1791).setStrokeWeight((int)(10*Scale));
 select_lvl_9 = new Button(this,(int)(100*Scale),(int)(400*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 9",-59135,-1791).setStrokeWeight((int)(10*Scale));
 select_lvl_10 = new Button(this,(int)(350*Scale),(int)(400*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 10",-59135,-1791).setStrokeWeight((int)(10*Scale));
+playButton=new Button(this,540*Scale,310*Scale,200*Scale,50*Scale,"Play",#FF1900,#FFF900).setStrokeWeight(10*Scale);
+exitButton=new Button(this,540*Scale,470*Scale,200*Scale,50*Scale,"Exit",#FF1900,#FFF900).setStrokeWeight(10*Scale);
+joinButton=new Button(this,540*Scale,390*Scale,200*Scale,50*Scale,#FF1900,#FFF900).setStrokeWeight(10*Scale);
+settingsButton=new Button(this,540*Scale,550*Scale,200*Scale,50*Scale,"Settings",#FF1900,#FFF900).setStrokeWeight(10*Scale);
+howToPlayButton=new Button(this,540*Scale,630*Scale,200*Scale,50*Scale,"Tutorial",#FF1900,#FFF900).setStrokeWeight(10*Scale);
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -197,7 +202,7 @@ players by index position
 
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10;
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10,playButton,joinButton,settingsButton,howToPlayButton,exitButton;
 String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.6.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -269,22 +274,27 @@ try{//catch all fatal errors and display them
         draw_mann(200*Scale,360*Scale,1,4*Scale,"red");
         draw_mann(1080*Scale,360*Scale,1,4*Scale,"green");
         
+        playButton.draw();
+        exitButton.draw();
+        joinButton.draw();
+        settingsButton.draw();
+        howToPlayButton.draw();
         textAlign(LEFT,BOTTOM);
-        fill(255,25,0);
-        stroke(255,249,0);
-        strokeWeight(10*Scale);
-        rect(540*Scale,310*Scale,200*Scale,50*Scale);//play button
-        fill(0);
-        text("play",600*Scale,350*Scale);
-        fill(255,25,0);
-        rect(540*Scale,390*Scale,200*Scale,50*Scale);//the rest of the buttons on the screen
-        rect(540*Scale,470*Scale,200*Scale,50*Scale);
-        rect(540*Scale,550*Scale,200*Scale,50*Scale);
-        rect(540*Scale,630*Scale,200*Scale,50*Scale);
-        fill(0);
-        text("exit",600*Scale,510*Scale);//exit button
-        text("settings",580*Scale,590*Scale);
-        text("tutorial",580*Scale,670*Scale);
+        //fill(255,25,0);
+        //stroke(255,249,0);
+        //strokeWeight(10*Scale);
+        //rect(540*Scale,310*Scale,200*Scale,50*Scale);//play button
+        //fill(0);
+        //text("play",600*Scale,350*Scale);
+        //fill(255,25,0);
+        //rect(540*Scale,390*Scale,200*Scale,50*Scale);//the rest of the buttons on the screen
+        //rect(540*Scale,470*Scale,200*Scale,50*Scale);
+        //rect(540*Scale,550*Scale,200*Scale,50*Scale);
+        //rect(540*Scale,630*Scale,200*Scale,50*Scale);
+        //fill(0);
+        //text("exit",600*Scale,510*Scale);//exit button
+        //text("settings",580*Scale,590*Scale);
+        //text("tutorial",580*Scale,670*Scale);
         fill(255);
         textSize(10*Scale);
         text(version,0*Scale,718*Scale);//proint the version in the lower corner
@@ -726,7 +736,8 @@ disEngageHUDPosition();
 
 void mouseClicked(){// when you click the mouse
 
-try{
+try{/*fill(255,25,0);
+        stroke(255,249,0);*/
   if(menue){//if your in a menue
      if(Menue.equals("main")){//if that menue is the main menue
        if(mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 310*Scale && mouseY <= 360*Scale){//level select button
@@ -1221,9 +1232,11 @@ if(menue){
     key = 0;  //clear the key so it doesnt close the program
     Menue="main";
   }
-  if(Menue.equals("main")){
-   exit(0); 
+  
   }
+  if(Menue.equals("main")){
+    if (key == ESC)
+   exit(0); 
   }
 }
   

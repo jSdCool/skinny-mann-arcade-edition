@@ -4,6 +4,7 @@
 -added: level-9
 -added: level-10
 -added: logic interactive buttons
+-changed: fatal error handling imporoved
 
 
 0.5.0_Early_Access
