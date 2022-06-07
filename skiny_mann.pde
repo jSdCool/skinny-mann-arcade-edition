@@ -147,6 +147,8 @@ UGC_lvl_play=new Button(this,(int)(600*Scale),(int)(600*Scale),(int)(200*Scale),
 levelcreatorLink=new Button(this,(int)(980*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"create",-59135,-1791).setStrokeWeight((int)(10*Scale));
 select_lvl_7=new Button(this,(int)(600*Scale),(int)(250*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 7",-59135,-1791).setStrokeWeight((int)(10*Scale));
 select_lvl_8 =new Button(this,(int)(850*Scale),(int)(250*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 8",-59135,-1791).setStrokeWeight((int)(10*Scale));
+select_lvl_9 = new Button(this,(int)(100*Scale),(int)(400*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 9",-59135,-1791).setStrokeWeight((int)(10*Scale));
+select_lvl_10 = new Button(this,(int)(350*Scale),(int)(400*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 10",-59135,-1791).setStrokeWeight((int)(10*Scale));
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -166,7 +168,7 @@ PApplet primaryWindow=this;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false;
-String Menue ="creds"/*,level="n"*/,version="0.5.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version;
+String Menue ="creds"/*,level="n"*/,version="0.6.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1,gravity=0.001;
@@ -185,14 +187,15 @@ players by index position
 
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8;
-String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.5.0_Early_Access"};
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10;
+String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.6.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];
 float [] tpCords=new float[3];
 Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
+LogicThread logicTickingThread =new LogicThread();
 //▄
 void draw(){// the function that is called every fraim
 
@@ -327,6 +330,16 @@ try{//catch all fatal errors and display them
         }else{
           select_lvl_8.setColor(-59135,-1791);
         }
+        if(progress<9){
+          select_lvl_9.setColor(#B40F00,#B4AF00);
+        }else{
+          select_lvl_9.setColor(-59135,-1791);
+        }
+        if(progress<10){
+          select_lvl_10.setColor(#B40F00,#B4AF00);
+        }else{
+          select_lvl_10.setColor(-59135,-1791);
+        }
         select_lvl_1.draw();
         select_lvl_2.draw();
         select_lvl_3.draw();
@@ -335,6 +348,8 @@ try{//catch all fatal errors and display them
         select_lvl_6.draw();
         select_lvl_7.draw();
         select_lvl_8.draw();
+        select_lvl_9.draw();
+        select_lvl_10.draw();
         select_lvl_back.draw();
         select_lvl_UGC.draw();
      }
@@ -775,6 +790,16 @@ try{
          }
          if(select_lvl_8.isMouseOver()&&progress>=8){
            loadLevel("data/levels/level-8");
+           menue=false;
+           inGame=true;
+         }
+         if(select_lvl_9.isMouseOver()&&progress>=9){
+           loadLevel("data/levels/level-9");
+           menue=false;
+           inGame=true;
+         }
+         if(select_lvl_10.isMouseOver()&&progress>=10){
+           loadLevel("data/levels/level-10");
            menue=false;
            inGame=true;
          }
@@ -1303,6 +1328,7 @@ void loadLevel(String fdp){
  rootPath=fdp;
  mainIndex=loadJSONArray(rootPath+"/index.json");
  level=new Level(mainIndex);
+ level.logicBoards.get(level.loadBoard).superTick();
 }
 
 int curMills=0,lasMills=0,mspc=0;
@@ -1322,6 +1348,9 @@ void thrdCalc2(){
      
    }
  }else{
+   if(logicTickingThread.isAlive()){//if the ticking thread is running when we dont want it to be
+     logicTickingThread.shouldRun=false;//then stop it
+   }
 random(10);//some how make it so it doesent stop the thread
  }
    lasMills=curMills;
