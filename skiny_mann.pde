@@ -160,6 +160,9 @@ exitButton=new Button(this,540*Scale,470*Scale,200*Scale,50*Scale,"Exit",#FF1900
 joinButton=new Button(this,540*Scale,390*Scale,200*Scale,50*Scale,#FF1900,#FFF900).setStrokeWeight(10*Scale);
 settingsButton=new Button(this,540*Scale,550*Scale,200*Scale,50*Scale,"Settings",#FF1900,#FFF900).setStrokeWeight(10*Scale);
 howToPlayButton=new Button(this,540*Scale,630*Scale,200*Scale,50*Scale,"Tutorial",#FF1900,#FFF900).setStrokeWeight(10*Scale);
+downloadUpdateButton=new Button(this,400*Scale2,350*Scale,500*Scale2,50*Scale,"Download & Install",#FF0004,#FFF300).setStrokeWeight(10*Scale);
+updateGetButton=new Button(this,400*Scale2,150*Scale,500*Scale2,50*Scale,"Get it",#FF0004,#FFF300).setStrokeWeight(10*Scale);
+updateOkButton=new Button(this,400*Scale2,250*Scale,500*Scale2,50*Scale,"Ok",#FF0004,#FFF300).setStrokeWeight(10*Scale);
 
 soundHandler =new SoundHandler(musicTracks,sfxTracks,this);
 soundHandler.setMusicVolume(0);
@@ -183,7 +186,7 @@ PApplet primaryWindow=this;
 Server s;
 Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false;
-String Menue ="creds"/*,level="n"*/,version="0.6.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version;
+String Menue ="creds"/*,level="n"*/,version="0.6.1_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version,internetVersion;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1,gravity=0.001;
@@ -202,7 +205,7 @@ players by index position
 
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0;
 JSONArray  settings,mainIndex,levelProgress;
-Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10,playButton,joinButton,settingsButton,howToPlayButton,exitButton;
+Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10,playButton,joinButton,settingsButton,howToPlayButton,exitButton,downloadUpdateButton,updateGetButton,updateOkButton;
 String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.6.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -233,9 +236,9 @@ try{//catch all fatal errors and display them
       soundHandler.setMusicVolume(musicVolume);
       soundHandler.setSoundsVolume(sfxVolume);
         try{
-          String inver =get_git_version();//check for updates
+          String inver =readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates
           inver =inver.substring(0,inver.length()-1);
-          
+          internetVersion=inver;
         if(!inver.equals(version)){//if an update exists 
           Menue="update";//go to update menue
         }else{//if no update exists go to main menue
@@ -257,6 +260,9 @@ try{//catch all fatal errors and display them
     
     if(Menue.equals("update")){//if there is an updat draw the update screen
        draw_updae_screen(); 
+    }
+    if(Menue.equals("downloading update")){
+      drawUpdateDownloadingScreen();
     }
     
      if(Menue.equals("main")){//if on main menue
