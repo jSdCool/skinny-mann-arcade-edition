@@ -2,6 +2,8 @@
 -added: update installer(windows only)
 -fixed: player being able to move in the z-axis when dead 
 -added: 3D logic controlls
+-changed: removed giant triangle at start of level-2
+-changed: spawn position in level 5
 
 
 

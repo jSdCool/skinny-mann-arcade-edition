@@ -5,13 +5,13 @@
     "author": "jSdCool",
     "level_id": 5,
     "number of variable": 5,
-    "spawnX": 20,
+    "spawnX": 21,
     "name": "level-5",
-    "spawn pointX": 20,
+    "spawn pointX": 21,
     "groups": ["group 0"],
-    "spawn pointY": 700,
+    "spawn pointY": 659,
     "game version": "0.6.0_Early_Access",
-    "spawnY": 700
+    "spawnY": 659
   },
   {
     "name": "stage 1",
