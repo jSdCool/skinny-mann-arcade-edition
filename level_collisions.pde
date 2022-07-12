@@ -1,9 +1,9 @@
-int xangle=25+180, yangle=15, dist=700;//camera presets 
-float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd;//camera rotation
+int xangle=25+180, yangle=15, dist=700;//camera presets
+float DY=sin(radians(yangle))*dist, hd=cos(radians(yangle))*dist, DX=sin(radians(xangle))*hd, DZ=cos(radians(xangle))*hd, cam3Dx, cam3Dy, cam3Dz;//camera rotation
 
 /**draws all the elements of a stage
-
-*/
+ 
+ */
 void stageLevelDraw() {
   Stage stage=level.stages.get(currentStageIndex);
   background(stage.skyColor);//sky color
@@ -12,7 +12,7 @@ void stageLevelDraw() {
     selectIndex=colid_index(mouseX+camPos, mouseY-camPosY, stage);//figure out what eleiment you are hovering over
   }
   if (E_pressed&&viewingItemContents) {//if you are viewing the contence of an element and you press E
-    E_pressed=false;//close the contence of the eleiment 
+    E_pressed=false;//close the contence of the eleiment
     viewingItemContents=false;
     viewingItemIndex=-1;
   }
@@ -28,13 +28,13 @@ void stageLevelDraw() {
         stroke(#FFFF00);//give that element a blue border
         strokeWeight(2);
       }
-      if (selectedIndex==i) {//if the current element is the element that has been selected 
+      if (selectedIndex==i) {//if the current element is the element that has been selected
         stroke(#0A03FF);//give that element a yellow border
         strokeWeight(2);
       }
       stage.parts.get(i).draw();//draw the element
       if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
-        viewingItemIndex=i;//set the cuurent viewing item to this element 
+        viewingItemIndex=i;//set the cuurent viewing item to this element
       }
     }
 
@@ -47,7 +47,11 @@ void stageLevelDraw() {
     //====================================================================================================================================================================================================
   } else if (stage.type.equals("3Dstage")) {//if the stage is a 3D stage
     if (e3DMode) {//if 3D mode is turned on
-      camera(player1.x+DX, player1.y-DY, player1.z-DZ, player1.x, player1.y, player1.z, 0, 1, 0);//set the camera
+
+      
+        camera3DpositionSimulating();
+
+      camera(cam3Dx+DX, cam3Dy-DY, cam3Dz-DZ, cam3Dx, cam3Dy, cam3Dz, 0, 1, 0);//set the camera
       directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
       ambientLight(102, 102, 102);
       coinRotation+=3;//rotate the coins
@@ -58,11 +62,17 @@ void stageLevelDraw() {
       for (int i=0; stageLoopCondishen(i, stage); i++) {//loop through all elements in the stage
         strokeWeight(0);
         noStroke();
+        if (selectedIndex==i) {//if the current element is the element the mouse is hovering over while the selection tool is active
+          stroke(#FFFF00);//give that element a blue border
+          strokeWeight(2);
+        }
         stage.parts.get(i).draw3D();//draw the element in 3D
         if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
-          viewingItemIndex=i;//set the cuurent viewing item to this element 
+          viewingItemIndex=i;//set the cuurent viewing item to this element
         }
       }
+
+
 
       draw_mann_3D(player1.x, player1.y, player1.z, player1.getPose(), player1.getScale(), player1.getColor());//draw the player
 
@@ -96,13 +106,13 @@ void stageLevelDraw() {
           stroke(#FFFF00);//give that element a blue border
           strokeWeight(2);
         }
-        if (selectedIndex==i) {//if the current element is the element that has been selected 
+        if (selectedIndex==i) {//if the current element is the element that has been selected
           stroke(#0A03FF);//give that element a yellow border
           strokeWeight(2);
         }
         stage.parts.get(i).draw();//draw the element
         if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
-          viewingItemIndex=i;//set the cuurent viewing item to this element 
+          viewingItemIndex=i;//set the cuurent viewing item to this element
         }
       }
       draw_mann(Scale*(player1.getX()-camPos), Scale*(player1.getY()+camPosY), player1.getPose(), Scale*player1.getScale(), player1.getColor());//draw the player
@@ -111,7 +121,7 @@ void stageLevelDraw() {
 
 
   if (level_complete) {//if the level has been completed
-    textAlign(LEFT,BOTTOM);
+    textAlign(LEFT, BOTTOM);
     textSize(Scale*100);//draw the level complete thing
     fill(255, 255, 0);
     text("LEVEL COMPLETE!!!", Scale*200, Scale*400);
@@ -145,8 +155,8 @@ void stageLevelDraw() {
   }
 }
 /**draws all the elements of a blueprint
-
-*/
+ 
+ */
 void blueprintEditDraw() {
   int selectIndex=-1;
   if (selecting) {//if you are currently using the selection tool
@@ -170,10 +180,89 @@ void blueprintEditDraw() {
       }
       workingBlueprint.parts.get(i).draw();//draw sll the elements in the blueprint
       if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
-          viewingItemIndex=i;//set the cuurent viewing item to this element 
-        }
+        viewingItemIndex=i;//set the cuurent viewing item to this element
+      }
     }
   }
+}
+
+void camera3DpositionSimulating() {
+  cam3Dx=player1.x;
+  cam3Dy=player1.y;
+  cam3Dz=player1.z;
+  if (cam_left) {
+    xangle+=2;
+    if (xangle>240)
+      xangle=240;
+  }
+  if (cam_right) {
+    xangle-=2;
+    if (xangle<190)
+      xangle=190;
+  }
+  if (cam_up) {
+    yangle+=1;
+    if (yangle>=30)
+      yangle=30;
+  }
+  if (cam_down) {
+    yangle-=1;
+    if (yangle<10)
+      yangle=10;
+  }
+  //xangle=205;
+  //yangle=15;
+  DY=sin(radians(yangle))*dist;
+  hd=cos(radians(yangle))*dist;
+  DX=sin(radians(xangle))*hd;
+  DZ=cos(radians(xangle))*hd;
+}
+
+void camera3DpositionNotSimulating() {
+  if (space3D) {
+    cam3Dy-=20;
+  }
+  if (shift3D) {
+    cam3Dy+=20;
+  }
+  if (w3D) {
+    cam3Dx+=20*sin(radians(-xangle));
+    cam3Dz+=20*cos(radians(-xangle));
+  }
+  if (s3D) {
+    cam3Dx-=20*sin(radians(-xangle));
+    cam3Dz-=20*cos(radians(-xangle));
+  }
+  if (a3D) {
+    cam3Dx+=20*cos(radians(xangle));
+    cam3Dz+=20*sin(radians(xangle));
+  }
+  if (d3D) {
+    cam3Dx-=20*cos(radians(xangle));
+    cam3Dz-=20*sin(radians(xangle));
+  }
+
+
+  if (cam_left) {
+    xangle+=2;
+  }
+  if (cam_right) {
+    xangle-=2;
+  }
+  if (cam_up) {
+    yangle+=1;
+    if (yangle>=90)
+      yangle=89;
+  }
+  if (cam_down) {
+    yangle-=1;
+    if (yangle<0)
+      yangle=0;
+  }
+  DY=sin(radians(yangle))*dist;
+  hd=cos(radians(yangle))*dist;
+  DX=sin(radians(xangle))*hd;
+  DZ=cos(radians(xangle))*hd;
 }
 //////////////////////////////////////////-----------------------------------------------------
 
@@ -306,7 +395,7 @@ void playerPhysics() {
     }
 
 
-     
+    
       if (true) {//gravity
         float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+player1.y;//calculate the new verticle position the player shoud be at
 
@@ -345,20 +434,20 @@ void playerPhysics() {
     }
 
 
-     
+    
       if (player1.getX()-camPos>(1280-eadgeScroleDist)) {//move the camera if the player goes too close to the end of the screen
         camPos=(int)(player1.getX()-(1280-eadgeScroleDist));
       }
 
-     
+    
       if (player1.getX()-camPos<eadgeScroleDist&&camPos>0) {//move the camera if the player goes too close to the end of the screen
         camPos=(int)(player1.getX()-eadgeScroleDist);
       }
-     
+    
       if (player1.getY()+camPosY>720-eadgeScroleDistV&&camPosY>0) {//move the camera if the player goes too close to the end of the screen
         camPosY-=player1.getY()+camPosY-(720-eadgeScroleDistV);
       }
-     
+    
       if (player1.getY()+camPosY<eadgeScroleDistV+75) {//move the camera if the player goes too close to the end of the screen
         camPosY-=player1.getY()+camPosY-(eadgeScroleDistV+75);
       }
@@ -608,7 +697,7 @@ void playerPhysics() {
     }
 
 
-     
+    
 
       if (true) {//gravity
         float pd = (player1.verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+player1.y;//calculate the new verticle position the player shoud be at
@@ -650,32 +739,30 @@ void playerPhysics() {
 
     player1.setX(respawnX);//move the player back to their spawnpoint
     player1.setY(respawnY);
-    if (checkpointIn3DStage) {
-      player1.z=respawnZ;
-    }
+    player1.z=respawnZ;
   }
-  if (setPlayerPosTo) {//move the player to a position that is wanted 
+  if (setPlayerPosTo) {//move the player to a position that is wanted
     player1.setX(tpCords[0]).setY(tpCords[1]);
     player1.z=tpCords[2];
     setPlayerPosTo=false;
     player1.verticalVelocity=0;
   }
   //////////////////////////////
-  if (inGame){//--------------------------------------------------------------------------------------------------modify this line in the final game
-    if(!logicTickingThread.isAlive()){//if the ticking thread has stoped for some reason
+  if (inGame) {
+    if (!logicTickingThread.isAlive()) {//if the ticking thread has stoped for some reason
       logicTickingThread=new LogicThread();
       logicTickingThread.shouldRun=true;//then start it
       logicTickingThread.start();
     }
-  }else{
-   if(logicTickingThread.isAlive()){//if the ticking thread is running when we dont want it to be
-     logicTickingThread.shouldRun=false;//then stop it
-   }
+  } else {
+    if (logicTickingThread.isAlive()) {//if the ticking thread is running when we dont want it to be
+      logicTickingThread.shouldRun=false;//then stop it
+    }
   }
 }
 /**check if a point is inside of a solid object
-
-*/
+ 
+ */
 boolean level_colide(float x, float y) {
   Stage stage=level.stages.get(currentStageIndex);
   for (int i=0; stageLoopCondishen(i, stage); i++) {
@@ -690,12 +777,12 @@ boolean level_colide(float x, float y) {
 }
 
 /**check if a point is inside of a solid object IN 3D
-
-*/
+ 
+ */
 boolean level_colide(float x, float y, float z) {//3d collions
   Stage stage=level.stages.get(currentStageIndex);
   for (int i=0; stageLoopCondishen(i, stage); i++) {
-    if (stage.parts.get(i).colide(x, y, z)) {
+    if (stage.parts.get(i).colide(x, y, z, false)) {
 
       return true;
     }
@@ -704,8 +791,8 @@ boolean level_colide(float x, float y, float z) {//3d collions
 }
 
 /**check if the given point would kill they player
-
-*/
+ 
+ */
 boolean player_kill(float x, float y) {
   Stage stage=level.stages.get(currentStageIndex);
   for (int i=0; stageLoopCondishen(i, stage); i++) {
@@ -718,8 +805,8 @@ boolean player_kill(float x, float y) {
 }
 
 /**the index of the element that the point is inside of
-
-*/
+ 
+ */
 int colid_index(float x, float y, Stage stage) {
   for (int i=stage.parts.size()-1; i>=0; i--) {
     if (stage.parts.get(i).colide(x, y, true)) {
@@ -728,9 +815,22 @@ int colid_index(float x, float y, Stage stage) {
   }
   return -1;
 }
-/** wather the for loop drawing the stage shouold continue
 
-*/
+/**the index of the 3d element that the point is inside of
+ 
+ */
+int colid_index(float x, float y, float z, Stage stage) {
+  for (int i=stage.parts.size()-1; i>=0; i--) {
+    if (stage.parts.get(i).colide(x, y, z, true)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+/** wather the for loop drawing the stage shouold continue
+ 
+ */
 boolean stageLoopCondishen(int i, Stage stage) {
   if (!tutorialMode) {
     return i<stage.parts.size();
@@ -744,18 +844,18 @@ boolean stageLoopCondishen(int i, Stage stage) {
 }
 
 /**thread responcable for ticking the logic baord tick
-
-*/
-class LogicThread extends Thread{
+ 
+ */
+class LogicThread extends Thread {
   boolean shouldRun=true;
   int lastRun;
-  LogicThread(){
+  LogicThread() {
     super("logic ticking thread");
   }
-  void run(){
+  void run() {
     lastRun=millis();
-    while(shouldRun){//whlie we want the logic board to be ticked
-      if(millis()-lastRun>=20){//once 20 millisecconds have passed seince the last tick  
+    while (shouldRun) {//whlie we want the logic board to be ticked
+      if (millis()-lastRun>=20) {//once 20 millisecconds have passed seince the last tick
         //println(millis()-lastRun);
         lastRun=millis();//update the time of the last tick
         level.logicBoards.get(level.tickBoard).tick();//tick the logic board

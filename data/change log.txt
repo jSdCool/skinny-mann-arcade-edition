@@ -1,3 +1,10 @@
+0.6.1_Early_Access
+-added: update installer(windows only)
+-fixed: player being able to move in the z-axis when dead 
+-added: 3D logic controlls
+
+
+
 0.6.0_Early_Access
 -changed: upgraded Button to 1.2.0
 -added: logic to levels

@@ -1,10 +1,10 @@
-class Level {
+class Level { //<>// //<>//
   ArrayList<Stage> stages=new ArrayList<>();
   ArrayList<LogicBoard> logicBoards=new ArrayList<>();
   ArrayList<Boolean> variables=new ArrayList<>();
   ArrayList<Group> groups=new ArrayList<>();
   ArrayList<String> groupNames=new ArrayList<>();
-  public int mainStage, numOfCoins, levelID,numlogicBoards=0,loadBoard,tickBoard,levelCompleteBoard;
+  public int mainStage, numOfCoins, levelID, numlogicBoards=0, loadBoard, tickBoard, levelCompleteBoard;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
@@ -23,30 +23,30 @@ class Level {
     createdVersion=job.getString("game version");
     author=job.getString("author");
     currentStageIndex=mainStage;
-    if(job.isNull("number of variable")){
+    if (job.isNull("number of variable")) {
       println("setting up variables because none exsisted before");
       variables.add(false);
       variables.add(false);
       variables.add(false);
       variables.add(false);
       variables.add(false);
-    }else{
-      for(int i=0;i<job.getInt("number of variable");i++){
+    } else {
+      for (int i=0; i<job.getInt("number of variable"); i++) {
         variables.add(false);
       }
       println("loaded "+variables.size()+" variables");
     }
-    if(!job.isNull("groups")){
-     JSONArray gps= job.getJSONArray("groups");
-     for(int i=0;i<gps.size();i++){
-       groupNames.add(gps.getString(i));
-       groups.add(new Group());
-     }
-     println("loaded "+groups.size()+" groups");
-    }else{
+    if (!job.isNull("groups")) {
+      JSONArray gps= job.getJSONArray("groups");
+      for (int i=0; i<gps.size(); i++) {
+        groupNames.add(gps.getString(i));
+        groups.add(new Group());
+      }
+      println("loaded "+groups.size()+" groups");
+    } else {
       println("no groups found, creating default");
-       groupNames.add("group 0");
-       groups.add(new Group());
+      groupNames.add("group 0");
+      groups.add(new Group());
     }
     player1.x=SpawnX;
     player1.y=SpawnY;
@@ -62,7 +62,7 @@ class Level {
     println("loading level components");
     for (int i=1; i<file.size(); i++) {
       job=file.getJSONObject(i);
-      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")){
+      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
         stages.add(new Stage(loadJSONArray(rootPath+job.getString("location"))));
         println("loaded stage: "+stages.get(stages.size()-1).name);
       }
@@ -71,18 +71,18 @@ class Level {
         println("loaded sound: "+job.getString("name"));
       }
       if (job.getString("type").equals("logicBoard")) {
-        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location")),this));
+        logicBoards.add(new LogicBoard(loadJSONArray(rootPath+job.getString("location")), this));
         numlogicBoards++;
         print("loaded logicboard: "+logicBoards.get(logicBoards.size()-1).name);
-        if(logicBoards.get(logicBoards.size()-1).name.equals("load")){
+        if (logicBoards.get(logicBoards.size()-1).name.equals("load")) {
           loadBoard=logicBoards.size()-1;
           print(" board id set to: "+loadBoard);
         }
-        if(logicBoards.get(logicBoards.size()-1).name.equals("tick")){
+        if (logicBoards.get(logicBoards.size()-1).name.equals("tick")) {
           tickBoard=logicBoards.size()-1;
           print(" board id set to: "+tickBoard);
         }
-        if(logicBoards.get(logicBoards.size()-1).name.equals("level complete")){
+        if (logicBoards.get(logicBoards.size()-1).name.equals("level complete")) {
           levelCompleteBoard=logicBoards.size()-1;
           print(" board id set to: "+levelCompleteBoard);
         }
@@ -94,8 +94,8 @@ class Level {
       coins.add(false);
     }
     println("loaded "+coins.size()+" coins");
-    
-    if(numlogicBoards==0){
+
+    if (numlogicBoards==0) {
       println("generating new logic boards as none exsisted");
       logicBoards.add(new LogicBoard("load"));
       logicBoards.add(new LogicBoard("tick"));
@@ -127,12 +127,12 @@ class Level {
     head.setString("name", name);
     head.setString("game version", GAME_version);
     head.setString("author", author);
-    head.setInt("number of variable",variables.size());
+    head.setInt("number of variable", variables.size());
     JSONArray grps=new JSONArray();
-    for(int i=0;i<groupNames.size();i++){
-       grps.setString(i, groupNames.get(i));
+    for (int i=0; i<groupNames.size(); i++) {
+      grps.setString(i, groupNames.get(i));
     }
-    head.setJSONArray("groups",grps);
+    head.setJSONArray("groups", grps);
     index.setJSONObject(0, head);
     for (int i=1; i<stages.size()+1; i++) {
       JSONObject stg=new JSONObject();
@@ -158,9 +158,9 @@ class Level {
   }
 }
 
-class Group{
- boolean visable=true;
- float xOffset=0,yOffset=0,zOffset=0;
+class Group {
+  boolean visable=true;
+  float xOffset=0, yOffset=0, zOffset=0;
 }
 
 class Stage {
@@ -232,8 +232,8 @@ class Stage {
           if (otype.equals("sound box")) {
             parts.add(new SoundBox(ob, is3D));
           }
-          if(otype.equals("logic button")){
-             parts.add(new LogicButton(ob,is3D)); 
+          if (otype.equals("logic button")) {
+            parts.add(new LogicButton(ob, is3D));
           }
         }
         catch(Throwable e) {
@@ -260,7 +260,7 @@ class Stage {
 
 abstract class StageComponent {//the base class for all components that exsist inside a stage
   public float x, y, z, dx, dy, dz;
-  public int ccolor,group=-1;
+  public int ccolor, group=-1;
   public String type;
   void draw() {
   };
@@ -269,7 +269,7 @@ abstract class StageComponent {//the base class for all components that exsist i
   boolean colide(float x, float y, boolean c) {
     return false;
   };//c= is colideing with click box
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z, boolean c) {
     return false;
   };
   boolean colideDethPlane(float x, float Y) {
@@ -279,23 +279,23 @@ abstract class StageComponent {//the base class for all components that exsist i
 
   void setData(String data) {
   }
-  void setData(int data){
+  void setData(int data) {
   }
 
   String getData() {
     return null;
   }
-  int getDataI(){
-   return -1; 
+  int getDataI() {
+    return -1;
   }
   abstract StageComponent copy();
-  Group getGroup(){
-    if(group==-1)
-    return new Group();
+  Group getGroup() {
+    if (group==-1)
+      return new Group();
     return level.groups.get(group);
   }
-  void setGroup(int grp){
-   group=grp; 
+  void setGroup(int grp) {
+    group=grp;
   }
 }
 
@@ -311,7 +311,7 @@ class Ground extends StageComponent {//ground component
       z=data.getFloat("z");
       dz=data.getFloat("dz");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -349,13 +349,13 @@ class Ground extends StageComponent {//ground component
     }
     part.setInt("color", ccolor);
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
@@ -363,10 +363,10 @@ class Ground extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
     translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
@@ -374,7 +374,7 @@ class Ground extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
     if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
@@ -383,9 +383,9 @@ class Ground extends StageComponent {//ground component
     return false;
   }
 
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=(this.z+group.zOffset)+dz;
     if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=(this.z+group.zOffset) && z<=z2/* terain hit box*/) {
@@ -407,7 +407,7 @@ class Holo extends StageComponent {//ground component
       z=data.getFloat("z");
       dz=data.getFloat("dz");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -445,13 +445,13 @@ class Holo extends StageComponent {//ground component
     }
     part.setInt("color", ccolor);
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
@@ -459,10 +459,10 @@ class Holo extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
     box(dx, dy, dz);
     translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
@@ -470,7 +470,7 @@ class Holo extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
@@ -481,9 +481,9 @@ class Holo extends StageComponent {//ground component
     return false;
   }
 
-  boolean colide(float x, float y, float z) {
+  boolean colide(float x, float y, float z, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy, z2=(this.z+group.zOffset)+dz;
     if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2 && z>=(this.z+group.zOffset) && z<=z2/* terain hit box*/) {
@@ -504,7 +504,7 @@ class DethPlane extends StageComponent {//ground component
       z=data.getFloat("z");
       dz=data.getFloat("dz");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -530,13 +530,13 @@ class DethPlane extends StageComponent {//ground component
       part.setFloat("dz", dz);
     }
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(-114431);
     rect(Scale*((x+group.xOffset)-drawCamPosX)-1, Scale*((y+group.yOffset)+drawCamPosY)-1, Scale*dx+2, Scale*dy+2);
@@ -544,7 +544,7 @@ class DethPlane extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(-114431);
     strokeWeight(0);
@@ -555,7 +555,7 @@ class DethPlane extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 = (this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
     if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
@@ -566,7 +566,7 @@ class DethPlane extends StageComponent {//ground component
 
   boolean colideDethPlane(float x, float y) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 =(this.x+group.xOffset)+dx, y2=(this.y+group.yOffset)+dy;
     if (x >= (this.x+group.xOffset) && x <= x2 && y >= (this.y+group.yOffset) && y <= y2/* terain hit box*/) {
@@ -585,7 +585,7 @@ class CheckPoint extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -613,13 +613,13 @@ class CheckPoint extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float playx=player1.getX();
     boolean po=false;
@@ -644,9 +644,9 @@ class CheckPoint extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
-    noStroke();
+    //noStroke();
     float playx=player1.getX();
     boolean po=false;
     if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= player1.getY() && (y+group.yOffset)>=player1.getY()-10 && player1.z >= (z+group.zOffset)-20 && player1.z <= (z+group.zOffset)+20) {
@@ -663,13 +663,13 @@ class CheckPoint extends StageComponent {//ground component
       fill(#E5C402);
     else
       fill(#B9B9B9);
-    strokeWeight(0);
+    //strokeWeight(0);
     translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
     box(4, 60, 4);
     translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
     fill(#EA0202);
-    stroke(#EA0202);
-    strokeWeight(0);
+    //stroke(#EA0202);
+    //strokeWeight(0);
     translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
     box(20, 20, 2);
     translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
@@ -677,10 +677,22 @@ class CheckPoint extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x>=(this.x+group.xOffset)-8 && x<= (this.x+group.xOffset)+8 && y >= (this.y+group.yOffset)-50 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x>=(this.x+group.xOffset)-8 && x<= (this.x+group.xOffset)+8 && y >= (this.y+group.yOffset)-50 && y <= (this.y+group.yOffset) && z>=(this.z+group.zOffset)-8 && z<= (this.z+group.zOffset)+8 ) {
         return true;
       }
     }
@@ -697,7 +709,7 @@ class Goal extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -718,13 +730,13 @@ class Goal extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float x2 = (x+group.xOffset)-drawCamPosX, y2 = (y+group.yOffset);
     fill(255);
@@ -738,8 +750,8 @@ class Goal extends StageComponent {//ground component
     float px =player1.getX(), py=player1.getY();
 
     if (px >= x2+drawCamPosX && px <= x2+drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
-      if(!level_complete){
-        level.logicBoards.get(level.levelCompleteBoard).superTick(); 
+      if (!level_complete) {
+        level.logicBoards.get(level.levelCompleteBoard).superTick();
       }
       level_complete=true;
     }
@@ -750,7 +762,7 @@ class Goal extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= (this.x+group.xOffset) && x <= ((this.x+group.xOffset)) + 250 && y >= ((this.y+group.yOffset)) - 50 && y <= ((this.y+group.yOffset)) + 50) {
@@ -771,7 +783,7 @@ class Coin extends StageComponent {//ground component
       z=data.getFloat("z");
     }
     coinId=data.getInt("coin id");
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -800,23 +812,23 @@ class Coin extends StageComponent {//ground component
     }
     part.setString("type", type);
     part.setInt("coin id", coinId);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float playx=player1.getX(), playy=player1.getY();
     boolean collected;
     if (editingBlueprint) {
       collected=false;
     } else {
-      if(coins.size()==0)
-      collected=false;
+      if (coins.size()==0)
+        collected=false;
       else
-      collected=coins.get(coinId);
+        collected=coins.get(coinId);
     }
     float x2=(x+group.xOffset)-drawCamPosX;
     if (!collected) {
@@ -830,7 +842,7 @@ class Coin extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float playx=player1.getX(), playy=player1.getY(), playz=player1.z;
     boolean collected=coins.get(coinId);
@@ -850,10 +862,22 @@ class Coin extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (Math.sqrt(Math.pow(x-(this.x+group.xOffset), 2)+Math.pow(y-(this.y+group.yOffset), 2))<19) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (Math.sqrt(Math.pow(x-(this.x+group.xOffset), 2)+Math.pow(y-(this.y+group.yOffset), 2)+Math.pow(z-(this.z+group.zOffset), 2))<19) {
         return true;
       }
     }
@@ -873,12 +897,11 @@ class Interdimentional_Portal extends StageComponent {//ground component
     linkIndex=data.getInt("link Index")-1;
     if (!data.isNull("z")) {
       z=data.getFloat("z");
-      
     }
-    if(!data.isNull("linkZ")){
+    if (!data.isNull("linkZ")) {
       linkZ=data.getFloat("linkZ");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -898,13 +921,13 @@ class Interdimentional_Portal extends StageComponent {//ground component
     part.setFloat("linkX", linkX);
     part.setFloat("linkY", linkY);
     part.setInt("link Index", linkIndex+1);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float playx=player1.getX(), playy=player1.getY();
     drawPortal(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale*1);
@@ -937,7 +960,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     float playx=player1.getX(), playy=player1.getY();
 
@@ -973,10 +996,22 @@ class Interdimentional_Portal extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x>(this.x+group.xOffset)-25&&x<(this.x+group.xOffset)+25&&y>(this.y+group.yOffset)-50&&y<(this.y+group.yOffset)+60) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x > (this.x+group.xOffset)-25 && x < (this.x+group.xOffset)+25 && y >(this.y+group.yOffset)-50 && y < (this.y+group.yOffset)+60 && z > (this.z+group.zOffset)-2 && z < (this.z+group.zOffset)+2) {
         return true;
       }
     }
@@ -999,7 +1034,7 @@ class Sloap extends StageComponent {//ground component
       dz=data.getFloat("dz");
     }
     direction=data.getInt("rotation");
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -1026,13 +1061,13 @@ class Sloap extends StageComponent {//ground component
     part.setInt("color", ccolor);
     part.setString("type", type);
     part.setInt("rotation", direction);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     if (direction==0) {
@@ -1051,7 +1086,7 @@ class Sloap extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     strokeWeight(0);
@@ -1062,7 +1097,7 @@ class Sloap extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     float x2 = dx+group.xOffset, y2=dy+group.yOffset, y1=(this.y+group.yOffset), x1=(this.x+group.xOffset), rot=direction;
     if (rot==0) {
@@ -1107,7 +1142,7 @@ class HoloTriangle extends StageComponent {//ground component
       dz=data.getFloat("dz");
     }
     direction=data.getInt("rotation");
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -1133,13 +1168,13 @@ class HoloTriangle extends StageComponent {//ground component
     part.setInt("color", ccolor);
     part.setString("type", type);
     part.setInt("rotation", direction);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     if (direction==0) {
@@ -1158,7 +1193,7 @@ class HoloTriangle extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     fill(ccolor);
     strokeWeight(0);
@@ -1169,7 +1204,7 @@ class HoloTriangle extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       float x2 = dx+group.xOffset, y2=dy+group.yOffset, y1=(this.y+group.yOffset), x1=(this.x+group.xOffset), rot=direction;
@@ -1210,7 +1245,7 @@ class SWon3D extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -1232,13 +1267,13 @@ class SWon3D extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     draw3DSwitch1(((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale);
     if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2) {
@@ -1250,17 +1285,29 @@ class SWon3D extends StageComponent {//ground component
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     draw3DSwitch1((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale);
   }
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset) && z >= ((this.z+group.zOffset)) - 10 && z <= (this.z+group.zOffset)) {
         return true;
       }
     }
@@ -1276,7 +1323,7 @@ class SWoff3D extends StageComponent {//ground component
     if (stage_3D) {
       z=data.getFloat("z");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -1298,20 +1345,20 @@ class SWoff3D extends StageComponent {//ground component
       part.setFloat("z", z);
     }
     part.setString("type", type);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     draw3DSwitch2(((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale);
   }
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     draw3DSwitch2((x+group.xOffset), y, (z+group.zOffset), Scale);
     if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
@@ -1324,10 +1371,22 @@ class SWoff3D extends StageComponent {//ground component
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset) && z >= ((this.z+group.zOffset)) - 10 && z <= (this.z+group.zOffset)) {
         return true;
       }
     }
@@ -1345,7 +1404,7 @@ class WritableSign extends StageComponent {
       z=data.getFloat("z");
     }
     contents=data.getString("contents");
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
@@ -1370,7 +1429,7 @@ class WritableSign extends StageComponent {
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     drawSign(Scale*((x+group.xOffset)-drawCamPosX), Scale*((y+group.yOffset)+drawCamPosY), Scale);
 
@@ -1389,7 +1448,7 @@ class WritableSign extends StageComponent {
   }
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale);
 
@@ -1407,10 +1466,22 @@ class WritableSign extends StageComponent {
   }
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-35 && x <= ((this.x+group.xOffset)) + 35 && y >= ((this.y+group.yOffset)) - 65 && y <= (this.y+group.yOffset)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  boolean colide(float x, float y, float z, boolean c) {
+    Group group=getGroup();
+    if (!group.visable)
+      return false;
+    if (c) {
+      if (x >= ((this.x+group.xOffset))-35 && x <= ((this.x+group.xOffset)) + 35 && y >= ((this.y+group.yOffset)) - 65 && y <= (this.y+group.yOffset) && z >= ((this.z+group.yOffset)) - 5 && z <= (this.z+group.zOffset)+5) {
         return true;
       }
     }
@@ -1426,7 +1497,7 @@ class WritableSign extends StageComponent {
     }
     part.setString("type", type);
     part.setString("contents", contents);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
@@ -1452,14 +1523,14 @@ class SoundBox extends StageComponent {
     x=data.getFloat("x");
     y=data.getFloat("y");
     soundKey=data.getString("sound key");
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     drawSoundBox((x+group.xOffset)-drawCamPosX, (y+group.yOffset)+drawCamPosY);
     if (player1.getX()>=(x+group.xOffset)-30&&player1.getX()<=(x+group.xOffset)+30&&player1.y>=(y+group.yOffset)-30&&player1.getY()<(y+group.yOffset)+30) {
@@ -1480,7 +1551,7 @@ class SoundBox extends StageComponent {
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-30 && x <= ((this.x+group.xOffset)) + 30 && y >= ((this.y+group.yOffset)) - 30 && y <= (this.y+group.yOffset)+30) {
@@ -1496,7 +1567,7 @@ class SoundBox extends StageComponent {
     part.setFloat("y", y);
     part.setString("type", type);
     part.setString("sound key", soundKey);
-    part.setInt("group",group);
+    part.setInt("group", group);
     return part;
   }
 
@@ -1516,7 +1587,7 @@ class SoundBox extends StageComponent {
 }
 
 class LogicButton extends StageComponent {//ground component
-int variable=-1;
+  int variable=-1;
   LogicButton(JSONObject data, boolean stage_3D) {
     type="logic button";
     x=data.getFloat("x");
@@ -1524,7 +1595,7 @@ int variable=-1;
     if (stage_3D) {
       z=data.getFloat("z");
     }
-    if(!data.isNull("group")){
+    if (!data.isNull("group")) {
       group=data.getInt("group");
     }
     variable=data.getInt("variable");
@@ -1552,51 +1623,50 @@ int variable=-1;
       part.setFloat("z", z);
     }
     part.setString("type", type);
-    part.setInt("group",group);
-    part.setInt("variable",variable);
+    part.setInt("group", group);
+    part.setInt("variable", variable);
     return part;
   }
 
   void draw() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     boolean state=false;
-    if(variable!=-1){
+    if (variable!=-1) {
       if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2) {
-        level.variables.set(variable,true);
-      }else{
-        level.variables.set(variable,false);
+        level.variables.set(variable, true);
+      } else {
+        level.variables.set(variable, false);
       }
     }
-    if(variable!=-1){
+    if (variable!=-1) {
       state=level.variables.get(variable);
     }
-    drawLogicButton(primaryWindow,((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale,state);
-    
+    drawLogicButton(primaryWindow, ((x+group.xOffset)-drawCamPosX)*Scale, ((y+group.yOffset)+drawCamPosY)*Scale, Scale, state);
   }
 
   void draw3D() {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return;
     boolean state=false;
-    if(variable!=-1){
+    if (variable!=-1) {
       if (player1.x>=(x+group.xOffset)-10&&player1.x<=(x+group.xOffset)+10&&player1.y >=(y+group.yOffset)-10&&player1.y<= (y+group.yOffset)+2 && player1.z >= (z+group.zOffset)-10 && player1.z <= (z+group.zOffset)+10) {
-        level.variables.set(variable,true);
-      }else{
-        level.variables.set(variable,false);
+        level.variables.set(variable, true);
+      } else {
+        level.variables.set(variable, false);
       }
     }
-    if(variable!=-1){
+    if (variable!=-1) {
       state=level.variables.get(variable);
     }
-    drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale,state);
+    drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), Scale, state);
   }
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
-    if(!group.visable)
+    if (!group.visable)
       return false;
     if (c) {
       if (x >= ((this.x+group.xOffset))-20 && x <= ((this.x+group.xOffset)) + 20 && y >= ((this.y+group.yOffset)) - 10 && y <= (this.y+group.yOffset)) {
@@ -1605,7 +1675,7 @@ int variable=-1;
     }
     return false;
   }
-  
+
   void setData(int data) {
     variable=data;
   }
@@ -1615,12 +1685,12 @@ int variable=-1;
   }
 }
 
-class GenericStageComponent extends StageComponent{
-  StageComponent copy(){
-   return this; 
+class GenericStageComponent extends StageComponent {
+  StageComponent copy() {
+    return this;
   }
-  JSONObject save(boolean e){
-   return null; 
+  JSONObject save(boolean e) {
+    return null;
   }
 }
 
@@ -1650,7 +1720,7 @@ class StageSound {
 class LogicBoard {//stores all the logic components
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
-  LogicBoard(JSONArray file,Level level) {
+  LogicBoard(JSONArray file, Level level) {
     JSONObject head=file.getJSONObject(0);
     name=head.getString("name");
     for (int i=1; i<file.size(); i++) {
@@ -1680,26 +1750,26 @@ class LogicBoard {//stores all the logic components
       if (type.equals("ON")) {
         components.add(new ConstantOnSignal(component, this));
       }
-      if(type.equals("read var")){
+      if (type.equals("read var")) {
         components.add(new ReadVariable(component, this));
       }
-      if(type.equals("set var")){
+      if (type.equals("set var")) {
         components.add(new SetVariable(component, this));
       }
-      if(type.equals("set visable")){
-        components.add(new SetVisibility(component, this,level));
+      if (type.equals("set visable")) {
+        components.add(new SetVisibility(component, this, level));
       }
-      if(type.equals("y-offset")){
-        components.add(new SetYOffset(component, this,level));
+      if (type.equals("y-offset")) {
+        components.add(new SetYOffset(component, this, level));
       }
-      if(type.equals("x-offset")){
-        components.add(new SetXOffset(component, this,level));
+      if (type.equals("x-offset")) {
+        components.add(new SetXOffset(component, this, level));
       }
-      if(type.equals("delay")){
+      if (type.equals("delay")) {
         components.add(new Delay(component, this));
       }
-      if(type.equals("z-offset")){
-        components.add(new SetZOffset(component,this,level));
+      if (type.equals("z-offset")) {
+        components.add(new SetZOffset(component, this, level));
       }
     }
   }
@@ -1735,21 +1805,21 @@ class LogicBoard {//stores all the logic components
       }
     }
   }
-  
-  void tick(){//tick each component once
-   for(int i=0;i<components.size();i++){
-     components.get(i).tick();
-   }
-   for(int i=0;i<components.size();i++){
-     components.get(i).sendOut();
-   }
-   for(int i=0;i<components.size();i++){
-     components.get(i).flushBuffer();
-   }
+
+  void tick() {//tick each component once
+    for (int i=0; i<components.size(); i++) {
+      components.get(i).tick();
+    }
+    for (int i=0; i<components.size(); i++) {
+      components.get(i).sendOut();
+    }
+    for (int i=0; i<components.size(); i++) {
+      components.get(i).flushBuffer();
+    }
   }
-  void superTick(){//ticked the logic board 256 times with no delay inbetween ticks
-    for(int i=0;i<256;i++){
-     tick(); 
+  void superTick() {//ticked the logic board 256 times with no delay inbetween ticks
+    for (int i=0; i<256; i++) {
+      tick();
     }
   }
 }
@@ -1864,12 +1934,11 @@ abstract class LogicComponent {//the base of all logic gam=ts and things
     component.setJSONArray("connections", connections);
     return component;
   }
-  
-  void setData(int data){
-    
+
+  void setData(int data) {
   }
-  
-  int getData(){
+
+  int getData() {
     return 0;
   }
 }
@@ -1974,7 +2043,7 @@ class Delay extends LogicComponent {
   Delay(float x, float y, LogicBoard lb) {
     super(x, y, "delay", lb);
     button.setText("delay "+time+" ticks  ");
-    for(int i=0;i<time;i++){
+    for (int i=0; i<time; i++) {
       mem.add(false);
     }
   }
@@ -1983,57 +2052,57 @@ class Delay extends LogicComponent {
     super(data.getFloat("x"), data.getFloat("y"), "delay", lb, data.getJSONArray("connections"));
     time=data.getInt("delay");
     button.setText("delay "+time+" ticks  ");
-    for(int i=0;i<time;i++){
+    for (int i=0; i<time; i++) {
       mem.add(false);
     }
   }
-  
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("input",x+5-camPos,y+16-camPosY);
-   text("clear",x+5-camPos,y+56-camPosY);
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("input", x+5-camPos, y+16-camPosY);
+    text("clear", x+5-camPos, y+56-camPosY);
   }
 
   void tick() {
-    if(inputTerminal2){
+    if (inputTerminal2) {
       mem=new ArrayList<>();
-      for(int i=0;i<time;i++){
+      for (int i=0; i<time; i++) {
         mem.add(false);
-      }  
+      }
     }
     outputTerminal=mem.remove(0);
     mem.add(inputTerminal1);
     //println(mem);
   }
-  void setData(int data){
+  void setData(int data) {
     time=data;
     button.setText("delay "+time+" ticks  ");
     mem=new ArrayList<>();
-    for(int i=0;i<time;i++){
+    for (int i=0; i<time; i++) {
       mem.add(false);
     }
   }
-  int getData(){
-   return time;
+  int getData() {
+    return time;
   }
-  
-  JSONObject save(){
+
+  JSONObject save() {
     JSONObject contence=super.save();
-    contence.setInt("delay",time);
+    contence.setInt("delay", time);
     return contence;
   }
 }
 
-abstract class LogicInputComponent extends LogicComponent{
+abstract class LogicInputComponent extends LogicComponent {
   LogicInputComponent(float x, float y, String type, LogicBoard board) {
     super(x, y, type, board);
     button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
   }
-  LogicInputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects){
-    super(x,y,type,board,cnects);
+  LogicInputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects) {
+    super(x, y, type, board, cnects);
     button=new Button(primaryWindow, x, y, 100, 40, "  "+type+"  ");
   }
   void draw() {
@@ -2051,13 +2120,13 @@ abstract class LogicInputComponent extends LogicComponent{
   }
 }
 
-abstract class LogicOutputComponent extends LogicComponent{
+abstract class LogicOutputComponent extends LogicComponent {
   LogicOutputComponent(float x, float y, String type, LogicBoard board) {
     super(x, y, type, board);
     button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
   }
-  LogicOutputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects){
-    super(x,y,type,board,cnects);
+  LogicOutputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects) {
+    super(x, y, type, board, cnects);
     button=new Button(primaryWindow, x, y, 100, 80, "  "+type+"  ");
   }
   void draw() {
@@ -2079,7 +2148,7 @@ abstract class LogicOutputComponent extends LogicComponent{
   }
 }
 
-class ConstantOnSignal extends LogicInputComponent{
+class ConstantOnSignal extends LogicInputComponent {
   ConstantOnSignal(float x, float y, LogicBoard lb) {
     super(x, y, "ON", lb);
     outputTerminal=true;
@@ -2089,12 +2158,12 @@ class ConstantOnSignal extends LogicInputComponent{
     super(data.getFloat("x"), data.getFloat("y"), "ON", lb, data.getJSONArray("connections"));
     outputTerminal=true;
   }
-  void tick(){
+  void tick() {
     outputTerminal=true;
   }
 }
 
-class ReadVariable extends LogicInputComponent{
+class ReadVariable extends LogicInputComponent {
   int variableNumber=0;
   ReadVariable(float x, float y, LogicBoard lb) {
     super(x, y, "read var", lb);
@@ -2106,24 +2175,24 @@ class ReadVariable extends LogicInputComponent{
     variableNumber=data.getInt("variable number");
     button.setText("read var b"+variableNumber+"  ");
   }
-  void tick(){
+  void tick() {
     outputTerminal=level.variables.get(variableNumber);
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("variable number",variableNumber);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("variable number", variableNumber);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     variableNumber=data;
     button.setText("read var b"+variableNumber+"  ");
   }
-  int getData(){
-   return variableNumber;
+  int getData() {
+    return variableNumber;
   }
 }
 
-class SetVariable extends LogicOutputComponent{
+class SetVariable extends LogicOutputComponent {
   int variableNumber=0;
   SetVariable(float x, float y, LogicBoard lb) {
     super(x, y, "set var", lb);
@@ -2135,77 +2204,76 @@ class SetVariable extends LogicOutputComponent{
     variableNumber=data.getInt("variable number");
     button.setText("  set var b"+variableNumber);
   }
-  void tick(){
-    if(inputTerminal2)
-    level.variables.set(variableNumber,inputTerminal1);
+  void tick() {
+    if (inputTerminal2)
+      level.variables.set(variableNumber, inputTerminal1);
   }
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("data",x+5-camPos,y+16-camPosY);
-   text("set",x+5-camPos,y+56-camPosY);
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("data", x+5-camPos, y+16-camPosY);
+    text("set", x+5-camPos, y+56-camPosY);
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("variable number",variableNumber);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("variable number", variableNumber);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     variableNumber=data;
     button.setText("  set var b"+variableNumber);
   }
-  int getData(){
-   return variableNumber;
+  int getData() {
+    return variableNumber;
   }
 }
 
-class SetVisibility extends LogicOutputComponent{
+class SetVisibility extends LogicOutputComponent {
   int groupNumber=0;
   SetVisibility(float x, float y, LogicBoard lb) {
     super(x, y, "set visable", lb);
     button.setText("  visibility of "+level.groupNames.get(groupNumber));
   }
 
-  SetVisibility(JSONObject data, LogicBoard lb,Level level) {
+  SetVisibility(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "set visable", lb, data.getJSONArray("connections"));
-    groupNumber=data.getInt("group number"); //<>//
+    groupNumber=data.getInt("group number");
     button.setText("  visibility of "+level.groupNames.get(groupNumber));
   }
-  void tick(){
-    if(inputTerminal1){
+  void tick() {
+    if (inputTerminal1) {
       level.groups.get(groupNumber).visable=true;
     }
-    if(inputTerminal2){
-    level.groups.get(groupNumber).visable=false;
+    if (inputTerminal2) {
+      level.groups.get(groupNumber).visable=false;
     }
-    
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("group number",groupNumber);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("group number", groupNumber);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     groupNumber=data;
     button.setText("  visibility of "+level.groupNames.get(groupNumber));
   }
-  int getData(){
-   return groupNumber;
+  int getData() {
+    return groupNumber;
   }
-  
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("true",x+5-camPos,y+16-camPosY);
-   text("false",x+5-camPos,y+56-camPosY);
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("true", x+5-camPos, y+16-camPosY);
+    text("false", x+5-camPos, y+56-camPosY);
   }
 }
 
-class SetXOffset extends LogicOutputComponent{
+class SetXOffset extends LogicOutputComponent {
   int groupNumber=0;
   float offset=0;
   SetXOffset(float x, float y, LogicBoard lb) {
@@ -2213,52 +2281,52 @@ class SetXOffset extends LogicOutputComponent{
     button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
 
-  SetXOffset(JSONObject data, LogicBoard lb,Level level) {
+  SetXOffset(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "x-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
     button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  void tick(){
-    if(inputTerminal1){
+  void tick() {
+    if (inputTerminal1) {
       level.groups.get(groupNumber).xOffset=offset;
     }
-    if(inputTerminal2){
-    level.groups.get(groupNumber).xOffset=0;
+    if (inputTerminal2) {
+      level.groups.get(groupNumber).xOffset=0;
     }
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("group number",groupNumber);
-   component.setFloat("offset",offset);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("group number", groupNumber);
+    component.setFloat("offset", offset);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     groupNumber=data;
     button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  int getData(){
-   return groupNumber;
+  int getData() {
+    return groupNumber;
   }
-  
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("set",x+5-camPos,y+16-camPosY);
-   text("reset",x+5-camPos,y+56-camPosY);
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("set", x+5-camPos, y+16-camPosY);
+    text("reset", x+5-camPos, y+56-camPosY);
   }
-  void setOffset(float of){
-   offset=of; 
-   button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  void setOffset(float of) {
+    offset=of;
+    button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  float getOffset(){
-   return offset; 
+  float getOffset() {
+    return offset;
   }
 }
 
-class SetYOffset extends LogicOutputComponent{
+class SetYOffset extends LogicOutputComponent {
   int groupNumber=0;
   float offset=0;
   SetYOffset(float x, float y, LogicBoard lb) {
@@ -2266,52 +2334,52 @@ class SetYOffset extends LogicOutputComponent{
     button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
 
-  SetYOffset(JSONObject data, LogicBoard lb,Level level) {
+  SetYOffset(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "y-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
-    offset=data.getFloat("offset"); //<>//
+    offset=data.getFloat("offset");
     button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  void tick(){
-    if(inputTerminal1){
+  void tick() {
+    if (inputTerminal1) {
       level.groups.get(groupNumber).yOffset=-offset;
     }
-    if(inputTerminal2){
-    level.groups.get(groupNumber).yOffset=0;
+    if (inputTerminal2) {
+      level.groups.get(groupNumber).yOffset=0;
     }
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("group number",groupNumber);
-   component.setFloat("offset",offset);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("group number", groupNumber);
+    component.setFloat("offset", offset);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     groupNumber=data;
     button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  int getData(){
-   return groupNumber;
+  int getData() {
+    return groupNumber;
   }
-  
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("set",x+5-camPos,y+16-camPosY);
-   text("reset",x+5-camPos,y+56-camPosY);
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("set", x+5-camPos, y+16-camPosY);
+    text("reset", x+5-camPos, y+56-camPosY);
   }
-  void setOffset(float of){
-   offset=of; 
-   button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  void setOffset(float of) {
+    offset=of;
+    button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  float getOffset(){
-   return offset; 
+  float getOffset() {
+    return offset;
   }
 }
 
-class SetZOffset extends LogicOutputComponent{
+class SetZOffset extends LogicOutputComponent {
   int groupNumber=0;
   float offset=0;
   SetZOffset(float x, float y, LogicBoard lb) {
@@ -2319,47 +2387,90 @@ class SetZOffset extends LogicOutputComponent{
     button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
 
-  SetZOffset(JSONObject data, LogicBoard lb,Level level) {
+  SetZOffset(JSONObject data, LogicBoard lb, Level level) {
     super(data.getFloat("x"), data.getFloat("y"), "z-offset", lb, data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
     button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  void tick(){
-    if(inputTerminal1){
+  void tick() {
+    if (inputTerminal1) {
       level.groups.get(groupNumber).zOffset=offset;
     }
-    if(inputTerminal2){
-    level.groups.get(groupNumber).zOffset=0;
+    if (inputTerminal2) {
+      level.groups.get(groupNumber).zOffset=0;
     }
   }
   JSONObject save() {
-   JSONObject component=super.save();
-   component.setInt("group number",groupNumber);
-   component.setFloat("offset",offset);
-   return component;
+    JSONObject component=super.save();
+    component.setInt("group number", groupNumber);
+    component.setFloat("offset", offset);
+    return component;
   }
-  void setData(int data){
+  void setData(int data) {
     groupNumber=data;
     button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  int getData(){
-   return groupNumber;
+  int getData() {
+    return groupNumber;
   }
-  
-  void draw(){
-   super.draw();
-   fill(0);
-   textSize(15);
-   textAlign(LEFT,CENTER);
-   text("set",x+5-camPos,y+16-camPosY);
-   text("reset",x+5-camPos,y+56-camPosY);
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("set", x+5-camPos, y+16-camPosY);
+    text("reset", x+5-camPos, y+56-camPosY);
   }
-  void setOffset(float of){
-   offset=of; 
-   button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+  void setOffset(float of) {
+    offset=of;
+    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
-  float getOffset(){
-   return offset; 
+  float getOffset() {
+    return offset;
+  }
+}
+
+class Set3DMode extends LogicOutputComponent {
+  int groupNumber=0;
+  float offset=0;
+  Set3DMode(float x, float y, LogicBoard lb) {
+    super(x, y, "  set 3D  ", lb);
+  }
+
+  Set3DMode(JSONObject data, LogicBoard lb, Level level) {
+    super(data.getFloat("x"), data.getFloat("y"), "  set 3D  ", lb, data.getJSONArray("connections"));
+  }
+  void tick() {
+    if (inputTerminal1) {
+      e3DMode=true;
+    }
+    if (inputTerminal2) {
+      e3DMode=false;
+    }
+  }
+
+  void draw() {
+    super.draw();
+    fill(0);
+    textSize(15);
+    textAlign(LEFT, CENTER);
+    text("true", x+5-camPos, y+16-camPosY);
+    text("false", x+5-camPos, y+56-camPosY);
+  }
+}
+
+class Read3DMode extends LogicInputComponent {
+  int variableNumber=0;
+  Read3DMode(float x, float y, LogicBoard lb) {
+    super(x, y, "read 3D ", lb);
+  }
+
+  Read3DMode(JSONObject data, LogicBoard lb) {
+    super(data.getFloat("x"), data.getFloat("y"), "read 3D ", lb, data.getJSONArray("connections"));
+  }
+  void tick() {
+    outputTerminal=e3DMode;
   }
 }

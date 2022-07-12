@@ -185,7 +185,7 @@ PShape coin3D;
 PApplet primaryWindow=this;
 Server s;
 Client c;
-boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false;
+boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false,s3D=false,w3D=false,shift3D=false,space3D=false,d3D=false,a3D=false,cam_down=false,cam_up=false,cam_right=false,cam_left=false;
 String Menue ="creds"/*,level="n"*/,version="0.6.1_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version,internetVersion;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
@@ -1206,6 +1206,39 @@ try{
   }
   
   }//end of 3d mode
+  if (e3DMode) {
+    if (keyCode==65) {//if 'A' is pressed
+      a3D=true;
+    }
+    if (keyCode==68) {//if 'D' is pressed
+      d3D=true;
+    }
+    if (keyCode==32) {//if SPACE is pressed
+      space3D=true;
+    }
+    if (keyCode==16) {//if 'SHIFT' is pressed
+      shift3D=true;
+    }
+    if (keyCode==87) {//if 'W' is pressed
+      w3D=true;
+      key = 0;//clear key so CTRL + W doesent close the program
+    }
+    if (keyCode==83) {//if 'S' is pressed
+      s3D=true;
+    }
+    if (keyCode==37) {//if LEFT ARROW is pressed
+      cam_left=true;
+    }
+    if (keyCode==39) {//if RIGHT ARROW is pressed
+      cam_right=true;
+    }
+    if (keyCode==38) {//if UP ARROW is pressed
+      cam_up=true;
+    }
+    if (keyCode==40) {//if DOWN ARROW is pressed
+      cam_down=true;
+    }
+  }
 }
 if(menue){
   if(Menue.equals("level select")){
@@ -1275,6 +1308,39 @@ try{
     SPressed=false;
   }
   }//end of 3d mode
+  if (e3DMode) {
+    if (keyCode==65) {//if 'A' is pressed
+      a3D=false;
+    }
+    if (keyCode==68) {//if 'D' is pressed
+      d3D=false;
+    }
+    if (keyCode==32) {//if SPACE is pressed
+      space3D=false;
+    }
+    if (keyCode==16) {//if 'SHIFT' is pressed
+      shift3D=false;
+    }
+    if (keyCode==87) {//if 'W' is pressed
+      w3D=false;
+      key = 0;//clear key so CTRL + W doesent close the program
+    }
+    if (keyCode==83) {//if 'S' is pressed
+      s3D=false;
+    }
+    if (keyCode==37) {//if LEFT ARROW released
+      cam_left=false;
+    }
+    if (keyCode==39) {//if RIGHT ARROW released
+      cam_right=false;
+    }
+    if (keyCode==38) {//if UP ARROW released
+      cam_up=false;
+    }
+    if (keyCode==40) {//if DOWN ARROW released
+      cam_down=false;
+    }
+  }
   }
 }catch(Throwable e){
  handleError(e); 
