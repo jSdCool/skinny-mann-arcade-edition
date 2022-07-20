@@ -1,5 +1,6 @@
 0.6.2_Early_Access
 -fixed: final audio clip in tutorial could be played in stage 1 if you died
+-changed: reduced respawn cooldown
 
 0.6.1_Early_Access
 -added: update installer(windows only)

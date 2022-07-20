@@ -681,7 +681,7 @@ try{//catch all fatal errors and display them
     textSize(50*Scale);
     text("you died",500*Scale,360*Scale);
      death_cool_down++;
-     if(death_cool_down>150){// respawn cool down
+     if(death_cool_down>75){// respawn cool down
        dead=false;
        inGame=true;
        //if(respawnX < 400){
