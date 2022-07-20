@@ -1693,7 +1693,7 @@ void tutorialLogic(){
     }
   }
   if(tutorialPos==23){
-    if(player1.x>=6739){
+    if(player1.x>=6739&&currentStageIndex==1&&player1.x<=7000){
       tutorialPos++;
       currentTutorialSound=16;
      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();

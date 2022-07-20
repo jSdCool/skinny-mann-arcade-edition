@@ -1,6 +1,9 @@
+0.6.2_Early_Access
+-fixed: final audio clip in tutorial could be played in stage 1 if you died
+
 0.6.1_Early_Access
 -added: update installer(windows only)
--fixed: player being able to move in the z-axis when dead 
+-fixed: player being able to move in the z-axis when dide in stage 2 before getting the checkpoint
 -added: 3D logic controlls
 -changed: removed giant triangle at start of level-2
 -changed: spawn position in level 5
