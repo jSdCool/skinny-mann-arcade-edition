@@ -92,5 +92,72 @@
     "group number": 0,
     "type": "set visable",
     "connections": []
+  },
+  {
+    "variable number": 21,
+    "x": 1073,
+    "y": 88,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 22,
+    "x": 1052,
+    "y": 225,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 23,
+    "x": 1050,
+    "y": 406,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 850,
+    "y": 81,
+    "type": " random ",
+    "connections": [{
+      "index": 7,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 829,
+    "y": 226,
+    "type": " random ",
+    "connections": [{
+      "index": 8,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 804,
+    "y": 406,
+    "type": " random ",
+    "connections": [{
+      "index": 9,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 822,
+    "y": 302,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 8,
+        "terminal": 1
+      },
+      {
+        "index": 7,
+        "terminal": 1
+      },
+      {
+        "index": 9,
+        "terminal": 1
+      }
+    ]
   }
 ]

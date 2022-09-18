@@ -2,16 +2,19 @@
   {
     "mainStage": 0,
     "coins": 587,
+    "min players": 2,
     "author": "jSdCool",
     "level_id": 2,
-    "number of variable": 5,
     "spawnX": 20,
+    "groups": ["group 0"],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 620,
+    "max players": 2,
+    "number of variable": 5,
     "name": "level-2",
     "spawn pointX": 20,
-    "groups": ["group 0"],
     "spawn pointY": 620,
-    "game version": "0.6.0_Early_Access",
-    "spawnY": 620
+    "multyplayer mode": 1
   },
   {
     "name": "stage 1",

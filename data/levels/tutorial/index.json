@@ -2,15 +2,18 @@
   {
     "mainStage": 0,
     "coins": 108,
+    "min players": 2,
     "level_id": -1,
-    "number of variable": 5,
     "spawnX": 20,
+    "groups": ["group 0"],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 380,
+    "max players": 2,
+    "number of variable": 5,
     "name": "tutorial",
     "spawn pointX": 20,
-    "groups": ["group 0"],
     "spawn pointY": 380,
-    "game version": "0.6.0_Early_Access",
-    "spawnY": 380
+    "multyplayer mode": 1
   },
   {
     "name": "stage1",

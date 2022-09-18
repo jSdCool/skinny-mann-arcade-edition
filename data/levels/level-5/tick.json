@@ -1,1 +1,64 @@
-[{"name": "tick"}]
+[
+  {"name": "tick"},
+  {
+    "x": 311,
+    "y": 161,
+    "type": "NOR",
+    "connections": [{
+      "index": 4,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 0,
+    "x": 139,
+    "y": 152,
+    "type": "read var",
+    "connections": [{
+      "index": 0,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 0,
+    "x": 600,
+    "y": 148,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "sound key": "in 3D",
+    "x": 606,
+    "y": 266,
+    "type": "play sound",
+    "connections": []
+  },
+  {
+    "x": 459,
+    "y": 199,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 3,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 150,
+    "y": 247,
+    "type": "read 3D ",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  }
+]

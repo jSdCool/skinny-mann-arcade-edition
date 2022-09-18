@@ -2,12 +2,10 @@
   {
     "mainStage": 0,
     "coins": 184,
-	"author": "jSdCool",
+    "min players": 2,
+    "author": "jSdCool",
     "level_id": 9,
-    "number of variable": 12,
     "spawnX": 20,
-    "name": "level-9",
-    "spawn pointX": 20,
     "groups": [
       "group 0",
       "main door 1",
@@ -23,9 +21,14 @@
       "thing",
       "end"
     ],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 700,
+    "max players": 2,
+    "number of variable": 12,
+    "name": "level-9",
+    "spawn pointX": 20,
     "spawn pointY": 700,
-    "game version": "0.6.0_Early_Access",
-    "spawnY": 700
+    "multyplayer mode": 1
   },
   {
     "name": "stage 1",

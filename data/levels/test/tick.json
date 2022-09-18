@@ -370,5 +370,111 @@
     "y": 830,
     "type": "set var",
     "connections": []
+  },
+  {
+    "variable number": 16,
+    "x": 335,
+    "y": 986,
+    "type": "read var",
+    "connections": [{
+      "index": 33,
+      "terminal": 0
+    }]
+  },
+  {
+    "sound key": "boop3",
+    "x": 523,
+    "y": 1003,
+    "type": "play sound",
+    "connections": []
+  },
+  {
+    "variable number": 17,
+    "x": 346,
+    "y": 1040,
+    "type": "read var",
+    "connections": [{
+      "index": 33,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 89,
+    "y": 62,
+    "type": " random ",
+    "connections": []
+  },
+  {
+    "x": 90,
+    "y": 474,
+    "type": " random ",
+    "connections": []
+  },
+  {
+    "x": 127,
+    "y": 1146,
+    "type": " random ",
+    "connections": [{
+      "index": 40,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 123,
+    "y": 1203,
+    "type": " random ",
+    "connections": [{
+      "index": 41,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 110,
+    "y": 1282,
+    "type": " random ",
+    "connections": [{
+      "index": 42,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 18,
+    "x": 412,
+    "y": 1153,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 19,
+    "x": 392,
+    "y": 1254,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 20,
+    "x": 387,
+    "y": 1371,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 87,
+    "y": 1370,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 42,
+        "terminal": 1
+      },
+      {
+        "index": 41,
+        "terminal": 1
+      },
+      {
+        "index": 40,
+        "terminal": 1
+      }
+    ]
   }
 ]

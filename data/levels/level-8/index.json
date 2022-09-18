@@ -2,15 +2,18 @@
   {
     "mainStage": 0,
     "coins": 0,
+    "min players": 2,
     "level_id": 707313637,
-    "number of variable": 5,
     "spawnX": 20,
+    "groups": ["group 0"],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 700,
+    "max players": 2,
+    "number of variable": 5,
     "name": "level-8",
     "spawn pointX": 20,
-    "groups": ["group 0"],
     "spawn pointY": 700,
-    "game version": "0.6.0_Early_Access",
-    "spawnY": 700
+    "multyplayer mode": 1
   },
   {
     "name": "stage 1",
