@@ -113,7 +113,20 @@ JSONObject debug=settings.getJSONObject(3);
   menue=false;
   inGame=true;
   
-}
+ }
+ 
+ players[0]=new Player(20, 699, 1, 0);
+  players[1]=new Player(20, 699, 1, 1);
+  players[2]=new Player(20, 699, 1, 2);
+  players[3]=new Player(20, 699, 1, 3);
+  players[4]=new Player(20, 699, 1, 4);
+  players[5]=new Player(20, 699, 1, 5);
+  players[6]=new Player(20, 699, 1, 6);
+  players[7]=new Player(20, 699, 1, 7);
+  players[8]=new Player(20, 699, 1, 8);
+  players[9]=new Player(20, 699, 1, 9);
+  
+  
 textSize(500);
 select_lvl_1=new Button(this,(int)(100*Scale),(int)(100*Scale),(int)(200*Scale),(int)(100*Scale),"lvl 1",-59135,-1791).setStrokeWeight((int)(10*Scale));
 select_lvl_back=new Button(this,(int)(100*Scale),(int)(600*Scale),(int)(200*Scale),(int)(50*Scale),"back",-59135,-1791).setStrokeWeight((int)(10*Scale));
@@ -190,7 +203,7 @@ String Menue ="creds"/*,level="n"*/,version="0.6.2_Early_Access",ip="localhost",
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1,gravity=0.001;
-Player player1 =new Player(20,699,1,"red");
+Player players[] =new Player[10];
 /*player array info
 players by index position
 0  xpos
@@ -203,7 +216,7 @@ players by index position
 */
 
 
-int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0;
+int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0,currentPlayer=0,currentNumberOfPlayers=1;
 JSONArray  settings,mainIndex,levelProgress;
 Button select_lvl_1,select_lvl_back,discord,select_lvl_2,select_lvl_3,select_lvl_4,select_lvl_5,select_lvl_6,sdSlider,enableFPS,disableFPS,enableDebug,disableDebug,sttingsGPL,settingsDSP,settingsOUT,rez720,rez900,rez1080,rez1440,rez4k,fullScreenOn,fullScreenOff,vsdSlider,MusicSlider,SFXSlider,shadowOn,shadowOff,narrationMode1,narrationMode0,select_lvl_UGC,UGC_open_folder,UGC_lvls_next,UGC_lvls_prev,UGC_lvl_play,levelcreatorLink,select_lvl_7,select_lvl_8,select_lvl_9,select_lvl_10,playButton,joinButton,settingsButton,howToPlayButton,exitButton,downloadUpdateButton,updateGetButton,updateOkButton;
 String[] musicTracks ={"data/music/track1.wav","data/music/track2.wav","data/music/track3.wav"},sfxTracks={"data/sounds/level complete.wav"},compatibleVersions={"0.6.0_Early_Access","0.6.1_Early_Access","0.6.2_Early_Access"};
@@ -277,8 +290,8 @@ try{//catch all fatal errors and display them
         fill(-16732415);
         stroke(-16732415);
         rect(0*Scale,360*Scale,1280*Scale,360*Scale);//green rectangle
-        draw_mann(200*Scale,360*Scale,1,4*Scale,"red");
-        draw_mann(1080*Scale,360*Scale,1,4*Scale,"green");
+        draw_mann(200*Scale,360*Scale,1,4*Scale,0);
+        draw_mann(1080*Scale,360*Scale,1,4*Scale,1);
         
         playButton.draw();
         exitButton.draw();
@@ -709,11 +722,11 @@ if(displayDebugInfo){
   textSize(10*Scale);//fraim rate counter
   textAlign(RIGHT,TOP);
   text("mspc: "+ mspc,1275*Scale,10*Scale);
-  text("player X: "+ player1.x,1275*Scale,20*Scale);
-  text("player Y: "+ player1.y,1275*Scale,30*Scale);
-  text("player vertical velocity: "+ player1.verticalVelocity,1275*Scale,40*Scale);
-  text("player animation Cooldown: "+ player1.animationCooldown,1275*Scale,50*Scale);
-  text("player pose: "+ player1.pose,1275*Scale,60*Scale);
+  text("player X: "+ players[currentPlayer].x,1275*Scale,20*Scale);
+  text("player Y: "+ players[currentPlayer].y,1275*Scale,30*Scale);
+  text("player vertical velocity: "+ players[currentPlayer].verticalVelocity,1275*Scale,40*Scale);
+  text("player animation Cooldown: "+ players[currentPlayer].animationCooldown,1275*Scale,50*Scale);
+  text("player pose: "+ players[currentPlayer].pose,1275*Scale,60*Scale);
   text("camera x: "+camPos,1275*Scale,70*Scale);
   text("camera y: "+camPosY,1275*Scale,80*Scale);
   text("tutorial position: "+tutorialPos,1275*Scale,90*Scale);
@@ -1192,7 +1205,7 @@ try{
   }
   if(dev_mode){//if in dev mode
    if(keyCode==81){//if q is pressed print the player position
-    System.out.println(player1.getX()+" "+player1.getY());
+    System.out.println(players[currentPlayer].getX()+" "+players[currentPlayer].getY());
   }}
   if(key=='e'||key=='E'){
    E_pressed=true; 
@@ -1580,7 +1593,7 @@ void tutorialLogic(){
   }
   if(tutorialPos==8){
     player1_jumping=false;
-    if(player1.x>=1604){
+    if(players[currentPlayer].x>=1604){
       currentTutorialSound=7;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
@@ -1604,14 +1617,14 @@ void tutorialLogic(){
     }
   }
   if(tutorialPos==11){
-    if(player1.x>=1819){
+    if(players[currentPlayer].x>=1819){
       currentTutorialSound=9;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
     }
   }
   if(tutorialPos==12){
-    if(player1.x>=3875){
+    if(players[currentPlayer].x>=3875){
       currentTutorialSound=10;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
@@ -1628,7 +1641,7 @@ void tutorialLogic(){
   }
   
   if(tutorialPos==14){
-    if(player1.x>=5338){
+    if(players[currentPlayer].x>=5338){
       currentTutorialSound=11;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
       tutorialPos++;
@@ -1665,7 +1678,7 @@ void tutorialLogic(){
     }
   }
   if(tutorialPos==19){
-    if(player1.x>=7315){
+    if(players[currentPlayer].x>=7315){
       tutorialPos++;
       currentTutorialSound=14;
       tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
@@ -1693,7 +1706,7 @@ void tutorialLogic(){
     }
   }
   if(tutorialPos==23){
-    if(player1.x>=6739&&currentStageIndex==1&&player1.x<=7000){
+    if(players[currentPlayer].x>=6739&&currentStageIndex==1&&players[currentPlayer].x<=7000){
       tutorialPos++;
       currentTutorialSound=16;
      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
@@ -1749,23 +1762,16 @@ for(int i=0;i<compatibleVersions.length;i++){
 levelCompatible=false;
  return false; 
 }
-void drawSoundBox(float x,float y){
-}
+
 void engageHUDPosition() {
-  //translate(player1.x+DX,player1.y-DY,player1.z-DZ);
-  //rotateY(radians(-(xangle-180)));
-  //rotateX(radians(yangle));
-  //translate(-640,-360,-623);
+
   camera();
   hint(DISABLE_DEPTH_TEST);
   noLights();
 }
 
 void disEngageHUDPosition() {
-  //translate(640,360,623);
-  //rotateX(radians(-yangle));
-  //rotateY(radians((xangle-180)));
-  //translate(-1*(player1.x+DX),-1*(player1.y-DY),-1*(player1.z-DZ));
+
   hint(ENABLE_DEPTH_TEST);
 }
 
