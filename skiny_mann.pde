@@ -196,7 +196,7 @@ thread("thrdCalc2");
 PImage CBi,icon,discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false,s3D=false,w3D=false,shift3D=false,space3D=false,d3D=false,a3D=false,cam_down=false,cam_up=false,cam_right=false,cam_left=false,isHost=false;
+boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false,s3D=false,w3D=false,shift3D=false,space3D=false,d3D=false,a3D=false,cam_down=false,cam_up=false,cam_right=false,cam_left=false,isHost=false,killPhysics=false;
 String Menue ="creds"/*,level="n"*/,version="0.7.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version,internetVersion;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
@@ -432,7 +432,7 @@ try{//catch all fatal errors and display them
         text("horozontal screen scrolling location",40*Scale,90*Scale);
         text("vertical  screen scrolling location",40*Scale,160*Scale);
         text((int)(((esdPos-800.0)/440)*530)+100,700*Scale,90*Scale);
-        text((int)(((vesdPos-800.0)/440)*250)+100,700*Scale,160*Scale);
+        text((int)(((vesdPos-800.0)/440)*220)+100,700*Scale,160*Scale);
         
            sdSlider.draw();
            fill(255);
@@ -731,6 +731,10 @@ if(millis()<gmillis){
    text(displayText,width/2,height*0.2); 
   }
 
+//fill(#E800F5,100);
+//rect(0,0,width,eadgeScroleDistV);
+//rect(0,height,width,-eadgeScroleDistV);
+
 disEngageHUDPosition();
 
 
@@ -945,9 +949,9 @@ try{/*fill(255,25,0);
          if(vesdPos>1240){
            vesdPos=1240;
          }
-         eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*250)+100;
+         eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
          JSONObject scroll=settings.getJSONObject(1);
-         scroll.setInt("vertical",(int)(((vesdPos-800.0)/440)*250)+100);
+         scroll.setInt("vertical",(int)(((vesdPos-800.0)/440)*220)+100);
          settings.setJSONObject(1,scroll);
          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
        }
@@ -1285,6 +1289,9 @@ if(menue){
 }catch(Throwable e){
  handleError(e); 
 }
+if(key =='l'){
+ killPhysics=true; 
+}
 }
 
 void keyReleased(){//when you release a key
@@ -1376,9 +1383,9 @@ void mouseDragged(){
          if(vesdPos>1240){
            vesdPos=1240;
          }
-         eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*250)+100;
+         eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
          JSONObject scroll=settings.getJSONObject(1);
-         scroll.setInt("vertical",(int)(((vesdPos-800.0)/440)*250)+100);
+         scroll.setInt("vertical",(int)(((vesdPos-800.0)/440)*220)+100);
          settings.setJSONObject(1,scroll);
          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
        } 

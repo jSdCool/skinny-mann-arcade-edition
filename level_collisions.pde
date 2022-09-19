@@ -40,10 +40,10 @@ void stageLevelDraw() {
     players[currentPlayer].in3D=false;
     for (int i=currentNumberOfPlayers-1; i>=0; i--) {
       if (players[i].stage==currentStageIndex)//if this player is on the same stage as the userser then
-        draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+        draw_mann(Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
     }
 
-    draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw this users player
+    draw_mann(Scale*(players[currentPlayer].getX()-drawCamPosX), Scale*(players[currentPlayer].getY()+drawCamPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw this users player
     players[currentPlayer].stage=currentStageIndex;
     //====================================================================================================================================================================================================
     //====================================================================================================================================================================================================
