@@ -64,7 +64,7 @@ static skiny_mann source;
       else if (type.equals("pulse")){
         components.add(new Pulse(component,this));
       }
-      else if(type.equals("read 3D")){
+      else if(type.equals("read 3D ")){
          components.add(new Read3DMode(component,this)); 
       }
       else if(type.equals("  set 3D  ")){
