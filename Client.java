@@ -18,7 +18,7 @@ class Client extends Thread {
   }
   Client(Socket s,int num){
     playernumber=num;
-    Client(s);
+    new Client(s);
   }
   
   public void run() {
