@@ -1,5 +1,4 @@
-import processing.net.*;//import the stuffs
-import processing.sound.*;
+import processing.sound.*;//import the stuffs
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -197,25 +196,14 @@ thread("thrdCalc2");
 PImage CBi,icon,discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-Server s;
-Client c;
 boolean menue =true,inGame=false,player1_moving_right=false,player1_moving_left=false,dev_mode=false,player1_jumping=false,dead=false,level_complete=false,start_host=false,entering_port=false,entering_name=false,entering_ip=false,hosting=false,joined=false,start_join=false,reset_spawn=false,fs,E_pressed=false,loopThread2=true,showSettingsAfterStart=false,displayFPS=true,displayDebugInfo=false,prevousInGame=false,setPlayerPosTo=false,e3DMode=false,checkpointIn3DStage=false,WPressed=false,SPressed=false,levelCompleteSoundPlayed=false,tutorialMode=false,shadow3D=true,UGC_lvl=false,levelCompatible=false,editingBlueprint=false,viewingItemContents=false,selecting=false,s3D=false,w3D=false,shift3D=false,space3D=false,d3D=false,a3D=false,cam_down=false,cam_up=false,cam_right=false,cam_left=false,isHost=false;
 String Menue ="creds"/*,level="n"*/,version="0.7.0_Early_Access",ip="localhost",name="can't_be_botherd_to_chane_it",input,outher_name,file_path,rootPath,stageType="",settingsMenue="game play",author="",displayText="",GAME_version=version,internetVersion;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
 float Scale =1,Scale2=1,musicVolume=1,sfxVolume=1,gravity=0.001;
 Player players[] =new Player[10];
-/*player array info
-players by index position
-0  xpos
-1  ypos
-2  animation state
-3  animation delay count
-4  size scale factor
-5  jump cool down
 
-*/
-
+ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0,camPosY=0,death_cool_down,start_down,port=9367,scroll_left,scroll_right,respawnX=20,respawnY=700,respawnZ=150,spdelay=0,vres,hres,respawnStage,stageIndex,coinCount=0,eadgeScroleDist=100,esdPos=800,setPlayerPosX,setPlayerPosY,setPlayerPosZ,gmillis=0,coinRotation=0,vesdPos=800,eadgeScroleDistV=100,settingsVersion=3,musVolSllid=800,sfxVolSllid=800,currentStageIndex,tutorialDrawLimit=0,displayTextUntill=0,tutorialPos=0,currentTutorialSound,tutorialNarrationMode=0,UGC_lvl_indx,selectedIndex=-1,viewingItemIndex=-1,drawCamPosX=0,drawCamPosY=0,currentPlayer=0,currentNumberOfPlayers=1;
 JSONArray  settings,mainIndex,levelProgress;
@@ -1952,6 +1940,7 @@ void sourceInitilize(){
   StageSound.source=this;
   LogicComponent.source=this;
   Client.source=this;
+  Server.source=this;
 }
 
 void networkError(Throwable error){

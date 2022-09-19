@@ -1,4 +1,3 @@
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
 class Client extends Thread {
@@ -16,6 +15,10 @@ class Client extends Thread {
       source.networkError(i);
     }
     start();
+  }
+  Client(Socket s,int num){
+    playernumber=num;
+    Client(s);
   }
   
   public void run() {
