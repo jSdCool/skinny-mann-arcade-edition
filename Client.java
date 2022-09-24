@@ -7,6 +7,7 @@ class Client extends Thread {
   ObjectOutputStream output;
   ObjectInputStream input;
   Client(Socket s){
+    System.out.println("creating new client");
     try{
       socket=s;
       output=new ObjectOutputStream(socket.getOutputStream());
@@ -17,6 +18,7 @@ class Client extends Thread {
     start();
   }
   Client(Socket s,int num){
+    super("client number "+num);
     playernumber=num;
     new Client(s);
   }
@@ -24,11 +26,14 @@ class Client extends Thread {
   public void run() {
     if (source.isHost) {
       //if this instance is the host of a multyplayer cession
+      System.out.println("starting client host loop");
       host();
     } else {
       //if this instanmce has joined a multyplayer cession
+      System.out.println("statring client joined loop");
       joined();
     }
+    disconnect();
   }
   
   void host(){
@@ -69,5 +74,11 @@ class Client extends Thread {
     }catch(ClassNotFoundException c){
       source.networkError(c);
     }
+  }
+  
+  void disconnect(){
+    try{output.close();}catch(IOException e){}
+    try{input.close();}catch(IOException e){}
+    try{socket.close();}catch(IOException e){}
   }
 }

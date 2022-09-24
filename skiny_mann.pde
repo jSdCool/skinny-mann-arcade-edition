@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.Socket;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -239,7 +240,7 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multyiplayer=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
@@ -259,6 +260,7 @@ float [] tpCords=new float[3];
 Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
+Server server;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -1244,6 +1246,12 @@ void mouseClicked() {// when you click the mouse
           enteringName=false;
           enteringPort=true;
         }
+        if(multyplayerGo.isMouseOver()){
+          isHost=true;
+          Menue="multiplayer selection";
+          multyiplayer=true;
+          server= new Server(port);
+        }
       }
       if (Menue.equals("start join")) {
         if (multyplayerExit.isMouseOver()) {
@@ -1263,6 +1271,12 @@ void mouseClicked() {// when you click the mouse
           enteringName=false;
           enteringPort=false;
           enteringIP=true;
+        }
+        if(multyplayerGo.isMouseOver()){
+          isHost=false;
+          Menue="multiplayer selection";
+          multyiplayer=true;
+          clients.add(new Client(new Socket(ip,port)));
         }
       }
 
