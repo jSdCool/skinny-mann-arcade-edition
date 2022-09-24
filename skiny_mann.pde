@@ -240,7 +240,7 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multyiplayer=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
@@ -703,7 +703,7 @@ void draw() {// the function that is called every fraim
         textAlign(CENTER,CENTER);
         textSize(50*Scale);
         text("Disconnected",width/2,height*0.05);
-        textSize(15);
+        textSize(20*Scale);
         text(disconnectReason,width/2,height*0.3);
       }
 
@@ -1258,7 +1258,7 @@ void mouseClicked() {// when you click the mouse
         if(multyplayerGo.isMouseOver()){
           isHost=true;
           Menue="multiplayer selection";
-          multyiplayer=true;
+          multiplayer = true;
           server= new Server(port);
         }
       }
@@ -1284,8 +1284,14 @@ void mouseClicked() {// when you click the mouse
         if(multyplayerGo.isMouseOver()){
           isHost=false;
           Menue="multiplayer selection";
-          multyiplayer=true;
-          clients.add(new Client(new Socket(ip,port)));
+          multiplayer=true;
+          try{
+            clients.add(new Client(new Socket(ip,port)));
+          }catch(java.net.ConnectException c){
+            multiplayer=false;
+            Menue="disconnected";
+            disconnectReason="failed to connect to server\n"+c.toString();
+          }
         }
       }
 
@@ -2154,6 +2160,7 @@ void networkError(Throwable error) {
   error.printStackTrace();
   Menue="disconnected";
   disconnectReason=error.toString();
+  multiplayer=false;
 }
 
 void drawDevMenue() {
