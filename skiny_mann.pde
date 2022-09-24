@@ -124,59 +124,61 @@ void setup() {//seccond function called
 
 
     textSize(500);
-    select_lvl_1=new Button(this, (int)(100*Scale), (int)(100*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 1", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_back=new Button(this, (int)(100*Scale), (int)(600*Scale), (int)(200*Scale), (int)(50*Scale), "back", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    discord=new Button(this, (int)(1190*Scale), (int)(640*Scale), (int)(70*Scale), (int)(70*Scale), -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_2 =new Button(this, (int)(350*Scale), (int)(100*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 2", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_3 =new Button(this, (int)(600*Scale), (int)(100*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 3", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_4 =new Button(this, (int)(850*Scale), (int)(100*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 4", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    sdSlider=new Button(this, (int)(800*Scale), (int)(50*Scale), (int)(440*Scale), (int)(30*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    disableFPS =new Button(this, (int)(1130*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    enableFPS =new Button(this, (int)(1200*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    disableDebug =new Button(this, (int)(1130*Scale), (int)(120*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    enableDebug =new Button(this, (int)(1200*Scale), (int)(120*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    select_lvl_5=new Button(this, (int)(100*Scale), (int)(250*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 5", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_6 =new Button(this, (int)(350*Scale), (int)(250*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 6", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    sttingsGPL = new Button(this, (int)(40*Scale), (int)(550*Scale), (int)(150*Scale), (int)(40*Scale), "game play", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    settingsDSP = new Button(this, (int)(240*Scale), (int)(550*Scale), (int)(150*Scale), (int)(40*Scale), "display", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    settingsOUT = new Button(this, (int)(440*Scale), (int)(550*Scale), (int)(150*Scale), (int)(40*Scale), "outher", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    rez720 = new Button(this, (int)(920*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez900 = new Button(this, (int)(990*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez1080 = new Button(this, (int)(1060*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez1440 = new Button(this, (int)(1130*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez4k = new Button(this, (int)(1200*Scale), (int)(50*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    fullScreenOn = new Button(this, (int)(1200*Scale), (int)(120*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    fullScreenOff = new Button(this, (int)(1130*Scale), (int)(120*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    vsdSlider =new Button(this, (int)(800*Scale), (int)(120*Scale), (int)(440*Scale), (int)(30*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    MusicSlider=new Button(this, (int)(800*Scale), (int)(190*Scale), (int)(440*Scale), (int)(30*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    SFXSlider=new Button(this, (int)(800*Scale), (int)(260*Scale), (int)(440*Scale), (int)(30*Scale), 255, 0).setStrokeWeight((int)(5*Scale));
-    shadowOn = new Button(this, (int)(1200*Scale), (int)(330*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    shadowOff = new Button(this, (int)(1130*Scale), (int)(330*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    narrationMode1 =new Button(this, (int)(1200*Scale), (int)(460*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    narrationMode0 = new Button(this, (int)(1130*Scale), (int)(460*Scale), (int)(40*Scale), (int)(40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    select_lvl_UGC=new Button(this, (int)(350*Scale), (int)(600*Scale), (int)(200*Scale), (int)(50*Scale), "UGC", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    UGC_open_folder=new Button(this, (int)(350*Scale), (int)(600*Scale), (int)(200*Scale), (int)(50*Scale), "open folder", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    UGC_lvls_next=new Button(this, (int)(1030*Scale), (int)(335*Scale), (int)(200*Scale), (int)(50*Scale), "next", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    UGC_lvls_prev=new Button(this, (int)(50*Scale), (int)(335*Scale), (int)(200*Scale), (int)(50*Scale), "prevous", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    UGC_lvl_play=new Button(this, (int)(600*Scale), (int)(600*Scale), (int)(200*Scale), (int)(50*Scale), "play", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    levelcreatorLink=new Button(this, (int)(980*Scale), (int)(600*Scale), (int)(200*Scale), (int)(50*Scale), "create", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_7=new Button(this, (int)(600*Scale), (int)(250*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 7", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_8 =new Button(this, (int)(850*Scale), (int)(250*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 8", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_9 = new Button(this, (int)(100*Scale), (int)(400*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 9", -59135, -1791).setStrokeWeight((int)(10*Scale));
-    select_lvl_10 = new Button(this, (int)(350*Scale), (int)(400*Scale), (int)(200*Scale), (int)(100*Scale), "lvl 10", -59135, -1791).setStrokeWeight((int)(10*Scale));
+    select_lvl_1=new Button(this,  (100*Scale),  (100*Scale),  (200*Scale),  (100*Scale), "lvl 1", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_back=new Button(this,  (100*Scale),  (600*Scale),  (200*Scale),  (50*Scale), "back", -59135, -1791).setStrokeWeight( (10*Scale));
+    discord=new Button(this,  (1190*Scale),  (640*Scale),  (70*Scale),  (70*Scale), -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_2 =new Button(this,  (350*Scale),  (100*Scale),  (200*Scale),  (100*Scale), "lvl 2", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_3 =new Button(this,  (600*Scale),  (100*Scale),  (200*Scale),  (100*Scale), "lvl 3", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_4 =new Button(this,  (850*Scale),  (100*Scale),  (200*Scale),  (100*Scale), "lvl 4", -59135, -1791).setStrokeWeight( (10*Scale));
+    sdSlider=new Button(this,  (800*Scale),  (50*Scale),  (440*Scale),  (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    disableFPS =new Button(this,  (1130*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    enableFPS =new Button(this,  (1200*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    disableDebug =new Button(this,  (1130*Scale),  (120*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    enableDebug =new Button(this,  (1200*Scale),  (120*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    select_lvl_5=new Button(this,  (100*Scale),  (250*Scale),  (200*Scale),  (100*Scale), "lvl 5", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_6 =new Button(this,  (350*Scale),  (250*Scale),  (200*Scale),  (100*Scale), "lvl 6", -59135, -1791).setStrokeWeight( (10*Scale));
+    sttingsGPL = new Button(this,  (40*Scale),  (550*Scale),  (150*Scale),  (40*Scale), "game play", -59135, -1791).setStrokeWeight( (10*Scale));
+    settingsDSP = new Button(this,  (240*Scale),  (550*Scale),  (150*Scale),  (40*Scale), "display", -59135, -1791).setStrokeWeight( (10*Scale));
+    settingsOUT = new Button(this,  (440*Scale),  (550*Scale),  (150*Scale),  (40*Scale), "outher", -59135, -1791).setStrokeWeight( (10*Scale));
+    rez720 = new Button(this,  (920*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    rez900 = new Button(this,  (990*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    rez1080 = new Button(this,  (1060*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    rez1440 = new Button(this,  (1130*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    rez4k = new Button(this,  (1200*Scale),  (50*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    fullScreenOn = new Button(this,  (1200*Scale),  (120*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    fullScreenOff = new Button(this,  (1130*Scale),  (120*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    vsdSlider =new Button(this,  (800*Scale),  (120*Scale),  (440*Scale),  (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    MusicSlider=new Button(this,  (800*Scale),  (190*Scale),  (440*Scale),  (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    SFXSlider=new Button(this,  (800*Scale),  (260*Scale),  (440*Scale),  (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+    shadowOn = new Button(this,  (1200*Scale),  (330*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    shadowOff = new Button(this,  (1130*Scale),  (330*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    narrationMode1 =new Button(this,  (1200*Scale),  (460*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    narrationMode0 = new Button(this,  (1130*Scale),  (460*Scale),  (40*Scale),  (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+    select_lvl_UGC=new Button(this,  (350*Scale),  (600*Scale),  (200*Scale),  (50*Scale), "UGC", -59135, -1791).setStrokeWeight( (10*Scale));
+    UGC_open_folder=new Button(this,  (350*Scale),  (600*Scale),  (200*Scale),  (50*Scale), "open folder", -59135, -1791).setStrokeWeight( (10*Scale));
+    UGC_lvls_next=new Button(this,  (1030*Scale),  (335*Scale),  (200*Scale),  (50*Scale), "next", -59135, -1791).setStrokeWeight( (10*Scale));
+    UGC_lvls_prev=new Button(this,  (50*Scale),  (335*Scale),  (200*Scale),  (50*Scale), "prevous", -59135, -1791).setStrokeWeight( (10*Scale));
+    UGC_lvl_play=new Button(this,  (600*Scale),  (600*Scale),  (200*Scale),  (50*Scale), "play", -59135, -1791).setStrokeWeight( (10*Scale));
+    levelcreatorLink=new Button(this,  (980*Scale),  (600*Scale),  (200*Scale),  (50*Scale), "create", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_7=new Button(this,  (600*Scale),  (250*Scale),  (200*Scale),  (100*Scale), "lvl 7", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_8 =new Button(this,  (850*Scale),  (250*Scale),  (200*Scale),  (100*Scale), "lvl 8", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_9 = new Button(this,  (100*Scale),  (400*Scale),  (200*Scale),  (100*Scale), "lvl 9", -59135, -1791).setStrokeWeight( (10*Scale));
+    select_lvl_10 = new Button(this,  (350*Scale),  (400*Scale),  (200*Scale),  (100*Scale), "lvl 10", -59135, -1791).setStrokeWeight( (10*Scale));
     playButton=new Button(this, 540*Scale, 310*Scale, 200*Scale, 50*Scale, "Play", #FF1900, #FFF900).setStrokeWeight(10*Scale);
     exitButton=new Button(this, 540*Scale, 470*Scale, 200*Scale, 50*Scale, "Exit", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, #FF1900, #FFF900).setStrokeWeight(10*Scale);
+    joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10*Scale);
     settingsButton=new Button(this, 540*Scale, 550*Scale, 200*Scale, 50*Scale, "Settings", #FF1900, #FFF900).setStrokeWeight(10*Scale);
     howToPlayButton=new Button(this, 540*Scale, 630*Scale, 200*Scale, 50*Scale, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10*Scale);
     downloadUpdateButton=new Button(this, 400*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
     updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
     updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    
-    dev_main = new Button(this,80*Scale,100*Scale,200*Scale,50*Scale,"main menue");
-    dev_quit = new Button(this,300*Scale,100*Scale,200*Scale,50*Scale,"exit");
-    dev_levels  = new Button(this,520*Scale,100*Scale,200*Scale,50*Scale,"level select");
-    dev_tutorial  = new Button(this,740*Scale,100*Scale,200*Scale,50*Scale,"tutorial");
+
+    dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
+    dev_quit = new Button(this, 430*Scale, 100*Scale, 200*Scale, 50*Scale, "exit");
+    dev_levels  = new Button(this, 650*Scale, 100*Scale, 200*Scale, 50*Scale, "level select");
+    dev_tutorial  = new Button(this, 870*Scale, 100*Scale, 200*Scale, 50*Scale, "tutorial");
+    dev_settings = new Button(this, 210*Scale, 170*Scale, 200*Scale, 50*Scale, "settings");
+    dev_UGC = new Button(this, 430*Scale, 170*Scale, 200*Scale, 50*Scale, "UGC");
 
     soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
     soundHandler.setMusicVolume(0);
@@ -241,7 +243,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=1;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton,dev_main,dev_quit,dev_levels,dev_tutorial;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -265,12 +267,12 @@ void draw() {// the function that is called every fraim
         if (start_wate>=2) {// display it for 100  fraims
           soundHandler.setMusicVolume(musicVolume);
           soundHandler.setSoundsVolume(sfxVolume);
-           if(dev_mode){
-             Menue="dev";
-             println("dev mode activated");
-             return;
-           }
-          
+          if (dev_mode) {
+            Menue="dev";
+            println("dev mode activated");
+            return;
+          }
+
           try {
             String inver = readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates  inver = internet version
             inver =inver.substring(0, inver.length()-1);
@@ -284,7 +286,8 @@ void draw() {// the function that is called every fraim
                 Menue="main";
               }
             }
-          }catch(Throwable e) {//if an error occors or no return then go to main menue
+          }
+          catch(Throwable e) {//if an error occors or no return then go to main menue
             if (showSettingsAfterStart) {
               Menue="settings";
             } else {
@@ -763,7 +766,7 @@ void draw() {// the function that is called every fraim
 
 
 void mouseClicked() {// when you click the mouse
-//!hosting&&!joined
+  //!hosting&&!joined
   try {
 
     if (menue) {//if your in a menue
@@ -1159,8 +1162,8 @@ void mouseClicked() {// when you click the mouse
       if (Menue.equals("update")) {//if that menue is update
         updae_screen_click(); //check the update clicks
       }
-      if (Menue.equals("dev")){
-         clickDevMenue(); 
+      if (Menue.equals("dev")) {
+        clickDevMenue();
       }
     }
     if (level_complete) {//if you completed a level and have not joined
@@ -1192,10 +1195,10 @@ void mouseClicked() {// when you click the mouse
 
 void keyPressed() {// when a key is pressed
   try {
-    if(!menue&&tutorialMode&&key == ESC){
+    if (!menue&&tutorialMode&&key == ESC) {
       exit(1);
     }
-    
+
     if (inGame) {//if in game
       if (key == ESC) {
         key = 0;  //clear the key so it doesnt close the program
@@ -1973,35 +1976,66 @@ void networkError(Throwable error) {
   error.printStackTrace();
 }
 
-void drawDevMenue(){
+void drawDevMenue() {
   background(#EDEDED);
   textSize(50*Scale);
   fill(0);
-  textAlign(CENTER,CENTER);
-  text("Developer Menue",width/2,height*0.05);
+  textAlign(CENTER, CENTER);
+  text("Developer Menue", width/2, height*0.05);
   textSize(25*Scale);
-  text("this is a development build of the game, there may be bugs or unfinished features",width/2,height*0.1);
-  
+  text("this is a development build of the game, there may be bugs or unfinished features", width/2, height*0.1);
+
   dev_main.draw();
   dev_quit.draw();
   dev_levels.draw();
   dev_tutorial.draw();
+  dev_settings.draw();
+  dev_UGC.draw();
 }
 
-void clickDevMenue(){
-  if(dev_main.isMouseOver()){
+void clickDevMenue() {
+  if (dev_main.isMouseOver()) {
     Menue="main";
   }
-  if(dev_quit.isMouseOver()){
+  if (dev_quit.isMouseOver()) {
     exit(1);
   }
-  if(dev_levels.isMouseOver()){
+  if (dev_levels.isMouseOver()) {
     Menue="level select";
   }
-  if(dev_tutorial.isMouseOver()){
+  if (dev_tutorial.isMouseOver()) {
     menue=false;
     tutorialMode=true;
     tutorialPos=0;
   }
-  
+  if (dev_settings.isMouseOver()) {
+    Menue="settings";
+  }
+  if (dev_UGC.isMouseOver()) {
+    Menue="level select UGC";
+    new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+    String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
+
+    compatibles=new ArrayList<>();
+    UGCNames=new ArrayList<>();
+    try {
+      if (files.length==0)
+        return;
+    }
+    catch(NullPointerException e) {
+      return;
+    }
+    for (int i=0; i<files.length; i++) {
+      if (FileIsLevel(files[i])) {
+        UGCNames.add(files[i]);
+        if (levelCompatible) {
+          compatibles.add(false);
+        } else {
+          compatibles.add(true);
+        }
+      }
+    }
+    UGC_lvl_indx=0;
+    return;
+  }
 }
