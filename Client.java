@@ -77,6 +77,8 @@ class Client extends Thread {
   }
   
   void disconnect(){
+    System.out.println("disconnecting client");
+    source.clients.remove(this);
     try{output.close();}catch(IOException e){}
     try{input.close();}catch(IOException e){}
     try{socket.close();}catch(IOException e){}
