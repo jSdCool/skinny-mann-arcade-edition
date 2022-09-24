@@ -1192,6 +1192,10 @@ void mouseClicked() {// when you click the mouse
 
 void keyPressed() {// when a key is pressed
   try {
+    if(!menue&&tutorialMode&&key == ESC){
+      exit(1);
+    }
+    
     if (inGame) {//if in game
       if (key == ESC) {
         key = 0;  //clear the key so it doesnt close the program
@@ -1993,6 +1997,11 @@ void clickDevMenue(){
   }
   if(dev_levels.isMouseOver()){
     Menue="level select";
+  }
+  if(dev_tutorial.isMouseOver()){
+    menue=false;
+    tutorialMode=true;
+    tutorialPos=0;
   }
   
 }
