@@ -230,7 +230,7 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, start_host=false, entering_port=false, entering_name=false, entering_ip=false, hosting=false, joined=false, start_join=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, outher_name, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames;
@@ -763,26 +763,26 @@ void draw() {// the function that is called every fraim
 
 
 void mouseClicked() {// when you click the mouse
+//!hosting&&!joined
+  try {
 
-  try {/*fill(255,25,0);
-   stroke(255,249,0);*/
     if (menue) {//if your in a menue
       if (Menue.equals("main")) {//if that menue is the main menue
-        if (mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 310*Scale && mouseY <= 360*Scale) {//level select button
+        if (playButton.isMouseOver()) {//level select button
           Menue = "level select";
           return;
         }
-        if (mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 470*Scale && mouseY <= 510*Scale) {//exit button
+        if (exitButton.isMouseOver()) {//exit button
           exit(1);
         }
-        if ((mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 390*Scale && mouseY <= 440*Scale)&&!hosting&&!joined) {//join game button
+        if (joinButton.isMouseOver()) {//join game button
           link("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
-        if ((mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 550*Scale && mouseY <= 600*Scale)&&!hosting&&!joined) {//settings button
+        if (settingsButton.isMouseOver()) {//settings button
           Menue="settings";
           return;
         }
-        if ((mouseX >= 540*Scale && mouseX <= 740*Scale && mouseY >= 630*Scale && mouseY <= 680*Scale)&&!hosting&&!joined) {//how to play button
+        if (howToPlayButton.isMouseOver()) {//how to play button
           //how to play
           menue=false;
           tutorialMode=true;
@@ -792,7 +792,7 @@ void mouseClicked() {// when you click the mouse
           link("http://discord.gg/C5SACF2");
         }
       }
-      if (Menue.equals("level select")&&!start_host) {//if that menue is level select
+      if (Menue.equals("level select")) {//if that menue is level select
         int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
         if (select_lvl_1.isMouseOver()) {
           loadLevel("data/levels/level-1");
@@ -915,7 +915,7 @@ void mouseClicked() {// when you click the mouse
         }
       }
 
-      if (Menue.equals("pause")&&!start_host) {//if that menue is pause
+      if (Menue.equals("pause")) {//if that menue is pause
         if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 200*Scale && mouseY <= 260*Scale) {//resume game button
           menue=false;
         }
