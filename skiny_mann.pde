@@ -703,7 +703,7 @@ void draw() {// the function that is called every fraim
         textAlign(CENTER,CENTER);
         textSize(50*Scale);
         text("Disconnected",width/2,height*0.05);
-        textSize(20*Scale);
+        textSize(25*Scale);
         text(disconnectReason,width/2,height*0.3);
       }
 
