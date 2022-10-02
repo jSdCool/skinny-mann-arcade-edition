@@ -12,8 +12,10 @@ class Client extends Thread {
       socket=s;
       output=new ObjectOutputStream(socket.getOutputStream());
       input = new ObjectInputStream(socket.getInputStream());
-    }catch(IOException i){
+    }catch(Exception i){
+      disconnect();
       source.networkError(i);
+      return;
     }
     start();
   }
@@ -78,9 +80,9 @@ class Client extends Thread {
   
   void disconnect(){
     System.out.println("disconnecting client");
-    source.clients.remove(this);
-    try{output.close();}catch(IOException e){}
-    try{input.close();}catch(IOException e){}
-    try{socket.close();}catch(IOException e){}
+    try{source.clients.remove(this);}catch(Exception e){}
+    try{output.close();}catch(Exception e){}
+    try{input.close();}catch(Exception e){}
+    try{socket.close();}catch(Exception e){}
   }
 }

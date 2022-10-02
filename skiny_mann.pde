@@ -705,6 +705,7 @@ void draw() {// the function that is called every fraim
         text("Disconnected",width/2,height*0.05);
         textSize(25*Scale);
         text(disconnectReason,width/2,height*0.3);
+        multyplayerExit.draw();
       }
 
       if (Menue.equals("dev")) {
@@ -1287,11 +1288,17 @@ void mouseClicked() {// when you click the mouse
           multiplayer=true;
           try{
             clients.add(new Client(new Socket(ip,port)));
-          }catch(java.net.ConnectException c){
+          }catch(Exception c){
+            c.printStackTrace();
             multiplayer=false;
             Menue="disconnected";
             disconnectReason="failed to connect to server\n"+c.toString();
           }
+        }
+      }
+      if(Menue.equals("disconnected")){
+        if(multyplayerExit.isMouseOver()){
+          Menue="start join";
         }
       }
 
