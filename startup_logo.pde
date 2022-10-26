@@ -28,11 +28,7 @@ void drawlogo(){
     
   }
   fill(255);
-  //camera(cx, 
-  //       cy,
-  //       cz, 
-  //       width/2.0, height/2.0, 0, 
-  //       0, 1, 0);
+  camera(width/2,height/2,720,width/2,height/2,0,0,1,0);
     
   pushMatrix();
   translate(width/2, height/2, 0);  

@@ -1,5 +1,6 @@
 0.7.0_Early_Access
 -fixed: verticle blipping. as a consequence the max verticle scroll location is now 320
+-changed: CBI sphere texture
 
 0.6.2_Early_Access
 -fixed: final audio clip in tutorial could be played in stage 1 if you died
