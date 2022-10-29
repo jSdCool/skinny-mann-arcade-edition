@@ -84,7 +84,7 @@ class Client extends Thread {
         output.reset();
       }
     }catch(java.net.SocketTimeoutException s){
-      
+      source.networkError(s);
     }catch(IOException i){
       source.networkError(i);
     }catch(ClassNotFoundException c){
