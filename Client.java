@@ -79,7 +79,7 @@ class Client extends Thread {
   }
   
   void disconnect(){
-    System.out.println("disconnecting client");
+    System.out.println("disconnecting client "+socket.getInetAddress());
     try{source.clients.remove(this);}catch(Exception e){}
     try{output.close();}catch(Exception e){}
     try{input.close();}catch(Exception e){}

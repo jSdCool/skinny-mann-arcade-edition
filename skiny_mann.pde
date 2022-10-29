@@ -1314,12 +1314,14 @@ void mouseClicked() {// when you click the mouse
         clickDevMenue();
       }
       if(Menue.equals("multiplayer selection")){
-        if(multyplayerLeave.isMouseOver()){
-          println("quitting multyplayer host");
-          server.end();
-          println("returning to main menue");
-          Menue="main";
-          return;
+        if(isHost){
+          if(multyplayerLeave.isMouseOver()){
+            println("quitting multyplayer host");
+            server.end();
+            println("returning to main menue");
+            Menue="main";
+            return;
+          }
         }
       }
     }
