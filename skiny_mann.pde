@@ -1318,7 +1318,7 @@ void mouseClicked() {// when you click the mouse
           if(multyplayerLeave.isMouseOver()){
             println("quitting multyplayer host");
             server.end();
-            println("returning to main menue");
+            println("returning to main menu");
             Menue="main";
             return;
           }

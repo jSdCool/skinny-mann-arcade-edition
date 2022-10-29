@@ -35,7 +35,10 @@ class Server extends Thread {
             System.out.println("too many clients are connected disconnecting most recent client");
             return;
           }
-          source.clients.add(new Client(clientSocket, clientNumber));
+          Client newConnection = new Client(clientSocket, clientNumber);
+          //System.out.println(newConnection);
+          source.clients.add(newConnection);
+          //System.out.println(source.clients);
         }
         catch(java.net.SocketTimeoutException s) {}
         catch(IOException i) {

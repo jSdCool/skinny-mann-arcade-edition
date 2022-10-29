@@ -6,7 +6,17 @@ class Client extends Thread {
   Socket socket;
   ObjectOutputStream output;
   ObjectInputStream input;
+  String ip="uninitilized";
   Client(Socket s){
+    init(s);
+  }
+  Client(Socket s,int num){
+    super("client number "+num);
+    playernumber=num;
+    init(s);
+  }
+  
+  void init(Socket s){
     System.out.println("creating new client");
     try{
       socket=s;
@@ -17,12 +27,10 @@ class Client extends Thread {
       source.networkError(i);
       return;
     }
+    socket.setSoTimeout(5000);
+    ip=socket.getInetAddress().toString();
+    System.out.println(ip);
     start();
-  }
-  Client(Socket s,int num){
-    super("client number "+num);
-    playernumber=num;
-    new Client(s);
   }
   
   public void run() {
@@ -51,11 +59,14 @@ class Client extends Thread {
         //process input
         
       }
+    }catch(SocketTimeoutException s){
+      
+    
     }catch(IOException i){
-      source.networkError(i);
+      //source.networkError(i);
     }
     catch(ClassNotFoundException c){
-      source.networkError(c);
+      //source.networkError(c);
     }
   }
   
@@ -71,6 +82,8 @@ class Client extends Thread {
         output.flush();
         output.reset();
       }
+    }catch(SocketTimeoutException s){
+      
     }catch(IOException i){
       source.networkError(i);
     }catch(ClassNotFoundException c){
@@ -79,10 +92,14 @@ class Client extends Thread {
   }
   
   void disconnect(){
-    System.out.println("disconnecting client "+socket.getInetAddress());
+    System.out.println("disconnecting client "+ip);
     try{source.clients.remove(this);}catch(Exception e){}
-    try{output.close();}catch(Exception e){}
-    try{input.close();}catch(Exception e){}
-    try{socket.close();}catch(Exception e){}
+    try{output.close();}catch(Exception e){System.out.println("output stream close failed");e.printStackTrace();}
+    try{input.close();}catch(Exception e){System.out.println("input stream close failed");e.printStackTrace();}
+    try{socket.close();}catch(Exception e){System.out.println("socket close failed");e.printStackTrace();}
+  }
+  
+  public String toString(){
+    return "client thread "+ip;
   }
 }
