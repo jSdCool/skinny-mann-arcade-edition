@@ -1322,6 +1322,12 @@ void mouseClicked() {// when you click the mouse
             Menue="main";
             return;
           }
+        }else{//if joined 
+          println("quitting multyplayer joined");
+            clients.get(0).disconnect();
+            println("returning to main menu");
+            Menue="main";
+            return;
         }
       }
     }
