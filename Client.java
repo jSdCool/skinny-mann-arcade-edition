@@ -22,12 +22,13 @@ class Client extends Thread {
       socket=s;
       output=new ObjectOutputStream(socket.getOutputStream());
       input = new ObjectInputStream(socket.getInputStream());
+      socket.setSoTimeout(5000);
     }catch(Exception i){
       disconnect();
       source.networkError(i);
       return;
     }
-    socket.setSoTimeout(5000);
+    
     ip=socket.getInetAddress().toString();
     System.out.println(ip);
     start();
@@ -59,7 +60,7 @@ class Client extends Thread {
         //process input
         
       }
-    }catch(SocketTimeoutException s){
+    }catch(java.net.SocketTimeoutException s){
       
     
     }catch(IOException i){
@@ -82,7 +83,7 @@ class Client extends Thread {
         output.flush();
         output.reset();
       }
-    }catch(SocketTimeoutException s){
+    }catch(java.net.SocketTimeoutException s){
       
     }catch(IOException i){
       source.networkError(i);
