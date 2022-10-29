@@ -37,21 +37,21 @@ class Server extends Thread {
           }
           source.clients.add(new Client(clientSocket, clientNumber));
         }
-        catch(java.net.SocketTimeoutException s) {
-        }
+        catch(java.net.SocketTimeoutException s) {}
         catch(IOException i) {
         }
       }
     }
-    catch(java.net.SocketException s) {
-    }
+    catch(java.net.SocketException s) {}
     isActive=false;
   }
   
   public void end(){
-    for(int i=0;i<source.clients.size();i++){
-      source.clients.get(i).disconnect();
+    System.out.println("disconnecting clients");
+    while(source.clients.size()>0){
+      source.clients.get(0).disconnect();
     }
+    System.out.println("stopping server");
     try{serverSocket.close();}catch(IOException e){}
   }
 }

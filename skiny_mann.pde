@@ -187,6 +187,7 @@ void setup() {//seccond function called
     multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
     multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
+    multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
 
     soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
     soundHandler.setMusicVolume(0);
@@ -251,7 +252,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=1;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo,multyplayerLeave;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -672,7 +673,8 @@ void draw() {// the function that is called every fraim
         text("Port", width/2, height*0.24);
         rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
         text(port+((enteringPort)? cursor:""), width/2, height*0.285);
-
+        
+        
         multyplayerExit.draw();
         multyplayerGo.draw();
       }
@@ -694,6 +696,7 @@ void draw() {// the function that is called every fraim
         rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
         text(ip+((enteringIP)?cursor:""), width/2, height*0.395);
 
+        
         multyplayerExit.draw();
         multyplayerGo.draw();
       }
@@ -706,6 +709,11 @@ void draw() {// the function that is called every fraim
         textSize(25*Scale);
         text(disconnectReason,width/2,height*0.3);
         multyplayerExit.draw();
+      }
+      if(Menue.equals("multiplayer selection")){
+        background(-9131009);
+        
+        multyplayerLeave.draw();
       }
 
       if (Menue.equals("dev")) {
@@ -1304,6 +1312,15 @@ void mouseClicked() {// when you click the mouse
 
       if (Menue.equals("dev")) {
         clickDevMenue();
+      }
+      if(Menue.equals("multiplayer selection")){
+        if(multyplayerLeave.isMouseOver()){
+          println("quitting multyplayer host");
+          server.end();
+          println("returning to main menue");
+          Menue="main";
+          return;
+        }
       }
     }
     if (level_complete) {//if you completed a level and have not joined
