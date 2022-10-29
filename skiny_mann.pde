@@ -1270,6 +1270,7 @@ void mouseClicked() {// when you click the mouse
           multiplayer = true;
           server= new Server(port);
         }
+        return;
       }
       if (Menue.equals("start join")) {
         if (multyplayerExit.isMouseOver()) {
@@ -1302,6 +1303,7 @@ void mouseClicked() {// when you click the mouse
             Menue="disconnected";
             disconnectReason="failed to connect to server\n"+c.toString();
           }
+          return;
         }
       }
       if(Menue.equals("disconnected")){
@@ -1312,6 +1314,7 @@ void mouseClicked() {// when you click the mouse
 
       if (Menue.equals("dev")) {
         clickDevMenue();
+        return;
       }
       if(Menue.equals("multiplayer selection")){
         if(isHost){
@@ -1323,11 +1326,13 @@ void mouseClicked() {// when you click the mouse
             return;
           }
         }else{//if joined 
-          println("quitting multyplayer joined");
+          if(multyplayerLeave.isMouseOver()){
+            println("quitting multyplayer joined");
             clients.get(0).disconnect();
             println("returning to main menu");
             Menue="main";
             return;
+          }
         }
       }
     }
