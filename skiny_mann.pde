@@ -245,7 +245,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="",multyplayerSelectionLevels="speed";
+ String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="",multyplayerSelectionLevels="speed",multyplayerSelectedLevelPath;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames,playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
@@ -265,7 +265,7 @@ Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
 Server server;
-SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo("test info here","NAME HERERE","ALL OF THEM", 1,98,32);
+SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -765,6 +765,7 @@ void draw() {// the function that is called every fraim
             calcTextSize(clients.get(i).name,width*0.16875,(int)(25*Scale));
             text(clients.get(i).name,width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
           }
+          //horozontal line under selecte level
           rect(width*0.171875,height*0.09,width*0.8-width*0.171875,height*(2.0/720));
           
           //draw the buttons for level type
@@ -772,6 +773,7 @@ void draw() {// the function that is called every fraim
           multyplayerCoop.draw();
           multyplayerUGC.draw();
           
+          //darw lines seperating levels
           fill(0);
           for(int i=0;i<16;i++){
             rect(width*0.171875,height*0.09+((height*0.9027777777-height*0.09)/16)*i,width*0.8-width*0.171875,height*(1.0/720));
@@ -1420,6 +1422,16 @@ void mouseClicked() {// when you click the mouse
             Menue="main";
             multiplayer=false;
             return;
+          }
+          if(mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666){//if the mouse is in the area to select a level
+            int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
+            if(multyplayerSelectionLevels.equals("speed")){
+              if(slotSelected<=9){
+                multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
+                genSelectedInfo(multyplayerSelectedLevelPath);
+              }
+            }
+            
           }
         }else{//if joined 
           if(multyplayerLeave.isMouseOver()){
@@ -2381,4 +2393,22 @@ void calcTextSize(String text,float width,int max){
       return;
     }
   }
+}
+
+void genSelectedInfo(String path){
+  String name,author,gameVersion;
+  int multyplayerMode=-1,maxPlayers=-1,minPlayers=-1;
+  JSONArray index = loadJSONArray(path+"/index.json");
+  JSONObject info = index.getJSONObject(0);
+  name = info.getString("name");
+  author=info.getString("author");
+  gameVersion=info.getString("game version");
+  try{
+    multyplayerMode=info.getInt("multyplayer mode");
+    maxPlayers=info.getInt("max players");
+    minPlayers=info.getInt("min players");
+  }catch(Exception e){}
+  
+  multyplayerSelectedLevel=new SelectedLevelInfo(name,author,gameVersion,multyplayerMode,maxPlayers,minPlayers);
+  
 }
