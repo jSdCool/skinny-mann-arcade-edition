@@ -78,6 +78,11 @@ class Client extends Thread {
           names.add(source.clients.get(i).name);
         }
         dataToSend.add(new InfoForClient(playernumber,names,source.version));
+        if(source.menue){
+           if(source.Menue.equals("multiplayer selection")){
+             dataToSend.add(source.multyplayerSelectedLevel);
+           }
+        }
         //create the next packet to send
         generateSendPacket();
       }
@@ -112,6 +117,10 @@ class Client extends Thread {
                 throw new IOException("host and client are not on the same version\nhost is on "+ifc.hostVersion);
               }
             }
+          }
+          if(di instanceof SelectedLevelInfo){
+            SelectedLevelInfo sli = (SelectedLevelInfo)di;
+            source.multyplayerSelectedLevel=sli;
           }
           
         }
