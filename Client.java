@@ -62,10 +62,11 @@ class Client extends Thread {
         //recieve data from client
         Object rawInput = input.readObject();
         //process input
-        recieved=(NetworkDataPacket)rawInput
+        recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
-          DataPacket di = recived.data.get(i);
-          if(di instanceof ClientInfo ci){
+          DataPacket di = recieved.data.get(i);
+          if(di instanceof ClientInfo){
+            ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
             System.out.println("client connected with name "+name);
           }
@@ -92,7 +93,7 @@ class Client extends Thread {
         //recieve data from server
         Object rawInput = input.readObject();
         //process input
-        recieved=(NetworkDataPacket)rawInput
+        recieved=(NetworkDataPacket)rawInput;
         
         //outher misolenous processing 
         dataToSend.add(new ClientInfo(source.name));
