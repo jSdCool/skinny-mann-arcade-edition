@@ -6,6 +6,6 @@ class InfoForClient extends DataPacket{
   InfoForClient(int number,ArrayList<String> names,String version){
     playerNumber=number;
     playerNames=names;
-    hostversion=version;
+    hostVersion=version;
   }
 }

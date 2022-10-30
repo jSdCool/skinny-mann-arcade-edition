@@ -106,7 +106,7 @@ class Client extends Thread {
             source.playerNames=ifc.playerNames;
             playernumber=ifc.playerNumber;
             if(!versionChecked){
-              if(source.version.equals(ifc.hostversion)){
+              if(source.version.equals(ifc.hostVersion)){
                 versionChecked=true;
               }else{
                 throw new IOException("host and client are not on the same version");
