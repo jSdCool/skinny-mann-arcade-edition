@@ -69,6 +69,7 @@ class Client extends Thread {
           if(di instanceof ClientInfo){
             ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
+            this.readdy=ci.readdy;
           }
         }
         
@@ -127,13 +128,14 @@ class Client extends Thread {
             LoadLevelRequest llr = (LoadLevelRequest)di;
             if(llr.isBuiltIn){
               source.loadLevel(llr.path);
+              readdy=true;
             }
           }
           
         }
         
         //outher misolenous processing 
-        dataToSend.add(new ClientInfo(source.name));
+        dataToSend.add(new ClientInfo(source.name,readdy));
         //create the next packet to send
         generateSendPacket();
         

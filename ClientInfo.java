@@ -3,7 +3,9 @@
 */
 class ClientInfo extends DataPacket{
   public String name;
-  ClientInfo(String name){
+  boolean readdy=false;
+  ClientInfo(String name,boolean ready){
     this.name=name;
+    this.readdy=readdy;
   }
 }

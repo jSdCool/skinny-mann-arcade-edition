@@ -245,7 +245,7 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false,waitingForReady=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="",multyplayerSelectionLevels="speed",multyplayerSelectedLevelPath;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames,playerNames=new ArrayList<>();
@@ -749,7 +749,8 @@ void draw() {// the function that is called every fraim
           if(!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)){
             text("Level is incompatible with current version of game",width*0.81,height*0.34);
           }else{
-           multyplayerPlay.draw(); 
+            if(isHost)
+             multyplayerPlay.draw(); 
           }
         
         }
@@ -1438,7 +1439,14 @@ void mouseClicked() {// when you click the mouse
           }
           if(gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)){
             if(multyplayerPlay.isMouseOver()){
-              
+              if(multyplayerSelectionLevels.equals("speed")){
+                LoadLevelRequest req =new LoadLevelRequest(true,multyplayerSelectedLevelPath);
+                for(int i=0;i<clients.size();i++){
+                  clients.get(i).dataToSend.add(req);
+                }
+                loadLevel(multyplayerSelectedLevelPath);
+                waitingForReady=true;
+              }
             }
           }
         }else{//if joined 
