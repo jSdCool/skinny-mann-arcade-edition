@@ -244,7 +244,7 @@ PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="";
 ArrayList<Boolean> coins;
-ArrayList<String> UGCNames;
+ArrayList<String> UGCNames,playerNames;
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
 Player players[] =new Player[10];
 
@@ -724,8 +724,16 @@ void draw() {// the function that is called every fraim
         if(isHost){
           calcTextSize(name,216*Scale,(int)(25*Scale));
           text(name+"\n(you)",110*Scale,height*0.04+((660*Scale-height*0.04)/10/2));
-        }else{
           
+          for(int i=0;i<clients.size();i++){
+            calcTextSize(clients.get(i).name,216*Scale,(int)(25*Scale));
+            text(clients.get(i).name,110*Scale,height*0.04+((660*Scale-height*0.04)/10/2)+((660*Scale-height*0.04)/10)*(i+1));
+          }
+        }else{
+          for(int i=0;i<playerNames.size();i++){
+            calcTextSize(playerNames.get(i),216*Scale,(int)(25*Scale));
+            text(playerNames.get(i),110*Scale,height*0.04+((660*Scale-height*0.04)/10/2)+((660*Scale-height*0.04)/10)*(i));
+          }
         }
         multyplayerLeave.draw();
       }

@@ -7,7 +7,7 @@ class Client extends Thread {
   Socket socket;
   ObjectOutputStream output;
   ObjectInputStream input;
-  String ip="uninitilized",name;
+  String ip="uninitilized",name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
   Client(Socket s){
@@ -68,11 +68,15 @@ class Client extends Thread {
           if(di instanceof ClientInfo){
             ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
-            System.out.println("client connected with name "+name);
           }
         }
         
-        
+        ArrayList<String> names=new ArrayList<>();
+        names.add(source.name);
+        for(int i=0;i<source.clients.size();i++){
+          names.add(source.clients.get(i).name);
+        }
+        dataToSend.add(new InfoForClient(playernumber,names));
         //create the next packet to send
         generateSendPacket();
       }
@@ -94,6 +98,15 @@ class Client extends Thread {
         Object rawInput = input.readObject();
         //process input
         recieved=(NetworkDataPacket)rawInput;
+        for(int i=0;i<recieved.data.size();i++){
+          DataPacket di = recieved.data.get(i);
+          if(di instanceof InfoForClient){
+            InfoForClient ifc = (InfoForClient)di;
+            source.playerNames=ifc.playerNames;
+            playernumber=ifc.playerNumber;
+          }
+          
+        }
         
         //outher misolenous processing 
         dataToSend.add(new ClientInfo(source.name));
