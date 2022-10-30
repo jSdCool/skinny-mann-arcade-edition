@@ -135,6 +135,7 @@ class Client extends Thread {
     while(dataToSend.size()>0){
       toSend.data.add(dataToSend.remove(0));
     }
+    System.out.println(toSend.data.size()+" many p");
   }
 
 }
