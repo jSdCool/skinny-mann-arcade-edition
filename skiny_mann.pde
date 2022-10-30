@@ -712,6 +712,15 @@ void draw() {// the function that is called every fraim
       }
       if(Menue.equals("multiplayer selection")){
         background(-9131009);
+        fill(0);
+        rect(220*Scale,0,2*Scale,height);
+        textAlign(CENTER,CENTER);
+        textSize(20*Scale);
+        text("players",110*Scale,height*0.015);
+        rect(0,height*0.04,220*Scale,2*Scale);
+        for(int i=0;i<10;i++){
+          rect(0,height*0.04+((660*Scale-height*0.04)/10)*i,220*Scale,1*Scale);
+        }
         
         multyplayerLeave.draw();
       }
