@@ -265,6 +265,7 @@ Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
 Server server;
+SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo("test info here","NAME HERERE","ALL OF THEM", 1,98,32);
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -716,32 +717,76 @@ void draw() {// the function that is called every fraim
       if(Menue.equals("multiplayer selection")){
         background(-9131009);
         fill(0);
-        rect(width*0.171875,0,2*Scale,height);
+        rect(width*0.171875,0,2*Scale,height);//verticle line on the left of the screen
         textAlign(CENTER,CENTER);
         textSize(20*Scale);
         text("players",width*0.086,height*0.015);
-        rect(0,height*0.04,width*0.171875,height*(2.0/720));
+        rect(0,height*0.04,width*0.171875,height*(2.0/720));//horozontal line ath the top of the left colum 
+        
+        //horozontal lines that seperate the names of the players
         for(int i=0;i<10;i++){
           rect(0,height*0.04+((height*0.91666-height*0.04)/10)*i,width*0.171875,height*(1.0/720));
         }
-        rect(width*0.8,0,width*0.0015625,height);
-        calcTextSize("select level",width*0.1);
-        text("select level",width/2,height*0.05);
-        if(isHost){
+        
+        rect(width*0.8,0,width*0.0015625,height);//verticle line on the right of the screen
+        
+        //multyplayerSelectedLevel
+        calcTextSize("selected level",width*0.15);
+        text("Selected Level",width*0.9,height*0.1);
+        rect(width*0.8,height*0.2,width*0.2,height*(2.0/720));
+        textSize(10*Scale);
+        textAlign(LEFT,CENTER);
+        if(multyplayerSelectedLevel.exsists){
+          text("Name: "+multyplayerSelectedLevel.name,width*0.81,height*0.22);
+          text("Author: "+multyplayerSelectedLevel.author,width*0.81,height*0.24);
+          text("Game Version: "+multyplayerSelectedLevel.gameVersion,width*0.81,height*0.26);
+          text("Multyplayer Mode: "+((multyplayerSelectedLevel.multyplayerMode==1) ? "Speed Run" : "Co - Op"),width*0.81,height*0.28);
+          if(multyplayerSelectedLevel.multyplayerMode==2){
+            text("Max players: "+multyplayerSelectedLevel.maxPlayers,width*0.81,height*0.3);
+            text("Min players: "+multyplayerSelectedLevel.minPlayers,width*0.81,height*0.32);
+          }
+          if(!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)){
+            text("Level is incompatible with current version of game",width*0.81,height*0.34);
+          }
+        
+        }
+        
+        textAlign(CENTER,CENTER);
+        if(isHost){//if you are the host of the session
+          calcTextSize("select level",width*0.15);
+          text("select level",width/2,height*0.05);
+          
+          //display your name at the top of the list
           calcTextSize(name,width*0.16875,(int)(25*Scale));
           text(name+"\n(you)",width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2));
           
+          //display the names of all the outher players
           for(int i=0;i<clients.size();i++){
             calcTextSize(clients.get(i).name,width*0.16875,(int)(25*Scale));
             text(clients.get(i).name,width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
           }
+          rect(width*0.171875,height*0.09,width*0.8-width*0.171875,height*(2.0/720));
+          
+          //draw the buttons for level type
           multyplayerSpeedrun.draw();
           multyplayerCoop.draw();
           multyplayerUGC.draw();
+          
+          fill(0);
+          for(int i=0;i<16;i++){
+            rect(width*0.171875,height*0.09+((height*0.9027777777-height*0.09)/16)*i,width*0.8-width*0.171875,height*(1.0/720));
+          }
+          
           if(multyplayerSelectionLevels.equals("speed")){
             multyplayerSpeedrun.setColor(-59135, -35185);
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -1791);
+            int numOfBuiltInLevels=10;
+            calcTextSize("level 30",width*0.1);
+            for(int i=0;i<numOfBuiltInLevels;i++){
+              text("Level "+(i+1),width/2,height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+              
+            }
             
           }
           if(multyplayerSelectionLevels.equals("coop")){
@@ -2044,7 +2089,7 @@ boolean FileIsLevel(String fil) {
   return true;
 }
 
-boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version id compatible
+boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
   for (int i=0; i<compatibleVersions.length; i++) {
     if (vers.equals(compatibleVersions[i])) {
       levelCompatible=true;
