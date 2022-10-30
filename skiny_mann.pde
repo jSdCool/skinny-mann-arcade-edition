@@ -721,7 +721,12 @@ void draw() {// the function that is called every fraim
         for(int i=0;i<10;i++){
           rect(0,height*0.04+((660*Scale-height*0.04)/10)*i,220*Scale,1*Scale);
         }
-        
+        if(isHost){
+          calcTextSize(name,216*Scale,(int)(25*Scale));
+          text(name+"\n(you)",110*Scale,height*0.04+((660*Scale-height*0.04)/10/2));
+        }else{
+          
+        }
         multyplayerLeave.draw();
       }
 
@@ -2279,5 +2284,18 @@ void clickDevMenue() {
   }
   if (dev_multiplayer.isMouseOver()) {
     Menue="multiplayer strart";
+  }
+}
+
+void calcTextSize(String text,float width){
+  calcTextSize(text,width,4837521);
+}
+void calcTextSize(String text,float width,int max){
+  for(int i=1;i<max;i++){
+    textSize(i);
+    if(textWidth(text)>width){
+      textSize(i-1);
+      return;
+    }
   }
 }

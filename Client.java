@@ -1,12 +1,15 @@
 import java.net.Socket;
 import java.io.*;
+import java.util.ArrayList;
 class Client extends Thread {
   static skiny_mann source;
   int playernumber;
   Socket socket;
   ObjectOutputStream output;
   ObjectInputStream input;
-  String ip="uninitilized";
+  String ip="uninitilized",name;
+  ArrayList<DataPacket> dataToSend=new ArrayList<>();
+  NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
   Client(Socket s){
     init(s);
   }
@@ -51,14 +54,26 @@ class Client extends Thread {
     try{
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
-        output.writeObject("temp");
+        
+        output.writeObject(toSend);
         output.flush();
         output.reset();
         
         //recieve data from client
         Object rawInput = input.readObject();
         //process input
+        recieved=(NetworkDataPacket)rawInput
+        for(int i=0;i<recieved.data.size();i++){
+          DataPacket di = recived.data.get(i);
+          if(di instanceof ClientInfo ci){
+            this.name = ci.name;
+            System.out.println("client connected with name "+name);
+          }
+        }
         
+        
+        //create the next packet to send
+        generateSendPacket();
       }
     }catch(java.net.SocketTimeoutException s){
       
@@ -77,9 +92,16 @@ class Client extends Thread {
         //recieve data from server
         Object rawInput = input.readObject();
         //process input
+        recieved=(NetworkDataPacket)rawInput
+        
+        //outher misolenous processing 
+        dataToSend.add(new ClientInfo(source.name));
+        
+        //create the next packet to send
+        generateSendPacket();
         
         //send data to server
-        output.writeObject("temp");
+        output.writeObject(toSend);
         output.flush();
         output.reset();
       }
@@ -103,4 +125,12 @@ class Client extends Thread {
   public String toString(){
     return "client thread "+ip;
   }
+  
+  void generateSendPacket(){
+    NetworkDataPacket toSend=new NetworkDataPacket();
+    while(dataToSend.size()>0){
+      toSend.data.add(dataToSend.remove(0));
+    }
+  }
+
 }
