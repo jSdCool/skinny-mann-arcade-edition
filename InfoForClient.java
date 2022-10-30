@@ -8,6 +8,6 @@ class InfoForClient extends DataPacket{
     playerNumber=number;
     playerNames=names;
     hostVersion=version;
-    this.inGame=ingame;
+    this.inGame=inGame;
   }
 }
