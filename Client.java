@@ -63,7 +63,6 @@ class Client extends Thread {
         Object rawInput = input.readObject();
         //process input
         recieved=(NetworkDataPacket)rawInput;
-        System.out.println("recieved data with "+recieved.data.size()+" pakcets");
         for(int i=0;i<recieved.data.size();i++){
           DataPacket di = recieved.data.get(i);
           if(di instanceof ClientInfo){
@@ -98,11 +97,9 @@ class Client extends Thread {
         
         //outher misolenous processing 
         dataToSend.add(new ClientInfo(source.name));
-        System.out.println("creating info to send");
         //create the next packet to send
         generateSendPacket();
         
-        System.out.println("sending data with "+toSend.data.size()+" packets");
         //send data to server
         output.writeObject(toSend);
         output.flush();
@@ -130,12 +127,10 @@ class Client extends Thread {
   }
   
   void generateSendPacket(){
-    NetworkDataPacket toSend=new NetworkDataPacket();
-    System.out.println("adding "+dataToSend.size()+" packets to send");
+    toSend=new NetworkDataPacket();
     while(dataToSend.size()>0){
       toSend.data.add(dataToSend.remove(0));
     }
-    System.out.println(toSend.data.size()+" many p");
   }
 
 }
