@@ -3,6 +3,7 @@
     "mainStage": 0,
     "coins": 202,
     "min players": 2,
+	"author": "jSdCool",
     "level_id": 7,
     "spawnX": 20,
     "groups": ["group 0"],
