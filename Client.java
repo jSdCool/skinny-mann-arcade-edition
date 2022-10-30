@@ -102,7 +102,7 @@ class Client extends Thread {
         //create the next packet to send
         generateSendPacket();
         
-        System.out.println("sending data with "+tosend.data.size()+" packets");
+        System.out.println("sending data with "+toSend.data.size()+" packets");
         //send data to server
         output.writeObject(toSend);
         output.flush();
