@@ -131,6 +131,7 @@ class Client extends Thread {
   
   void generateSendPacket(){
     NetworkDataPacket toSend=new NetworkDataPacket();
+    System.out.println("adding "+dataToSend.size()+" packets to send");
     while(dataToSend.size()>0){
       toSend.data.add(dataToSend.remove(0));
     }
