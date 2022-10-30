@@ -10,7 +10,7 @@ class Client extends Thread {
   String ip="uninitilized",name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
-  boolean versionChecked=false;
+  boolean versionChecked=false,readdy=false;
   Client(Socket s){
     init(s);
   }
@@ -110,6 +110,7 @@ class Client extends Thread {
             InfoForClient ifc = (InfoForClient)di;
             source.playerNames=ifc.playerNames;
             playernumber=ifc.playerNumber;
+            source.currentPlayer=playernumber;
             if(!versionChecked){
               if(source.version.equals(ifc.hostVersion)){
                 versionChecked=true;
@@ -121,6 +122,12 @@ class Client extends Thread {
           if(di instanceof SelectedLevelInfo){
             SelectedLevelInfo sli = (SelectedLevelInfo)di;
             source.multyplayerSelectedLevel=sli;
+          }
+          if(di instanceof LoadLevelRequest){
+            LoadLevelRequest llr = (LoadLevelRequest)di;
+            if(llr.isBuiltIn){
+              source.loadLevel(llr.path);
+            }
           }
           
         }
