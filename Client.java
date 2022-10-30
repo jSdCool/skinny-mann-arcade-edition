@@ -10,6 +10,7 @@ class Client extends Thread {
   String ip="uninitilized",name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
+  boolean versionChecked=false;
   Client(Socket s){
     init(s);
   }
@@ -76,7 +77,7 @@ class Client extends Thread {
         for(int i=0;i<source.clients.size();i++){
           names.add(source.clients.get(i).name);
         }
-        dataToSend.add(new InfoForClient(playernumber,names));
+        dataToSend.add(new InfoForClient(playernumber,names,source.version));
         //create the next packet to send
         generateSendPacket();
       }
@@ -104,6 +105,13 @@ class Client extends Thread {
             InfoForClient ifc = (InfoForClient)di;
             source.playerNames=ifc.playerNames;
             playernumber=ifc.playerNumber;
+            if(!versionChecked){
+              if(source.version.equals(ifc.hostversion)){
+                versionChecked=true;
+              }else{
+                throw new IOException("host and client are not on the same version");
+              }
+            }
           }
           
         }
