@@ -109,7 +109,7 @@ class Client extends Thread {
               if(source.version.equals(ifc.hostVersion)){
                 versionChecked=true;
               }else{
-                throw new IOException("host and client are not on the same version");
+                throw new IOException("host and client are not on the same version\nhost is on "+ifc.hostVersion);
               }
             }
           }
