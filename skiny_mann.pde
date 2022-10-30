@@ -242,7 +242,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="";
+ String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="",multyplayerSelectionLevels="speed";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames,playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
@@ -713,26 +713,29 @@ void draw() {// the function that is called every fraim
       if(Menue.equals("multiplayer selection")){
         background(-9131009);
         fill(0);
-        rect(220*Scale,0,2*Scale,height);
+        rect(width*0.171875,0,2*Scale,height);
         textAlign(CENTER,CENTER);
         textSize(20*Scale);
-        text("players",110*Scale,height*0.015);
-        rect(0,height*0.04,220*Scale,2*Scale);
+        text("players",width*0.086,height*0.015);
+        rect(0,height*0.04,width*0.171875,2*Scale);
         for(int i=0;i<10;i++){
-          rect(0,height*0.04+((660*Scale-height*0.04)/10)*i,220*Scale,1*Scale);
+          rect(0,height*0.04+((height*0.91666-height*0.04)/10)*i,width*0.171875,1*Scale);
         }
         if(isHost){
-          calcTextSize(name,216*Scale,(int)(25*Scale));
-          text(name+"\n(you)",110*Scale,height*0.04+((660*Scale-height*0.04)/10/2));
+          calcTextSize(name,width*0.16875,(int)(25*Scale));
+          text(name+"\n(you)",width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2));
           
           for(int i=0;i<clients.size();i++){
-            calcTextSize(clients.get(i).name,216*Scale,(int)(25*Scale));
-            text(clients.get(i).name,110*Scale,height*0.04+((660*Scale-height*0.04)/10/2)+((660*Scale-height*0.04)/10)*(i+1));
+            calcTextSize(clients.get(i).name,width*0.16875,(int)(25*Scale));
+            text(clients.get(i).name,width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
+          }
+          if(multyplayerSelectionLevels.equals("speed")){
+            
           }
         }else{
           for(int i=0;i<playerNames.size();i++){
-            calcTextSize(playerNames.get(i),216*Scale,(int)(25*Scale));
-            text(playerNames.get(i),110*Scale,height*0.04+((660*Scale-height*0.04)/10/2)+((660*Scale-height*0.04)/10)*(i));
+            calcTextSize(playerNames.get(i),width*0.16875,(int)(25*Scale));
+            text(playerNames.get(i),width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
           }
         }
         multyplayerLeave.draw();
@@ -1331,6 +1334,7 @@ void mouseClicked() {// when you click the mouse
       if(Menue.equals("disconnected")){
         if(multyplayerExit.isMouseOver()){
           Menue="start join";
+          multiplayer=false;
         }
       }
 
@@ -1345,6 +1349,7 @@ void mouseClicked() {// when you click the mouse
             server.end();
             println("returning to main menu");
             Menue="main";
+            multiplayer=false;
             return;
           }
         }else{//if joined 
@@ -1354,6 +1359,7 @@ void mouseClicked() {// when you click the mouse
             clients.get(0).disconnect();
             println("returning to main menu");
             Menue="main";
+            multiplayer=false;
             return;
           }
         }
