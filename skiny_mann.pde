@@ -187,7 +187,7 @@ void setup() {//seccond function called
     multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
-    
+
     multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale);
@@ -245,10 +245,10 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false,clientQuitting=false,waitingForReady=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="",disconnectReason="",multyplayerSelectionLevels="speed",multyplayerSelectedLevelPath;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false;
+ String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath;
 ArrayList<Boolean> coins;
-ArrayList<String> UGCNames,playerNames=new ArrayList<>();
+ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
 Player players[] =new Player[10];
 
@@ -256,7 +256,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=1;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo,multyplayerLeave,multyplayerSpeedrun,multyplayerCoop,multyplayerUGC,multyplayerPlay;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -678,8 +678,8 @@ void draw() {// the function that is called every fraim
         text("Port", width/2, height*0.24);
         rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
         text(port+((enteringPort)? cursor:""), width/2, height*0.285);
-        
-        
+
+
         multyplayerExit.draw();
         multyplayerGo.draw();
       }
@@ -701,116 +701,111 @@ void draw() {// the function that is called every fraim
         rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
         text(ip+((enteringIP)?cursor:""), width/2, height*0.395);
 
-        
+
         multyplayerExit.draw();
         multyplayerGo.draw();
       }
-      if(Menue.equals("disconnected")){
+      if (Menue.equals("disconnected")) {
         background(200);
         fill(0);
-        textAlign(CENTER,CENTER);
+        textAlign(CENTER, CENTER);
         textSize(50*Scale);
-        text("Disconnected",width/2,height*0.05);
+        text("Disconnected", width/2, height*0.05);
         textSize(25*Scale);
-        text(disconnectReason,width/2,height*0.3);
+        text(disconnectReason, width/2, height*0.3);
         multyplayerExit.draw();
       }
-      if(Menue.equals("multiplayer selection")){
+      if (Menue.equals("multiplayer selection")) {
         background(-9131009);
         fill(0);
-        rect(width*0.171875,0,2*Scale,height);//verticle line on the left of the screen
-        textAlign(CENTER,CENTER);
+        rect(width*0.171875, 0, 2*Scale, height);//verticle line on the left of the screen
+        textAlign(CENTER, CENTER);
         textSize(20*Scale);
-        text("players",width*0.086,height*0.015);
-        rect(0,height*0.04,width*0.171875,height*(2.0/720));//horozontal line ath the top of the left colum 
-        
+        text("players", width*0.086, height*0.015);
+        rect(0, height*0.04, width*0.171875, height*(2.0/720));//horozontal line ath the top of the left colum
+
         //horozontal lines that seperate the names of the players
-        for(int i=0;i<10;i++){
-          rect(0,height*0.04+((height*0.91666-height*0.04)/10)*i,width*0.171875,height*(1.0/720));
+        for (int i=0; i<10; i++) {
+          rect(0, height*0.04+((height*0.91666-height*0.04)/10)*i, width*0.171875, height*(1.0/720));
         }
-        
-        rect(width*0.8,0,width*0.0015625,height);//verticle line on the right of the screen
-        
+
+        rect(width*0.8, 0, width*0.0015625, height);//verticle line on the right of the screen
+
         //multyplayerSelectedLevel
-        calcTextSize("selected level",width*0.15);
-        text("Selected Level",width*0.9,height*0.1);
-        rect(width*0.8,height*0.2,width*0.2,height*(2.0/720));
+        calcTextSize("selected level", width*0.15);
+        text("Selected Level", width*0.9, height*0.1);
+        rect(width*0.8, height*0.2, width*0.2, height*(2.0/720));
         textSize(10*Scale);
-        textAlign(LEFT,CENTER);
-        if(multyplayerSelectedLevel.exsists){
-          text("Name: "+multyplayerSelectedLevel.name,width*0.81,height*0.22);
-          text("Author: "+multyplayerSelectedLevel.author,width*0.81,height*0.24);
-          text("Game Version: "+multyplayerSelectedLevel.gameVersion,width*0.81,height*0.26);
-          text("Multyplayer Mode: "+((multyplayerSelectedLevel.multyplayerMode==1) ? "Speed Run" : "Co - Op"),width*0.81,height*0.28);
-          if(multyplayerSelectedLevel.multyplayerMode==2){
-            text("Max players: "+multyplayerSelectedLevel.maxPlayers,width*0.81,height*0.3);
-            text("Min players: "+multyplayerSelectedLevel.minPlayers,width*0.81,height*0.32);
+        textAlign(LEFT, CENTER);
+        if (multyplayerSelectedLevel.exsists) {
+          text("Name: "+multyplayerSelectedLevel.name, width*0.81, height*0.22);
+          text("Author: "+multyplayerSelectedLevel.author, width*0.81, height*0.24);
+          text("Game Version: "+multyplayerSelectedLevel.gameVersion, width*0.81, height*0.26);
+          text("Multyplayer Mode: "+((multyplayerSelectedLevel.multyplayerMode==1) ? "Speed Run" : "Co - Op"), width*0.81, height*0.28);
+          if (multyplayerSelectedLevel.multyplayerMode==2) {
+            text("Max players: "+multyplayerSelectedLevel.maxPlayers, width*0.81, height*0.3);
+            text("Min players: "+multyplayerSelectedLevel.minPlayers, width*0.81, height*0.32);
           }
-          if(!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)){
-            text("Level is incompatible with current version of game",width*0.81,height*0.34);
-          }else{
-            if(isHost)
-             multyplayerPlay.draw(); 
+          if (!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+            text("Level is incompatible with current version of game", width*0.81, height*0.34);
+          } else {
+            if (isHost)
+              multyplayerPlay.draw();
           }
-        
         }
-        
-        textAlign(CENTER,CENTER);
-        if(isHost){//if you are the host of the session
-          calcTextSize("select level",width*0.15);
-          text("select level",width/2,height*0.05);
-          
+
+        textAlign(CENTER, CENTER);
+        if (isHost) {//if you are the host of the session
+          calcTextSize("select level", width*0.15);
+          text("select level", width/2, height*0.05);
+
           //display your name at the top of the list
-          calcTextSize(name,width*0.16875,(int)(25*Scale));
-          text(name+"\n(you)",width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2));
-          
+          calcTextSize(name, width*0.16875, (int)(25*Scale));
+          text(name+"\n(you)", width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2));
+
           //display the names of all the outher players
-          for(int i=0;i<clients.size();i++){
-            calcTextSize(clients.get(i).name,width*0.16875,(int)(25*Scale));
-            text(clients.get(i).name,width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
+          for (int i=0; i<clients.size(); i++) {
+            calcTextSize(clients.get(i).name, width*0.16875, (int)(25*Scale));
+            text(clients.get(i).name, width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
           }
           //horozontal line under selecte level
-          rect(width*0.171875,height*0.09,width*0.8-width*0.171875,height*(2.0/720));
-          
+          rect(width*0.171875, height*0.09, width*0.8-width*0.171875, height*(2.0/720));
+
           //draw the buttons for level type
           multyplayerSpeedrun.draw();
           multyplayerCoop.draw();
           multyplayerUGC.draw();
-          
+
           //darw lines seperating levels
           fill(0);
-          for(int i=0;i<16;i++){
-            rect(width*0.171875,height*0.09+((height*0.9027777777-height*0.09)/16)*i,width*0.8-width*0.171875,height*(1.0/720));
+          for (int i=0; i<16; i++) {
+            rect(width*0.171875, height*0.09+((height*0.9027777777-height*0.09)/16)*i, width*0.8-width*0.171875, height*(1.0/720));
           }
-          
-          if(multyplayerSelectionLevels.equals("speed")){
+
+          if (multyplayerSelectionLevels.equals("speed")) {
             multyplayerSpeedrun.setColor(-59135, -35185);
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -1791);
             int numOfBuiltInLevels=10;
-            calcTextSize("level 30",width*0.1);
-            for(int i=0;i<numOfBuiltInLevels;i++){
-              text("Level "+(i+1),width/2,height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
-              
+            calcTextSize("level 30", width*0.1);
+            for (int i=0; i<numOfBuiltInLevels; i++) {
+              text("Level "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
             }
-            
           }
-          if(multyplayerSelectionLevels.equals("coop")){
+          if (multyplayerSelectionLevels.equals("coop")) {
             multyplayerSpeedrun.setColor(-59135, -1791);
             multyplayerCoop.setColor(-59135, -35185);
             multyplayerUGC.setColor(-59135, -1791);
-            
           }
-          if(multyplayerSelectionLevels.equals("UGC")){
+          if (multyplayerSelectionLevels.equals("UGC")) {
             multyplayerSpeedrun.setColor(-59135, -1791);
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -35185);
-            
           }
-        }else{
-          for(int i=0;i<playerNames.size();i++){
-            calcTextSize(playerNames.get(i),width*0.16875,(int)(25*Scale));
-            text(playerNames.get(i),width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
+        } else {
+          for (int i=0; i<playerNames.size(); i++) {
+            calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
+            text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
           }
         }
         multyplayerLeave.draw();
@@ -938,6 +933,28 @@ void draw() {// the function that is called every fraim
   }
   catch(Throwable e) {//cath and display all the fatail errors that occor
     handleError(e);
+  }
+
+  //when waiting for clients to be readdy
+  if (waitingForReady) {
+    try {
+      boolean rtg=false;
+      for (int i=0; i<clients.size(); i++) {
+        if (!clients.get(i).readdy) {
+          break;
+        }
+      }
+      if (rtg) {
+        waitingForReady=false;
+        menue=false;
+        inGame=true;
+        for (int i=0; i<clients.size(); i++) {
+          clients.get(i).dataToSend.add(new CloseMenuRequest());
+        }
+      }
+    }
+    catch(Exception e) {
+    }
   }
 }
 
@@ -1364,7 +1381,7 @@ void mouseClicked() {// when you click the mouse
           enteringName=false;
           enteringPort=true;
         }
-        if(multyplayerGo.isMouseOver()){
+        if (multyplayerGo.isMouseOver()) {
           isHost=true;
           Menue="multiplayer selection";
           multiplayer = true;
@@ -1391,13 +1408,14 @@ void mouseClicked() {// when you click the mouse
           enteringPort=false;
           enteringIP=true;
         }
-        if(multyplayerGo.isMouseOver()){
+        if (multyplayerGo.isMouseOver()) {
           isHost=false;
           Menue="multiplayer selection";
           multiplayer=true;
-          try{
-            clients.add(new Client(new Socket(ip,port)));
-          }catch(Exception c){
+          try {
+            clients.add(new Client(new Socket(ip, port)));
+          }
+          catch(Exception c) {
             c.printStackTrace();
             multiplayer=false;
             Menue="disconnected";
@@ -1406,8 +1424,8 @@ void mouseClicked() {// when you click the mouse
           return;
         }
       }
-      if(Menue.equals("disconnected")){
-        if(multyplayerExit.isMouseOver()){
+      if (Menue.equals("disconnected")) {
+        if (multyplayerExit.isMouseOver()) {
           Menue="start join";
           multiplayer=false;
         }
@@ -1417,9 +1435,9 @@ void mouseClicked() {// when you click the mouse
         clickDevMenue();
         return;
       }
-      if(Menue.equals("multiplayer selection")){
-        if(isHost){
-          if(multyplayerLeave.isMouseOver()){
+      if (Menue.equals("multiplayer selection")) {
+        if (isHost) {
+          if (multyplayerLeave.isMouseOver()) {
             println("quitting multyplayer host");
             server.end();
             println("returning to main menu");
@@ -1427,21 +1445,20 @@ void mouseClicked() {// when you click the mouse
             multiplayer=false;
             return;
           }
-          if(mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666){//if the mouse is in the area to select a level
+          if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
             int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
-            if(multyplayerSelectionLevels.equals("speed")){
-              if(slotSelected<=9){
+            if (multyplayerSelectionLevels.equals("speed")) {
+              if (slotSelected<=9) {
                 multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
                 genSelectedInfo(multyplayerSelectedLevelPath);
               }
             }
-            
           }
-          if(gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)){
-            if(multyplayerPlay.isMouseOver()){
-              if(multyplayerSelectionLevels.equals("speed")){
-                LoadLevelRequest req =new LoadLevelRequest(true,multyplayerSelectedLevelPath);
-                for(int i=0;i<clients.size();i++){
+          if (gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+            if (multyplayerPlay.isMouseOver()) {
+              if (multyplayerSelectionLevels.equals("speed")) {
+                LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
+                for (int i=0; i<clients.size(); i++) {
                   clients.get(i).dataToSend.add(req);
                 }
                 loadLevel(multyplayerSelectedLevelPath);
@@ -1449,8 +1466,8 @@ void mouseClicked() {// when you click the mouse
               }
             }
           }
-        }else{//if joined 
-          if(multyplayerLeave.isMouseOver()){
+        } else {//if joined
+          if (multyplayerLeave.isMouseOver()) {
             println("quitting multyplayer joined");
             clientQuitting=true;
             clients.get(0).disconnect();
@@ -2320,9 +2337,9 @@ void sourceInitilize() {
 }
 
 void networkError(Throwable error) {
-  if(clientQuitting){
-   clientQuitting=false;
-   return;
+  if (clientQuitting) {
+    clientQuitting=false;
+    return;
   }
   error.printStackTrace();
   Menue="disconnected";
@@ -2398,33 +2415,34 @@ void clickDevMenue() {
   }
 }
 
-void calcTextSize(String text,float width){
-  calcTextSize(text,width,4837521);
+void calcTextSize(String text, float width) {
+  calcTextSize(text, width, 4837521);
 }
-void calcTextSize(String text,float width,int max){
-  for(int i=1;i<max;i++){
+void calcTextSize(String text, float width, int max) {
+  for (int i=1; i<max; i++) {
     textSize(i);
-    if(textWidth(text)>width){
+    if (textWidth(text)>width) {
       textSize(i-1);
       return;
     }
   }
 }
 
-void genSelectedInfo(String path){
-  String name,author,gameVersion;
-  int multyplayerMode=-1,maxPlayers=-1,minPlayers=-1;
+void genSelectedInfo(String path) {
+  String name, author, gameVersion;
+  int multyplayerMode=-1, maxPlayers=-1, minPlayers=-1;
   JSONArray index = loadJSONArray(path+"/index.json");
   JSONObject info = index.getJSONObject(0);
   name = info.getString("name");
   author=info.getString("author");
   gameVersion=info.getString("game version");
-  try{
+  try {
     multyplayerMode=info.getInt("multyplayer mode");
     maxPlayers=info.getInt("max players");
     minPlayers=info.getInt("min players");
-  }catch(Exception e){}
-  
-  multyplayerSelectedLevel=new SelectedLevelInfo(name,author,gameVersion,multyplayerMode,maxPlayers,minPlayers);
-  
+  }
+  catch(Exception e) {
+  }
+
+  multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers);
 }
