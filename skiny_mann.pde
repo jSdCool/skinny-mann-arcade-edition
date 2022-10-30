@@ -183,12 +183,15 @@ void setup() {//seccond function called
     dev_multiplayer = new Button(this, 650*Scale, 170*Scale, 200*Scale, 50*Scale, "Multiplayer");
 
     multyplayerJoin = new Button(this, 400*Scale, 300*Scale, 200*Scale, 50*Scale, "Join", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    ;
     multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
     multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
-
+    
+    multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
+    multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
+    multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale);
+//-35185
     soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
     soundHandler.setMusicVolume(0);
 
@@ -252,7 +255,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=1;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo,multyplayerLeave;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo,multyplayerLeave,multyplayerSpeedrun,multyplayerCoop,multyplayerUGC;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -717,10 +720,13 @@ void draw() {// the function that is called every fraim
         textAlign(CENTER,CENTER);
         textSize(20*Scale);
         text("players",width*0.086,height*0.015);
-        rect(0,height*0.04,width*0.171875,2*Scale);
+        rect(0,height*0.04,width*0.171875,height*(2.0/720));
         for(int i=0;i<10;i++){
-          rect(0,height*0.04+((height*0.91666-height*0.04)/10)*i,width*0.171875,1*Scale);
+          rect(0,height*0.04+((height*0.91666-height*0.04)/10)*i,width*0.171875,height*(1.0/720));
         }
+        rect(width*0.8,0,width*0.0015625,height);
+        calcTextSize("select level",width*0.1);
+        text("select level",width/2,height*0.05);
         if(isHost){
           calcTextSize(name,width*0.16875,(int)(25*Scale));
           text(name+"\n(you)",width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2));
@@ -729,7 +735,25 @@ void draw() {// the function that is called every fraim
             calcTextSize(clients.get(i).name,width*0.16875,(int)(25*Scale));
             text(clients.get(i).name,width*0.086,height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
           }
+          multyplayerSpeedrun.draw();
+          multyplayerCoop.draw();
+          multyplayerUGC.draw();
           if(multyplayerSelectionLevels.equals("speed")){
+            multyplayerSpeedrun.setColor(-59135, -35185);
+            multyplayerCoop.setColor(-59135, -1791);
+            multyplayerUGC.setColor(-59135, -1791);
+            
+          }
+          if(multyplayerSelectionLevels.equals("coop")){
+            multyplayerSpeedrun.setColor(-59135, -1791);
+            multyplayerCoop.setColor(-59135, -35185);
+            multyplayerUGC.setColor(-59135, -1791);
+            
+          }
+          if(multyplayerSelectionLevels.equals("UGC")){
+            multyplayerSpeedrun.setColor(-59135, -1791);
+            multyplayerCoop.setColor(-59135, -1791);
+            multyplayerUGC.setColor(-59135, -35185);
             
           }
         }else{
