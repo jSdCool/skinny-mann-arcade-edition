@@ -4,6 +4,7 @@ class Player implements Serializable{
   public int pose=1,stage=0;
   int shirt;
   boolean jumping=false,in3D;
+  String name="";
   Player(float X, float Y, float Scale, int Color) {
     x=X;
     y=Y;

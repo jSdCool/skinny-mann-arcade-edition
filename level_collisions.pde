@@ -39,17 +39,14 @@ void stageLevelDraw() {
     }
     players[currentPlayer].in3D=false;
     for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+      if(i==currentPlayer)
+        continue;
       if (players[i].stage==currentStageIndex&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
         draw_mann(Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
         fill(255);
-        String name="";
-        for (int j=0; j<clients.size(); j++) {
-          if (clients.get(j).playernumber==i)
-            name=clients.get(j).name;
-        }
         textSize(15*Scale);
         textAlign(CENTER, CENTER);
-        text(name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*70));
+        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-70));
       }
     }
 
@@ -90,31 +87,23 @@ void stageLevelDraw() {
       }
       players[currentPlayer].in3D=true;
       for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+        if(i==currentPlayer)
+        continue;
         if (players[i].stage==currentStageIndex&&i!=currentPlayer&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
           if (players[i].in3D) {
             draw_mann_3D(players[i].x, players[i].y, players[i].z, players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the players in 3D
             fill(255);
-            String name="";
-            for (int j=0; j<clients.size(); j++) {
-              if (clients.get(j).playernumber==i)
-                name=clients.get(j).name;
-            }
             textSize(15*Scale);
             textAlign(CENTER, CENTER);
             translate(0,0,players[i].z);
-            text(name, (players[i].getX()),(players[i].getY()-70));
+            text(players[i].name, (players[i].getX()),(players[i].getY()-70));
             translate(0,0,-players[i].z);
           } else {
-            draw_mann(Scale*(players[i].getX()), Scale*(players[i].getY()), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players in 2D
+            draw_mann((players[i].getX()), (players[i].getY()), players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the outher players in 2D
             fill(255);
-            String name="";
-            for (int j=0; j<clients.size(); j++) {
-              if (clients.get(j).playernumber==i)
-                name=clients.get(j).name;
-            }
             textSize(15);
             textAlign(CENTER, CENTER);
-            text(name, players[i].getX(), players[i].getY()-70);
+            text(players[i].name, players[i].getX(), players[i].getY()-70);
           }
         }
       }

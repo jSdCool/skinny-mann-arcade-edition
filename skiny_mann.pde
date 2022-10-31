@@ -1389,6 +1389,7 @@ void mouseClicked() {// when you click the mouse
           Menue="multiplayer selection";
           multiplayer = true;
           server= new Server(port);
+          players[0].name=name;
         }
         return;
       }

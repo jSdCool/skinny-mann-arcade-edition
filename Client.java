@@ -166,6 +166,7 @@ class Client extends Thread {
         //System.out.println(readdy);
         dataToSend.add(new ClientInfo(source.name,readdy));
         if(source.inGame){
+          source.players[playernumber].name=source.name;
           dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));
         }
         //create the next packet to send
