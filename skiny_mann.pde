@@ -2345,6 +2345,8 @@ void networkError(Throwable error) {
     clientQuitting=false;
     return;
   }
+  menue=true;
+  inGame=false;
   error.printStackTrace();
   Menue="disconnected";
   disconnectReason=error.toString();
