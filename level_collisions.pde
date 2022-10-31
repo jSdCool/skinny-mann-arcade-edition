@@ -46,7 +46,7 @@ void stageLevelDraw() {
         fill(255);
         textSize(15*Scale);
         textAlign(CENTER, CENTER);
-        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-75));
+        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-85));
       }
     }
 
@@ -96,14 +96,14 @@ void stageLevelDraw() {
             textSize(15*Scale);
             textAlign(CENTER, CENTER);
             translate(0,0,players[i].z);
-            text(players[i].name, (players[i].getX()),(players[i].getY()-75));
+            text(players[i].name, (players[i].getX()),(players[i].getY()-85));
             translate(0,0,-players[i].z);
           } else {
             draw_mann((players[i].getX()), (players[i].getY()), players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the outher players in 2D
             fill(255);
             textSize(15);
             textAlign(CENTER, CENTER);
-            text(players[i].name, players[i].getX(), players[i].getY()-75);
+            text(players[i].name, players[i].getX(), players[i].getY()-85);
           }
         }
       }
@@ -161,7 +161,7 @@ void stageLevelDraw() {
           fill(255);
           textSize(15*Scale);
           textAlign(CENTER, CENTER);
-          text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*75));
+          text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*85));
         }
       }
       draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
