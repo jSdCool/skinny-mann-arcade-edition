@@ -55,14 +55,14 @@ class Client extends Thread {
     try{
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
-        System.out.println("sending "+source.frameCount);
+        //System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
         output.flush();
         output.reset();
         
         //recieve data from client
         Object rawInput = input.readObject();
-        System.out.println("recieved "+source.frameCount);
+        //System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
@@ -72,6 +72,10 @@ class Client extends Thread {
             this.name = ci.name;
             this.readdy=ci.readdy;
             //System.out.println("c "+readdy);
+          }
+          if(di instanceof PlayerPositionInfo){
+           PlayerPositionInfo ppi = (PlayerPositionInfo)di;
+           source.players[playernumber]=ppi.player;
           }
         }
         
@@ -113,7 +117,7 @@ class Client extends Thread {
       while (socket.isConnected()&&!socket.isClosed()) {
         //recieve data from server
         Object rawInput = input.readObject();
-        System.out.println("recieved "+source.frameCount);
+        //System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
@@ -159,13 +163,16 @@ class Client extends Thread {
         }
         
         //outher misolenous processing 
-        System.out.println(readdy);
+        //System.out.println(readdy);
         dataToSend.add(new ClientInfo(source.name,readdy));
+        if(source.inGame){
+          dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));
+        }
         //create the next packet to send
         generateSendPacket();
         
         //send data to server
-        System.out.println("sending "+source.frameCount);
+        //System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
         output.flush();
         output.reset();
