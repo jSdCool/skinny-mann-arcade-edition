@@ -55,14 +55,14 @@ class Client extends Thread {
     try{
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
-        System.out.println("sending");
+        System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
         output.flush();
         output.reset();
         
         //recieve data from client
         Object rawInput = input.readObject();
-        System.out.println("recieved");
+        System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
@@ -113,7 +113,7 @@ class Client extends Thread {
       while (socket.isConnected()&&!socket.isClosed()) {
         //recieve data from server
         Object rawInput = input.readObject();
-        System.out.println("recieved");
+        System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
@@ -165,7 +165,7 @@ class Client extends Thread {
         generateSendPacket();
         
         //send data to server
-        System.out.println("sent");
+        System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
         output.flush();
         output.reset();
