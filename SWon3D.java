@@ -41,7 +41,7 @@ class SWon3D extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch1(((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale);
+    source.draw3DSwitch1(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale);
     if (source.players[source.currentPlayer].x>=(x+group.xOffset)-10&&source.players[source.currentPlayer].x<=(x+group.xOffset)+10&&source.players[source.currentPlayer].y >=(y+group.yOffset)-10&&source.players[source.currentPlayer].y<= (y+group.yOffset)+2) {
       source.players[source.currentPlayer].z=z;
       source.e3DMode=true;

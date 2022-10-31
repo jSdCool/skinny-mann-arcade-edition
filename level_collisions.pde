@@ -46,7 +46,7 @@ void stageLevelDraw() {
         fill(255);
         textSize(15*Scale);
         textAlign(CENTER, CENTER);
-        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-70));
+        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-75));
       }
     }
 
@@ -96,14 +96,14 @@ void stageLevelDraw() {
             textSize(15*Scale);
             textAlign(CENTER, CENTER);
             translate(0,0,players[i].z);
-            text(players[i].name, (players[i].getX()),(players[i].getY()-70));
+            text(players[i].name, (players[i].getX()),(players[i].getY()-75));
             translate(0,0,-players[i].z);
           } else {
             draw_mann((players[i].getX()), (players[i].getY()), players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the outher players in 2D
             fill(255);
             textSize(15);
             textAlign(CENTER, CENTER);
-            text(players[i].name, players[i].getX(), players[i].getY()-70);
+            text(players[i].name, players[i].getX(), players[i].getY()-75);
           }
         }
       }
@@ -154,17 +154,14 @@ void stageLevelDraw() {
       players[currentPlayer].in3D=false;
 
       for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+        if(i==currentPlayer)
+        continue;
         if (players[i].stage==currentStageIndex&&!players[i].in3D&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
           draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
           fill(255);
-          String name="";
-          for (int j=0; j<clients.size(); j++) {
-            if (clients.get(j).playernumber==i)
-              name=clients.get(j).name;
-          }
           textSize(15*Scale);
           textAlign(CENTER, CENTER);
-          text(name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*70));
+          text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*75));
         }
       }
       draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player

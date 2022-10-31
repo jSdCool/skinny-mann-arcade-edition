@@ -41,7 +41,7 @@ class SWoff3D extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch2(((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale);
+    source.draw3DSwitch2(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale);
   }
 
   void draw3D() {
