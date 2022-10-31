@@ -940,12 +940,12 @@ void draw() {// the function that is called every fraim
     try {
       boolean rtg=false;
       for (int i=0; i<clients.size(); i++) {
-        print(clients.get(i).readdy+" ");
+        //print(clients.get(i).readdy+" ");
         if (!clients.get(i).readdy) {
           break;
         }
       }
-      println();
+      //println();
       if (rtg) {
         waitingForReady=false;
         menue=false;
