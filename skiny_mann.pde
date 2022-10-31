@@ -938,10 +938,11 @@ void draw() {// the function that is called every fraim
   //when waiting for clients to be readdy
   if (waitingForReady) {
     try {
-      boolean rtg=false;
+      boolean rtg=true;
       for (int i=0; i<clients.size(); i++) {
         //print(clients.get(i).readdy+" ");
         if (!clients.get(i).readdy) {
+          rtg=false;
           break;
         }
       }

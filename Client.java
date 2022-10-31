@@ -10,7 +10,7 @@ class Client extends Thread {
   String ip="uninitilized",name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
-  boolean versionChecked=false,readdy=false;
+  boolean versionChecked=false,readdy=false,viablePlayers[]=new boolean[10];
   Client(Socket s){
     init(s);
   }
@@ -85,6 +85,14 @@ class Client extends Thread {
              dataToSend.add(source.multyplayerSelectedLevel);
            }
         }
+        if(source.inGame){
+          viablePlayers=new boolean[10];
+          viablePlayers[0]=true;
+          for(int i=0;i<source.clients.size();i++){
+            viablePlayers[source.clients.get(i).playernumber]=true;
+          }
+          dataToSend.add(new PlayerInfo(source.players,viablePlayers));
+        }
         //create the next packet to send
         generateSendPacket();
       }
@@ -135,6 +143,15 @@ class Client extends Thread {
           }
           if(di instanceof CloseMenuRequest){
             source.menue=false;
+          }
+          if(di instanceof PlayerInfo){
+            PlayerInfo pi = (PlayerInfo)di;
+            for(int j=0;j<10;j++){
+              if(j!=playernumber){
+                source.players[j]=pi.players[j];
+              }
+            }
+            viablePlayers=pi.visable;
           }
           
         }
