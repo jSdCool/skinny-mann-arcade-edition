@@ -70,6 +70,7 @@ class Client extends Thread {
             ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
             this.readdy=ci.readdy;
+            //System.out.println("c "+readdy);
           }
         }
         
