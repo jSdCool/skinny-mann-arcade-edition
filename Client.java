@@ -139,6 +139,7 @@ class Client extends Thread {
         }
         
         //outher misolenous processing 
+        System.out.println(readdy);
         dataToSend.add(new ClientInfo(source.name,readdy));
         //create the next packet to send
         generateSendPacket();

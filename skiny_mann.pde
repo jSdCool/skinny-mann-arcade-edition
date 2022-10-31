@@ -940,10 +940,12 @@ void draw() {// the function that is called every fraim
     try {
       boolean rtg=false;
       for (int i=0; i<clients.size(); i++) {
+        print(clients.get(i).readdy+" ");
         if (!clients.get(i).readdy) {
           break;
         }
       }
+      println();
       if (rtg) {
         waitingForReady=false;
         menue=false;
@@ -1443,6 +1445,7 @@ void mouseClicked() {// when you click the mouse
             println("returning to main menu");
             Menue="main";
             multiplayer=false;
+            waitingForReady=false;
             return;
           }
           if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
