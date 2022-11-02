@@ -53,15 +53,22 @@ class Client extends Thread {
   
   void host(){
     try{
+      long sent=0,processStart=0;
+      double sr=0,rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
         //System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
+        sent=System.nanoTime();
         output.flush();
         output.reset();
+        rs=(double)(sent/1000000-processStart/1000000);
+        println("send to recieve: "+sr+"\nrecieve to send: "+rs);
         
         //recieve data from client
         Object rawInput = input.readObject();
+        processStart=System.nanotTime();
+        sr=(double)(processStart/1000000-sent/1000000);
         //System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
@@ -114,10 +121,13 @@ class Client extends Thread {
   
   void joined(){
     try{
+      long sent=0,processStart=0;
+      double sr=0,rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
         //recieve data from server
         Object rawInput = input.readObject();
-        //System.out.println("recieved "+source.frameCount);
+        processStart=System.nanotTime();
+        sr=(double)(processStart/1000000-sent/1000000);
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for(int i=0;i<recieved.data.size();i++){
@@ -175,8 +185,12 @@ class Client extends Thread {
         //send data to server
         //System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
+        sent=System.nanoTime();
         output.flush();
         output.reset();
+        
+        rs=(double)(sent/1000000-processStart/1000000);
+        println("send to recieve: "+sr+"\nrecieve to send: "+rs);
       }
     }catch(java.net.SocketTimeoutException s){
       source.networkError(s);
