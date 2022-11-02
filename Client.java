@@ -67,7 +67,7 @@ class Client extends Thread {
         
         //recieve data from client
         Object rawInput = input.readObject();
-        processStart=System.nanotTime();
+        processStart=System.nanoTime();
         sr=(double)(processStart/1000000-sent/1000000);
         //System.out.println("recieved "+source.frameCount);
         //process input
@@ -126,7 +126,7 @@ class Client extends Thread {
       while (socket.isConnected()&&!socket.isClosed()) {
         //recieve data from server
         Object rawInput = input.readObject();
-        processStart=System.nanotTime();
+        processStart=System.nanoTime();
         sr=(double)(processStart/1000000-sent/1000000);
         //process input
         recieved=(NetworkDataPacket)rawInput;
