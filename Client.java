@@ -63,7 +63,7 @@ class Client extends Thread {
         output.flush();
         output.reset();
         rs=(double)(sent/1000000-processStart/1000000);
-        System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
+        //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
         
         //recieve data from client
         Object rawInput = input.readObject();
@@ -190,7 +190,7 @@ class Client extends Thread {
         output.reset();
         
         rs=(double)(sent/1000000-processStart/1000000);
-        System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
+        //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
       }
     }catch(java.net.SocketTimeoutException s){
       source.networkError(s);
