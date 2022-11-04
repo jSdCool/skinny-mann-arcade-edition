@@ -169,6 +169,10 @@ class Client extends Thread {
             }
             viablePlayers=pi.visable;
           }
+          if(di instanceof BackToMenuRequest){
+            source.menue=true;
+            source.Menue="multiplayer selection";
+          }
           
         }
         

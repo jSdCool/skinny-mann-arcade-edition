@@ -1130,7 +1130,18 @@ void mouseClicked() {// when you click the mouse
           menue=true;
           inGame=false;
           tutorialMode=false;
+          if(multiplayer){
+            if(isHost){
+              Menue="multiplayer selection";
+              multiplayer=false;
+              returnToSlection();
+            }else{
+              Menue="main";
+              multiplayer=false;
+            }
+          }else{
           Menue="level select";
+          }
           soundHandler.setMusicVolume(musicVolume);
           coinCount=0;
         }
@@ -2452,4 +2463,15 @@ void genSelectedInfo(String path) {
   }
 
   multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers);
+}
+
+void returnToSlection(){
+  BackToMenuRequest mrq = new BackToMenuRequest();
+  try{
+    for(int i=0;i<clients.size();i++){
+      clients.get(i).dataToSend.add(mrq);
+    }
+  }catch(Exception e){
+    
+  }
 }
