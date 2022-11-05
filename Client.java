@@ -169,6 +169,7 @@ class Client extends Thread {
             source.menue=false;
             source.bestTime=0;
             source.startTime=source.millis();
+            source.timerEndTime=source.sessionTime+source.millis();
           }
           if(di instanceof PlayerInfo){
             PlayerInfo pi = (PlayerInfo)di;

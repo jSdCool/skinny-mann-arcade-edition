@@ -256,7 +256,7 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10,startTime,bestTime=0,sessionTime=600000;
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10,startTime,bestTime=0,sessionTime=600000,timerEndTime;
 JSONArray  settings, mainIndex, levelProgress;
 Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay,increaseTime,decreaseTime;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
@@ -842,6 +842,8 @@ void draw() {// the function that is called every fraim
       if (level_complete&&!levelCompleteSoundPlayed) {
         if(multiplayer){
           if(level.multyplayerMode==1){
+            players[currentPlayer].setX(-100);
+            players[currentPlayer].setY(-100);
             level.psudoLoad();
             level_complete=false;
             int completeTime=millis()-startTime;
@@ -999,6 +1001,19 @@ void draw() {// the function that is called every fraim
           lb+=leaderBoard.leaderboard[i]+"\n";
         }
         text(lb,width*0.01,height*0.15);
+        String timeLeft=formatMillis(timerEndTime-millis());
+        calcTextSize(timeLeft,width*0.05);
+        text(timeLeft,width*0.01,height*0.12);
+        calcTextSize("Time Left",width*0.05);
+        text("Time Left",width*0.01,height*0.1);
+        if(isHost){
+          if(timerEndTime-millis()<=0){
+           Menue="multiplayer selection";
+           returnToSlection(); 
+           menue=true;
+           inGame=false;
+          }
+        }
         
       }
     }
@@ -1030,6 +1045,7 @@ void draw() {// the function that is called every fraim
           clients.get(i).dataToSend.add(new CloseMenuRequest());
         }
         startTime=millis();
+        timerEndTime=sessionTime+millis();
       }
     }
     catch(Exception e) {
@@ -1209,7 +1225,6 @@ void mouseClicked() {// when you click the mouse
           if(multiplayer){
             if(isHost){
               Menue="multiplayer selection";
-              //multiplayer=false;
               returnToSlection();
             }else{
               Menue="main";
