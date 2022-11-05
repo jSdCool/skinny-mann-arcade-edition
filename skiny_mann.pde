@@ -1133,7 +1133,7 @@ void mouseClicked() {// when you click the mouse
           if(multiplayer){
             if(isHost){
               Menue="multiplayer selection";
-              multiplayer=false;
+              //multiplayer=false;
               returnToSlection();
             }else{
               Menue="main";

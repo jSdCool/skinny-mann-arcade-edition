@@ -136,8 +136,6 @@ void drawSpeakericon(PApplet screen, float x, float y, float scale) {
 }
 
 void drawSoundBox(float x, float y) {
-  fill(#F2C007, 127);
-  rect(x-30, y-30, 60, 60);
 }
 
 void drawLogicButton(PApplet screen, float x, float y, float Scale, boolean pressed) {
