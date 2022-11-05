@@ -159,6 +159,8 @@ class Client extends Thread {
           }
           if(di instanceof CloseMenuRequest){
             source.menue=false;
+            source.bestTime=0;
+            source.startTime=source.millis();
           }
           if(di instanceof PlayerInfo){
             PlayerInfo pi = (PlayerInfo)di;
