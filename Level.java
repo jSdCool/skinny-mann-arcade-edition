@@ -162,10 +162,10 @@ static skiny_mann source;
       groupNames.add("group 0");
       groups.add(new Group());
     }
-    SpawnX=job.getFloat("spawnX");
-    SpawnY=job.getFloat("spawnY");
-    RewspawnX=job.getFloat("spawn pointX");
-    RespawnY=job.getFloat("spawn pointY");
+    SpawnX=hedObj.getFloat("spawnX");
+    SpawnY=hedObj.getFloat("spawnY");
+    RewspawnX=hedObj.getFloat("spawn pointX");
+    RespawnY=hedObj.getFloat("spawn pointY");
     source.currentStageIndex=mainStage;
     source.players[source.currentPlayer].x=SpawnX;
     source.players[source.currentPlayer].y=SpawnY;
@@ -173,7 +173,7 @@ static skiny_mann source;
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;
-    logicBoards.get(level.loadBoard).superTick();
+    logicBoards.get(loadBoard).superTick();
   }
 
   void reloadCoins() {
