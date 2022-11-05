@@ -823,8 +823,15 @@ void draw() {// the function that is called every fraim
       background(7646207);
       stageLevelDraw();
       if (level_complete&&!levelCompleteSoundPlayed) {
-        soundHandler.addToQueue(0);
-        levelCompleteSoundPlayed=true;
+        if(multiplayer){
+          if(level.multyplayerMode==1){
+            level.psudoLoad();
+            level_complete=false;
+          }
+        }else{
+          soundHandler.addToQueue(0);
+          levelCompleteSoundPlayed=true;
+        }
       }
     }
 

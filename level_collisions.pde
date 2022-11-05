@@ -38,6 +38,7 @@ void stageLevelDraw() {
       }
     }
     players[currentPlayer].in3D=false;
+    if(clients.size()>0)
     for (int i=currentNumberOfPlayers-1; i>=0; i--) {
       if(i==currentPlayer)
         continue;
@@ -86,6 +87,7 @@ void stageLevelDraw() {
         }
       }
       players[currentPlayer].in3D=true;
+      if(clients.size()>0)
       for (int i=currentNumberOfPlayers-1; i>=0; i--) {
         if(i==currentPlayer)
         continue;
@@ -152,7 +154,7 @@ void stageLevelDraw() {
       }
 
       players[currentPlayer].in3D=false;
-
+      if(clients.size()>0)
       for (int i=currentNumberOfPlayers-1; i>=0; i--) {
         if(i==currentPlayer)
         continue;

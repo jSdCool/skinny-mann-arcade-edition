@@ -15,6 +15,7 @@ static skiny_mann source;
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
+  JSONObject hedObj;
   
 
   Level(JSONArray file) {
@@ -125,6 +126,54 @@ static skiny_mann source;
       levelCompleteBoard=2;
     }
     System.out.println("level load complete");
+    hedObj=job;
+  }
+  
+  void psudoLoad(){
+    System.out.println("psudo loading level");
+    source.coins=new ArrayList<Boolean>();
+    for (int i=0; i<numOfCoins; i++) {
+      source.coins.add(false);
+    }
+    groups=new ArrayList<>();
+    variables=new ArrayList<>();
+    if (hedObj.isNull("number of variable")) {
+      System.out.println("setting up variables because none exsisted before");
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+      variables.add(false);
+    } else {
+      for (int i=0; i<hedObj.getInt("number of variable"); i++) {
+        variables.add(false);
+      }
+      System.out.println("loaded "+variables.size()+" variables");
+    }
+    if (!hedObj.isNull("groups")) {
+      JSONArray gps= hedObj.getJSONArray("groups");
+      for (int i=0; i<gps.size(); i++) {
+        groupNames.add(gps.getString(i));
+        groups.add(new Group());
+      }
+      System.out.println("loaded "+groups.size()+" groups");
+    } else {
+      System.out.println("no groups found, creating default");
+      groupNames.add("group 0");
+      groups.add(new Group());
+    }
+    SpawnX=job.getFloat("spawnX");
+    SpawnY=job.getFloat("spawnY");
+    RewspawnX=job.getFloat("spawn pointX");
+    RespawnY=job.getFloat("spawn pointY");
+    source.currentStageIndex=mainStage;
+    source.players[source.currentPlayer].x=SpawnX;
+    source.players[source.currentPlayer].y=SpawnY;
+    
+    source.respawnX=(int)RewspawnX;
+    source.respawnY=(int)RespawnY;
+    source.respawnStage=source.currentStageIndex;
+    logicBoards.get(level.loadBoard).superTick();
   }
 
   void reloadCoins() {
