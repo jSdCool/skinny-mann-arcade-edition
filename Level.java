@@ -167,6 +167,10 @@ static skiny_mann source;
     source.players[source.currentPlayer].x=SpawnX;
     source.players[source.currentPlayer].y=SpawnY;
     
+    source.tpCords[0]=SpawnX;
+    source.tpCords[1]=SpawnY;
+    source.setPlayerPosTo=true;
+    
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;
