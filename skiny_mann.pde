@@ -1137,7 +1137,12 @@ void mouseClicked() {// when you click the mouse
               returnToSlection();
             }else{
               Menue="main";
+              println("quitting multyplayer joined");
+              clientQuitting=true;
+              clients.get(0).disconnect();
+              println("returning to main menu");
               multiplayer=false;
+              return;
             }
           }else{
           Menue="level select";
