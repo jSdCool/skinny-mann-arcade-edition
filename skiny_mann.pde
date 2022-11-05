@@ -951,7 +951,7 @@ void draw() {// the function that is called every fraim
         if(isHost){
           BestScore[] scores=new BestScore[10];
           for(int i=0;i<10;i++){
-            scores[i]=new BestScore("",0);
+            scores[i]=new BestScore("",Integer.MAX_VALUE);
           }
           scores[0]=new BestScore(name,bestTime);
           int j=1;
@@ -961,7 +961,7 @@ void draw() {// the function that is called every fraim
           }
           for(int i=0;i<9;i++){//lazyest bubble sort ever
             for(j=0;j<9;j++){
-              if(scores[j].score<scores[j+1].score){
+              if(scores[j].score>scores[j+1].score){
                 BestScore tmp =scores[j+1];
                 scores[j+1]=scores[j];
                 scores[j]=tmp;
