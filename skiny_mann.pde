@@ -124,7 +124,7 @@ void setup() {//seccond function called
     players[9]=new Player(20, 699, 1, 9);
 
 
-    textSize(500);
+    textSize(100*Scale);//500
     select_lvl_1=new Button(this, (100*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 1", -59135, -1791).setStrokeWeight( (10*Scale));
     select_lvl_back=new Button(this, (100*Scale), (600*Scale), (200*Scale), (50*Scale), "back", -59135, -1791).setStrokeWeight( (10*Scale));
     discord=new Button(this, (1190*Scale), (640*Scale), (70*Scale), (70*Scale), -59135, -1791).setStrokeWeight( (10*Scale));
@@ -961,7 +961,7 @@ void draw() {// the function that is called every fraim
           }
           for(int i=0;i<9;i++){//lazyest bubble sort ever
             for(j=0;j<9;j++){
-              if(scores[j].score>scores[j+1].score){
+              if(scores[j].score<scores[j+1].score&&scores[j].score==0){
                 BestScore tmp =scores[j+1];
                 scores[j+1]=scores[j];
                 scores[j]=tmp;
@@ -1013,6 +1013,7 @@ void draw() {// the function that is called every fraim
         for (int i=0; i<clients.size(); i++) {
           clients.get(i).dataToSend.add(new CloseMenuRequest());
         }
+        startTime=millis();
       }
     }
     catch(Exception e) {
