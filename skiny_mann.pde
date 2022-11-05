@@ -58,7 +58,7 @@ void setup() {//seccond function called
       Scale=vres/720.0;
       Scale2=hres/1280.0;
     }
-    println(height);//debung info
+    println(height+" "+Scale);//debung info
 
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
     CBi.resize((int)(500*Scale), (int)(500*Scale));//scale the CBi logo
@@ -77,7 +77,7 @@ void setup() {//seccond function called
     esdPos=(int)(((eadgeScroleDist-100.0)/530)*440+800);
     eadgeScroleDistV=scroll.getInt("vertical");
     vesdPos=(int)(((eadgeScroleDistV-100.0)/250)*440+800);
-    println(esdPos+" "+eadgeScroleDist+" "+vesdPos+" "+eadgeScroleDistV);
+    //println(esdPos+" "+eadgeScroleDist+" "+vesdPos+" "+eadgeScroleDistV);
     //((esdPos-800.0)/440)*250)+100
     //scroll_left = scroll.getInt("value_left");//set the screen scrolling locations
     //scroll_right = scroll.getInt("value_right");
