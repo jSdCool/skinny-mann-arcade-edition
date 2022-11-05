@@ -21,6 +21,7 @@ static skiny_mann source;
   Level(JSONArray file) {
     System.out.println("loading level");
     JSONObject job =file.getJSONObject(0);
+    hedObj=job;
     mainStage=job.getInt("mainStage");
     numOfCoins=job.getInt("coins");
     levelID=job.getInt("level_id");
@@ -126,7 +127,7 @@ static skiny_mann source;
       levelCompleteBoard=2;
     }
     System.out.println("level load complete");
-    hedObj=job;
+    
   }
   
   void psudoLoad(){
@@ -162,10 +163,6 @@ static skiny_mann source;
       groupNames.add("group 0");
       groups.add(new Group());
     }
-    SpawnX=hedObj.getFloat("spawnX");
-    SpawnY=hedObj.getFloat("spawnY");
-    RewspawnX=hedObj.getFloat("spawn pointX");
-    RespawnY=hedObj.getFloat("spawn pointY");
     source.currentStageIndex=mainStage;
     source.players[source.currentPlayer].x=SpawnX;
     source.players[source.currentPlayer].y=SpawnY;

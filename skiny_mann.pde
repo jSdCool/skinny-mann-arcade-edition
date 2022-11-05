@@ -1481,8 +1481,9 @@ void mouseClicked() {// when you click the mouse
                 genSelectedInfo(multyplayerSelectedLevelPath);
               }
             }
+            return;
           }
-          if (gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+          if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             if (multyplayerPlay.isMouseOver()) {
               if (multyplayerSelectionLevels.equals("speed")) {
                 LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
