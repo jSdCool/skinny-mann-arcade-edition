@@ -270,6 +270,7 @@ SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
 LeaderBoard leaderBoard= new LeaderBoard(new String[]{"","","","","","","","","",""});
 //▄
 void draw() {// the function that is called every fraim
+println(System.nanoTime());
   if (frameCount%20==0) {
     cursor="|";
   }
@@ -951,7 +952,7 @@ void draw() {// the function that is called every fraim
         if(isHost){
           BestScore[] scores=new BestScore[10];
           for(int i=0;i<10;i++){
-            scores[i]=new BestScore("",Integer.MAX_VALUE);
+            scores[i]=new BestScore("",0);
           }
           scores[0]=new BestScore(name,bestTime);
           int j=1;
