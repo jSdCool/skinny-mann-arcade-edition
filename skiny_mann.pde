@@ -267,6 +267,7 @@ ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
 Server server;
 SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
+LeaderBoard leaderBoard= new LeaderBoard(new String[]{"","","","","","","","","",""});
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -828,7 +829,8 @@ void draw() {// the function that is called every fraim
             level.psudoLoad();
             level_complete=false;
             int completeTime=millis()-startTime;
-            if(completeTime>bestTime){
+            println("completed in: "+completeTime+" "+formatMillis(completeTime));
+            if(completeTime<bestTime||bestTime==0){
               bestTime=completeTime;
             }
             startTime=millis();
@@ -944,6 +946,44 @@ void draw() {// the function that is called every fraim
         calcTextSize(curtime,width*0.06);
         textAlign(CENTER,CENTER);
         text(curtime,width/2,height*0.015);
+        
+        
+        if(isHost){
+          BestScore[] scores=new BestScore[10];
+          for(int i=0;i<10;i++){
+            scores[i]=new BestScore("",0);
+          }
+          scores[0]=new BestScore(name,bestTime);
+          int j=1;
+          for(int i=0;i<clients.size();i++){
+            scores[j]=clients.get(i).bestScore;
+            j++;
+          }
+          for(int i=0;i<9;i++){//lazyest bubble sort ever
+            for(j=0;j<9;j++){
+              if(scores[j].score<scores[j+1].score){
+                BestScore tmp =scores[j+1];
+                scores[j+1]=scores[j];
+                scores[j]=tmp;
+              }
+            }
+          }
+          String []times={"","","","","","","","","",""};
+          for(int i=0;i<10;i++){
+            if(!scores[i].name.equals("")){
+              times[i]=scores[i].name+": "+formatMillis(scores[i].score);
+            }
+          }
+          leaderBoard=new LeaderBoard(times);
+        }
+        calcTextSize("12345678910",width*0.06);
+        textAlign(LEFT,TOP);
+        String lb ="Leader Board\n";
+        for(int i=0;i<leaderBoard.leaderboard.length;i++){
+          lb+=leaderBoard.leaderboard[i]+"\n";
+        }
+        text(lb,width*0.01,height*0.15);
+        
       }
     }
     

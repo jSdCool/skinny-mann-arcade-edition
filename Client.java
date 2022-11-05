@@ -11,6 +11,7 @@ class Client extends Thread {
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
   boolean versionChecked=false,readdy=false,viablePlayers[]=new boolean[10];
+  BestScore bestScore=new BestScore("",0);
   Client(Socket s){
     init(s);
   }
@@ -84,6 +85,9 @@ class Client extends Thread {
            PlayerPositionInfo ppi = (PlayerPositionInfo)di;
            source.players[playernumber]=ppi.player;
           }
+          if(di instanceof BestScore){
+            bestScore=(BestScore)di;
+          }
         }
         
         ArrayList<String> names=new ArrayList<>();
@@ -104,6 +108,9 @@ class Client extends Thread {
             viablePlayers[source.clients.get(i).playernumber]=true;
           }
           dataToSend.add(new PlayerInfo(source.players,viablePlayers));
+          if(source.level.multyplayerMode==1){
+            dataToSend.add(source.leaderBoard);
+          }
         }
         //create the next packet to send
         generateSendPacket();
@@ -175,6 +182,11 @@ class Client extends Thread {
             source.menue=true;
             source.Menue="multiplayer selection";
           }
+          if(di instanceof LeaderBoard){
+            LeaderBoard lb = (LeaderBoard)di;
+            source.leaderBoard=lb;
+          }
+          
           
         }
         
@@ -184,6 +196,9 @@ class Client extends Thread {
         if(source.inGame){
           source.players[playernumber].name=source.name;
           dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));
+          if(source.level.multyplayerMode==1){
+              dataToSend.add(new BestScore(source.name,source.bestTime));
+          }
         }
         //create the next packet to send
         generateSendPacket();
