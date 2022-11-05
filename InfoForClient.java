@@ -4,10 +4,12 @@ class InfoForClient extends DataPacket{
   ArrayList<String> playerNames;
   String hostVersion;
   boolean inGame=false;
-  InfoForClient(int number,ArrayList<String> names,String version,boolean inGame){
+  int sessionTime;
+  InfoForClient(int number,ArrayList<String> names,String version,boolean inGame,int time){
     playerNumber=number;
     playerNames=names;
     hostVersion=version;
     this.inGame=inGame;
+    sessionTime=time;
   }
 }

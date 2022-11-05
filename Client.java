@@ -95,7 +95,7 @@ class Client extends Thread {
         for(int i=0;i<source.clients.size();i++){
           names.add(source.clients.get(i).name);
         }
-        dataToSend.add(new InfoForClient(playernumber,names,source.version,source.inGame));
+        dataToSend.add(new InfoForClient(playernumber,names,source.version,source.inGame,source.sessionTime));
         if(source.menue){
            if(source.Menue.equals("multiplayer selection")){
              dataToSend.add(source.multyplayerSelectedLevel);
@@ -152,6 +152,7 @@ class Client extends Thread {
               }
             }
             source.inGame=ifc.inGame;
+            source.sessionTime=ifc.sessionTime;
           }
           if(di instanceof SelectedLevelInfo){
             SelectedLevelInfo sli = (SelectedLevelInfo)di;

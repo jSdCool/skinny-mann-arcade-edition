@@ -190,8 +190,10 @@ void setup() {//seccond function called
 
     multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
     multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
-    multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale);
+    multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale).setHoverText("coming soon");
     multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
+    increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
+    decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
 
     soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
     soundHandler.setMusicVolume(0);
@@ -254,9 +256,9 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10,startTime,bestTime=0;
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10,startTime,bestTime=0,sessionTime=600000;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay,increaseTime,decreaseTime;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -270,7 +272,6 @@ SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
 LeaderBoard leaderBoard= new LeaderBoard(new String[]{"","","","","","","","","",""});
 //▄
 void draw() {// the function that is called every fraim
-println(System.nanoTime());
   if (frameCount%20==0) {
     cursor="|";
   }
@@ -748,11 +749,24 @@ println(System.nanoTime());
             text("Max players: "+multyplayerSelectedLevel.maxPlayers, width*0.81, height*0.3);
             text("Min players: "+multyplayerSelectedLevel.minPlayers, width*0.81, height*0.32);
           }
+          if (multyplayerSelectedLevel.multyplayerMode==1) {
+            textAlign(CENTER,CENTER);
+            calcTextSize("time to complete",width*0.96609375-width*0.8463194444);
+            text("time to complete",width*0.901,height*0.68);
+            String time = formatMillis(sessionTime);
+            calcTextSize(time,width*0.96609375-width*0.8463194444);
+            text(time,width*0.901,height*0.72);
+          }
           if (!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
-            if (isHost)
+            if (isHost){
               multyplayerPlay.draw();
+              if (multyplayerSelectedLevel.multyplayerMode==1) {
+                increaseTime.draw();
+                decreaseTime.draw();
+              }
+            }
           }
         }
 
@@ -804,6 +818,7 @@ println(System.nanoTime());
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -35185);
           }
+          
         } else {
           for (int i=0; i<playerNames.size(); i++) {
             calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
@@ -1549,6 +1564,16 @@ void mouseClicked() {// when you click the mouse
               }
             }
           }
+          if (multyplayerSelectedLevel.multyplayerMode==1) {
+            if(increaseTime.isMouseOver()){
+              sessionTime+=30000;
+            }
+            if(decreaseTime.isMouseOver()){
+              if(sessionTime>30000)
+                sessionTime-=30000;
+            }
+          }
+            
         } else {//if joined
           if (multyplayerLeave.isMouseOver()) {
             println("quitting multyplayer joined");
