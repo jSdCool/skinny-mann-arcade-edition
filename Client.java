@@ -95,7 +95,7 @@ class Client extends Thread {
         for(int i=0;i<source.clients.size();i++){
           names.add(source.clients.get(i).name);
         }
-        dataToSend.add(new InfoForClient(playernumber,names,source.version,source.inGame,source.sessionTime));
+        dataToSend.add(new InfoForClient(playernumber,names,source.version,source.inGame||(source.prevousInGame&&source.Menue.equals("settings")),source.sessionTime));
         if(source.menue){
            if(source.Menue.equals("multiplayer selection")){
              dataToSend.add(source.multyplayerSelectedLevel);
@@ -151,6 +151,7 @@ class Client extends Thread {
                 throw new IOException("host and client are not on the same version\nhost is on "+ifc.hostVersion);
               }
             }
+            if(!source.prevousInGame)
             source.inGame=ifc.inGame;
             source.sessionTime=ifc.sessionTime;
           }
@@ -183,6 +184,7 @@ class Client extends Thread {
           if(di instanceof BackToMenuRequest){
             source.menue=true;
             source.Menue="multiplayer selection";
+            source.prevousInGame=false;
           }
           if(di instanceof LeaderBoard){
             LeaderBoard lb = (LeaderBoard)di;
