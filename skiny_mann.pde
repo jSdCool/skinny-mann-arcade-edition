@@ -759,7 +759,7 @@ void draw() {// the function that is called every fraim
             calcTextSize(time,width*0.96609375-width*0.8463194444);
             text(time,width*0.901,height*0.72);
           }
-          if (!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+          if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
             if (isHost){
