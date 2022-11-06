@@ -7,38 +7,39 @@ class Client extends Thread {
   Socket socket;
   ObjectOutputStream output;
   ObjectInputStream input;
-  String ip="uninitilized",name="uninitilized";
+  String ip="uninitilized", name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
-  NetworkDataPacket toSend=new NetworkDataPacket(),recieved;
-  boolean versionChecked=false,readdy=false,viablePlayers[]=new boolean[10];
-  BestScore bestScore=new BestScore("",0);
-  Client(Socket s){
+  NetworkDataPacket toSend=new NetworkDataPacket(), recieved;
+  boolean versionChecked=false, readdy=false, viablePlayers[]=new boolean[10];
+  BestScore bestScore=new BestScore("", 0);
+  Client(Socket s) {
     init(s);
   }
-  Client(Socket s,int num){
+  Client(Socket s, int num) {
     super("client number "+num);
     playernumber=num;
     init(s);
   }
-  
-  void init(Socket s){
+
+  void init(Socket s) {
     System.out.println("creating new client");
-    try{
+    try {
       socket=s;
       output=new ObjectOutputStream(socket.getOutputStream());
       input = new ObjectInputStream(socket.getInputStream());
       socket.setSoTimeout(5000);
-    }catch(Exception i){
+    }
+    catch(Exception i) {
       disconnect();
       source.networkError(i);
       return;
     }
-    
+
     ip=socket.getInetAddress().toString();
     System.out.println(ip);
     start();
   }
-  
+
   public void run() {
     if (source.isHost) {
       //if this instance is the host of a multyplayer cession
@@ -51,11 +52,11 @@ class Client extends Thread {
     }
     disconnect();
   }
-  
-  void host(){
-    try{
-      long sent=0,processStart=0;
-      double sr=0,rs=0;
+
+  void host() {
+    try {
+      long sent=0, processStart=0;
+      double sr=0, rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
         //System.out.println("sending "+source.frameCount);
@@ -65,7 +66,7 @@ class Client extends Thread {
         output.reset();
         rs=(double)(sent/1000000-processStart/1000000);
         //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
-        
+
         //recieve data from client
         Object rawInput = input.readObject();
         processStart=System.nanoTime();
@@ -73,63 +74,63 @@ class Client extends Thread {
         //System.out.println("recieved "+source.frameCount);
         //process input
         recieved=(NetworkDataPacket)rawInput;
-        for(int i=0;i<recieved.data.size();i++){
+        for (int i=0; i<recieved.data.size(); i++) {
           DataPacket di = recieved.data.get(i);
-          if(di instanceof ClientInfo){
+          if (di instanceof ClientInfo) {
             ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
             this.readdy=ci.readdy;
             //System.out.println("c "+readdy);
           }
-          if(di instanceof PlayerPositionInfo){
-           PlayerPositionInfo ppi = (PlayerPositionInfo)di;
-           source.players[playernumber]=ppi.player;
+          if (di instanceof PlayerPositionInfo) {
+            PlayerPositionInfo ppi = (PlayerPositionInfo)di;
+            source.players[playernumber]=ppi.player;
           }
-          if(di instanceof BestScore){
+          if (di instanceof BestScore) {
             bestScore=(BestScore)di;
           }
         }
-        
+
         ArrayList<String> names=new ArrayList<>();
         names.add(source.name);
-        for(int i=0;i<source.clients.size();i++){
+        for (int i=0; i<source.clients.size(); i++) {
           names.add(source.clients.get(i).name);
         }
-        dataToSend.add(new InfoForClient(playernumber,names,source.version,source.inGame||(source.prevousInGame&&source.Menue.equals("settings")),source.sessionTime));
-        if(source.menue){
-           if(source.Menue.equals("multiplayer selection")){
-             dataToSend.add(source.multyplayerSelectedLevel);
-           }
+        dataToSend.add(new InfoForClient(playernumber, names, source.version, source.inGame||(source.prevousInGame&&source.Menue.equals("settings")), source.sessionTime));
+        if (source.menue) {
+          if (source.Menue.equals("multiplayer selection")) {
+            dataToSend.add(source.multyplayerSelectedLevel);
+          }
         }
-        if(source.inGame){
+        if (source.inGame) {
           viablePlayers=new boolean[10];
           viablePlayers[0]=true;
-          for(int i=0;i<source.clients.size();i++){
+          for (int i=0; i<source.clients.size(); i++) {
             viablePlayers[source.clients.get(i).playernumber]=true;
           }
-          dataToSend.add(new PlayerInfo(source.players,viablePlayers));
-          if(source.level.multyplayerMode==1){
+          dataToSend.add(new PlayerInfo(source.players, viablePlayers));
+          if (source.level.multyplayerMode==1) {
             dataToSend.add(source.leaderBoard);
           }
         }
         //create the next packet to send
         generateSendPacket();
       }
-    }catch(java.net.SocketTimeoutException s){
-      
-    
-    }catch(IOException i){
+    }
+    catch(java.net.SocketTimeoutException s) {
+    }
+    catch(IOException i) {
       //source.networkError(i);
     }
-    catch(ClassNotFoundException c){
+    catch(ClassNotFoundException c) {
       //source.networkError(c);
     }
   }
-  
-  void joined(){
-    try{
-      long sent=0,processStart=0;
-      double sr=0,rs=0;
+
+  void joined() {
+    try {
+      long sent=0, processStart=0;
+      double sr=0, rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
         //recieve data from server
         Object rawInput = input.readObject();
@@ -137,112 +138,134 @@ class Client extends Thread {
         sr=(double)(processStart/1000000-sent/1000000);
         //process input
         recieved=(NetworkDataPacket)rawInput;
-        for(int i=0;i<recieved.data.size();i++){
+        for (int i=0; i<recieved.data.size(); i++) {
           DataPacket di = recieved.data.get(i);
-          if(di instanceof InfoForClient){
+          if (di instanceof InfoForClient) {
             InfoForClient ifc = (InfoForClient)di;
             source.playerNames=ifc.playerNames;
             playernumber=ifc.playerNumber;
             source.currentPlayer=playernumber;
-            if(!versionChecked){
-              if(source.version.equals(ifc.hostVersion)){
+            if (!versionChecked) {
+              if (source.version.equals(ifc.hostVersion)) {
                 versionChecked=true;
-              }else{
+              } else {
                 throw new IOException("host and client are not on the same version\nhost is on "+ifc.hostVersion);
               }
             }
-            if(!source.prevousInGame)
-            source.inGame=ifc.inGame;
+            if (!source.prevousInGame)
+              source.inGame=ifc.inGame;
             source.sessionTime=ifc.sessionTime;
           }
-          if(di instanceof SelectedLevelInfo){
+          if (di instanceof SelectedLevelInfo) {
             SelectedLevelInfo sli = (SelectedLevelInfo)di;
             source.multyplayerSelectedLevel=sli;
           }
-          if(di instanceof LoadLevelRequest){
+          if (di instanceof LoadLevelRequest) {
             LoadLevelRequest llr = (LoadLevelRequest)di;
-            if(llr.isBuiltIn){
+            if (llr.isBuiltIn) {
               source.loadLevel(llr.path);
               readdy=true;
             }
           }
-          if(di instanceof CloseMenuRequest){
+          if (di instanceof CloseMenuRequest) {
             source.menue=false;
             source.bestTime=0;
             source.startTime=source.millis();
             source.timerEndTime=source.sessionTime+source.millis();
           }
-          if(di instanceof PlayerInfo){
+          if (di instanceof PlayerInfo) {
             PlayerInfo pi = (PlayerInfo)di;
-            for(int j=0;j<10;j++){
-              if(j!=playernumber){
+            for (int j=0; j<10; j++) {
+              if (j!=playernumber) {
                 source.players[j]=pi.players[j];
               }
             }
             viablePlayers=pi.visable;
           }
-          if(di instanceof BackToMenuRequest){
+          if (di instanceof BackToMenuRequest) {
             source.menue=true;
             source.Menue="multiplayer selection";
             source.prevousInGame=false;
           }
-          if(di instanceof LeaderBoard){
+          if (di instanceof LeaderBoard) {
             LeaderBoard lb = (LeaderBoard)di;
             source.leaderBoard=lb;
           }
-          
-          
         }
-        
-        //outher misolenous processing 
+
+        //outher misolenous processing
         //System.out.println(readdy);
-        dataToSend.add(new ClientInfo(source.name,readdy));
-        if(source.inGame){
+        dataToSend.add(new ClientInfo(source.name, readdy));
+        if (source.inGame) {
           source.players[playernumber].name=source.name;
           dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));
-          if(source.level.multyplayerMode==1){
-              dataToSend.add(new BestScore(source.name,source.bestTime));
+          if (source.level.multyplayerMode==1) {
+            dataToSend.add(new BestScore(source.name, source.bestTime));
           }
         }
         //create the next packet to send
         generateSendPacket();
-        
+
         //send data to server
         //System.out.println("sending "+source.frameCount);
         output.writeObject(toSend);
         sent=System.nanoTime();
         output.flush();
         output.reset();
-        
+
         rs=(double)(sent/1000000-processStart/1000000);
         //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
       }
-    }catch(java.net.SocketTimeoutException s){
+    }
+    catch(java.net.SocketTimeoutException s) {
       source.networkError(s);
-    }catch(IOException i){
+    }
+    catch(IOException i) {
       source.networkError(i);
-    }catch(ClassNotFoundException c){
+    }
+    catch(ClassNotFoundException c) {
       source.networkError(c);
     }
   }
-  
-  void disconnect(){
+
+  void disconnect() {
     System.out.println("disconnecting client "+ip);
-    try{source.clients.remove(this);}catch(Exception e){}
-    try{output.close();}catch(Exception e){System.out.println("output stream close failed");e.printStackTrace();}
-    try{input.close();}catch(Exception e){System.out.println("input stream close failed");e.printStackTrace();}
-    try{socket.close();}catch(Exception e){System.out.println("socket close failed");e.printStackTrace();}
-  }
-  
-  public String toString(){
-    return "client thread "+ip;
-  }
-  
-  void generateSendPacket(){
-    toSend=new NetworkDataPacket();
-    while(dataToSend.size()>0){
-      toSend.data.add(dataToSend.remove(0));
+    try {
+      source.clients.remove(this);
+    }
+    catch(Exception e) {
+    }
+    try {
+      output.close();
+    }
+    catch(Exception e) {
+      System.out.println("output stream close failed");
+      e.printStackTrace();
+    }
+    try {
+      input.close();
+    }
+    catch(Exception e) {
+      System.out.println("input stream close failed");
+      e.printStackTrace();
+    }
+    try {
+      socket.close();
+    }
+    catch(Exception e) {
+      System.out.println("socket close failed");
+      e.printStackTrace();
     }
   }
 
+  public String toString() {
+    return "client thread "+ip;
+  }
+
+  void generateSendPacket() {
+    toSend=new NetworkDataPacket();
+    while (dataToSend.size()>0) {
+      toSend.data.add(dataToSend.remove(0));
+    }
+  }
 }

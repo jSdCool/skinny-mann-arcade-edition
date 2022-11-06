@@ -1,7 +1,7 @@
-class LoadLevelRequest extends DataPacket{
+class LoadLevelRequest extends DataPacket {
   boolean isBuiltIn=false;
   String path;
-  LoadLevelRequest(boolean bi,String location){
+  LoadLevelRequest(boolean bi, String location) {
     isBuiltIn=bi;
     path=location;
   }

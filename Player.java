@@ -1,9 +1,9 @@
 import java.io.Serializable;
-class Player implements Serializable{
+class Player implements Serializable {
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
-  public int pose=1,stage=0;
+  public int pose=1, stage=0;
   int shirt;
-  boolean jumping=false,in3D;
+  boolean jumping=false, in3D;
   String name="";
   Player(float X, float Y, float Scale, int Color) {
     x=X;

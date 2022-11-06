@@ -38,18 +38,18 @@ void stageLevelDraw() {
       }
     }
     players[currentPlayer].in3D=false;
-    if(clients.size()>0)
-    for (int i=currentNumberOfPlayers-1; i>=0; i--) {
-      if(i==currentPlayer)
-        continue;
-      if (players[i].stage==currentStageIndex&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
-        draw_mann(Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
-        fill(255);
-        textSize(15*Scale);
-        textAlign(CENTER, CENTER);
-        text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-85));
+    if (clients.size()>0)
+      for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+        if (i==currentPlayer)
+          continue;
+        if (players[i].stage==currentStageIndex&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
+          draw_mann(Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+          fill(255);
+          textSize(15*Scale);
+          textAlign(CENTER, CENTER);
+          text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-85));
+        }
       }
-    }
 
     draw_mann(Scale*(players[currentPlayer].getX()-drawCamPosX), Scale*(players[currentPlayer].getY()+drawCamPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw this users player
     players[currentPlayer].stage=currentStageIndex;
@@ -87,28 +87,28 @@ void stageLevelDraw() {
         }
       }
       players[currentPlayer].in3D=true;
-      if(clients.size()>0)
-      for (int i=currentNumberOfPlayers-1; i>=0; i--) {
-        if(i==currentPlayer)
-        continue;
-        if (players[i].stage==currentStageIndex&&i!=currentPlayer&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
-          if (players[i].in3D) {
-            draw_mann_3D(players[i].x, players[i].y, players[i].z, players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the players in 3D
-            fill(255);
-            textSize(15*Scale);
-            textAlign(CENTER, CENTER);
-            translate(0,0,players[i].z);
-            text(players[i].name, (players[i].getX()),(players[i].getY()-85));
-            translate(0,0,-players[i].z);
-          } else {
-            draw_mann((players[i].getX()), (players[i].getY()), players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the outher players in 2D
-            fill(255);
-            textSize(15);
-            textAlign(CENTER, CENTER);
-            text(players[i].name, players[i].getX(), players[i].getY()-85);
+      if (clients.size()>0)
+        for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+          if (i==currentPlayer)
+            continue;
+          if (players[i].stage==currentStageIndex&&i!=currentPlayer&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
+            if (players[i].in3D) {
+              draw_mann_3D(players[i].x, players[i].y, players[i].z, players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the players in 3D
+              fill(255);
+              textSize(15*Scale);
+              textAlign(CENTER, CENTER);
+              translate(0, 0, players[i].z);
+              text(players[i].name, (players[i].getX()), (players[i].getY()-85));
+              translate(0, 0, -players[i].z);
+            } else {
+              draw_mann((players[i].getX()), (players[i].getY()), players[i].getPose(), players[i].getScale(), players[i].getColor());//draw the outher players in 2D
+              fill(255);
+              textSize(15);
+              textAlign(CENTER, CENTER);
+              text(players[i].name, players[i].getX(), players[i].getY()-85);
+            }
           }
         }
-      }
 
       draw_mann_3D(players[currentPlayer].x, players[currentPlayer].y, players[currentPlayer].z, players[currentPlayer].getPose(), players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
       players[currentPlayer].stage=currentStageIndex;
@@ -154,18 +154,18 @@ void stageLevelDraw() {
       }
 
       players[currentPlayer].in3D=false;
-      if(clients.size()>0)
-      for (int i=currentNumberOfPlayers-1; i>=0; i--) {
-        if(i==currentPlayer)
-        continue;
-        if (players[i].stage==currentStageIndex&&!players[i].in3D&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
-          draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
-          fill(255);
-          textSize(15*Scale);
-          textAlign(CENTER, CENTER);
-          text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*85));
+      if (clients.size()>0)
+        for (int i=currentNumberOfPlayers-1; i>=0; i--) {
+          if (i==currentPlayer)
+            continue;
+          if (players[i].stage==currentStageIndex&&!players[i].in3D&&clients.get(0).viablePlayers[i]) {//if this player is on the same stage as the userser then
+            draw_mann(Scale*(players[i].getX()-camPos), Scale*(players[i].getY()+camPosY), players[i].getPose(), Scale*players[i].getScale(), players[i].getColor());//draw the outher players
+            fill(255);
+            textSize(15*Scale);
+            textAlign(CENTER, CENTER);
+            text(players[i].name, Scale*(players[i].getX()-drawCamPosX), Scale*(players[i].getY()+drawCamPosY-Scale*85));
+          }
         }
-      }
       draw_mann(Scale*(players[currentPlayer].getX()-camPos), Scale*(players[currentPlayer].getY()+camPosY), players[currentPlayer].getPose(), Scale*players[currentPlayer].getScale(), players[currentPlayer].getColor());//draw the player
       players[currentPlayer].stage=currentStageIndex;
     }

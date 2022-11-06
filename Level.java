@@ -4,8 +4,8 @@ import processing.data.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class Level implements Serializable{
-static skiny_mann source;
+class Level implements Serializable {
+  static skiny_mann source;
   public ArrayList<Stage> stages=new ArrayList<>();
   public ArrayList<LogicBoard> logicBoards=new ArrayList<>();
   public ArrayList<Boolean> variables=new ArrayList<>();
@@ -16,7 +16,7 @@ static skiny_mann source;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
   JSONObject hedObj;
-  
+
 
   Level(JSONArray file) {
     System.out.println("loading level");
@@ -59,16 +59,16 @@ static skiny_mann source;
       groupNames.add("group 0");
       groups.add(new Group());
     }
-    if(!job.isNull("multyplayer mode")){
+    if (!job.isNull("multyplayer mode")) {
       multyplayerMode=job.getInt("multyplayer mode");
     }
-    if(!job.isNull("max players")){
+    if (!job.isNull("max players")) {
       maxPLayers=job.getInt("max players");
     }
-    if(!job.isNull("min players")){
+    if (!job.isNull("min players")) {
       minPlayers=job.getInt("min players");
     }
-    for(int i=0;i<10;i++){
+    for (int i=0; i<10; i++) {
       source.players[i].x=SpawnX;
       source.players[i].y=SpawnY;
     }
@@ -127,10 +127,9 @@ static skiny_mann source;
       levelCompleteBoard=2;
     }
     System.out.println("level load complete");
-    
   }
-  
-  void psudoLoad(){
+
+  void psudoLoad() {
     System.out.println("psudo loading level");
     source.coins=new ArrayList<Boolean>();
     for (int i=0; i<numOfCoins; i++) {
@@ -166,11 +165,11 @@ static skiny_mann source;
     source.currentStageIndex=mainStage;
     source.players[source.currentPlayer].x=SpawnX;
     source.players[source.currentPlayer].y=SpawnY;
-    
+
     source.tpCords[0]=SpawnX;
     source.tpCords[1]=SpawnY;
     source.setPlayerPosTo=true;
-    
+
     source.respawnX=(int)RewspawnX;
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;

@@ -61,7 +61,7 @@ void setup() {//seccond function called
     println(height+" "+Scale);//debung info
 
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
-   // CBi.resize((int)(500*Scale), (int)(500*Scale));//scale the CBi logo
+    // CBi.resize((int)(500*Scale), (int)(500*Scale));//scale the CBi logo
 
     textSize(100*Scale);//500
     initButtons();
@@ -70,7 +70,6 @@ void setup() {//seccond function called
     ptsH=100;
     initializeSphere(ptsW, ptsH);
     thread("programLoad");
-    
   }
   catch(Throwable e) {
     println("an error occored in the setup function");
@@ -81,7 +80,7 @@ void setup() {//seccond function called
 PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false,loaded=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false;
  String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access_T1", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
@@ -90,9 +89,9 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10,startTime,bestTime=0,sessionTime=600000,timerEndTime;
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime;
 JSONArray  settings, mainIndex, levelProgress;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay,increaseTime,decreaseTime,pauseRestart;
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart;
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -103,7 +102,7 @@ ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
 Server server;
 SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
-LeaderBoard leaderBoard= new LeaderBoard(new String[]{"","","","","","","","","",""});
+LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", "", "", "", ""});
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -584,17 +583,17 @@ void draw() {// the function that is called every fraim
             text("Min players: "+multyplayerSelectedLevel.minPlayers, width*0.81, height*0.32);
           }
           if (multyplayerSelectedLevel.multyplayerMode==1) {
-            textAlign(CENTER,CENTER);
-            calcTextSize("time to complete",width*0.96609375-width*0.8463194444);
-            text("time to complete",width*0.901,height*0.68);
+            textAlign(CENTER, CENTER);
+            calcTextSize("time to complete", width*0.96609375-width*0.8463194444);
+            text("time to complete", width*0.901, height*0.68);
             String time = formatMillis(sessionTime);
-            calcTextSize(time,width*0.96609375-width*0.8463194444);
-            text(time,width*0.901,height*0.72);
+            calcTextSize(time, width*0.96609375-width*0.8463194444);
+            text(time, width*0.901, height*0.72);
           }
           if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
-            if (isHost){
+            if (isHost) {
               multyplayerPlay.draw();
               if (multyplayerSelectedLevel.multyplayerMode==1) {
                 increaseTime.draw();
@@ -652,7 +651,6 @@ void draw() {// the function that is called every fraim
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -35185);
           }
-          
         } else {
           for (int i=0; i<playerNames.size(); i++) {
             calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
@@ -674,20 +672,20 @@ void draw() {// the function that is called every fraim
       background(7646207);
       stageLevelDraw();
       if (level_complete&&!levelCompleteSoundPlayed) {
-        if(multiplayer){
-          if(level.multyplayerMode==1){
+        if (multiplayer) {
+          if (level.multyplayerMode==1) {
             players[currentPlayer].setX(-100);
             players[currentPlayer].setY(-100);
             level.psudoLoad();
             level_complete=false;
             int completeTime=millis()-startTime;
             println("completed in: "+completeTime+" "+formatMillis(completeTime));
-            if(completeTime<bestTime||bestTime==0){
+            if (completeTime<bestTime||bestTime==0) {
               bestTime=completeTime;
             }
             startTime=millis();
           }
-        }else{
+        } else {
           soundHandler.addToQueue(0);
           levelCompleteSoundPlayed=true;
         }
@@ -739,8 +737,8 @@ void draw() {// the function that is called every fraim
         text("resume", 550*Scale, 250*Scale);
         text("options", 550*Scale, 350*Scale);
         text("quit", 600*Scale, 450*Scale);
-        if(multiplayer){
-          if(level.multyplayerMode==1){
+        if (multiplayer) {
+          if (level.multyplayerMode==1) {
             pauseRestart.draw();
           }
         }
@@ -796,68 +794,67 @@ void draw() {// the function that is called every fraim
       text(displayText, width/2, height*0.2);
     }
 
-    if(multiplayer&&inGame){
-      if(level.multyplayerMode==1){
+    if (multiplayer&&inGame) {
+      if (level.multyplayerMode==1) {
         fill(255);
         String curtime=formatMillis(millis()-startTime);
-        calcTextSize(curtime,width*0.06);
-        textAlign(CENTER,CENTER);
-        text(curtime,width/2,height*0.015);
-        
-        
-        if(isHost){
+        calcTextSize(curtime, width*0.06);
+        textAlign(CENTER, CENTER);
+        text(curtime, width/2, height*0.015);
+
+
+        if (isHost) {
           BestScore[] scores=new BestScore[10];
-          for(int i=0;i<10;i++){
-            scores[i]=new BestScore("",0);
+          for (int i=0; i<10; i++) {
+            scores[i]=new BestScore("", 0);
           }
-          scores[0]=new BestScore(name,bestTime);
+          scores[0]=new BestScore(name, bestTime);
           int j=1;
-          for(int i=0;i<clients.size();i++){
+          for (int i=0; i<clients.size(); i++) {
             scores[j]=clients.get(i).bestScore;
             j++;
           }
-          for(int i=0;i<9;i++){//lazyest bubble sort ever
-            for(j=0;j<9;j++){
-              if((scores[j].score==0||scores[j].score>scores[j+1].score)&&scores[j+1].score!=0){
+          for (int i=0; i<9; i++) {//lazyest bubble sort ever
+            for (j=0; j<9; j++) {
+              if ((scores[j].score==0||scores[j].score>scores[j+1].score)&&scores[j+1].score!=0) {
                 BestScore tmp =scores[j+1];
                 scores[j+1]=scores[j];
                 scores[j]=tmp;
               }
             }
           }
-          String []times={"","","","","","","","","",""};
-          for(int i=0;i<10;i++){
-            if(!scores[i].name.equals("")){
+          String []times={"", "", "", "", "", "", "", "", "", ""};
+          for (int i=0; i<10; i++) {
+            if (!scores[i].name.equals("")) {
               times[i]=scores[i].name+": "+formatMillis(scores[i].score);
             }
           }
           leaderBoard=new LeaderBoard(times);
         }
-        calcTextSize("12345678910",width*0.06);
-        textAlign(LEFT,TOP);
+        calcTextSize("12345678910", width*0.06);
+        textAlign(LEFT, TOP);
         String lb ="Leader Board\n";
-        for(int i=0;i<leaderBoard.leaderboard.length;i++){
+        for (int i=0; i<leaderBoard.leaderboard.length; i++) {
           lb+=leaderBoard.leaderboard[i]+"\n";
         }
-        text(lb,width*0.01,height*0.15);
+        text(lb, width*0.01, height*0.15);
         String timeLeft=formatMillis(timerEndTime-millis());
-        calcTextSize(timeLeft,width*0.05);
-        text(timeLeft,width*0.01,height*0.12);
-        calcTextSize("Time Left",width*0.05);
-        text("Time Left",width*0.01,height*0.1);
-        if(isHost){
-          if(timerEndTime-millis()<=0){
-           Menue="multiplayer selection";
-           returnToSlection(); 
-           menue=true;
-           inGame=false;
+        calcTextSize(timeLeft, width*0.05);
+        text(timeLeft, width*0.01, height*0.12);
+        calcTextSize("Time Left", width*0.05);
+        text("Time Left", width*0.01, height*0.1);
+        if (isHost) {
+          if (timerEndTime-millis()<=0) {
+            Menue="multiplayer selection";
+            returnToSlection();
+            menue=true;
+            inGame=false;
           }
         }
-        
       }
     }
-    
-    
+
+
     disEngageHUDPosition();
   }
   catch(Throwable e) {//cath and display all the fatail errors that occor
@@ -1061,11 +1058,11 @@ void mouseClicked() {// when you click the mouse
           menue=true;
           inGame=false;
           tutorialMode=false;
-          if(multiplayer){
-            if(isHost){
+          if (multiplayer) {
+            if (isHost) {
               Menue="multiplayer selection";
               returnToSlection();
-            }else{
+            } else {
               Menue="main";
               println("quitting multyplayer joined");
               clientQuitting=true;
@@ -1074,15 +1071,15 @@ void mouseClicked() {// when you click the mouse
               multiplayer=false;
               return;
             }
-          }else{
-          Menue="level select";
+          } else {
+            Menue="level select";
           }
           soundHandler.setMusicVolume(musicVolume);
           coinCount=0;
         }
-        if(multiplayer){
-          if(level.multyplayerMode==1){
-            if(pauseRestart.isMouseOver()){
+        if (multiplayer) {
+          if (level.multyplayerMode==1) {
+            if (pauseRestart.isMouseOver()) {
               level.psudoLoad();
               startTime=millis();
               menue=false;
@@ -1428,15 +1425,14 @@ void mouseClicked() {// when you click the mouse
             }
           }
           if (multyplayerSelectedLevel.multyplayerMode==1) {
-            if(increaseTime.isMouseOver()){
+            if (increaseTime.isMouseOver()) {
               sessionTime+=30000;
             }
-            if(decreaseTime.isMouseOver()){
-              if(sessionTime>30000)
+            if (decreaseTime.isMouseOver()) {
+              if (sessionTime>30000)
                 sessionTime-=30000;
             }
           }
-            
         } else {//if joined
           if (multyplayerLeave.isMouseOver()) {
             println("quitting multyplayer joined");
@@ -2420,187 +2416,188 @@ void genSelectedInfo(String path) {
   multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers);
 }
 
-void returnToSlection(){
+void returnToSlection() {
   BackToMenuRequest mrq = new BackToMenuRequest();
-  try{
-    for(int i=0;i<clients.size();i++){
+  try {
+    for (int i=0; i<clients.size(); i++) {
       clients.get(i).dataToSend.add(mrq);
     }
-  }catch(Exception e){
-    
+  }
+  catch(Exception e) {
   }
 }
 
-String formatMillis(int millis){
+String formatMillis(int millis) {
   int mins=millis/60000;
   float secs=(millis/1000.0)-mins*60;
   return mins+":"+String.format("%.3f", secs);
 }
 
-void programLoad(){
+void programLoad() {
   discordIcon=loadImage("data/assets/discord.png");
-    discordIcon.resize((int)(50*Scale), (int)(50*Scale));
+  discordIcon.resize((int)(50*Scale), (int)(50*Scale));
 
-    coin3D=loadShape("data/modles/coin/tinker.obj");
-    coin3D.scale(3);
+  coin3D=loadShape("data/modles/coin/tinker.obj");
+  coin3D.scale(3);
 
-    //icon = loadImage("data/assets/skinny mann face.PNG");//load the window icon
-    //surface.setIcon(icon);//set the window icon
+  //icon = loadImage("data/assets/skinny mann face.PNG");//load the window icon
+  //surface.setIcon(icon);//set the window icon
 
-    JSONObject scroll=settings.getJSONObject(1);//load in the settings
-    eadgeScroleDist=scroll.getInt("horozontal");
-    esdPos=(int)(((eadgeScroleDist-100.0)/530)*440+800);
-    eadgeScroleDistV=scroll.getInt("vertical");
-    vesdPos=(int)(((eadgeScroleDistV-100.0)/250)*440+800);
-    JSONObject debug=settings.getJSONObject(3);
-    displayFPS=debug.getBoolean("fps");
-    displayDebugInfo=debug.getBoolean("debug info");
-    JSONObject sound=settings.getJSONObject(4);
-    musicVolume=sound.getFloat("music volume");
-    sfxVolume=sound.getFloat("SFX volume");
-    musVolSllid=(int)(musicVolume*440+800);
-    sfxVolSllid=(int)(sfxVolume*440+800);
-    JSONObject sv3=settings.getJSONObject(5);
-    shadow3D=sv3.getBoolean("3D shaows");
-    tutorialNarrationMode=sv3.getInt("narrationMode");
+  JSONObject scroll=settings.getJSONObject(1);//load in the settings
+  eadgeScroleDist=scroll.getInt("horozontal");
+  esdPos=(int)(((eadgeScroleDist-100.0)/530)*440+800);
+  eadgeScroleDistV=scroll.getInt("vertical");
+  vesdPos=(int)(((eadgeScroleDistV-100.0)/250)*440+800);
+  JSONObject debug=settings.getJSONObject(3);
+  displayFPS=debug.getBoolean("fps");
+  displayDebugInfo=debug.getBoolean("debug info");
+  JSONObject sound=settings.getJSONObject(4);
+  musicVolume=sound.getFloat("music volume");
+  sfxVolume=sound.getFloat("SFX volume");
+  musVolSllid=(int)(musicVolume*440+800);
+  sfxVolSllid=(int)(sfxVolume*440+800);
+  JSONObject sv3=settings.getJSONObject(5);
+  shadow3D=sv3.getBoolean("3D shaows");
+  tutorialNarrationMode=sv3.getInt("narrationMode");
 
-    musVolSllid=(int)(musicVolume*440+800);
-    sfxVolSllid=(int)(sfxVolume*440+800);
+  musVolSllid=(int)(musicVolume*440+800);
+  sfxVolSllid=(int)(sfxVolume*440+800);
 
-    try {//load level prgress
-      levelProgress=loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
-      levelProgress.getJSONObject(0);
-    }
-    catch(Throwable e) {
-      levelProgress=new JSONArray();
-      JSONObject p=new JSONObject();
-      p.setInt("progress", 0);
-      levelProgress.setJSONObject(0, p);
-      saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
-    }
+  try {//load level prgress
+    levelProgress=loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+    levelProgress.getJSONObject(0);
+  }
+  catch(Throwable e) {
+    levelProgress=new JSONArray();
+    JSONObject p=new JSONObject();
+    p.setInt("progress", 0);
+    levelProgress.setJSONObject(0, p);
+    saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+  }
 
-    players[0]=new Player(20, 699, 1, 0);
-    players[1]=new Player(20, 699, 1, 1);
-    players[2]=new Player(20, 699, 1, 2);
-    players[3]=new Player(20, 699, 1, 3);
-    players[4]=new Player(20, 699, 1, 4);
-    players[5]=new Player(20, 699, 1, 5);
-    players[6]=new Player(20, 699, 1, 6);
-    players[7]=new Player(20, 699, 1, 7);
-    players[8]=new Player(20, 699, 1, 8);
-    players[9]=new Player(20, 699, 1, 9);
-    
-    soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
-    soundHandler.setMusicVolume(0);
+  players[0]=new Player(20, 699, 1, 0);
+  players[1]=new Player(20, 699, 1, 1);
+  players[2]=new Player(20, 699, 1, 2);
+  players[3]=new Player(20, 699, 1, 3);
+  players[4]=new Player(20, 699, 1, 4);
+  players[5]=new Player(20, 699, 1, 5);
+  players[6]=new Player(20, 699, 1, 6);
+  players[7]=new Player(20, 699, 1, 7);
+  players[8]=new Player(20, 699, 1, 8);
+  players[9]=new Player(20, 699, 1, 9);
 
-    tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
-    tutorialNarration[0][1]=new SoundFile(this, "data/sounds/tutorial/T2a.wav");
-    tutorialNarration[0][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
-    tutorialNarration[0][3]=new SoundFile(this, "data/sounds/tutorial/T4a.wav");
-    tutorialNarration[0][4]=new SoundFile(this, "data/sounds/tutorial/T5a.wav");
-    tutorialNarration[0][5]=new SoundFile(this, "data/sounds/tutorial/T6a.wav");
-    tutorialNarration[0][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
-    tutorialNarration[0][7]=new SoundFile(this, "data/sounds/tutorial/T8a.wav");
-    tutorialNarration[0][8]=new SoundFile(this, "data/sounds/tutorial/T9a.wav");
-    tutorialNarration[0][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
-    tutorialNarration[0][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
-    tutorialNarration[0][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
-    tutorialNarration[0][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
-    tutorialNarration[0][13]=new SoundFile(this, "data/sounds/tutorial/T14a.wav");
-    tutorialNarration[0][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
-    tutorialNarration[0][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
-    tutorialNarration[0][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
-    tutorialNarration[1][0]=new SoundFile(this, "data/sounds/tutorial/T1b.wav");
-    tutorialNarration[1][1]=new SoundFile(this, "data/sounds/tutorial/T2b.wav");
-    tutorialNarration[1][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
-    tutorialNarration[1][3]=new SoundFile(this, "data/sounds/tutorial/T4b.wav");
-    tutorialNarration[1][4]=new SoundFile(this, "data/sounds/tutorial/T5b.wav");
-    tutorialNarration[1][5]=new SoundFile(this, "data/sounds/tutorial/T6b.wav");
-    tutorialNarration[1][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
-    tutorialNarration[1][7]=new SoundFile(this, "data/sounds/tutorial/T8b.wav");
-    tutorialNarration[1][8]=new SoundFile(this, "data/sounds/tutorial/T9b.wav");
-    tutorialNarration[1][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
-    tutorialNarration[1][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
-    tutorialNarration[1][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
-    tutorialNarration[1][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
-    tutorialNarration[1][13]=new SoundFile(this, "data/sounds/tutorial/T14b.wav");
-    tutorialNarration[1][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
-    tutorialNarration[1][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
-    tutorialNarration[1][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
-    
-    thread("thrdCalc2");
+  soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
+  soundHandler.setMusicVolume(0);
+
+  tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
+  tutorialNarration[0][1]=new SoundFile(this, "data/sounds/tutorial/T2a.wav");
+  tutorialNarration[0][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  tutorialNarration[0][3]=new SoundFile(this, "data/sounds/tutorial/T4a.wav");
+  tutorialNarration[0][4]=new SoundFile(this, "data/sounds/tutorial/T5a.wav");
+  tutorialNarration[0][5]=new SoundFile(this, "data/sounds/tutorial/T6a.wav");
+  tutorialNarration[0][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  tutorialNarration[0][7]=new SoundFile(this, "data/sounds/tutorial/T8a.wav");
+  tutorialNarration[0][8]=new SoundFile(this, "data/sounds/tutorial/T9a.wav");
+  tutorialNarration[0][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  tutorialNarration[0][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  tutorialNarration[0][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  tutorialNarration[0][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  tutorialNarration[0][13]=new SoundFile(this, "data/sounds/tutorial/T14a.wav");
+  tutorialNarration[0][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  tutorialNarration[0][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  tutorialNarration[0][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+  tutorialNarration[1][0]=new SoundFile(this, "data/sounds/tutorial/T1b.wav");
+  tutorialNarration[1][1]=new SoundFile(this, "data/sounds/tutorial/T2b.wav");
+  tutorialNarration[1][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  tutorialNarration[1][3]=new SoundFile(this, "data/sounds/tutorial/T4b.wav");
+  tutorialNarration[1][4]=new SoundFile(this, "data/sounds/tutorial/T5b.wav");
+  tutorialNarration[1][5]=new SoundFile(this, "data/sounds/tutorial/T6b.wav");
+  tutorialNarration[1][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  tutorialNarration[1][7]=new SoundFile(this, "data/sounds/tutorial/T8b.wav");
+  tutorialNarration[1][8]=new SoundFile(this, "data/sounds/tutorial/T9b.wav");
+  tutorialNarration[1][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  tutorialNarration[1][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  tutorialNarration[1][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  tutorialNarration[1][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  tutorialNarration[1][13]=new SoundFile(this, "data/sounds/tutorial/T14b.wav");
+  tutorialNarration[1][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  tutorialNarration[1][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  tutorialNarration[1][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+
+  thread("thrdCalc2");
   loaded=true;
 }
-void  initButtons(){
+void  initButtons() {
   select_lvl_1=new Button(this, (100*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 1", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_back=new Button(this, (100*Scale), (600*Scale), (200*Scale), (50*Scale), "back", -59135, -1791).setStrokeWeight( (10*Scale));
-    discord=new Button(this, (1190*Scale), (640*Scale), (70*Scale), (70*Scale), -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_2 =new Button(this, (350*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 2", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_3 =new Button(this, (600*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 3", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_4 =new Button(this, (850*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 4", -59135, -1791).setStrokeWeight( (10*Scale));
-    sdSlider=new Button(this, (800*Scale), (50*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    disableFPS =new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    enableFPS =new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    disableDebug =new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    enableDebug =new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    select_lvl_5=new Button(this, (100*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 5", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_6 =new Button(this, (350*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 6", -59135, -1791).setStrokeWeight( (10*Scale));
-    sttingsGPL = new Button(this, (40*Scale), (550*Scale), (150*Scale), (40*Scale), "game play", -59135, -1791).setStrokeWeight( (10*Scale));
-    settingsDSP = new Button(this, (240*Scale), (550*Scale), (150*Scale), (40*Scale), "display", -59135, -1791).setStrokeWeight( (10*Scale));
-    settingsOUT = new Button(this, (440*Scale), (550*Scale), (150*Scale), (40*Scale), "outher", -59135, -1791).setStrokeWeight( (10*Scale));
-    rez720 = new Button(this, (920*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez900 = new Button(this, (990*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez1080 = new Button(this, (1060*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez1440 = new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    rez4k = new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    fullScreenOn = new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    fullScreenOff = new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    vsdSlider =new Button(this, (800*Scale), (120*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    MusicSlider=new Button(this, (800*Scale), (190*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    SFXSlider=new Button(this, (800*Scale), (260*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-    shadowOn = new Button(this, (1200*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    shadowOff = new Button(this, (1130*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    narrationMode1 =new Button(this, (1200*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    narrationMode0 = new Button(this, (1130*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-    select_lvl_UGC=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "UGC", -59135, -1791).setStrokeWeight( (10*Scale));
-    UGC_open_folder=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "open folder", -59135, -1791).setStrokeWeight( (10*Scale));
-    UGC_lvls_next=new Button(this, (1030*Scale), (335*Scale), (200*Scale), (50*Scale), "next", -59135, -1791).setStrokeWeight( (10*Scale));
-    UGC_lvls_prev=new Button(this, (50*Scale), (335*Scale), (200*Scale), (50*Scale), "prevous", -59135, -1791).setStrokeWeight( (10*Scale));
-    UGC_lvl_play=new Button(this, (600*Scale), (600*Scale), (200*Scale), (50*Scale), "play", -59135, -1791).setStrokeWeight( (10*Scale));
-    levelcreatorLink=new Button(this, (980*Scale), (600*Scale), (200*Scale), (50*Scale), "create", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_7=new Button(this, (600*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 7", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_8 =new Button(this, (850*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 8", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_9 = new Button(this, (100*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 9", -59135, -1791).setStrokeWeight( (10*Scale));
-    select_lvl_10 = new Button(this, (350*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 10", -59135, -1791).setStrokeWeight( (10*Scale));
-    playButton=new Button(this, 540*Scale, 310*Scale, 200*Scale, 50*Scale, "Play", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    exitButton=new Button(this, 540*Scale, 470*Scale, 200*Scale, 50*Scale, "Exit", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    settingsButton=new Button(this, 540*Scale, 550*Scale, 200*Scale, 50*Scale, "Settings", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    howToPlayButton=new Button(this, 540*Scale, 630*Scale, 200*Scale, 50*Scale, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-    downloadUpdateButton=new Button(this, 400*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    pauseRestart=new Button(this,500*Scale, 100*Scale, 300*Scale, 60*Scale,"Restart",#FF0004, #FFF300).setStrokeWeight(10*Scale);;
+  select_lvl_back=new Button(this, (100*Scale), (600*Scale), (200*Scale), (50*Scale), "back", -59135, -1791).setStrokeWeight( (10*Scale));
+  discord=new Button(this, (1190*Scale), (640*Scale), (70*Scale), (70*Scale), -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_2 =new Button(this, (350*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 2", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_3 =new Button(this, (600*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 3", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_4 =new Button(this, (850*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 4", -59135, -1791).setStrokeWeight( (10*Scale));
+  sdSlider=new Button(this, (800*Scale), (50*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  disableFPS =new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  enableFPS =new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  disableDebug =new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  enableDebug =new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  select_lvl_5=new Button(this, (100*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 5", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_6 =new Button(this, (350*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 6", -59135, -1791).setStrokeWeight( (10*Scale));
+  sttingsGPL = new Button(this, (40*Scale), (550*Scale), (150*Scale), (40*Scale), "game play", -59135, -1791).setStrokeWeight( (10*Scale));
+  settingsDSP = new Button(this, (240*Scale), (550*Scale), (150*Scale), (40*Scale), "display", -59135, -1791).setStrokeWeight( (10*Scale));
+  settingsOUT = new Button(this, (440*Scale), (550*Scale), (150*Scale), (40*Scale), "outher", -59135, -1791).setStrokeWeight( (10*Scale));
+  rez720 = new Button(this, (920*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  rez900 = new Button(this, (990*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  rez1080 = new Button(this, (1060*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  rez1440 = new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  rez4k = new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  fullScreenOn = new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  fullScreenOff = new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  vsdSlider =new Button(this, (800*Scale), (120*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  MusicSlider=new Button(this, (800*Scale), (190*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  SFXSlider=new Button(this, (800*Scale), (260*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
+  shadowOn = new Button(this, (1200*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  shadowOff = new Button(this, (1130*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  narrationMode1 =new Button(this, (1200*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  narrationMode0 = new Button(this, (1130*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
+  select_lvl_UGC=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "UGC", -59135, -1791).setStrokeWeight( (10*Scale));
+  UGC_open_folder=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "open folder", -59135, -1791).setStrokeWeight( (10*Scale));
+  UGC_lvls_next=new Button(this, (1030*Scale), (335*Scale), (200*Scale), (50*Scale), "next", -59135, -1791).setStrokeWeight( (10*Scale));
+  UGC_lvls_prev=new Button(this, (50*Scale), (335*Scale), (200*Scale), (50*Scale), "prevous", -59135, -1791).setStrokeWeight( (10*Scale));
+  UGC_lvl_play=new Button(this, (600*Scale), (600*Scale), (200*Scale), (50*Scale), "play", -59135, -1791).setStrokeWeight( (10*Scale));
+  levelcreatorLink=new Button(this, (980*Scale), (600*Scale), (200*Scale), (50*Scale), "create", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_7=new Button(this, (600*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 7", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_8 =new Button(this, (850*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 8", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_9 = new Button(this, (100*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 9", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_10 = new Button(this, (350*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 10", -59135, -1791).setStrokeWeight( (10*Scale));
+  playButton=new Button(this, 540*Scale, 310*Scale, 200*Scale, 50*Scale, "Play", #FF1900, #FFF900).setStrokeWeight(10*Scale);
+  exitButton=new Button(this, 540*Scale, 470*Scale, 200*Scale, 50*Scale, "Exit", #FF1900, #FFF900).setStrokeWeight(10*Scale);
+  joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10*Scale);
+  settingsButton=new Button(this, 540*Scale, 550*Scale, 200*Scale, 50*Scale, "Settings", #FF1900, #FFF900).setStrokeWeight(10*Scale);
+  howToPlayButton=new Button(this, 540*Scale, 630*Scale, 200*Scale, 50*Scale, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10*Scale);
+  downloadUpdateButton=new Button(this, 400*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  pauseRestart=new Button(this, 500*Scale, 100*Scale, 300*Scale, 60*Scale, "Restart", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  ;
 
 
-    dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
-    dev_quit = new Button(this, 430*Scale, 100*Scale, 200*Scale, 50*Scale, "exit");
-    dev_levels  = new Button(this, 650*Scale, 100*Scale, 200*Scale, 50*Scale, "level select");
-    dev_tutorial  = new Button(this, 870*Scale, 100*Scale, 200*Scale, 50*Scale, "tutorial");
-    dev_settings = new Button(this, 210*Scale, 170*Scale, 200*Scale, 50*Scale, "settings");
-    dev_UGC = new Button(this, 430*Scale, 170*Scale, 200*Scale, 50*Scale, "UGC");
-    dev_multiplayer = new Button(this, 650*Scale, 170*Scale, 200*Scale, 50*Scale, "Multiplayer");
+  dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
+  dev_quit = new Button(this, 430*Scale, 100*Scale, 200*Scale, 50*Scale, "exit");
+  dev_levels  = new Button(this, 650*Scale, 100*Scale, 200*Scale, 50*Scale, "level select");
+  dev_tutorial  = new Button(this, 870*Scale, 100*Scale, 200*Scale, 50*Scale, "tutorial");
+  dev_settings = new Button(this, 210*Scale, 170*Scale, 200*Scale, 50*Scale, "settings");
+  dev_UGC = new Button(this, 430*Scale, 170*Scale, 200*Scale, 50*Scale, "UGC");
+  dev_multiplayer = new Button(this, 650*Scale, 170*Scale, 200*Scale, 50*Scale, "Multiplayer");
 
-    multyplayerJoin = new Button(this, 400*Scale, 300*Scale, 200*Scale, 50*Scale, "Join", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-    multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
-    multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
-    multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerJoin = new Button(this, 400*Scale, 300*Scale, 200*Scale, 50*Scale, "Join", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
 
-    multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
-    multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
-    multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale).setHoverText("coming soon");
-    multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
-    increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
-    decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
+  multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale).setHoverText("coming soon");
+  multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
+  increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
+  decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
 }

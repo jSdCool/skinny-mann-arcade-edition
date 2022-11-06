@@ -1,1 +1,2 @@
-class CloseMenuRequest extends DataPacket{}
+class CloseMenuRequest extends DataPacket {
+}

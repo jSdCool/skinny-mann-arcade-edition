@@ -3,7 +3,7 @@ import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-class Random extends LogicInputComponent{
+class Random extends LogicInputComponent {
   int variableNumber=0;
   Random(float x, float y, LogicBoard lb) {
     super(x, y, " random ", lb);

@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 class LogicBoard {//stores all the logic components
-static skiny_mann source;
+  static skiny_mann source;
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
   LogicBoard(JSONArray file, Level level) {
@@ -15,63 +15,44 @@ static skiny_mann source;
       String type=component.getString("type");
       if (type.equals("generic")) {
         components.add(new GenericLogicComponent(component, this));
-      }
-      else if (type.equals("AND")) {
+      } else if (type.equals("AND")) {
         components.add(new AndGate(component, this));
-      }
-      else if (type.equals("OR")) {
+      } else if (type.equals("OR")) {
         components.add(new OrGate(component, this));
-      }
-      else if (type.equals("XOR")) {
+      } else if (type.equals("XOR")) {
         components.add(new XorGate(component, this));
-      }
-      else if (type.equals("NAND")) {
+      } else if (type.equals("NAND")) {
         components.add(new NAndGate(component, this));
-      }
-      else if (type.equals("NOR")) {
+      } else if (type.equals("NOR")) {
         components.add(new NOrGate(component, this));
-      }
-      else if (type.equals("XNOR")) {
+      } else if (type.equals("XNOR")) {
         components.add(new XNorGate(component, this));
-      }
-      else if (type.equals("ON")) {
+      } else if (type.equals("ON")) {
         components.add(new ConstantOnSignal(component, this));
-      }
-      else if (type.equals("read var")) {
+      } else if (type.equals("read var")) {
         components.add(new ReadVariable(component, this));
-      }
-      else if (type.equals("set var")) {
+      } else if (type.equals("set var")) {
         components.add(new SetVariable(component, this));
-      }
-      else if (type.equals("set visable")) {
+      } else if (type.equals("set visable")) {
         components.add(new SetVisibility(component, this, level));
-      }
-      else if (type.equals("y-offset")) {
+      } else if (type.equals("y-offset")) {
         components.add(new SetYOffset(component, this, level));
-      }
-      else if (type.equals("x-offset")) {
+      } else if (type.equals("x-offset")) {
         components.add(new SetXOffset(component, this, level));
-      }
-      else if (type.equals("delay")) {
+      } else if (type.equals("delay")) {
         components.add(new Delay(component, this));
-      }
-      else if (type.equals("z-offset")) {
+      } else if (type.equals("z-offset")) {
         components.add(new SetZOffset(component, this, level));
-      }
-      else if( type.equals("play sound")){
-        components.add(new LogicPlaySound(component,this,level));
-      }
-      else if (type.equals("pulse")){
-        components.add(new Pulse(component,this));
-      }
-      else if(type.equals("read 3D ")){
-         components.add(new Read3DMode(component,this)); 
-      }
-      else if(type.equals("  set 3D  ")){
-         components.add(new Set3DMode(component,this)); 
-      }
-      else if(type.equals(" random ")){
-        components.add(new Random(component,this)); 
+      } else if ( type.equals("play sound")) {
+        components.add(new LogicPlaySound(component, this, level));
+      } else if (type.equals("pulse")) {
+        components.add(new Pulse(component, this));
+      } else if (type.equals("read 3D ")) {
+        components.add(new Read3DMode(component, this));
+      } else if (type.equals("  set 3D  ")) {
+        components.add(new Set3DMode(component, this));
+      } else if (type.equals(" random ")) {
+        components.add(new Random(component, this));
       }
     }
   }

@@ -1,6 +1,6 @@
-class LeaderBoard extends DataPacket{
+class LeaderBoard extends DataPacket {
   String[] leaderboard;
-  LeaderBoard(String [] names){
-   leaderboard=names; 
+  LeaderBoard(String [] names) {
+    leaderboard=names;
   }
 }

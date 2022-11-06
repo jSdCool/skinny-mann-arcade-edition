@@ -3,39 +3,38 @@ int ptsW, ptsH;
 PImage img;
 
 int numPointsW;
-int numPointsH_2pi; 
+int numPointsH_2pi;
 int numPointsH;
 
 float[] coorX;
 float[] coorY;
 float[] coorZ;
 float[] multXZ;
-float logorx=-75,logory=-180,logorz=0,start_wate=0;
-void drawlogo(){
+float logorx=-75, logory=-180, logorz=0, start_wate=0;
+void drawlogo() {
   directionalLight(255, 255, 255, 1, 0.8, -1);
   ambientLight(102, 102, 102);
-  
-  
+
+
   background(0);
-  if(logorx<0){
-   logorx+=(1.0/frameRate)*25; 
-  }else{
+  if (logorx<0) {
+    logorx+=(1.0/frameRate)*25;
+  } else {
     fill(#03FA0C);
     textSize(100*Scale);
-    textAlign(CENTER,CENTER);
-    text("GAMES",width/2,height/2+height/3);
+    textAlign(CENTER, CENTER);
+    text("GAMES", width/2, height/2+height/3);
     start_wate+=1.0/frameRate;
-    
   }
   fill(255);
-  camera(width/2,height/2,720,width/2,height/2,0,0,1,0);
-    
+  camera(width/2, height/2, 720, width/2, height/2, 0, 0, 1, 0);
+
   pushMatrix();
-  translate(width/2, height/2, 0);  
+  translate(width/2, height/2, 0);
   rotateZ(radians(logorz));
   rotateX(radians(logorx));
   rotateY(radians(logory));
-  
+
   textureSphere(200, 200, 200, CBi);
   popMatrix();
 }
@@ -52,34 +51,32 @@ void initializeSphere(int numPtsW, int numPtsH_2pi) {
   coorZ=new float[numPointsW];   // All the z-coor in a horizontal circle radius 1
   multXZ=new float[numPointsH];  // The radius of each horizontal circle (that you will multiply with coorX and coorZ)
 
-  for (int i=0; i<numPointsW ;i++) {  // For all the points around the width
+  for (int i=0; i<numPointsW; i++) {  // For all the points around the width
     float thetaW=i*2*PI/(numPointsW-1);
     coorX[i]=sin(thetaW);
     coorZ[i]=cos(thetaW);
   }
-  
+
   for (int i=0; i<numPointsH; i++) {  // For all points from top to bottom
     if (int(numPointsH_2pi/2) != (float)numPointsH_2pi/2 && i==numPointsH-1) {  // If the numPointsH_2pi is odd and it is at the last pt
       float thetaH=(i-1)*2*PI/(numPointsH_2pi);
-      coorY[i]=cos(PI+thetaH); 
+      coorY[i]=cos(PI+thetaH);
       multXZ[i]=0;
-    } 
-    else {
+    } else {
       //The numPointsH_2pi and 2 below allows there to be a flat bottom if the numPointsH is odd
       float thetaH=i*2*PI/(numPointsH_2pi);
 
       //PI+ below makes the top always the point instead of the bottom.
-      coorY[i]=cos(PI+thetaH); 
+      coorY[i]=cos(PI+thetaH);
       multXZ[i]=sin(thetaH);
     }
   }
-  
 }
 
-void textureSphere(float rx, float ry, float rz, PImage t) { 
-  // These are so we can map certain parts of the image on to the shape 
-  float changeU=t.width/(float)(numPointsW-1); 
-  float changeV=t.height/(float)(numPointsH-1); 
+void textureSphere(float rx, float ry, float rz, PImage t) {
+  // These are so we can map certain parts of the image on to the shape
+  float changeU=t.width/(float)(numPointsW-1);
+  float changeV=t.height/(float)(numPointsH-1);
   float u=0;  // Width variable for the texture
   float v=0;  // Height variable for the texture
 

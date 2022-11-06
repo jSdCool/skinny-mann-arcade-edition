@@ -98,7 +98,7 @@ class LogicButton extends StageComponent {//ground component
     }
     return false;
   }
-  
+
   boolean colide(float x, float y, float z, boolean c) {
     Group group=getGroup();
     if (!group.visable)

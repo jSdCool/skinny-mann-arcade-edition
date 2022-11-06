@@ -2,7 +2,7 @@
 import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
-class Button implements Serializable{
+class Button implements Serializable {
   protected float x, y, lengthX, lengthY;
   private int fColor=255, sColor=-5592405, textcolor=0, htFill=200, htStroke=0, htColor=0;
   private String text="", hoverText="";

@@ -1,1 +1,2 @@
-class BackToMenuRequest extends DataPacket{}
+class BackToMenuRequest extends DataPacket {
+}

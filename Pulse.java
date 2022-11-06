@@ -8,12 +8,10 @@ class Pulse extends LogicComponent {
   boolean prevousState=false;
   Pulse(float x, float y, LogicBoard lb) {
     super(x, y, "pulse", lb);
-    
   }
 
   Pulse(JSONObject data, LogicBoard lb) {
     super(data.getFloat("x"), data.getFloat("y"), "pulse", lb, data.getJSONArray("connections"));
-    
   }
 
   void draw() {
@@ -28,10 +26,9 @@ class Pulse extends LogicComponent {
   void tick() {
     if (inputTerminal2) {//invert terminal
       outputTerminal=!(inputTerminal1 && !prevousState);//if invert is activated then set the output high nles a pulse comes in
-    }else{
+    } else {
       outputTerminal=inputTerminal1 && !prevousState;//if the invert is deactivated then set the output low untill a pulse comes
     }
     prevousState=inputTerminal1;
   }
-  
 }

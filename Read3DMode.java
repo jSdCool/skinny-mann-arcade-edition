@@ -13,7 +13,7 @@ class Read3DMode extends LogicInputComponent {
     super(data.getFloat("x"), data.getFloat("y"), "read 3D ", lb, data.getJSONArray("connections"));
   }
   void tick() {
-    if(source.level.multyplayerMode!=2)
+    if (source.level.multyplayerMode!=2)
       outputTerminal=source.e3DMode;
     else
       outputTerminal=false;

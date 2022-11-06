@@ -34,7 +34,7 @@ char getCh(int mode, char leter) {
     if (leter=='1'||leter=='2'||leter=='3'||leter=='4'||leter=='5'||leter=='6'||leter=='7'||leter=='8'||leter=='9'||leter=='0'||leter=='\n'||leter=='/')
       return leter;
   }
-  if (mode==4){//mode 4 domain name mode. letter numbers and outher charicters found in domains
+  if (mode==4) {//mode 4 domain name mode. letter numbers and outher charicters found in domains
     if (Character.isLetter(leter)) {
       return leter;
     }

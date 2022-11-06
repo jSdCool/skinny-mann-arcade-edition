@@ -16,7 +16,6 @@ class SetYOffset extends LogicOutputComponent {
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
     button.setText("y-offset "+level.groupNames.get(groupNumber)+" by "+offset);
-    
   }
   void tick() {
     if (inputTerminal1) {

@@ -13,8 +13,8 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color) {
     stroke(0, 29, 255);
   }
   if (shirt_color==3) {//yellow
-    fill(255,226,0);
-    stroke(255,226,0);
+    fill(255, 226, 0);
+    stroke(255, 226, 0);
   }
   if (shirt_color==4) {//magenta
     fill(232, 0, 221);
@@ -238,8 +238,8 @@ void draw_mann_3D(float x, float y, float z, int pose, float scale, int shirt_co
     stroke(0, 29, 255);
   }
   if (shirt_color==3) {//yellow
-    fill(255,226,0);
-    stroke(255,226,0);
+    fill(255, 226, 0);
+    stroke(255, 226, 0);
   }
   if (shirt_color==4) {//magenta
     fill(232, 0, 221);

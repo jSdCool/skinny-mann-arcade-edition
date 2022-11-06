@@ -1,12 +1,12 @@
 
-class SelectedLevelInfo extends DataPacket{
-  String name,author,gameVersion;
-  int multyplayerMode,maxPlayers,minPlayers;
+class SelectedLevelInfo extends DataPacket {
+  String name, author, gameVersion;
+  int multyplayerMode, maxPlayers, minPlayers;
   boolean exsists=false;
-  SelectedLevelInfo(){
+  SelectedLevelInfo() {
     exsists=false;
   }
-  SelectedLevelInfo(String name,String author,String version,int mode,int min,int max){
+  SelectedLevelInfo(String name, String author, String version, int mode, int min, int max) {
     exsists=true;
     this.name=name;
     this.author=author;
@@ -15,5 +15,4 @@ class SelectedLevelInfo extends DataPacket{
     minPlayers=min;
     maxPlayers=max;
   }
-  
 }

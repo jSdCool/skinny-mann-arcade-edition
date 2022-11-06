@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 abstract class LogicComponent {//the base of all logic gam=ts and things
-static skiny_mann source;
+  static skiny_mann source;
   float x, y;//for visuals only
   String type;
   Button button;

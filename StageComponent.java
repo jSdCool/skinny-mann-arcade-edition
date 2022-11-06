@@ -3,8 +3,8 @@ import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-abstract class StageComponent implements Serializable{//the base class for all components that exsist inside a stage
-static skiny_mann source;
+abstract class StageComponent implements Serializable {//the base class for all components that exsist inside a stage
+  static skiny_mann source;
   public float x, y, z, dx, dy, dz;
   public int ccolor, group=-1;
   public String type;
@@ -43,6 +43,7 @@ static skiny_mann source;
   void setGroup(int grp) {
     group=grp;
   }
-  
-  void worldInteractions(int data){}
+
+  void worldInteractions(int data) {
+  }
 }
