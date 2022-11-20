@@ -624,6 +624,7 @@ void draw() {// the function that is called every fraim
           multyplayerSpeedrun.draw();
           multyplayerCoop.draw();
           multyplayerUGC.draw();
+          multyplayerUGC.drawHoverText();
 
           //darw lines seperating levels
           fill(0);
@@ -634,9 +635,10 @@ void draw() {// the function that is called every fraim
           if (multyplayerSelectionLevels.equals("speed")) {
             multyplayerSpeedrun.setColor(-59135, -35185);
             multyplayerCoop.setColor(-59135, -1791);
-            multyplayerUGC.setColor(-59135, -1791);
+            multyplayerUGC.setColor(#B40F00, #B4AF00);
             int numOfBuiltInLevels=10;
             calcTextSize("level 30", width*0.1);
+            textAlign(CENTER, CENTER);
             for (int i=0; i<numOfBuiltInLevels; i++) {
               text("Level "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
             }
@@ -644,7 +646,12 @@ void draw() {// the function that is called every fraim
           if (multyplayerSelectionLevels.equals("coop")) {
             multyplayerSpeedrun.setColor(-59135, -1791);
             multyplayerCoop.setColor(-59135, -35185);
-            multyplayerUGC.setColor(-59135, -1791);
+            multyplayerUGC.setColor(#B40F00, #B4AF00);
+            calcTextSize("level 30", width*0.1);
+            textAlign(CENTER, CENTER);
+            for (int i=0; i<1; i++) {
+              text("Co-Op "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+            }
           }
           if (multyplayerSelectionLevels.equals("UGC")) {
             multyplayerSpeedrun.setColor(-59135, -1791);
@@ -652,6 +659,7 @@ void draw() {// the function that is called every fraim
             multyplayerUGC.setColor(-59135, -35185);
           }
         } else {
+          textAlign(CENTER, CENTER);
           for (int i=0; i<playerNames.size(); i++) {
             calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
             text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
@@ -1432,6 +1440,12 @@ void mouseClicked() {// when you click the mouse
               if (sessionTime>30000)
                 sessionTime-=30000;
             }
+          }
+          if(multyplayerCoop.isMouseOver()){
+            multyplayerSelectionLevels="coop";
+          }
+          if(multyplayerSpeedrun.isMouseOver()){
+            multyplayerSelectionLevels="speed";
           }
         } else {//if joined
           if (multyplayerLeave.isMouseOver()) {
@@ -2577,7 +2591,7 @@ void  initButtons() {
   updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new Button(this, 500*Scale, 100*Scale, 300*Scale, 60*Scale, "Restart", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  ;
+  
 
 
   dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
