@@ -1,0 +1,138 @@
+[
+  {"name": "load"},
+  {
+    "x": 210,
+    "y": 16,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 16,
+    "y": 56,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 0,
+        "terminal": 1
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      },
+      {
+        "index": 12,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 211,
+    "y": 113,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 10,
+    "x": 604,
+    "y": 97,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 11,
+    "x": 604,
+    "y": 181,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 12,
+    "x": 603,
+    "y": 266,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 13,
+    "x": 603,
+    "y": 349,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 14,
+    "x": 602,
+    "y": 434,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 15,
+    "x": 601,
+    "y": 517,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 16,
+    "x": 601,
+    "y": 602,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 17,
+    "x": 602,
+    "y": 687,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 349,
+    "y": 424,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 3,
+        "terminal": 1
+      },
+      {
+        "index": 4,
+        "terminal": 1
+      },
+      {
+        "index": 5,
+        "terminal": 1
+      },
+      {
+        "index": 6,
+        "terminal": 1
+      },
+      {
+        "index": 7,
+        "terminal": 1
+      },
+      {
+        "index": 8,
+        "terminal": 1
+      },
+      {
+        "index": 9,
+        "terminal": 1
+      },
+      {
+        "index": 10,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 207,
+    "y": 236,
+    "group number": 14,
+    "type": "set visable",
+    "connections": []
+  }
+]

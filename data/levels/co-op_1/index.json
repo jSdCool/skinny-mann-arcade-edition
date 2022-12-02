@@ -1,0 +1,88 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 150,
+    "min players": 2,
+    "author": "jSdCool",
+    "level_id": 947111594,
+    "spawnX": 41,
+    "groups": [
+      "group 0",
+      "starting gates",
+      "starting gates 2",
+      "first problem gate",
+      "p1 I1",
+      "P1 I2",
+      "p1 I3",
+      "p1 I4",
+      "p1 I5",
+      "p1 I6",
+      "p1 I7",
+      "p1 I8",
+      "p2 p2 pt1",
+      "p2 p1 pt 1",
+      "part 2 portals",
+      "part3 platform1",
+      "part3 platform 2",
+      "part 3 button 3rd"
+    ],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 659,
+    "max players": 2,
+    "number of variable": 24,
+    "name": "co-op_1",
+    "spawn pointX": 41,
+    "spawn pointY": 659,
+    "multyplayer mode": 2
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "player 1 par t 1",
+    "location": "/player 1 par t 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "player 2 part 1",
+    "location": "/player 2 part 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "player 2 part 2",
+    "location": "/player 2 part 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "player 1 part 2",
+    "location": "/player 1 part 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "part 3D",
+    "location": "/part 3D.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "end",
+    "location": "/end.json",
+    "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

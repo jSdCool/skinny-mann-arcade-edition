@@ -1,0 +1,243 @@
+[
+  {
+    "name": "player 2 part 1",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 1170,
+    "color": -16732415,
+    "dy": 50,
+    "x": 0,
+    "y": 670,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 1,
+    "x": 40,
+    "y": 620,
+    "type": "interdimentional Portal",
+    "linkY": 470,
+    "linkX": 1650,
+    "group": -1
+  },
+  {
+    "x": 210,
+    "variable": 2,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 280,
+    "variable": 3,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 350,
+    "variable": 4,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 420,
+    "variable": 5,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 490,
+    "variable": 6,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 560,
+    "variable": 7,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 630,
+    "variable": 8,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 710,
+    "variable": 9,
+    "y": 670,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "dx": 570,
+    "color": -16711679,
+    "dy": 60,
+    "x": 170,
+    "y": 460,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 190,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 270,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 340,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 410,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 470,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 540,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 610,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16646399,
+    "dy": 20,
+    "x": 680,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 190,
+    "y": 480,
+    "type": "holo",
+    "group": 4
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 270,
+    "y": 480,
+    "type": "holo",
+    "group": 5
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 340,
+    "y": 480,
+    "type": "holo",
+    "group": 6
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 410,
+    "y": 480,
+    "type": "holo",
+    "group": 7
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 470,
+    "y": 480,
+    "type": "holo",
+    "group": 8
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 540,
+    "y": 480,
+    "type": "holo",
+    "group": 9
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 610,
+    "y": 480,
+    "type": "holo",
+    "group": 10
+  },
+  {
+    "dx": 20,
+    "color": -65535,
+    "dy": 20,
+    "x": 680,
+    "y": 480,
+    "type": "holo",
+    "group": 11
+  },
+  {
+    "link Index": 4,
+    "x": 1130,
+    "y": 620,
+    "type": "interdimentional Portal",
+    "linkY": 600,
+    "linkX": 40,
+    "group": 3
+  }
+]

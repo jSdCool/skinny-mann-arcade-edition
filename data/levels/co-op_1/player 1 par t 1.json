@@ -1,0 +1,41 @@
+[
+  {
+    "name": "player 1 par t 1",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 570,
+    "color": -16732415,
+    "dy": 60,
+    "x": 0,
+    "y": 660,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 1,
+    "x": 40,
+    "y": 610,
+    "type": "interdimentional Portal",
+    "linkY": 610,
+    "linkX": 1650,
+    "group": -1
+  },
+  {
+    "contents": "relay this code\nX X O O O X O X",
+    "x": 300,
+    "y": 660,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "link Index": 5,
+    "x": 530,
+    "y": 610,
+    "type": "interdimentional Portal",
+    "linkY": 620,
+    "linkX": 30,
+    "group": 3
+  }
+]

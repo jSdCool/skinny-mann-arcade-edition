@@ -1413,8 +1413,14 @@ void mouseClicked() {// when you click the mouse
           if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
             int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
             if (multyplayerSelectionLevels.equals("speed")) {
-              if (slotSelected<=9) {
+              if (slotSelected<=9) {//set speed run max levels here for selection 
                 multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
+                genSelectedInfo(multyplayerSelectedLevelPath);
+              }
+            }
+            if (multyplayerSelectionLevels.equals("coop")) {
+              if (slotSelected<=0) {// set co op max levels here for selection
+                multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
                 genSelectedInfo(multyplayerSelectedLevelPath);
               }
             }

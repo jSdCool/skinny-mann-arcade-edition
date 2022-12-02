@@ -1,0 +1,31 @@
+[
+  {
+    "name": "end",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 1250,
+    "color": -16732415,
+    "dy": 120,
+    "x": 0,
+    "y": 600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 860,
+    "y": 600,
+    "type": "goal",
+    "group": -1
+  },
+  {
+    "link Index": 6,
+    "x": 100,
+    "y": 550,
+    "type": "interdimentional Portal",
+    "linkY": 540,
+    "linkX": 4900,
+    "group": -1
+  }
+]

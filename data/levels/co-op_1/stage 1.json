@@ -1,0 +1,494 @@
+[
+  {
+    "name": "stage 1",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 1280,
+    "color": -16732415,
+    "dy": 60,
+    "x": 0,
+    "y": 660,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 970,
+    "color": -7254783,
+    "dy": 20,
+    "x": 310,
+    "y": 520,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 900,
+    "color": -7254783,
+    "dy": 20,
+    "x": 380,
+    "y": 390,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 110,
+    "x": 480,
+    "y": 410,
+    "type": "ground",
+    "group": 1
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 120,
+    "x": 480,
+    "y": 540,
+    "type": "ground",
+    "group": 1
+  },
+  {
+    "x": 680,
+    "y": 520,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 710,
+    "y": 520,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 690,
+    "y": 520,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 700,
+    "y": 520,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 680,
+    "y": 470,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 690,
+    "y": 470,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 700,
+    "y": 470,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 710,
+    "y": 470,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 680,
+    "y": 660,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 690,
+    "y": 660,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 710,
+    "y": 660,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 700,
+    "y": 660,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 710,
+    "y": 600,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 700,
+    "y": 600,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 690,
+    "y": 600,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 680,
+    "y": 600,
+    "type": "check point",
+    "group": -1
+  },
+  {
+    "x": 830,
+    "variable": 1,
+    "y": 520,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "x": 830,
+    "variable": 0,
+    "y": 660,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 110,
+    "x": 920,
+    "y": 410,
+    "type": "ground",
+    "group": 2
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 120,
+    "x": 920,
+    "y": 540,
+    "type": "ground",
+    "group": 2
+  },
+  {
+    "dx": 70,
+    "color": -16776959,
+    "dy": 10,
+    "x": 330,
+    "y": 630,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 70,
+    "x": 360,
+    "y": 560,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 30,
+    "color": -16776959,
+    "dy": 10,
+    "x": 340,
+    "y": 570,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 70,
+    "color": -16776959,
+    "dy": 10,
+    "x": 330,
+    "y": 490,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 10,
+    "x": 340,
+    "y": 480,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 20,
+    "x": 380,
+    "y": 430,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 30,
+    "color": -16776959,
+    "dy": 10,
+    "x": 350,
+    "y": 420,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 10,
+    "x": 340,
+    "y": 430,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 10,
+    "x": 360,
+    "y": 460,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 10,
+    "x": 370,
+    "y": 450,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -16776959,
+    "dy": 10,
+    "x": 350,
+    "y": 470,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 960,
+    "color": -16732415,
+    "dy": 60,
+    "x": 1280,
+    "y": 660,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 420,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1280,
+    "y": 520,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 420,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1280,
+    "y": 390,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -7254783,
+    "dy": 270,
+    "x": 1700,
+    "y": 390,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "coin id": 0,
+    "x": 1170,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 1,
+    "x": 1210,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 2,
+    "x": 1250,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 3,
+    "x": 1290,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 4,
+    "x": 1330,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 5,
+    "x": 1370,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 6,
+    "x": 1410,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 7,
+    "x": 1450,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 8,
+    "x": 1490,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 9,
+    "x": 1530,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 10,
+    "x": 1570,
+    "y": 500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 11,
+    "x": 1570,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 12,
+    "x": 1530,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 13,
+    "x": 1490,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 14,
+    "x": 1450,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 15,
+    "x": 1410,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 16,
+    "x": 1370,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 17,
+    "x": 1330,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 18,
+    "x": 1290,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 19,
+    "x": 1250,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 20,
+    "x": 1210,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 21,
+    "x": 1170,
+    "y": 640,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "link Index": 2,
+    "x": 1650,
+    "y": 610,
+    "type": "interdimentional Portal",
+    "linkY": 610,
+    "linkX": 40,
+    "group": -1
+  },
+  {
+    "contents": "players need to stand on buttons to start\n\nnote players will need to be in contact with\neachouther to complete this level",
+    "x": 200,
+    "y": 660,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "link Index": 3,
+    "x": 1650,
+    "y": 470,
+    "type": "interdimentional Portal",
+    "linkY": 620,
+    "linkX": 40,
+    "group": -1
+  }
+]

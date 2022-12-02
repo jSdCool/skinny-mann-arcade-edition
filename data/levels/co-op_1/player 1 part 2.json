@@ -1,0 +1,104 @@
+[
+  {
+    "name": "player 1 part 2",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 390,
+    "color": -16732415,
+    "dy": 50,
+    "x": 0,
+    "y": 670,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 2,
+    "x": 30,
+    "y": 620,
+    "type": "interdimentional Portal",
+    "linkY": 610,
+    "linkX": 530,
+    "group": -1
+  },
+  {
+    "dx": 140,
+    "color": -7254783,
+    "dy": 20,
+    "x": 460,
+    "y": 610,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 130,
+    "color": -7254783,
+    "dy": 20,
+    "x": 710,
+    "y": 550,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 130,
+    "color": -7254783,
+    "dy": 20,
+    "x": 970,
+    "y": 570,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 150,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1360,
+    "y": 520,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 190,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1860,
+    "y": 500,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 290,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2500,
+    "y": 550,
+    "type": "ground",
+    "group": 13
+  },
+  {
+    "dx": 550,
+    "color": -16732415,
+    "dy": 170,
+    "x": 2940,
+    "y": 550,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 3220,
+    "variable": 18,
+    "y": 550,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "link Index": 6,
+    "x": 3450,
+    "y": 500,
+    "type": "interdimentional Portal",
+    "linkY": 590,
+    "linkX": 50,
+    "group": 14
+  }
+]
