@@ -112,6 +112,9 @@ class Client extends Thread {
           if (source.level.multyplayerMode==1) {
             dataToSend.add(source.leaderBoard);
           }
+          if(source.level.multyplayerMode==2){
+            dataToSend.add(new CoOpStateInfo(source.level.variables,source.level.groups));
+          }
         }
         //create the next packet to send
         generateSendPacket();
@@ -190,6 +193,11 @@ class Client extends Thread {
           if (di instanceof LeaderBoard) {
             LeaderBoard lb = (LeaderBoard)di;
             source.leaderBoard=lb;
+          }
+          if(di instanceof CoOpStateInfo){
+            CoOpStateInfo cos = (CoOpStateInfo)di;
+            source.level.variables=cos.vars;
+            source.level.groups=cos.groups;
           }
         }
 
