@@ -206,7 +206,7 @@ class Client extends Thread {
 
         //outher misolenous processing
         //System.out.println(readdy);
-        dataToSend.add(new ClientInfo(source.name, readdy,reachedEnd));
+        dataToSend.add(new ClientInfo(source.name, readdy,source.reachedEnd));
         if (source.inGame) {
           source.players[playernumber].name=source.name;
           dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));

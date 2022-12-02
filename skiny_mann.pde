@@ -874,6 +874,7 @@ void draw() {// the function that is called every fraim
         if(isHost){
           boolean allDone=true;
           for(int i=0;i<clients.size();i++){
+            //println(clients.get(i).reachedEnd+" "+i);
             allDone=allDone && clients.get(i).reachedEnd;
           }
           allDone = allDone && reachedEnd;
