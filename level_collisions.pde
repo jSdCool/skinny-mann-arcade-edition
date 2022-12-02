@@ -912,7 +912,6 @@ class LogicThread extends Thread {
         //System.out.println(millis()-lastRun);
         lastRun=millis();//update the time of the last tick
         level.logicBoards.get(level.tickBoard).tick();//tick the logic board
-        println(level.variables);
         //activate world interaction on all stage components that require it
         for (int i=0; i<level.stages.size(); i++) {
           for (int j=0; j<level.stages.get(i).interactables.size(); j++) {
