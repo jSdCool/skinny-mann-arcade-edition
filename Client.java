@@ -12,6 +12,7 @@ class Client extends Thread {
   NetworkDataPacket toSend=new NetworkDataPacket(), recieved;
   boolean versionChecked=false, readdy=false, viablePlayers[]=new boolean[10];
   BestScore bestScore=new BestScore("", 0);
+  boolean reachedEnd;
   Client(Socket s) {
     init(s);
   }
@@ -80,6 +81,7 @@ class Client extends Thread {
             ClientInfo ci = (ClientInfo)di;
             this.name = ci.name;
             this.readdy=ci.readdy;
+            reachedEnd=ci.atEnd;
             //System.out.println("c "+readdy);
           }
           if (di instanceof PlayerPositionInfo) {
@@ -113,7 +115,7 @@ class Client extends Thread {
             dataToSend.add(source.leaderBoard);
           }
           if(source.level.multyplayerMode==2){
-            dataToSend.add(new CoOpStateInfo(source.level.variables,source.level.groups));
+            dataToSend.add(new CoOpStateInfo(source.level.variables,source.level.groups,source.level_complete));
           }
         }
         //create the next packet to send
@@ -198,12 +200,13 @@ class Client extends Thread {
             CoOpStateInfo cos = (CoOpStateInfo)di;
             source.level.variables=cos.vars;
             source.level.groups=cos.groups;
+            source.level_complete=cos.levelCompleted;
           }
         }
 
         //outher misolenous processing
         //System.out.println(readdy);
-        dataToSend.add(new ClientInfo(source.name, readdy));
+        dataToSend.add(new ClientInfo(source.name, readdy,reachedEnd));
         if (source.inGame) {
           source.players[playernumber].name=source.name;
           dataToSend.add(new PlayerPositionInfo(source.players[playernumber]));

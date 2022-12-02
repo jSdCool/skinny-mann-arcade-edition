@@ -181,10 +181,13 @@ void stageLevelDraw() {
     fill(255, 126, 0);
     stroke(255, 0, 0);
     strokeWeight(Scale*10);
-    rect(Scale*550, Scale*450, Scale*200, Scale*40);//continue button
-    fill(0);
-    textSize(Scale*40);
-    text("continue", Scale*565, Scale*485);
+    
+    if(level.multyplayerMode!=2||isHost){
+      rect(Scale*550, Scale*450, Scale*200, Scale*40);//continue button
+      fill(0);
+      textSize(Scale*40);
+      text("continue", Scale*565, Scale*485);
+    }
   }
 
   if (viewingItemContents) {//if viewing the contence of an element

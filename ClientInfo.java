@@ -3,9 +3,10 @@
  */
 class ClientInfo extends DataPacket {
   public String name;
-  boolean readdy;
-  ClientInfo(String name, boolean ready) {
+  boolean readdy,atEnd;
+  ClientInfo(String name, boolean ready,boolean atEnd) {
     this.name=name;
     this.readdy=ready;
+    this.atEnd=atEnd;
   }
 }
