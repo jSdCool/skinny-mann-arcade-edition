@@ -58,7 +58,7 @@ class Goal extends StageComponent {//ground component
       if(source.level.multyplayerMode!=2){
         source.level_complete=true;
       }else{
-        reachedEnd=true;
+        source.reachedEnd=true;
       }
     }
   }
