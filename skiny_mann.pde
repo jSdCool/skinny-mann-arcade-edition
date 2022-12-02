@@ -789,15 +789,17 @@ void draw() {// the function that is called every fraim
 
       textSize(10*Scale);//fraim rate counter
       textAlign(RIGHT, TOP);
-      text("mspc: "+ mspc, 1275*Scale, 10*Scale);
-      text("player X: "+ players[currentPlayer].x, 1275*Scale, 20*Scale);
-      text("player Y: "+ players[currentPlayer].y, 1275*Scale, 30*Scale);
-      text("player vertical velocity: "+ players[currentPlayer].verticalVelocity, 1275*Scale, 40*Scale);
-      text("player animation Cooldown: "+ players[currentPlayer].animationCooldown, 1275*Scale, 50*Scale);
-      text("player pose: "+ players[currentPlayer].pose, 1275*Scale, 60*Scale);
-      text("camera x: "+camPos, 1275*Scale, 70*Scale);
-      text("camera y: "+camPosY, 1275*Scale, 80*Scale);
-      text("tutorial position: "+tutorialPos, 1275*Scale, 90*Scale);
+      if(players[currentPlayer]!=null){
+        text("mspc: "+ mspc, 1275*Scale, 10*Scale);
+        text("player X: "+ players[currentPlayer].x, 1275*Scale, 20*Scale);
+        text("player Y: "+ players[currentPlayer].y, 1275*Scale, 30*Scale);
+        text("player vertical velocity: "+ players[currentPlayer].verticalVelocity, 1275*Scale, 40*Scale);
+        text("player animation Cooldown: "+ players[currentPlayer].animationCooldown, 1275*Scale, 50*Scale);
+        text("player pose: "+ players[currentPlayer].pose, 1275*Scale, 60*Scale);
+        text("camera x: "+camPos, 1275*Scale, 70*Scale);
+        text("camera y: "+camPosY, 1275*Scale, 80*Scale);
+        text("tutorial position: "+tutorialPos, 1275*Scale, 90*Scale);
+      }
     }
 
     if (millis()<gmillis) {
