@@ -594,10 +594,18 @@ void draw() {// the function that is called every fraim
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
             if (isHost) {
-              multyplayerPlay.draw();
               if (multyplayerSelectedLevel.multyplayerMode==1) {
                 increaseTime.draw();
                 decreaseTime.draw();
+                multyplayerPlay.draw();
+              }
+              if(multyplayerSelectedLevel.multyplayerMode==2){
+                if(clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers){
+                  multyplayerPlay.draw();
+                }else{
+                  textSize(20*Scale);
+                  text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
+                }
               }
             }
           }
@@ -1428,13 +1436,23 @@ void mouseClicked() {// when you click the mouse
           }
           if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             if (multyplayerPlay.isMouseOver()) {
-              if (multyplayerSelectionLevels.equals("speed")) {
+              if (multyplayerSelectedLevel.multyplayerMode==1) {
                 LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
                 for (int i=0; i<clients.size(); i++) {
                   clients.get(i).dataToSend.add(req);
                 }
                 loadLevel(multyplayerSelectedLevelPath);
                 waitingForReady=true;
+              }
+              if(multyplayerSelectedLevel.multyplayerMode==2){
+                if(clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers){
+                  LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
+                  for (int i=0; i<clients.size(); i++) {
+                    clients.get(i).dataToSend.add(req);
+                  }
+                  loadLevel(multyplayerSelectedLevelPath);
+                  waitingForReady=true;
+                }
               }
             }
           }
