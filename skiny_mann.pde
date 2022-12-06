@@ -599,10 +599,10 @@ void draw() {// the function that is called every fraim
                 decreaseTime.draw();
                 multyplayerPlay.draw();
               }
-              if(multyplayerSelectedLevel.multyplayerMode==2){
-                if(clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers){
+              if (multyplayerSelectedLevel.multyplayerMode==2) {
+                if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
                   multyplayerPlay.draw();
-                }else{
+                } else {
                   textSize(20*Scale);
                   text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
                 }
@@ -789,7 +789,7 @@ void draw() {// the function that is called every fraim
 
       textSize(10*Scale);//fraim rate counter
       textAlign(RIGHT, TOP);
-      if(players[currentPlayer]!=null){
+      if (players[currentPlayer]!=null) {
         text("mspc: "+ mspc, 1275*Scale, 10*Scale);
         text("player X: "+ players[currentPlayer].x, 1275*Scale, 20*Scale);
         text("player Y: "+ players[currentPlayer].y, 1275*Scale, 30*Scale);
@@ -870,15 +870,15 @@ void draw() {// the function that is called every fraim
           }
         }
       }
-      if(level.multyplayerMode==2){
-        if(isHost){
+      if (level.multyplayerMode==2) {
+        if (isHost) {
           boolean allDone=true;
-          for(int i=0;i<clients.size();i++){
+          for (int i=0; i<clients.size(); i++) {
             //println(clients.get(i).reachedEnd+" "+i);
             allDone=allDone && clients.get(i).reachedEnd;
           }
           allDone = allDone && reachedEnd;
-          if(allDone){
+          if (allDone) {
             level_complete=true;
           }
         }
@@ -1436,7 +1436,7 @@ void mouseClicked() {// when you click the mouse
           if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
             int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
             if (multyplayerSelectionLevels.equals("speed")) {
-              if (slotSelected<=9) {//set speed run max levels here for selection 
+              if (slotSelected<=9) {//set speed run max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
                 genSelectedInfo(multyplayerSelectedLevelPath);
               }
@@ -1459,8 +1459,8 @@ void mouseClicked() {// when you click the mouse
                 loadLevel(multyplayerSelectedLevelPath);
                 waitingForReady=true;
               }
-              if(multyplayerSelectedLevel.multyplayerMode==2){
-                if(clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers){
+              if (multyplayerSelectedLevel.multyplayerMode==2) {
+                if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
                   LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
                   for (int i=0; i<clients.size(); i++) {
                     clients.get(i).dataToSend.add(req);
@@ -1480,10 +1480,10 @@ void mouseClicked() {// when you click the mouse
                 sessionTime-=30000;
             }
           }
-          if(multyplayerCoop.isMouseOver()){
+          if (multyplayerCoop.isMouseOver()) {
             multyplayerSelectionLevels="coop";
           }
-          if(multyplayerSpeedrun.isMouseOver()){
+          if (multyplayerSpeedrun.isMouseOver()) {
             multyplayerSelectionLevels="speed";
           }
         } else {//if joined
@@ -1499,23 +1499,30 @@ void mouseClicked() {// when you click the mouse
         }
       }
     }
-    if (level_complete) {//if you completed a level and have not joined
+    if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
       if (mouseX >= 550*Scale && mouseX <= 750*Scale && mouseY >= 450*Scale && mouseY <= 490*Scale) {//continue button
-        menue=true;
-        inGame=false;
-        Menue="level select";
-        level_complete=false;
-        coinCount=0;
-        if (!UGC_lvl) {
-          JSONObject lvlinfo=mainIndex.getJSONObject(0);
-          if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
-            JSONObject p=new JSONObject();
-            p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
-            levelProgress.setJSONObject(0, p);
-            saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
-          }
+        if (multiplayer) {
+          menue=true;
+          inGame=false;
+          Menue="multiplayer selection";
+          returnToSlection();
         } else {
-          UGC_lvl=false;
+          menue=true;
+          inGame=false;
+          Menue="level select";
+          level_complete=false;
+          coinCount=0;
+          if (!UGC_lvl) {
+            JSONObject lvlinfo=mainIndex.getJSONObject(0);
+            if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
+              JSONObject p=new JSONObject();
+              p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
+              levelProgress.setJSONObject(0, p);
+              saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+            }
+          } else {
+            UGC_lvl=false;
+          }
         }
       }
     }
@@ -2631,7 +2638,7 @@ void  initButtons() {
   updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new Button(this, 500*Scale, 100*Scale, 300*Scale, 60*Scale, "Restart", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  
+
 
 
   dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
