@@ -14,9 +14,14 @@ import java.awt.Desktop;
 import javax.swing.*;
 
 void settings() {//first function called
+  if (platform==WINDOWS){
+   appdata=System.getenv("AppData");
+  }else{
+    appdata=System.getenv("HOME");
+  }
   try {
     try {
-      settings =loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");//load the settings
+      settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");//load the settings
       JSONObject vers=settings.getJSONObject(0);
       if (vers.getInt("settings version")!=settingsVersion) {
         generateSettings();
@@ -81,7 +86,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access_T1", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath;
+ String Menue ="creds"/*,level="n"*/, version="0.7.0_Early_Access_T1", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath,appdata;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
@@ -396,7 +401,7 @@ void draw() {// the function that is called every fraim
 
         //end of check boers and stuffs
 
-        settings =loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+        settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
 
         strokeWeight(5*Scale);
         stroke(255, 0, 0);
@@ -1011,8 +1016,8 @@ void mouseClicked() {// when you click the mouse
         }
         if (select_lvl_UGC.isMouseOver()) {
           Menue="level select UGC";
-          new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
-          String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
+          new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+          String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
 
           compatibles=new ArrayList<>();
           UGCNames=new ArrayList<>();
@@ -1061,7 +1066,7 @@ void mouseClicked() {// when you click the mouse
             }
           }
           if (UGC_lvl_play.isMouseOver()) {
-            loadLevel(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
+            loadLevel(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
             if (!levelCompatible) {
               Menue="level select";
               return;
@@ -1135,7 +1140,7 @@ void mouseClicked() {// when you click the mouse
             JSONObject scroll=settings.getJSONObject(1);
             scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
             settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (vsdSlider.isMouseOver()) {
@@ -1150,7 +1155,7 @@ void mouseClicked() {// when you click the mouse
             JSONObject scroll=settings.getJSONObject(1);
             scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
             settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
         }//end of game play settings
 
@@ -1165,7 +1170,7 @@ void mouseClicked() {// when you click the mouse
             rez.setFloat("scale", 2160/720.0);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (rez1440.isMouseOver()) {// 1440 resolition button
@@ -1176,7 +1181,7 @@ void mouseClicked() {// when you click the mouse
             rez.setFloat("scale", 1440/720.0);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (rez1080.isMouseOver()) {// 1080 resolution button
@@ -1187,7 +1192,7 @@ void mouseClicked() {// when you click the mouse
             rez.setFloat("scale", 1080/720.0);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (rez900.isMouseOver()) {////900 resolution button
@@ -1198,7 +1203,7 @@ void mouseClicked() {// when you click the mouse
             rez.setFloat("scale", 900/720.0);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (rez720.isMouseOver()) {// 720 resolution button
@@ -1209,7 +1214,7 @@ void mouseClicked() {// when you click the mouse
             rez.setFloat("scale", 720/720.0);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
 
@@ -1217,14 +1222,14 @@ void mouseClicked() {// when you click the mouse
             rez.setBoolean("full_Screen", true);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (fullScreenOff.isMouseOver()) {//turn fullscreen off button
             rez.setBoolean("full_Screen", false);
 
             settings.setJSONObject(2, rez);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
         }//end of display settings menue
 
@@ -1234,25 +1239,25 @@ void mouseClicked() {// when you click the mouse
             debug.setBoolean("fps", true);
             displayFPS=true;
             settings.setJSONObject(3, debug);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (disableFPS.isMouseOver()) {
             debug.setBoolean("fps", false);
             displayFPS=false;
             settings.setJSONObject(3, debug);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (enableDebug.isMouseOver()) {
             debug.setBoolean("debug info", true);
             displayDebugInfo=true;
             settings.setJSONObject(3, debug);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (disableDebug.isMouseOver()) {
             debug.setBoolean("debug info", false);
             displayDebugInfo=false;
             settings.setJSONObject(3, debug);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
 
           if (MusicSlider.isMouseOver()) {
@@ -1267,7 +1272,7 @@ void mouseClicked() {// when you click the mouse
             JSONObject scroll=settings.getJSONObject(4);
             scroll.setFloat("music volume", (musVolSllid-800.0)/440);
             settings.setJSONObject(4, scroll);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             soundHandler.setMusicVolume(musicVolume);
           }
           if (SFXSlider.isMouseOver()) {
@@ -1282,7 +1287,7 @@ void mouseClicked() {// when you click the mouse
             JSONObject scroll=settings.getJSONObject(4);
             scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
             settings.setJSONObject(4, scroll);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             soundHandler.setSoundsVolume(sfxVolume);
           }
 
@@ -1291,28 +1296,28 @@ void mouseClicked() {// when you click the mouse
             sv3.setBoolean("3D shaows", true);
             shadow3D=true;
             settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (shadowOff.isMouseOver()) {
             JSONObject sv3=settings.getJSONObject(5);
             sv3.setBoolean("3D shaows", false);
             shadow3D=false;
             settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (narrationMode0.isMouseOver()) {
             JSONObject sv3=settings.getJSONObject(5);
             sv3.setInt("narrationMode", 0);
             tutorialNarrationMode=0;
             settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
           if (narrationMode1.isMouseOver()) {
             JSONObject sv3=settings.getJSONObject(5);
             sv3.setInt("narrationMode", 1);
             tutorialNarrationMode=1;
             settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
         }//end of outher settings menue
 
@@ -1518,7 +1523,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject p=new JSONObject();
               p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
               levelProgress.setJSONObject(0, p);
-              saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+              saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
             }
           } else {
             UGC_lvl=false;
@@ -1781,7 +1786,7 @@ void mouseDragged() {
           JSONObject scroll=settings.getJSONObject(1);
           scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
           settings.setJSONObject(1, scroll);
-          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
         }
 
         if (vsdSlider.isMouseOver()) {
@@ -1796,7 +1801,7 @@ void mouseDragged() {
           JSONObject scroll=settings.getJSONObject(1);
           scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
           settings.setJSONObject(1, scroll);
-          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
         }
       }
       if (settingsMenue.equals("outher")) {
@@ -1812,7 +1817,7 @@ void mouseDragged() {
           JSONObject scroll=settings.getJSONObject(4);
           scroll.setFloat("music volume", (musVolSllid-800.0)/440);
           settings.setJSONObject(4, scroll);
-          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           soundHandler.setMusicVolume(musicVolume);
         }
         if (SFXSlider.isMouseOver()) {
@@ -1827,7 +1832,7 @@ void mouseDragged() {
           JSONObject scroll=settings.getJSONObject(4);
           scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
           settings.setJSONObject(4, scroll);
-          saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           soundHandler.setSoundsVolume(sfxVolume);
         }
       }
@@ -1915,7 +1920,7 @@ void generateSettings() {
   sv3.setInt("narrationMode", 0);
   settings.setJSONObject(5, sv3);
 
-  saveJSONArray(settings, System.getenv("AppData")+"/CBi-games/skinny mann/settings.json");
+  saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
 }
 
 void chechMark(float x, float y) {
@@ -2136,19 +2141,19 @@ void openUGCFolder() {
   Desktop desktop = Desktop.getDesktop();
   File dirToOpen = null;
   try {
-    dirToOpen = new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels");
+    dirToOpen = new File(appdata+"/CBi-games/skinny mann/UGC/levels");
     desktop.open(dirToOpen);
   }
   catch (Throwable iae) {
     System.out.println("folder Not Found, creating folder");
-    new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+    new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
     openUGCFolder();
   }
 }
 
 boolean FileIsLevel(String fil) {
   try {
-    JSONObject job =loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
+    JSONObject job =loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
     String createdVersion=job.getString("game version");
     if (gameVersionCompatibilityCheck(createdVersion)) {
       levelCompatible=true;
@@ -2415,8 +2420,8 @@ void clickDevMenue() {
   }
   if (dev_UGC.isMouseOver()) {
     Menue="level select UGC";
-    new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").mkdirs();
-    String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann/UGC/levels").list();
+    new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+    String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
 
     compatibles=new ArrayList<>();
     UGCNames=new ArrayList<>();
@@ -2525,7 +2530,7 @@ void programLoad() {
   sfxVolSllid=(int)(sfxVolume*440+800);
 
   try {//load level prgress
-    levelProgress=loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+    levelProgress=loadJSONArray(appdata+"/CBi-games/skinny mann/progressions.json");
     levelProgress.getJSONObject(0);
   }
   catch(Throwable e) {
@@ -2533,7 +2538,7 @@ void programLoad() {
     JSONObject p=new JSONObject();
     p.setInt("progress", 0);
     levelProgress.setJSONObject(0, p);
-    saveJSONArray(levelProgress, System.getenv("AppData")+"/CBi-games/skinny mann/progressions.json");
+    saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
   }
 
   players[0]=new Player(20, 699, 1, 0);
