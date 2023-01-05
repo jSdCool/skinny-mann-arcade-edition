@@ -20,12 +20,14 @@ void settings() {//first function called
     appdata=System.getenv("HOME");
   }
   try {
+    println("attempting to load settings");
     try {
       settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");//load the settings
       JSONObject vers=settings.getJSONObject(0);
       if (vers.getInt("settings version")!=settingsVersion) {
         generateSettings();
       }
+      println("settings found");
     }
     catch(Throwable e) {
       println("an error occored finding the settings file generating new file");
@@ -42,6 +44,7 @@ void settings() {//first function called
     } else {
       fullScreen(P3D, rez.getInt("full_Screen_diplay"));//if full screen then turn full screen on
     }
+    println("loading window icon");
     PJOGL.setIcon("data/assets/skinny mann face.PNG");
     sourceInitilize();
   }
@@ -57,22 +60,23 @@ void setup() {//seccond function called
   try {
     frameRate(60);//limet the frame reate
     background(0);
-    if (fs) {//get and set some data
+    if (fs) {//get and set some data if in fullscreen
       hres=width;
       vres=height;
       Scale=vres/720.0;
       Scale2=hres/1280.0;
     }
     println(height+" "+Scale);//debung info
-
+    println("loading texture for start screen");
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
-    // CBi.resize((int)(500*Scale), (int)(500*Scale));//scale the CBi logo
 
     textSize(100*Scale);//500
+    println("initilizing buttons");
     initButtons();
 
     ptsW=100;
     ptsH=100;
+    println("initilizing zbi sphere");
     initializeSphere(ptsW, ptsH);
     thread("programLoad");
   }
@@ -2500,15 +2504,15 @@ String formatMillis(int millis) {
 }
 
 void programLoad() {
+  println("loading discord icon");
   discordIcon=loadImage("data/assets/discord.png");
   discordIcon.resize((int)(50*Scale), (int)(50*Scale));
 
+  println("loading 3D coin modle");
   coin3D=loadShape("data/modles/coin/tinker.obj");
   coin3D.scale(3);
 
-  //icon = loadImage("data/assets/skinny mann face.PNG");//load the window icon
-  //surface.setIcon(icon);//set the window icon
-
+  println("loading settings");
   JSONObject scroll=settings.getJSONObject(1);//load in the settings
   eadgeScroleDist=scroll.getInt("horozontal");
   esdPos=(int)(((eadgeScroleDist-100.0)/530)*440+800);
@@ -2529,11 +2533,13 @@ void programLoad() {
   musVolSllid=(int)(musicVolume*440+800);
   sfxVolSllid=(int)(sfxVolume*440+800);
 
+  println("loading level progress");
   try {//load level prgress
     levelProgress=loadJSONArray(appdata+"/CBi-games/skinny mann/progressions.json");
     levelProgress.getJSONObject(0);
   }
   catch(Throwable e) {
+    println("failed to load level progress. creating new progress data");
     levelProgress=new JSONArray();
     JSONObject p=new JSONObject();
     p.setInt("progress", 0);
@@ -2541,6 +2547,7 @@ void programLoad() {
     saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
   }
 
+  println("inililizing players");
   players[0]=new Player(20, 699, 1, 0);
   players[1]=new Player(20, 699, 1, 1);
   players[2]=new Player(20, 699, 1, 2);
@@ -2552,46 +2559,84 @@ void programLoad() {
   players[8]=new Player(20, 699, 1, 8);
   players[9]=new Player(20, 699, 1, 9);
 
+  println("initlizing sound handler");
   soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
   soundHandler.setMusicVolume(0);
-
+  
+  println("starting to load tutorial audio tracks");
   tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
+  println("loaded tutorial audio track T1a");
   tutorialNarration[0][1]=new SoundFile(this, "data/sounds/tutorial/T2a.wav");
+  println("loaded tutorial audio track T2a");
   tutorialNarration[0][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  println("loaded tutorial audio track T3");
   tutorialNarration[0][3]=new SoundFile(this, "data/sounds/tutorial/T4a.wav");
+  println("loaded tutorial audio track T4a");
   tutorialNarration[0][4]=new SoundFile(this, "data/sounds/tutorial/T5a.wav");
+  println("loaded tutorial audio track T5a");
   tutorialNarration[0][5]=new SoundFile(this, "data/sounds/tutorial/T6a.wav");
+  println("loaded tutorial audio track T6a");
   tutorialNarration[0][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  println("loaded tutorial audio track T7");
   tutorialNarration[0][7]=new SoundFile(this, "data/sounds/tutorial/T8a.wav");
+  println("loaded tutorial audio track T8a");
   tutorialNarration[0][8]=new SoundFile(this, "data/sounds/tutorial/T9a.wav");
+  println("loaded tutorial audio track T9a");
   tutorialNarration[0][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  println("loaded tutorial audio track T10");
   tutorialNarration[0][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  println("loaded tutorial audio track T11");
   tutorialNarration[0][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  println("loaded tutorial audio track T12");
   tutorialNarration[0][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  println("loaded tutorial audio track T13");
   tutorialNarration[0][13]=new SoundFile(this, "data/sounds/tutorial/T14a.wav");
+  println("loaded tutorial audio track T14a");
   tutorialNarration[0][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  println("loaded tutorial audio track T15");
   tutorialNarration[0][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  println("loaded tutorial audio track T16");
   tutorialNarration[0][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+  println("loaded tutorial audio track T17");
   tutorialNarration[1][0]=new SoundFile(this, "data/sounds/tutorial/T1b.wav");
+  println("loaded tutorial audio track T1b");
   tutorialNarration[1][1]=new SoundFile(this, "data/sounds/tutorial/T2b.wav");
+  println("loaded tutorial audio track T2b");
   tutorialNarration[1][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  println("loaded tutorial audio track T3");
   tutorialNarration[1][3]=new SoundFile(this, "data/sounds/tutorial/T4b.wav");
+  println("loaded tutorial audio track T4b");
   tutorialNarration[1][4]=new SoundFile(this, "data/sounds/tutorial/T5b.wav");
+  println("loaded tutorial audio track T5b");
   tutorialNarration[1][5]=new SoundFile(this, "data/sounds/tutorial/T6b.wav");
+  println("loaded tutorial audio track T6b");
   tutorialNarration[1][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  println("loaded tutorial audio track T7");
   tutorialNarration[1][7]=new SoundFile(this, "data/sounds/tutorial/T8b.wav");
+  println("loaded tutorial audio track T8b");
   tutorialNarration[1][8]=new SoundFile(this, "data/sounds/tutorial/T9b.wav");
+  println("loaded tutorial audio track T9b");
   tutorialNarration[1][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  println("loaded tutorial audio track T10");
   tutorialNarration[1][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  println("loaded tutorial audio track T11");
   tutorialNarration[1][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  println("loaded tutorial audio track T12");
   tutorialNarration[1][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  println("loaded tutorial audio track T13");
   tutorialNarration[1][13]=new SoundFile(this, "data/sounds/tutorial/T14b.wav");
+  println("loaded tutorial audio track T14b");
   tutorialNarration[1][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  println("loaded tutorial audio track T15");
   tutorialNarration[1][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  println("loaded tutorial audio track T16");
   tutorialNarration[1][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+  println("loaded tutorial audio track T17");
 
+  println("starting physics thread");
   thread("thrdCalc2");
   loaded=true;
+  println("loading complete");
 }
 void  initButtons() {
   select_lvl_1=new Button(this, (100*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 1", -59135, -1791).setStrokeWeight( (10*Scale));
