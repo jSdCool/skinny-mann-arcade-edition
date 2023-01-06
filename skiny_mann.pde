@@ -666,7 +666,7 @@ void draw() {// the function that is called every fraim
             multyplayerUGC.setColor(#B40F00, #B4AF00);
             calcTextSize("level 30", width*0.1);
             textAlign(CENTER, CENTER);
-            for (int i=0; i<1; i++) {
+            for (int i=0; i<2; i++) {
               text("Co-Op "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
             }
           }
@@ -1451,7 +1451,7 @@ void mouseClicked() {// when you click the mouse
               }
             }
             if (multyplayerSelectionLevels.equals("coop")) {
-              if (slotSelected<=0) {// set co op max levels here for selection
+              if (slotSelected<=1) {// set co op max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
                 genSelectedInfo(multyplayerSelectedLevelPath);
               }
@@ -1467,6 +1467,7 @@ void mouseClicked() {// when you click the mouse
                 }
                 loadLevel(multyplayerSelectedLevelPath);
                 waitingForReady=true;
+                bestTime=0;
               }
               if (multyplayerSelectedLevel.multyplayerMode==2) {
                 if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {

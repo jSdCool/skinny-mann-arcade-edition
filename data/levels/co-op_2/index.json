@@ -1,0 +1,74 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 169,
+    "min players": 3,
+    "author": "jSdCool",
+    "level_id": 68542958,
+    "spawnX": 85,
+    "groups": [
+      "group 0",
+      "start gate",
+      "start gate 2",
+      "p1 pt3 platform",
+      "p2 pt3 platform",
+      "p3 pt3 platform",
+      "pt3 box1",
+      "pt3 box2",
+      "pt3 walkway"
+    ],
+    "game version": "0.7.0_Early_Access",
+    "spawnY": 629,
+    "max players": 3,
+    "number of variable": 11,
+    "name": "co-op_2",
+    "spawn pointX": 85,
+    "spawn pointY": 629,
+    "multyplayer mode": 2
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "p1 s2",
+    "location": "/p1 s2.json",
+    "type": "stage"
+  },
+  {
+    "name": "p2 s2",
+    "location": "/p2 s2.json",
+    "type": "stage"
+  },
+  {
+    "name": "p3 s2",
+    "location": "/p3 s2.json",
+    "type": "stage"
+  },
+  {
+    "name": "part 3",
+    "location": "/part 3.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "final",
+    "location": "/final.json",
+    "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

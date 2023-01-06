@@ -169,6 +169,8 @@ class Client extends Thread {
             LoadLevelRequest llr = (LoadLevelRequest)di;
             if (llr.isBuiltIn) {
               source.loadLevel(llr.path);
+              source.bestTime=0;
+              dataToSend.add(new BestScore(source.name, source.bestTime));
               readdy=true;
             }
           }

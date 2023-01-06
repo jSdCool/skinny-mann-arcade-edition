@@ -1,0 +1,117 @@
+[
+  {
+    "name": "final",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 750,
+    "color": -16732415,
+    "dy": 90,
+    "x": 0,
+    "y": 630,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "link Index": 5,
+    "x": 280,
+    "y": 580,
+    "type": "interdimentional Portal",
+    "linkY": 550,
+    "linkX": 6600,
+    "group": -1
+  },
+  {
+    "dx": 670,
+    "color": -16732415,
+    "dy": 210,
+    "x": 750,
+    "y": 510,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 980,
+    "y": 510,
+    "type": "goal",
+    "group": -1
+  },
+  {
+    "coin id": 158,
+    "x": 390,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 159,
+    "x": 440,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 160,
+    "x": 490,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 161,
+    "x": 540,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 162,
+    "x": 590,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 163,
+    "x": 640,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 164,
+    "x": 690,
+    "y": 610,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 165,
+    "x": 780,
+    "y": 490,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 166,
+    "x": 830,
+    "y": 490,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 167,
+    "x": 880,
+    "y": 490,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 168,
+    "x": 940,
+    "y": 490,
+    "type": "coin",
+    "group": -1
+  }
+]

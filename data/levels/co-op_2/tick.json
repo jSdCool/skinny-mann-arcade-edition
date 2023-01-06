@@ -1,0 +1,464 @@
+[
+  {"name": "tick"},
+  {
+    "variable number": 0,
+    "x": 110,
+    "y": 90,
+    "type": "read var",
+    "connections": [{
+      "index": 3,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 99,
+    "y": 166,
+    "type": "read var",
+    "connections": [{
+      "index": 3,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 2,
+    "x": 96,
+    "y": 258,
+    "type": "read var",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 283,
+    "y": 86,
+    "type": "AND",
+    "connections": [{
+      "index": 4,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 458,
+    "y": 176,
+    "type": "AND",
+    "connections": [{
+      "index": 5,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 653,
+    "y": 198,
+    "type": "pulse",
+    "connections": [
+      {
+        "index": 6,
+        "terminal": 1
+      },
+      {
+        "index": 7,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 823,
+    "y": 190,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 817,
+    "y": 286,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 3,
+    "x": 98,
+    "y": 411,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 14,
+        "terminal": 0
+      },
+      {
+        "index": 21,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 4,
+    "x": 102,
+    "y": 467,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 15,
+        "terminal": 0
+      },
+      {
+        "index": 21,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 5,
+    "x": 89,
+    "y": 551,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 16,
+        "terminal": 0
+      },
+      {
+        "index": 22,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 709,
+    "y": 401,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 709,
+    "y": 496,
+    "group number": 5,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 711,
+    "y": 597,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 444,
+    "y": 403,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 17,
+        "terminal": 0
+      },
+      {
+        "index": 11,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 444,
+    "y": 496,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 18,
+        "terminal": 0
+      },
+      {
+        "index": 12,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 434,
+    "y": 590,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 19,
+        "terminal": 0
+      },
+      {
+        "index": 13,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 580,
+    "y": 406,
+    "type": "NOR",
+    "connections": [{
+      "index": 11,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 578,
+    "y": 513,
+    "type": "NOR",
+    "connections": [{
+      "index": 12,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 573,
+    "y": 602,
+    "type": "NOR",
+    "connections": [{
+      "index": 13,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 6,
+    "x": 72,
+    "y": 663,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 16,
+        "terminal": 1
+      },
+      {
+        "index": 15,
+        "terminal": 1
+      },
+      {
+        "index": 14,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 325,
+    "y": 721,
+    "type": "AND",
+    "connections": [{
+      "index": 22,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 472,
+    "y": 774,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 23,
+        "terminal": 1
+      },
+      {
+        "index": 23,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 6,
+    "x": 643,
+    "y": 794,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 7,
+    "x": 61,
+    "y": 948,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 35,
+        "terminal": 0
+      },
+      {
+        "index": 38,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "variable number": 8,
+    "x": 57,
+    "y": 1042,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 36,
+        "terminal": 0
+      },
+      {
+        "index": 38,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 9,
+    "x": 58,
+    "y": 1122,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 37,
+        "terminal": 0
+      },
+      {
+        "index": 39,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 10,
+    "x": 47,
+    "y": 1216,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 35,
+        "terminal": 1
+      },
+      {
+        "index": 36,
+        "terminal": 1
+      },
+      {
+        "index": 37,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 735,
+    "y": 932,
+    "group number": 6,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 735,
+    "y": 1016,
+    "group number": 7,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 735,
+    "y": 1100,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 10,
+    "x": 735,
+    "y": 1185,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 532,
+    "y": 938,
+    "type": "NOR",
+    "connections": [{
+      "index": 28,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 531,
+    "y": 1022,
+    "type": "NOR",
+    "connections": [{
+      "index": 29,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 530,
+    "y": 1108,
+    "type": "NOR",
+    "connections": [{
+      "index": 30,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 369,
+    "y": 936,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 32,
+        "terminal": 0
+      },
+      {
+        "index": 28,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 368,
+    "y": 1023,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 33,
+        "terminal": 0
+      },
+      {
+        "index": 29,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 368,
+    "y": 1107,
+    "type": "OR",
+    "connections": [
+      {
+        "index": 34,
+        "terminal": 0
+      },
+      {
+        "index": 30,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 368,
+    "y": 1191,
+    "type": "AND",
+    "connections": [{
+      "index": 39,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 530,
+    "y": 1193,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 31,
+        "terminal": 0
+      },
+      {
+        "index": 31,
+        "terminal": 1
+      }
+    ]
+  }
+]
