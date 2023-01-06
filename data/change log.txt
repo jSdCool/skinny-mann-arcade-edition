@@ -8,6 +8,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: settings/progrss/UGC is now stored in users home directory on mac/linux
 -added: multyplayer. now with 2 modes
 -added: co-op_1 multyplayer level
+-added: co-op_2 multyplayer level
+-changed: prbly some outher things I don't remember
 
 0.6.2_Early_Access
 -fixed: final audio clip in tutorial could be played in stage 1 if you died
