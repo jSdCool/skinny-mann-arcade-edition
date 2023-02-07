@@ -600,6 +600,8 @@ void draw() {// the function that is called every fraim
             text(time, width*0.901, height*0.72);
           }
           if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+            textSize(10*Scale);
+            textAlign(LEFT, CENTER);
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
             if (isHost) {
@@ -641,7 +643,6 @@ void draw() {// the function that is called every fraim
           multyplayerSpeedrun.draw();
           multyplayerCoop.draw();
           multyplayerUGC.draw();
-          multyplayerUGC.drawHoverText();
 
           //darw lines seperating levels
           fill(0);
@@ -652,7 +653,7 @@ void draw() {// the function that is called every fraim
           if (multyplayerSelectionLevels.equals("speed")) {
             multyplayerSpeedrun.setColor(-59135, -35185);
             multyplayerCoop.setColor(-59135, -1791);
-            multyplayerUGC.setColor(#B40F00, #B4AF00);
+            multyplayerUGC.setColor(-59135, -1791);
             int numOfBuiltInLevels=10;
             calcTextSize("level 30", width*0.1);
             textAlign(CENTER, CENTER);
@@ -663,7 +664,7 @@ void draw() {// the function that is called every fraim
           if (multyplayerSelectionLevels.equals("coop")) {
             multyplayerSpeedrun.setColor(-59135, -1791);
             multyplayerCoop.setColor(-59135, -35185);
-            multyplayerUGC.setColor(#B40F00, #B4AF00);
+            multyplayerUGC.setColor(-59135, -1791);
             calcTextSize("level 30", width*0.1);
             textAlign(CENTER, CENTER);
             for (int i=0; i<2; i++) {
@@ -671,9 +672,16 @@ void draw() {// the function that is called every fraim
             }
           }
           if (multyplayerSelectionLevels.equals("UGC")) {
-            multyplayerSpeedrun.setColor(-59135, -1791);
+            multyplayerSpeedrun.setColor(-59135, -1791);//color of the buttons at the bottom of the screen
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -35185);
+            
+            calcTextSize("level 30", width*0.1);//display the levels to selct from
+            textAlign(CENTER, CENTER);
+            for(int i=0;i<UGCNames.size();i++){
+              String levelName = loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(i)+"/index.json").getJSONObject(0).getString("name");
+              text(levelName, width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+            }
           }
         } else {
           textAlign(CENTER, CENTER);
@@ -1020,28 +1028,7 @@ void mouseClicked() {// when you click the mouse
         }
         if (select_lvl_UGC.isMouseOver()) {
           Menue="level select UGC";
-          new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
-          String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
-
-          compatibles=new ArrayList<>();
-          UGCNames=new ArrayList<>();
-          try {
-            if (files.length==0)
-              return;
-          }
-          catch(NullPointerException e) {
-            return;
-          }
-          for (int i=0; i<files.length; i++) {
-            if (FileIsLevel(files[i])) {
-              UGCNames.add(files[i]);
-              if (levelCompatible) {
-                compatibles.add(false);
-              } else {
-                compatibles.add(true);
-              }
-            }
-          }
+          loadUGCList();
           UGC_lvl_indx=0;
           return;
         }
@@ -1447,39 +1434,70 @@ void mouseClicked() {// when you click the mouse
             if (multyplayerSelectionLevels.equals("speed")) {
               if (slotSelected<=9) {//set speed run max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath);
+                genSelectedInfo(multyplayerSelectedLevelPath,false);
               }
             }
             if (multyplayerSelectionLevels.equals("coop")) {
               if (slotSelected<=1) {// set co op max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath);
+                genSelectedInfo(multyplayerSelectedLevelPath,false);
+              }
+            }
+            if(multyplayerSelectionLevels.equals("UGC")){
+              if (slotSelected<=UGCNames.size()-1) {// set co op max levels here for selection
+                multyplayerSelectedLevelPath=appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(slotSelected);
+                genSelectedInfo(multyplayerSelectedLevelPath,true);
               }
             }
             return;
           }
           if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             if (multyplayerPlay.isMouseOver()) {
-              if (multyplayerSelectedLevel.multyplayerMode==1) {
-                LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
-                for (int i=0; i<clients.size(); i++) {
-                  clients.get(i).dataToSend.add(req);
-                }
-                loadLevel(multyplayerSelectedLevelPath);
-                waitingForReady=true;
-                bestTime=0;
-              }
-              if (multyplayerSelectedLevel.multyplayerMode==2) {
-                if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+              if(!multyplayerSelectedLevel.isUGC){
+                if (multyplayerSelectedLevel.multyplayerMode==1) {
                   LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
                   for (int i=0; i<clients.size(); i++) {
                     clients.get(i).dataToSend.add(req);
                   }
                   loadLevel(multyplayerSelectedLevelPath);
                   waitingForReady=true;
+                  bestTime=0;
+                }
+                
+                if (multyplayerSelectedLevel.multyplayerMode==2) {
+                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
+                    for (int i=0; i<clients.size(); i++) {
+                      clients.get(i).dataToSend.add(req);
+                    }
+                    loadLevel(multyplayerSelectedLevelPath);
+                    waitingForReady=true;
+                  }
+                }
+              }else{
+                if (multyplayerSelectedLevel.multyplayerMode==1) {
+                  
+                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id,getLevelHash(multyplayerSelectedLevelPath));
+                  for (int i=0; i<clients.size(); i++) {
+                    clients.get(i).dataToSend.add(req);
+                  }
+                  loadLevel(multyplayerSelectedLevelPath);
+                  waitingForReady=true;
+                  bestTime=0;
+                }
+                
+                if (multyplayerSelectedLevel.multyplayerMode==2) {
+                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id,getLevelHash(multyplayerSelectedLevelPath));
+                    for (int i=0; i<clients.size(); i++) {
+                      clients.get(i).dataToSend.add(req);
+                    }
+                    loadLevel(multyplayerSelectedLevelPath);
+                    waitingForReady=true;
+                  }
                 }
               }
-            }
+            }//end of multyplayer play button
           }
           if (multyplayerSelectedLevel.multyplayerMode==1) {
             if (increaseTime.isMouseOver()) {
@@ -1495,6 +1513,11 @@ void mouseClicked() {// when you click the mouse
           }
           if (multyplayerSpeedrun.isMouseOver()) {
             multyplayerSelectionLevels="speed";
+          }
+          if (multyplayerUGC.isMouseOver()) {
+            multyplayerSelectionLevels="UGC";
+            //load a list of all the UGC levels
+            loadUGCList();
           }
         } else {//if joined
           if (multyplayerLeave.isMouseOver()) {
@@ -2425,28 +2448,7 @@ void clickDevMenue() {
   }
   if (dev_UGC.isMouseOver()) {
     Menue="level select UGC";
-    new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
-    String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
-
-    compatibles=new ArrayList<>();
-    UGCNames=new ArrayList<>();
-    try {
-      if (files.length==0)
-        return;
-    }
-    catch(NullPointerException e) {
-      return;
-    }
-    for (int i=0; i<files.length; i++) {
-      if (FileIsLevel(files[i])) {
-        UGCNames.add(files[i]);
-        if (levelCompatible) {
-          compatibles.add(false);
-        } else {
-          compatibles.add(true);
-        }
-      }
-    }
+    loadUGCList();
     UGC_lvl_indx=0;
     return;
   }
@@ -2468,14 +2470,15 @@ void calcTextSize(String text, float width, int max) {
   }
 }
 
-void genSelectedInfo(String path) {
+void genSelectedInfo(String path,boolean UGC) {
   String name, author, gameVersion;
-  int multyplayerMode=-1, maxPlayers=-1, minPlayers=-1;
+  int multyplayerMode=1, maxPlayers=-1, minPlayers=-1,id=0;
   JSONArray index = loadJSONArray(path+"/index.json");
   JSONObject info = index.getJSONObject(0);
   name = info.getString("name");
   author=info.getString("author");
   gameVersion=info.getString("game version");
+  id=info.getInt("level_id");
   try {
     multyplayerMode=info.getInt("multyplayer mode");
     maxPlayers=info.getInt("max players");
@@ -2484,7 +2487,7 @@ void genSelectedInfo(String path) {
   catch(Exception e) {
   }
 
-  multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers);
+  multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers,id,UGC);
 }
 
 void returnToSlection() {
@@ -2708,7 +2711,7 @@ void  initButtons() {
 
   multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
-  multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale).setHoverText("coming soon");
+  multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
@@ -2743,3 +2746,28 @@ String getLevelHash(String path){
     }
     return hash;
   }
+  
+ void loadUGCList(){
+   new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+  String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
+
+  compatibles=new ArrayList<>();
+  UGCNames=new ArrayList<>();
+  try {
+    if (files.length==0)
+      return;
+  }
+  catch(NullPointerException e) {
+    return;
+  }
+  for (int i=0; i<files.length; i++) {
+    if (FileIsLevel(files[i])) {
+      UGCNames.add(files[i]);
+      if (levelCompatible) {
+        compatibles.add(false);
+      } else {
+        compatibles.add(true);
+      }
+    }
+  } 
+ }

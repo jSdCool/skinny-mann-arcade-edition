@@ -167,11 +167,37 @@ class Client extends Thread {
           }
           if (di instanceof LoadLevelRequest) {
             LoadLevelRequest llr = (LoadLevelRequest)di;
-            if (llr.isBuiltIn) {
+            if (llr.isBuiltIn) {//if the level to load is included with the game
               source.loadLevel(llr.path);
               source.bestTime=0;
               dataToSend.add(new BestScore(source.name, source.bestTime));
               readdy=true;
+            }else{//if the level to load is UGC
+              source.loadUGCList();//load the list of UGC levels on thius device
+              boolean foundlevel=false;
+              String levelName="";
+              ArrayList<String> matchIDs =new ArrayList<>();
+              for(int j=0;j<source.UGCNames.size();j++){//look through the UGC levels to see if any levels match the ID of the level your trying to load
+                int thisLevelId = source.loadJSONArray(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+source.UGCNames.get(j)).getJSONObject(0).getInt("level_id");
+                if(thisLevelId == llr.id){
+                  matchIDs.add(source.UGCNames.get(j));
+                }
+              }
+              for(int j=0;j<matchIDs.size();j++){//chek all the ID matches to see if any of them have the same hash as the level requested to load
+                if(source.getLevelHash(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+source.matchIDs.get(i)).equals(llr.hash)){
+                  levelName=matchIDs.get(i);
+                  foundlevel=true;
+                  break;
+                }
+              }
+              if(foundlevel){//if an exact match was found then load that and be readdy
+                source.loadLevel(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+levelName);
+                source.bestTime=0;
+                dataToSend.add(new BestScore(source.name, source.bestTime));
+                readdy=true;
+              }else{//get the level from the host
+                
+              }
             }
           }
           if (di instanceof CloseMenuRequest) {
