@@ -1461,7 +1461,7 @@ void mouseClicked() {// when you click the mouse
           if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             if (multyplayerPlay.isMouseOver()) {
               if (multyplayerSelectedLevel.multyplayerMode==1) {
-                LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
+                LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
                 for (int i=0; i<clients.size(); i++) {
                   clients.get(i).dataToSend.add(req);
                 }
@@ -1471,7 +1471,7 @@ void mouseClicked() {// when you click the mouse
               }
               if (multyplayerSelectedLevel.multyplayerMode==2) {
                 if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
-                  LoadLevelRequest req =new LoadLevelRequest(true, multyplayerSelectedLevelPath);
+                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
                   for (int i=0; i<clients.size(); i++) {
                     clients.get(i).dataToSend.add(req);
                   }
@@ -2713,3 +2713,33 @@ void  initButtons() {
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
 }
+
+
+String getLevelHash(String path){
+    String basePath="";
+    if(path.startsWith("data")){
+      basePath=sketchPath()+"/"+path;
+    }else{
+      basePath=path;
+    }
+    String hash="";
+    hash+=Hasher.getFileHash(basePath+"/index.json");
+    
+    JSONArray file = loadJSONArray(basePath+"/index.json");
+    JSONObject job;
+    for (int i=1; i<file.size(); i++) {
+      job=file.getJSONObject(i);
+      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+        continue;
+      }
+      if (job.getString("type").equals("sound")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+        continue;
+      }
+      if (job.getString("type").equals("logicBoard")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+      }
+    }
+    return hash;
+  }

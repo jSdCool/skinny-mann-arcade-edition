@@ -229,4 +229,33 @@ class Level implements Serializable {
     }
     source.saveJSONArray(index, source.rootPath+"/index.json");
   }
+  
+  String getHash(){
+    String basePath="";
+    if(source.rootPath.startsWith("data")){
+      basePath=source.sketchPath()+"/"+source.rootPath;
+    }else{
+      basePath=source.rootPath;
+    }
+    String hash="";
+    hash+=Hasher.getFileHash(basePath+"/index.json");
+    
+    JSONArray file = source.loadJSONArray(basePath+"/index.json");
+    JSONObject job;
+    for (int i=1; i<file.size(); i++) {
+      job=file.getJSONObject(i);
+      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+        continue;
+      }
+      if (job.getString("type").equals("sound")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+        continue;
+      }
+      if (job.getString("type").equals("logicBoard")) {
+        hash+=Hasher.getFileHash(basePath+job.getString("location"));
+      }
+    }
+    return hash;
+  }
 }
