@@ -215,10 +215,11 @@ class Level implements Serializable {
     }
     String[] keys=new String[0];
     keys=(String[])sounds.keySet().toArray(keys);
-    if (keys.length!=0)
+    if (keys.length!=0){
       for (int i=0; i<keys.length; i++) {
         index.setJSONObject(index.size(), sounds.get(keys[i]).save());
       }
+    }
     for (int i=0; i<logicBoards.size(); i++) {
       JSONObject board=new JSONObject();
       board.setString("name", logicBoards.get(i).name);

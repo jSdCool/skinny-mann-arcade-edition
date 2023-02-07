@@ -4,10 +4,10 @@ import processing.data.*;
 import java.util.ArrayList;
 import processing.sound.*;
 
-class StageSound {
+class StageSound implements Serializable{
   static skiny_mann source;
   String path, name, type="sound";
-  protected SoundFile sound;
+  protected transient SoundFile sound;
   StageSound(JSONObject input) {
     name=input.getString("name");
     path=input.getString("location");
