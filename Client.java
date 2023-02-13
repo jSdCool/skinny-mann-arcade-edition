@@ -191,11 +191,13 @@ class Client extends Thread {
                 }
               }
               if(foundlevel){//if an exact match was found then load that and be readdy
+                System.out.println("found requested level. loading...");
                 source.loadLevel(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+levelName);
                 source.bestTime=0;
                 dataToSend.add(new BestScore(source.name, source.bestTime));
                 readdy=true;
               }else{//get the level from the host
+                System.out.println("requested level not found. attempting to download from host");
                 
               }
             }
