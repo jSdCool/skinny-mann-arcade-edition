@@ -184,7 +184,7 @@ class Client extends Thread {
                 }
               }
               for(int j=0;j<matchIDs.size();j++){//chek all the ID matches to see if any of them have the same hash as the level requested to load
-                if(source.getLevelHash(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+source.matchIDs.get(i)).equals(llr.hash)){
+                if(source.getLevelHash(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+matchIDs.get(i)).equals(llr.hash)){
                   levelName=matchIDs.get(i);
                   foundlevel=true;
                   break;
