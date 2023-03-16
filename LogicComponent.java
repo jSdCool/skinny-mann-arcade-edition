@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 abstract class LogicComponent implements Serializable{//the base of all logic gam=ts and things
-  static skiny_mann source;
+  static transient skiny_mann source;
   float x, y;//for visuals only
   String type;
   Button button;

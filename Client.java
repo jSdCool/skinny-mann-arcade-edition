@@ -2,7 +2,7 @@ import java.net.Socket;
 import java.io.*;
 import java.util.ArrayList;
 class Client extends Thread {
-  static skiny_mann source;
+  static transient skiny_mann source;
   int playernumber,blockSize=10240,currentDownloadIndex,currentDownloadblock;
   Socket socket;
   ObjectOutputStream output;

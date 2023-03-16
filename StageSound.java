@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import processing.sound.*;
 
 class StageSound implements Serializable{
-  static skiny_mann source;
+  static transient skiny_mann source;
   String path, name, type="sound";
   protected transient SoundFile sound;
   StageSound(JSONObject input) {

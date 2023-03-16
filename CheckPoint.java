@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 class CheckPoint extends StageComponent {//ground component
-  static skiny_mann source;
+  static transient skiny_mann source;
   CheckPoint(JSONObject data, boolean stage_3D) {
     type="check point";
     x=data.getFloat("x");

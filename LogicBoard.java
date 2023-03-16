@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 class LogicBoard implements Serializable{//stores all the logic components
-  static skiny_mann source;
+  static transient skiny_mann source;
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
   LogicBoard(JSONArray file, Level level) {

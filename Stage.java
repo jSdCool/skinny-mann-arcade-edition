@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 class Stage implements Serializable {
-  static skiny_mann source;
+  static transient skiny_mann source;
   public ArrayList<StageComponent> parts = new ArrayList<>(), interactables=new ArrayList<>();
   public boolean is3D=false;
   public String type, name;

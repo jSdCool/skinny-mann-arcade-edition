@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 abstract class StageComponent implements Serializable {//the base class for all components that exsist inside a stage
-  static skiny_mann source;
+  static transient skiny_mann source;
   public float x, y, z, dx, dy, dz;
   public int ccolor, group=-1;
   public String type;
