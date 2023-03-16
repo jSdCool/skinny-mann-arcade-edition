@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 class Client extends Thread {
   static skiny_mann source;
-  int playernumber;
+  int playernumber,blockSize=10240,currentDownloadIndex,currentDownloadblock;
   Socket socket;
   ObjectOutputStream output;
   ObjectInputStream input;
@@ -12,7 +12,12 @@ class Client extends Thread {
   NetworkDataPacket toSend=new NetworkDataPacket(), recieved;
   boolean versionChecked=false, readdy=false, viablePlayers[]=new boolean[10];
   BestScore bestScore=new BestScore("", 0);
-  boolean reachedEnd;
+  boolean reachedEnd, downloadingLevel=false;
+  LevelDownloadInfo ldi;
+  String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&()-_=+`~[]{}";
+  byte outherFiles[][];
+  byte currentDownloadingFile[];
+  
   Client(Socket s) {
     init(s);
   }
@@ -82,6 +87,11 @@ class Client extends Thread {
             this.name = ci.name;
             this.readdy=ci.readdy;
             reachedEnd=ci.atEnd;
+            if(readdy&&outherFiles!=null){
+              outherFiles=null;
+              ldi=null;
+              downloadingLevel=false;
+            }
             //System.out.println("c "+readdy);
           }
           if (di instanceof PlayerPositionInfo) {
@@ -91,12 +101,34 @@ class Client extends Thread {
           if (di instanceof BestScore) {
             bestScore=(BestScore)di;
           }
+          if(di instanceof RequestLevel){
+            downloadingLevel=true;
+            String fileNames[] = source.level.getOutherFileNames();
+            int fileSizes[]=new int[fileNames.length];
+            outherFiles=new byte[fileNames.length][];
+            for(int j=0;j<fileNames.length;j++){
+              outherFiles[j]=source.loadBytes(source.rootPath+fileNames[j]);//save the contence of the files for later
+              fileSizes[j]=outherFiles[j].length/blockSize;//get the file size in hole blocks
+              fileSizes[j]+=((outherFiles[j].length%blockSize==0) ? 0 : 1);//if some bites are clipped off by the number of blocks then add 1 more
+            }
+            ldi=new LevelDownloadInfo(source.level,fileNames,fileSizes,blockSize);
+            dataToSend.add(ldi);
+          }
+          if(di instanceof RequestLevelFileComponent){
+            RequestLevelFileComponent rlfc = (RequestLevelFileComponent)di;
+            byte sendBytes[]=new byte[blockSize];
+            for(int j=0; j < blockSize && (j+rlfc.block*blockSize) < outherFiles[rlfc.file].length ; j++){
+              sendBytes[j]=outherFiles[rlfc.file][j+rlfc.block*blockSize];
+            }
+            //respond with the data
+            dataToSend.add(new LevelFileComponentData(sendBytes));
+          }
         }
 
         ArrayList<String> names=new ArrayList<>();
         names.add(source.name);
-        for (int i=0; i<source.clients.size(); i++) {
-          names.add(source.clients.get(i).name);
+        for (int j=0; j<source.clients.size(); j++) {
+          names.add(source.clients.get(j).name);
         }
         dataToSend.add(new InfoForClient(playernumber, names, source.version, source.inGame||(source.prevousInGame&&source.Menue.equals("settings")), source.sessionTime));
         if (source.menue) {
@@ -198,7 +230,8 @@ class Client extends Thread {
                 readdy=true;
               }else{//get the level from the host
                 System.out.println("requested level not found. attempting to download from host");
-                
+                dataToSend.add(new RequestLevel());
+                downloadingLevel=true;
               }
             }
           }
@@ -231,6 +264,24 @@ class Client extends Thread {
             source.level.variables=cos.vars;
             source.level.groups=cos.groups;
             source.level_complete=cos.levelCompleted;
+          }
+          if(di instanceof LevelDownloadInfo){
+            LevelDownloadInfo ldi = (LevelDownloadInfo)di; 
+            this.ldi=ldi;
+            blockSize=ldi.blockSize;
+
+            source.rootPath=source.appdata+"/CBi-games/skinny mann/UGC/levels/"+ldi.level.name+generateRandomString(10);
+            ldi.level.save();
+            currentDownloadIndex=-1;
+            currentDownloadblock=-1;
+            getNextLevelComponent();
+          }
+          if(di instanceof LevelFileComponentData){
+            LevelFileComponentData lfcd=(LevelFileComponentData)di;
+            for(int j=0;j<lfcd.data.length && (j+currentDownloadblock*blockSize) < currentDownloadingFile.length;j++){
+              currentDownloadingFile[j+currentDownloadblock*blockSize] = lfcd.data[j];
+            }
+            getNextLevelComponent();
           }
         }
 
@@ -308,5 +359,53 @@ class Client extends Thread {
     while (dataToSend.size()>0) {
       toSend.data.add(dataToSend.remove(0));
     }
+  }
+  
+  String generateRandomString(int size){
+    String out="";
+    for(int i=0;i<size;i++){
+      out+=letters.charAt((int)source.random(0,letters.length()-1));
+    }
+    return out;
+  }
+  
+  void getNextLevelComponent(){
+    if(currentDownloadIndex==-1){
+      currentDownloadIndex=0;
+      currentDownloadblock=0;
+      if(ldi.files.length==0){//if there are no file to download
+        source.loadLevel(source.rootPath);
+        source.bestTime=0;
+        dataToSend.add(new BestScore(source.name, source.bestTime));
+        readdy=true;
+        downloadingLevel=false;
+        return;
+      }
+      currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]];
+    }else{
+      currentDownloadblock++;
+      if(currentDownloadblock==ldi.fileSizes[currentDownloadIndex]){
+        //save that file to the disc
+        source.saveBytes(source.rootPath+ldi.files[currentDownloadIndex],currentDownloadingFile);
+        
+        currentDownloadblock=0;
+        currentDownloadIndex++;
+        currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]];
+        if(currentDownloadIndex==ldi.fileSizes.length){
+          //your done downloading 
+          source.loadLevel(source.rootPath);
+          source.bestTime=0;
+          dataToSend.add(new BestScore(source.name, source.bestTime));
+          readdy=true;
+          downloadingLevel=false;
+          currentDownloadingFile=null;
+          ldi=null;
+          return;
+        }
+      }
+    }
+    //you now have the next segemnt to download
+    
+    dataToSend.add(new RequestLevelFileComponent(currentDownloadIndex,currentDownloadblock));//request that segment
   }
 }

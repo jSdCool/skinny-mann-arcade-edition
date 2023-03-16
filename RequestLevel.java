@@ -1,0 +1,2 @@
+class RequestLevel extends DataPacket{
+}
