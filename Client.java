@@ -215,7 +215,7 @@ class Client extends Thread {
               String levelName="";
               ArrayList<String> matchIDs =new ArrayList<>();
               for(int j=0;j<source.UGCNames.size();j++){//look through the UGC levels to see if any levels match the ID of the level your trying to load
-                int thisLevelId = source.loadJSONArray(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+source.UGCNames.get(j)).getJSONObject(0).getInt("level_id");
+                int thisLevelId = source.loadJSONArray(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+source.UGCNames.get(j)+"/index.json").getJSONObject(0).getInt("level_id");
                 if(thisLevelId == llr.id){
                   matchIDs.add(source.UGCNames.get(j));
                 }

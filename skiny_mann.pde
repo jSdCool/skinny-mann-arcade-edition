@@ -1537,6 +1537,7 @@ void mouseClicked() {// when you click the mouse
         if (multiplayer) {
           menue=true;
           inGame=false;
+          level_complete=false;
           Menue="multiplayer selection";
           returnToSlection();
         } else {
