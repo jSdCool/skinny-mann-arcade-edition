@@ -15,7 +15,7 @@ class Level implements Serializable {
   public String name, createdVersion;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
-  JSONObject hedObj;
+  transient JSONObject hedObj;
 
 
   Level(JSONArray file) {

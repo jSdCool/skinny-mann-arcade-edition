@@ -2487,7 +2487,7 @@ void genSelectedInfo(String path,boolean UGC) {
   catch(Exception e) {
   }
 
-  multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, maxPlayers, minPlayers,id,UGC);
+  multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, minPlayers, maxPlayers, id, UGC);
 }
 
 void returnToSlection() {

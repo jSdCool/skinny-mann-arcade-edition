@@ -102,6 +102,7 @@ class Client extends Thread {
             bestScore=(BestScore)di;
           }
           if(di instanceof RequestLevel){
+            System.out.println(ip+" requested to download the level");
             downloadingLevel=true;
             String fileNames[] = source.level.getOutherFileNames();
             int fileSizes[]=new int[fileNames.length];
@@ -116,6 +117,7 @@ class Client extends Thread {
           }
           if(di instanceof RequestLevelFileComponent){
             RequestLevelFileComponent rlfc = (RequestLevelFileComponent)di;
+            System.out.println(ip+" has requested file "+rlfc.file+" block "+rlfc.block);
             byte sendBytes[]=new byte[blockSize];
             for(int j=0; j < blockSize && (j+rlfc.block*blockSize) < outherFiles[rlfc.file].length ; j++){
               sendBytes[j]=outherFiles[rlfc.file][j+rlfc.block*blockSize];
