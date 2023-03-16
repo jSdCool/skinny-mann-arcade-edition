@@ -157,11 +157,14 @@ class Client extends Thread {
       }
     }
     catch(java.net.SocketTimeoutException s) {
+      s.printStackTrace();//for DEBUG ONLY diabled for final build
     }
     catch(IOException i) {
+      i.printStackTrace();
       //source.networkError(i);
     }
     catch(ClassNotFoundException c) {
+      c.printStackTrace();
       //source.networkError(c);
     }
   }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 //GenericLogicComponent
 
-class GenericLogicComponent extends LogicComponent implements Serializable{
+class GenericLogicComponent extends LogicComponent {
   GenericLogicComponent(float x, float y, LogicBoard lb) {
     super(x, y, "generic", lb);
   }
