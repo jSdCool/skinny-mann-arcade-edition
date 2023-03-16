@@ -386,7 +386,7 @@ class Client extends Thread {
         downloadingLevel=false;
         return;
       }
-      currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]];
+      currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]*blockSize];
     }else{
       currentDownloadblock++;
       if(currentDownloadblock==ldi.fileSizes[currentDownloadIndex]){
@@ -395,7 +395,6 @@ class Client extends Thread {
         
         currentDownloadblock=0;
         currentDownloadIndex++;
-        currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]];
         if(currentDownloadIndex==ldi.fileSizes.length){
           //your done downloading 
           source.loadLevel(source.rootPath);
@@ -407,6 +406,7 @@ class Client extends Thread {
           ldi=null;
           return;
         }
+        currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]*blockSize];
       }
     }
     //you now have the next segemnt to download
