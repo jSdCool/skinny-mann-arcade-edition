@@ -7,7 +7,7 @@ class Button implements Serializable {
   private int fColor=255, sColor=-5592405, textcolor=0, htFill=200, htStroke=0, htColor=0;
   private String text="", hoverText="";
   private float textScaleFactor=2.903f, strokeWeight=3;
-  private PApplet window;
+  private transient PApplet window;
   Button(PApplet window, float X, float Y, float DX, float DY) {
     this.window=window;
     x=X;
