@@ -12,7 +12,7 @@ class Level implements Serializable {
   public ArrayList<Group> groups=new ArrayList<>();
   public ArrayList<String> groupNames=new ArrayList<>();
   public int mainStage, numOfCoins, levelID, numlogicBoards=0, loadBoard, tickBoard, levelCompleteBoard, multyplayerMode=1, maxPLayers=2, minPlayers=2;
-  public String name, createdVersion;
+  public String name, createdVersion, author;
   public float SpawnX, SpawnY, RewspawnX, RespawnY;
   public HashMap<String, StageSound> sounds=new HashMap<>();
   transient JSONObject hedObj;
@@ -32,6 +32,7 @@ class Level implements Serializable {
     name=job.getString("name");
     createdVersion=job.getString("game version");
     source.author=job.getString("author");
+    author=job.getString("author");
     System.out.println("author: "+source.author);
     source.currentStageIndex=mainStage;
     if (job.isNull("number of variable")) {
@@ -195,7 +196,7 @@ class Level implements Serializable {
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
     head.setString("game version", source.GAME_version);
-    head.setString("author", source.author);
+    head.setString("author", author);
     head.setInt("number of variable", variables.size());
     head.setInt("multyplayer mode", multyplayerMode);
     head.setInt("max players", maxPLayers);
