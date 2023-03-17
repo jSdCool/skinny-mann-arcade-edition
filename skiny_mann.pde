@@ -14,9 +14,9 @@ import java.awt.Desktop;
 import javax.swing.*;
 
 void settings() {//first function called
-  if (platform==WINDOWS){
-   appdata=System.getenv("AppData");
-  }else{
+  if (platform==WINDOWS) {
+    appdata=System.getenv("AppData");
+  } else {
     appdata=System.getenv("HOME");
   }
   try {
@@ -90,7 +90,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.1_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath,appdata;
+ String Menue ="creds"/*,level="n"*/, version="0.7.1_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata;
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001;
@@ -101,7 +101,7 @@ ArrayList<Client> clients= new ArrayList<>();
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime;
 JSONArray  settings, mainIndex, levelProgress;
 Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart;
-String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access","0.7.1_Early_Access"};
+String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 SoundFile[][] tutorialNarration=new SoundFile[2][17];
@@ -605,18 +605,25 @@ void draw() {// the function that is called every fraim
             text("Level is incompatible with current version of game", width*0.81, height*0.34);
           } else {
             if (isHost) {
-              if (multyplayerSelectedLevel.multyplayerMode==1) {
-                increaseTime.draw();
-                decreaseTime.draw();
-                multyplayerPlay.draw();
-              }
-              if (multyplayerSelectedLevel.multyplayerMode==2) {
-                if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+              if (!waitingForReady) {
+                if (multyplayerSelectedLevel.multyplayerMode==1) {
+                  increaseTime.draw();
+                  decreaseTime.draw();
                   multyplayerPlay.draw();
-                } else {
-                  textSize(20*Scale);
-                  text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
                 }
+                if (multyplayerSelectedLevel.multyplayerMode==2) {
+                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                    multyplayerPlay.draw();
+                  } else {
+                    textSize(20*Scale);
+                    text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
+                  }
+                }
+              } else {//when waiting for clients to be readdy
+                calcTextSize("waiting for clients",multyplayerPlay.lengthX);
+                textAlign(CENTER, CENTER);
+                fill(0);
+                text("waiting for clients",multyplayerPlay.x+multyplayerPlay.lengthX/2,multyplayerPlay.y+multyplayerPlay.lengthY/2);
               }
             }
           }
@@ -675,10 +682,10 @@ void draw() {// the function that is called every fraim
             multyplayerSpeedrun.setColor(-59135, -1791);//color of the buttons at the bottom of the screen
             multyplayerCoop.setColor(-59135, -1791);
             multyplayerUGC.setColor(-59135, -35185);
-            
+
             calcTextSize("level 30", width*0.1);//display the levels to selct from
             textAlign(CENTER, CENTER);
-            for(int i=0;i<UGCNames.size();i++){
+            for (int i=0; i<UGCNames.size(); i++) {
               String levelName = loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(i)+"/index.json").getJSONObject(0).getString("name");
               text(levelName, width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
             }
@@ -689,26 +696,30 @@ void draw() {// the function that is called every fraim
             calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
             text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
           }
-          
-          if(clients.get(0).downloadingLevel){
+
+          if (clients.get(0).downloadingLevel) {
             calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
-            text("downloading... ",width/2,height*0.05);
+            text("downloading... ", width/2, height*0.05);
             int totalBlocks=0;
-            if(clients.get(0).ldi!=null){
-              for(int i=0;i<clients.get(0).ldi.fileSizes.length;i++){
+            if (clients.get(0).ldi!=null) {
+              for (int i=0; i<clients.get(0).ldi.fileSizes.length; i++) {
                 totalBlocks+=clients.get(0).ldi.fileSizes[i];
               }
               int downloadedBlocks=0;
-              for(int i=0;i<clients.get(0).currentDownloadIndex;i++){
+              for (int i=0; i<clients.get(0).currentDownloadIndex; i++) {
                 downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
               }
               downloadedBlocks+=clients.get(0).currentDownloadblock;
-              rect(width*0.3,height*0.1,width*0.4,height*0.08);
+              rect(width*0.3, height*0.1, width*0.4, height*0.08);
               fill(-9131009);
-              rect(width*0.305,height*0.11,width*0.39,height*0.06);
+              rect(width*0.305, height*0.11, width*0.39, height*0.06);
               fill(0);
-              rect(width*0.305,height*0.11,width*0.39*(1.0*downloadedBlocks/totalBlocks),height*0.06);
+              rect(width*0.305, height*0.11, width*0.39*(1.0*downloadedBlocks/totalBlocks), height*0.06);
             }
+          }
+          if (clients.get(0).readdy) {
+            calcTextSize("waiting for server", width*0.35, (int)(25*Scale));
+            text("waiting for server", width/2, height*0.05);
           }
         }
         multyplayerLeave.draw();
@@ -1455,26 +1466,26 @@ void mouseClicked() {// when you click the mouse
             if (multyplayerSelectionLevels.equals("speed")) {
               if (slotSelected<=9) {//set speed run max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath,false);
+                genSelectedInfo(multyplayerSelectedLevelPath, false);
               }
             }
             if (multyplayerSelectionLevels.equals("coop")) {
               if (slotSelected<=1) {// set co op max levels here for selection
                 multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath,false);
+                genSelectedInfo(multyplayerSelectedLevelPath, false);
               }
             }
-            if(multyplayerSelectionLevels.equals("UGC")){
+            if (multyplayerSelectionLevels.equals("UGC")) {
               if (slotSelected<=UGCNames.size()-1) {// set co op max levels here for selection
                 multyplayerSelectedLevelPath=appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(slotSelected);
-                genSelectedInfo(multyplayerSelectedLevelPath,true);
+                genSelectedInfo(multyplayerSelectedLevelPath, true);
               }
             }
             return;
           }
           if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
             if (multyplayerPlay.isMouseOver()) {
-              if(!multyplayerSelectedLevel.isUGC){
+              if (!multyplayerSelectedLevel.isUGC) {
                 if (multyplayerSelectedLevel.multyplayerMode==1) {
                   LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
                   for (int i=0; i<clients.size(); i++) {
@@ -1484,7 +1495,7 @@ void mouseClicked() {// when you click the mouse
                   waitingForReady=true;
                   bestTime=0;
                 }
-                
+
                 if (multyplayerSelectedLevel.multyplayerMode==2) {
                   if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
                     LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
@@ -1495,10 +1506,10 @@ void mouseClicked() {// when you click the mouse
                     waitingForReady=true;
                   }
                 }
-              }else{
+              } else {
                 if (multyplayerSelectedLevel.multyplayerMode==1) {
-                  
-                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id,getLevelHash(multyplayerSelectedLevelPath));
+
+                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
                   for (int i=0; i<clients.size(); i++) {
                     clients.get(i).dataToSend.add(req);
                   }
@@ -1506,10 +1517,10 @@ void mouseClicked() {// when you click the mouse
                   waitingForReady=true;
                   bestTime=0;
                 }
-                
+
                 if (multyplayerSelectedLevel.multyplayerMode==2) {
                   if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
-                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id,getLevelHash(multyplayerSelectedLevelPath));
+                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
                     for (int i=0; i<clients.size(); i++) {
                       clients.get(i).dataToSend.add(req);
                     }
@@ -2492,9 +2503,9 @@ void calcTextSize(String text, float width, int max) {
   }
 }
 
-void genSelectedInfo(String path,boolean UGC) {
+void genSelectedInfo(String path, boolean UGC) {
   String name, author, gameVersion;
-  int multyplayerMode=1, maxPlayers=-1, minPlayers=-1,id=0;
+  int multyplayerMode=1, maxPlayers=-1, minPlayers=-1, id=0;
   JSONArray index = loadJSONArray(path+"/index.json");
   JSONObject info = index.getJSONObject(0);
   name = info.getString("name");
@@ -2588,7 +2599,7 @@ void programLoad() {
   println("initlizing sound handler");
   soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
   soundHandler.setMusicVolume(0);
-  
+
   println("starting to load tutorial audio tracks");
   tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
   println("loaded tutorial audio track T1a");
@@ -2740,37 +2751,37 @@ void  initButtons() {
 }
 
 
-String getLevelHash(String path){
-    String basePath="";
-    if(path.startsWith("data")){
-      basePath=sketchPath()+"/"+path;
-    }else{
-      basePath=path;
-    }
-    String hash="";
-    hash+=Hasher.getFileHash(basePath+"/index.json");
-    
-    JSONArray file = loadJSONArray(basePath+"/index.json");
-    JSONObject job;
-    for (int i=1; i<file.size(); i++) {
-      job=file.getJSONObject(i);
-      if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
-        hash+=Hasher.getFileHash(basePath+job.getString("location"));
-        continue;
-      }
-      if (job.getString("type").equals("sound")) {
-        hash+=Hasher.getFileHash(basePath+job.getString("location"));
-        continue;
-      }
-      if (job.getString("type").equals("logicBoard")) {
-        hash+=Hasher.getFileHash(basePath+job.getString("location"));
-      }
-    }
-    return hash;
+String getLevelHash(String path) {
+  String basePath="";
+  if (path.startsWith("data")) {
+    basePath=sketchPath()+"/"+path;
+  } else {
+    basePath=path;
   }
-  
- void loadUGCList(){
-   new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
+  String hash="";
+  hash+=Hasher.getFileHash(basePath+"/index.json");
+
+  JSONArray file = loadJSONArray(basePath+"/index.json");
+  JSONObject job;
+  for (int i=1; i<file.size(); i++) {
+    job=file.getJSONObject(i);
+    if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
+      hash+=Hasher.getFileHash(basePath+job.getString("location"));
+      continue;
+    }
+    if (job.getString("type").equals("sound")) {
+      hash+=Hasher.getFileHash(basePath+job.getString("location"));
+      continue;
+    }
+    if (job.getString("type").equals("logicBoard")) {
+      hash+=Hasher.getFileHash(basePath+job.getString("location"));
+    }
+  }
+  return hash;
+}
+
+void loadUGCList() {
+  new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
   String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
 
   compatibles=new ArrayList<>();
@@ -2791,5 +2802,5 @@ String getLevelHash(String path){
         compatibles.add(true);
       }
     }
-  } 
- }
+  }
+}
