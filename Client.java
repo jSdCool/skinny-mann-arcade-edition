@@ -87,7 +87,7 @@ class Client extends Thread {
             this.name = ci.name;
             this.readdy=ci.readdy;
             reachedEnd=ci.atEnd;
-            if(readdy&&outherFiles!=null){
+            if(readdy&&outherFiles!=null&&!downloadingLevel){
               outherFiles=null;
               ldi=null;
               downloadingLevel=false;
@@ -222,7 +222,9 @@ class Client extends Thread {
                   matchIDs.add(source.UGCNames.get(j));
                 }
               }
+              System.out.println(llr.hash+"\n===");
               for(int j=0;j<matchIDs.size();j++){//chek all the ID matches to see if any of them have the same hash as the level requested to load
+              System.out.println(source.getLevelHash(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+matchIDs.get(i))+"\n=");
                 if(source.getLevelHash(source.appdata+"/CBi-games/skinny mann/UGC/levels/"+matchIDs.get(i)).equals(llr.hash)){
                   levelName=matchIDs.get(i);
                   foundlevel=true;
