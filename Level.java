@@ -195,7 +195,7 @@ class Level implements Serializable {
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", source.GAME_version);
+    head.setString("game version", createdVersion);//when integrating the level creator make shure this line is changed to reflect the correct version
     head.setString("author", author);
     head.setInt("number of variable", variables.size());
     head.setInt("multyplayer mode", multyplayerMode);
