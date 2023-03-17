@@ -263,6 +263,7 @@ class Client extends Thread {
             source.menue=true;
             source.Menue="multiplayer selection";
             source.prevousInGame=false;
+            readdy=false;
           }
           if (di instanceof LeaderBoard) {
             LeaderBoard lb = (LeaderBoard)di;
