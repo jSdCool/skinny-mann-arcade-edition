@@ -691,6 +691,7 @@ void draw() {// the function that is called every fraim
           }
           
           if(clients.get(0).downloadingLevel){
+            calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
             text("downloading... ",width/2,height*0.05);
             int totalBlocks=0;
             if(clients.get(0).ldi!=null){
@@ -702,11 +703,11 @@ void draw() {// the function that is called every fraim
                 downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
               }
               downloadedBlocks+=clients.get(0).currentDownloadblock;
-              rect(width*0.3,height*0.1,width*0.4,height*0.01);
+              rect(width*0.3,height*0.1,width*0.4,height*0.08);
               fill(-9131009);
-              rect(width*0.31,height*0.11,width*0.38,height*0.008);
+              rect(width*0.305,height*0.11,width*0.39,height*0.06);
               fill(0);
-              rect(width*0.31,height*0.11,width*0.38*(1.0*downloadedBlocks/totalBlocks),height*0.008);
+              rect(width*0.305,height*0.11,width*0.39*(1.0*downloadedBlocks/totalBlocks),height*0.06);
             }
           }
         }
