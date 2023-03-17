@@ -106,13 +106,15 @@ class Client extends Thread {
             downloadingLevel=true;
             String fileNames[] = source.level.getOutherFileNames();
             int fileSizes[]=new int[fileNames.length];
+            int realSizes[]=new int[fileNames.length];
             outherFiles=new byte[fileNames.length][];
             for(int j=0;j<fileNames.length;j++){
               outherFiles[j]=source.loadBytes(source.rootPath+fileNames[j]);//save the contence of the files for later
               fileSizes[j]=outherFiles[j].length/blockSize;//get the file size in hole blocks
               fileSizes[j]+=((outherFiles[j].length%blockSize==0) ? 0 : 1);//if some bites are clipped off by the number of blocks then add 1 more
+              realSizes[j]=outherFiles[j].length;
             }
-            ldi=new LevelDownloadInfo(source.level,fileNames,fileSizes,blockSize);
+            ldi=new LevelDownloadInfo(source.level,fileNames,fileSizes,blockSize,realSizes);
             dataToSend.add(ldi);
           }
           if(di instanceof RequestLevelFileComponent){
@@ -275,7 +277,7 @@ class Client extends Thread {
             this.ldi=ldi;
             blockSize=ldi.blockSize;
 
-            source.rootPath=source.appdata+"/CBi-games/skinny mann/UGC/levels/"+ldi.level.name+generateRandomString(10);
+            source.rootPath=source.appdata+"/CBi-games/skinny mann/UGC/levels/"+ldi.level.name+generateRandomString(20);
             ldi.level.save();
             currentDownloadIndex=-1;
             currentDownloadblock=-1;
@@ -386,7 +388,7 @@ class Client extends Thread {
         downloadingLevel=false;
         return;
       }
-      currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]*blockSize];
+      currentDownloadingFile=new byte[ldi.realSize[currentDownloadIndex]];
     }else{
       currentDownloadblock++;
       if(currentDownloadblock==ldi.fileSizes[currentDownloadIndex]){
@@ -406,7 +408,7 @@ class Client extends Thread {
           ldi=null;
           return;
         }
-        currentDownloadingFile=new byte[ldi.fileSizes[currentDownloadIndex]*blockSize];
+        currentDownloadingFile=new byte[ldi.realSize[currentDownloadIndex]];
       }
     }
     //you now have the next segemnt to download
