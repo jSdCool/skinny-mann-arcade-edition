@@ -689,6 +689,26 @@ void draw() {// the function that is called every fraim
             calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
             text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
           }
+          
+          if(clients.get(0).downloadingLevel){
+            text("downloading... ",width/2,height*0.05);
+            int totalBlocks=0;
+            if(clients.get(0).ldi!=null){
+              for(int i=0;i<clients.get(0).ldi.fileSizes.length;i++){
+                totalBlocks+=clients.get(0).ldi.fileSizes[i];
+              }
+              int downloadedBlocks=0;
+              for(int i=0;i<clients.get(0).currentDownloadIndex;i++){
+                downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
+              }
+              downloadedBlocks+=clients.get(0).currentDownloadblock;
+              rect(width*0.3,height*0.1,width*0.4,height*0.01);
+              fill(-9131009);
+              rect(width*0.31,height*0.11,width*0.38,height*0.008);
+              fill(0);
+              rect(width*0.31,height*0.11,width*0.38*(1.0*downloadedBlocks/totalBlocks),height*0.008);
+            }
+          }
         }
         multyplayerLeave.draw();
       }
