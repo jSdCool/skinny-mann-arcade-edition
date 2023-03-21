@@ -620,10 +620,10 @@ void draw() {// the function that is called every fraim
                   }
                 }
               } else {//when waiting for clients to be readdy
-                calcTextSize("waiting for clients",multyplayerPlay.lengthX);
+                calcTextSize("waiting for clients", multyplayerPlay.lengthX);
                 textAlign(CENTER, CENTER);
                 fill(0);
-                text("waiting for clients",multyplayerPlay.x+multyplayerPlay.lengthX/2,multyplayerPlay.y+multyplayerPlay.lengthY/2);
+                text("waiting for clients", multyplayerPlay.x+multyplayerPlay.lengthX/2, multyplayerPlay.y+multyplayerPlay.lengthY/2);
               }
             }
           }
@@ -697,29 +697,31 @@ void draw() {// the function that is called every fraim
             text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
           }
 
-          if (clients.get(0).downloadingLevel) {
-            calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
-            text("downloading... ", width/2, height*0.05);
-            int totalBlocks=0;
-            if (clients.get(0).ldi!=null) {
-              for (int i=0; i<clients.get(0).ldi.fileSizes.length; i++) {
-                totalBlocks+=clients.get(0).ldi.fileSizes[i];
+          if (clients.size()>0) {
+            if (clients.get(0).downloadingLevel) {
+              calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
+              text("downloading... ", width/2, height*0.05);
+              int totalBlocks=0;
+              if (clients.get(0).ldi!=null) {
+                for (int i=0; i<clients.get(0).ldi.fileSizes.length; i++) {
+                  totalBlocks+=clients.get(0).ldi.fileSizes[i];
+                }
+                int downloadedBlocks=0;
+                for (int i=0; i<clients.get(0).currentDownloadIndex; i++) {
+                  downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
+                }
+                downloadedBlocks+=clients.get(0).currentDownloadblock;
+                rect(width*0.3, height*0.1, width*0.4, height*0.08);
+                fill(-9131009);
+                rect(width*0.305, height*0.11, width*0.39, height*0.06);
+                fill(0);
+                rect(width*0.305, height*0.11, width*0.39*(1.0*downloadedBlocks/totalBlocks), height*0.06);
               }
-              int downloadedBlocks=0;
-              for (int i=0; i<clients.get(0).currentDownloadIndex; i++) {
-                downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
-              }
-              downloadedBlocks+=clients.get(0).currentDownloadblock;
-              rect(width*0.3, height*0.1, width*0.4, height*0.08);
-              fill(-9131009);
-              rect(width*0.305, height*0.11, width*0.39, height*0.06);
-              fill(0);
-              rect(width*0.305, height*0.11, width*0.39*(1.0*downloadedBlocks/totalBlocks), height*0.06);
             }
-          }
-          if (clients.get(0).readdy) {
-            calcTextSize("waiting for server", width*0.35, (int)(25*Scale));
-            text("waiting for server", width/2, height*0.05);
+            if (clients.get(0).readdy) {
+              calcTextSize("waiting for server", width*0.35, (int)(25*Scale));
+              text("waiting for server", width/2, height*0.05);
+            }
           }
         }
         multyplayerLeave.draw();
@@ -1509,22 +1511,24 @@ void mouseClicked() {// when you click the mouse
               } else {
                 if (multyplayerSelectedLevel.multyplayerMode==1) {
 
+                  loadLevel(multyplayerSelectedLevelPath);
                   LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
                   for (int i=0; i<clients.size(); i++) {
                     clients.get(i).dataToSend.add(req);
                   }
-                  loadLevel(multyplayerSelectedLevelPath);
+
                   waitingForReady=true;
                   bestTime=0;
                 }
 
                 if (multyplayerSelectedLevel.multyplayerMode==2) {
                   if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                    loadLevel(multyplayerSelectedLevelPath);
                     LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
                     for (int i=0; i<clients.size(); i++) {
                       clients.get(i).dataToSend.add(req);
                     }
-                    loadLevel(multyplayerSelectedLevelPath);
+
                     waitingForReady=true;
                   }
                 }
