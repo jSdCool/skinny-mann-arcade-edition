@@ -4,6 +4,9 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
 -fixed: level complete would still show in new levels once a CO-PO level was completed
+-added: waiting for clients message after play is clicked in multyplayer
+-added: support for UGC levels in multyplayer
+-fixed: game would crash if while entering the multyplayer port you tried to backspace while the port was set to 0
 
 0.7.0_Early_Access
 -fixed: verticle blipping. as a consequence the max verticle scroll location is now 320

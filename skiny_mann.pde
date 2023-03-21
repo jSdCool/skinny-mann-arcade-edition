@@ -1718,7 +1718,7 @@ void keyPressed() {// when a key is pressed
             port=0;
           } else {
             if (port==0) {
-              port=Integer.parseInt(getInput("", 1));
+              port=Integer.parseInt(getInput("0", 1));
             } else {
               try {
                 port=Integer.parseInt(getInput(port+"", 1));
@@ -1742,7 +1742,7 @@ void keyPressed() {// when a key is pressed
             port=0;
           } else {
             if (port==0) {
-              port=Integer.parseInt(getInput("", 1));
+              port=Integer.parseInt(getInput("0", 1));
             } else {
               try {
                 port=Integer.parseInt(getInput(port+"", 1));
