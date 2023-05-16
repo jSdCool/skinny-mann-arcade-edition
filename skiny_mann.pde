@@ -90,7 +90,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D,redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false,ground=false,check_point=false,goal=false,deleteing=false,moving_player=false,grid_mode=false,holo_gram=false,drawCoins=false,drawingPortal=false,sloap=false,holoTriangle=false,dethPlane=false,selectingBlueprint=false,placingSound=false,drawingSign=false,placingLogicButton=false,draw3DSwitch1=false,draw3DSwitch2=false,editinglogicBoard=false,connectingLogic=false,moveLogicComponents=false,placingAndGate=false,placingOrGate=false,placingXorGate=false,placingNandGate=false,placingNorGate=false,placingXnorGate=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingDelay=false,placingZOffset=false,placing3Dsetter=false,placing3Dreader=false,placingPlaySoundLogic=false,placingPulse=false,placingRandom=false,saveColors=false,levelOverview=false,drawingPortal3=false,placingTestLogic=false,settingPlayerSpawn=false,levelCreator=false,drawing=false,draw=false,delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false,drawingPortal2=false,startup=false,loading=false,newLevel=false,newFile=false;
- String Menue ="creds"/*,level="n"*/, version="0.7.1_Early_Access", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata,coursorr="";
+ String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access",EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata,coursorr="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001,downX, downY, upX, upY;
@@ -100,7 +100,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300,grid_size=10,current3DTransformMode=1,currentBluieprintIndex=0,logicBoardIndex=0,Color=0,RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0,triangleMode=0,transformComponentNumber=0,preSI=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart,newBlueprint, loadBlueprint,newLevelButton,loadLevelButton;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -133,6 +133,8 @@ void draw() {// the function that is called every fraim
       saveJSONArray(colors, appdata+"/CBi-games/skinny mann level creator/colors.json");
       saveColors=false;
     }
+    
+    if(!levelCreator){
     
     if (menue) {//when in a menue
       if (Menue.equals("creds")) {//the inital loading screen
@@ -822,6 +824,25 @@ void draw() {// the function that is called every fraim
           }
         }
       }
+    }
+    //level creator here
+    }else{
+      if (startup) {//if on the startup screen
+        background(#48EDD8);
+        newLevelButton.draw();
+        loadLevelButton.draw();
+        textAlign(LEFT, BOTTOM);
+        fill(0);
+        textSize(15*Scale);
+        text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, (718.0/720)*height);//game version text
+        fill(0);
+        textSize(15*Scale);
+        text("author: "+author+coursorr, 10*Scale, 30*Scale);//author text
+        strokeWeight(0);
+        rect(60*Scale, 31*Scale, textWidth(author), 1*Scale);//draw the line under the author name
+        newBlueprint.draw();
+        loadBlueprint.draw();
+      }//end of startup screen
     }
 
 
@@ -2792,6 +2813,12 @@ void  initButtons() {
   multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
+  
+  newBlueprint=new Button(this, 200*Scale, 500*Scale, 200*Scale, 80*Scale, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadBlueprint=new Button(this, 800*Scale, 500*Scale, 200*Scale, 80*Scale, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  newLevelButton=new Button(this,200*Scale, 300*Scale, 200*Scale, 80*Scale,"NEW",#BB48ED,#4857ED).setStrokeWeight(10);
+  loadLevelButton=new Button(this,800*Scale, 300*Scale, 200*Scale, 80*Scale,"LOAD",#BB48ED,#4857ED).setStrokeWeight(10);
+
 }
 
 
