@@ -34,92 +34,92 @@ void stageEditGUI() {
         if (sloap||holoTriangle) {//if your currenly drawing a triangle type
           int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
-            X1=(int)((downX+camPos)/grid_size)*grid_size-camPos;
-            X2=(int)(Math.ceil((mouseX*1.0+camPos)/grid_size)*grid_size)-camPos;
+            X1=(int)((downX/Scale+camPos)/grid_size)*grid_size-camPos;
+            X2=(int)(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos;
           }
           if (mouseX<downX) {
-            X1=(int)((mouseX+camPos)/grid_size)*grid_size-camPos;
-            X2=(int)(Math.ceil((downX+camPos)/grid_size)*grid_size)-camPos;
+            X1=(int)((mouseX/Scale+camPos)/grid_size)*grid_size-camPos;
+            X2=(int)(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-camPos;
           }
           if (mouseY>downY) {
-            Y1=(int)((downY-camPosY)/grid_size)*grid_size+camPosY;
-            Y2=(int)(Math.ceil((mouseY-camPosY)*1.0/grid_size)*grid_size)+camPosY;
+            Y1=(int)((downY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            Y2=(int)(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY;
           }
           if (mouseY<downY) {
-            Y1=(int)((mouseY-camPosY)/grid_size)*grid_size+camPosY;
-            Y2=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)+camPosY;
+            Y1=(int)((mouseY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            Y2=(int)(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)+camPosY;
           }
           if (triangleMode==0) {//display the triangle that will be created
-            triangle(X1, Y1, X2, Y2, X2, Y1);
+            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
           if (triangleMode==1) {
-            triangle(X1, Y1, X1, Y2, X2, Y1);
+            triangle(X1*Scale, Y1*Scale, X1*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
           if (triangleMode==2) {
-            triangle(X1, Y1, X2, Y2, X1, Y2);
+            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X1*Scale, Y2*Scale);
           }
           if (triangleMode==3) {
-            triangle(X1, Y2, X2, Y2, X2, Y1);
+            triangle(X1*Scale, Y2*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
         } else {//if the type is not a triangle
           int XD=0, YD=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
-            X1=(int)((downX+camPos)/grid_size)*grid_size-camPos;
-            XD=(int)(Math.ceil((mouseX*1.0+camPos)/grid_size)*grid_size)-X1-camPos;
+            X1=(int)((downX/Scale+camPos)/grid_size)*grid_size-camPos;
+            XD=(int)(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-X1-camPos;
           }
           if (mouseX<downX) {
-            X1=(int)((mouseX+camPos)/grid_size)*grid_size-camPos;
-            XD=(int)(Math.ceil((downX+camPos)/grid_size)*grid_size)-X1-camPos;
+            X1=(int)((mouseX/Scale+camPos)/grid_size)*grid_size-camPos;
+            XD=(int)(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-X1-camPos;
           }
           if (mouseY>downY) {
-            Y1=(int)((downY-camPosY)/grid_size)*grid_size+camPosY;
-            YD=(int)(Math.ceil((mouseY-camPosY)*1.0/grid_size)*grid_size)-Y1+camPosY;
+            Y1=(int)((downY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            YD=(int)(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)-Y1+camPosY;
           }
           //YD=(int)(Math.ceil(upY/grid_size)*grid_size)-Y1;
           if (mouseY<downY) {
-            Y1=(int)((mouseY-camPosY)/grid_size)*grid_size+camPosY;
-            YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1+camPosY;
+            Y1=(int)((mouseY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            YD=(int)(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1+camPosY;
           }
           strokeWeight(0);
 
-          rect(X1, Y1, XD, YD);//display the rectangle that is being drawn
+          rect(X1*Scale, Y1*Scale, XD*Scale, YD*Scale);//display the rectangle that is being drawn
         }
       } else {//if grid mode is off
         if (sloap||holoTriangle) {
           int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
-            X1=(int)((downX));
-            X2=(int)(Math.ceil((mouseX)));
+            X1=(int)((downX/Scale));
+            X2=(int)(Math.ceil((mouseX/Scale)));
           }
           if (mouseX<downX) {
-            X1=(int)((mouseX));
-            X2=(int)(Math.ceil((downX)));
+            X1=(int)((mouseX/Scale));
+            X2=(int)(Math.ceil((downX/Scale)));
           }
           if (mouseY>downY) {
-            Y1=(int)(downY);
-            Y2=(int)(Math.ceil(mouseY));
+            Y1=(int)(downY/Scale);
+            Y2=(int)(Math.ceil(mouseY/Scale));
           }
           if (mouseY<downY) {
-            Y1=(int)(mouseY);
-            Y2=(int)(Math.ceil(downY));
+            Y1=(int)(mouseY/Scale);
+            Y2=(int)(Math.ceil(downY/Scale));
           }
           if (triangleMode==0) {//display the triangle that will be created
-            triangle(X1, Y1, X2, Y2, X2, Y1);
+            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
           if (triangleMode==1) {
-            triangle(X1, Y1, X1, Y2, X2, Y1);
+            triangle(X1*Scale, Y1*Scale, X1*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
           if (triangleMode==2) {
-            triangle(X1, Y1, X2, Y2, X1, Y2);
+            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X1*Scale, Y2*Scale);
           }
           if (triangleMode==3) {
-            triangle(X1, Y2, X2, Y2, X2, Y1);
+            triangle(X1*Scale, Y2*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
           }
         } else {
           strokeWeight(0);
-          float xdif=mouseX-downX, ydif=mouseY-downY;//calcaute the location of the mouese press and unpress location
+          float xdif=(int)((mouseX-downX)/Scale)*Scale, ydif=(int)((mouseY-downY)/Scale)*Scale;//calcaute the location of the mouese press and unpress location
 
-          rect(downX, downY, xdif, ydif);//display the rectangle that is being drawn
+          rect((int)(downX/Scale)*Scale, (int)(downY/Scale)*Scale, xdif, ydif);//display the rectangle that is being drawn
         }
       }
     }
@@ -132,20 +132,20 @@ void stageEditGUI() {
 
 
         if (upX>downX) {//calcualte corner position
-          X1=(int)((downX+camPos)/grid_size)*grid_size;
-          XD=(int)(Math.ceil((upX+camPos)/grid_size)*grid_size)-X1;
+          X1=(int)((downX/Scale+camPos)/grid_size)*grid_size;
+          XD=(int)(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size)-X1;
         }
         if (upX<downX) {
-          X1=(int)((upX+camPos)/grid_size)*grid_size;
-          XD=(int)(Math.ceil((downX+camPos)/grid_size)*grid_size)-X1;
+          X1=(int)((upX/Scale+camPos)/grid_size)*grid_size;
+          XD=(int)(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-X1;
         }
         if (upY>downY) {
-          Y1=(int)((downY-camPosY)/grid_size)*grid_size;
-          YD=(int)(Math.ceil((upY-camPosY)/grid_size)*grid_size)-Y1;
+          Y1=(int)((downY/Scale-camPosY)/grid_size)*grid_size;
+          YD=(int)(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size)-Y1;
         }
         if (upY<downY) {
-          Y1=(int)((upY-camPosY)/grid_size)*grid_size;
-          YD=(int)(Math.ceil((downY-camPosY)/grid_size)*grid_size)-Y1;
+          Y1=(int)((upY/Scale-camPosY)/grid_size)*grid_size;
+          YD=(int)(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
         }
         if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;
@@ -159,20 +159,20 @@ void stageEditGUI() {
 
 
         if (upX>downX) {//calculate corder position
-          X1 = (int)downX+camPos;
-          XD = (int)abs(xdif);
+          X1 = (int)(downX/Scale)+camPos;
+          XD = (int)abs(xdif/Scale);
         }
         if (upX<downX) {
-          X1 = (int)upX+camPos;
-          XD = (int)abs(downX-upX);
+          X1 = (int)(upX/Scale)+camPos;
+          XD = (int)abs(downX/Scale-upX/Scale);
         }
         if (upY>downY) {
-          Y1 = (int)downY-camPosY;
-          YD =  (int)abs(ydif);
+          Y1 = (int)(downY/Scale)-camPosY;
+          YD =  (int)abs(ydif/Scale);
         }
         if (upY<downY) {
-          Y1 = (int)upY-camPosY;
-          YD = (int)abs(downY-upY);
+          Y1 = (int)(upY/Scale)-camPosY;
+          YD = (int)abs(downY/Scale-upY/Scale);
         }
         if (downX==upX) {//if there was no change is mouse position then don't create a new segment
           draw=false;

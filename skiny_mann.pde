@@ -1173,7 +1173,7 @@ void draw() {// the function that is called every fraim
           float[] nodePos = level.logicBoards.get(logicBoardIndex).components.get(connectingFromIndex).getTerminalPos(2);
           stroke(0);
           strokeWeight(5*Scale);
-          line(nodePos[0]*Scale, nodePos[1]*Scale, mouseX*Scale, mouseY*Scale);
+          line(nodePos[0]*Scale, nodePos[1]*Scale, mouseX, mouseY);
         }
 
         if (movingLogicComponent&&moveLogicComponents) {
@@ -2670,46 +2670,45 @@ void keyReleased() {//when you release a key
           cam_down=false;
         }
       }
-      
     }
-    
+
     if (levelCreator) {
-        if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
-          if (keyCode==37) {//if LEFT ARROW released
-            cam_left=false;
-          }
-          if (keyCode==39) {//if RIGHT ARROW released
-            cam_right=false;
-          }
-          if (keyCode==38) {//if UP ARROW released
-            cam_up=false;
-          }
-          if (keyCode==40) {//if DOWN ARROW released
-            cam_down=false;
-          }
-        }//end of simulation pasued
-        if (!simulating&&e3DMode) {
-          if (keyCode==65) {//if 'A' is pressed
-            a3D=false;
-          }
-          if (keyCode==68) {//if 'D' is pressed
-            d3D=false;
-          }
-          if (keyCode==32) {//if SPACE is pressed
-            space3D=false;
-          }
-          if (keyCode==16) {//if 'SHIFT' is pressed
-            shift3D=false;
-          }
-          if (keyCode==87) {//if 'W' is pressed
-            w3D=false;
-            key = 0;//clear key so CTRL + W doesent close the program
-          }
-          if (keyCode==83) {//if 'S' is pressed
-            s3D=false;
-          }
+      if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
+        if (keyCode==37) {//if LEFT ARROW released
+          cam_left=false;
+        }
+        if (keyCode==39) {//if RIGHT ARROW released
+          cam_right=false;
+        }
+        if (keyCode==38) {//if UP ARROW released
+          cam_up=false;
+        }
+        if (keyCode==40) {//if DOWN ARROW released
+          cam_down=false;
+        }
+      }//end of simulation pasued
+      if (!simulating&&e3DMode) {
+        if (keyCode==65) {//if 'A' is pressed
+          a3D=false;
+        }
+        if (keyCode==68) {//if 'D' is pressed
+          d3D=false;
+        }
+        if (keyCode==32) {//if SPACE is pressed
+          space3D=false;
+        }
+        if (keyCode==16) {//if 'SHIFT' is pressed
+          shift3D=false;
+        }
+        if (keyCode==87) {//if 'W' is pressed
+          w3D=false;
+          key = 0;//clear key so CTRL + W doesent close the program
+        }
+        if (keyCode==83) {//if 'S' is pressed
+          s3D=false;
         }
       }
+    }
   }
   catch(Throwable e) {
     handleError(e);
@@ -2718,68 +2717,70 @@ void keyReleased() {//when you release a key
 
 void mouseDragged() {
   try {
-    if (Menue.equals("settings")) {
-      if (settingsMenue.equals("game play")) {
-        if (sdSlider.isMouseOver()) {
-          esdPos=(int)(mouseX/Scale);
-          if (esdPos<800) {
-            esdPos=800;
+    if (levelCreator) {
+      if (Menue.equals("settings")) {
+        if (settingsMenue.equals("game play")) {
+          if (sdSlider.isMouseOver()) {
+            esdPos=(int)(mouseX/Scale);
+            if (esdPos<800) {
+              esdPos=800;
+            }
+            if (esdPos>1240) {
+              esdPos=1240;
+            }
+            eadgeScroleDist=(int)(((esdPos-800.0)/440)*530)+100;
+            JSONObject scroll=settings.getJSONObject(1);
+            scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
+            settings.setJSONObject(1, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
-          if (esdPos>1240) {
-            esdPos=1240;
-          }
-          eadgeScroleDist=(int)(((esdPos-800.0)/440)*530)+100;
-          JSONObject scroll=settings.getJSONObject(1);
-          scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
-          settings.setJSONObject(1, scroll);
-          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-        }
 
-        if (vsdSlider.isMouseOver()) {
-          vesdPos=(int)(mouseX/Scale);
-          if (vesdPos<800) {
-            vesdPos=800;
+          if (vsdSlider.isMouseOver()) {
+            vesdPos=(int)(mouseX/Scale);
+            if (vesdPos<800) {
+              vesdPos=800;
+            }
+            if (vesdPos>1240) {
+              vesdPos=1240;
+            }
+            eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
+            JSONObject scroll=settings.getJSONObject(1);
+            scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
+            settings.setJSONObject(1, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
-          if (vesdPos>1240) {
-            vesdPos=1240;
-          }
-          eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
-          JSONObject scroll=settings.getJSONObject(1);
-          scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
-          settings.setJSONObject(1, scroll);
-          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
         }
-      }
-      if (settingsMenue.equals("outher")) {
-        if (MusicSlider.isMouseOver()) {
-          musVolSllid=(int)(mouseX/Scale);
-          if (musVolSllid<800) {
-            musVolSllid=800;
+        if (settingsMenue.equals("outher")) {
+          if (MusicSlider.isMouseOver()) {
+            musVolSllid=(int)(mouseX/Scale);
+            if (musVolSllid<800) {
+              musVolSllid=800;
+            }
+            if (musVolSllid>1240) {
+              musVolSllid=1240;
+            }
+            musicVolume=(musVolSllid-800.0)/440;
+            JSONObject scroll=settings.getJSONObject(4);
+            scroll.setFloat("music volume", (musVolSllid-800.0)/440);
+            settings.setJSONObject(4, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            soundHandler.setMusicVolume(musicVolume);
           }
-          if (musVolSllid>1240) {
-            musVolSllid=1240;
+          if (SFXSlider.isMouseOver()) {
+            sfxVolSllid=(int)(mouseX/Scale);
+            if (sfxVolSllid<800) {
+              sfxVolSllid=800;
+            }
+            if (sfxVolSllid>1240) {
+              sfxVolSllid=1240;
+            }
+            sfxVolume=(sfxVolSllid-800.0)/440;
+            JSONObject scroll=settings.getJSONObject(4);
+            scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
+            settings.setJSONObject(4, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            soundHandler.setSoundsVolume(sfxVolume);
           }
-          musicVolume=(musVolSllid-800.0)/440;
-          JSONObject scroll=settings.getJSONObject(4);
-          scroll.setFloat("music volume", (musVolSllid-800.0)/440);
-          settings.setJSONObject(4, scroll);
-          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          soundHandler.setMusicVolume(musicVolume);
-        }
-        if (SFXSlider.isMouseOver()) {
-          sfxVolSllid=(int)(mouseX/Scale);
-          if (sfxVolSllid<800) {
-            sfxVolSllid=800;
-          }
-          if (sfxVolSllid>1240) {
-            sfxVolSllid=1240;
-          }
-          sfxVolume=(sfxVolSllid-800.0)/440;
-          JSONObject scroll=settings.getJSONObject(4);
-          scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
-          settings.setJSONObject(4, scroll);
-          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          soundHandler.setSoundsVolume(sfxVolume);
         }
       }
     }
@@ -2829,6 +2830,148 @@ void thrdCalc2() {
     //soundHandler.setMusicVolume(musicVolume);
     //soundHandler.setSoundsVolume(sfxVolume);
     soundHandler.tick();
+  }
+}
+
+void mousePressed() {
+  if (levelCreator) {
+    if (mouseButton==LEFT) {
+      if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
+        GUImousePressed();
+      }
+      if (editinglogicBoard) {
+        if (connectingLogic) {
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);
+          for (int i=0; i<board.components.size(); i++) {
+            float[] nodePos=board.components.get(i).getTerminalPos(2);
+            if (Math.sqrt(Math.pow(nodePos[0]-mouseX/Scale, 2)+Math.pow(nodePos[1]-mouseY/Scale, 2))<=10) {
+              connecting=true;
+              connectingFromIndex=i;
+              return;
+            }
+          }
+        }
+        if (moveLogicComponents) {
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);
+          for (int i=0; i<board.components.size(); i++) {
+            if (board.components.get(i).button.isMouseOver()) {
+              movingLogicIndex=i;
+              movingLogicComponent=true;
+              return;
+            }
+          }
+        }
+      }//end of editng logic board
+      if (e3DMode&&selectedIndex!=-1) {
+        StageComponent ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        for (int i=0; i<5000; i++) {
+          Point3D testPoint=genMousePoint(i);
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
+            translateZaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z) {
+            translateZaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            translateXaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            translateXaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            translateYaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
+            translateYaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+        }
+        initalMousePoint=mousePoint;
+        initalObjectPos=new Point3D(ct.x, ct.y, ct.z);
+        initialObjectDim=new Point3D(ct.dx, ct.dy, ct.dz);
+      }
+    }
+  }
+}
+
+void mouseReleased() {
+  if (levelCreator) {
+    if (mouseButton==LEFT) {
+      if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
+        GUImouseReleased();
+      }
+      if (editinglogicBoard) {
+        if (connectingLogic&&connecting) {//if attempting to connect terminals
+          connecting=false;//stop more connecting
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);
+          for (int i=0; i<board.components.size(); i++) {//srech through all components in the current board
+            float[] nodePos1=board.components.get(i).getTerminalPos(0), nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
+            if (Math.sqrt(Math.pow(nodePos1[0]-mouseX/Scale, 2)+Math.pow(nodePos1[1]-mouseY/Scale, 2))<=10) {//if the mmouse is over terminal 0
+              for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+                if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==0) {//if so then remove the connection
+                  board.components.get(connectingFromIndex).connections.remove(j);
+                  return;
+                }
+              }
+              for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+                for (int k=0; k<board.components.get(j).connections.size(); k++) {
+                  if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==0) {//if so then do nothing
+                    return;
+                  }
+                }
+              }
+              board.components.get(connectingFromIndex).connect(i, 0);//make the connection
+              return;
+            }
+            if (Math.sqrt(Math.pow(nodePos2[0]-mouseX/Scale, 2)+Math.pow(nodePos2[1]-mouseY/Scale, 2))<=10) {//if the mmouse is over terminal 1
+              for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
+                if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1) {//if so then remove the connection
+                  board.components.get(connectingFromIndex).connections.remove(j);
+                  return;
+                }
+              }
+
+              for (int j=0; j<board.components.size(); j++) {//check if any outher components are connecting to this terminal allready
+                for (int k=0; k<board.components.get(j).connections.size(); k++) {
+                  if ( board.components.get(j).connections.get(k)[0]==i&&board.components.get(j).connections.get(k)[1]==1) {//if so then do nothing
+                    return;
+                  }
+                }
+              }
+              board.components.get(connectingFromIndex).connect(i, 1);
+              return;
+            }
+          }
+        }
+        if (moveLogicComponents) {
+          if (movingLogicComponent) {
+            movingLogicComponent=false;
+            level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX/Scale+camPos, mouseY/Scale+camPosY);
+          }
+        }
+      }//end of editing logic board
+      if (e3DMode&&selectedIndex!=-1) {
+        translateZaxis=false;
+        translateXaxis=false;
+        translateYaxis=false;
+      }
+    }
   }
 }
 
@@ -3114,7 +3257,7 @@ boolean FileIsLevel(String fil) {
 }
 
 boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
-  if(levelCreator){
+  if (levelCreator) {
     levelCompatible=true;
     return true;
   }
