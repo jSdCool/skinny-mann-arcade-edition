@@ -27,9 +27,9 @@ class Set3DMode extends LogicOutputComponent {
   void draw() {
     super.draw();
     source.fill(0);
-    source.textSize(15);
+    source.textSize(15*source.Scale);
     source.textAlign(source.LEFT, source.CENTER);
-    source.text("true", x+5-source.camPos, y+16-source.camPosY);
-    source.text("false", x+5-source.camPos, y+56-source.camPosY);
+    source.text("true", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
+    source.text("false", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
 }

@@ -22,10 +22,10 @@ class SetVariable extends LogicOutputComponent {
   void draw() {
     super.draw();
     source.fill(0);
-    source.textSize(15);
+    source.textSize(15*source.Scale);
     source.textAlign(source.LEFT, source.CENTER);
-    source.text("data", x+5-source.camPos, y+16-source.camPosY);
-    source.text("set", x+5-source.camPos, y+56-source.camPosY);
+    source.text("data", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
+    source.text("set", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
   JSONObject save() {
     JSONObject component=super.save();

@@ -90,7 +90,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;
 ;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false,connecting=false,movingLogicComponent=false;
  String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
@@ -99,7 +99,7 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0;//int
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0,connectingFromIndex=0,movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
 Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
@@ -1007,6 +1007,191 @@ void draw() {// the function that is called every fraim
         if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size())
           overviewDown.draw();
       }//end of level over view
+
+      if (newFile) {//if on the new file screen
+        background(#0092FF);
+        stroke(0);
+        strokeWeight(2*Scale);
+        line(100*Scale, 450*Scale, 1200*Scale, 450*Scale);
+        //highlight the option that is currently set
+        if (newFileType.equals("2D")) {
+          new2DStage.setColor(#BB48ED, #51DFFA);
+          new3DStage.setColor(#BB48ED, #4857ED);
+          addSound.setColor(#BB48ED, #4857ED);
+        } else if (newFileType.equals("3D")) {
+          new3DStage.setColor(#BB48ED, #51DFFA);
+          new2DStage.setColor(#BB48ED, #4857ED);
+          addSound.setColor(#BB48ED, #4857ED);
+        } else if (newFileType.equals("sound")) {
+          new3DStage.setColor(#BB48ED, #4857ED);
+          new2DStage.setColor(#BB48ED, #4857ED);
+          addSound.setColor(#BB48ED, #51DFFA);
+        }
+
+        new2DStage.draw();//draw the selection buttons
+        new3DStage.draw();
+        addSound.draw();
+        newFileCreate.draw();
+        newFileBack.draw();
+        drawSpeakericon(this, addSound.x+addSound.lengthX/2, addSound.y+addSound.lengthY/2, 1*Scale);
+        fill(0);
+        textSize(70*Scale);
+        textAlign(LEFT, BOTTOM);
+        if (newFileType.equals("sound")) {//if the selected type is sound
+          text("name: "+newFileName+coursorr, 100*Scale, 445*Scale);//dfisplay the entyered name
+          String pathSegments[]=fileToCoppyPath.split("/|\\\\");
+          textSize(30*Scale);
+          text(pathSegments[pathSegments.length-1], 655*Scale, 585*Scale);//display the name of the selected file
+          chooseFileButton.draw();
+        } else {
+          text(newFileName+coursorr, 100*Scale, 445*Scale);//display the entered name
+        }
+      }//end of new file
+
+      if (drawingPortal2) {//if drawing portal part 2 aka outher overview selection screen
+        background(#0092FF);
+        fill(#7CC7FF);
+        stroke(#7CC7FF);
+        strokeWeight(0);
+        if (overviewSelection!=-1) {//if sonethign is selected
+          rect(0, ((overviewSelection- filesScrole)*60+80)*Scale, 1280*Scale, 60*Scale);//highlight
+          if (overviewSelection<level.stages.size())
+            if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
+              selectStage.draw();//draw the select stage button
+              textAlign(LEFT, BOTTOM);
+              stroke(0, 255, 0);
+              strokeWeight(7*Scale);
+              line(1212*Scale, 44*Scale, 1224*Scale, 55*Scale);//checkmark
+              line(1224*Scale, 55*Scale, 1253*Scale, 29*Scale);
+            }
+        }
+        textAlign(LEFT, BOTTOM);
+        stroke(0);
+        strokeWeight(2*Scale);
+        line(0*Scale, 80*Scale, 1280*Scale, 80*Scale);
+        fill(0);
+        textSize(30*Scale);
+        String[] keys=new String[0];//create a string array that can be used to place the sound keys in
+        keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
+        for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+          if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
+            fill(0);
+            String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            if (type.equals("stage")) {//if it is a stage then display the stage icon
+              drawWorldSymbol(20*Scale, (90+60*(i))*Scale);
+            }
+            if (type.equals("3Dstage")) {
+              draw3DStageIcon(43*Scale, (100+60*i)*Scale, 0.7*Scale);
+            }
+          } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is not a stage type
+            fill(0);
+            String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            if (type.equals("sound")) {//if the thing is a sound then display the sound icon
+              drawSpeakericon(this, 40*Scale, (110+60*(i))*Scale, 0.5*Scale);
+            }
+          } else {
+            fill(0);
+            String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            logicIcon(40*Scale, (100+60*i)*Scale, 1*Scale);
+          }
+        }
+        textAlign(CENTER, CENTER);
+
+        fill(0);
+        textSize(60*Scale);
+        text("select destenation stage", 640*Scale, 30*Scale);
+        if (filesScrole>0)//scroll buttons
+          overviewUp.draw();
+        if (filesScrole+11<level.stages.size()+level.sounds.size())
+          overviewDown.draw();
+        textAlign(LEFT, BOTTOM);
+      }//end of drawing portal2
+
+      if (creatingNewBlueprint) {//if creating a new bueprint screen
+        textAlign(LEFT, BOTTOM);
+        background(#48EDD8);
+        fill(0);
+        textSize(20*Scale);
+        text("enter blueprint name", 40*Scale, 100*Scale);
+        if (new_name!=null) {//display the name entered
+          text(new_name+coursorr, 40*Scale, 150*Scale);
+        } else if (coursor) {
+          text("|", 40*Scale, 150*Scale);
+        }
+        createBlueprintGo.draw();//create button
+        stroke(0);
+        strokeWeight(1*Scale);
+        line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//text line
+      }//end of creating new blueprint
+
+      if (loadingBlueprint) {//if loading blueprint
+        textAlign(LEFT, BOTTOM);
+        background(#48EDD8);
+        fill(0);
+        textSize(20*Scale);
+        text("enter blueprint name", 40*Scale, 100*Scale);
+        if (new_name!=null) {//coursor and entrd name
+          text(new_name+coursorr, 40*Scale, 150*Scale);
+        } else if (coursor) {
+          text("|", 40*Scale, 150*Scale);
+        }
+        stroke(0);
+        strokeWeight(1*Scale);
+        line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);
+        createBlueprintGo.setText("load");//load button
+        createBlueprintGo.draw();
+      }//end of loading blueprint
+
+      if (editingBlueprint) {//if edditing blueprint
+        background(7646207);
+        fill(0);
+        strokeWeight(0);
+        rect(width/2-0.5, 0, 1, height);//draw lines in the center of the screen that indicate wherer (0,0) is
+        rect(0, height/2-0.5, width, 1);
+        blueprintEditDraw();//draw the accual blueprint
+        stageEditGUI();//overlays when placing things
+      }//end of edit blueprint
+
+      if (editinglogicBoard) {//if editing a logic board
+        background(#FFECA0);
+        for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the components
+          if (selectedIndex==i) {
+            strokeWeight(0);
+            fill(255, 0, 0);
+            rect((level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10)*Scale);
+          }
+          level.logicBoards.get(logicBoardIndex).components.get(i).draw();
+        }
+        for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the connections
+          level.logicBoards.get(logicBoardIndex).components.get(i).drawConnections();
+        }
+
+        if (connectingLogic&&connecting) {//draw the connnecting line
+          float[] nodePos = level.logicBoards.get(logicBoardIndex).components.get(connectingFromIndex).getTerminalPos(2);
+          stroke(0);
+          strokeWeight(5*Scale);
+          line(nodePos[0]*Scale, nodePos[1]*Scale, mouseX*Scale, mouseY*Scale);
+        }
+
+        if (movingLogicComponent&&moveLogicComponents) {
+          level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX/Scale+camPos, mouseY/Scale+camPosY);
+        }
+        if (cam_left&&camPos>0) {
+          camPos-=4;
+        }
+        if (cam_right) {
+          camPos+=4;
+        }
+        if (cam_up&&camPosY>0) {
+          camPosY-=4;
+        }
+        if (cam_down) {
+          camPosY+=4;
+        }
+      }
     }//end of level creator
 
 
@@ -1972,7 +2157,7 @@ void mouseClicked() {// when you click the mouse
               String pathSegments[]=fileToCoppyPath.split("/|\\\\");//split the file path at directory seperator
               try {//attempt to coppy the file
                 System.out.println("attempting to coppy file");
-                java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(sketchPath()+"/"+rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
+                java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
               }
               catch(IOException i) {
                 i.printStackTrace();
@@ -2019,8 +2204,8 @@ void mouseClicked() {// when you click the mouse
         }
         if (drawingPortal2) {//if placing portal part 2 (part that has the overview)
 
-          if (mouseY>80) {//select the file that was clicked on in the overview
-            overviewSelection=(mouseY-80)/60+ filesScrole;
+          if (mouseY>80*Scale) {//select the file that was clicked on in the overview
+            overviewSelection=(int)(mouseY/Scale-80)/60+ filesScrole;
             if (overviewSelection>=level.stages.size()+level.sounds.size()) {
               overviewSelection=-1;
             }
@@ -2045,6 +2230,7 @@ void mouseClicked() {// when you click the mouse
           if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())//scroll down button
             filesScrole++;
         }//end of drawing portal 2
+
         if (creatingNewBlueprint) {//if creating a new blueprint
           if (createBlueprintGo.isMouseOver()) {//create button
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
@@ -2058,6 +2244,7 @@ void mouseClicked() {// when you click the mouse
             }//end of name was enterd
           }//end of create button
         }//end of creating new bluepint
+
         if (loadingBlueprint) {//if loading blueprint
           if (createBlueprintGo.isMouseOver()) {//load button
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
@@ -2073,22 +2260,22 @@ void mouseClicked() {// when you click the mouse
         }//end of loading blueprint
         if (editinglogicBoard) {
           if (placingAndGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingOrGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingXorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingNandGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingNorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingXnorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (deleteing) {
             for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
@@ -2102,13 +2289,13 @@ void mouseClicked() {// when you click the mouse
             //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingOnSingal) {
-            level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingSetVaravle) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingReadVariable) {
-            level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (selecting) {
             for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
@@ -2118,43 +2305,46 @@ void mouseClicked() {// when you click the mouse
             }
           }
           if (placingSetVisibility) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingXOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingYOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingDelay) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingZOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placing3Dsetter) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Set3DMode(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new Set3DMode(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placing3Dreader) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Read3DMode(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new Read3DMode(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingPlaySoundLogic) {
-            level.logicBoards.get(logicBoardIndex).components.add(new LogicPlaySound(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new LogicPlaySound(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingPulse) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Pulse(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new Pulse(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
           if (placingRandom) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Random(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+            level.logicBoards.get(logicBoardIndex).components.add(new Random(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
         }//end of edditing logic board
+        
         if (settingPlayerSpawn) {
-          level.SpawnX=mouseX+camPos;
-          level.SpawnY=mouseY-camPosY;
-          level.RewspawnX=mouseX+camPos;
-          level.RespawnY=mouseY-camPosY;
+          level.SpawnX=mouseX/Scale+camPos;
+          level.SpawnY=mouseY/Scale-camPosY;
+          level.RewspawnX=mouseX/Scale+camPos;
+          level.RespawnY=mouseY/Scale-camPosY;
           settingPlayerSpawn=false;
         }
+        
+        
       }//end of left mouse button clicked
     }//end of level creator
   }
@@ -3413,7 +3603,7 @@ void  initButtons() {
   newLevelButton=new Button(this, 200*Scale, 300*Scale, 200*Scale, 80*Scale, "NEW", #BB48ED, #4857ED).setStrokeWeight(10);
   loadLevelButton=new Button(this, 800*Scale, 300*Scale, 200*Scale, 80*Scale, "LOAD", #BB48ED, #4857ED).setStrokeWeight(10);
 
-  newStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale,"+", #0092FF, 0);
+  newStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale, "+", #0092FF, 0);
   newFileCreate=new Button(this, 300*Scale, 600*Scale, 200*Scale, 40*Scale, "create", #BB48ED, #4857ED).setStrokeWeight(5);
   newFileBack=new Button(this, 600*Scale, 600*Scale, 200*Scale, 40*Scale, "back", #BB48ED, #4857ED).setStrokeWeight(5);
   chooseFileButton=new Button(this, 450*Scale, 540*Scale, 200*Scale, 40*Scale, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);

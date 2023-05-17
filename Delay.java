@@ -29,8 +29,8 @@ class Delay extends LogicComponent {
     source.fill(0);
     source.textSize(15);
     source.textAlign(source.LEFT, source.CENTER);
-    source.text("input", x+5-source.camPos, y+16-source.camPosY);
-    source.text("clear", x+5-source.camPos, y+56-source.camPosY);
+    source.text("input", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
+    source.text("clear", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
 
   void tick() {

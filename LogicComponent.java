@@ -16,7 +16,7 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(source, x, y, 100, 80, "  "+type+"  ");
+    button=new Button(source, x, y, 100*source.Scale, 80*source.Scale, "  "+type+"  ");
     lb=board;
   }
 
@@ -24,7 +24,7 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
     this.x=x;
     this.y=y;
     this.type=type;
-    button=new Button(source, x, y, 100, 80, "  "+type+"  ");
+    button=new Button(source, x, y, 100*source.Scale, 80*source.Scale, "  "+type+"  ");
     lb=board;
     for (int i=0; i<cnects.size(); i++) {
       JSONObject data= cnects.getJSONObject(i);
@@ -33,14 +33,14 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
   }
 
   void draw() {
-    button.x=x-source.camPos;
-    button.y=y-source.camPosY;
+    button.x=(x-source.camPos)*source.Scale;
+    button.y=(y-source.camPosY)*source.Scale;
     button.draw();
     source.fill(-26416);
-    source.ellipse(x-2-source.camPos, y+20-source.camPosY, 20, 20);
-    source.ellipse(x-2-source.camPos, y+60-source.camPosY, 20, 20);
+    source.ellipse((x-2-source.camPos)*source.Scale, (y+20-source.camPosY)*source.Scale, 20*source.Scale, 20*source.Scale);
+    source.ellipse((x-2-source.camPos)*source.Scale, (y+60-source.camPosY)*source.Scale, 20*source.Scale, 20*source.Scale);
     source.fill(-369706);
-    source.ellipse(x+102-source.camPos, y+40-source.camPosY, 20, 20);
+    source.ellipse((x+102-source.camPos)*source.Scale, (y+40-source.camPosY)*source.Scale, 20*source.Scale, 20*source.Scale);
   }
 
   float[] getTerminalPos(int t) {
@@ -67,10 +67,10 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
   void drawConnections() {
     for (int i=0; i<connections.size(); i++) {
       source.stroke(0);
-      source.strokeWeight(5);
+      source.strokeWeight(5*source.Scale);
       Integer[] connectionInfo =connections.get(i);
       float[] thisTerminal = getTerminalPos(2), toTerminal=lb.components.get(connectionInfo[0]).getTerminalPos(connectionInfo[1]);
-      source.line(thisTerminal[0], thisTerminal[1], toTerminal[0], toTerminal[1]);
+      source.line(thisTerminal[0]*source.Scale, thisTerminal[1]*source.Scale, toTerminal[0]*source.Scale, toTerminal[1]*source.Scale);
     }
   }
 
