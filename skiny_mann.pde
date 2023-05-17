@@ -90,7 +90,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;
 ;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false,connecting=false,movingLogicComponent=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false;
  String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
@@ -99,7 +99,7 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0,connectingFromIndex=0,movingLogicIndex=0;//int
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
 Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
@@ -2335,7 +2335,7 @@ void mouseClicked() {// when you click the mouse
             level.logicBoards.get(logicBoardIndex).components.add(new Random(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
           }
         }//end of edditing logic board
-        
+
         if (settingPlayerSpawn) {
           level.SpawnX=mouseX/Scale+camPos;
           level.SpawnY=mouseY/Scale-camPosY;
@@ -2343,8 +2343,6 @@ void mouseClicked() {// when you click the mouse
           level.RespawnY=mouseY/Scale-camPosY;
           settingPlayerSpawn=false;
         }
-        
-        
       }//end of left mouse button clicked
     }//end of level creator
   }
@@ -2360,8 +2358,8 @@ void keyPressed() {// when a key is pressed
       exit(1);
     }
 
-    if (inGame) {//if in game
-      if (key == ESC) {
+    if (inGame||(levelCreator&&editingStage)) {//if in game
+      if (key == ESC&&!levelCreator) {
         key = 0;  //clear the key so it doesnt close the program
         menue=true;
         Menue="pause";
@@ -2569,6 +2567,41 @@ void keyPressed() {// when a key is pressed
       if (startup) {//if on the main menue
         author = getInput(author, 0);//typing for the author name
       }
+      if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
+        if (keyCode==37) {//if LEFT ARROW is pressed
+          cam_left=true;
+        }
+        if (keyCode==39) {//if RIGHT ARROW is pressed
+          cam_right=true;
+        }
+        if (keyCode==38) {//if UP ARROW is pressed
+          cam_up=true;
+        }
+        if (keyCode==40) {//if DOWN ARROW is pressed
+          cam_down=true;
+        }
+      }//end of if sumilating
+      if (!simulating&&e3DMode) {
+        if (keyCode==65) {//if 'A' is pressed
+          a3D=true;
+        }
+        if (keyCode==68) {//if 'D' is pressed
+          d3D=true;
+        }
+        if (keyCode==32) {//if SPACE is pressed
+          space3D=true;
+        }
+        if (keyCode==16) {//if 'SHIFT' is pressed
+          shift3D=true;
+        }
+        if (keyCode==87) {//if 'W' is pressed
+          w3D=true;
+          key = 0;//clear key so CTRL + W doesent close the program
+        }
+        if (keyCode==83) {//if 'S' is pressed
+          s3D=true;
+        }
+      }
     }
 
     //System.out.println(keyCode);
@@ -2583,7 +2616,7 @@ void keyPressed() {// when a key is pressed
 
 void keyReleased() {//when you release a key
   try {
-    if (inGame) {//whehn in game
+    if (inGame||(levelCreator&&editingStage)) {//whehn in game
       if (keyCode==65) {//if A is released
         player1_moving_left=false;
       }
@@ -2637,7 +2670,46 @@ void keyReleased() {//when you release a key
           cam_down=false;
         }
       }
+      
     }
+    
+    if (levelCreator) {
+        if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
+          if (keyCode==37) {//if LEFT ARROW released
+            cam_left=false;
+          }
+          if (keyCode==39) {//if RIGHT ARROW released
+            cam_right=false;
+          }
+          if (keyCode==38) {//if UP ARROW released
+            cam_up=false;
+          }
+          if (keyCode==40) {//if DOWN ARROW released
+            cam_down=false;
+          }
+        }//end of simulation pasued
+        if (!simulating&&e3DMode) {
+          if (keyCode==65) {//if 'A' is pressed
+            a3D=false;
+          }
+          if (keyCode==68) {//if 'D' is pressed
+            d3D=false;
+          }
+          if (keyCode==32) {//if SPACE is pressed
+            space3D=false;
+          }
+          if (keyCode==16) {//if 'SHIFT' is pressed
+            shift3D=false;
+          }
+          if (keyCode==87) {//if 'W' is pressed
+            w3D=false;
+            key = 0;//clear key so CTRL + W doesent close the program
+          }
+          if (keyCode==83) {//if 'S' is pressed
+            s3D=false;
+          }
+        }
+      }
   }
   catch(Throwable e) {
     handleError(e);
@@ -2740,7 +2812,7 @@ void thrdCalc2() {
     if (tutorialMode) {
       tutorialLogic();
     }
-    if (inGame) {
+    if (inGame||(levelCreator&&editingStage)) {
       try {
         playerPhysics();
       }
@@ -3042,6 +3114,10 @@ boolean FileIsLevel(String fil) {
 }
 
 boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
+  if(levelCreator){
+    levelCompatible=true;
+    return true;
+  }
   for (int i=0; i<compatibleVersions.length; i++) {
     if (vers.equals(compatibleVersions[i])) {
       levelCompatible=true;

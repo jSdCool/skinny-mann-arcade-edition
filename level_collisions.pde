@@ -62,9 +62,10 @@ void stageLevelDraw() {
     if (e3DMode) {//if 3D mode is turned on
 
 
-      camera3DpositionSimulating();
-      //else
-      //  camera3DpositionNotSimulating();
+     if (simulating&&levelCreator)
+        camera3DpositionSimulating();
+      else
+        camera3DpositionNotSimulating();
 
       camera(cam3Dx+DX, cam3Dy-DY, cam3Dz-DZ, cam3Dx, cam3Dy, cam3Dz, 0, 1, 0);//set the camera
       directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
