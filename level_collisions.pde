@@ -452,7 +452,7 @@ void playerPhysics() {
     }
 
 
-
+    if (simulating||!levelCreator)
     if (true) {//gravity
       float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
 
@@ -491,20 +491,22 @@ void playerPhysics() {
     }
 
 
-
+    if (simulating||!levelCreator)
     if (players[calcingPlayer].getX()-camPos>(1280-eadgeScroleDist)) {//move the camera if the player goes too close to the end of the screen
       camPos=(int)(players[calcingPlayer].getX()-(1280-eadgeScroleDist));
     }
 
-
+    if (simulating||!levelCreator)
     if (players[calcingPlayer].getX()-camPos<eadgeScroleDist&&camPos>0) {//move the camera if the player goes too close to the end of the screen
       camPos=(int)(players[calcingPlayer].getX()-eadgeScroleDist);
     }
 
+    if (simulating||!levelCreator)
     if (players[calcingPlayer].getY()+camPosY>720-eadgeScroleDistV&&camPosY>0) {//move the camera if the player goes too close to the end of the screen
       camPosY-=players[calcingPlayer].getY()+camPosY-(720-eadgeScroleDistV);
     }
 
+    if (simulating||!levelCreator)
     if (players[calcingPlayer].getY()+camPosY<eadgeScroleDistV+75) {//move the camera if the player goes too close to the end of the screen
       camPosY-=players[calcingPlayer].getY()+camPosY-(eadgeScroleDistV+75);
     }
@@ -755,7 +757,7 @@ void playerPhysics() {
 
 
 
-
+    if (simulating||!levelCreator)
     if (true) {//gravity
       float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
 
@@ -805,7 +807,7 @@ void playerPhysics() {
     players[calcingPlayer].verticalVelocity=0;
   }
   //////////////////////////////
-  if (level.multyplayerMode==1 || (level.multyplayerMode==2 && isHost)) {//--------------------------------------------------------------------------------------------------modify this line in the final game
+  if (level.multyplayerMode==1 || (level.multyplayerMode==2 && isHost)||(levelCreator&&simulating)) {//--------------------------------------------------------------------------------------------------modify this line in the final game
     if (!logicTickingThread.isAlive()) {//if the ticking thread has stoped for some reason
       logicTickingThread=new LogicThread();
       logicTickingThread.shouldRun=true;//then start it

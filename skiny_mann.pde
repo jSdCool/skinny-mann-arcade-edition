@@ -2358,7 +2358,7 @@ void keyPressed() {// when a key is pressed
       exit(1);
     }
 
-    if (inGame||(levelCreator&&editingStage)) {//if in game
+    if (inGame||(levelCreator&&editingStage&&simulating)) {//if in game
       if (key == ESC&&!levelCreator) {
         key = 0;  //clear the key so it doesnt close the program
         menue=true;
