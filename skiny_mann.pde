@@ -87,20 +87,21 @@ void setup() {//seccond function called
 }
 //define a shit tone of varibles
 PImage CBi, icon, discordIcon;
-PShape coin3D,redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;;
+PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;
+;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false,ground=false,check_point=false,goal=false,deleteing=false,moving_player=false,grid_mode=false,holo_gram=false,drawCoins=false,drawingPortal=false,sloap=false,holoTriangle=false,dethPlane=false,selectingBlueprint=false,placingSound=false,drawingSign=false,placingLogicButton=false,draw3DSwitch1=false,draw3DSwitch2=false,editinglogicBoard=false,connectingLogic=false,moveLogicComponents=false,placingAndGate=false,placingOrGate=false,placingXorGate=false,placingNandGate=false,placingNorGate=false,placingXnorGate=false,placingOnSingal=false,placingReadVariable=false,placingSetVaravle=false,placingSetVisibility=false,placingXOffset=false,placingYOffset=false,placingDelay=false,placingZOffset=false,placing3Dsetter=false,placing3Dreader=false,placingPlaySoundLogic=false,placingPulse=false,placingRandom=false,saveColors=false,levelOverview=false,drawingPortal3=false,placingTestLogic=false,settingPlayerSpawn=false,levelCreator=false,drawing=false,draw=false,delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false,drawingPortal2=false,startup=false,loading=false,newLevel=false,newFile=false;
- String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access",EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata,coursorr="";
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false;
+ String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
-float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001,downX, downY, upX, upY;
+float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY;
 Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300,grid_size=10,current3DTransformMode=1,currentBluieprintIndex=0,logicBoardIndex=0,Color=0,RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0,triangleMode=0,transformComponentNumber=0,preSI=0;//int
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart,newBlueprint, loadBlueprint,newLevelButton,loadLevelButton;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -121,712 +122,714 @@ void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
     cursor="|";
     coursorr="|";
+    coursor=true;
   }
   if (frameCount%40==0) {
     cursor="";
     coursorr="";
+    coursor=false;
   }
-    
+
   try {//catch all fatal errors and display them
-    
+
     if (saveColors) {//save the saved colors if you want to save colors
       saveJSONArray(colors, appdata+"/CBi-games/skinny mann level creator/colors.json");
       saveColors=false;
     }
-    
-    if(!levelCreator){
-    
-    if (menue) {//when in a menue
-      if (Menue.equals("creds")) {//the inital loading screen
-        background(0);
-        noStroke();
 
-        drawlogo();
+    if (!levelCreator) {
 
-        if (start_wate>=2&&loaded) {// display it for 100  fraims
-          soundHandler.setMusicVolume(musicVolume);
-          soundHandler.setSoundsVolume(sfxVolume);
-          if (dev_mode) {
-            Menue="dev";
-            println("dev mode activated");
-            return;
-          }
+      if (menue) {//when in a menue
+        if (Menue.equals("creds")) {//the inital loading screen
+          background(0);
+          noStroke();
 
-          try {
-            String inver = readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates  inver = internet version
-            inver =inver.substring(0, inver.length()-1);
-            internetVersion=inver;
-            if (!inver.equals(version)) {//if an update exists
-              Menue="update";//go to update menue
-            } else {//if no update exists go to main menue
+          drawlogo();
+
+          if (start_wate>=2&&loaded) {// display it for 100  fraims
+            soundHandler.setMusicVolume(musicVolume);
+            soundHandler.setSoundsVolume(sfxVolume);
+            if (dev_mode) {
+              Menue="dev";
+              println("dev mode activated");
+              return;
+            }
+
+            try {
+              String inver = readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates  inver = internet version
+              inver =inver.substring(0, inver.length()-1);
+              internetVersion=inver;
+              if (!inver.equals(version)) {//if an update exists
+                Menue="update";//go to update menue
+              } else {//if no update exists go to main menue
+                if (showSettingsAfterStart) {
+                  Menue="settings";
+                } else {
+                  Menue="main";
+                }
+              }
+            }
+            catch(Throwable e) {//if an error occors or no return then go to main menue
               if (showSettingsAfterStart) {
                 Menue="settings";
               } else {
                 Menue="main";
               }
+              println(e);//print to console the cause of the error
             }
           }
-          catch(Throwable e) {//if an error occors or no return then go to main menue
-            if (showSettingsAfterStart) {
-              Menue="settings";
-            } else {
-              Menue="main";
-            }
-            println(e);//print to console the cause of the error
-          }
         }
-      }
 
-      if (Menue.equals("update")) {//if there is an updat draw the update screen
-        draw_updae_screen();
-      }
-      if (Menue.equals("downloading update")) {
-        drawUpdateDownloadingScreen();
-      }
+        if (Menue.equals("update")) {//if there is an updat draw the update screen
+          draw_updae_screen();
+        }
+        if (Menue.equals("downloading update")) {
+          drawUpdateDownloadingScreen();
+        }
 
-      if (Menue.equals("main")) {//if on main menue
-        background(7646207);
-        textSize(100*Scale);
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text("skinny mann", width/2, 80*Scale);//the title
-        fill(255, 255, 0);
-        text("Early Access", width/2, 180*Scale);
-        textSize(35*Scale);
-        fill(-16732415);
-        stroke(-16732415);
-        rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
-        draw_mann(200*Scale, 360*Scale, 1, 4*Scale, 0);
-        draw_mann(1080*Scale, 360*Scale, 1, 4*Scale, 1);
-
-        playButton.draw();
-        exitButton.draw();
-        joinButton.draw();
-        settingsButton.draw();
-        howToPlayButton.draw();
-        textAlign(LEFT, BOTTOM);
-
-        fill(255);
-        textSize(10*Scale);
-        text(version, 0*Scale, 718*Scale);//proint the version in the lower corner
-        discord.draw();
-        image(discordIcon, 1200*Scale, 650*Scale);
-      }
-      if (Menue.equals("level select")) {//if selecting level
-        levelCompleteSoundPlayed=false;
-        textAlign(LEFT, BOTTOM);
-        strokeWeight(10*Scale);
-        background(7646207);
-        textSize(35*Scale);
-        fill(-16732415);
-        stroke(-16732415);
-        strokeWeight(0);
-        rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
-        textSize(50*Scale);
-        fill(0);
-        text("Level Select", 484*Scale, 54*Scale);//menue title
-        int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
-        if (progress<2) {
-          select_lvl_2.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_2.setColor(-59135, -1791);
-        }
-        if (progress<3) {
-          select_lvl_3.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_3.setColor(-59135, -1791);
-        }
-        if (progress<4) {
-          select_lvl_4.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_4.setColor(-59135, -1791);
-        }
-        if (progress<5) {
-          select_lvl_5.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_5.setColor(-59135, -1791);
-        }
-        if (progress<6) {
-          select_lvl_6.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_6.setColor(-59135, -1791);
-        }
-        if (progress<7) {
-          select_lvl_7.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_7.setColor(-59135, -1791);
-        }
-        if (progress<8) {
-          select_lvl_8.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_8.setColor(-59135, -1791);
-        }
-        if (progress<9) {
-          select_lvl_9.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_9.setColor(-59135, -1791);
-        }
-        if (progress<10) {
-          select_lvl_10.setColor(#B40F00, #B4AF00);
-        } else {
-          select_lvl_10.setColor(-59135, -1791);
-        }
-        select_lvl_1.draw();
-        select_lvl_2.draw();
-        select_lvl_3.draw();
-        select_lvl_4.draw();
-        select_lvl_5.draw();
-        select_lvl_6.draw();
-        select_lvl_7.draw();
-        select_lvl_8.draw();
-        select_lvl_9.draw();
-        select_lvl_10.draw();
-        select_lvl_back.draw();
-        select_lvl_UGC.draw();
-      }
-      if (Menue.equals("level select UGC")) {
-        background(7646207);
-        textSize(35*Scale);
-        fill(0);
-        textAlign(LEFT, BOTTOM);
-        text("User Generated Levels", 484*Scale, 54*Scale);//menue title
-        select_lvl_back.draw();
-        UGC_open_folder.draw();
-        levelcreatorLink.draw();
-        fill(0);
-        textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        if (UGCNames.size()==0) {
-          text("no levels found", width/2, height/2);
-        } else {
-          text(UGCNames.get(UGC_lvl_indx), width/2, height/2);
-          if ((boolean)compatibles.get(UGC_lvl_indx)) {
-            text("this level is not compatible with this version of the game", width/2, height/2+height*0.1);
-          }
-          if (UGC_lvl_indx<UGCNames.size()-1) {
-            UGC_lvls_next.draw();
-          }
-          if (UGC_lvl_indx>0) {
-            UGC_lvls_prev.draw();
-          }
-          UGC_lvl_play.draw();
-        }
-      }
-      if (Menue.equals("pause")) {//when in the pause emnue cancle all motion
-        player1_moving_right=false;
-        player1_moving_left=false;
-        player1_jumping=false;
-      }
-
-
-      if (Menue.equals("settings")) {//the settings menue
-        fill(0);
-        textAlign(LEFT, BOTTOM);
-        background(7646207);
-        textAlign(CENTER, BOTTOM);
-        textSize(100*Scale);
-        text("Settings", width/2, height);
-
-        textAlign(LEFT, BOTTOM);
-        textSize(40*Scale);//explaination text
-
-        if (settingsMenue.equals("game play")) {
+        if (Menue.equals("main")) {//if on main menue
+          background(7646207);
+          textSize(100*Scale);
           fill(0);
-          text("horozontal screen scrolling location", 40*Scale, 90*Scale);
-          text("vertical  screen scrolling location", 40*Scale, 160*Scale);
-          text((int)(((esdPos-800.0)/440)*530)+100, 700*Scale, 90*Scale);
-          text((int)(((vesdPos-800.0)/440)*220)+100, 700*Scale, 160*Scale);
+          textAlign(CENTER, CENTER);
+          text("skinny mann", width/2, 80*Scale);//the title
+          fill(255, 255, 0);
+          text("Early Access", width/2, 180*Scale);
+          textSize(35*Scale);
+          fill(-16732415);
+          stroke(-16732415);
+          rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
+          draw_mann(200*Scale, 360*Scale, 1, 4*Scale, 0);
+          draw_mann(1080*Scale, 360*Scale, 1, 4*Scale, 1);
 
-          sdSlider.draw();
-          fill(255);
-          rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
-          vsdSlider.draw();
-          fill(255);
-          rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
-
-          textSize(50*Scale);
-          textAlign(CENTER, TOP);
-          fill(0);
-          text("game play", width/2, -10*Scale);
-        }//end of gameplay settings
-
-        if (settingsMenue.equals("display")) {
-          fill(0);
-          text("verticle screen resolution (requires restart)", 40*Scale, 80*Scale);
-          text("full screen (requires restart)", 40*Scale, 140*Scale);
-          textSize(20*Scale);
-          text("2160(4K)", 1190*Scale, 45*Scale);
-          text("1440", 1120*Scale, 45*Scale);
-          text("1080", 1055*Scale, 45*Scale);
-          text("900", 990*Scale, 45*Scale);
-          text("720", 920*Scale, 45*Scale);
-          text("yes", 1190*Scale, 115*Scale);
-          text("no", 1120*Scale, 115*Scale);
-          rez720.draw();
-          rez900.draw();
-          rez1080.draw();
-          rez1440.draw();
-          rez4k.draw();
-          fullScreenOn.draw();
-          fullScreenOff.draw();
-
-          textSize(50*Scale);
-          textAlign(CENTER, TOP);
-          fill(0);
-          text("display", width/2, -10*Scale);
-        }//end of display settings
-
-        if (settingsMenue.equals("outher")) {
-          fill(0);
-          text("display fps", 40*Scale, 70*Scale);
-          text("display debug info", 40*Scale, 140*Scale);
-          text("music volume", 40*Scale, 210*Scale);
-          text((int)((int)(musicVolume*100)), 700*Scale, 215*Scale);
-          text("sounds volume", 40*Scale, 280*Scale);
-          text((int)(sfxVolume*100), 700*Scale, 285*Scale);
-          text("3D shaows", 40*Scale, 350*Scale);
-          text("narration mode", 40*Scale, 460*Scale);
-
-          textSize(20*Scale);
-          text("yes", 1190*Scale, 45*Scale);
-          text("no", 1120*Scale, 45*Scale);
-          text("better", 1190*Scale, 460*Scale);
-          text("please don't\ndemonetize\nme youtube", 1070*Scale, 460*Scale);
-
-          enableFPS.draw();
-          disableFPS.draw();
-          enableDebug.draw();
-          disableDebug.draw();
-          MusicSlider.draw();
-          SFXSlider.draw();
-          shadowOn.draw();
-          shadowOff.draw();
-          narrationMode1.draw();
-          narrationMode0.draw();
+          playButton.draw();
+          exitButton.draw();
+          joinButton.draw();
+          settingsButton.draw();
+          howToPlayButton.draw();
+          textAlign(LEFT, BOTTOM);
 
           fill(255);
-          stroke(0);
-          strokeWeight(Scale);
-          rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
-          rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
+          textSize(10*Scale);
+          text(version, 0*Scale, 718*Scale);//proint the version in the lower corner
+          discord.draw();
+          image(discordIcon, 1200*Scale, 650*Scale);
+        }
+        if (Menue.equals("level select")) {//if selecting level
+          levelCompleteSoundPlayed=false;
+          textAlign(LEFT, BOTTOM);
+          strokeWeight(10*Scale);
+          background(7646207);
+          textSize(35*Scale);
+          fill(-16732415);
+          stroke(-16732415);
           strokeWeight(0);
-
+          rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
           textSize(50*Scale);
-          textAlign(CENTER, TOP);
           fill(0);
-          text("outher", width/2, -10*Scale);
-        }//end of outher settings
+          text("Level Select", 484*Scale, 54*Scale);//menue title
+          int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+          if (progress<2) {
+            select_lvl_2.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_2.setColor(-59135, -1791);
+          }
+          if (progress<3) {
+            select_lvl_3.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_3.setColor(-59135, -1791);
+          }
+          if (progress<4) {
+            select_lvl_4.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_4.setColor(-59135, -1791);
+          }
+          if (progress<5) {
+            select_lvl_5.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_5.setColor(-59135, -1791);
+          }
+          if (progress<6) {
+            select_lvl_6.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_6.setColor(-59135, -1791);
+          }
+          if (progress<7) {
+            select_lvl_7.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_7.setColor(-59135, -1791);
+          }
+          if (progress<8) {
+            select_lvl_8.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_8.setColor(-59135, -1791);
+          }
+          if (progress<9) {
+            select_lvl_9.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_9.setColor(-59135, -1791);
+          }
+          if (progress<10) {
+            select_lvl_10.setColor(#B40F00, #B4AF00);
+          } else {
+            select_lvl_10.setColor(-59135, -1791);
+          }
+          select_lvl_1.draw();
+          select_lvl_2.draw();
+          select_lvl_3.draw();
+          select_lvl_4.draw();
+          select_lvl_5.draw();
+          select_lvl_6.draw();
+          select_lvl_7.draw();
+          select_lvl_8.draw();
+          select_lvl_9.draw();
+          select_lvl_10.draw();
+          select_lvl_back.draw();
+          select_lvl_UGC.draw();
+        }
+        if (Menue.equals("level select UGC")) {
+          background(7646207);
+          textSize(35*Scale);
+          fill(0);
+          textAlign(LEFT, BOTTOM);
+          text("User Generated Levels", 484*Scale, 54*Scale);//menue title
+          select_lvl_back.draw();
+          UGC_open_folder.draw();
+          levelcreatorLink.draw();
+          fill(0);
+          textSize(50*Scale);
+          textAlign(CENTER, CENTER);
+          if (UGCNames.size()==0) {
+            text("no levels found", width/2, height/2);
+          } else {
+            text(UGCNames.get(UGC_lvl_indx), width/2, height/2);
+            if ((boolean)compatibles.get(UGC_lvl_indx)) {
+              text("this level is not compatible with this version of the game", width/2, height/2+height*0.1);
+            }
+            if (UGC_lvl_indx<UGCNames.size()-1) {
+              UGC_lvls_next.draw();
+            }
+            if (UGC_lvl_indx>0) {
+              UGC_lvls_prev.draw();
+            }
+            UGC_lvl_play.draw();
+          }
+        }
+        if (Menue.equals("pause")) {//when in the pause emnue cancle all motion
+          player1_moving_right=false;
+          player1_moving_left=false;
+          player1_jumping=false;
+        }
 
-        //end of check boers and stuffs
 
-        settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
+        if (Menue.equals("settings")) {//the settings menue
+          fill(0);
+          textAlign(LEFT, BOTTOM);
+          background(7646207);
+          textAlign(CENTER, BOTTOM);
+          textSize(100*Scale);
+          text("Settings", width/2, height);
 
-        strokeWeight(5*Scale);
-        stroke(255, 0, 0);
-        if (true) {
-          JSONObject rez=settings.getJSONObject(2);
-          int vres = rez.getInt("v-res");
-          //  String arat = rez.getString("aspect ratio");
-          boolean fus = rez.getBoolean("full_Screen");
+          textAlign(LEFT, BOTTOM);
+          textSize(40*Scale);//explaination text
 
+          if (settingsMenue.equals("game play")) {
+            fill(0);
+            text("horozontal screen scrolling location", 40*Scale, 90*Scale);
+            text("vertical  screen scrolling location", 40*Scale, 160*Scale);
+            text((int)(((esdPos-800.0)/440)*530)+100, 700*Scale, 90*Scale);
+            text((int)(((vesdPos-800.0)/440)*220)+100, 700*Scale, 160*Scale);
+
+            sdSlider.draw();
+            fill(255);
+            rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
+            vsdSlider.draw();
+            fill(255);
+            rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
+
+            textSize(50*Scale);
+            textAlign(CENTER, TOP);
+            fill(0);
+            text("game play", width/2, -10*Scale);
+          }//end of gameplay settings
 
           if (settingsMenue.equals("display")) {
-            if (vres==720) {
-              chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
-            }
-            if (vres==900) {
-              chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
-            }
-            if (vres==1080) {
-              chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
-            }
-            if (vres==1440) {
-              chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
-            }
-            if (vres==2160) {
-              chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
-            }
+            fill(0);
+            text("verticle screen resolution (requires restart)", 40*Scale, 80*Scale);
+            text("full screen (requires restart)", 40*Scale, 140*Scale);
+            textSize(20*Scale);
+            text("2160(4K)", 1190*Scale, 45*Scale);
+            text("1440", 1120*Scale, 45*Scale);
+            text("1080", 1055*Scale, 45*Scale);
+            text("900", 990*Scale, 45*Scale);
+            text("720", 920*Scale, 45*Scale);
+            text("yes", 1190*Scale, 115*Scale);
+            text("no", 1120*Scale, 115*Scale);
+            rez720.draw();
+            rez900.draw();
+            rez1080.draw();
+            rez1440.draw();
+            rez4k.draw();
+            fullScreenOn.draw();
+            fullScreenOff.draw();
 
-            if (!fus) {
-              chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
-            } else {
-              chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
-            }
-          }//end of display settings checkmarks
+            textSize(50*Scale);
+            textAlign(CENTER, TOP);
+            fill(0);
+            text("display", width/2, -10*Scale);
+          }//end of display settings
 
           if (settingsMenue.equals("outher")) {
-            //enableFPS,disableFPS,enableDebug,disableDebug
-            if (!displayFPS) {
-              chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
-            } else {
-              chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
-            }
-            if (!displayDebugInfo) {
-              chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
-            } else {
-              chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
-            }
+            fill(0);
+            text("display fps", 40*Scale, 70*Scale);
+            text("display debug info", 40*Scale, 140*Scale);
+            text("music volume", 40*Scale, 210*Scale);
+            text((int)((int)(musicVolume*100)), 700*Scale, 215*Scale);
+            text("sounds volume", 40*Scale, 280*Scale);
+            text((int)(sfxVolume*100), 700*Scale, 285*Scale);
+            text("3D shaows", 40*Scale, 350*Scale);
+            text("narration mode", 40*Scale, 460*Scale);
 
-            if (!shadow3D) {
-              chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
-            } else {
-              chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
-            }
+            textSize(20*Scale);
+            text("yes", 1190*Scale, 45*Scale);
+            text("no", 1120*Scale, 45*Scale);
+            text("better", 1190*Scale, 460*Scale);
+            text("please don't\ndemonetize\nme youtube", 1070*Scale, 460*Scale);
 
-            if (tutorialNarrationMode==0) {
-              chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
-            } else if (tutorialNarrationMode==1) {
-              chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
-            }
-          }
-        }//end of outher settings
+            enableFPS.draw();
+            disableFPS.draw();
+            enableDebug.draw();
+            disableDebug.draw();
+            MusicSlider.draw();
+            SFXSlider.draw();
+            shadowOn.draw();
+            shadowOff.draw();
+            narrationMode1.draw();
+            narrationMode0.draw();
 
-        sttingsGPL.draw();
-        settingsDSP.draw();
-        settingsOUT.draw();
-        textAlign(LEFT, BOTTOM);
-        fill(255, 25, 0);
-        stroke(255, 249, 0);
-        strokeWeight(10*Scale);
-        rect(40*Scale, 610*Scale, 200*Scale, 50*Scale);//the back button
-        fill(0);
-        textSize(50*Scale);
-        text("back", 60*Scale, 655*Scale);
-      }
+            fill(255);
+            stroke(0);
+            strokeWeight(Scale);
+            rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
+            rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
+            strokeWeight(0);
 
+            textSize(50*Scale);
+            textAlign(CENTER, TOP);
+            fill(0);
+            text("outher", width/2, -10*Scale);
+          }//end of outher settings
 
-      if (Menue.equals("how to play")) {//how to play menue
-        background(#4FCEAF);
-        fill(0);
-        textAlign(LEFT, TOP);
-        textSize(60*Scale);
-        text("press 'A' or 'D' to move left or right \npress SPACE to jump\npress 'ESC' to pause the game\ngoal: get the the finishline at the \nend of the level", 100*Scale, 100*Scale);//the explaination
-        fill(255, 25, 0);
-        stroke(255, 249, 0);
-        strokeWeight(10*Scale);
-        rect(40*Scale, 610*Scale, 200*Scale, 50*Scale);// the back button
-        fill(0);
-        textAlign(LEFT, BOTTOM);
-        textSize(50*Scale);
-        text("back", 60*Scale, 655*Scale);
-      }
+          //end of check boers and stuffs
 
-      if (Menue.equals("multiplayer strart")) {
-        background(#FF8000);
-        fill(0);
-        textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        text("Multiplayer", width/2, height*0.05);
+          settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
 
-        multyplayerJoin.draw();
-        multyplayerHost.draw();
-        multyplayerExit.draw();
-      }
-
-      if (Menue.equals("start host")) {
-        background(#FF8000);
-        fill(0);
-        textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        text("Host session", width/2, height*0.05);
-        textSize(25*Scale);
-        text("Name", width/2, height*0.13);
-        noStroke();
-        rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-        text(name+((enteringName)? cursor:""), width/2, height*0.175);
-        text("Port", width/2, height*0.24);
-        rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-        text(port+((enteringPort)? cursor:""), width/2, height*0.285);
+          strokeWeight(5*Scale);
+          stroke(255, 0, 0);
+          if (true) {
+            JSONObject rez=settings.getJSONObject(2);
+            int vres = rez.getInt("v-res");
+            //  String arat = rez.getString("aspect ratio");
+            boolean fus = rez.getBoolean("full_Screen");
 
 
-        multyplayerExit.draw();
-        multyplayerGo.draw();
-      }
-      if (Menue.equals("start join")) {
-        background(#FF8000);
-        fill(0);
-        textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        text("Join session", width/2, height*0.05);
-        textSize(25*Scale);
-        text("Name", width/2, height*0.13);
-        noStroke();
-        rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-        text(name+((enteringName)? cursor:""), width/2, height*0.175);
-        text("Port", width/2, height*0.24);
-        rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-        text(port+((enteringPort)? cursor:""), width/2, height*0.285);
-        text("IP address", width/2, height*0.35);
-        rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
-        text(ip+((enteringIP)?cursor:""), width/2, height*0.395);
+            if (settingsMenue.equals("display")) {
+              if (vres==720) {
+                chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
+              }
+              if (vres==900) {
+                chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
+              }
+              if (vres==1080) {
+                chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
+              }
+              if (vres==1440) {
+                chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
+              }
+              if (vres==2160) {
+                chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
+              }
 
+              if (!fus) {
+                chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
+              } else {
+                chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
+              }
+            }//end of display settings checkmarks
 
-        multyplayerExit.draw();
-        multyplayerGo.draw();
-      }
-      if (Menue.equals("disconnected")) {
-        background(200);
-        fill(0);
-        textAlign(CENTER, CENTER);
-        textSize(50*Scale);
-        text("Disconnected", width/2, height*0.05);
-        textSize(25*Scale);
-        text(disconnectReason, width/2, height*0.3);
-        multyplayerExit.draw();
-      }
-      if (Menue.equals("multiplayer selection")) {
-        background(-9131009);
-        fill(0);
-        rect(width*0.171875, 0, 2*Scale, height);//verticle line on the left of the screen
-        textAlign(CENTER, CENTER);
-        textSize(20*Scale);
-        text("players", width*0.086, height*0.015);
-        rect(0, height*0.04, width*0.171875, height*(2.0/720));//horozontal line ath the top of the left colum
+            if (settingsMenue.equals("outher")) {
+              //enableFPS,disableFPS,enableDebug,disableDebug
+              if (!displayFPS) {
+                chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
+              } else {
+                chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
+              }
+              if (!displayDebugInfo) {
+                chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
+              } else {
+                chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
+              }
 
-        //horozontal lines that seperate the names of the players
-        for (int i=0; i<10; i++) {
-          rect(0, height*0.04+((height*0.91666-height*0.04)/10)*i, width*0.171875, height*(1.0/720));
-        }
+              if (!shadow3D) {
+                chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
+              } else {
+                chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
+              }
 
-        rect(width*0.8, 0, width*0.0015625, height);//verticle line on the right of the screen
-
-        //multyplayerSelectedLevel
-        calcTextSize("selected level", width*0.15);
-        text("Selected Level", width*0.9, height*0.1);
-        rect(width*0.8, height*0.2, width*0.2, height*(2.0/720));
-        textSize(10*Scale);
-        textAlign(LEFT, CENTER);
-        if (multyplayerSelectedLevel.exsists) {
-          text("Name: "+multyplayerSelectedLevel.name, width*0.81, height*0.22);
-          text("Author: "+multyplayerSelectedLevel.author, width*0.81, height*0.24);
-          text("Game Version: "+multyplayerSelectedLevel.gameVersion, width*0.81, height*0.26);
-          text("Multyplayer Mode: "+((multyplayerSelectedLevel.multyplayerMode==1) ? "Speed Run" : "Co - Op"), width*0.81, height*0.28);
-          if (multyplayerSelectedLevel.multyplayerMode==2) {
-            text("Max players: "+multyplayerSelectedLevel.maxPlayers, width*0.81, height*0.3);
-            text("Min players: "+multyplayerSelectedLevel.minPlayers, width*0.81, height*0.32);
-          }
-          if (multyplayerSelectedLevel.multyplayerMode==1) {
-            textAlign(CENTER, CENTER);
-            calcTextSize("time to complete", width*0.96609375-width*0.8463194444);
-            text("time to complete", width*0.901, height*0.68);
-            String time = formatMillis(sessionTime);
-            calcTextSize(time, width*0.96609375-width*0.8463194444);
-            text(time, width*0.901, height*0.72);
-          }
-          if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
-            textSize(10*Scale);
-            textAlign(LEFT, CENTER);
-            text("Level is incompatible with current version of game", width*0.81, height*0.34);
-          } else {
-            if (isHost) {
-              if (!waitingForReady) {
-                if (multyplayerSelectedLevel.multyplayerMode==1) {
-                  increaseTime.draw();
-                  decreaseTime.draw();
-                  multyplayerPlay.draw();
-                }
-                if (multyplayerSelectedLevel.multyplayerMode==2) {
-                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
-                    multyplayerPlay.draw();
-                  } else {
-                    textSize(20*Scale);
-                    text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
-                  }
-                }
-              } else {//when waiting for clients to be readdy
-                calcTextSize("waiting for clients", multyplayerPlay.lengthX);
-                textAlign(CENTER, CENTER);
-                fill(0);
-                text("waiting for clients", multyplayerPlay.x+multyplayerPlay.lengthX/2, multyplayerPlay.y+multyplayerPlay.lengthY/2);
+              if (tutorialNarrationMode==0) {
+                chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
+              } else if (tutorialNarrationMode==1) {
+                chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
               }
             }
-          }
-        }
+          }//end of outher settings
 
-        textAlign(CENTER, CENTER);
-        if (isHost) {//if you are the host of the session
-          calcTextSize("select level", width*0.15);
-          text("select level", width/2, height*0.05);
-
-          //display your name at the top of the list
-          calcTextSize(name, width*0.16875, (int)(25*Scale));
-          text(name+"\n(you)", width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2));
-
-          //display the names of all the outher players
-          for (int i=0; i<clients.size(); i++) {
-            calcTextSize(clients.get(i).name, width*0.16875, (int)(25*Scale));
-            text(clients.get(i).name, width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
-          }
-          //horozontal line under selecte level
-          rect(width*0.171875, height*0.09, width*0.8-width*0.171875, height*(2.0/720));
-
-          //draw the buttons for level type
-          multyplayerSpeedrun.draw();
-          multyplayerCoop.draw();
-          multyplayerUGC.draw();
-
-          //darw lines seperating levels
+          sttingsGPL.draw();
+          settingsDSP.draw();
+          settingsOUT.draw();
+          textAlign(LEFT, BOTTOM);
+          fill(255, 25, 0);
+          stroke(255, 249, 0);
+          strokeWeight(10*Scale);
+          rect(40*Scale, 610*Scale, 200*Scale, 50*Scale);//the back button
           fill(0);
-          for (int i=0; i<16; i++) {
-            rect(width*0.171875, height*0.09+((height*0.9027777777-height*0.09)/16)*i, width*0.8-width*0.171875, height*(1.0/720));
-          }
+          textSize(50*Scale);
+          text("back", 60*Scale, 655*Scale);
+        }
 
-          if (multyplayerSelectionLevels.equals("speed")) {
-            multyplayerSpeedrun.setColor(-59135, -35185);
-            multyplayerCoop.setColor(-59135, -1791);
-            multyplayerUGC.setColor(-59135, -1791);
-            int numOfBuiltInLevels=10;
-            calcTextSize("level 30", width*0.1);
-            textAlign(CENTER, CENTER);
-            for (int i=0; i<numOfBuiltInLevels; i++) {
-              text("Level "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
-            }
-          }
-          if (multyplayerSelectionLevels.equals("coop")) {
-            multyplayerSpeedrun.setColor(-59135, -1791);
-            multyplayerCoop.setColor(-59135, -35185);
-            multyplayerUGC.setColor(-59135, -1791);
-            calcTextSize("level 30", width*0.1);
-            textAlign(CENTER, CENTER);
-            for (int i=0; i<2; i++) {
-              text("Co-Op "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
-            }
-          }
-          if (multyplayerSelectionLevels.equals("UGC")) {
-            multyplayerSpeedrun.setColor(-59135, -1791);//color of the buttons at the bottom of the screen
-            multyplayerCoop.setColor(-59135, -1791);
-            multyplayerUGC.setColor(-59135, -35185);
 
-            calcTextSize("level 30", width*0.1);//display the levels to selct from
-            textAlign(CENTER, CENTER);
-            for (int i=0; i<UGCNames.size(); i++) {
-              String levelName = loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(i)+"/index.json").getJSONObject(0).getString("name");
-              text(levelName, width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
-            }
-          }
-        } else {
+        if (Menue.equals("how to play")) {//how to play menue
+          background(#4FCEAF);
+          fill(0);
+          textAlign(LEFT, TOP);
+          textSize(60*Scale);
+          text("press 'A' or 'D' to move left or right \npress SPACE to jump\npress 'ESC' to pause the game\ngoal: get the the finishline at the \nend of the level", 100*Scale, 100*Scale);//the explaination
+          fill(255, 25, 0);
+          stroke(255, 249, 0);
+          strokeWeight(10*Scale);
+          rect(40*Scale, 610*Scale, 200*Scale, 50*Scale);// the back button
+          fill(0);
+          textAlign(LEFT, BOTTOM);
+          textSize(50*Scale);
+          text("back", 60*Scale, 655*Scale);
+        }
+
+        if (Menue.equals("multiplayer strart")) {
+          background(#FF8000);
+          fill(0);
+          textSize(50*Scale);
           textAlign(CENTER, CENTER);
-          for (int i=0; i<playerNames.size(); i++) {
-            calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
-            text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
+          text("Multiplayer", width/2, height*0.05);
+
+          multyplayerJoin.draw();
+          multyplayerHost.draw();
+          multyplayerExit.draw();
+        }
+
+        if (Menue.equals("start host")) {
+          background(#FF8000);
+          fill(0);
+          textSize(50*Scale);
+          textAlign(CENTER, CENTER);
+          text("Host session", width/2, height*0.05);
+          textSize(25*Scale);
+          text("Name", width/2, height*0.13);
+          noStroke();
+          rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
+          text(name+((enteringName)? cursor:""), width/2, height*0.175);
+          text("Port", width/2, height*0.24);
+          rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
+          text(port+((enteringPort)? cursor:""), width/2, height*0.285);
+
+
+          multyplayerExit.draw();
+          multyplayerGo.draw();
+        }
+        if (Menue.equals("start join")) {
+          background(#FF8000);
+          fill(0);
+          textSize(50*Scale);
+          textAlign(CENTER, CENTER);
+          text("Join session", width/2, height*0.05);
+          textSize(25*Scale);
+          text("Name", width/2, height*0.13);
+          noStroke();
+          rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
+          text(name+((enteringName)? cursor:""), width/2, height*0.175);
+          text("Port", width/2, height*0.24);
+          rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
+          text(port+((enteringPort)? cursor:""), width/2, height*0.285);
+          text("IP address", width/2, height*0.35);
+          rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
+          text(ip+((enteringIP)?cursor:""), width/2, height*0.395);
+
+
+          multyplayerExit.draw();
+          multyplayerGo.draw();
+        }
+        if (Menue.equals("disconnected")) {
+          background(200);
+          fill(0);
+          textAlign(CENTER, CENTER);
+          textSize(50*Scale);
+          text("Disconnected", width/2, height*0.05);
+          textSize(25*Scale);
+          text(disconnectReason, width/2, height*0.3);
+          multyplayerExit.draw();
+        }
+        if (Menue.equals("multiplayer selection")) {
+          background(-9131009);
+          fill(0);
+          rect(width*0.171875, 0, 2*Scale, height);//verticle line on the left of the screen
+          textAlign(CENTER, CENTER);
+          textSize(20*Scale);
+          text("players", width*0.086, height*0.015);
+          rect(0, height*0.04, width*0.171875, height*(2.0/720));//horozontal line ath the top of the left colum
+
+          //horozontal lines that seperate the names of the players
+          for (int i=0; i<10; i++) {
+            rect(0, height*0.04+((height*0.91666-height*0.04)/10)*i, width*0.171875, height*(1.0/720));
           }
 
-          if (clients.size()>0) {
-            if (clients.get(0).downloadingLevel) {
-              calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
-              text("downloading... ", width/2, height*0.05);
-              int totalBlocks=0;
-              if (clients.get(0).ldi!=null) {
-                for (int i=0; i<clients.get(0).ldi.fileSizes.length; i++) {
-                  totalBlocks+=clients.get(0).ldi.fileSizes[i];
+          rect(width*0.8, 0, width*0.0015625, height);//verticle line on the right of the screen
+
+          //multyplayerSelectedLevel
+          calcTextSize("selected level", width*0.15);
+          text("Selected Level", width*0.9, height*0.1);
+          rect(width*0.8, height*0.2, width*0.2, height*(2.0/720));
+          textSize(10*Scale);
+          textAlign(LEFT, CENTER);
+          if (multyplayerSelectedLevel.exsists) {
+            text("Name: "+multyplayerSelectedLevel.name, width*0.81, height*0.22);
+            text("Author: "+multyplayerSelectedLevel.author, width*0.81, height*0.24);
+            text("Game Version: "+multyplayerSelectedLevel.gameVersion, width*0.81, height*0.26);
+            text("Multyplayer Mode: "+((multyplayerSelectedLevel.multyplayerMode==1) ? "Speed Run" : "Co - Op"), width*0.81, height*0.28);
+            if (multyplayerSelectedLevel.multyplayerMode==2) {
+              text("Max players: "+multyplayerSelectedLevel.maxPlayers, width*0.81, height*0.3);
+              text("Min players: "+multyplayerSelectedLevel.minPlayers, width*0.81, height*0.32);
+            }
+            if (multyplayerSelectedLevel.multyplayerMode==1) {
+              textAlign(CENTER, CENTER);
+              calcTextSize("time to complete", width*0.96609375-width*0.8463194444);
+              text("time to complete", width*0.901, height*0.68);
+              String time = formatMillis(sessionTime);
+              calcTextSize(time, width*0.96609375-width*0.8463194444);
+              text(time, width*0.901, height*0.72);
+            }
+            if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+              textSize(10*Scale);
+              textAlign(LEFT, CENTER);
+              text("Level is incompatible with current version of game", width*0.81, height*0.34);
+            } else {
+              if (isHost) {
+                if (!waitingForReady) {
+                  if (multyplayerSelectedLevel.multyplayerMode==1) {
+                    increaseTime.draw();
+                    decreaseTime.draw();
+                    multyplayerPlay.draw();
+                  }
+                  if (multyplayerSelectedLevel.multyplayerMode==2) {
+                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                      multyplayerPlay.draw();
+                    } else {
+                      textSize(20*Scale);
+                      text((clients.size()+1 < multyplayerSelectedLevel.minPlayers)? "not enough players" : "too many players", width*0.81, height*0.72);
+                    }
+                  }
+                } else {//when waiting for clients to be readdy
+                  calcTextSize("waiting for clients", multyplayerPlay.lengthX);
+                  textAlign(CENTER, CENTER);
+                  fill(0);
+                  text("waiting for clients", multyplayerPlay.x+multyplayerPlay.lengthX/2, multyplayerPlay.y+multyplayerPlay.lengthY/2);
                 }
-                int downloadedBlocks=0;
-                for (int i=0; i<clients.get(0).currentDownloadIndex; i++) {
-                  downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
-                }
-                downloadedBlocks+=clients.get(0).currentDownloadblock;
-                rect(width*0.3, height*0.1, width*0.4, height*0.08);
-                fill(-9131009);
-                rect(width*0.305, height*0.11, width*0.39, height*0.06);
-                fill(0);
-                rect(width*0.305, height*0.11, width*0.39*(1.0*downloadedBlocks/totalBlocks), height*0.06);
               }
             }
-            if (clients.get(0).readdy) {
-              calcTextSize("waiting for server", width*0.35, (int)(25*Scale));
-              text("waiting for server", width/2, height*0.05);
+          }
+
+          textAlign(CENTER, CENTER);
+          if (isHost) {//if you are the host of the session
+            calcTextSize("select level", width*0.15);
+            text("select level", width/2, height*0.05);
+
+            //display your name at the top of the list
+            calcTextSize(name, width*0.16875, (int)(25*Scale));
+            text(name+"\n(you)", width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2));
+
+            //display the names of all the outher players
+            for (int i=0; i<clients.size(); i++) {
+              calcTextSize(clients.get(i).name, width*0.16875, (int)(25*Scale));
+              text(clients.get(i).name, width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i+1));
             }
+            //horozontal line under selecte level
+            rect(width*0.171875, height*0.09, width*0.8-width*0.171875, height*(2.0/720));
+
+            //draw the buttons for level type
+            multyplayerSpeedrun.draw();
+            multyplayerCoop.draw();
+            multyplayerUGC.draw();
+
+            //darw lines seperating levels
+            fill(0);
+            for (int i=0; i<16; i++) {
+              rect(width*0.171875, height*0.09+((height*0.9027777777-height*0.09)/16)*i, width*0.8-width*0.171875, height*(1.0/720));
+            }
+
+            if (multyplayerSelectionLevels.equals("speed")) {
+              multyplayerSpeedrun.setColor(-59135, -35185);
+              multyplayerCoop.setColor(-59135, -1791);
+              multyplayerUGC.setColor(-59135, -1791);
+              int numOfBuiltInLevels=10;
+              calcTextSize("level 30", width*0.1);
+              textAlign(CENTER, CENTER);
+              for (int i=0; i<numOfBuiltInLevels; i++) {
+                text("Level "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+              }
+            }
+            if (multyplayerSelectionLevels.equals("coop")) {
+              multyplayerSpeedrun.setColor(-59135, -1791);
+              multyplayerCoop.setColor(-59135, -35185);
+              multyplayerUGC.setColor(-59135, -1791);
+              calcTextSize("level 30", width*0.1);
+              textAlign(CENTER, CENTER);
+              for (int i=0; i<2; i++) {
+                text("Co-Op "+(i+1), width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+              }
+            }
+            if (multyplayerSelectionLevels.equals("UGC")) {
+              multyplayerSpeedrun.setColor(-59135, -1791);//color of the buttons at the bottom of the screen
+              multyplayerCoop.setColor(-59135, -1791);
+              multyplayerUGC.setColor(-59135, -35185);
+
+              calcTextSize("level 30", width*0.1);//display the levels to selct from
+              textAlign(CENTER, CENTER);
+              for (int i=0; i<UGCNames.size(); i++) {
+                String levelName = loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(i)+"/index.json").getJSONObject(0).getString("name");
+                text(levelName, width/2, height*0.09+(height*0.7/32)+((height*0.9027777777-height*0.09)/16)*i);
+              }
+            }
+          } else {
+            textAlign(CENTER, CENTER);
+            for (int i=0; i<playerNames.size(); i++) {
+              calcTextSize(playerNames.get(i), width*0.16875, (int)(25*Scale));
+              text(playerNames.get(i), width*0.086, height*0.04+((height*0.91666-height*0.04)/10/2)+((height*0.91666-height*0.04)/10)*(i));
+            }
+
+            if (clients.size()>0) {
+              if (clients.get(0).downloadingLevel) {
+                calcTextSize("downloading... ", width*0.25, (int)(25*Scale));
+                text("downloading... ", width/2, height*0.05);
+                int totalBlocks=0;
+                if (clients.get(0).ldi!=null) {
+                  for (int i=0; i<clients.get(0).ldi.fileSizes.length; i++) {
+                    totalBlocks+=clients.get(0).ldi.fileSizes[i];
+                  }
+                  int downloadedBlocks=0;
+                  for (int i=0; i<clients.get(0).currentDownloadIndex; i++) {
+                    downloadedBlocks+=clients.get(0).ldi.fileSizes[i];
+                  }
+                  downloadedBlocks+=clients.get(0).currentDownloadblock;
+                  rect(width*0.3, height*0.1, width*0.4, height*0.08);
+                  fill(-9131009);
+                  rect(width*0.305, height*0.11, width*0.39, height*0.06);
+                  fill(0);
+                  rect(width*0.305, height*0.11, width*0.39*(1.0*downloadedBlocks/totalBlocks), height*0.06);
+                }
+              }
+              if (clients.get(0).readdy) {
+                calcTextSize("waiting for server", width*0.35, (int)(25*Scale));
+                text("waiting for server", width/2, height*0.05);
+              }
+            }
+          }
+          multyplayerLeave.draw();
+        }
+
+        if (Menue.equals("dev")) {
+          drawDevMenue();
+        }
+      }
+      //end of menue draw
+
+
+      if (inGame) {
+        //================================================================================================
+        background(7646207);
+        stageLevelDraw();
+        if (level_complete&&!levelCompleteSoundPlayed) {
+          if (multiplayer) {
+            if (level.multyplayerMode==1) {
+              players[currentPlayer].setX(-100);
+              players[currentPlayer].setY(-100);
+              level.psudoLoad();
+              level_complete=false;
+              int completeTime=millis()-startTime;
+              println("completed in: "+completeTime+" "+formatMillis(completeTime));
+              if (completeTime<bestTime||bestTime==0) {
+                bestTime=completeTime;
+              }
+              startTime=millis();
+            }
+          } else {
+            soundHandler.addToQueue(0);
+            levelCompleteSoundPlayed=true;
           }
         }
-        multyplayerLeave.draw();
       }
 
-      if (Menue.equals("dev")) {
-        drawDevMenue();
-      }
-    }
-    //end of menue draw
-
-
-    if (inGame) {
-      //================================================================================================
-      background(7646207);
-      stageLevelDraw();
-      if (level_complete&&!levelCompleteSoundPlayed) {
-        if (multiplayer) {
-          if (level.multyplayerMode==1) {
-            players[currentPlayer].setX(-100);
-            players[currentPlayer].setY(-100);
-            level.psudoLoad();
-            level_complete=false;
-            int completeTime=millis()-startTime;
-            println("completed in: "+completeTime+" "+formatMillis(completeTime));
-            if (completeTime<bestTime||bestTime==0) {
-              bestTime=completeTime;
-            }
-            startTime=millis();
-          }
+      if (tutorialMode&&!inGame) {
+        if (Menue.equals("settings")) {
+          background(0);
+          fill(255);
+          textSize(50*Scale);
+          textAlign(CENTER, CENTER);
+          text("this feture is disabled during the tutorial\npres ECS to return", width/2, height/2);
         } else {
-          soundHandler.addToQueue(0);
-          levelCompleteSoundPlayed=true;
+          background(0);
+          fill(255);
+          textSize(50*Scale);
+          textAlign(CENTER, CENTER);
+          text("ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", width/2, height/2);
+          textSize(25*Scale);
+          text("press ESC to close", width/2, height*0.97);
         }
       }
-    }
+      engageHUDPosition();//anything hud
 
-    if (tutorialMode&&!inGame) {
-      if (Menue.equals("settings")) {
-        background(0);
+      if (inGame) {
         fill(255);
         textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        text("this feture is disabled during the tutorial\npres ECS to return", width/2, height/2);
-      } else {
-        background(0);
-        fill(255);
-        textSize(50*Scale);
-        textAlign(CENTER, CENTER);
-        text("ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", width/2, height/2);
-        textSize(25*Scale);
-        text("press ESC to close", width/2, height*0.97);
+        textAlign(LEFT, TOP);
+        text("coins: "+coinCount, 0, 0);
       }
-    }
-    engageHUDPosition();//anything hud
 
-    if (inGame) {
-      fill(255);
-      textSize(50*Scale);
-      textAlign(LEFT, TOP);
-      text("coins: "+coinCount, 0, 0);
-    }
-
-    if (menue) {
-      if (Menue.equals("pause")) {//when paused
-        textAlign(LEFT, BOTTOM);
-        fill(50, 200);
-        rect(0, 0, width, height);
-        fill(0);
-        textSize(100*Scale);
-        text("GAME PAUSED", 300*Scale, 100*Scale);
-        fill(255, 25, 0);
-        stroke(255, 249, 0);
-        strokeWeight(10*Scale);
-        rect(500*Scale, 200*Scale, 300*Scale, 60*Scale);//buttons
-        rect(500*Scale, 300*Scale, 300*Scale, 60*Scale);
-        rect(500*Scale, 400*Scale, 300*Scale, 60*Scale);
-        fill(0);
-        textSize(50*Scale);
-        text("resume", 550*Scale, 250*Scale);
-        text("options", 550*Scale, 350*Scale);
-        text("quit", 600*Scale, 450*Scale);
-        if (multiplayer) {
-          if (level.multyplayerMode==1) {
-            pauseRestart.draw();
+      if (menue) {
+        if (Menue.equals("pause")) {//when paused
+          textAlign(LEFT, BOTTOM);
+          fill(50, 200);
+          rect(0, 0, width, height);
+          fill(0);
+          textSize(100*Scale);
+          text("GAME PAUSED", 300*Scale, 100*Scale);
+          fill(255, 25, 0);
+          stroke(255, 249, 0);
+          strokeWeight(10*Scale);
+          rect(500*Scale, 200*Scale, 300*Scale, 60*Scale);//buttons
+          rect(500*Scale, 300*Scale, 300*Scale, 60*Scale);
+          rect(500*Scale, 400*Scale, 300*Scale, 60*Scale);
+          fill(0);
+          textSize(50*Scale);
+          text("resume", 550*Scale, 250*Scale);
+          text("options", 550*Scale, 350*Scale);
+          text("quit", 600*Scale, 450*Scale);
+          if (multiplayer) {
+            if (level.multyplayerMode==1) {
+              pauseRestart.draw();
+            }
           }
         }
       }
-    }
-    //level creator here
-    }else{
+      //level creator here
+    } else {
       if (startup) {//if on the startup screen
         background(#48EDD8);
         newLevelButton.draw();
@@ -843,7 +846,168 @@ void draw() {// the function that is called every fraim
         newBlueprint.draw();
         loadBlueprint.draw();
       }//end of startup screen
-    }
+
+      if (loading) {//if loading a lavel
+        textAlign(LEFT, BOTTOM);
+        background(#48EDD8);
+        fill(0);
+        textSize(20*Scale);
+        text("enter level name", 40*Scale, 100*Scale);
+        if (rootPath!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
+          if (entering_file_path&&coursor) {
+            text(rootPath+"|", 40*Scale, 150*Scale);
+          } else {
+            text(rootPath, 40*Scale, 150*Scale);
+          }
+        } else if (entering_file_path&&coursor) {
+          text("|", 40*Scale, 150*Scale);
+        }
+        stroke(0);
+        strokeWeight(1*Scale);
+        line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);//draw the line the the text sits on
+        stroke(#4857ED);
+        fill(#BB48ED);
+        strokeWeight(10*Scale);
+        lcLoadLevelButton.draw();//draw load button
+      }//end of loading level
+
+      if (newLevel) {//if creating a new level
+        textAlign(LEFT, BOTTOM);
+        background(#48EDD8);
+        fill(0);
+        textSize(20*Scale);
+        text("enter level name", 40*Scale, 100*Scale);
+        if (new_name!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
+          if (entering_name&&coursor) {
+            text(new_name+"|", 40*Scale, 150*Scale);
+          } else {
+            text(new_name, 40*Scale, 150*Scale);
+          }
+        } else if (entering_name&&coursor) {
+          text("|", 40*Scale, 150*Scale);
+        }
+
+        lcNewLevelButton.draw();//start button
+        fill(0);
+        stroke(0);
+        strokeWeight(1*Scale);
+        line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//line for name text
+      }//end of make new level
+
+      if (editingStage) {//if edditing the stage
+        if (!simulating) {//if not simulating allow the camera to be moved by the arrow keys
+          if (cam_left&&camPos>0) {
+            camPos-=4;
+          }
+          if (cam_right) {
+            camPos+=4;
+          }
+          if (cam_down&&camPosY>0) {
+            camPosY-=4;
+          }
+          if (cam_up) {
+            camPosY+=4;
+          }
+        }
+
+        stageLevelDraw();//level draw code
+        stageEditGUI();//level gui code
+
+        if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
+          generateDisplayBlueprint();//visualize the blueprint that is selected
+          renderBlueprint();//render blueprint
+        }
+      }
+
+      if (levelOverview) {//if on the level overview
+        background(#0092FF);
+        fill(#7CC7FF);
+        stroke(#7CC7FF);
+        strokeWeight(0);
+        if (overviewSelection!=-1) {//if something is selected
+          rect(0, ((overviewSelection- filesScrole)*60+80)*Scale, 1280*Scale, 60*Scale);//draw the highlight
+          if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+            if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
+              edditStage.draw();//draw edit button
+              fill(255, 255, 0);
+              strokeWeight(1*Scale);
+              quad(1155*Scale, 37*Scale, 1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1140*Scale, 22*Scale);//draw the pencil
+              fill(#E5B178);
+              triangle(1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1109*Scale, 53*Scale);//more pencil thing
+              setMainStage.draw();//draw set main stage button
+              fill(255, 0, 0);
+              quad(1030*Scale, 16*Scale, 1010*Scale, 40*Scale, 1030*Scale, 66*Scale, 1050*Scale, 40*Scale);//draw the main stage diamond
+              setMainStage.drawHoverText();
+            }
+            if (level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a 3D stage
+              edditStage.draw();//draw edit stage button
+              fill(255, 255, 0);
+              strokeWeight(1*Scale);
+              quad(1155*Scale, 37*Scale, 1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1140*Scale, 22*Scale);//draw the pencil
+              fill(#E5B178);
+              triangle(1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1109*Scale, 53*Scale);
+            }
+          }//end of thing slected is in stage range
+          if (overviewSelection>=level.stages.size()+level.sounds.size()) {//if the selection is in the logic board range
+            edditStage.draw();//draw edit button
+            fill(255, 255, 0);
+            strokeWeight(1*Scale);
+            quad(1155*Scale, 37*Scale, 1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1140*Scale, 22*Scale);//draw the pencil
+            fill(#E5B178);
+            triangle(1129*Scale, 54*Scale, 1114*Scale, 39*Scale, 1109*Scale, 53*Scale);//more pencil thing
+          }
+        }//end of if something is selected
+        textAlign(LEFT, BOTTOM);
+        stroke(0);
+        strokeWeight(2*Scale);
+        line(0*Scale, 80*Scale, 1280*Scale, 80*Scale);
+        fill(0);
+        textSize(30*Scale);
+
+        String[] keys=new String[0];//create a string array that can be used to place the sound keys in
+        keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
+        for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+          if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
+            fill(0);
+            String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            if (type.equals("stage")) {//if it is a stage then display the stage icon
+              drawWorldSymbol(20*Scale, (90+60*(i))*Scale);
+            }
+            if (type.equals("3Dstage")) {
+              draw3DStageIcon(43*Scale, (100+60*i)*Scale, 0.7*Scale);
+            }
+          } else if (i+ filesScrole<level.stages.size()+level.sounds.size()) {//if the thing is in the range of sounds
+            fill(0);
+            String displayName=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).name, type=level.sounds.get(keys[i+ filesScrole-level.stages.size()]).type;//get the name and type of a sound in the level
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            if (type.equals("sound")) {//if the thing is a sound then display the sound icon
+              drawSpeakericon(this, 40*Scale, (110+60*(i))*Scale, 0.5*Scale);
+            }
+          } else {
+            fill(0);
+            String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
+            text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
+            logicIcon(40*Scale, (100+60*i)*Scale, 1*Scale);
+          }
+        }
+
+
+        textAlign(CENTER, CENTER);
+        newStage.draw();//draw the new file button
+        textAlign(LEFT, BOTTOM);
+        respawnX=(int)level.SpawnX;//set the respawn info to that of the current level
+        respawnY=(int)level.SpawnY;
+        respawnStage=level.mainStage;
+
+        overview_saveLevel.draw();//draw save button
+        help.draw();//draw help button
+        if (filesScrole>0)//draw scroll buttons
+          overviewUp.draw();
+        if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size())
+          overviewDown.draw();
+      }//end of level over view
+    }//end of level creator
 
 
     if (dead) {// when  dead
@@ -1008,564 +1172,553 @@ void draw() {// the function that is called every fraim
 
 
 void mouseClicked() {// when you click the mouse
-  //!hosting&&!joined
+
   try {
+    if (!levelCreator) {
 
-    if (menue) {//if your in a menue
-      if (Menue.equals("main")) {//if that menue is the main menue
-        if (playButton.isMouseOver()) {//level select button
-          Menue = "level select";
-          return;
-        }
-        if (exitButton.isMouseOver()) {//exit button
-          exit(1);
-        }
-        if (joinButton.isMouseOver()) {//join game button
-          Menue="multiplayer strart";
-        }
-        if (settingsButton.isMouseOver()) {//settings button
-          Menue="settings";
-          return;
-        }
-        if (howToPlayButton.isMouseOver()) {//how to play button
-          //how to play
-          menue=false;
-          tutorialMode=true;
-          tutorialPos=0;
-        }
-        if (discord.isMouseOver()) {
-          link("http://discord.gg/C5SACF2");
-        }
-      }
-      if (Menue.equals("level select")) {//if that menue is level select
-        int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
-        if (select_lvl_1.isMouseOver()) {
-          loadLevel("data/levels/level-1");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_2.isMouseOver()&&progress>=2) {
-          loadLevel("data/levels/level-2");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_3.isMouseOver()&&progress>=3) {
-          loadLevel("data/levels/level-3");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_4.isMouseOver()&&progress>=4) {
-          loadLevel("data/levels/level-4");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_5.isMouseOver()&&progress>=5) {
-          loadLevel("data/levels/level-5");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_6.isMouseOver()&&progress>=6) {
-          loadLevel("data/levels/level-6");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_7.isMouseOver()&&progress>=7) {
-          loadLevel("data/levels/level-7");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_8.isMouseOver()&&progress>=8) {
-          loadLevel("data/levels/level-8");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_9.isMouseOver()&&progress>=9) {
-          loadLevel("data/levels/level-9");
-          menue=false;
-          inGame=true;
-        }
-        if (select_lvl_10.isMouseOver()&&progress>=10) {
-          loadLevel("data/levels/level-10");
-          menue=false;
-          inGame=true;
-        }
-
-        if (select_lvl_back.isMouseOver()) {
-          Menue="main";
-        }
-        if (select_lvl_UGC.isMouseOver()) {
-          Menue="level select UGC";
-          loadUGCList();
-          UGC_lvl_indx=0;
-          return;
-        }
-
-
-        return;
-      }
-      if (Menue.equals("level select UGC")) {
-        if (select_lvl_back.isMouseOver()) {
-          Menue="level select";
-        }
-        if (UGC_open_folder.isMouseOver()) {
-          openUGCFolder();
-        }
-
-        if (UGCNames.size()==0) {
-        } else {
-          if (UGC_lvl_indx<UGCNames.size()-1) {
-            if (UGC_lvls_next.isMouseOver()) {
-              UGC_lvl_indx++;
-            }
+      if (menue) {//if your in a menue
+        if (Menue.equals("main")) {//if that menue is the main menue
+          if (playButton.isMouseOver()) {//level select button
+            Menue = "level select";
+            return;
           }
-          if (UGC_lvl_indx>0) {
-            if (UGC_lvls_prev.isMouseOver()) {
-              UGC_lvl_indx--;
-            }
+          if (exitButton.isMouseOver()) {//exit button
+            exit(1);
           }
-          if (UGC_lvl_play.isMouseOver()) {
-            loadLevel(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
-            if (!levelCompatible) {
-              Menue="level select";
-              return;
-            }
-            UGC_lvl=true;
-            inGame=true;
+          if (joinButton.isMouseOver()) {//join game button
+            Menue="multiplayer strart";
+          }
+          if (settingsButton.isMouseOver()) {//settings button
+            Menue="settings";
+            return;
+          }
+          if (howToPlayButton.isMouseOver()) {//how to play button
+            //how to play
             menue=false;
+            tutorialMode=true;
+            tutorialPos=0;
+          }
+          if (discord.isMouseOver()) {
+            link("http://discord.gg/C5SACF2");
           }
         }
-        if (levelcreatorLink.isMouseOver()) {
-          //link("https://cbi-games.glitch.me/level%20creator.html");
-          if(scr2==null)//create the 2nd screen if it does not exsist
-            scr2 =new ToolBox(millis());
-          startup=true;
-          loading=false;
-          newLevel=false;
-          editingStage=false;
-          levelOverview=false;
-          newFile=false;
-          levelCreator=true;
+        if (Menue.equals("level select")) {//if that menue is level select
+          int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+          if (select_lvl_1.isMouseOver()) {
+            loadLevel("data/levels/level-1");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_2.isMouseOver()&&progress>=2) {
+            loadLevel("data/levels/level-2");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_3.isMouseOver()&&progress>=3) {
+            loadLevel("data/levels/level-3");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_4.isMouseOver()&&progress>=4) {
+            loadLevel("data/levels/level-4");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_5.isMouseOver()&&progress>=5) {
+            loadLevel("data/levels/level-5");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_6.isMouseOver()&&progress>=6) {
+            loadLevel("data/levels/level-6");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_7.isMouseOver()&&progress>=7) {
+            loadLevel("data/levels/level-7");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_8.isMouseOver()&&progress>=8) {
+            loadLevel("data/levels/level-8");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_9.isMouseOver()&&progress>=9) {
+            loadLevel("data/levels/level-9");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_10.isMouseOver()&&progress>=10) {
+            loadLevel("data/levels/level-10");
+            menue=false;
+            inGame=true;
+          }
+
+          if (select_lvl_back.isMouseOver()) {
+            Menue="main";
+          }
+          if (select_lvl_UGC.isMouseOver()) {
+            Menue="level select UGC";
+            loadUGCList();
+            UGC_lvl_indx=0;
+            return;
+          }
+
+
           return;
         }
-      }
-
-      if (Menue.equals("pause")) {//if that menue is pause
-        if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 200*Scale && mouseY <= 260*Scale) {//resume game button
-          menue=false;
-        }
-        if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 300*Scale && mouseY <= 360*Scale) {//resume game button
-          Menue="settings";
-          prevousInGame=true;
-          inGame=false;
-        }
-        if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 400*Scale && mouseY <= 460*Scale) {//quit button
-          menue=true;
-          inGame=false;
-          tutorialMode=false;
-          if (multiplayer) {
-            if (isHost) {
-              Menue="multiplayer selection";
-              returnToSlection();
-            } else {
-              Menue="main";
-              println("quitting multyplayer joined");
-              clientQuitting=true;
-              clients.get(0).disconnect();
-              println("returning to main menu");
-              multiplayer=false;
-              return;
-            }
-          } else {
+        if (Menue.equals("level select UGC")) {
+          if (select_lvl_back.isMouseOver()) {
             Menue="level select";
           }
-          soundHandler.setMusicVolume(musicVolume);
-          coinCount=0;
-        }
-        if (multiplayer) {
-          if (level.multyplayerMode==1) {
-            if (pauseRestart.isMouseOver()) {
-              level.psudoLoad();
-              startTime=millis();
+          if (UGC_open_folder.isMouseOver()) {
+            openUGCFolder();
+          }
+
+          if (UGCNames.size()==0) {
+          } else {
+            if (UGC_lvl_indx<UGCNames.size()-1) {
+              if (UGC_lvls_next.isMouseOver()) {
+                UGC_lvl_indx++;
+              }
+            }
+            if (UGC_lvl_indx>0) {
+              if (UGC_lvls_prev.isMouseOver()) {
+                UGC_lvl_indx--;
+              }
+            }
+            if (UGC_lvl_play.isMouseOver()) {
+              loadLevel(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
+              if (!levelCompatible) {
+                Menue="level select";
+                return;
+              }
+              UGC_lvl=true;
+              inGame=true;
               menue=false;
             }
           }
+          if (levelcreatorLink.isMouseOver()) {
+            //link("https://cbi-games.glitch.me/level%20creator.html");
+            if (scr2==null)//create the 2nd screen if it does not exsist
+              scr2 =new ToolBox(millis());
+            startup=true;
+            loading=false;
+            newLevel=false;
+            editingStage=false;
+            levelOverview=false;
+            newFile=false;
+            levelCreator=true;
+            return;
+          }
         }
-      }
 
-      if (Menue.equals("settings")) {     //if that menue is settings
-
-        if (settingsMenue.equals("game play")) {
-
-          if (sdSlider.isMouseOver()) {
-            esdPos=(int)(mouseX/Scale);
-            if (esdPos<800) {
-              esdPos=800;
+        if (Menue.equals("pause")) {//if that menue is pause
+          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 200*Scale && mouseY <= 260*Scale) {//resume game button
+            menue=false;
+          }
+          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 300*Scale && mouseY <= 360*Scale) {//resume game button
+            Menue="settings";
+            prevousInGame=true;
+            inGame=false;
+          }
+          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 400*Scale && mouseY <= 460*Scale) {//quit button
+            menue=true;
+            inGame=false;
+            tutorialMode=false;
+            if (multiplayer) {
+              if (isHost) {
+                Menue="multiplayer selection";
+                returnToSlection();
+              } else {
+                Menue="main";
+                println("quitting multyplayer joined");
+                clientQuitting=true;
+                clients.get(0).disconnect();
+                println("returning to main menu");
+                multiplayer=false;
+                return;
+              }
+            } else {
+              Menue="level select";
             }
-            if (esdPos>1240) {
-              esdPos=1240;
-            }
-            eadgeScroleDist=(int)(((esdPos-800.0)/440)*530)+100;
-            JSONObject scroll=settings.getJSONObject(1);
-            scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
-            settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (vsdSlider.isMouseOver()) {
-            vesdPos=(int)(mouseX/Scale);
-            if (vesdPos<800) {
-              vesdPos=800;
-            }
-            if (vesdPos>1240) {
-              vesdPos=1240;
-            }
-            eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
-            JSONObject scroll=settings.getJSONObject(1);
-            scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
-            settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-        }//end of game play settings
-
-        if (settingsMenue.equals("display")) {
-          JSONObject rez=settings.getJSONObject(2);
-          String arat = "16:9";
-          if (rez4k.isMouseOver()) {//2160 resolution button
-            rez.setInt("v-res", 2160);
-            if (arat.equals("16:9")) {
-              rez.setInt("h-res", 2160*16/9);
-            }
-            rez.setFloat("scale", 2160/720.0);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (rez1440.isMouseOver()) {// 1440 resolition button
-            rez.setInt("v-res", 1440);
-            if (arat.equals("16:9")) {
-              rez.setInt("h-res", 1440*16/9);
-            }
-            rez.setFloat("scale", 1440/720.0);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (rez1080.isMouseOver()) {// 1080 resolution button
-            rez.setInt("v-res", 1080);
-            if (arat.equals("16:9")) {
-              rez.setInt("h-res", 1080*16/9);
-            }
-            rez.setFloat("scale", 1080/720.0);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (rez900.isMouseOver()) {////900 resolution button
-            rez.setInt("v-res", 900);
-            if (arat.equals("16:9")) {
-              rez.setInt("h-res", 900*16/9);
-            }
-            rez.setFloat("scale", 900/720.0);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (rez720.isMouseOver()) {// 720 resolution button
-            rez.setInt("v-res", 720);
-            if (arat.equals("16:9")) {
-              rez.setInt("h-res", 720*16/9);
-            }
-            rez.setFloat("scale", 720/720.0);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-
-          if (fullScreenOn.isMouseOver()) {//turn full screen on button
-            rez.setBoolean("full_Screen", true);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (fullScreenOff.isMouseOver()) {//turn fullscreen off button
-            rez.setBoolean("full_Screen", false);
-
-            settings.setJSONObject(2, rez);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-        }//end of display settings menue
-
-        if (settingsMenue.equals("outher")) {
-          JSONObject debug=settings.getJSONObject(3);
-          if (enableFPS.isMouseOver()) {
-            debug.setBoolean("fps", true);
-            displayFPS=true;
-            settings.setJSONObject(3, debug);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (disableFPS.isMouseOver()) {
-            debug.setBoolean("fps", false);
-            displayFPS=false;
-            settings.setJSONObject(3, debug);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (enableDebug.isMouseOver()) {
-            debug.setBoolean("debug info", true);
-            displayDebugInfo=true;
-            settings.setJSONObject(3, debug);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (disableDebug.isMouseOver()) {
-            debug.setBoolean("debug info", false);
-            displayDebugInfo=false;
-            settings.setJSONObject(3, debug);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-
-          if (MusicSlider.isMouseOver()) {
-            musVolSllid=(int)(mouseX/Scale);
-            if (musVolSllid<800) {
-              musVolSllid=800;
-            }
-            if (musVolSllid>1240) {
-              musVolSllid=1240;
-            }
-            musicVolume=(musVolSllid-800.0)/440;
-            JSONObject scroll=settings.getJSONObject(4);
-            scroll.setFloat("music volume", (musVolSllid-800.0)/440);
-            settings.setJSONObject(4, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             soundHandler.setMusicVolume(musicVolume);
+            coinCount=0;
           }
-          if (SFXSlider.isMouseOver()) {
-            sfxVolSllid=(int)(mouseX/Scale);
-            if (sfxVolSllid<800) {
-              sfxVolSllid=800;
+          if (multiplayer) {
+            if (level.multyplayerMode==1) {
+              if (pauseRestart.isMouseOver()) {
+                level.psudoLoad();
+                startTime=millis();
+                menue=false;
+              }
             }
-            if (sfxVolSllid>1240) {
-              sfxVolSllid=1240;
+          }
+        }
+
+        if (Menue.equals("settings")) {     //if that menue is settings
+
+          if (settingsMenue.equals("game play")) {
+
+            if (sdSlider.isMouseOver()) {
+              esdPos=(int)(mouseX/Scale);
+              if (esdPos<800) {
+                esdPos=800;
+              }
+              if (esdPos>1240) {
+                esdPos=1240;
+              }
+              eadgeScroleDist=(int)(((esdPos-800.0)/440)*530)+100;
+              JSONObject scroll=settings.getJSONObject(1);
+              scroll.setInt("horozontal", (int)(((esdPos-800.0)/440)*530)+100);
+              settings.setJSONObject(1, scroll);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             }
-            sfxVolume=(sfxVolSllid-800.0)/440;
-            JSONObject scroll=settings.getJSONObject(4);
-            scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
-            settings.setJSONObject(4, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-            soundHandler.setSoundsVolume(sfxVolume);
-          }
 
-          if (shadowOn.isMouseOver()) {
-            JSONObject sv3=settings.getJSONObject(5);
-            sv3.setBoolean("3D shaows", true);
-            shadow3D=true;
-            settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (shadowOff.isMouseOver()) {
-            JSONObject sv3=settings.getJSONObject(5);
-            sv3.setBoolean("3D shaows", false);
-            shadow3D=false;
-            settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (narrationMode0.isMouseOver()) {
-            JSONObject sv3=settings.getJSONObject(5);
-            sv3.setInt("narrationMode", 0);
-            tutorialNarrationMode=0;
-            settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-          if (narrationMode1.isMouseOver()) {
-            JSONObject sv3=settings.getJSONObject(5);
-            sv3.setInt("narrationMode", 1);
-            tutorialNarrationMode=1;
-            settings.setJSONObject(5, sv3);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-          }
-        }//end of outher settings menue
+            if (vsdSlider.isMouseOver()) {
+              vesdPos=(int)(mouseX/Scale);
+              if (vesdPos<800) {
+                vesdPos=800;
+              }
+              if (vesdPos>1240) {
+                vesdPos=1240;
+              }
+              eadgeScroleDistV=(int)(((vesdPos-800.0)/440)*220)+100;
+              JSONObject scroll=settings.getJSONObject(1);
+              scroll.setInt("vertical", (int)(((vesdPos-800.0)/440)*220)+100);
+              settings.setJSONObject(1, scroll);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+          }//end of game play settings
 
-        if (sttingsGPL.isMouseOver())
-          settingsMenue="game play";
-        if (settingsDSP.isMouseOver())
-          settingsMenue="display";
-        if (settingsOUT.isMouseOver())
-          settingsMenue="outher";
+          if (settingsMenue.equals("display")) {
+            JSONObject rez=settings.getJSONObject(2);
+            String arat = "16:9";
+            if (rez4k.isMouseOver()) {//2160 resolution button
+              rez.setInt("v-res", 2160);
+              if (arat.equals("16:9")) {
+                rez.setInt("h-res", 2160*16/9);
+              }
+              rez.setFloat("scale", 2160/720.0);
 
-        if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
-          if (prevousInGame) {
-            Menue="pause";
-            inGame=true;
-            prevousInGame=false;
-          } else {
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (rez1440.isMouseOver()) {// 1440 resolition button
+              rez.setInt("v-res", 1440);
+              if (arat.equals("16:9")) {
+                rez.setInt("h-res", 1440*16/9);
+              }
+              rez.setFloat("scale", 1440/720.0);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (rez1080.isMouseOver()) {// 1080 resolution button
+              rez.setInt("v-res", 1080);
+              if (arat.equals("16:9")) {
+                rez.setInt("h-res", 1080*16/9);
+              }
+              rez.setFloat("scale", 1080/720.0);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (rez900.isMouseOver()) {////900 resolution button
+              rez.setInt("v-res", 900);
+              if (arat.equals("16:9")) {
+                rez.setInt("h-res", 900*16/9);
+              }
+              rez.setFloat("scale", 900/720.0);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (rez720.isMouseOver()) {// 720 resolution button
+              rez.setInt("v-res", 720);
+              if (arat.equals("16:9")) {
+                rez.setInt("h-res", 720*16/9);
+              }
+              rez.setFloat("scale", 720/720.0);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+
+            if (fullScreenOn.isMouseOver()) {//turn full screen on button
+              rez.setBoolean("full_Screen", true);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (fullScreenOff.isMouseOver()) {//turn fullscreen off button
+              rez.setBoolean("full_Screen", false);
+
+              settings.setJSONObject(2, rez);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+          }//end of display settings menue
+
+          if (settingsMenue.equals("outher")) {
+            JSONObject debug=settings.getJSONObject(3);
+            if (enableFPS.isMouseOver()) {
+              debug.setBoolean("fps", true);
+              displayFPS=true;
+              settings.setJSONObject(3, debug);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (disableFPS.isMouseOver()) {
+              debug.setBoolean("fps", false);
+              displayFPS=false;
+              settings.setJSONObject(3, debug);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (enableDebug.isMouseOver()) {
+              debug.setBoolean("debug info", true);
+              displayDebugInfo=true;
+              settings.setJSONObject(3, debug);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (disableDebug.isMouseOver()) {
+              debug.setBoolean("debug info", false);
+              displayDebugInfo=false;
+              settings.setJSONObject(3, debug);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if (MusicSlider.isMouseOver()) {
+              musVolSllid=(int)(mouseX/Scale);
+              if (musVolSllid<800) {
+                musVolSllid=800;
+              }
+              if (musVolSllid>1240) {
+                musVolSllid=1240;
+              }
+              musicVolume=(musVolSllid-800.0)/440;
+              JSONObject scroll=settings.getJSONObject(4);
+              scroll.setFloat("music volume", (musVolSllid-800.0)/440);
+              settings.setJSONObject(4, scroll);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              soundHandler.setMusicVolume(musicVolume);
+            }
+            if (SFXSlider.isMouseOver()) {
+              sfxVolSllid=(int)(mouseX/Scale);
+              if (sfxVolSllid<800) {
+                sfxVolSllid=800;
+              }
+              if (sfxVolSllid>1240) {
+                sfxVolSllid=1240;
+              }
+              sfxVolume=(sfxVolSllid-800.0)/440;
+              JSONObject scroll=settings.getJSONObject(4);
+              scroll.setFloat("SFX volume", (sfxVolSllid-800.0)/440);
+              settings.setJSONObject(4, scroll);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              soundHandler.setSoundsVolume(sfxVolume);
+            }
+
+            if (shadowOn.isMouseOver()) {
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setBoolean("3D shaows", true);
+              shadow3D=true;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (shadowOff.isMouseOver()) {
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setBoolean("3D shaows", false);
+              shadow3D=false;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (narrationMode0.isMouseOver()) {
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setInt("narrationMode", 0);
+              tutorialNarrationMode=0;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+            if (narrationMode1.isMouseOver()) {
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setInt("narrationMode", 1);
+              tutorialNarrationMode=1;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+          }//end of outher settings menue
+
+          if (sttingsGPL.isMouseOver())
+            settingsMenue="game play";
+          if (settingsDSP.isMouseOver())
+            settingsMenue="display";
+          if (settingsOUT.isMouseOver())
+            settingsMenue="outher";
+
+          if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
+            if (prevousInGame) {
+              Menue="pause";
+              inGame=true;
+              prevousInGame=false;
+            } else {
+              Menue ="main";
+            }
+          }
+        }
+
+
+        if (Menue.equals("how to play")) {//if that menue is how to play
+          if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
             Menue ="main";
           }
         }
-      }
 
-
-      if (Menue.equals("how to play")) {//if that menue is how to play
-        if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
-          Menue ="main";
+        if (Menue.equals("update")) {//if that menue is update
+          updae_screen_click(); //check the update clicks
         }
-      }
-
-      if (Menue.equals("update")) {//if that menue is update
-        updae_screen_click(); //check the update clicks
-      }
-      if (Menue.equals("multiplayer strart")) {
-        if (multyplayerExit.isMouseOver()) {
-          Menue="main";
-        }
-        if (multyplayerJoin.isMouseOver()) {
-          Menue="start join";
-        }
-        if (multyplayerHost.isMouseOver()) {
-          Menue="start host";
-        }
-      }
-      if (Menue.equals("start host")) {
-        if (multyplayerExit.isMouseOver()) {
-          Menue="main";
-        }
-        if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
-          enteringName=true;
-          enteringPort=false;
-        }
-        if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
-          enteringName=false;
-          enteringPort=true;
-        }
-        if (multyplayerGo.isMouseOver()) {
-          isHost=true;
-          Menue="multiplayer selection";
-          multiplayer = true;
-          server= new Server(port);
-          players[0].name=name;
-        }
-        return;
-      }
-      if (Menue.equals("start join")) {
-        if (multyplayerExit.isMouseOver()) {
-          Menue="main";
-        }
-        if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
-          enteringName=true;
-          enteringPort=false;
-          enteringIP=false;
-        }
-        if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
-          enteringName=false;
-          enteringPort=true;
-          enteringIP=false;
-        }
-        if (mouseX >= width/2-width*0.3 && mouseX <= width/2+width*0.3 && mouseY >= height*0.37 && mouseY <= height*0.42) {//ip line
-          enteringName=false;
-          enteringPort=false;
-          enteringIP=true;
-        }
-        if (multyplayerGo.isMouseOver()) {
-          isHost=false;
-          Menue="multiplayer selection";
-          multiplayer=true;
-          try {
-            clients.add(new Client(new Socket(ip, port)));
+        if (Menue.equals("multiplayer strart")) {
+          if (multyplayerExit.isMouseOver()) {
+            Menue="main";
           }
-          catch(Exception c) {
-            c.printStackTrace();
-            multiplayer=false;
-            Menue="disconnected";
-            disconnectReason="failed to connect to server\n"+c.toString();
+          if (multyplayerJoin.isMouseOver()) {
+            Menue="start join";
+          }
+          if (multyplayerHost.isMouseOver()) {
+            Menue="start host";
+          }
+        }
+        if (Menue.equals("start host")) {
+          if (multyplayerExit.isMouseOver()) {
+            Menue="main";
+          }
+          if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
+            enteringName=true;
+            enteringPort=false;
+          }
+          if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
+            enteringName=false;
+            enteringPort=true;
+          }
+          if (multyplayerGo.isMouseOver()) {
+            isHost=true;
+            Menue="multiplayer selection";
+            multiplayer = true;
+            server= new Server(port);
+            players[0].name=name;
           }
           return;
         }
-      }
-      if (Menue.equals("disconnected")) {
-        if (multyplayerExit.isMouseOver()) {
-          Menue="start join";
-          multiplayer=false;
-        }
-      }
-
-      if (Menue.equals("dev")) {
-        clickDevMenue();
-        return;
-      }
-      if (Menue.equals("multiplayer selection")) {
-        if (isHost) {
-          if (multyplayerLeave.isMouseOver()) {
-            println("quitting multyplayer host");
-            server.end();
-            println("returning to main menu");
+        if (Menue.equals("start join")) {
+          if (multyplayerExit.isMouseOver()) {
             Menue="main";
+          }
+          if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
+            enteringName=true;
+            enteringPort=false;
+            enteringIP=false;
+          }
+          if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
+            enteringName=false;
+            enteringPort=true;
+            enteringIP=false;
+          }
+          if (mouseX >= width/2-width*0.3 && mouseX <= width/2+width*0.3 && mouseY >= height*0.37 && mouseY <= height*0.42) {//ip line
+            enteringName=false;
+            enteringPort=false;
+            enteringIP=true;
+          }
+          if (multyplayerGo.isMouseOver()) {
+            isHost=false;
+            Menue="multiplayer selection";
+            multiplayer=true;
+            try {
+              clients.add(new Client(new Socket(ip, port)));
+            }
+            catch(Exception c) {
+              c.printStackTrace();
+              multiplayer=false;
+              Menue="disconnected";
+              disconnectReason="failed to connect to server\n"+c.toString();
+            }
+            return;
+          }
+        }
+        if (Menue.equals("disconnected")) {
+          if (multyplayerExit.isMouseOver()) {
+            Menue="start join";
             multiplayer=false;
-            waitingForReady=false;
-            return;
           }
-          if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
-            int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
-            if (multyplayerSelectionLevels.equals("speed")) {
-              if (slotSelected<=9) {//set speed run max levels here for selection
-                multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath, false);
-              }
-            }
-            if (multyplayerSelectionLevels.equals("coop")) {
-              if (slotSelected<=1) {// set co op max levels here for selection
-                multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
-                genSelectedInfo(multyplayerSelectedLevelPath, false);
-              }
-            }
-            if (multyplayerSelectionLevels.equals("UGC")) {
-              if (slotSelected<=UGCNames.size()-1) {// set co op max levels here for selection
-                multyplayerSelectedLevelPath=appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(slotSelected);
-                genSelectedInfo(multyplayerSelectedLevelPath, true);
-              }
-            }
-            return;
-          }
-          if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
-            if (multyplayerPlay.isMouseOver()) {
-              if (!multyplayerSelectedLevel.isUGC) {
-                if (multyplayerSelectedLevel.multyplayerMode==1) {
-                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
-                  for (int i=0; i<clients.size(); i++) {
-                    clients.get(i).dataToSend.add(req);
-                  }
-                  loadLevel(multyplayerSelectedLevelPath);
-                  waitingForReady=true;
-                  bestTime=0;
-                }
+        }
 
-                if (multyplayerSelectedLevel.multyplayerMode==2) {
-                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+        if (Menue.equals("dev")) {
+          clickDevMenue();
+          return;
+        }
+        if (Menue.equals("multiplayer selection")) {
+          if (isHost) {
+            if (multyplayerLeave.isMouseOver()) {
+              println("quitting multyplayer host");
+              server.end();
+              println("returning to main menu");
+              Menue="main";
+              multiplayer=false;
+              waitingForReady=false;
+              return;
+            }
+            if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
+              int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
+              if (multyplayerSelectionLevels.equals("speed")) {
+                if (slotSelected<=9) {//set speed run max levels here for selection
+                  multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
+                  genSelectedInfo(multyplayerSelectedLevelPath, false);
+                }
+              }
+              if (multyplayerSelectionLevels.equals("coop")) {
+                if (slotSelected<=1) {// set co op max levels here for selection
+                  multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
+                  genSelectedInfo(multyplayerSelectedLevelPath, false);
+                }
+              }
+              if (multyplayerSelectionLevels.equals("UGC")) {
+                if (slotSelected<=UGCNames.size()-1) {// set co op max levels here for selection
+                  multyplayerSelectedLevelPath=appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(slotSelected);
+                  genSelectedInfo(multyplayerSelectedLevelPath, true);
+                }
+              }
+              return;
+            }
+            if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+              if (multyplayerPlay.isMouseOver()) {
+                if (!multyplayerSelectedLevel.isUGC) {
+                  if (multyplayerSelectedLevel.multyplayerMode==1) {
                     LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
                     for (int i=0; i<clients.size(); i++) {
                       clients.get(i).dataToSend.add(req);
                     }
                     loadLevel(multyplayerSelectedLevelPath);
                     waitingForReady=true;
-                  }
-                }
-              } else {
-                if (multyplayerSelectedLevel.multyplayerMode==1) {
-
-                  loadLevel(multyplayerSelectedLevelPath);
-                  LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
-                  for (int i=0; i<clients.size(); i++) {
-                    clients.get(i).dataToSend.add(req);
+                    bestTime=0;
                   }
 
-                  waitingForReady=true;
-                  bestTime=0;
-                }
+                  if (multyplayerSelectedLevel.multyplayerMode==2) {
+                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
+                      for (int i=0; i<clients.size(); i++) {
+                        clients.get(i).dataToSend.add(req);
+                      }
+                      loadLevel(multyplayerSelectedLevelPath);
+                      waitingForReady=true;
+                    }
+                  }
+                } else {
+                  if (multyplayerSelectedLevel.multyplayerMode==1) {
 
-                if (multyplayerSelectedLevel.multyplayerMode==2) {
-                  if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
                     loadLevel(multyplayerSelectedLevelPath);
                     LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
                     for (int i=0; i<clients.size(); i++) {
@@ -1573,72 +1726,437 @@ void mouseClicked() {// when you click the mouse
                     }
 
                     waitingForReady=true;
+                    bestTime=0;
+                  }
+
+                  if (multyplayerSelectedLevel.multyplayerMode==2) {
+                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
+                      loadLevel(multyplayerSelectedLevelPath);
+                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
+                      for (int i=0; i<clients.size(); i++) {
+                        clients.get(i).dataToSend.add(req);
+                      }
+
+                      waitingForReady=true;
+                    }
                   }
                 }
+              }//end of multyplayer play button
+            }
+            if (multyplayerSelectedLevel.multyplayerMode==1) {
+              if (increaseTime.isMouseOver()) {
+                sessionTime+=30000;
               }
-            }//end of multyplayer play button
-          }
-          if (multyplayerSelectedLevel.multyplayerMode==1) {
-            if (increaseTime.isMouseOver()) {
-              sessionTime+=30000;
+              if (decreaseTime.isMouseOver()) {
+                if (sessionTime>30000)
+                  sessionTime-=30000;
+              }
             }
-            if (decreaseTime.isMouseOver()) {
-              if (sessionTime>30000)
-                sessionTime-=30000;
+            if (multyplayerCoop.isMouseOver()) {
+              multyplayerSelectionLevels="coop";
+            }
+            if (multyplayerSpeedrun.isMouseOver()) {
+              multyplayerSelectionLevels="speed";
+            }
+            if (multyplayerUGC.isMouseOver()) {
+              multyplayerSelectionLevels="UGC";
+              //load a list of all the UGC levels
+              loadUGCList();
+            }
+          } else {//if joined
+            if (multyplayerLeave.isMouseOver()) {
+              println("quitting multyplayer joined");
+              clientQuitting=true;
+              clients.get(0).disconnect();
+              println("returning to main menu");
+              Menue="main";
+              multiplayer=false;
+              return;
             }
           }
-          if (multyplayerCoop.isMouseOver()) {
-            multyplayerSelectionLevels="coop";
+        }
+      }
+      if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
+        if (mouseX >= 550*Scale && mouseX <= 750*Scale && mouseY >= 450*Scale && mouseY <= 490*Scale) {//continue button
+          if (multiplayer) {
+            menue=true;
+            inGame=false;
+            level_complete=false;
+            Menue="multiplayer selection";
+            returnToSlection();
+          } else {
+            menue=true;
+            inGame=false;
+            Menue="level select";
+            level_complete=false;
+            coinCount=0;
+            if (!UGC_lvl) {
+              JSONObject lvlinfo=mainIndex.getJSONObject(0);
+              if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
+                JSONObject p=new JSONObject();
+                p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
+                levelProgress.setJSONObject(0, p);
+                saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
+              }
+            } else {
+              UGC_lvl=false;
+            }
           }
-          if (multyplayerSpeedrun.isMouseOver()) {
-            multyplayerSelectionLevels="speed";
+        }
+      }
+    } else {//level creator
+      if (mouseButton==LEFT) {//if the button pressed was the left button
+        //System.out.println(mouseX+" "+mouseY);//print the location the mouse clicked to the console
+        if (startup) {//if on the startup screen
+          if (newLevelButton.isMouseOver()) {//new level button
+            startup=false;
+            newLevel=true;
           }
-          if (multyplayerUGC.isMouseOver()) {
-            multyplayerSelectionLevels="UGC";
-            //load a list of all the UGC levels
-            loadUGCList();
+          if (loadLevelButton.isMouseOver()) {//load level button
+            startup=false;
+            loading=true;
           }
-        } else {//if joined
-          if (multyplayerLeave.isMouseOver()) {
-            println("quitting multyplayer joined");
-            clientQuitting=true;
-            clients.get(0).disconnect();
-            println("returning to main menu");
-            Menue="main";
-            multiplayer=false;
+          if (newBlueprint.isMouseOver()) {//new blurprint button
+            startup=false;
+            creatingNewBlueprint=true;
+            new_name="my blueprint";
+            entering_name=true;
+          }
+          if (loadBlueprint.isMouseOver()) {//loaf blueprint button
+            startup=false;
+            loadingBlueprint=true;
+            new_name="";
+            entering_name=true;
+          }
+        }
+        if (loading) {//if loading level
+          if (mouseX >=40*Scale && mouseX <= 1200*Scale && mouseY >= 100*Scale && mouseY <= 150*Scale) {//click box for the line to type the name
+            entering_file_path=true;
+          }
+          if (lcLoadLevelButton.isMouseOver()) {//load button
+            try {//attempt to load the level
+              rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+rootPath;
+              mainIndex=loadJSONArray(rootPath+"/index.json");
+              entering_file_path=false;
+              loading=false;
+              levelOverview=true;
+            }
+            catch(Throwable e) {//do nothign if loading fails
+            }
+            level=new Level(mainIndex);
+            level.logicBoards.get(level.loadBoard).superTick();
+            if (level.multyplayerMode==2) {
+              currentNumberOfPlayers=level.maxPLayers;
+            }
             return;
           }
         }
-      }
-    }
-    if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
-      if (mouseX >= 550*Scale && mouseX <= 750*Scale && mouseY >= 450*Scale && mouseY <= 490*Scale) {//continue button
-        if (multiplayer) {
-          menue=true;
-          inGame=false;
-          level_complete=false;
-          Menue="multiplayer selection";
-          returnToSlection();
-        } else {
-          menue=true;
-          inGame=false;
-          Menue="level select";
-          level_complete=false;
-          coinCount=0;
-          if (!UGC_lvl) {
-            JSONObject lvlinfo=mainIndex.getJSONObject(0);
-            if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
-              JSONObject p=new JSONObject();
-              p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
-              levelProgress.setJSONObject(0, p);
-              saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
-            }
-          } else {
-            UGC_lvl=false;
+        if (newLevel) {//if creating a new level
+          if (mouseX >=40*Scale && mouseX <= 1200*Scale && mouseY >= 100*Scale && mouseY <= 150*Scale) {//text line click box
+            entering_name=true;
+          }//rect(40,400,200,40);
+          if (lcNewLevelButton.isMouseOver()) {//create button
+            entering_name=false;
+            newLevel=false;
+            rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+new_name;
+            JSONArray mainIndex=new JSONArray();//set up a new level
+            JSONObject terain = new JSONObject();
+            terain.setInt("level_id", (int)(Math.random()*1000000000%999999999));
+            terain.setString("name", new_name);
+            terain.setString("game version", GAME_version);
+            terain.setFloat("spawnX", 20);
+            terain.setFloat("spawnY", 700);
+            terain.setFloat("spawn pointX", 20);
+            terain.setFloat("spawn pointY", 700);
+            terain.setInt("mainStage", -1);
+            terain.setInt("coins", 0);
+            terain.setString("author", author);
+            mainIndex.setJSONObject(0, terain);
+            levelOverview=true;
+            level=new Level(mainIndex);
+            level.save();
+            return;
           }
         }
-      }
-    }
+        if (!e3DMode)
+          GUImouseClicked();//gui clicking code
+        else {
+          mouseClicked3D();
+        }
+
+
+
+        if (levelOverview) {//if on level overview
+          if (newStage.isMouseOver()) {//if the new file button is clicked
+            levelOverview=false;
+            newFile=true;
+            newFileName="";
+          }
+          if (mouseY>80*Scale) {//if the mouse is in the files section of the screen
+            overviewSelection=(int)(mouseY/Scale-80)/60+ filesScrole;//figure out witch thing to select
+            if (overviewSelection>=level.stages.size()+level.sounds.size()+level.logicBoards.size()) {//de seclect if there was nothing under where the click happend
+              overviewSelection=-1;
+            }
+          }
+
+          if (overview_saveLevel.isMouseOver()) {//save button in the level overview
+            System.out.println("saving level");
+            level.save();
+            gmillis=millis()+400;//glitch effect
+            System.out.println("save complete");
+          }
+          if (help.isMouseOver()) {//help button in the level overview
+            link("https://youtu.be/5QXhi2uu1RM");
+          }
+          if (overviewSelection!=-1) {//if something is selected
+            if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+              if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
+                if (edditStage.isMouseOver()) {//eddit stage button
+                  editingStage=true;
+                  levelOverview=false;
+                  currentStageIndex=overviewSelection;
+                  respawnStage=currentStageIndex;
+                }
+
+                if (setMainStage.isMouseOver()) {//set main stage button
+                  level.mainStage=overviewSelection;
+                  background(0);
+                  settingPlayerSpawn=true;
+                  levelOverview=false;
+                  editingStage=true;
+                  currentStageIndex=overviewSelection;
+                  respawnStage=currentStageIndex;
+                  return;
+                }
+              }
+              if (level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a 3D stage
+                if (edditStage.isMouseOver()) {//eddit button
+                  editingStage=true;
+                  levelOverview=false;
+                  currentStageIndex=overviewSelection;
+                  respawnStage=currentStageIndex;
+                }
+              }
+            }//end if if selection is in range of the stages
+            if (overviewSelection>=level.stages.size()+level.sounds.size()) {//if the selecion is in the logic board range
+              if (edditStage.isMouseOver()) {//eddit button
+                levelOverview=false;
+                editinglogicBoard=true;
+                logicBoardIndex=overviewSelection-(level.stages.size()+level.sounds.size());
+                camPos=0;
+                camPosY=0;
+              }
+            }
+          }//end of if something is selected
+
+          if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
+            filesScrole--;
+          if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size()&&overviewDown.isMouseOver())//scroll down button
+            filesScrole++;
+        }//end of level overview
+
+        if (newFile) {//if on the new file page
+          if (newFileBack.isMouseOver()) {//back button
+            levelOverview=true;
+            newFile=false;
+          }
+
+          if (newFileCreate.isMouseOver()) {//create button
+            if (newFileName.equals("")) {//if no name has been entered
+              return;
+            }
+            if (newFileType.equals("sound")) {//if the type that is selected is sound
+              if (fileToCoppyPath.equals("")) {//if no file is selected
+                return;
+              }
+              String pathSegments[]=fileToCoppyPath.split("/|\\\\");//split the file path at directory seperator
+              try {//attempt to coppy the file
+                System.out.println("attempting to coppy file");
+                java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(sketchPath()+"/"+rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
+              }
+              catch(IOException i) {
+                i.printStackTrace();
+              }
+              System.out.println("adding sound to level");
+              level.sounds.put(newFileName, new StageSound(newFileName, "/"+pathSegments[pathSegments.length-1]));//add the sound to the level
+              System.out.println("saving level");
+              level.save();//save the level
+              gmillis=millis()+400;///glitch effect
+              System.out.println("save complete"+gmillis);
+              newFile=false;//return back to the obverview
+              newFileName="";
+              fileToCoppyPath="";
+              levelOverview=true;
+              return;
+            }
+            currentStageIndex=level.stages.size();//set the current sateg to the new stage
+            respawnStage=currentStageIndex;
+            if (newFileType.equals("2D")) {//create the approriate type of stage based on what is selectd
+              level.stages.add(new Stage(newFileName, "stage"));
+            }
+            if (newFileType.equals("3D")) {
+              level.stages.add(new Stage(newFileName, "3Dstage"));
+            }
+
+            editingStage=true;
+            newFile=false;
+          }
+          if (newFileType.equals("sound")) {
+            if (chooseFileButton.isMouseOver()) {//choose file button for when the type is sound
+              selectInput("select audio file: .WAV .AFI .MP3:", "fileSelected");//open file selection diaglog
+            }
+          }
+
+          if (new3DStage.isMouseOver()) {//buttons to set type
+            newFileType="3D";
+          }
+          if (new2DStage.isMouseOver()) {
+            newFileType="2D";
+          }
+          if (addSound.isMouseOver()) {
+            newFileType="sound";
+          }
+        }
+        if (drawingPortal2) {//if placing portal part 2 (part that has the overview)
+
+          if (mouseY>80) {//select the file that was clicked on in the overview
+            overviewSelection=(mouseY-80)/60+ filesScrole;
+            if (overviewSelection>=level.stages.size()+level.sounds.size()) {
+              overviewSelection=-1;
+            }
+          }
+
+          if (overviewSelection!=-1) {//if something is selected
+            if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
+              if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a valid destination stage
+                if (selectStage.isMouseOver()) {//if the select stagge button is clicked
+                  editingStage=true;//go to that stage
+                  levelOverview=false;
+                  drawingPortal2=false;
+                  drawingPortal3=true;
+                  camPos=0;
+                  currentStageIndex=overviewSelection;
+                }
+              }
+            }//end of if in stage range
+          }
+          if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
+            filesScrole--;
+          if (filesScrole+11<level.stages.size()+level.sounds.size()&&overviewDown.isMouseOver())//scroll down button
+            filesScrole++;
+        }//end of drawing portal 2
+        if (creatingNewBlueprint) {//if creating a new blueprint
+          if (createBlueprintGo.isMouseOver()) {//create button
+            if (new_name!=null&&!new_name.equals("")) {//if something was entered
+              workingBlueprint=new Stage(new_name, "blueprint");//creat and load the new blueprint
+              entering_name=false;//set up enviormatn vaibles
+              creatingNewBlueprint=false;
+              editingBlueprint=true;
+              camPos=-640;
+              camPosY=360;
+              rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
+            }//end of name was enterd
+          }//end of create button
+        }//end of creating new bluepint
+        if (loadingBlueprint) {//if loading blueprint
+          if (createBlueprintGo.isMouseOver()) {//load button
+            if (new_name!=null&&!new_name.equals("")) {//if something was entered
+              rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
+              workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));//load the blueprint
+              entering_name=false;//set enviormaent varibles
+              loadingBlueprint=false;
+              editingBlueprint=true;
+              camPos=-640;
+              camPosY=360;
+            }//end of thing were entered
+          }//end of load button
+        }//end of loading blueprint
+        if (editinglogicBoard) {
+          if (placingAndGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingOrGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingXorGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingNandGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingNorGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingXnorGate) {
+            level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (deleteing) {
+            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
+              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
+                level.logicBoards.get(logicBoardIndex).remove(i);
+                return;
+              }
+            }
+          }
+          if (placingTestLogic) {
+            //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingOnSingal) {
+            level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingSetVaravle) {
+            level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingReadVariable) {
+            level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (selecting) {
+            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
+              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
+                selectedIndex=i;
+              }
+            }
+          }
+          if (placingSetVisibility) {
+            level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingXOffset) {
+            level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingYOffset) {
+            level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingDelay) {
+            level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingZOffset) {
+            level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placing3Dsetter) {
+            level.logicBoards.get(logicBoardIndex).components.add(new Set3DMode(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placing3Dreader) {
+            level.logicBoards.get(logicBoardIndex).components.add(new Read3DMode(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingPlaySoundLogic) {
+            level.logicBoards.get(logicBoardIndex).components.add(new LogicPlaySound(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingPulse) {
+            level.logicBoards.get(logicBoardIndex).components.add(new Pulse(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+          if (placingRandom) {
+            level.logicBoards.get(logicBoardIndex).components.add(new Random(mouseX-50+camPos, mouseY-20+camPosY, level.logicBoards.get(logicBoardIndex)));
+          }
+        }//end of edditing logic board
+        if (settingPlayerSpawn) {
+          level.SpawnX=mouseX+camPos;
+          level.SpawnY=mouseY-camPosY;
+          level.RewspawnX=mouseX+camPos;
+          level.RespawnY=mouseY-camPosY;
+          settingPlayerSpawn=false;
+        }
+      }//end of left mouse button clicked
+    }//end of level creator
   }
   catch(Throwable e) {
     handleError(e);
@@ -1717,7 +2235,7 @@ void keyPressed() {// when a key is pressed
         }
       }
     }
-    if (menue) {
+    if (menue&&!levelCreator) {
       if (Menue.equals("level select")) {
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
@@ -1802,6 +2320,64 @@ void keyPressed() {// when a key is pressed
         if (enteringIP) {
           ip=getInput(ip, 4);
         }
+      }
+    }
+    if (levelCreator) {
+      if (editingStage||editingBlueprint) {//if edditng a stage
+        if (key=='r'||key=='R') {//if 'R' is pressed
+          triangleMode++;//increase the current rotation
+          if (triangleMode==4)//reset if rotation os over max
+            triangleMode=0;
+        }
+      }
+
+      if (entering_file_path) {//if ennering "file path"
+        if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
+
+          if (rootPath==null) {//if the path is blank
+            rootPath=key+"";//add current key pressed to path
+          } else {
+            rootPath+=key;//add current key pressed to path
+          }
+        }
+        if (keyCode==8) {//if the key is BACKSPACE
+          if (rootPath==null) {//if there3 is nothing then do nothing
+          } else {
+            if (rootPath.length()==1) {//delet if only 1 charcter
+              rootPath=null;
+            } else {
+              rootPath=rootPath.substring(0, rootPath.length()-1);//remove last charicter
+            }
+          }
+        }
+      }//end of entering file path
+
+      if (entering_name) {//if entering anme
+        if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
+
+          if (new_name==null) {//if the path is blank
+            new_name=key+"";//add current key pressed to path
+          } else {
+            new_name+=key;//add current key pressed to path
+          }
+        }
+        if (keyCode==8) {//if the key is BACKSPACE
+          if (new_name==null) {
+          } else {
+            if (new_name.length()==1) {
+              new_name=null;
+            } else {
+              new_name=new_name.substring(0, new_name.length()-1);//remove the last charicter
+            }
+          }
+        }
+      }//end of entering name
+      if (newFile) {//if new file
+        newFileName=getInput(newFileName, 0);//use the cencable typing functions
+      }
+
+      if (startup) {//if on the main menue
+        author = getInput(author, 0);//typing for the author name
       }
     }
 
@@ -2506,6 +3082,7 @@ void drawDevMenue() {
   dev_settings.draw();
   dev_UGC.draw();
   dev_multiplayer.draw();
+  dev_levelCreator.draw();
 }
 
 void clickDevMenue() {
@@ -2534,6 +3111,22 @@ void clickDevMenue() {
   }
   if (dev_multiplayer.isMouseOver()) {
     Menue="multiplayer strart";
+    return;
+  }
+  if (dev_levelCreator.isMouseOver()) {
+    Menue="level select UGC";
+    loadUGCList();
+    UGC_lvl_indx=0;
+    if (scr2==null)//create the 2nd screen if it does not exsist
+      scr2 =new ToolBox(millis());
+    startup=true;
+    loading=false;
+    newLevel=false;
+    editingStage=false;
+    levelOverview=false;
+    newFile=false;
+    levelCreator=true;
+    return;
   }
 }
 
@@ -2718,12 +3311,12 @@ void programLoad() {
   println("loaded tutorial audio track T17");
 
   println("loading saved colors");
-  if(new File(appdata+"/CBi-games/skinny mann level creator/colors.json").exists()){
+  if (new File(appdata+"/CBi-games/skinny mann level creator/colors.json").exists()) {
     colors=loadJSONArray(appdata+"/CBi-games/skinny mann level creator/colors.json");//load saved colors
-  }else{
+  } else {
     colors=JSONArray.parse("[{\"red\": 0,\"green\": 175,\"blue\": 0},{\"red\": 145,\"green\": 77,\"blue\": 0}]");
   }
-  
+
   println("loading 3D arrows and scalar moddles");
   redArrow=loadShape("data/modles/red arrow/arrow.obj");
   greenArrow=loadShape("data/modles/green arrow/arrow.obj");
@@ -2786,9 +3379,9 @@ void  initButtons() {
   joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10*Scale);
   settingsButton=new Button(this, 540*Scale, 550*Scale, 200*Scale, 50*Scale, "Settings", #FF1900, #FFF900).setStrokeWeight(10*Scale);
   howToPlayButton=new Button(this, 540*Scale, 630*Scale, 200*Scale, 50*Scale, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  downloadUpdateButton=new Button(this, 400*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  updateGetButton=new Button(this, 400*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  updateOkButton=new Button(this, 400*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  downloadUpdateButton=new Button(this, width/2-250*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  updateGetButton=new Button(this, width/2-250*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  updateOkButton=new Button(this, width/2-250*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new Button(this, 500*Scale, 100*Scale, 300*Scale, 60*Scale, "Restart", #FF0004, #FFF300).setStrokeWeight(10*Scale);
 
 
@@ -2800,6 +3393,7 @@ void  initButtons() {
   dev_settings = new Button(this, 210*Scale, 170*Scale, 200*Scale, 50*Scale, "settings");
   dev_UGC = new Button(this, 430*Scale, 170*Scale, 200*Scale, 50*Scale, "UGC");
   dev_multiplayer = new Button(this, 650*Scale, 170*Scale, 200*Scale, 50*Scale, "Multiplayer");
+  dev_levelCreator=new Button(this, 870*Scale, 170*Scale, 200*Scale, 50*Scale, "Level Creator");
 
   multyplayerJoin = new Button(this, 400*Scale, 300*Scale, 200*Scale, 50*Scale, "Join", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
@@ -2813,12 +3407,37 @@ void  initButtons() {
   multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
-  
+
   newBlueprint=new Button(this, 200*Scale, 500*Scale, 200*Scale, 80*Scale, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
   loadBlueprint=new Button(this, 800*Scale, 500*Scale, 200*Scale, 80*Scale, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
-  newLevelButton=new Button(this,200*Scale, 300*Scale, 200*Scale, 80*Scale,"NEW",#BB48ED,#4857ED).setStrokeWeight(10);
-  loadLevelButton=new Button(this,800*Scale, 300*Scale, 200*Scale, 80*Scale,"LOAD",#BB48ED,#4857ED).setStrokeWeight(10);
+  newLevelButton=new Button(this, 200*Scale, 300*Scale, 200*Scale, 80*Scale, "NEW", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadLevelButton=new Button(this, 800*Scale, 300*Scale, 200*Scale, 80*Scale, "LOAD", #BB48ED, #4857ED).setStrokeWeight(10);
 
+  newStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale,"+", #0092FF, 0);
+  newFileCreate=new Button(this, 300*Scale, 600*Scale, 200*Scale, 40*Scale, "create", #BB48ED, #4857ED).setStrokeWeight(5);
+  newFileBack=new Button(this, 600*Scale, 600*Scale, 200*Scale, 40*Scale, "back", #BB48ED, #4857ED).setStrokeWeight(5);
+  chooseFileButton=new Button(this, 450*Scale, 540*Scale, 200*Scale, 40*Scale, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);
+
+  edditStage=new Button(this, 1100*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0);
+
+  setMainStage=new Button(this, 1000*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0).setHoverText("set as main stage");
+
+
+  selectStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0);
+
+
+  new2DStage=new Button(this, 400*Scale, 200*Scale, 80*Scale, 80*Scale, "2D", #BB48ED, #4857ED).setStrokeWeight(5);
+  new3DStage=new Button(this, 600*Scale, 200*Scale, 80*Scale, 80*Scale, "3D", #BB48ED, #4857ED).setStrokeWeight(5);
+  addSound=new Button(this, 800*Scale, 200*Scale, 80*Scale, 80*Scale, #BB48ED, #4857ED).setStrokeWeight(5);
+
+  overview_saveLevel=new Button(this, 60*Scale, 20*Scale, 50*Scale, 50*Scale, "save", #0092FF, 0).setStrokeWeight(5);
+  help=new Button(this, 130*Scale, 20*Scale, 50*Scale, 50*Scale, " ? ", #0092FF, 0);
+  overviewUp=new Button(this, 270*Scale, 20*Scale, 50*Scale, 50*Scale, " ^ ", #0092FF, 0);
+  overviewDown=new Button(this, 200*Scale, 20*Scale, 50*Scale, 50*Scale, " v ", #0092FF, 0);
+  createBlueprintGo=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "start", #BB48ED, #4857ED).setStrokeWeight(10);
+
+  lcLoadLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
+  lcNewLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
 }
 
 

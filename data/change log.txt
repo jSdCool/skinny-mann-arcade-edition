@@ -1,6 +1,9 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.8.0_Early_Access
+-fixed: update screen button not being center at all resolutions
+
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
 -fixed: level complete would still show in new levels once a CO-PO level was completed
