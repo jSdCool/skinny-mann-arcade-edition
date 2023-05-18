@@ -101,7 +101,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -845,6 +845,7 @@ void draw() {// the function that is called every fraim
         rect(60*Scale, 31*Scale, textWidth(author), 1*Scale);//draw the line under the author name
         newBlueprint.draw();
         loadBlueprint.draw();
+        lc_backButton.draw();
       }//end of startup screen
 
       if (loading) {//if loading a lavel
@@ -869,6 +870,7 @@ void draw() {// the function that is called every fraim
         fill(#BB48ED);
         strokeWeight(10*Scale);
         lcLoadLevelButton.draw();//draw load button
+        lc_backButton.draw();
       }//end of loading level
 
       if (newLevel) {//if creating a new level
@@ -888,6 +890,7 @@ void draw() {// the function that is called every fraim
         }
 
         lcNewLevelButton.draw();//start button
+        lc_backButton.draw();
         fill(0);
         stroke(0);
         strokeWeight(1*Scale);
@@ -1122,6 +1125,7 @@ void draw() {// the function that is called every fraim
           text("|", 40*Scale, 150*Scale);
         }
         createBlueprintGo.draw();//create button
+        lc_backButton.draw();
         stroke(0);
         strokeWeight(1*Scale);
         line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//text line
@@ -1143,6 +1147,7 @@ void draw() {// the function that is called every fraim
         line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);
         createBlueprintGo.setText("load");//load button
         createBlueprintGo.draw();
+        lc_backButton.draw();
       }//end of loading blueprint
 
       if (editingBlueprint) {//if edditing blueprint
@@ -1996,10 +2001,12 @@ void mouseClicked() {// when you click the mouse
           if (newLevelButton.isMouseOver()) {//new level button
             startup=false;
             newLevel=true;
+            entering_name=true;
           }
           if (loadLevelButton.isMouseOver()) {//load level button
             startup=false;
             loading=true;
+            entering_file_path=true;
           }
           if (newBlueprint.isMouseOver()) {//new blurprint button
             startup=false;
@@ -2012,6 +2019,9 @@ void mouseClicked() {// when you click the mouse
             loadingBlueprint=true;
             new_name="";
             entering_name=true;
+          }
+          if(lc_backButton.isMouseOver()){
+            levelCreator=false;
           }
         }
         if (loading) {//if loading level
@@ -2034,6 +2044,11 @@ void mouseClicked() {// when you click the mouse
               currentNumberOfPlayers=level.maxPLayers;
             }
             return;
+          }
+          if(lc_backButton.isMouseOver()){
+            startup=true;
+            loading=false;
+            entering_file_path=false;
           }
         }
         if (newLevel) {//if creating a new level
@@ -2061,6 +2076,11 @@ void mouseClicked() {// when you click the mouse
             level=new Level(mainIndex);
             level.save();
             return;
+          }
+          if(lc_backButton.isMouseOver()){
+            startup=true;
+            newLevel=false;
+            entering_name=false;
           }
         }
         if (!e3DMode)
@@ -2243,6 +2263,11 @@ void mouseClicked() {// when you click the mouse
               rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
             }//end of name was enterd
           }//end of create button
+          if(lc_backButton.isMouseOver()){
+            startup=true;
+            creatingNewBlueprint=false;
+            entering_name=false;
+          }
         }//end of creating new bluepint
 
         if (loadingBlueprint) {//if loading blueprint
@@ -2257,6 +2282,11 @@ void mouseClicked() {// when you click the mouse
               camPosY=360;
             }//end of thing were entered
           }//end of load button
+          if(lc_backButton.isMouseOver()){
+            startup=true;
+            loadingBlueprint=false;
+            entering_name=false;
+          }
         }//end of loading blueprint
         if (editinglogicBoard) {
           if (placingAndGate) {
@@ -3847,6 +3877,7 @@ void  initButtons() {
 
   lcLoadLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
   lcNewLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
+  lc_backButton=new Button(this, 20*Scale,650*Scale,200*Scale, 40*Scale,"Back",#BB48ED, #4857ED).setStrokeWeight(10);
 }
 
 
