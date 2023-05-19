@@ -5,6 +5,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: update screen button not being center at all resolutions
 -added: integrated level creator into game
 -changed: error window that pops up when the game crashes is now allways on top
+-changed: level creator now stores content created by the user in appdata or equivlent
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
