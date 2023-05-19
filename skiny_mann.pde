@@ -87,7 +87,7 @@ void setup() {//seccond function called
 }
 //define a shit tone of varibles
 PImage CBi, icon, discordIcon;
-PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler;
+PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler,LevelCreatorLogo;
 ;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false,exitLevelCreator=false;
@@ -832,6 +832,16 @@ void draw() {// the function that is called every fraim
     } else {
       if (startup) {//if on the startup screen
         background(#48EDD8);
+        translate(width/2,150*Scale,0);
+        rotateX(PI);
+        ambientLight(128,128,128);
+        directionalLight(255,255,255,-0.4,-0.3,0.1);
+        shape(LevelCreatorLogo);//logo
+        noLights();
+        rotateX(-PI);
+        translate(-width/2,-150*Scale,0);
+        
+        
         newLevelButton.draw();
         loadLevelButton.draw();
         textAlign(LEFT, BOTTOM);
@@ -3797,6 +3807,9 @@ void programLoad() {
   greenScaler=loadShape("data/modles/green scaler/obj.obj");
   blueScaler=loadShape("data/modles/blue scaler/obj.obj");
   yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
+  
+  LevelCreatorLogo=loadShape("data/modles/LevelCreatorLogo/LCL.obj");
+  LevelCreatorLogo.scale(3*Scale);
 
   println("starting physics thread");
   thread("thrdCalc2");
