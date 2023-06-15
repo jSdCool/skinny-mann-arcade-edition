@@ -66,6 +66,7 @@ void setup() {//seccond function called
       Scale=vres/720.0;
       Scale2=hres/1280.0;
     }
+    ui=new UiFrame(this,1280,720);
     println(height+" "+Scale);//debung info
     println("loading texture for start screen");
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
@@ -76,7 +77,7 @@ void setup() {//seccond function called
 
     ptsW=100;
     ptsH=100;
-    println("initilizing zbi sphere");
+    println("initilizing CBi sphere");
     initializeSphere(ptsW, ptsH);
     thread("programLoad");
   }
@@ -117,6 +118,7 @@ SelectedLevelInfo multyplayerSelectedLevel=new SelectedLevelInfo();
 LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", "", "", "", ""});
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
+UiFrame ui;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -3833,22 +3835,22 @@ void programLoad() {
   println("loading complete");
 }
 void  initButtons() {
-  select_lvl_1=new Button(this, (100*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 1", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_back=new Button(this, (100*Scale), (600*Scale), (200*Scale), (50*Scale), "back", -59135, -1791).setStrokeWeight( (10*Scale));
-  discord=new Button(this, (1190*Scale), (640*Scale), (70*Scale), (70*Scale), -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_2 =new Button(this, (350*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 2", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_3 =new Button(this, (600*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 3", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_4 =new Button(this, (850*Scale), (100*Scale), (200*Scale), (100*Scale), "lvl 4", -59135, -1791).setStrokeWeight( (10*Scale));
-  sdSlider=new Button(this, (800*Scale), (50*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  disableFPS =new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  enableFPS =new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  disableDebug =new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  enableDebug =new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  select_lvl_5=new Button(this, (100*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 5", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_6 =new Button(this, (350*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 6", -59135, -1791).setStrokeWeight( (10*Scale));
-  sttingsGPL = new Button(this, (40*Scale), (550*Scale), (150*Scale), (40*Scale), "game play", -59135, -1791).setStrokeWeight( (10*Scale));
-  settingsDSP = new Button(this, (240*Scale), (550*Scale), (150*Scale), (40*Scale), "display", -59135, -1791).setStrokeWeight( (10*Scale));
-  settingsOUT = new Button(this, (440*Scale), (550*Scale), (150*Scale), (40*Scale), "outher", -59135, -1791).setStrokeWeight( (10*Scale));
+  select_lvl_1=new UiButton(ui, (100), (100), (200), (100), "lvl 1", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "back", -59135, -1791).setStrokeWeight( (10));
+  discord=new UiButton(ui, (1190), (640), (70), (70), -59135, -1791).setStrokeWeight( (10));
+  select_lvl_2 =new UiButton(ui, (350), (100), (200), (100), "lvl 2", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_3 =new UiButton(ui, (600), (100), (200), (100), "lvl 3", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_4 =new UiButton(ui, (850), (100), (200), (100), "lvl 4", -59135, -1791).setStrokeWeight( (10));
+  sdSlider=new UiButton(ui, (800), (50), (440), (30), 255, 0).setStrokeWeight( (5));
+  disableFPS =new UiButton(ui, (1130), (50), (40), (40), 255, 0).setStrokeWeight( (5));
+  enableFPS =new UiButton(ui, (1200), (50), (40), (40), 255, 0).setStrokeWeight( (5));
+  disableDebug =new UiButton(ui, (1130), (120), (40), (40), 255, 0).setStrokeWeight( (5));
+  enableDebug =new UiButton(ui, (1200), (120), (40), (40), 255, 0).setStrokeWeight( (5));
+  select_lvl_5=new UiButton(ui, (100), (250), (200), (100), "lvl 5", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_6 =new UiButton(ui, (350), (250), (200), (100), "lvl 6", -59135, -1791).setStrokeWeight( (10));
+  sttingsGPL = new UiButton(ui, (40), (550), (150), (40), "game play", -59135, -1791).setStrokeWeight( (10));
+  settingsDSP = new UiButton(ui, (240), (550), (150), (40), "display", -59135, -1791).setStrokeWeight( (10));
+  settingsOUT = new UiButton(ui, (440), (550), (150), (40), "outher", -59135, -1791).setStrokeWeight( (10));
   rez720 = new Button(this, (920*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
   rez900 = new Button(this, (990*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
   rez1080 = new Button(this, (1060*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
@@ -3885,20 +3887,20 @@ void  initButtons() {
 
 
 
-  dev_main = new Button(this, 210*Scale, 100*Scale, 200*Scale, 50*Scale, "main menu");
-  dev_quit = new Button(this, 430*Scale, 100*Scale, 200*Scale, 50*Scale, "exit");
-  dev_levels  = new Button(this, 650*Scale, 100*Scale, 200*Scale, 50*Scale, "level select");
-  dev_tutorial  = new Button(this, 870*Scale, 100*Scale, 200*Scale, 50*Scale, "tutorial");
-  dev_settings = new Button(this, 210*Scale, 170*Scale, 200*Scale, 50*Scale, "settings");
-  dev_UGC = new Button(this, 430*Scale, 170*Scale, 200*Scale, 50*Scale, "UGC");
-  dev_multiplayer = new Button(this, 650*Scale, 170*Scale, 200*Scale, 50*Scale, "Multiplayer");
-  dev_levelCreator=new Button(this, 870*Scale, 170*Scale, 200*Scale, 50*Scale, "Level Creator");
+  dev_main = new UiButton(ui, 210, 100, 200, 50, "main menu");
+  dev_quit = new UiButton(ui, 430, 100, 200, 50, "exit");
+  dev_levels  = new UiButton(ui, 650, 100, 200, 50, "level select");
+  dev_tutorial  = new UiButton(ui, 870, 100, 200, 50, "tutorial");
+  dev_settings = new UiButton(ui, 210, 170, 200, 50, "settings");
+  dev_UGC = new UiButton(ui, 430, 170, 200, 50, "UGC");
+  dev_multiplayer = new UiButton(ui, 650, 170, 200, 50, "Multiplayer");
+  dev_levelCreator=new UiButton(ui, 870, 170, 200, 50, "Level Creator");
 
-  multyplayerJoin = new Button(this, 400*Scale, 300*Scale, 200*Scale, 50*Scale, "Join", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  multyplayerHost = new Button(this, 680*Scale, 300*Scale, 200*Scale, 50*Scale, "Host", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  multyplayerExit = new Button(this, 100*Scale, 600*Scale, 200*Scale, 50*Scale, "back", -59135, -1791).setStrokeWeight(10*Scale);
-  multyplayerGo = new Button(this, width/2-100*Scale, 600*Scale, 200*Scale, 50*Scale, "GO", -59135, -1791).setStrokeWeight(10*Scale);
-  multyplayerLeave = new Button(this, 10*Scale, 660*Scale, 200*Scale, 50*Scale, "leave", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerJoin = new UiButton(ui, 400, 300, 200, 50, "Join", #FF0004, #FFF300).setStrokeWeight(10);
+  multyplayerHost = new UiButton(ui, 680, 300, 200, 50, "Host", #FF0004, #FFF300).setStrokeWeight(10);
+  multyplayerExit = new UiButton(ui, 100, 600, 200, 50, "back", -59135, -1791).setStrokeWeight(10);
+  multyplayerGo = new UiButton(ui, 640-100, 600, 200, 50, "GO", -59135, -1791).setStrokeWeight(10);
+  multyplayerLeave = new UiButton(ui, 10, 660, 200, 50, "leave", -59135, -1791).setStrokeWeight(10);
 
   multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
