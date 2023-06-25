@@ -102,7 +102,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -499,7 +499,7 @@ void draw() {// the function that is called every fraim
           text("back", 60*Scale, 655*Scale);
         }
 
-
+        //very old and not used but still exsist here anyway
         if (Menue.equals("how to play")) {//how to play menue
           background(#4FCEAF);
           fill(0);
@@ -889,6 +889,7 @@ void draw() {// the function that is called every fraim
         strokeWeight(10*Scale);
         lcLoadLevelButton.draw();//draw load button
         lc_backButton.draw();
+        lc_openLevelsFolder.draw();
       }//end of loading level
 
       if (newLevel) {//if creating a new level
@@ -913,6 +914,7 @@ void draw() {// the function that is called every fraim
         stroke(0);
         strokeWeight(1*Scale);
         line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//line for name text
+        lc_openLevelsFolder.draw();
       }//end of make new level
 
       if (editingStage) {//if edditing the stage
@@ -1519,7 +1521,7 @@ void mouseClicked() {// when you click the mouse
               menue=false;
             }
           }
-          if (levelcreatorLink.isMouseOver()) {
+          if (levelcreatorLink.isMouseOver()) {//this now opens the level creator
             //link("https://cbi-games.glitch.me/level%20creator.html");
             if (scr2==null)//create the 2nd screen if it does not exsist
               scr2 =new ToolBox(millis());
@@ -1792,7 +1794,7 @@ void mouseClicked() {// when you click the mouse
           }
         }
 
-
+        //back button for the old how to play menue
         if (Menue.equals("how to play")) {//if that menue is how to play
           if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
             Menue ="main";
@@ -2090,6 +2092,9 @@ void mouseClicked() {// when you click the mouse
             loading=false;
             entering_file_path=false;
           }
+          if(lc_openLevelsFolder.isMouseOver()){
+            openLevelCreatorLevelsFolder();
+          }
         }
         if (newLevel) {//if creating a new level
           if (mouseX >=40*Scale && mouseX <= 1200*Scale && mouseY >= 100*Scale && mouseY <= 150*Scale) {//text line click box
@@ -2121,6 +2126,9 @@ void mouseClicked() {// when you click the mouse
             startup=true;
             newLevel=false;
             entering_name=false;
+          }
+          if(lc_openLevelsFolder.isMouseOver()){
+            openLevelCreatorLevelsFolder();
           }
         }
         if (!e3DMode)
@@ -3326,6 +3334,20 @@ void openUGCFolder() {
   }
 }
 
+void openLevelCreatorLevelsFolder() {
+  Desktop desktop = Desktop.getDesktop();
+  File dirToOpen = null;
+  try {
+    dirToOpen = new File(appdata+"/CBi-games/skinny mann level creator/levels");
+    desktop.open(dirToOpen);
+  }
+  catch (Throwable iae) {
+    System.out.println("folder Not Found, creating folder");
+    new File(appdata+"/CBi-games/skinny mann level creator/levels").mkdirs();
+    openUGCFolder();
+  }
+}
+
 boolean FileIsLevel(String fil) {
   try {
     JSONObject job =loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
@@ -3944,6 +3966,8 @@ void  initButtons() {
   
   lc_exitConfirm = new UiButton(ui,240,400,200,50,"Exit",#BB48ED, #4857ED).setStrokeWeight(10);
   lc_exitCancle = new UiButton(ui,840,400,200,50,"Cancle",#BB48ED, #4857ED).setStrokeWeight(10);
+  
+  lc_openLevelsFolder = new UiButton(ui,1060,650,200, 40,"Open Folder",#BB48ED, #4857ED).setStrokeWeight(10);
 }
 
 

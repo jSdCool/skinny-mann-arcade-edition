@@ -872,6 +872,7 @@ class ToolBox extends PApplet {
             }
             holoButton.draw();
             saveLevel.draw();
+            exitStageEdit.draw();
 
             textAlign(LEFT, BOTTOM);
             groundButton.drawHoverText();
@@ -883,6 +884,7 @@ class ToolBox extends PApplet {
             checkpointButton.drawHoverText();
             draw_sloap.drawHoverText();
             draw_holoTriangle.drawHoverText();
+            exitStageEdit.drawHoverText();
           }//end of type is blueprint
         } else if (editinglogicBoard) {
           //draw buttons
@@ -1810,6 +1812,10 @@ class ToolBox extends PApplet {
               workingBlueprint.save();
               gmillis=millis()+400+millisOffset;
               System.out.println("save complete"+gmillis);
+            }
+            if(exitStageEdit.isMouseOver()){
+              levelCreator=false;
+              editingBlueprint=false;
             }
           }//end of type is blueprint
         }//end of editing blueprint
