@@ -3851,39 +3851,39 @@ void  initButtons() {
   sttingsGPL = new UiButton(ui, (40), (550), (150), (40), "game play", -59135, -1791).setStrokeWeight( (10));
   settingsDSP = new UiButton(ui, (240), (550), (150), (40), "display", -59135, -1791).setStrokeWeight( (10));
   settingsOUT = new UiButton(ui, (440), (550), (150), (40), "outher", -59135, -1791).setStrokeWeight( (10));
-  rez720 = new Button(this, (920*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  rez900 = new Button(this, (990*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  rez1080 = new Button(this, (1060*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  rez1440 = new Button(this, (1130*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  rez4k = new Button(this, (1200*Scale), (50*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  fullScreenOn = new Button(this, (1200*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  fullScreenOff = new Button(this, (1130*Scale), (120*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  vsdSlider =new Button(this, (800*Scale), (120*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  MusicSlider=new Button(this, (800*Scale), (190*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  SFXSlider=new Button(this, (800*Scale), (260*Scale), (440*Scale), (30*Scale), 255, 0).setStrokeWeight( (5*Scale));
-  shadowOn = new Button(this, (1200*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  shadowOff = new Button(this, (1130*Scale), (330*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  narrationMode1 =new Button(this, (1200*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  narrationMode0 = new Button(this, (1130*Scale), (460*Scale), (40*Scale), (40*Scale), 255, 0).setStrokeWeight(5*Scale);
-  select_lvl_UGC=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "UGC", -59135, -1791).setStrokeWeight( (10*Scale));
-  UGC_open_folder=new Button(this, (350*Scale), (600*Scale), (200*Scale), (50*Scale), "open folder", -59135, -1791).setStrokeWeight( (10*Scale));
-  UGC_lvls_next=new Button(this, (1030*Scale), (335*Scale), (200*Scale), (50*Scale), "next", -59135, -1791).setStrokeWeight( (10*Scale));
-  UGC_lvls_prev=new Button(this, (50*Scale), (335*Scale), (200*Scale), (50*Scale), "prevous", -59135, -1791).setStrokeWeight( (10*Scale));
-  UGC_lvl_play=new Button(this, (600*Scale), (600*Scale), (200*Scale), (50*Scale), "play", -59135, -1791).setStrokeWeight( (10*Scale));
-  levelcreatorLink=new Button(this, (980*Scale), (600*Scale), (200*Scale), (50*Scale), "create", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_7=new Button(this, (600*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 7", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_8 =new Button(this, (850*Scale), (250*Scale), (200*Scale), (100*Scale), "lvl 8", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_9 = new Button(this, (100*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 9", -59135, -1791).setStrokeWeight( (10*Scale));
-  select_lvl_10 = new Button(this, (350*Scale), (400*Scale), (200*Scale), (100*Scale), "lvl 10", -59135, -1791).setStrokeWeight( (10*Scale));
-  playButton=new Button(this, 540*Scale, 310*Scale, 200*Scale, 50*Scale, "Play", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  exitButton=new Button(this, 540*Scale, 470*Scale, 200*Scale, 50*Scale, "Exit", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  joinButton=new Button(this, 540*Scale, 390*Scale, 200*Scale, 50*Scale, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  settingsButton=new Button(this, 540*Scale, 550*Scale, 200*Scale, 50*Scale, "Settings", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  howToPlayButton=new Button(this, 540*Scale, 630*Scale, 200*Scale, 50*Scale, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10*Scale);
-  downloadUpdateButton=new Button(this, width/2-250*Scale2, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  updateGetButton=new Button(this, width/2-250*Scale2, 150*Scale, 500*Scale2, 50*Scale, "Get it", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  updateOkButton=new Button(this, width/2-250*Scale2, 250*Scale, 500*Scale2, 50*Scale, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
-  pauseRestart=new Button(this, 500*Scale, 100*Scale, 300*Scale, 60*Scale, "Restart", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  rez720 = new UiButton(ui, (920), (50), (40), (40), 255, 0).setStrokeWeight(5);
+  rez900 = new UiButton(ui, (990), (50), (40), (40), 255, 0).setStrokeWeight(5);
+  rez1080 = new UiButton(ui, (1060), (50), (40), (40), 255, 0).setStrokeWeight(5);
+  rez1440 = new UiButton(ui, (1130), (50), (40), (40), 255, 0).setStrokeWeight(5);
+  rez4k = new UiButton(ui, (1200), (50), (40), (40), 255, 0).setStrokeWeight(5);
+  fullScreenOn = new UiButton(ui, (1200), (120), (40), (40), 255, 0).setStrokeWeight(5);
+  fullScreenOff = new UiButton(ui, (1130), (120), (40), (40), 255, 0).setStrokeWeight(5);
+  vsdSlider =new UiButton(ui, (800), (120), (440), (30), 255, 0).setStrokeWeight( (5));
+  MusicSlider=new UiButton(ui, (800), (190), (440), (30), 255, 0).setStrokeWeight( (5));
+  SFXSlider=new UiButton(ui, (800), (260), (440), (30), 255, 0).setStrokeWeight( (5));
+  shadowOn = new UiButton(ui, (1200), (330), (40), (40), 255, 0).setStrokeWeight(5);
+  shadowOff = new UiButton(ui, (1130), (330), (40), (40), 255, 0).setStrokeWeight(5);
+  narrationMode1 =new UiButton(ui, (1200), (460), (40), (40), 255, 0).setStrokeWeight(5);
+  narrationMode0 = new UiButton(ui, (1130), (460), (40), (40), 255, 0).setStrokeWeight(5);
+  select_lvl_UGC=new UiButton(ui, (350), (600), (200), (50), "UGC", -59135, -1791).setStrokeWeight( (10));
+  UGC_open_folder=new UiButton(ui, (350), (600), (200), (50), "Open Folder", -59135, -1791).setStrokeWeight( (10));
+  UGC_lvls_next=new UiButton(ui, (1030), (335), (200), (50), "Next", -59135, -1791).setStrokeWeight( (10));
+  UGC_lvls_prev=new UiButton(ui, (50), (335), (200), (50), "Prevous", -59135, -1791).setStrokeWeight( (10));
+  UGC_lvl_play=new UiButton(ui, (600), (600), (200), (50), "Play", -59135, -1791).setStrokeWeight( (10));
+  levelcreatorLink=new UiButton(ui, (980), (600), (200), (50), "create", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_7=new UiButton(ui, (600), (250), (200), (100), "lvl 7", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_8 =new UiButton(ui, (850), (250), (200), (100), "lvl 8", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_9 = new UiButton(ui, (100), (400), (200), (100), "lvl 9", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_10 = new UiButton(ui, (350), (400), (200), (100), "lvl 10", -59135, -1791).setStrokeWeight( (10));
+  playButton=new UiButton(ui, 540, 310, 200, 50, "Play", #FF1900, #FFF900).setStrokeWeight(10);
+  exitButton=new UiButton(ui, 540, 470, 200, 50, "Exit", #FF1900, #FFF900).setStrokeWeight(10);
+  joinButton=new UiButton(ui, 540, 390, 200, 50, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10);
+  settingsButton=new UiButton(ui, 540, 550, 200, 50, "Settings", #FF1900, #FFF900).setStrokeWeight(10);
+  howToPlayButton=new UiButton(ui, 540, 630, 200, 50, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10);
+  downloadUpdateButton=new UiButton(ui, 390, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10);
+  updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
+  updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  pauseRestart=new UiButton(ui, 500, 100, 300, 60, "Restart", #FF0004, #FFF300).setStrokeWeight(10);
 
 
 
@@ -3909,41 +3909,41 @@ void  initButtons() {
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
 
-  newBlueprint=new Button(this, 200*Scale, 500*Scale, 200*Scale, 80*Scale, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
-  loadBlueprint=new Button(this, 800*Scale, 500*Scale, 200*Scale, 80*Scale, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
-  newLevelButton=new Button(this, 200*Scale, 300*Scale, 200*Scale, 80*Scale, "NEW", #BB48ED, #4857ED).setStrokeWeight(10);
-  loadLevelButton=new Button(this, 800*Scale, 300*Scale, 200*Scale, 80*Scale, "LOAD", #BB48ED, #4857ED).setStrokeWeight(10);
+  newBlueprint=new UiButton(ui, 200, 500, 200, 80, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadBlueprint=new UiButton(ui, 800, 500, 200, 80, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  newLevelButton=new UiButton(ui, 200, 300, 200, 80, "NEW", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadLevelButton=new UiButton(ui, 800, 300, 200, 80, "LOAD", #BB48ED, #4857ED).setStrokeWeight(10);
 
-  newStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale, "+", #0092FF, 0);
-  newFileCreate=new Button(this, 300*Scale, 600*Scale, 200*Scale, 40*Scale, "create", #BB48ED, #4857ED).setStrokeWeight(5);
-  newFileBack=new Button(this, 600*Scale, 600*Scale, 200*Scale, 40*Scale, "back", #BB48ED, #4857ED).setStrokeWeight(5);
-  chooseFileButton=new Button(this, 450*Scale, 540*Scale, 200*Scale, 40*Scale, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);
+  newStage=new UiButton(ui, 1200, 10, 60, 60, "+", #0092FF, 0).setStrokeWeight(3);
+  newFileCreate=new UiButton(ui, 300, 600, 200, 40, "create", #BB48ED, #4857ED).setStrokeWeight(5);
+  newFileBack=new UiButton(ui, 600, 600, 200, 40, "back", #BB48ED, #4857ED).setStrokeWeight(5);
+  chooseFileButton=new UiButton(ui, 450, 540, 200, 40, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);
 
-  edditStage=new Button(this, 1100*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0);
+  edditStage=new UiButton(ui, 1100, 10, 60, 60, #0092FF, 0).setStrokeWeight(3);
 
-  setMainStage=new Button(this, 1000*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0).setHoverText("set as main stage");
-
-
-  selectStage=new Button(this, 1200*Scale, 10*Scale, 60*Scale, 60*Scale, #0092FF, 0);
+  setMainStage=new UiButton(ui, 1000, 10, 60, 60, #0092FF, 0).setHoverText("set as main stage").setStrokeWeight(3);
 
 
-  new2DStage=new Button(this, 400*Scale, 200*Scale, 80*Scale, 80*Scale, "2D", #BB48ED, #4857ED).setStrokeWeight(5);
-  new3DStage=new Button(this, 600*Scale, 200*Scale, 80*Scale, 80*Scale, "3D", #BB48ED, #4857ED).setStrokeWeight(5);
-  addSound=new Button(this, 800*Scale, 200*Scale, 80*Scale, 80*Scale, #BB48ED, #4857ED).setStrokeWeight(5);
+  selectStage=new UiButton(ui, 1200, 10, 60, 60, #0092FF, 0).setStrokeWeight(3);
 
-  overview_saveLevel=new Button(this, 60*Scale, 20*Scale, 50*Scale, 50*Scale, "save", #0092FF, 0).setStrokeWeight(5);
-  help=new Button(this, 130*Scale, 20*Scale, 50*Scale, 50*Scale, " ? ", #0092FF, 0);
-  overviewUp=new Button(this, 270*Scale, 20*Scale, 50*Scale, 50*Scale, " ^ ", #0092FF, 0);
-  overviewDown=new Button(this, 200*Scale, 20*Scale, 50*Scale, 50*Scale, " v ", #0092FF, 0);
-  createBlueprintGo=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "start", #BB48ED, #4857ED).setStrokeWeight(10);
 
-  lcLoadLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
-  lcNewLevelButton=new Button(this, 40*Scale, 400*Scale, 200*Scale, 40*Scale, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
-  lc_backButton=new Button(this, 20*Scale,650*Scale,200*Scale, 40*Scale,"Back",#BB48ED, #4857ED).setStrokeWeight(10);
-  lcOverviewExitButton= new Button(this,340*Scale, 20*Scale, 100*Scale, 50*Scale, "Exit", #0092FF, 0);
+  new2DStage=new UiButton(ui, 400, 200, 80, 80, "2D", #BB48ED, #4857ED).setStrokeWeight(5);
+  new3DStage=new UiButton(ui, 600, 200, 80, 80, "3D", #BB48ED, #4857ED).setStrokeWeight(5);
+  addSound=new UiButton(ui, 800, 200, 80, 80, #BB48ED, #4857ED).setStrokeWeight(5);
+
+  overview_saveLevel=new UiButton(ui, 60, 20, 50, 50, "save", #0092FF, 0).setStrokeWeight(5);
+  help=new UiButton(ui, 130, 20, 50, 50, " ? ", #0092FF, 0).setStrokeWeight(3);
+  overviewUp=new UiButton(ui, 270, 20, 50, 50, " ^ ", #0092FF, 0).setStrokeWeight(3);
+  overviewDown=new UiButton(ui, 200, 20, 50, 50, " v ", #0092FF, 0).setStrokeWeight(3);
+  createBlueprintGo=new UiButton(ui, 40, 400, 200, 40, "start", #BB48ED, #4857ED).setStrokeWeight(10);
+
+  lcLoadLevelButton=new UiButton(ui, 40, 400, 200, 40, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
+  lcNewLevelButton=new UiButton(ui, 40, 400, 200, 40, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
+  lc_backButton=new UiButton(ui, 20,650,200, 40,"Back",#BB48ED, #4857ED).setStrokeWeight(10);
+  lcOverviewExitButton= new UiButton(ui,340, 20, 100, 50, "Exit", #0092FF, 0);
   
-  lc_exitConfirm = new Button(this,width/2-400*Scale,400*Scale,200*Scale,50*Scale,"Exit",#BB48ED, #4857ED).setStrokeWeight(10);
-  lc_exitCancle = new Button(this,width/2+200*Scale,400*Scale,200*Scale,50*Scale,"Cancle",#BB48ED, #4857ED).setStrokeWeight(10);
+  lc_exitConfirm = new UiButton(ui,240,400,200,50,"Exit",#BB48ED, #4857ED).setStrokeWeight(10);
+  lc_exitCancle = new UiButton(ui,840,400,200,50,"Cancle",#BB48ED, #4857ED).setStrokeWeight(10);
 }
 
 
