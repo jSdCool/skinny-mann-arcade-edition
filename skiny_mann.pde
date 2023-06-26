@@ -74,6 +74,7 @@ void setup() {//seccond function called
     textSize(100*Scale);//500
     println("initilizing buttons");
     initButtons();
+    initText();
 
     ptsW=100;
     ptsH=100;
@@ -119,6 +120,7 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
+UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -191,16 +193,16 @@ void draw() {// the function that is called every fraim
 
         if (Menue.equals("main")) {//if on main menue
           background(7646207);
-          textSize(100*Scale);
           fill(0);
-          textAlign(CENTER, CENTER);
-          text("skinny mann", width/2, 80*Scale);//the title
+          //the title
+          mm_title.draw();
+          
           fill(255, 255, 0);
-          text("Early Access", width/2, 180*Scale);
+          mm_EarlyAccess.draw();
           textSize(35*Scale);
           fill(-16732415);
           stroke(-16732415);
-          rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
+          rect(0, height/2, width, height/2);//green rectangle
           draw_mann(200*Scale, 360*Scale, 1, 4*Scale, 0);
           draw_mann(1080*Scale, 360*Scale, 1, 4*Scale, 1);
 
@@ -209,27 +211,21 @@ void draw() {// the function that is called every fraim
           joinButton.draw();
           settingsButton.draw();
           howToPlayButton.draw();
-          textAlign(LEFT, BOTTOM);
 
           fill(255);
-          textSize(10*Scale);
-          text(version, 0*Scale, 718*Scale);//proint the version in the lower corner
+          mm_version.draw();
           discord.draw();
           image(discordIcon, 1200*Scale, 650*Scale);
         }
         if (Menue.equals("level select")) {//if selecting level
           levelCompleteSoundPlayed=false;
-          textAlign(LEFT, BOTTOM);
-          strokeWeight(10*Scale);
           background(7646207);
-          textSize(35*Scale);
           fill(-16732415);
           stroke(-16732415);
           strokeWeight(0);
           rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
-          textSize(50*Scale);
           fill(0);
-          text("Level Select", 484*Scale, 54*Scale);//menue title
+          ls_levelSelect.draw();
           int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
           if (progress<2) {
             select_lvl_2.setColor(#B40F00, #B4AF00);
@@ -291,10 +287,9 @@ void draw() {// the function that is called every fraim
         }
         if (Menue.equals("level select UGC")) {
           background(7646207);
-          textSize(35*Scale);
           fill(0);
-          textAlign(LEFT, BOTTOM);
-          text("User Generated Levels", 484*Scale, 54*Scale);//menue title
+          lsUGC_title.draw();//menue title
+
           select_lvl_back.draw();
           UGC_open_folder.draw();
           levelcreatorLink.draw();
@@ -302,11 +297,12 @@ void draw() {// the function that is called every fraim
           textSize(50*Scale);
           textAlign(CENTER, CENTER);
           if (UGCNames.size()==0) {
-            text("no levels found", width/2, height/2);
+            lsUGC_noLevelFound.draw();
           } else {
-            text(UGCNames.get(UGC_lvl_indx), width/2, height/2);
+            lsUGC_levelName.setText(UGCNames.get(UGC_lvl_indx));
+            lsUGC_levelName.draw();
             if ((boolean)compatibles.get(UGC_lvl_indx)) {
-              text("this level is not compatible with this version of the game", width/2, height/2+height*0.1);
+              lsUGC_levelNotCompatible.draw();
             }
             if (UGC_lvl_indx<UGCNames.size()-1) {
               UGC_lvls_next.draw();
@@ -326,21 +322,22 @@ void draw() {// the function that is called every fraim
 
         if (Menue.equals("settings")) {//the settings menue
           fill(0);
-          textAlign(LEFT, BOTTOM);
           background(7646207);
           textAlign(CENTER, BOTTOM);
           textSize(100*Scale);
           text("Settings", width/2, height);
-
+          st_title.draw();
           textAlign(LEFT, BOTTOM);
           textSize(40*Scale);//explaination text
 
           if (settingsMenue.equals("game play")) {
             fill(0);
-            text("horozontal screen scrolling location", 40*Scale, 90*Scale);
-            text("vertical  screen scrolling location", 40*Scale, 160*Scale);
-            text((int)(((esdPos-800.0)/440)*530)+100, 700*Scale, 90*Scale);
-            text((int)(((vesdPos-800.0)/440)*220)+100, 700*Scale, 160*Scale);
+            st_Hssr.draw();
+            st_Vssr.draw();
+            st_hsrp.setText((int)(((esdPos-800.0)/440)*530)+100+"");
+            st_vsrp.setText((int)(((vesdPos-800.0)/440)*220)+100+"");
+            st_hsrp.draw();
+            st_vsrp.draw();
 
             sdSlider.draw();
             fill(255);
@@ -348,11 +345,8 @@ void draw() {// the function that is called every fraim
             vsdSlider.draw();
             fill(255);
             rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
-
-            textSize(50*Scale);
-            textAlign(CENTER, TOP);
             fill(0);
-            text("game play", width/2, -10*Scale);
+            st_gameplay.draw();
           }//end of gameplay settings
 
           if (settingsMenue.equals("display")) {
@@ -2884,6 +2878,10 @@ void mouseDragged() {
   }
 }
 
+void windowResized(){
+  ui.reScale();
+}
+
 void loadLevel(String fdp) {
   try {
     reachedEnd=false;
@@ -4071,4 +4069,21 @@ void turnThingsOff() {
   placingPlaySoundLogic=false;
   placingPulse=false;
   placingRandom=false;
+}
+
+void initText(){
+  mm_title = new UiText(ui,"skinny mann",640,80,100,CENTER,CENTER);
+  mm_EarlyAccess = new UiText(ui,"Early Access",640,180,100,CENTER,CENTER);
+  mm_version = new UiText(ui,version,0,718,10,LEFT,BOTTOM);
+  ls_levelSelect = new UiText(ui,"Level Select",640,54,50,CENTER,CENTER);
+  lsUGC_title = new UiText(ui,"User Generated Levels",640,54,35,CENTER,CENTER);
+  lsUGC_noLevelFound = new UiText(ui,"no levels found",640,360,50,CENTER,CENTER);
+  lsUGC_levelNotCompatible = new UiText(ui,"this level is not compatible with this version of the game",640,432,50,CENTER,CENTER);
+  lsUGC_levelName = new UiText(ui,"V",640,360,50,CENTER,CENTER);
+  st_title = new UiText(ui,"Settings",640,720,100,CENTER,BOTTOM);
+  st_Hssr = new UiText(ui,"horozontal screen scrolling location",40,90,40,LEFT,BOTTOM);
+  st_Vssr = new UiText(ui,"vertical  screen scrolling location",40,160,40,LEFT,BOTTOM);
+  st_gameplay = new UiText(ui,"game play",640,-10,50,CENTER,TOP);
+  st_vsrp = new UiText(ui,"V",700,160,40,LEFT,BOTTOM);
+  st_hsrp = new UiText(ui,"V",700,90,40,LEFT,BOTTOM);
 }
