@@ -103,7 +103,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder,settingsBackButton;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -120,7 +120,7 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp;
+UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -323,9 +323,6 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("settings")) {//the settings menue
           fill(0);
           background(7646207);
-          textAlign(CENTER, BOTTOM);
-          textSize(100*Scale);
-          text("Settings", width/2, height);
           st_title.draw();
           textAlign(LEFT, BOTTOM);
           textSize(40*Scale);//explaination text
@@ -351,16 +348,15 @@ void draw() {// the function that is called every fraim
 
           if (settingsMenue.equals("display")) {
             fill(0);
-            text("verticle screen resolution (requires restart)", 40*Scale, 80*Scale);
-            text("full screen (requires restart)", 40*Scale, 140*Scale);
-            textSize(20*Scale);
-            text("2160(4K)", 1190*Scale, 45*Scale);
-            text("1440", 1120*Scale, 45*Scale);
-            text("1080", 1055*Scale, 45*Scale);
-            text("900", 990*Scale, 45*Scale);
-            text("720", 920*Scale, 45*Scale);
-            text("yes", 1190*Scale, 115*Scale);
-            text("no", 1120*Scale, 115*Scale);
+            st_dsp_vsr.draw();
+            st_dsp_fs.draw();
+            st_dsp_4k.draw();
+            st_dsp_1440.draw();
+            st_dsp_1080.draw();
+            st_dsp_900.draw();
+            st_dsp_720.draw();
+            st_dsp_fsYes.draw();
+            st_dsp_fsNo.draw();
             rez720.draw();
             rez900.draw();
             rez1080.draw();
@@ -369,28 +365,27 @@ void draw() {// the function that is called every fraim
             fullScreenOn.draw();
             fullScreenOff.draw();
 
-            textSize(50*Scale);
-            textAlign(CENTER, TOP);
             fill(0);
-            text("display", width/2, -10*Scale);
+            st_display.draw();
+
           }//end of display settings
 
           if (settingsMenue.equals("outher")) {
             fill(0);
-            text("display fps", 40*Scale, 70*Scale);
-            text("display debug info", 40*Scale, 140*Scale);
-            text("music volume", 40*Scale, 210*Scale);
-            text((int)((int)(musicVolume*100)), 700*Scale, 215*Scale);
-            text("sounds volume", 40*Scale, 280*Scale);
-            text((int)(sfxVolume*100), 700*Scale, 285*Scale);
-            text("3D shaows", 40*Scale, 350*Scale);
-            text("narration mode", 40*Scale, 460*Scale);
-
-            textSize(20*Scale);
-            text("yes", 1190*Scale, 45*Scale);
-            text("no", 1120*Scale, 45*Scale);
-            text("better", 1190*Scale, 460*Scale);
-            text("please don't\ndemonetize\nme youtube", 1070*Scale, 460*Scale);
+            st_o_displayFPS.draw();
+            st_o_debugINFO.draw();
+            st_o_musicVol.draw();
+            st_o_SFXvol.draw();
+            st_o_3DShadow.draw();
+            st_o_narration.draw();
+            st_o_yes.draw();
+            st_o_no.draw();
+            st_o_better.draw();
+            st_o_demonitized.draw();
+            st_o_currentMusicVolume.setText((int)(musicVolume*100)+"");
+            st_o_currentSoundsVolume.setText((int)(sfxVolume*100)+"");
+            st_o_currentMusicVolume.draw();
+            st_o_currentSoundsVolume.draw();
 
             enableFPS.draw();
             disableFPS.draw();
@@ -413,10 +408,10 @@ void draw() {// the function that is called every fraim
             textSize(50*Scale);
             textAlign(CENTER, TOP);
             fill(0);
-            text("outher", width/2, -10*Scale);
+            st_other.draw();
           }//end of outher settings
 
-          //end of check boers and stuffs
+          //end of check boxes and stuffs
 
           settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
 
@@ -483,14 +478,8 @@ void draw() {// the function that is called every fraim
           sttingsGPL.draw();
           settingsDSP.draw();
           settingsOUT.draw();
-          textAlign(LEFT, BOTTOM);
-          fill(255, 25, 0);
-          stroke(255, 249, 0);
-          strokeWeight(10*Scale);
-          rect(40*Scale, 610*Scale, 200*Scale, 50*Scale);//the back button
-          fill(0);
-          textSize(50*Scale);
-          text("back", 60*Scale, 655*Scale);
+
+          settingsBackButton.draw();
         }
 
         //very old and not used but still exsist here anyway
@@ -1777,7 +1766,7 @@ void mouseClicked() {// when you click the mouse
           if (settingsOUT.isMouseOver())
             settingsMenue="outher";
 
-          if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
+          if (settingsBackButton.isMouseOver()) {//back button
             if (prevousInGame) {
               Menue="pause";
               inGame=true;
@@ -3868,9 +3857,9 @@ void  initButtons() {
   enableDebug =new UiButton(ui, (1200), (120), (40), (40), 255, 0).setStrokeWeight( (5));
   select_lvl_5=new UiButton(ui, (100), (250), (200), (100), "lvl 5", -59135, -1791).setStrokeWeight( (10));
   select_lvl_6 =new UiButton(ui, (350), (250), (200), (100), "lvl 6", -59135, -1791).setStrokeWeight( (10));
-  sttingsGPL = new UiButton(ui, (40), (550), (150), (40), "game play", -59135, -1791).setStrokeWeight( (10));
-  settingsDSP = new UiButton(ui, (240), (550), (150), (40), "display", -59135, -1791).setStrokeWeight( (10));
-  settingsOUT = new UiButton(ui, (440), (550), (150), (40), "outher", -59135, -1791).setStrokeWeight( (10));
+  sttingsGPL = new UiButton(ui, (40), (550), (150), (40), "Game Play", -59135, -1791).setStrokeWeight( (10));
+  settingsDSP = new UiButton(ui, (240), (550), (150), (40), "Display", -59135, -1791).setStrokeWeight( (10));
+  settingsOUT = new UiButton(ui, (440), (550), (150), (40), "Outher", -59135, -1791).setStrokeWeight( (10));
   rez720 = new UiButton(ui, (920), (50), (40), (40), 255, 0).setStrokeWeight(5);
   rez900 = new UiButton(ui, (990), (50), (40), (40), 255, 0).setStrokeWeight(5);
   rez1080 = new UiButton(ui, (1060), (50), (40), (40), 255, 0).setStrokeWeight(5);
@@ -3904,6 +3893,7 @@ void  initButtons() {
   updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
   updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new UiButton(ui, 500, 100, 300, 60, "Restart", #FF0004, #FFF300).setStrokeWeight(10);
+  settingsBackButton = new UiButton(ui,40,620,200,50,"Back",#FF1900,#FFF900).setStrokeWeight(10);
 
 
 
@@ -4083,7 +4073,30 @@ void initText(){
   st_title = new UiText(ui,"Settings",640,720,100,CENTER,BOTTOM);
   st_Hssr = new UiText(ui,"horozontal screen scrolling location",40,90,40,LEFT,BOTTOM);
   st_Vssr = new UiText(ui,"vertical  screen scrolling location",40,160,40,LEFT,BOTTOM);
-  st_gameplay = new UiText(ui,"game play",640,-10,50,CENTER,TOP);
+  st_gameplay = new UiText(ui,"Game Play",640,-10,50,CENTER,TOP);
   st_vsrp = new UiText(ui,"V",700,160,40,LEFT,BOTTOM);
   st_hsrp = new UiText(ui,"V",700,90,40,LEFT,BOTTOM);
+  st_dsp_vsr = new UiText(ui,"verticle screen resolution (requires restart)",40,80,40,LEFT, BOTTOM);
+  st_dsp_fs = new UiText(ui,"full screen (requires restart)",40,140,40,LEFT, BOTTOM);
+  st_dsp_4k = new UiText(ui,"2160(4K)",1190,45,20,LEFT, BOTTOM);
+  st_dsp_1440 = new UiText(ui,"1440",1120,45,20,LEFT, BOTTOM);
+  st_dsp_1080 = new UiText(ui,"1080",1055,45,20,LEFT, BOTTOM);
+  st_dsp_900 = new UiText(ui,"900",990,45,20,LEFT, BOTTOM);
+  st_dsp_720 = new UiText(ui,"720",920,45,20,LEFT, BOTTOM);
+  st_dsp_fsYes = new UiText(ui,"yes",1190,115,20,LEFT, BOTTOM);
+  st_dsp_fsNo = new UiText(ui,"no",1120,115,20,LEFT, BOTTOM);
+  st_display = new UiText(ui,"Display",640,-10,50,CENTER,TOP);
+  st_o_displayFPS = new UiText(ui,"display fps",40,70,40,LEFT, BOTTOM);
+  st_o_debugINFO = new UiText(ui,"display debug info",40,140,40,LEFT, BOTTOM);
+  st_o_musicVol = new UiText(ui,"music volume",40,210,40,LEFT, BOTTOM);
+  st_o_SFXvol = new UiText(ui,"sounds volume",40,280,40,LEFT, BOTTOM);
+  st_o_3DShadow = new UiText(ui,"3D shadows",40,350,40,LEFT, BOTTOM);
+  st_o_narration = new UiText(ui,"narration mode",40,460,40,LEFT, BOTTOM);
+  st_o_yes = new UiText(ui,"yes",1190,45,20,LEFT, BOTTOM);
+  st_o_no = new UiText(ui,"no",1120,45,20,LEFT, BOTTOM);
+  st_o_better = new UiText(ui,"better",1190,460,20,LEFT, BOTTOM);
+  st_o_demonitized = new UiText(ui,"please don't\ndemonetize\nme youtube",1070,460,20,LEFT, BOTTOM);
+  st_o_currentMusicVolume = new UiText(ui,"V",700,215,40,LEFT, BOTTOM);
+  st_o_currentSoundsVolume = new UiText(ui,"B",700,285,40,LEFT, BOTTOM);
+  st_other = new UiText(ui,"Outher",640,-10,50,CENTER,TOP);
 }
