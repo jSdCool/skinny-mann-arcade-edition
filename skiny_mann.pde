@@ -120,8 +120,15 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info,tut_notToday,tut_disclaimer,tut_toClose,coinCountText,pa_title,logoText,up_title,up_info,up_wait;
+UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info,tut_notToday,tut_disclaimer,tut_toClose,coinCountText,pa_title,logoText,up_title,up_info,up_wait,lc_start_version,lc_start_author,lc_load_new_describe,lc_load_new_enterd,lc_load_notFound,lc_newf_enterdName,lc_newf_fileName,lc_dp2_info,lc_newbp_describe,lc_exit_question,lc_exit_disclaimer,deadText,fpsText,dbg_mspc,dbg_playerX,dbg_playerY,dbg_vertvel,dbg_animationCD,dbg_pose,dbg_camX,dbg_camY,dbg_tutorialPos,game_displayText;
 //▄
+
+
+//camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0); 
+//defCameraX = width/2;  
+//defCameraY = height/2; 
+//defCameraFOV = 60 * DEG_TO_RAD;  
+//defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
     cursor="|";
@@ -813,10 +820,9 @@ void draw() {// the function that is called every fraim
         textAlign(LEFT, BOTTOM);
         fill(0);
         textSize(15*Scale);
-        text("game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, (718.0/720)*height);//game version text
-        fill(0);
-        textSize(15*Scale);
-        text("author: "+author+coursorr, 10*Scale, 30*Scale);//author text
+        lc_start_version.draw();
+        lc_start_author.setText("author: "+author+coursorr);
+        lc_start_author.draw();
         strokeWeight(0);
         rect(60*Scale, 31*Scale, textWidth(author), 1*Scale);//draw the line under the author name
         newBlueprint.draw();
@@ -824,26 +830,24 @@ void draw() {// the function that is called every fraim
         lc_backButton.draw();
       }//end of startup screen
 
-      if (loading) {//if loading a lavel
-        textAlign(LEFT, BOTTOM);
+      if (loading) {//if loading a level
         background(#48EDD8);
         fill(0);
-        textSize(20*Scale);
-        text("enter level name", 40*Scale, 100*Scale);
+        lc_load_new_describe.draw();
+        
         if (rootPath!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
           if (entering_file_path&&coursor) {
-            text(rootPath+"|", 40*Scale, 150*Scale);
+            lc_load_new_enterd.setText(rootPath+"|");
           } else {
-            text(rootPath, 40*Scale, 150*Scale);
+            lc_load_new_enterd.setText(rootPath);
           }
         } else if (entering_file_path&&coursor) {
-          text("|", 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText("|");
         }
-        textAlign(CENTER,CENTER);
+        lc_load_new_enterd.draw();
         if(levelNotFound){
           fill(200,0,0);
-          textSize(50*Scale);
-          text("Level Not Found!",width/2,Scale*300);
+          lc_load_notFound.draw();
         }
         stroke(0);
         strokeWeight(1*Scale);
@@ -857,20 +861,19 @@ void draw() {// the function that is called every fraim
       }//end of loading level
 
       if (newLevel) {//if creating a new level
-        textAlign(LEFT, BOTTOM);
         background(#48EDD8);
         fill(0);
-        textSize(20*Scale);
-        text("enter level name", 40*Scale, 100*Scale);
+        lc_load_new_describe.draw();
         if (new_name!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
           if (entering_name&&coursor) {
-            text(new_name+"|", 40*Scale, 150*Scale);
+            lc_load_new_enterd.setText(rootPath+"|");
           } else {
-            text(new_name, 40*Scale, 150*Scale);
+            lc_load_new_enterd.setText(rootPath);
           }
         } else if (entering_name&&coursor) {
-          text("|", 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText("|");
         }
+        lc_load_new_enterd.draw();
 
         lcNewLevelButton.draw();//start button
         lc_backButton.draw();
@@ -950,7 +953,7 @@ void draw() {// the function that is called every fraim
         line(0*Scale, 80*Scale, 1280*Scale, 80*Scale);
         fill(0);
         textSize(30*Scale);
-
+        //TODO: update the text here. outher stuff def needs to be changed to scale well with it
         String[] keys=new String[0];//create a string array that can be used to place the sound keys in
         keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
         for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
@@ -1023,17 +1026,17 @@ void draw() {// the function that is called every fraim
         newFileBack.draw();
         drawSpeakericon(this, addSound.x+addSound.lengthX/2, addSound.y+addSound.lengthY/2, 1*Scale);
         fill(0);
-        textSize(70*Scale);
-        textAlign(LEFT, BOTTOM);
+        
         if (newFileType.equals("sound")) {//if the selected type is sound
-          text("name: "+newFileName+coursorr, 100*Scale, 445*Scale);//dfisplay the entyered name
+          lc_newf_enterdName.setText("name: "+newFileName+coursorr);//display the entered name
           String pathSegments[]=fileToCoppyPath.split("/|\\\\");
-          textSize(30*Scale);
-          text(pathSegments[pathSegments.length-1], 655*Scale, 585*Scale);//display the name of the selected file
+          lc_newf_fileName.setText(pathSegments[pathSegments.length-1]);//display the name of the selected file
+          lc_newf_fileName.draw();
           chooseFileButton.draw();
         } else {
-          text(newFileName+coursorr, 100*Scale, 445*Scale);//display the entered name
+          lc_newf_enterdName.setText(newFileName+coursorr);//display the entered name
         }
+        lc_newf_enterdName.draw();
       }//end of new file
 
       if (drawingPortal2) {//if drawing portal part 2 aka outher overview selection screen
@@ -1046,7 +1049,6 @@ void draw() {// the function that is called every fraim
           if (overviewSelection<level.stages.size())
             if (level.stages.get(overviewSelection).type.equals("stage")||level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a posible destination stage
               selectStage.draw();//draw the select stage button
-              textAlign(LEFT, BOTTOM);
               stroke(0, 255, 0);
               strokeWeight(7*Scale);
               line(1212*Scale, 44*Scale, 1224*Scale, 55*Scale);//checkmark
@@ -1059,6 +1061,7 @@ void draw() {// the function that is called every fraim
         line(0*Scale, 80*Scale, 1280*Scale, 80*Scale);
         fill(0);
         textSize(30*Scale);
+        //TODO: fix text here just like overview
         String[] keys=new String[0];//create a string array that can be used to place the sound keys in
         keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
         for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
@@ -1086,29 +1089,25 @@ void draw() {// the function that is called every fraim
             logicIcon(40*Scale, (100+60*i)*Scale, 1*Scale);
           }
         }
-        textAlign(CENTER, CENTER);
-
         fill(0);
-        textSize(60*Scale);
-        text("select destenation stage", 640*Scale, 30*Scale);
+        lc_dp2_info.draw();
         if (filesScrole>0)//scroll buttons
           overviewUp.draw();
         if (filesScrole+11<level.stages.size()+level.sounds.size())
           overviewDown.draw();
-        textAlign(LEFT, BOTTOM);
       }//end of drawing portal2
 
       if (creatingNewBlueprint) {//if creating a new bueprint screen
-        textAlign(LEFT, BOTTOM);
         background(#48EDD8);
         fill(0);
-        textSize(20*Scale);
-        text("enter blueprint name", 40*Scale, 100*Scale);
+        lc_newbp_describe.draw();
         if (new_name!=null) {//display the name entered
-          text(new_name+coursorr, 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText(new_name+coursorr);
         } else if (coursor) {
-          text("|", 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText("|");
         }
+        lc_load_new_enterd.draw();
+        
         createBlueprintGo.draw();//create button
         lc_backButton.draw();
         stroke(0);
@@ -1117,16 +1116,15 @@ void draw() {// the function that is called every fraim
       }//end of creating new blueprint
 
       if (loadingBlueprint) {//if loading blueprint
-        textAlign(LEFT, BOTTOM);
         background(#48EDD8);
         fill(0);
-        textSize(20*Scale);
-        text("enter blueprint name", 40*Scale, 100*Scale);
+        lc_newbp_describe.draw();
         if (new_name!=null) {//coursor and entrd name
-          text(new_name+coursorr, 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText(new_name+coursorr);
         } else if (coursor) {
-          text("|", 40*Scale, 150*Scale);
+          lc_load_new_enterd.setText("|");
         }
+        lc_load_new_enterd.draw();
         stroke(0);
         strokeWeight(1*Scale);
         line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);
@@ -1186,10 +1184,9 @@ void draw() {// the function that is called every fraim
       if(exitLevelCreator){
         background(#0092FF);
         fill(0);
-        textSize(50*Scale);
-        textAlign(CENTER,CENTER);
-        text("Are you sure?",width/2,120*Scale);
-        text("Any unsaved data will be lost.",width/2,200*Scale);
+        lc_exit_question.draw();
+        lc_exit_disclaimer.draw();
+
         lc_exitConfirm.draw();
         lc_exitCancle.draw();
       }
@@ -1198,8 +1195,7 @@ void draw() {// the function that is called every fraim
 
     if (dead) {// when  dead
       fill(255, 0, 0);
-      textSize(50*Scale);
-      text("you died", 500*Scale, 360*Scale);
+      deadText.draw();
       death_cool_down++;
       if (death_cool_down>75) {// respawn cool down
         dead=false;
@@ -1213,27 +1209,31 @@ void draw() {// the function that is called every fraim
 
     if (displayFPS) {
       fill(255);
-      textSize(10*Scale);//fraim rate counter
-      textAlign(LEFT, BOTTOM);
-      text("fps: "+ frameRate, 1200*Scale, 10*Scale);
+      fpsText.setText("FPS: "+ frameRate);
+      fpsText.draw();
     }
     if (displayDebugInfo) {
-      fill(255);
-
-
-      textSize(10*Scale);//fraim rate counter
-      textAlign(RIGHT, TOP);
+      fill(255);     
       if (players[currentPlayer]!=null) {
-        text("mspc: "+ mspc, 1275*Scale, 10*Scale);
-        text("player X: "+ players[currentPlayer].x, 1275*Scale, 20*Scale);
-        text("player Y: "+ players[currentPlayer].y, 1275*Scale, 30*Scale);
-        text("player vertical velocity: "+ players[currentPlayer].verticalVelocity, 1275*Scale, 40*Scale);
-        text("player animation Cooldown: "+ players[currentPlayer].animationCooldown, 1275*Scale, 50*Scale);
-        text("player pose: "+ players[currentPlayer].pose, 1275*Scale, 60*Scale);
-        text("camera x: "+camPos, 1275*Scale, 70*Scale);
-        text("camera y: "+camPosY, 1275*Scale, 80*Scale);
-        text("tutorial position: "+tutorialPos, 1275*Scale, 90*Scale);
+        dbg_mspc.setText("mspc: "+ mspc);
+        dbg_playerX.setText("player X: "+ players[currentPlayer].x);
+        dbg_playerY.setText("player Y: "+ players[currentPlayer].y);
+        dbg_vertvel.setText("player vertical velocity: "+ players[currentPlayer].verticalVelocity);
+        dbg_animationCD.setText("player animation Cooldown: "+ players[currentPlayer].animationCooldown);
+        dbg_pose.setText("player pose: "+ players[currentPlayer].pose);
+        dbg_camX.setText("camera x: "+camPos);
+        dbg_camY.setText("camera y: "+camPosY);
+        dbg_tutorialPos.setText("tutorial position: "+tutorialPos);
       }
+      dbg_mspc.draw();
+      dbg_playerX.draw();
+      dbg_playerY.draw();
+      dbg_vertvel.draw();
+      dbg_animationCD.draw();
+      dbg_pose.draw();
+      dbg_camX.draw();
+      dbg_camY.draw();
+      dbg_tutorialPos.draw();
     }
 
     if (millis()<gmillis) {
@@ -1241,11 +1241,10 @@ void draw() {// the function that is called every fraim
     }
     if (displayTextUntill>=millis()) {
       fill(255);
-      textSize(200*Scale);
-      textAlign(CENTER, CENTER);
-      text(displayText, width/2, height*0.2);
+      game_displayText.setText(displayText);
+      game_displayText.draw();
     }
-
+    //TODO: text stuff for multyplayer in game
     if (multiplayer&&inGame) {
       if (level.multyplayerMode==1) {
         fill(255);
@@ -1253,7 +1252,6 @@ void draw() {// the function that is called every fraim
         calcTextSize(curtime, width*0.06);
         textAlign(CENTER, CENTER);
         text(curtime, width/2, height*0.015);
-
 
         if (isHost) {
           BestScore[] scores=new BestScore[10];
@@ -4042,6 +4040,23 @@ void turnThingsOff() {
   placingRandom=false;
 }
 
+void fileSelected(File selection) {
+  if (selection == null) {
+    return;
+  }
+  String path = selection.getAbsolutePath();
+  System.out.println(path);
+  String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();
+  System.out.println(extenchen);
+  if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")) {//check if the file type is valid
+
+    fileToCoppyPath=path;
+  } else {
+    System.out.println("invalid extenchen");
+    return;
+  }
+}
+
 void initText(){
   mm_title = new UiText(ui,"skinny mann",640,80,100,CENTER,CENTER);
   mm_EarlyAccess = new UiText(ui,"Early Access",640,180,100,CENTER,CENTER);
@@ -4106,4 +4121,27 @@ void initText(){
   up_title = new UiText(ui,"UPDATE!!!",640,102.857,50,CENTER,BASELINE);
   up_info = new UiText(ui,"A new version of this game has been released!!!",640,120,20,CENTER,BASELINE);
   up_wait = new UiText(ui,"please wait",640,102.857,50,CENTER,BASELINE);
+  lc_start_version = new UiText(ui,"game ver: "+GAME_version+ "  editor ver: "+EDITOR_version,0,718,15,LEFT,BOTTOM);
+  lc_start_author = new UiText(ui,"author: ",10,30,15,LEFT,BOTTOM);
+  lc_load_new_describe = new UiText(ui,"enter level name",40,100,20,LEFT, BOTTOM);
+  lc_load_new_enterd = new UiText(ui,"EEEEEEEEE",40,150,20,LEFT, BOTTOM);
+  lc_load_notFound = new UiText(ui,"Level Not Found!",640,300,50,CENTER,CENTER);
+  lc_newf_enterdName = new UiText(ui,"VAL",100,445,70,LEFT, BOTTOM);
+  lc_newf_fileName = new UiText(ui,"VAL",655,585,30,LEFT, BOTTOM);
+  lc_dp2_info = new UiText(ui,"select destenation stage",640,30,60,CENTER,CENTER);
+  lc_newbp_describe = new UiText(ui,"enter blueprint name",40,100,20,LEFT, BOTTOM);
+  lc_exit_question = new UiText(ui,"Are you sure?",640,120,50,CENTER,CENTER);
+  lc_exit_disclaimer = new UiText(ui,"Any unsaved data will be lost.",640,200,50,CENTER,CENTER);
+  deadText = new UiText(ui,"you died",640,360,50,CENTER,CENTER);
+  fpsText = new UiText(ui,"fps: ",1220,15,10,LEFT,BOTTOM);
+  dbg_mspc = new UiText(ui,"mspc: V",1275,10,10,RIGHT, TOP);
+  dbg_playerX = new UiText(ui,"player X: V",1275,20,10,RIGHT, TOP);
+  dbg_playerY = new UiText(ui,"player Y: V",1275,30,10,RIGHT, TOP);
+  dbg_vertvel = new UiText(ui,"player vertical velocity: V",1275,40,10,RIGHT, TOP);
+  dbg_animationCD = new UiText(ui,"player animation Cooldown: V",1275,50,10,RIGHT, TOP);
+  dbg_pose = new UiText(ui,"player pose: V",1275,60,10,RIGHT, TOP);
+  dbg_camX = new UiText(ui,"camera x: V",1275,70,10,RIGHT, TOP);
+  dbg_camY = new UiText(ui,"camera y: V",1275,80,10,RIGHT, TOP);
+  dbg_tutorialPos = new UiText(ui,"tutorial position: V",1275,90,10,RIGHT, TOP);
+  game_displayText = new UiText(ui,"V",640,144,200,CENTER,CENTER);
 }
