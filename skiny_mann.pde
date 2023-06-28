@@ -120,7 +120,7 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other;
+UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -502,9 +502,7 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("multiplayer strart")) {
           background(#FF8000);
           fill(0);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
-          text("Multiplayer", width/2, height*0.05);
+          initMultyplayerScreenTitle.draw();
 
           multyplayerJoin.draw();
           multyplayerHost.draw();
@@ -516,16 +514,18 @@ void draw() {// the function that is called every fraim
           fill(0);
           textSize(50*Scale);
           textAlign(CENTER, CENTER);
-          text("Host session", width/2, height*0.05);
-          textSize(25*Scale);
-          text("Name", width/2, height*0.13);
+          mp_hostSeccion.draw();
+          mp_host_Name.draw();
+          mp_host_enterdName.setText(name+((enteringName)? cursor:""));
+          mp_host_enterdName.draw();
+          mp_host_port.draw();
+          mp_host_endterdPort.setText(port+((enteringPort)? cursor:""));
+          mp_host_endterdPort.draw();
+
           noStroke();
           rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-          text(name+((enteringName)? cursor:""), width/2, height*0.175);
-          text("Port", width/2, height*0.24);
-          rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-          text(port+((enteringPort)? cursor:""), width/2, height*0.285);
 
+          rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
 
           multyplayerExit.draw();
           multyplayerGo.draw();
@@ -535,33 +535,35 @@ void draw() {// the function that is called every fraim
           fill(0);
           textSize(50*Scale);
           textAlign(CENTER, CENTER);
-          text("Join session", width/2, height*0.05);
-          textSize(25*Scale);
-          text("Name", width/2, height*0.13);
+          mp_joinSession.draw();
+          mp_join_name.draw();
+          mp_join_enterdName.setText(name+((enteringName)? cursor:""));
+          mp_join_enterdName.draw();
+          mp_join_port.draw();
+          mp_join_enterdPort.setText(port+((enteringPort)? cursor:""));
+          mp_join_enterdPort.draw();
+          mp_join_ip.draw();
+          mp_join_enterdIp.setText(ip+((enteringIP)?cursor:""));
+          mp_join_enterdIp.draw();
           noStroke();
           rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-          text(name+((enteringName)? cursor:""), width/2, height*0.175);
-          text("Port", width/2, height*0.24);
           rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-          text(port+((enteringPort)? cursor:""), width/2, height*0.285);
-          text("IP address", width/2, height*0.35);
           rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
-          text(ip+((enteringIP)?cursor:""), width/2, height*0.395);
-
 
           multyplayerExit.draw();
           multyplayerGo.draw();
         }
         if (Menue.equals("disconnected")) {
+          
           background(200);
           fill(0);
-          textAlign(CENTER, CENTER);
-          textSize(50*Scale);
-          text("Disconnected", width/2, height*0.05);
-          textSize(25*Scale);
-          text(disconnectReason, width/2, height*0.3);
+          mp_disconnected.draw();
+          mp_dc_reason.setText(disconnectReason);
+          mp_dc_reason.draw();
+          
           multyplayerExit.draw();
         }
+        //TODO: update text in multyplayer selection menu to UiText
         if (Menue.equals("multiplayer selection")) {
           background(-9131009);
           fill(0);
@@ -727,7 +729,7 @@ void draw() {// the function that is called every fraim
             }
           }
           multyplayerLeave.draw();
-        }
+        }//end of multyplayer selection
 
         if (Menue.equals("dev")) {
           drawDevMenue();
@@ -3575,12 +3577,9 @@ void networkError(Throwable error) {
 
 void drawDevMenue() {
   background(#EDEDED);
-  textSize(50*Scale);
   fill(0);
-  textAlign(CENTER, CENTER);
-  text("Developer Menue", width/2, height*0.05);
-  textSize(25*Scale);
-  text("this is a development build of the game, there may be bugs or unfinished features", width/2, height*0.1);
+  dev_title.draw();
+  dev_info.draw();
 
   dev_main.draw();
   dev_quit.draw();
@@ -4099,4 +4098,21 @@ void initText(){
   st_o_currentMusicVolume = new UiText(ui,"V",700,215,40,LEFT, BOTTOM);
   st_o_currentSoundsVolume = new UiText(ui,"B",700,285,40,LEFT, BOTTOM);
   st_other = new UiText(ui,"Outher",640,-10,50,CENTER,TOP);
+  initMultyplayerScreenTitle = new UiText(ui,"Multiplayer",640,36,50,CENTER,CENTER);
+  mp_hostSeccion = new UiText(ui,"Host session",640,36,50,CENTER, CENTER);
+  mp_host_Name = new UiText(ui,"Name",640,93.6,25,CENTER, CENTER);
+  mp_host_enterdName = new UiText(ui,"V",640,126,25,CENTER, CENTER);
+  mp_host_port = new UiText(ui,"Port",640,172.8,25,CENTER, CENTER);
+  mp_host_endterdPort = new UiText(ui,"V",640,205.2,25,CENTER, CENTER);
+  mp_joinSession = new UiText(ui,"Join session",640,36,50,CENTER, CENTER);
+  mp_join_name = new UiText(ui,"Name",640,93.6,25,CENTER, CENTER);
+  mp_join_enterdName = new UiText(ui,"V",640,126,25,CENTER, CENTER);
+  mp_join_port = new UiText(ui,"Port",640,172.8,25,CENTER, CENTER);
+  mp_join_enterdPort = new UiText(ui,"V",640,205.2,25,CENTER, CENTER);
+  mp_join_ip = new UiText(ui,"IP address",640,252,25,CENTER, CENTER);
+  mp_join_enterdIp = new UiText(ui,"?V",640,284.4,25,CENTER, CENTER);
+  mp_disconnected = new UiText(ui,"Disconnected",640,36,50,CENTER, CENTER);
+  mp_dc_reason = new UiText(ui,"V",640,216,25,CENTER, CENTER);
+  dev_title = new UiText(ui,"Developer Menue",640,36,50,CENTER, CENTER);
+  dev_info = new UiText(ui,"this is a development build of the game, there may be bugs or unfinished features",640,72,25,CENTER, CENTER);
 }
