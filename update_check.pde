@@ -1,11 +1,10 @@
 void draw_updae_screen() {//the update screen
   background(#EDEDED);
   fill(0);
-  textSize(50*Scale);
-  textAlign(CENTER);
-  text("UPDATE!!!", width/2, height/7);
-  textSize(20*Scale);
-  text("A new version of this game has been released!!!", width/2, height/6);
+
+  up_title.draw();
+  up_info .draw();
+
   updateOkButton.draw();
   updateGetButton.draw();
   if (platform==WINDOWS)
@@ -16,10 +15,8 @@ void draw_updae_screen() {//the update screen
 
 void drawUpdateDownloadingScreen() {
   background(#EDEDED);
-  textSize(50*Scale);
-  textAlign(CENTER);
   fill(0);
-  text("please wait", width/2, height/7);
+  up_wait.draw();
 }
 ArrayList<String> fileIndex=new ArrayList<>();
 void updae_screen_click() {//the buttons on the update screen

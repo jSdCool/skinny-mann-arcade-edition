@@ -103,7 +103,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder,settingsBackButton;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder,settingsBackButton,pauseResumeButton,pauseOptionsButton,pauseQuitButton;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -120,7 +120,7 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info;
+UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info,tut_notToday,tut_disclaimer,tut_toClose,coinCountText,pa_title,logoText,up_title,up_info,up_wait;
 //▄
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -294,8 +294,6 @@ void draw() {// the function that is called every fraim
           UGC_open_folder.draw();
           levelcreatorLink.draw();
           fill(0);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
           if (UGCNames.size()==0) {
             lsUGC_noLevelFound.draw();
           } else {
@@ -324,8 +322,6 @@ void draw() {// the function that is called every fraim
           fill(0);
           background(7646207);
           st_title.draw();
-          textAlign(LEFT, BOTTOM);
-          textSize(40*Scale);//explaination text
 
           if (settingsMenue.equals("game play")) {
             fill(0);
@@ -512,8 +508,6 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("start host")) {
           background(#FF8000);
           fill(0);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
           mp_hostSeccion.draw();
           mp_host_Name.draw();
           mp_host_enterdName.setText(name+((enteringName)? cursor:""));
@@ -533,8 +527,6 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("start join")) {
           background(#FF8000);
           fill(0);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
           mp_joinSession.draw();
           mp_join_name.draw();
           mp_join_enterdName.setText(name+((enteringName)? cursor:""));
@@ -767,47 +759,34 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("settings")) {
           background(0);
           fill(255);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
-          text("this feture is disabled during the tutorial\npres ECS to return", width/2, height/2);
+          tut_notToday.draw();
         } else {
           background(0);
           fill(255);
-          textSize(50*Scale);
-          textAlign(CENTER, CENTER);
-          text("ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", width/2, height/2);
-          textSize(25*Scale);
-          text("press ESC to close", width/2, height*0.97);
+          tut_disclaimer.draw();
+          tut_toClose.draw();
+         
         }
       }
       engageHUDPosition();//anything hud
 
       if (inGame) {
         fill(255);
-        textSize(50*Scale);
-        textAlign(LEFT, TOP);
-        text("coins: "+coinCount, 0, 0);
+        coinCountText.setText("coins: "+coinCount);
+        coinCountText.draw();
       }
 
       if (menue) {
         if (Menue.equals("pause")) {//when paused
-          textAlign(LEFT, BOTTOM);
           fill(50, 200);
           rect(0, 0, width, height);
           fill(0);
-          textSize(100*Scale);
-          text("GAME PAUSED", 300*Scale, 100*Scale);
-          fill(255, 25, 0);
-          stroke(255, 249, 0);
-          strokeWeight(10*Scale);
-          rect(500*Scale, 200*Scale, 300*Scale, 60*Scale);//buttons
-          rect(500*Scale, 300*Scale, 300*Scale, 60*Scale);
-          rect(500*Scale, 400*Scale, 300*Scale, 60*Scale);
-          fill(0);
-          textSize(50*Scale);
-          text("resume", 550*Scale, 250*Scale);
-          text("options", 550*Scale, 350*Scale);
-          text("quit", 600*Scale, 450*Scale);
+          pa_title.draw();
+ 
+          pauseResumeButton.draw();
+          pauseOptionsButton.draw();
+          pauseQuitButton.draw();
+
           if (multiplayer) {
             if (level.multyplayerMode==1) {
               pauseRestart.draw();
@@ -3893,6 +3872,9 @@ void  initButtons() {
   updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new UiButton(ui, 500, 100, 300, 60, "Restart", #FF0004, #FFF300).setStrokeWeight(10);
   settingsBackButton = new UiButton(ui,40,620,200,50,"Back",#FF1900,#FFF900).setStrokeWeight(10);
+  pauseResumeButton = new UiButton(ui,500,200,300,60,"Resume",#FF1900,#FFF900).setStrokeWeight(10);
+  pauseOptionsButton = new UiButton(ui,500,300,300,60,"Options",#FF1900,#FFF900).setStrokeWeight(10);
+  pauseQuitButton = new UiButton(ui,500,400,300,60,"Quit",#FF1900,#FFF900).setStrokeWeight(10);
 
 
 
@@ -4115,4 +4097,13 @@ void initText(){
   mp_dc_reason = new UiText(ui,"V",640,216,25,CENTER, CENTER);
   dev_title = new UiText(ui,"Developer Menue",640,36,50,CENTER, CENTER);
   dev_info = new UiText(ui,"this is a development build of the game, there may be bugs or unfinished features",640,72,25,CENTER, CENTER);
+  tut_notToday = new UiText(ui,"this feture is disabled during the tutorial\npres ECS to return",640,360,50,CENTER, CENTER);
+  tut_disclaimer = new UiText(ui,"ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!",640,360,50,CENTER, CENTER);
+  tut_toClose = new UiText(ui,"press ESC to close",640,698.4,25,CENTER, CENTER);
+  coinCountText = new UiText(ui,"coins: ",0,0,50,LEFT, TOP);
+  pa_title = new UiText(ui,"GAME PAUSED",640,100,100,CENTER,BOTTOM);
+  logoText = new UiText(ui,"GAMES",640,600,100,CENTER,CENTER);
+  up_title = new UiText(ui,"UPDATE!!!",640,102.857,50,CENTER,BASELINE);
+  up_info = new UiText(ui,"A new version of this game has been released!!!",640,120,20,CENTER,BASELINE);
+  up_wait = new UiText(ui,"please wait",640,102.857,50,CENTER,BASELINE);
 }

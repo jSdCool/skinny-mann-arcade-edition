@@ -21,9 +21,7 @@ void drawlogo() {
     logorx+=(1.0/frameRate)*25;
   } else {
     fill(#03FA0C);
-    textSize(100*Scale);
-    textAlign(CENTER, CENTER);
-    text("GAMES", width/2, height/2+height/3);
+    logoText.draw();
     start_wate+=1.0/frameRate;
   }
   fill(255);
