@@ -867,9 +867,9 @@ void draw() {// the function that is called every fraim
         lc_load_new_describe.draw();
         if (new_name!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
           if (entering_name&&coursor) {
-            lc_load_new_enterd.setText(rootPath+"|");
+            lc_load_new_enterd.setText(new_name+"|");
           } else {
-            lc_load_new_enterd.setText(rootPath);
+            lc_load_new_enterd.setText(new_name);
           }
         } else if (entering_name&&coursor) {
           lc_load_new_enterd.setText("|");
