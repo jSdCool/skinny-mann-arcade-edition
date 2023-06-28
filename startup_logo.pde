@@ -11,6 +11,8 @@ float[] coorY;
 float[] coorZ;
 float[] multXZ;
 float logorx=-75, logory=-180, logorz=0, start_wate=0;
+
+PShape CBiSphere;
 void drawlogo() {
   directionalLight(255, 255, 255, 1, 0.8, -1);
   ambientLight(102, 102, 102);
@@ -32,8 +34,8 @@ void drawlogo() {
   rotateZ(radians(logorz));
   rotateX(radians(logorx));
   rotateY(radians(logory));
-
-  textureSphere(200, 200, 200, CBi);
+  shape(CBiSphere,0,0);
+  //textureSphere(200, 200, 200, CBi);
   popMatrix();
 }
 
@@ -71,15 +73,17 @@ void initializeSphere(int numPtsW, int numPtsH_2pi) {
   }
 }
 
-void textureSphere(float rx, float ry, float rz, PImage t) {
-  // These are so we can map certain parts of the image on to the shape
-  float changeU=t.width/(float)(numPointsW-1);
-  float changeV=t.height/(float)(numPointsH-1);
+void textureSphere(float rx, float ry, float rz, PImage t) { 
+  // These are so we can map certain parts of the image on to the shape 
+  float changeU=t.width/(float)(numPointsW-1); 
+  float changeV=t.height/(float)(numPointsH-1); 
   float u=0;  // Width variable for the texture
   float v=0;  // Height variable for the texture
+  CBiSphere= createShape();
 
-  beginShape(TRIANGLE_STRIP);
-  texture(t);
+  CBiSphere.beginShape(TRIANGLE_STRIP);
+  CBiSphere.noStroke();
+  CBiSphere.texture(t);
   for (int i=0; i<(numPointsH-1); i++) {  // For all the rings but top and bottom
     // Goes into the array here instead of loop to save time
     float coory=coorY[i];
@@ -89,14 +93,14 @@ void textureSphere(float rx, float ry, float rz, PImage t) {
     float multxzPlus=multXZ[i+1];
 
     for (int j=0; j<numPointsW; j++) { // For all the pts in the ring
-      normal(-coorX[j]*multxz, -coory, -coorZ[j]*multxz);
-      vertex(coorX[j]*multxz*rx, coory*ry, coorZ[j]*multxz*rz, u, v);
-      normal(-coorX[j]*multxzPlus, -cooryPlus, -coorZ[j]*multxzPlus);
-      vertex(coorX[j]*multxzPlus*rx, cooryPlus*ry, coorZ[j]*multxzPlus*rz, u, v+changeV);
+      CBiSphere.normal(-coorX[j]*multxz, -coory, -coorZ[j]*multxz);
+      CBiSphere.vertex(coorX[j]*multxz*rx, coory*ry, coorZ[j]*multxz*rz, u, v);
+      CBiSphere.normal(-coorX[j]*multxzPlus, -cooryPlus, -coorZ[j]*multxzPlus);
+      CBiSphere.vertex(coorX[j]*multxzPlus*rx, cooryPlus*ry, coorZ[j]*multxzPlus*rz, u, v+changeV);
       u+=changeU;
     }
     v+=changeV;
     u=0;
   }
-  endShape();
+  CBiSphere.endShape();
 }

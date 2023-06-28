@@ -70,7 +70,7 @@ void setup() {//seccond function called
     println(height+" "+Scale);//debung info
     println("loading texture for start screen");
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
-
+    
     textSize(100*Scale);//500
     println("initilizing buttons");
     initButtons();
@@ -80,6 +80,7 @@ void setup() {//seccond function called
     ptsH=100;
     println("initilizing CBi sphere");
     initializeSphere(ptsW, ptsH);
+    textureSphere(200, 200, 200, CBi);
     thread("programLoad");
   }
   catch(Throwable e) {
@@ -2848,6 +2849,7 @@ void mouseDragged() {
 
 void windowResized(){
   ui.reScale();
+  Scale = height/720.0;
 }
 
 void loadLevel(String fdp) {

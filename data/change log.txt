@@ -10,6 +10,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: spelling of shadows in settings
 -changed: finally updated buttons on pause menue
 -changed: imporoved UI scaleing
+-fixed: startup logo randomly loosing texture
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
