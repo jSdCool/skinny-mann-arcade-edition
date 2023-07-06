@@ -174,20 +174,10 @@ void stageLevelDraw() {
 
 
   if (level_complete) {//if the level has been completed
-    textAlign(LEFT, BOTTOM);
-    textSize(Scale*100);//draw the level complete thing
-    fill(255, 255, 0);
-    text("LEVEL COMPLETE!!!", Scale*200, Scale*400);
-
-    fill(255, 126, 0);
-    stroke(255, 0, 0);
-    strokeWeight(Scale*10);
-    
+    fill(255, 255, 0);  
+    lebelCompleteText.draw();
     if(level.multyplayerMode!=2||isHost){
-      rect(Scale*550, Scale*450, Scale*200, Scale*40);//continue button
-      fill(0);
-      textSize(Scale*40);
-      text("continue", Scale*565, Scale*485);
+      endOfLevelButton.draw();
     }
   }
 
