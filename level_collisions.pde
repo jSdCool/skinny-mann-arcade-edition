@@ -62,7 +62,7 @@ void stageLevelDraw() {
     if (e3DMode) {//if 3D mode is turned on
 
 
-     if (simulating&&levelCreator)
+     if ((simulating&&levelCreator)||!levelCreator)
         camera3DpositionSimulating();
       else
         camera3DpositionNotSimulating();
