@@ -3,6 +3,10 @@ void menuTransition() {
   case LOGO_TO_MAIN:
     transition_logoToMain();
     break;
+  
+  case LOTO_TO_SETTINGS:
+    transition_logoToSettings();
+    break;
 
   default:
     transitionProgress=1;
@@ -14,7 +18,8 @@ void menuTransition() {
 }
 
 enum Transitions {
-  LOGO_TO_MAIN
+  LOGO_TO_MAIN,
+  LOTO_TO_SETTINGS
 };
 
 Transitions currentTransition;
@@ -75,6 +80,57 @@ void transition_logoToMain() {
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
     drawMainMenu();
+  }
+
+  
+  transitionProgress=(float)(millis()-transitionStartMillis)/5000.0;
+}
+
+
+void transition_logoToSettings() {
+  
+  if (transitionProgress<0.4) {
+    background(0);
+    if (startupStars.size()<500) {
+      addStars();
+    }
+    for (int i=0; i<startupStars.size(); i++) {
+      startupStars.get(i).draw();
+    }
+    drawlogo(true,false);
+    
+  }else if(transitionProgress<0.6){
+    background(0);
+    float senctionProgress = (transitionProgress-0.4)/0.2;
+    float camYpos  = 1300*senctionProgress+height/2;
+    camera(width/2, camYpos, 623.5382907, width/2, camYpos, 0, 0, 1, 0);
+    if (startupStars.size()<500) {
+      addStars();
+    }
+    for (int i=0; i<startupStars.size(); i++) {
+      startupStars.get(i).draw();
+    }
+    drawlogo(false,false);
+    
+  }else if(transitionProgress<0.8){
+    float senctionProgress = (transitionProgress-0.6)/0.2;
+    float camYpos  = 1300*senctionProgress+height/2+1300;
+    background(lerpColor(0,#74ABFF,senctionProgress));
+    
+    camera(width/2, camYpos, 623.5382907, width/2, camYpos, 0, 0, 1, 0);
+    if (startupStars.size()<500) {
+      addStars();
+    }
+    for (int i=0; i<startupStars.size(); i++) {
+      startupStars.get(i).draw();
+    }
+    
+  } else {
+    float senctionProgress = (transitionProgress-0.8)/0.2;
+    float camYpos = 1300*senctionProgress+height/2-1300;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
+    drawSettings();
   }
 
   

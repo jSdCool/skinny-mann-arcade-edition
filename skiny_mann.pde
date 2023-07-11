@@ -178,7 +178,10 @@ void draw() {// the function that is called every fraim
                 Menue="update";//go to update menue
               } else {//if no update exists go to main menue
                 if (showSettingsAfterStart) {
+                  menue=false;
                   Menue="settings";
+                  initMenuTransition(Transitions.LOTO_TO_SETTINGS);
+                  return;
                 } else {
                   menue=false;
                   Menue="main";
@@ -188,15 +191,19 @@ void draw() {// the function that is called every fraim
               }
             }
             catch(Throwable e) {//if an error occors or no return then go to main menue
+              println(e);//print to console the cause of the error
               if (showSettingsAfterStart) {
+                menue=false;
                 Menue="settings";
+                initMenuTransition(Transitions.LOTO_TO_SETTINGS);
+                return;
               } else {
                 menue=false;
                 Menue="main";
                 initMenuTransition(Transitions.LOGO_TO_MAIN);
                 return;
               }
-              println(e);//print to console the cause of the error
+
             }
           }
         }
@@ -313,163 +320,7 @@ void draw() {// the function that is called every fraim
 
 
         if (Menue.equals("settings")) {//the settings menue
-          fill(0);
-          background(7646207);
-          st_title.draw();
-
-          if (settingsMenue.equals("game play")) {
-            fill(0);
-            st_Hssr.draw();
-            st_Vssr.draw();
-            st_hsrp.setText((int)(((esdPos-800.0)/440)*530)+100+"");
-            st_vsrp.setText((int)(((vesdPos-800.0)/440)*220)+100+"");
-            st_hsrp.draw();
-            st_vsrp.draw();
-
-            sdSlider.draw();
-            fill(255);
-            rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
-            vsdSlider.draw();
-            fill(255);
-            rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
-            fill(0);
-            st_gameplay.draw();
-          }//end of gameplay settings
-
-          if (settingsMenue.equals("display")) {
-            fill(0);
-            st_dsp_vsr.draw();
-            st_dsp_fs.draw();
-            st_dsp_4k.draw();
-            st_dsp_1440.draw();
-            st_dsp_1080.draw();
-            st_dsp_900.draw();
-            st_dsp_720.draw();
-            st_dsp_fsYes.draw();
-            st_dsp_fsNo.draw();
-            rez720.draw();
-            rez900.draw();
-            rez1080.draw();
-            rez1440.draw();
-            rez4k.draw();
-            fullScreenOn.draw();
-            fullScreenOff.draw();
-
-            fill(0);
-            st_display.draw();
-
-          }//end of display settings
-
-          if (settingsMenue.equals("outher")) {
-            fill(0);
-            st_o_displayFPS.draw();
-            st_o_debugINFO.draw();
-            st_o_musicVol.draw();
-            st_o_SFXvol.draw();
-            st_o_3DShadow.draw();
-            st_o_narration.draw();
-            st_o_yes.draw();
-            st_o_no.draw();
-            st_o_better.draw();
-            st_o_demonitized.draw();
-            st_o_currentMusicVolume.setText((int)(musicVolume*100)+"");
-            st_o_currentSoundsVolume.setText((int)(sfxVolume*100)+"");
-            st_o_currentMusicVolume.draw();
-            st_o_currentSoundsVolume.draw();
-
-            enableFPS.draw();
-            disableFPS.draw();
-            enableDebug.draw();
-            disableDebug.draw();
-            MusicSlider.draw();
-            SFXSlider.draw();
-            shadowOn.draw();
-            shadowOff.draw();
-            narrationMode1.draw();
-            narrationMode0.draw();
-
-            fill(255);
-            stroke(0);
-            strokeWeight(Scale);
-            rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
-            rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
-            strokeWeight(0);
-
-            textSize(50*Scale);
-            textAlign(CENTER, TOP);
-            fill(0);
-            st_other.draw();
-          }//end of outher settings
-
-          //end of check boxes and stuffs
-
-          settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
-
-          strokeWeight(5*Scale);
-          stroke(255, 0, 0);
-          if (true) {
-            JSONObject rez=settings.getJSONObject(2);
-            int vres = rez.getInt("v-res");
-            //  String arat = rez.getString("aspect ratio");
-            boolean fus = rez.getBoolean("full_Screen");
-
-
-            if (settingsMenue.equals("display")) {
-              if (vres==720) {
-                chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
-              }
-              if (vres==900) {
-                chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
-              }
-              if (vres==1080) {
-                chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
-              }
-              if (vres==1440) {
-                chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
-              }
-              if (vres==2160) {
-                chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
-              }
-
-              if (!fus) {
-                chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
-              } else {
-                chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
-              }
-            }//end of display settings checkmarks
-
-            if (settingsMenue.equals("outher")) {
-              //enableFPS,disableFPS,enableDebug,disableDebug
-              if (!displayFPS) {
-                chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
-              } else {
-                chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
-              }
-              if (!displayDebugInfo) {
-                chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
-              } else {
-                chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
-              }
-
-              if (!shadow3D) {
-                chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
-              } else {
-                chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
-              }
-
-              if (tutorialNarrationMode==0) {
-                chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
-              } else if (tutorialNarrationMode==1) {
-                chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
-              }
-            }
-          }//end of outher settings
-
-          sttingsGPL.draw();
-          settingsDSP.draw();
-          settingsOUT.draw();
-
-          settingsBackButton.draw();
+          drawSettings();
         }
 
         //very old and not used but still exsist here anyway
@@ -3051,6 +2902,166 @@ void drawMainMenu(){
   mm_version.draw();
   discord.draw();
   image(discordIcon, 1200*Scale, 650*Scale);
+}
+
+void drawSettings(){
+  fill(0);
+          background(7646207);
+          st_title.draw();
+
+          if (settingsMenue.equals("game play")) {
+            fill(0);
+            st_Hssr.draw();
+            st_Vssr.draw();
+            st_hsrp.setText((int)(((esdPos-800.0)/440)*530)+100+"");
+            st_vsrp.setText((int)(((vesdPos-800.0)/440)*220)+100+"");
+            st_hsrp.draw();
+            st_vsrp.draw();
+
+            sdSlider.draw();
+            fill(255);
+            rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
+            vsdSlider.draw();
+            fill(255);
+            rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
+            fill(0);
+            st_gameplay.draw();
+          }//end of gameplay settings
+
+          if (settingsMenue.equals("display")) {
+            fill(0);
+            st_dsp_vsr.draw();
+            st_dsp_fs.draw();
+            st_dsp_4k.draw();
+            st_dsp_1440.draw();
+            st_dsp_1080.draw();
+            st_dsp_900.draw();
+            st_dsp_720.draw();
+            st_dsp_fsYes.draw();
+            st_dsp_fsNo.draw();
+            rez720.draw();
+            rez900.draw();
+            rez1080.draw();
+            rez1440.draw();
+            rez4k.draw();
+            fullScreenOn.draw();
+            fullScreenOff.draw();
+
+            fill(0);
+            st_display.draw();
+
+          }//end of display settings
+
+          if (settingsMenue.equals("outher")) {
+            fill(0);
+            st_o_displayFPS.draw();
+            st_o_debugINFO.draw();
+            st_o_musicVol.draw();
+            st_o_SFXvol.draw();
+            st_o_3DShadow.draw();
+            st_o_narration.draw();
+            st_o_yes.draw();
+            st_o_no.draw();
+            st_o_better.draw();
+            st_o_demonitized.draw();
+            st_o_currentMusicVolume.setText((int)(musicVolume*100)+"");
+            st_o_currentSoundsVolume.setText((int)(sfxVolume*100)+"");
+            st_o_currentMusicVolume.draw();
+            st_o_currentSoundsVolume.draw();
+
+            enableFPS.draw();
+            disableFPS.draw();
+            enableDebug.draw();
+            disableDebug.draw();
+            MusicSlider.draw();
+            SFXSlider.draw();
+            shadowOn.draw();
+            shadowOff.draw();
+            narrationMode1.draw();
+            narrationMode0.draw();
+
+            fill(255);
+            stroke(0);
+            strokeWeight(Scale);
+            rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
+            rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
+            strokeWeight(0);
+
+            textSize(50*Scale);
+            textAlign(CENTER, TOP);
+            fill(0);
+            st_other.draw();
+          }//end of outher settings
+
+          //end of check boxes and stuffs
+
+          settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
+
+          strokeWeight(5*Scale);
+          stroke(255, 0, 0);
+          if (true) {
+            JSONObject rez=settings.getJSONObject(2);
+            int vres = rez.getInt("v-res");
+            //  String arat = rez.getString("aspect ratio");
+            boolean fus = rez.getBoolean("full_Screen");
+
+
+            if (settingsMenue.equals("display")) {
+              if (vres==720) {
+                chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
+              }
+              if (vres==900) {
+                chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
+              }
+              if (vres==1080) {
+                chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
+              }
+              if (vres==1440) {
+                chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
+              }
+              if (vres==2160) {
+                chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
+              }
+
+              if (!fus) {
+                chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
+              } else {
+                chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
+              }
+            }//end of display settings checkmarks
+
+            if (settingsMenue.equals("outher")) {
+              //enableFPS,disableFPS,enableDebug,disableDebug
+              if (!displayFPS) {
+                chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
+              } else {
+                chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
+              }
+              if (!displayDebugInfo) {
+                chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
+              } else {
+                chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
+              }
+
+              if (!shadow3D) {
+                chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
+              } else {
+                chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
+              }
+
+              if (tutorialNarrationMode==0) {
+                chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
+              } else if (tutorialNarrationMode==1) {
+                chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
+              }
+            }
+          }//end of outher settings
+
+          sttingsGPL.draw();
+          settingsDSP.draw();
+          settingsOUT.draw();
+
+          settingsBackButton.draw();
 }
 
 void generateSettings() {
