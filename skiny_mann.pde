@@ -4078,7 +4078,7 @@ void fileSelected(File selection) {
 }
 
 void initText(){
-  mm_title = new UiText(ui,"skinny mann",640,80,100,CENTER,CENTER);
+  mm_title = new UiText(ui,"Skinny Mann",640,80,100,CENTER,CENTER);
   mm_EarlyAccess = new UiText(ui,"Early Access",640,180,100,CENTER,CENTER);
   mm_version = new UiText(ui,version,0,718,10,LEFT,BOTTOM);
   ls_levelSelect = new UiText(ui,"Level Select",640,54,50,CENTER,CENTER);
