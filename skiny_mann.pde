@@ -1838,6 +1838,7 @@ void mouseClicked() {// when you click the mouse
           if (multyplayerExit.isMouseOver()) {
             Menue="start join";
             multiplayer=false;
+            currentPlayer=0;
           }
         }
 
@@ -1854,6 +1855,7 @@ void mouseClicked() {// when you click the mouse
               Menue="main";
               multiplayer=false;
               waitingForReady=false;
+              currentPlayer=0;
               return;
             }
             if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
@@ -1956,6 +1958,7 @@ void mouseClicked() {// when you click the mouse
               println("returning to main menu");
               Menue="main";
               multiplayer=false;
+              currentPlayer=0;
               return;
             }
           }

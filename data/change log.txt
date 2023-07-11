@@ -11,6 +11,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: finally updated buttons on pause menue
 -changed: imporoved UI scaleing
 -fixed: startup logo randomly loosing texture
+-fixed: player number not being reset when leaving multyplayer
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
