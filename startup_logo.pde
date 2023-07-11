@@ -13,12 +13,12 @@ float[] multXZ;
 float logorx=-75, logory=-180, logorz=0, start_wate=0;
 
 PShape CBiSphere;
-void drawlogo() {
+void drawlogo(boolean controllCamera,boolean setBackground) {
   directionalLight(255, 255, 255, 1, 0.8, -1);
   ambientLight(102, 102, 102);
 
-
-  background(0);
+  if(setBackground)
+    background(0);
   if (logorx<0) {
     logorx+=(1.0/frameRate)*25;
   } else {
@@ -27,7 +27,8 @@ void drawlogo() {
     start_wate+=1.0/frameRate;
   }
   fill(255);
-  camera(width/2, height/2, 720, width/2, height/2, 0, 0, 1, 0);
+  if(controllCamera)
+    camera(width/2, height/2, 623.5382907, width/2, height/2, 0, 0, 1, 0);
 
   pushMatrix();
   translate(width/2, height/2, 0);

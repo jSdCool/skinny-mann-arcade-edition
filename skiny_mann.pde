@@ -93,7 +93,7 @@ PImage CBi, icon, discordIcon;
 PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler,LevelCreatorLogo;
 ;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false,exitLevelCreator=false,levelNotFound=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false,exitLevelCreator=false,levelNotFound=false,transitioningMenu=false;
  String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
@@ -150,13 +150,16 @@ void draw() {// the function that is called every fraim
     }
 
     if (!levelCreator) {
+      if(transitioningMenu){
+        menuTransition();
+      }
 
       if (menue) {//when in a menue
         if (Menue.equals("creds")) {//the inital loading screen
           background(0);
           noStroke();
 
-          drawlogo();
+          drawlogo(true,true);
 
           if (start_wate>=2&&loaded) {// display it for 100  fraims
             soundHandler.setMusicVolume(musicVolume);
@@ -177,7 +180,10 @@ void draw() {// the function that is called every fraim
                 if (showSettingsAfterStart) {
                   Menue="settings";
                 } else {
+                  menue=false;
                   Menue="main";
+                  initMenuTransition(Transitions.LOGO_TO_MAIN);
+                  return;
                 }
               }
             }
@@ -185,7 +191,10 @@ void draw() {// the function that is called every fraim
               if (showSettingsAfterStart) {
                 Menue="settings";
               } else {
+                menue=false;
                 Menue="main";
+                initMenuTransition(Transitions.LOGO_TO_MAIN);
+                return;
               }
               println(e);//print to console the cause of the error
             }
@@ -200,30 +209,7 @@ void draw() {// the function that is called every fraim
         }
 
         if (Menue.equals("main")) {//if on main menue
-          background(7646207);
-          fill(0);
-          //the title
-          mm_title.draw();
-          
-          fill(255, 255, 0);
-          mm_EarlyAccess.draw();
-          textSize(35*Scale);
-          fill(-16732415);
-          stroke(-16732415);
-          rect(0, height/2, width, height/2);//green rectangle
-          draw_mann(200*Scale, 360*Scale, 1, 4*Scale, 0);
-          draw_mann(1080*Scale, 360*Scale, 1, 4*Scale, 1);
-
-          playButton.draw();
-          exitButton.draw();
-          joinButton.draw();
-          settingsButton.draw();
-          howToPlayButton.draw();
-
-          fill(255);
-          mm_version.draw();
-          discord.draw();
-          image(discordIcon, 1200*Scale, 650*Scale);
+          drawMainMenu();
         }
         if (Menue.equals("level select")) {//if selecting level
           levelCompleteSoundPlayed=false;
@@ -3038,6 +3024,33 @@ void mouseReleased() {
       }
     }
   }
+}
+
+void drawMainMenu(){
+  background(7646207);
+  fill(0);
+  //the title
+  mm_title.draw();
+  
+  fill(255, 255, 0);
+  mm_EarlyAccess.draw();
+  textSize(35*Scale);
+  fill(-16732415);
+  stroke(-16732415);
+  rect(0, height/2, width, height/2);//green rectangle
+  draw_mann(200*Scale, 360*Scale, 1, 4*Scale, 0);
+  draw_mann(1080*Scale, 360*Scale, 1, 4*Scale, 1);
+
+  playButton.draw();
+  exitButton.draw();
+  joinButton.draw();
+  settingsButton.draw();
+  howToPlayButton.draw();
+
+  fill(255);
+  mm_version.draw();
+  discord.draw();
+  image(discordIcon, 1200*Scale, 650*Scale);
 }
 
 void generateSettings() {
