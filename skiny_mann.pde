@@ -66,11 +66,11 @@ void setup() {//seccond function called
       Scale=vres/720.0;
       Scale2=hres/1280.0;
     }
-    ui=new UiFrame(this,1280,720);
+    ui=new UiFrame(this, 1280, 720);
     println(height+" "+Scale);//debung info
     println("loading texture for start screen");
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
-    
+
     textSize(100*Scale);//500
     println("initilizing buttons");
     initButtons();
@@ -90,10 +90,10 @@ void setup() {//seccond function called
 }
 //define a shit tone of varibles
 PImage CBi, icon, discordIcon;
-PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler,LevelCreatorLogo;
+PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler, LevelCreatorLogo;
 ;
 PApplet primaryWindow=this;
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false,exitLevelCreator=false,levelNotFound=false,transitioningMenu=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=true, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false;
  String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
@@ -102,9 +102,9 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0;//int
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator,lc_backButton,lcOverviewExitButton,lc_exitConfirm,lc_exitCancle,lc_openLevelsFolder,settingsBackButton,pauseResumeButton,pauseOptionsButton,pauseQuitButton,endOfLevelButton;//button
+Button select_lvl_1, select_lvl_back, discord, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -121,14 +121,14 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title,mm_EarlyAccess,mm_version,ls_levelSelect,lsUGC_title,lsUGC_noLevelFound,lsUGC_levelNotCompatible,lsUGC_levelName,st_title,st_Hssr,st_Vssr,st_gameplay,st_vsrp,st_hsrp,st_dsp_vsr,st_dsp_fs,st_dsp_4k,st_dsp_1440,st_dsp_1080,st_dsp_900,st_dsp_720,st_dsp_fsYes,st_dsp_fsNo,st_display,st_o_displayFPS, st_o_debugINFO, st_o_musicVol,st_o_SFXvol,st_o_3DShadow,st_o_narration, st_o_yes,st_o_no,st_o_better,st_o_demonitized,st_o_currentMusicVolume,st_o_currentSoundsVolume,st_other,initMultyplayerScreenTitle,mp_hostSeccion,mp_host_Name,mp_host_enterdName,mp_host_port,mp_host_endterdPort,mp_joinSession,mp_join_name,mp_join_enterdName,mp_join_port,mp_join_enterdPort,mp_join_ip,mp_join_enterdIp,mp_disconnected,mp_dc_reason,dev_title,dev_info,tut_notToday,tut_disclaimer,tut_toClose,coinCountText,pa_title,logoText,up_title,up_info,up_wait,lc_start_version,lc_start_author,lc_load_new_describe,lc_load_new_enterd,lc_load_notFound,lc_newf_enterdName,lc_newf_fileName,lc_dp2_info,lc_newbp_describe,lc_exit_question,lc_exit_disclaimer,deadText,fpsText,dbg_mspc,dbg_playerX,dbg_playerY,dbg_vertvel,dbg_animationCD,dbg_pose,dbg_camX,dbg_camY,dbg_tutorialPos,game_displayText,lebelCompleteText;
+UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText;
 //▄
 
 
-//camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0); 
-//defCameraX = width/2;  
-//defCameraY = height/2; 
-//defCameraFOV = 60 * DEG_TO_RAD;  
+//camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0);
+//defCameraX = width/2;
+//defCameraY = height/2;
+//defCameraFOV = 60 * DEG_TO_RAD;
 //defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
 void draw() {// the function that is called every fraim
   if (frameCount%20==0) {
@@ -150,7 +150,7 @@ void draw() {// the function that is called every fraim
     }
 
     if (!levelCreator) {
-      if(transitioningMenu){
+      if (transitioningMenu) {
         menuTransition();
       }
 
@@ -159,7 +159,7 @@ void draw() {// the function that is called every fraim
           background(0);
           noStroke();
 
-          drawlogo(true,true);
+          drawlogo(true, true);
 
           if (start_wate>=2&&loaded) {// display it for 100  fraims
             soundHandler.setMusicVolume(musicVolume);
@@ -180,7 +180,7 @@ void draw() {// the function that is called every fraim
                 if (showSettingsAfterStart) {
                   menue=false;
                   Menue="settings";
-                  initMenuTransition(Transitions.LOTO_TO_SETTINGS);
+                  initMenuTransition(Transitions.LOGO_TO_SETTINGS);
                   return;
                 } else {
                   menue=false;
@@ -195,7 +195,7 @@ void draw() {// the function that is called every fraim
               if (showSettingsAfterStart) {
                 menue=false;
                 Menue="settings";
-                initMenuTransition(Transitions.LOTO_TO_SETTINGS);
+                initMenuTransition(Transitions.LOGO_TO_SETTINGS);
                 return;
               } else {
                 menue=false;
@@ -203,7 +203,6 @@ void draw() {// the function that is called every fraim
                 initMenuTransition(Transitions.LOGO_TO_MAIN);
                 return;
               }
-
             }
           }
         }
@@ -216,75 +215,10 @@ void draw() {// the function that is called every fraim
         }
 
         if (Menue.equals("main")) {//if on main menue
-          drawMainMenu();
+          drawMainMenu(true);
         }
         if (Menue.equals("level select")) {//if selecting level
-          levelCompleteSoundPlayed=false;
-          background(7646207);
-          fill(-16732415);
-          stroke(-16732415);
-          strokeWeight(0);
-          rect(0*Scale, 360*Scale, 1280*Scale, 360*Scale);//green rectangle
-          fill(0);
-          ls_levelSelect.draw();
-          int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
-          if (progress<2) {
-            select_lvl_2.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_2.setColor(-59135, -1791);
-          }
-          if (progress<3) {
-            select_lvl_3.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_3.setColor(-59135, -1791);
-          }
-          if (progress<4) {
-            select_lvl_4.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_4.setColor(-59135, -1791);
-          }
-          if (progress<5) {
-            select_lvl_5.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_5.setColor(-59135, -1791);
-          }
-          if (progress<6) {
-            select_lvl_6.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_6.setColor(-59135, -1791);
-          }
-          if (progress<7) {
-            select_lvl_7.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_7.setColor(-59135, -1791);
-          }
-          if (progress<8) {
-            select_lvl_8.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_8.setColor(-59135, -1791);
-          }
-          if (progress<9) {
-            select_lvl_9.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_9.setColor(-59135, -1791);
-          }
-          if (progress<10) {
-            select_lvl_10.setColor(#B40F00, #B4AF00);
-          } else {
-            select_lvl_10.setColor(-59135, -1791);
-          }
-          select_lvl_1.draw();
-          select_lvl_2.draw();
-          select_lvl_3.draw();
-          select_lvl_4.draw();
-          select_lvl_5.draw();
-          select_lvl_6.draw();
-          select_lvl_7.draw();
-          select_lvl_8.draw();
-          select_lvl_9.draw();
-          select_lvl_10.draw();
-          select_lvl_back.draw();
-          select_lvl_UGC.draw();
+          drawLevelSelect(true);
         }
         if (Menue.equals("level select UGC")) {
           background(7646207);
@@ -391,13 +325,13 @@ void draw() {// the function that is called every fraim
           multyplayerGo.draw();
         }
         if (Menue.equals("disconnected")) {
-          
+
           background(200);
           fill(0);
           mp_disconnected.draw();
           mp_dc_reason.setText(disconnectReason);
           mp_dc_reason.draw();
-          
+
           multyplayerExit.draw();
         }
         //TODO: update text in multyplayer selection menu to UiText
@@ -610,7 +544,6 @@ void draw() {// the function that is called every fraim
           fill(255);
           tut_disclaimer.draw();
           tut_toClose.draw();
-         
         }
       }
       engageHUDPosition();//anything hud
@@ -627,7 +560,7 @@ void draw() {// the function that is called every fraim
           rect(0, 0, width, height);
           fill(0);
           pa_title.draw();
- 
+
           pauseResumeButton.draw();
           pauseOptionsButton.draw();
           pauseQuitButton.draw();
@@ -643,16 +576,16 @@ void draw() {// the function that is called every fraim
     } else {
       if (startup) {//if on the startup screen
         background(#48EDD8);
-        translate(width/2,150*Scale,0);
+        translate(width/2, 150*Scale, 0);
         rotateX(PI);
-        ambientLight(128,128,128);
-        directionalLight(255,255,255,-0.4,-0.3,0.1);
+        ambientLight(128, 128, 128);
+        directionalLight(255, 255, 255, -0.4, -0.3, 0.1);
         shape(LevelCreatorLogo);//logo
         noLights();
         rotateX(-PI);
-        translate(-width/2,-150*Scale,0);
-        
-        
+        translate(-width/2, -150*Scale, 0);
+
+
         newLevelButton.draw();
         loadLevelButton.draw();
         textAlign(LEFT, BOTTOM);
@@ -672,7 +605,7 @@ void draw() {// the function that is called every fraim
         background(#48EDD8);
         fill(0);
         lc_load_new_describe.draw();
-        
+
         if (rootPath!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
           if (entering_file_path&&coursor) {
             lc_load_new_enterd.setText(rootPath+"|");
@@ -683,8 +616,8 @@ void draw() {// the function that is called every fraim
           lc_load_new_enterd.setText("|");
         }
         lc_load_new_enterd.draw();
-        if(levelNotFound){
-          fill(200,0,0);
+        if (levelNotFound) {
+          fill(200, 0, 0);
           lc_load_notFound.draw();
         }
         stroke(0);
@@ -864,7 +797,7 @@ void draw() {// the function that is called every fraim
         newFileBack.draw();
         drawSpeakericon(this, addSound.x+addSound.lengthX/2, addSound.y+addSound.lengthY/2, 1*Scale);
         fill(0);
-        
+
         if (newFileType.equals("sound")) {//if the selected type is sound
           lc_newf_enterdName.setText("name: "+newFileName+coursorr);//display the entered name
           String pathSegments[]=fileToCoppyPath.split("/|\\\\");
@@ -945,7 +878,7 @@ void draw() {// the function that is called every fraim
           lc_load_new_enterd.setText("|");
         }
         lc_load_new_enterd.draw();
-        
+
         createBlueprintGo.draw();//create button
         lc_backButton.draw();
         stroke(0);
@@ -1018,8 +951,8 @@ void draw() {// the function that is called every fraim
           camPosY+=4;
         }
       }
-      
-      if(exitLevelCreator){
+
+      if (exitLevelCreator) {
         background(#0092FF);
         fill(0);
         lc_exit_question.draw();
@@ -1051,7 +984,7 @@ void draw() {// the function that is called every fraim
       fpsText.draw();
     }
     if (displayDebugInfo) {
-      fill(255);     
+      fill(255);
       if (players[currentPlayer]!=null) {
         dbg_mspc.setText("mspc: "+ mspc);
         dbg_playerX.setText("player X: "+ players[currentPlayer].x);
@@ -1202,6 +1135,8 @@ void mouseClicked() {// when you click the mouse
         if (Menue.equals("main")) {//if that menue is the main menue
           if (playButton.isMouseOver()) {//level select button
             Menue = "level select";
+            menue=false;
+            initMenuTransition(Transitions.MAIN_TO_LEVEL_SELECT);
             return;
           }
           if (exitButton.isMouseOver()) {//exit button
@@ -1212,6 +1147,8 @@ void mouseClicked() {// when you click the mouse
           }
           if (settingsButton.isMouseOver()) {//settings button
             Menue="settings";
+            menue=false;
+            initMenuTransition(Transitions.MAIN_TO_SETTINGS);
             return;
           }
           if (howToPlayButton.isMouseOver()) {//how to play button
@@ -1279,6 +1216,8 @@ void mouseClicked() {// when you click the mouse
 
           if (select_lvl_back.isMouseOver()) {
             Menue="main";
+            menue=false;
+            initMenuTransition(Transitions.LEVEL_SELECT_TO_MAIN);
           }
           if (select_lvl_UGC.isMouseOver()) {
             Menue="level select UGC";
@@ -1590,6 +1529,8 @@ void mouseClicked() {// when you click the mouse
               prevousInGame=false;
             } else {
               Menue ="main";
+              menue=false;
+              initMenuTransition(Transitions.SETTINGS_TO_MAIN);
             }
           }
         }
@@ -1857,7 +1798,7 @@ void mouseClicked() {// when you click the mouse
             new_name="";
             entering_name=true;
           }
-          if(lc_backButton.isMouseOver()){
+          if (lc_backButton.isMouseOver()) {
             levelCreator=false;
           }
         }
@@ -1870,7 +1811,7 @@ void mouseClicked() {// when you click the mouse
               String tmp=rootPath;
               rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+rootPath;
               boolean exsists=new File(rootPath+"/index.json").exists();
-              if(!exsists){
+              if (!exsists) {
                 levelNotFound=true;
                 rootPath=tmp;
                 return;
@@ -1890,12 +1831,12 @@ void mouseClicked() {// when you click the mouse
             }
             return;
           }
-          if(lc_backButton.isMouseOver()){
+          if (lc_backButton.isMouseOver()) {
             startup=true;
             loading=false;
             entering_file_path=false;
           }
-          if(lc_openLevelsFolder.isMouseOver()){
+          if (lc_openLevelsFolder.isMouseOver()) {
             openLevelCreatorLevelsFolder();
           }
         }
@@ -1925,12 +1866,12 @@ void mouseClicked() {// when you click the mouse
             level.save();
             return;
           }
-          if(lc_backButton.isMouseOver()){
+          if (lc_backButton.isMouseOver()) {
             startup=true;
             newLevel=false;
             entering_name=false;
           }
-          if(lc_openLevelsFolder.isMouseOver()){
+          if (lc_openLevelsFolder.isMouseOver()) {
             openLevelCreatorLevelsFolder();
           }
         }
@@ -2009,8 +1950,8 @@ void mouseClicked() {// when you click the mouse
             filesScrole--;
           if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size()&&overviewDown.isMouseOver())//scroll down button
             filesScrole++;
-          
-          if(lcOverviewExitButton.isMouseOver()){
+
+          if (lcOverviewExitButton.isMouseOver()) {
             levelOverview=false;
             exitLevelCreator=true;
           }
@@ -2119,7 +2060,7 @@ void mouseClicked() {// when you click the mouse
               rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
             }//end of name was enterd
           }//end of create button
-          if(lc_backButton.isMouseOver()){
+          if (lc_backButton.isMouseOver()) {
             startup=true;
             creatingNewBlueprint=false;
             entering_name=false;
@@ -2138,7 +2079,7 @@ void mouseClicked() {// when you click the mouse
               camPosY=360;
             }//end of thing were entered
           }//end of load button
-          if(lc_backButton.isMouseOver()){
+          if (lc_backButton.isMouseOver()) {
             startup=true;
             loadingBlueprint=false;
             entering_name=false;
@@ -2229,13 +2170,13 @@ void mouseClicked() {// when you click the mouse
           level.RespawnY=mouseY/Scale-camPosY;
           settingPlayerSpawn=false;
         }
-        if(exitLevelCreator){
-          if(lc_exitConfirm.isMouseOver()){
+        if (exitLevelCreator) {
+          if (lc_exitConfirm.isMouseOver()) {
             exitLevelCreator=false;
             levelCreator=false;
           }
-          
-          if(lc_exitCancle.isMouseOver()){
+
+          if (lc_exitCancle.isMouseOver()) {
             exitLevelCreator=false;
             levelOverview=true;
           }
@@ -2687,7 +2628,7 @@ void mouseDragged() {
   }
 }
 
-void windowResized(){
+void windowResized() {
   ui.reScale();
   Scale = height/720.0;
 }
@@ -2877,12 +2818,13 @@ void mouseReleased() {
   }
 }
 
-void drawMainMenu(){
-  background(7646207);
+void drawMainMenu(boolean background) {
+  if (background)
+    background(7646207);
   fill(0);
   //the title
   mm_title.draw();
-  
+
   fill(255, 255, 0);
   mm_EarlyAccess.draw();
   textSize(35*Scale);
@@ -2904,164 +2846,233 @@ void drawMainMenu(){
   image(discordIcon, 1200*Scale, 650*Scale);
 }
 
-void drawSettings(){
+void drawSettings() {
   fill(0);
-          background(7646207);
-          st_title.draw();
+  background(7646207);
+  st_title.draw();
 
-          if (settingsMenue.equals("game play")) {
-            fill(0);
-            st_Hssr.draw();
-            st_Vssr.draw();
-            st_hsrp.setText((int)(((esdPos-800.0)/440)*530)+100+"");
-            st_vsrp.setText((int)(((vesdPos-800.0)/440)*220)+100+"");
-            st_hsrp.draw();
-            st_vsrp.draw();
+  if (settingsMenue.equals("game play")) {
+    fill(0);
+    st_Hssr.draw();
+    st_Vssr.draw();
+    st_hsrp.setText((int)(((esdPos-800.0)/440)*530)+100+"");
+    st_vsrp.setText((int)(((vesdPos-800.0)/440)*220)+100+"");
+    st_hsrp.draw();
+    st_vsrp.draw();
 
-            sdSlider.draw();
-            fill(255);
-            rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
-            vsdSlider.draw();
-            fill(255);
-            rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
-            fill(0);
-            st_gameplay.draw();
-          }//end of gameplay settings
+    sdSlider.draw();
+    fill(255);
+    rect(esdPos*Scale, 42*Scale, 10*Scale, 45*Scale);//horizontal scrole distance slider bar
+    vsdSlider.draw();
+    fill(255);
+    rect(vesdPos*Scale, 112*Scale, 10*Scale, 45*Scale);//verticle scrole distance slider bar
+    fill(0);
+    st_gameplay.draw();
+  }//end of gameplay settings
 
-          if (settingsMenue.equals("display")) {
-            fill(0);
-            st_dsp_vsr.draw();
-            st_dsp_fs.draw();
-            st_dsp_4k.draw();
-            st_dsp_1440.draw();
-            st_dsp_1080.draw();
-            st_dsp_900.draw();
-            st_dsp_720.draw();
-            st_dsp_fsYes.draw();
-            st_dsp_fsNo.draw();
-            rez720.draw();
-            rez900.draw();
-            rez1080.draw();
-            rez1440.draw();
-            rez4k.draw();
-            fullScreenOn.draw();
-            fullScreenOff.draw();
+  if (settingsMenue.equals("display")) {
+    fill(0);
+    st_dsp_vsr.draw();
+    st_dsp_fs.draw();
+    st_dsp_4k.draw();
+    st_dsp_1440.draw();
+    st_dsp_1080.draw();
+    st_dsp_900.draw();
+    st_dsp_720.draw();
+    st_dsp_fsYes.draw();
+    st_dsp_fsNo.draw();
+    rez720.draw();
+    rez900.draw();
+    rez1080.draw();
+    rez1440.draw();
+    rez4k.draw();
+    fullScreenOn.draw();
+    fullScreenOff.draw();
 
-            fill(0);
-            st_display.draw();
+    fill(0);
+    st_display.draw();
+  }//end of display settings
 
-          }//end of display settings
+  if (settingsMenue.equals("outher")) {
+    fill(0);
+    st_o_displayFPS.draw();
+    st_o_debugINFO.draw();
+    st_o_musicVol.draw();
+    st_o_SFXvol.draw();
+    st_o_3DShadow.draw();
+    st_o_narration.draw();
+    st_o_yes.draw();
+    st_o_no.draw();
+    st_o_better.draw();
+    st_o_demonitized.draw();
+    st_o_currentMusicVolume.setText((int)(musicVolume*100)+"");
+    st_o_currentSoundsVolume.setText((int)(sfxVolume*100)+"");
+    st_o_currentMusicVolume.draw();
+    st_o_currentSoundsVolume.draw();
 
-          if (settingsMenue.equals("outher")) {
-            fill(0);
-            st_o_displayFPS.draw();
-            st_o_debugINFO.draw();
-            st_o_musicVol.draw();
-            st_o_SFXvol.draw();
-            st_o_3DShadow.draw();
-            st_o_narration.draw();
-            st_o_yes.draw();
-            st_o_no.draw();
-            st_o_better.draw();
-            st_o_demonitized.draw();
-            st_o_currentMusicVolume.setText((int)(musicVolume*100)+"");
-            st_o_currentSoundsVolume.setText((int)(sfxVolume*100)+"");
-            st_o_currentMusicVolume.draw();
-            st_o_currentSoundsVolume.draw();
+    enableFPS.draw();
+    disableFPS.draw();
+    enableDebug.draw();
+    disableDebug.draw();
+    MusicSlider.draw();
+    SFXSlider.draw();
+    shadowOn.draw();
+    shadowOff.draw();
+    narrationMode1.draw();
+    narrationMode0.draw();
 
-            enableFPS.draw();
-            disableFPS.draw();
-            enableDebug.draw();
-            disableDebug.draw();
-            MusicSlider.draw();
-            SFXSlider.draw();
-            shadowOn.draw();
-            shadowOff.draw();
-            narrationMode1.draw();
-            narrationMode0.draw();
+    fill(255);
+    stroke(0);
+    strokeWeight(Scale);
+    rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
+    rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
+    strokeWeight(0);
 
-            fill(255);
-            stroke(0);
-            strokeWeight(Scale);
-            rect(musVolSllid*Scale, 182*Scale, 10*Scale, 45*Scale);//slider bar
-            rect(sfxVolSllid*Scale, 252*Scale, 10*Scale, 45*Scale);//slider bar
-            strokeWeight(0);
+    textSize(50*Scale);
+    textAlign(CENTER, TOP);
+    fill(0);
+    st_other.draw();
+  }//end of outher settings
 
-            textSize(50*Scale);
-            textAlign(CENTER, TOP);
-            fill(0);
-            st_other.draw();
-          }//end of outher settings
+  //end of check boxes and stuffs
 
-          //end of check boxes and stuffs
+  settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
 
-          settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
-
-          strokeWeight(5*Scale);
-          stroke(255, 0, 0);
-          if (true) {
-            JSONObject rez=settings.getJSONObject(2);
-            int vres = rez.getInt("v-res");
-            //  String arat = rez.getString("aspect ratio");
-            boolean fus = rez.getBoolean("full_Screen");
+  strokeWeight(5*Scale);
+  stroke(255, 0, 0);
+  if (true) {
+    JSONObject rez=settings.getJSONObject(2);
+    int vres = rez.getInt("v-res");
+    //  String arat = rez.getString("aspect ratio");
+    boolean fus = rez.getBoolean("full_Screen");
 
 
-            if (settingsMenue.equals("display")) {
-              if (vres==720) {
-                chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
-              }
-              if (vres==900) {
-                chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
-              }
-              if (vres==1080) {
-                chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
-              }
-              if (vres==1440) {
-                chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
-              }
-              if (vres==2160) {
-                chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
-              }
+    if (settingsMenue.equals("display")) {
+      if (vres==720) {
+        chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
+      }
+      if (vres==900) {
+        chechMark(rez900.x+rez900.lengthX/2, rez900.y+rez900.lengthY/2);
+      }
+      if (vres==1080) {
+        chechMark(rez1080.x+rez1080.lengthX/2, rez1080.y+rez1080.lengthY/2);
+      }
+      if (vres==1440) {
+        chechMark(rez1440.x+rez1440.lengthX/2, rez1440.y+rez1440.lengthY/2);
+      }
+      if (vres==2160) {
+        chechMark(rez4k.x+rez4k.lengthX/2, rez4k.y+rez4k.lengthY/2);
+      }
 
-              if (!fus) {
-                chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
-              } else {
-                chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
-              }
-            }//end of display settings checkmarks
+      if (!fus) {
+        chechMark(fullScreenOff.x+fullScreenOff.lengthX/2, fullScreenOff.y+fullScreenOff.lengthY/2);
+      } else {
+        chechMark(fullScreenOn.x+fullScreenOn.lengthX/2, fullScreenOn.y+fullScreenOn.lengthY/2);
+      }
+    }//end of display settings checkmarks
 
-            if (settingsMenue.equals("outher")) {
-              //enableFPS,disableFPS,enableDebug,disableDebug
-              if (!displayFPS) {
-                chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
-              } else {
-                chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
-              }
-              if (!displayDebugInfo) {
-                chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
-              } else {
-                chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
-              }
+    if (settingsMenue.equals("outher")) {
+      //enableFPS,disableFPS,enableDebug,disableDebug
+      if (!displayFPS) {
+        chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
+      } else {
+        chechMark(enableFPS.x+enableFPS.lengthX/2, enableFPS.y+enableFPS.lengthY/2);
+      }
+      if (!displayDebugInfo) {
+        chechMark(disableDebug.x+disableDebug.lengthX/2, disableDebug.y+disableDebug.lengthY/2);
+      } else {
+        chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
+      }
 
-              if (!shadow3D) {
-                chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
-              } else {
-                chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
-              }
+      if (!shadow3D) {
+        chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
+      } else {
+        chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
+      }
 
-              if (tutorialNarrationMode==0) {
-                chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
-              } else if (tutorialNarrationMode==1) {
-                chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
-              }
-            }
-          }//end of outher settings
+      if (tutorialNarrationMode==0) {
+        chechMark(narrationMode0.x+narrationMode0.lengthX/2, narrationMode0.y+narrationMode0.lengthY/2);
+      } else if (tutorialNarrationMode==1) {
+        chechMark(narrationMode1.x+narrationMode1.lengthX/2, narrationMode1.y+narrationMode1.lengthY/2);
+      }
+    }
+  }//end of outher settings
 
-          sttingsGPL.draw();
-          settingsDSP.draw();
-          settingsOUT.draw();
+  sttingsGPL.draw();
+  settingsDSP.draw();
+  settingsOUT.draw();
 
-          settingsBackButton.draw();
+  settingsBackButton.draw();
+}//end of draw settings
+
+void drawLevelSelect(boolean bcakground) {
+  levelCompleteSoundPlayed=false;
+  if (bcakground)
+    background(7646207);
+  fill(-16732415);
+  stroke(-16732415);
+  strokeWeight(0);
+  rect(0, height/2, width, height/2);//green rectangle
+  fill(0);
+  ls_levelSelect.draw();
+  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+  if (progress<2) {
+    select_lvl_2.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_2.setColor(-59135, -1791);
+  }
+  if (progress<3) {
+    select_lvl_3.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_3.setColor(-59135, -1791);
+  }
+  if (progress<4) {
+    select_lvl_4.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_4.setColor(-59135, -1791);
+  }
+  if (progress<5) {
+    select_lvl_5.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_5.setColor(-59135, -1791);
+  }
+  if (progress<6) {
+    select_lvl_6.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_6.setColor(-59135, -1791);
+  }
+  if (progress<7) {
+    select_lvl_7.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_7.setColor(-59135, -1791);
+  }
+  if (progress<8) {
+    select_lvl_8.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_8.setColor(-59135, -1791);
+  }
+  if (progress<9) {
+    select_lvl_9.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_9.setColor(-59135, -1791);
+  }
+  if (progress<10) {
+    select_lvl_10.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_10.setColor(-59135, -1791);
+  }
+  select_lvl_1.draw();
+  select_lvl_2.draw();
+  select_lvl_3.draw();
+  select_lvl_4.draw();
+  select_lvl_5.draw();
+  select_lvl_6.draw();
+  select_lvl_7.draw();
+  select_lvl_8.draw();
+  select_lvl_9.draw();
+  select_lvl_10.draw();
+  select_lvl_back.draw();
+  select_lvl_UGC.draw();
 }
 
 void generateSettings() {
@@ -3695,37 +3706,46 @@ String formatMillis(int millis) {
 void programLoad() {
   println("loading discord icon");
   discordIcon=loadImage("data/assets/discord.png");
+  loadProgress++;
   discordIcon.resize((int)(50*Scale), (int)(50*Scale));
+  loadProgress++;
 
   println("loading 3D coin modle");
   coin3D=loadShape("data/modles/coin/tinker.obj");
+  loadProgress++;
   coin3D.scale(3);
 
   println("loading settings");
   JSONObject scroll=settings.getJSONObject(1);//load in the settings
+  loadProgress++;
   eadgeScroleDist=scroll.getInt("horozontal");
   esdPos=(int)(((eadgeScroleDist-100.0)/530)*440+800);
   eadgeScroleDistV=scroll.getInt("vertical");
   vesdPos=(int)(((eadgeScroleDistV-100.0)/250)*440+800);
   JSONObject debug=settings.getJSONObject(3);
+  loadProgress++;
   displayFPS=debug.getBoolean("fps");
   displayDebugInfo=debug.getBoolean("debug info");
   JSONObject sound=settings.getJSONObject(4);
+  loadProgress++;
   musicVolume=sound.getFloat("music volume");
   sfxVolume=sound.getFloat("SFX volume");
   musVolSllid=(int)(musicVolume*440+800);
   sfxVolSllid=(int)(sfxVolume*440+800);
   JSONObject sv3=settings.getJSONObject(5);
+  loadProgress++;
   shadow3D=sv3.getBoolean("3D shaows");
   tutorialNarrationMode=sv3.getInt("narrationMode");
 
   musVolSllid=(int)(musicVolume*440+800);
   sfxVolSllid=(int)(sfxVolume*440+800);
+  loadProgress++;
 
   println("loading level progress");
   try {//load level prgress
     levelProgress=loadJSONArray(appdata+"/CBi-games/skinny mann/progressions.json");
     levelProgress.getJSONObject(0);
+    loadProgress++;
   }
   catch(Throwable e) {
     println("failed to load level progress. creating new progress data");
@@ -3734,6 +3754,7 @@ void programLoad() {
     p.setInt("progress", 0);
     levelProgress.setJSONObject(0, p);
     saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
+    loadProgress++;
   }
 
   println("inililizing players");
@@ -3747,79 +3768,115 @@ void programLoad() {
   players[7]=new Player(20, 699, 1, 7);
   players[8]=new Player(20, 699, 1, 8);
   players[9]=new Player(20, 699, 1, 9);
+  loadProgress++;
 
   println("initlizing sound handler");
   soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
+  loadProgress++;
   soundHandler.setMusicVolume(0);
 
   println("starting to load tutorial audio tracks");
   tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T1a");
   tutorialNarration[0][1]=new SoundFile(this, "data/sounds/tutorial/T2a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T2a");
   tutorialNarration[0][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  loadProgress++;
   println("loaded tutorial audio track T3");
   tutorialNarration[0][3]=new SoundFile(this, "data/sounds/tutorial/T4a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T4a");
   tutorialNarration[0][4]=new SoundFile(this, "data/sounds/tutorial/T5a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T5a");
   tutorialNarration[0][5]=new SoundFile(this, "data/sounds/tutorial/T6a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T6a");
   tutorialNarration[0][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  loadProgress++;
   println("loaded tutorial audio track T7");
   tutorialNarration[0][7]=new SoundFile(this, "data/sounds/tutorial/T8a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T8a");
   tutorialNarration[0][8]=new SoundFile(this, "data/sounds/tutorial/T9a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T9a");
   tutorialNarration[0][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  loadProgress++;
   println("loaded tutorial audio track T10");
   tutorialNarration[0][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  loadProgress++;
   println("loaded tutorial audio track T11");
   tutorialNarration[0][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  loadProgress++;
   println("loaded tutorial audio track T12");
   tutorialNarration[0][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  loadProgress++;
   println("loaded tutorial audio track T13");
   tutorialNarration[0][13]=new SoundFile(this, "data/sounds/tutorial/T14a.wav");
+  loadProgress++;
   println("loaded tutorial audio track T14a");
   tutorialNarration[0][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  loadProgress++;
   println("loaded tutorial audio track T15");
   tutorialNarration[0][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  loadProgress++;
   println("loaded tutorial audio track T16");
   tutorialNarration[0][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+  loadProgress++;
   println("loaded tutorial audio track T17");
   tutorialNarration[1][0]=new SoundFile(this, "data/sounds/tutorial/T1b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T1b");
   tutorialNarration[1][1]=new SoundFile(this, "data/sounds/tutorial/T2b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T2b");
   tutorialNarration[1][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
+  loadProgress++;
   println("loaded tutorial audio track T3");
   tutorialNarration[1][3]=new SoundFile(this, "data/sounds/tutorial/T4b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T4b");
   tutorialNarration[1][4]=new SoundFile(this, "data/sounds/tutorial/T5b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T5b");
   tutorialNarration[1][5]=new SoundFile(this, "data/sounds/tutorial/T6b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T6b");
   tutorialNarration[1][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
+  loadProgress++;
   println("loaded tutorial audio track T7");
   tutorialNarration[1][7]=new SoundFile(this, "data/sounds/tutorial/T8b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T8b");
   tutorialNarration[1][8]=new SoundFile(this, "data/sounds/tutorial/T9b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T9b");
   tutorialNarration[1][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
+  loadProgress++;
   println("loaded tutorial audio track T10");
   tutorialNarration[1][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
+  loadProgress++;
   println("loaded tutorial audio track T11");
   tutorialNarration[1][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
+  loadProgress++;
   println("loaded tutorial audio track T12");
   tutorialNarration[1][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
+  loadProgress++;
   println("loaded tutorial audio track T13");
   tutorialNarration[1][13]=new SoundFile(this, "data/sounds/tutorial/T14b.wav");
+  loadProgress++;
   println("loaded tutorial audio track T14b");
   tutorialNarration[1][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
+  loadProgress++;
   println("loaded tutorial audio track T15");
   tutorialNarration[1][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
+  loadProgress++;
   println("loaded tutorial audio track T16");
   tutorialNarration[1][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
+  loadProgress++;
   println("loaded tutorial audio track T17");
 
   println("loading saved colors");
@@ -3828,26 +3885,39 @@ void programLoad() {
   } else {
     colors=JSONArray.parse("[{\"red\": 0,\"green\": 175,\"blue\": 0},{\"red\": 145,\"green\": 77,\"blue\": 0}]");
   }
+  loadProgress++;
 
   println("loading 3D arrows and scalar moddles");
   redArrow=loadShape("data/modles/red arrow/arrow.obj");
+  loadProgress++;
   greenArrow=loadShape("data/modles/green arrow/arrow.obj");
+  loadProgress++;
   blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
+  loadProgress++;
   yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
+  loadProgress++;
 
   redScaler=loadShape("data/modles/red scaler/obj.obj");
+  loadProgress++;
   greenScaler=loadShape("data/modles/green scaler/obj.obj");
+  loadProgress++;
   blueScaler=loadShape("data/modles/blue scaler/obj.obj");
+  loadProgress++;
   yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
-  
+  loadProgress++;
+
   LevelCreatorLogo=loadShape("data/modles/LevelCreatorLogo/LCL.obj");
+  loadProgress++;
   LevelCreatorLogo.scale(3*Scale);
 
   println("starting physics thread");
   thread("thrdCalc2");
   loaded=true;
   println("loading complete");
+  println(loadProgress);
 }
+
+
 void  initButtons() {
   select_lvl_1=new UiButton(ui, (100), (100), (200), (100), "lvl 1", -59135, -1791).setStrokeWeight( (10));
   select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "back", -59135, -1791).setStrokeWeight( (10));
@@ -3898,11 +3968,11 @@ void  initButtons() {
   updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
   updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
   pauseRestart=new UiButton(ui, 500, 100, 300, 60, "Restart", #FF0004, #FFF300).setStrokeWeight(10);
-  settingsBackButton = new UiButton(ui,40,620,200,50,"Back",#FF1900,#FFF900).setStrokeWeight(10);
-  pauseResumeButton = new UiButton(ui,500,200,300,60,"Resume",#FF1900,#FFF900).setStrokeWeight(10);
-  pauseOptionsButton = new UiButton(ui,500,300,300,60,"Options",#FF1900,#FFF900).setStrokeWeight(10);
-  pauseQuitButton = new UiButton(ui,500,400,300,60,"Quit",#FF1900,#FFF900).setStrokeWeight(10);
-  endOfLevelButton = new UiButton(ui,550,450,200,40,"continue",#FF1900,#FFF900).setStrokeWeight(10);
+  settingsBackButton = new UiButton(ui, 40, 620, 200, 50, "Back", #FF1900, #FFF900).setStrokeWeight(10);
+  pauseResumeButton = new UiButton(ui, 500, 200, 300, 60, "Resume", #FF1900, #FFF900).setStrokeWeight(10);
+  pauseOptionsButton = new UiButton(ui, 500, 300, 300, 60, "Options", #FF1900, #FFF900).setStrokeWeight(10);
+  pauseQuitButton = new UiButton(ui, 500, 400, 300, 60, "Quit", #FF1900, #FFF900).setStrokeWeight(10);
+  endOfLevelButton = new UiButton(ui, 550, 450, 200, 40, "continue", #FF1900, #FFF900).setStrokeWeight(10);
 
 
 
@@ -3959,13 +4029,13 @@ void  initButtons() {
 
   lcLoadLevelButton=new UiButton(ui, 40, 400, 200, 40, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
   lcNewLevelButton=new UiButton(ui, 40, 400, 200, 40, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
-  lc_backButton=new UiButton(ui, 20,650,200, 40,"Back",#BB48ED, #4857ED).setStrokeWeight(10);
-  lcOverviewExitButton= new UiButton(ui,340, 20, 100, 50, "Exit", #0092FF, 0);
-  
-  lc_exitConfirm = new UiButton(ui,240,400,200,50,"Exit",#BB48ED, #4857ED).setStrokeWeight(10);
-  lc_exitCancle = new UiButton(ui,840,400,200,50,"Cancle",#BB48ED, #4857ED).setStrokeWeight(10);
-  
-  lc_openLevelsFolder = new UiButton(ui,1060,650,200, 40,"Open Folder",#BB48ED, #4857ED).setStrokeWeight(10);
+  lc_backButton=new UiButton(ui, 20, 650, 200, 40, "Back", #BB48ED, #4857ED).setStrokeWeight(10);
+  lcOverviewExitButton= new UiButton(ui, 340, 20, 100, 50, "Exit", #0092FF, 0);
+
+  lc_exitConfirm = new UiButton(ui, 240, 400, 200, 50, "Exit", #BB48ED, #4857ED).setStrokeWeight(10);
+  lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
+
+  lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
 }
 
 
@@ -4088,92 +4158,92 @@ void fileSelected(File selection) {
   }
 }
 
-void initText(){
-  mm_title = new UiText(ui,"Skinny Mann",640,80,100,CENTER,CENTER);
-  mm_EarlyAccess = new UiText(ui,"Early Access",640,180,100,CENTER,CENTER);
-  mm_version = new UiText(ui,version,0,718,10,LEFT,BOTTOM);
-  ls_levelSelect = new UiText(ui,"Level Select",640,54,50,CENTER,CENTER);
-  lsUGC_title = new UiText(ui,"User Generated Levels",640,54,35,CENTER,CENTER);
-  lsUGC_noLevelFound = new UiText(ui,"no levels found",640,360,50,CENTER,CENTER);
-  lsUGC_levelNotCompatible = new UiText(ui,"this level is not compatible with this version of the game",640,432,50,CENTER,CENTER);
-  lsUGC_levelName = new UiText(ui,"V",640,360,50,CENTER,CENTER);
-  st_title = new UiText(ui,"Settings",640,720,100,CENTER,BOTTOM);
-  st_Hssr = new UiText(ui,"horozontal screen scrolling location",40,90,40,LEFT,BOTTOM);
-  st_Vssr = new UiText(ui,"vertical  screen scrolling location",40,160,40,LEFT,BOTTOM);
-  st_gameplay = new UiText(ui,"Game Play",640,-10,50,CENTER,TOP);
-  st_vsrp = new UiText(ui,"V",700,160,40,LEFT,BOTTOM);
-  st_hsrp = new UiText(ui,"V",700,90,40,LEFT,BOTTOM);
-  st_dsp_vsr = new UiText(ui,"verticle screen resolution (requires restart)",40,80,40,LEFT, BOTTOM);
-  st_dsp_fs = new UiText(ui,"full screen (requires restart)",40,140,40,LEFT, BOTTOM);
-  st_dsp_4k = new UiText(ui,"2160(4K)",1190,45,20,LEFT, BOTTOM);
-  st_dsp_1440 = new UiText(ui,"1440",1120,45,20,LEFT, BOTTOM);
-  st_dsp_1080 = new UiText(ui,"1080",1055,45,20,LEFT, BOTTOM);
-  st_dsp_900 = new UiText(ui,"900",990,45,20,LEFT, BOTTOM);
-  st_dsp_720 = new UiText(ui,"720",920,45,20,LEFT, BOTTOM);
-  st_dsp_fsYes = new UiText(ui,"yes",1190,115,20,LEFT, BOTTOM);
-  st_dsp_fsNo = new UiText(ui,"no",1120,115,20,LEFT, BOTTOM);
-  st_display = new UiText(ui,"Display",640,-10,50,CENTER,TOP);
-  st_o_displayFPS = new UiText(ui,"display fps",40,70,40,LEFT, BOTTOM);
-  st_o_debugINFO = new UiText(ui,"display debug info",40,140,40,LEFT, BOTTOM);
-  st_o_musicVol = new UiText(ui,"music volume",40,210,40,LEFT, BOTTOM);
-  st_o_SFXvol = new UiText(ui,"sounds volume",40,280,40,LEFT, BOTTOM);
-  st_o_3DShadow = new UiText(ui,"3D shadows",40,350,40,LEFT, BOTTOM);
-  st_o_narration = new UiText(ui,"narration mode",40,460,40,LEFT, BOTTOM);
-  st_o_yes = new UiText(ui,"yes",1190,45,20,LEFT, BOTTOM);
-  st_o_no = new UiText(ui,"no",1120,45,20,LEFT, BOTTOM);
-  st_o_better = new UiText(ui,"better",1190,460,20,LEFT, BOTTOM);
-  st_o_demonitized = new UiText(ui,"please don't\ndemonetize\nme youtube",1070,460,20,LEFT, BOTTOM);
-  st_o_currentMusicVolume = new UiText(ui,"V",700,215,40,LEFT, BOTTOM);
-  st_o_currentSoundsVolume = new UiText(ui,"B",700,285,40,LEFT, BOTTOM);
-  st_other = new UiText(ui,"Outher",640,-10,50,CENTER,TOP);
-  initMultyplayerScreenTitle = new UiText(ui,"Multiplayer",640,36,50,CENTER,CENTER);
-  mp_hostSeccion = new UiText(ui,"Host session",640,36,50,CENTER, CENTER);
-  mp_host_Name = new UiText(ui,"Name",640,93.6,25,CENTER, CENTER);
-  mp_host_enterdName = new UiText(ui,"V",640,126,25,CENTER, CENTER);
-  mp_host_port = new UiText(ui,"Port",640,172.8,25,CENTER, CENTER);
-  mp_host_endterdPort = new UiText(ui,"V",640,205.2,25,CENTER, CENTER);
-  mp_joinSession = new UiText(ui,"Join session",640,36,50,CENTER, CENTER);
-  mp_join_name = new UiText(ui,"Name",640,93.6,25,CENTER, CENTER);
-  mp_join_enterdName = new UiText(ui,"V",640,126,25,CENTER, CENTER);
-  mp_join_port = new UiText(ui,"Port",640,172.8,25,CENTER, CENTER);
-  mp_join_enterdPort = new UiText(ui,"V",640,205.2,25,CENTER, CENTER);
-  mp_join_ip = new UiText(ui,"IP address",640,252,25,CENTER, CENTER);
-  mp_join_enterdIp = new UiText(ui,"?V",640,284.4,25,CENTER, CENTER);
-  mp_disconnected = new UiText(ui,"Disconnected",640,36,50,CENTER, CENTER);
-  mp_dc_reason = new UiText(ui,"V",640,216,25,CENTER, CENTER);
-  dev_title = new UiText(ui,"Developer Menue",640,36,50,CENTER, CENTER);
-  dev_info = new UiText(ui,"this is a development build of the game, there may be bugs or unfinished features",640,72,25,CENTER, CENTER);
-  tut_notToday = new UiText(ui,"this feture is disabled during the tutorial\npres ECS to return",640,360,50,CENTER, CENTER);
-  tut_disclaimer = new UiText(ui,"ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!",640,360,50,CENTER, CENTER);
-  tut_toClose = new UiText(ui,"press ESC to close",640,698.4,25,CENTER, CENTER);
-  coinCountText = new UiText(ui,"coins: ",0,0,50,LEFT, TOP);
-  pa_title = new UiText(ui,"GAME PAUSED",640,100,100,CENTER,BOTTOM);
-  logoText = new UiText(ui,"GAMES",640,600,100,CENTER,CENTER);
-  up_title = new UiText(ui,"UPDATE!!!",640,102.857,50,CENTER,BASELINE);
-  up_info = new UiText(ui,"A new version of this game has been released!!!",640,120,20,CENTER,BASELINE);
-  up_wait = new UiText(ui,"please wait",640,102.857,50,CENTER,BASELINE);
-  lc_start_version = new UiText(ui,"game ver: "+GAME_version+ "  editor ver: "+EDITOR_version,0,718,15,LEFT,BOTTOM);
-  lc_start_author = new UiText(ui,"author: ",10,30,15,LEFT,BOTTOM);
-  lc_load_new_describe = new UiText(ui,"enter level name",40,100,20,LEFT, BOTTOM);
-  lc_load_new_enterd = new UiText(ui,"EEEEEEEEE",40,150,20,LEFT, BOTTOM);
-  lc_load_notFound = new UiText(ui,"Level Not Found!",640,300,50,CENTER,CENTER);
-  lc_newf_enterdName = new UiText(ui,"VAL",100,445,70,LEFT, BOTTOM);
-  lc_newf_fileName = new UiText(ui,"VAL",655,585,30,LEFT, BOTTOM);
-  lc_dp2_info = new UiText(ui,"select destenation stage",640,30,60,CENTER,CENTER);
-  lc_newbp_describe = new UiText(ui,"enter blueprint name",40,100,20,LEFT, BOTTOM);
-  lc_exit_question = new UiText(ui,"Are you sure?",640,120,50,CENTER,CENTER);
-  lc_exit_disclaimer = new UiText(ui,"Any unsaved data will be lost.",640,200,50,CENTER,CENTER);
-  deadText = new UiText(ui,"you died",640,360,50,CENTER,CENTER);
-  fpsText = new UiText(ui,"fps: ",1220,15,10,LEFT,BOTTOM);
-  dbg_mspc = new UiText(ui,"mspc: V",1275,10,10,RIGHT, TOP);
-  dbg_playerX = new UiText(ui,"player X: V",1275,20,10,RIGHT, TOP);
-  dbg_playerY = new UiText(ui,"player Y: V",1275,30,10,RIGHT, TOP);
-  dbg_vertvel = new UiText(ui,"player vertical velocity: V",1275,40,10,RIGHT, TOP);
-  dbg_animationCD = new UiText(ui,"player animation Cooldown: V",1275,50,10,RIGHT, TOP);
-  dbg_pose = new UiText(ui,"player pose: V",1275,60,10,RIGHT, TOP);
-  dbg_camX = new UiText(ui,"camera x: V",1275,70,10,RIGHT, TOP);
-  dbg_camY = new UiText(ui,"camera y: V",1275,80,10,RIGHT, TOP);
-  dbg_tutorialPos = new UiText(ui,"tutorial position: V",1275,90,10,RIGHT, TOP);
-  game_displayText = new UiText(ui,"V",640,144,200,CENTER,CENTER);
-  lebelCompleteText = new UiText(ui,"LEVEL COMPLETE!!!",200,400,100,LEFT,BOTTOM);
+void initText() {
+  mm_title = new UiText(ui, "Skinny Mann", 640, 80, 100, CENTER, CENTER);
+  mm_EarlyAccess = new UiText(ui, "Early Access", 640, 180, 100, CENTER, CENTER);
+  mm_version = new UiText(ui, version, 0, 718, 20, LEFT, BOTTOM);
+  ls_levelSelect = new UiText(ui, "Level Select", 640, 54, 50, CENTER, CENTER);
+  lsUGC_title = new UiText(ui, "User Generated Levels", 640, 54, 35, CENTER, CENTER);
+  lsUGC_noLevelFound = new UiText(ui, "no levels found", 640, 360, 50, CENTER, CENTER);
+  lsUGC_levelNotCompatible = new UiText(ui, "this level is not compatible with this version of the game", 640, 432, 50, CENTER, CENTER);
+  lsUGC_levelName = new UiText(ui, "V", 640, 360, 50, CENTER, CENTER);
+  st_title = new UiText(ui, "Settings", 640, 720, 100, CENTER, BOTTOM);
+  st_Hssr = new UiText(ui, "horozontal screen scrolling location", 40, 90, 40, LEFT, BOTTOM);
+  st_Vssr = new UiText(ui, "vertical  screen scrolling location", 40, 160, 40, LEFT, BOTTOM);
+  st_gameplay = new UiText(ui, "Game Play", 640, -10, 50, CENTER, TOP);
+  st_vsrp = new UiText(ui, "V", 700, 160, 40, LEFT, BOTTOM);
+  st_hsrp = new UiText(ui, "V", 700, 90, 40, LEFT, BOTTOM);
+  st_dsp_vsr = new UiText(ui, "verticle screen resolution (requires restart)", 40, 80, 40, LEFT, BOTTOM);
+  st_dsp_fs = new UiText(ui, "full screen (requires restart)", 40, 140, 40, LEFT, BOTTOM);
+  st_dsp_4k = new UiText(ui, "2160(4K)", 1190, 45, 20, LEFT, BOTTOM);
+  st_dsp_1440 = new UiText(ui, "1440", 1120, 45, 20, LEFT, BOTTOM);
+  st_dsp_1080 = new UiText(ui, "1080", 1055, 45, 20, LEFT, BOTTOM);
+  st_dsp_900 = new UiText(ui, "900", 990, 45, 20, LEFT, BOTTOM);
+  st_dsp_720 = new UiText(ui, "720", 920, 45, 20, LEFT, BOTTOM);
+  st_dsp_fsYes = new UiText(ui, "yes", 1190, 115, 20, LEFT, BOTTOM);
+  st_dsp_fsNo = new UiText(ui, "no", 1120, 115, 20, LEFT, BOTTOM);
+  st_display = new UiText(ui, "Display", 640, -10, 50, CENTER, TOP);
+  st_o_displayFPS = new UiText(ui, "display fps", 40, 70, 40, LEFT, BOTTOM);
+  st_o_debugINFO = new UiText(ui, "display debug info", 40, 140, 40, LEFT, BOTTOM);
+  st_o_musicVol = new UiText(ui, "music volume", 40, 210, 40, LEFT, BOTTOM);
+  st_o_SFXvol = new UiText(ui, "sounds volume", 40, 280, 40, LEFT, BOTTOM);
+  st_o_3DShadow = new UiText(ui, "3D shadows", 40, 350, 40, LEFT, BOTTOM);
+  st_o_narration = new UiText(ui, "narration mode", 40, 460, 40, LEFT, BOTTOM);
+  st_o_yes = new UiText(ui, "yes", 1190, 45, 20, LEFT, BOTTOM);
+  st_o_no = new UiText(ui, "no", 1120, 45, 20, LEFT, BOTTOM);
+  st_o_better = new UiText(ui, "better", 1190, 460, 20, LEFT, BOTTOM);
+  st_o_demonitized = new UiText(ui, "please don't\ndemonetize\nme youtube", 1070, 460, 20, LEFT, BOTTOM);
+  st_o_currentMusicVolume = new UiText(ui, "V", 700, 215, 40, LEFT, BOTTOM);
+  st_o_currentSoundsVolume = new UiText(ui, "B", 700, 285, 40, LEFT, BOTTOM);
+  st_other = new UiText(ui, "Outher", 640, -10, 50, CENTER, TOP);
+  initMultyplayerScreenTitle = new UiText(ui, "Multiplayer", 640, 36, 50, CENTER, CENTER);
+  mp_hostSeccion = new UiText(ui, "Host session", 640, 36, 50, CENTER, CENTER);
+  mp_host_Name = new UiText(ui, "Name", 640, 93.6, 25, CENTER, CENTER);
+  mp_host_enterdName = new UiText(ui, "V", 640, 126, 25, CENTER, CENTER);
+  mp_host_port = new UiText(ui, "Port", 640, 172.8, 25, CENTER, CENTER);
+  mp_host_endterdPort = new UiText(ui, "V", 640, 205.2, 25, CENTER, CENTER);
+  mp_joinSession = new UiText(ui, "Join session", 640, 36, 50, CENTER, CENTER);
+  mp_join_name = new UiText(ui, "Name", 640, 93.6, 25, CENTER, CENTER);
+  mp_join_enterdName = new UiText(ui, "V", 640, 126, 25, CENTER, CENTER);
+  mp_join_port = new UiText(ui, "Port", 640, 172.8, 25, CENTER, CENTER);
+  mp_join_enterdPort = new UiText(ui, "V", 640, 205.2, 25, CENTER, CENTER);
+  mp_join_ip = new UiText(ui, "IP address", 640, 252, 25, CENTER, CENTER);
+  mp_join_enterdIp = new UiText(ui, "?V", 640, 284.4, 25, CENTER, CENTER);
+  mp_disconnected = new UiText(ui, "Disconnected", 640, 36, 50, CENTER, CENTER);
+  mp_dc_reason = new UiText(ui, "V", 640, 216, 25, CENTER, CENTER);
+  dev_title = new UiText(ui, "Developer Menue", 640, 36, 50, CENTER, CENTER);
+  dev_info = new UiText(ui, "this is a development build of the game, there may be bugs or unfinished features", 640, 72, 25, CENTER, CENTER);
+  tut_notToday = new UiText(ui, "this feture is disabled during the tutorial\npres ECS to return", 640, 360, 50, CENTER, CENTER);
+  tut_disclaimer = new UiText(ui, "ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", 640, 360, 50, CENTER, CENTER);
+  tut_toClose = new UiText(ui, "press ESC to close", 640, 698.4, 25, CENTER, CENTER);
+  coinCountText = new UiText(ui, "coins: ", 0, 0, 50, LEFT, TOP);
+  pa_title = new UiText(ui, "GAME PAUSED", 640, 100, 100, CENTER, BOTTOM);
+  logoText = new UiText(ui, "GAMES", 640, 600, 100, CENTER, CENTER);
+  up_title = new UiText(ui, "UPDATE!!!", 640, 102.857, 50, CENTER, BASELINE);
+  up_info = new UiText(ui, "A new version of this game has been released!!!", 640, 120, 20, CENTER, BASELINE);
+  up_wait = new UiText(ui, "please wait", 640, 102.857, 50, CENTER, BASELINE);
+  lc_start_version = new UiText(ui, "game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, 718, 15, LEFT, BOTTOM);
+  lc_start_author = new UiText(ui, "author: ", 10, 30, 15, LEFT, BOTTOM);
+  lc_load_new_describe = new UiText(ui, "enter level name", 40, 100, 20, LEFT, BOTTOM);
+  lc_load_new_enterd = new UiText(ui, "EEEEEEEEE", 40, 150, 20, LEFT, BOTTOM);
+  lc_load_notFound = new UiText(ui, "Level Not Found!", 640, 300, 50, CENTER, CENTER);
+  lc_newf_enterdName = new UiText(ui, "VAL", 100, 445, 70, LEFT, BOTTOM);
+  lc_newf_fileName = new UiText(ui, "VAL", 655, 585, 30, LEFT, BOTTOM);
+  lc_dp2_info = new UiText(ui, "select destenation stage", 640, 30, 60, CENTER, CENTER);
+  lc_newbp_describe = new UiText(ui, "enter blueprint name", 40, 100, 20, LEFT, BOTTOM);
+  lc_exit_question = new UiText(ui, "Are you sure?", 640, 120, 50, CENTER, CENTER);
+  lc_exit_disclaimer = new UiText(ui, "Any unsaved data will be lost.", 640, 200, 50, CENTER, CENTER);
+  deadText = new UiText(ui, "you died", 640, 360, 50, CENTER, CENTER);
+  fpsText = new UiText(ui, "fps: ", 1220, 15, 10, LEFT, BOTTOM);
+  dbg_mspc = new UiText(ui, "mspc: V", 1275, 10, 10, RIGHT, TOP);
+  dbg_playerX = new UiText(ui, "player X: V", 1275, 20, 10, RIGHT, TOP);
+  dbg_playerY = new UiText(ui, "player Y: V", 1275, 30, 10, RIGHT, TOP);
+  dbg_vertvel = new UiText(ui, "player vertical velocity: V", 1275, 40, 10, RIGHT, TOP);
+  dbg_animationCD = new UiText(ui, "player animation Cooldown: V", 1275, 50, 10, RIGHT, TOP);
+  dbg_pose = new UiText(ui, "player pose: V", 1275, 60, 10, RIGHT, TOP);
+  dbg_camX = new UiText(ui, "camera x: V", 1275, 70, 10, RIGHT, TOP);
+  dbg_camY = new UiText(ui, "camera y: V", 1275, 80, 10, RIGHT, TOP);
+  dbg_tutorialPos = new UiText(ui, "tutorial position: V", 1275, 90, 10, RIGHT, TOP);
+  game_displayText = new UiText(ui, "V", 640, 144, 200, CENTER, CENTER);
+  lebelCompleteText = new UiText(ui, "LEVEL COMPLETE!!!", 200, 400, 100, LEFT, BOTTOM);
 }
