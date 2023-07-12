@@ -2,22 +2,23 @@ if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
 0.8.0_Early_Access
--fixed: update screen button not being center at all resolutions
--added: integrated level creator into game
+-fixed: update screen button not being centerd at all resolutions
++added: integrated level creator into game
 -changed: error window that pops up when the game crashes is now allways on top
 -changed: level creator now stores content created by the user in appdata or equivlent
--fixed: "grass" on main menue is now properly renderd based on the screen size rather then fixed position
+-fixed: "grass" on main menu and level select screen is now properly renderd based on the screen size rather then fixed position
 -fixed: spelling of shadows in settings
--changed: finally updated buttons on pause menue
+-changed: finally updated buttons on pause menu
 -changed: imporoved UI scaleing
 -fixed: startup logo randomly loosing texture
 -fixed: player number not being reset when leaving multyplayer
++added: menu transitions
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
 -fixed: level complete would still show in new levels once a CO-PO level was completed
--added: waiting for clients message after play is clicked in multyplayer
--added: support for UGC levels in multyplayer
++added: waiting for clients message after play is clicked in multyplayer
++added: support for UGC levels in multyplayer
 -fixed: game would crash if while entering the multyplayer port you tried to backspace while the port was set to 0
 
 0.7.0_Early_Access
@@ -25,9 +26,9 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: CBI sphere texture
 -fixed: 3D switches not scaling properly with resolutions
 -changed: settings/progrss/UGC is now stored in users home directory on mac/linux
--added: multyplayer. now with 2 modes
--added: co-op_1 multyplayer level
--added: co-op_2 multyplayer level
++added: multyplayer. now with 2 modes
++added: co-op_1 multyplayer level
++added: co-op_2 multyplayer level
 -changed: prbly some outher things I don't remember
 
 0.6.2_Early_Access
@@ -35,9 +36,9 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: reduced respawn cooldown
 
 0.6.1_Early_Access
--added: update installer(windows only)
++added: update installer(windows only)
 -fixed: player being able to move in the z-axis when dide in stage 2 before getting the checkpoint
--added: 3D logic controlls
++added: 3D logic controlls
 -changed: removed giant triangle at start of level-2
 -changed: spawn position in level 5
 
@@ -45,10 +46,10 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 0.6.0_Early_Access
 -changed: upgraded Button to 1.2.0
--added: logic to levels
--added: level-9
--added: level-10
--added: logic interactive buttons
++added: logic to levels
++added: level-9
++added: level-10
++added: logic interactive buttons
 -changed: fatal error handling imporoved
 -changed: improved main menue buttons
 
@@ -56,18 +57,18 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 0.5.0_Early_Access
 -changed: doubled movemet speed
 -changed: jumping/gravity is now more reslistic 
--added: signs
--added: changable sky color
--added: sound hit boxes
--added: level-7
--added: level-8
++added: signs
++added: changable sky color
++added: sound hit boxes
++added: level-7
++added: level-8
 -fixed: parts of levels randomly bliping up
 -fixed: sound file would not get set while loading settings
--added: sign to level 5 explaining how to move back and forth in 3D
--added: platform in level 4 to assist with first jump
--added: user generated levels now muct be of a compatible game version
--changed: default screen srcolling locations
--added: information to the "options" menue during the tutorial
++added: sign to level 5 explaining how to move back and forth in 3D
++added: platform in level 4 to assist with first jump
++added: user generated levels now muct be of a compatible game version
+-changed: default screen srcolling locations+
++added: information to the "options" menue during the tutorial
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux
@@ -77,22 +78,22 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 0.4.2_Early_Access
 -fixed: game crash when trying to view UGC levels when the folder does not exsist.
--added: if a fatal error occors then a window will pop up with the error
++added: if a fatal error occors then a window will pop up with the error
 
 0.4.1_Early_Access
 -fixed: tutorial no longer contributes to progress
--added: user generated levels
++added: user generated levels
 
 0.4.0_Early_Access
 -changed: JSON Arrays are no longer used internally for storing game objects and processing calculations  
 -human seek: massively improved performance   
--added: 3D shadow  
++added: 3D shadow  
 -changed: when standing at a portal the text "Press E" now appears in your face  
 -removed: how to play menu  
 -added: narrated tutorial   
 -changed: main menu now says Early Access  
--added: 3D shadow setting  
--added: tutorial narration mode setting  
++added: 3D shadow setting  
++added: tutorial narration mode setting  
 
 0.3.1_ALFA
 -fixed: progress file would not be created if it did not exist
