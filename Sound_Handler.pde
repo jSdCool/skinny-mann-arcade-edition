@@ -19,6 +19,7 @@ class SoundHandler {
     for (int i =0; i<musicFiles.length; i++) {
       music[i]=new SoundFile(X, musicFiles[i]);
     }
+    musNum=music.length-1;
   }
 
   void tick() {
