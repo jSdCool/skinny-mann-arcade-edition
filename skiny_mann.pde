@@ -163,8 +163,7 @@ void draw() {// the function that is called every fraim
           drawlogo(true, true);
 
           if (start_wate>=2&&loaded) {// display it for 100  fraims
-            soundHandler.setMusicVolume(musicVolume);
-            soundHandler.setSoundsVolume(sfxVolume);
+            soundHandler.startSounds();
             if (dev_mode) {
               Menue="dev";
               println("dev mode activated");
@@ -2606,6 +2605,7 @@ void windowResized() {
 }
 
 void loadLevel(String fdp) {
+  soundHandler.dumpLS();
   try {
     reachedEnd=false;
     rootPath=fdp;
@@ -2642,9 +2642,6 @@ void thrdCalc2() {
     }
     lasMills=curMills;
     //println(mspc);
-    //soundHandler.setMusicVolume(musicVolume);
-    //soundHandler.setSoundsVolume(sfxVolume);
-    soundHandler.tick();
   }
 }
 
@@ -3733,9 +3730,23 @@ void programLoad() {
   loadProgress++;
 
   println("initlizing sound handler");
-  soundHandler =new SoundHandler(musicTracks, sfxTracks, this);
+  
+  SoundHandler.Builder soundBuilder = SoundHandler.builder(this);
+  String[] musicTracks=loadStrings("data/music/music.txt");
+  for(int i=0;i<musicTracks.length;i++){
+    soundBuilder.addMusic(musicTracks[i],0);
+  }
+  String[] sfxTracks=loadStrings("data/sounds/sounds.txt");
+  for(int i=0;i<sfxTracks.length;i++){
+    soundBuilder.addSound(sfxTracks[i]);
+  }
+  
+  
+  soundHandler =soundBuilder.build();
   loadProgress++;
-  soundHandler.setMusicVolume(0);
+  
+  soundHandler.setMusicVolume(musicVolume);
+  soundHandler.setSoundsVolume(sfxVolume);
 
   println("starting to load tutorial audio tracks");
   tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");

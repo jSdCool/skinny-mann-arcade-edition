@@ -19,19 +19,19 @@ class LogicPlaySound extends LogicOutputComponent {
     if (inputTerminal1) {//if the play terminal is high then  play the sound if it is not playing
       try {
         StageSound sound = source.level.sounds.get(soundKey);
-        if (!sound.sound.isPlaying()) {
-          sound.sound.play();
+        if (!(source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound))) {
+           source.soundHandler.addToQueue(sound.sound);
         }
       }
       catch(Exception e) {
       }
     }
-    if (inputTerminal2) {//if the top terminal is high then stop the sound if it is playing
+    if (inputTerminal2) {//if the stop terminal is high then stop the sound if it is playing
       try {
         StageSound sound = source.level.sounds.get(soundKey);
-        if (sound.sound.isPlaying()) {
-          sound.sound.stop();
-        }
+        if ((source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound))) {
+             source.soundHandler.cancleSound(sound.sound);
+          }
       }
       catch(Exception e) {
       }

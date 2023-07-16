@@ -14,6 +14,9 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: player number not being reset when leaving multyplayer
 +added: menu transitions
 -changed: sliders in settings have been upgraded
+-changed: upgraded sound systems, all in level sounds now folow sound volume set in settings
+-removed: old music*
+-added: mew music
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels

@@ -7,16 +7,16 @@ import processing.sound.*;
 class StageSound implements Serializable{
   static transient skiny_mann source;
   String path, name, type="sound";
-  protected transient SoundFile sound;
+  protected transient int sound;
   StageSound(JSONObject input) {
     name=input.getString("name");
     path=input.getString("location");
-    sound= new SoundFile(source, source.rootPath+path);
+    sound = source.soundHandler.registerLevelSound(source.rootPath+path);
   }
   StageSound(String Name, String location) {
     name=Name;
     path=location;
-    sound= new SoundFile(source, source.rootPath+path);
+    sound = source.soundHandler.registerLevelSound(source.rootPath+path);
   }
 
   JSONObject save() {

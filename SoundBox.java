@@ -33,8 +33,8 @@ class SoundBox extends StageComponent {
       if (source.E_pressed) {
         try {
           StageSound sound = source.level.sounds.get(soundKey);
-          if (!sound.sound.isPlaying()) {
-            sound.sound.play();
+          if (!(source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound))) {
+             source.soundHandler.addToQueue(sound.sound);
           }
         }
         catch(Exception e) {
