@@ -136,7 +136,7 @@ void drawSpeakericon(PApplet screen, float x, float y, float scale) {
 }
 
 void drawSoundBox(float x, float y) {
-  if(levelCreator){
+  if (levelCreator) {
     fill(#F2C007, 127);
     rect(x-30*Scale, y-30*Scale, 60*Scale, 60*Scale);
   }

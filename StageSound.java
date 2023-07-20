@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 import processing.sound.*;
 
-class StageSound implements Serializable{
+class StageSound implements Serializable {
   static transient skiny_mann source;
   String path, name, type="sound";
   protected transient int sound;

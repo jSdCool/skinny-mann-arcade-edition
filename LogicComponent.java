@@ -4,7 +4,7 @@ import processing.data.*;
 import java.util.ArrayList;
 
 
-abstract class LogicComponent implements Serializable{//the base of all logic gam=ts and things
+abstract class LogicComponent implements Serializable {//the base of all logic gam=ts and things
   static transient skiny_mann source;
   float x, y;//for visuals only
   String type;
@@ -66,9 +66,9 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
 
   void drawConnections() {
     for (int i=0; i<connections.size(); i++) {
-      if(outputTerminal){
-        source.stroke(220,0,0);
-      }else{
+      if (outputTerminal) {
+        source.stroke(220, 0, 0);
+      } else {
         source.stroke(0);
       }
       source.strokeWeight(5*source.Scale);

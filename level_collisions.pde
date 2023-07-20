@@ -62,7 +62,7 @@ void stageLevelDraw() {
     if (e3DMode) {//if 3D mode is turned on
 
 
-     if ((simulating&&levelCreator)||!levelCreator)
+      if ((simulating&&levelCreator)||!levelCreator)
         camera3DpositionSimulating();
       else
         camera3DpositionNotSimulating();
@@ -174,9 +174,9 @@ void stageLevelDraw() {
 
 
   if (level_complete) {//if the level has been completed
-    fill(255, 255, 0);  
+    fill(255, 255, 0);
     lebelCompleteText.draw();
-    if(level.multyplayerMode!=2||isHost){
+    if (level.multyplayerMode!=2||isHost) {
       endOfLevelButton.draw();
     }
   }
@@ -443,20 +443,20 @@ void playerPhysics() {
 
 
     if (simulating||!levelCreator)
-    if (true) {//gravity
-      float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
+      if (true) {//gravity
+        float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
 
-      if ((!level_colide(players[calcingPlayer].getX()-10, pd)&&!level_colide(players[calcingPlayer].getX()-5, pd)&&!level_colide(players[calcingPlayer].getX(), pd)&&!level_colide(players[calcingPlayer].getX()+5, pd)&&!level_colide(players[calcingPlayer].getX()+10, pd))) {//check if that location would be inside of the ground
-        if ((!level_colide(players[calcingPlayer].getX()-10, pd-75-1)&&!level_colide(players[calcingPlayer].getX()-5, pd-75-1)&&!level_colide(players[calcingPlayer].getX(), pd-75-1)&&!level_colide(players[calcingPlayer].getX()+5, pd-75-1)&&!level_colide(players[calcingPlayer].getX()+10, pd-75-1))||players[calcingPlayer].verticalVelocity>0.001) {//check if that location would cause the player's head to be indide of something
-          players[calcingPlayer].verticalVelocity=players[calcingPlayer].verticalVelocity+gravity*mspc;//calculate the players new verticle velocity
-          players[calcingPlayer].y=pd;//update the postiton of the player
+        if ((!level_colide(players[calcingPlayer].getX()-10, pd)&&!level_colide(players[calcingPlayer].getX()-5, pd)&&!level_colide(players[calcingPlayer].getX(), pd)&&!level_colide(players[calcingPlayer].getX()+5, pd)&&!level_colide(players[calcingPlayer].getX()+10, pd))) {//check if that location would be inside of the ground
+          if ((!level_colide(players[calcingPlayer].getX()-10, pd-75-1)&&!level_colide(players[calcingPlayer].getX()-5, pd-75-1)&&!level_colide(players[calcingPlayer].getX(), pd-75-1)&&!level_colide(players[calcingPlayer].getX()+5, pd-75-1)&&!level_colide(players[calcingPlayer].getX()+10, pd-75-1))||players[calcingPlayer].verticalVelocity>0.001) {//check if that location would cause the player's head to be indide of something
+            players[calcingPlayer].verticalVelocity=players[calcingPlayer].verticalVelocity+gravity*mspc;//calculate the players new verticle velocity
+            players[calcingPlayer].y=pd;//update the postiton of the player
+          } else {
+            players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
+          }
         } else {
           players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
         }
-      } else {
-        players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
       }
-    }
 
 
     //death plane
@@ -482,24 +482,24 @@ void playerPhysics() {
 
 
     if (simulating||!levelCreator)
-    if (players[calcingPlayer].getX()-camPos>(1280-eadgeScroleDist)) {//move the camera if the player goes too close to the end of the screen
-      camPos=(int)(players[calcingPlayer].getX()-(1280-eadgeScroleDist));
-    }
+      if (players[calcingPlayer].getX()-camPos>(1280-eadgeScroleDist)) {//move the camera if the player goes too close to the end of the screen
+        camPos=(int)(players[calcingPlayer].getX()-(1280-eadgeScroleDist));
+      }
 
     if (simulating||!levelCreator)
-    if (players[calcingPlayer].getX()-camPos<eadgeScroleDist&&camPos>0) {//move the camera if the player goes too close to the end of the screen
-      camPos=(int)(players[calcingPlayer].getX()-eadgeScroleDist);
-    }
+      if (players[calcingPlayer].getX()-camPos<eadgeScroleDist&&camPos>0) {//move the camera if the player goes too close to the end of the screen
+        camPos=(int)(players[calcingPlayer].getX()-eadgeScroleDist);
+      }
 
     if (simulating||!levelCreator)
-    if (players[calcingPlayer].getY()+camPosY>720-eadgeScroleDistV&&camPosY>0) {//move the camera if the player goes too close to the end of the screen
-      camPosY-=players[calcingPlayer].getY()+camPosY-(720-eadgeScroleDistV);
-    }
+      if (players[calcingPlayer].getY()+camPosY>720-eadgeScroleDistV&&camPosY>0) {//move the camera if the player goes too close to the end of the screen
+        camPosY-=players[calcingPlayer].getY()+camPosY-(720-eadgeScroleDistV);
+      }
 
     if (simulating||!levelCreator)
-    if (players[calcingPlayer].getY()+camPosY<eadgeScroleDistV+75) {//move the camera if the player goes too close to the end of the screen
-      camPosY-=players[calcingPlayer].getY()+camPosY-(eadgeScroleDistV+75);
-    }
+      if (players[calcingPlayer].getY()+camPosY<eadgeScroleDistV+75) {//move the camera if the player goes too close to the end of the screen
+        camPosY-=players[calcingPlayer].getY()+camPosY-(eadgeScroleDistV+75);
+      }
     if (camPos<0)//prevent the camera from moving out of the valid areia
       camPos=0;
     if (camPosY<0)
@@ -748,20 +748,20 @@ void playerPhysics() {
 
 
     if (simulating||!levelCreator)
-    if (true) {//gravity
-      float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
+      if (true) {//gravity
+        float pd = (players[calcingPlayer].verticalVelocity*mspc+0.5*gravity*(float)Math.pow(mspc, 2))+players[calcingPlayer].y;//calculate the new verticle position the player shoud be at
 
-      if (!level_colide(players[calcingPlayer].getX(), pd, players[calcingPlayer].z+7)&&!level_colide(players[calcingPlayer].getX(), pd, players[calcingPlayer].z-7)) {//check if that location would be inside of the ground
-        if ((!level_colide(players[calcingPlayer].getX()-10, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()-5, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX(), pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()+5, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()+10, pd-75-1, players[calcingPlayer].z))||players[calcingPlayer].verticalVelocity>0.001) {//check if that location would cause the player's head to be indide of something
-          players[calcingPlayer].verticalVelocity=players[calcingPlayer].verticalVelocity+gravity*mspc;//calculate the new verticle velocity
-          players[calcingPlayer].y=pd;//update position
+        if (!level_colide(players[calcingPlayer].getX(), pd, players[calcingPlayer].z+7)&&!level_colide(players[calcingPlayer].getX(), pd, players[calcingPlayer].z-7)) {//check if that location would be inside of the ground
+          if ((!level_colide(players[calcingPlayer].getX()-10, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()-5, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX(), pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()+5, pd-75-1, players[calcingPlayer].z)&&!level_colide(players[calcingPlayer].getX()+10, pd-75-1, players[calcingPlayer].z))||players[calcingPlayer].verticalVelocity>0.001) {//check if that location would cause the player's head to be indide of something
+            players[calcingPlayer].verticalVelocity=players[calcingPlayer].verticalVelocity+gravity*mspc;//calculate the new verticle velocity
+            players[calcingPlayer].y=pd;//update position
+          } else {
+            players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
+          }
         } else {
           players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
         }
-      } else {
-        players[calcingPlayer].verticalVelocity=0;//stop the player's verticle motion
       }
-    }
 
     //in ground detection and rectification
     if (!(!level_colide(players[calcingPlayer].getX(), players[calcingPlayer].getY(), players[calcingPlayer].z+7)&&!level_colide(players[calcingPlayer].getX(), players[calcingPlayer].getY(), players[calcingPlayer].z-7))) {

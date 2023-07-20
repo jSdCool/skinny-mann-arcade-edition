@@ -216,7 +216,7 @@ class Level implements Serializable {
     }
     String[] keys=new String[0];
     keys=(String[])sounds.keySet().toArray(keys);
-    if (keys.length!=0){
+    if (keys.length!=0) {
       for (int i=0; i<keys.length; i++) {
         index.setJSONObject(index.size(), sounds.get(keys[i]).save());
       }
@@ -230,17 +230,17 @@ class Level implements Serializable {
     }
     source.saveJSONArray(index, source.rootPath+"/index.json");
   }
-  
-  String getHash(){
+
+  String getHash() {
     String basePath="";
-    if(source.rootPath.startsWith("data")){
+    if (source.rootPath.startsWith("data")) {
       basePath=source.sketchPath()+"/"+source.rootPath;
-    }else{
+    } else {
       basePath=source.rootPath;
     }
     String hash="";
     hash+=Hasher.getFileHash(basePath+"/index.json");
-    
+
     JSONArray file = source.loadJSONArray(basePath+"/index.json");
     JSONObject job;
     for (int i=1; i<file.size(); i++) {
@@ -259,13 +259,13 @@ class Level implements Serializable {
     }
     return hash;
   }
-  
-  String[] getOutherFileNames(){
-    
+
+  String[] getOutherFileNames() {
+
     String[] keys=new String[0];
     keys=(String[])sounds.keySet().toArray(keys);
     String[] names=new String[keys.length];
-    if (keys.length!=0){
+    if (keys.length!=0) {
       for (int i=0; i<keys.length; i++) {
         names[i]=sounds.get(keys[i]).path;
       }

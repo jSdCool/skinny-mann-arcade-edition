@@ -121,8 +121,8 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText,lc_fullScreenWarning;
-UiSlider musicVolumeSlider,SFXVolumeSlider,verticleEdgeScrollSlider,horozontalEdgeScrollSlider;
+UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning;
+UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider;
 //▄
 
 
@@ -576,7 +576,7 @@ void draw() {// the function that is called every fraim
         newBlueprint.draw();
         loadBlueprint.draw();
         lc_backButton.draw();
-        if(fs){//if in full screen mode then display this warning
+        if (fs) {//if in full screen mode then display this warning
           fill(0);
           lc_fullScreenWarning.draw();
         }
@@ -1306,7 +1306,7 @@ void mouseClicked() {// when you click the mouse
         if (Menue.equals("settings")) {     //if that menue is settings
 
           if (settingsMenue.equals("game play")) {
-            
+
             verticleEdgeScrollSlider.mouseClicked();
             horozontalEdgeScrollSlider.mouseClicked();
             if (horozontalEdgeScrollSlider.button.isMouseOver()) {
@@ -1324,8 +1324,6 @@ void mouseClicked() {// when you click the mouse
               settings.setJSONObject(1, scroll);
               saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             }
-            
-            
           }//end of game play settings
 
           if (settingsMenue.equals("display")) {
@@ -1431,7 +1429,7 @@ void mouseClicked() {// when you click the mouse
 
             musicVolumeSlider.mouseClicked();
             SFXVolumeSlider.mouseClicked();
-            
+
             if (musicVolumeSlider.button.isMouseOver()) {
               musicVolume=musicVolumeSlider.getValue()/100.0;
               JSONObject scroll=settings.getJSONObject(4);
@@ -1477,8 +1475,6 @@ void mouseClicked() {// when you click the mouse
               settings.setJSONObject(5, sv3);
               saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
             }
-            
-            
           }//end of outher settings menue
 
           if (sttingsGPL.isMouseOver())
@@ -2524,58 +2520,55 @@ void mouseDragged() {
     if (levelCreator) {
       if (Menue.equals("settings")) {
         if (settingsMenue.equals("game play")) {
-          
         }
         if (settingsMenue.equals("outher")) {
-          
         }
       }
-    }else{
+    } else {
       if (Menue.equals("settings")) {     //if that menue is settings
 
-          if (settingsMenue.equals("game play")) {
-            verticleEdgeScrollSlider.mouseDragged();
-            horozontalEdgeScrollSlider.mouseDragged();
-            if (horozontalEdgeScrollSlider.button.isMouseOver()) {
-              eadgeScroleDist=(int)horozontalEdgeScrollSlider.getValue();
-              JSONObject scroll=settings.getJSONObject(1);
-              scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
-              settings.setJSONObject(1, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-            }
+        if (settingsMenue.equals("game play")) {
+          verticleEdgeScrollSlider.mouseDragged();
+          horozontalEdgeScrollSlider.mouseDragged();
+          if (horozontalEdgeScrollSlider.button.isMouseOver()) {
+            eadgeScroleDist=(int)horozontalEdgeScrollSlider.getValue();
+            JSONObject scroll=settings.getJSONObject(1);
+            scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
+            settings.setJSONObject(1, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+          }
 
-            if (verticleEdgeScrollSlider.button.isMouseOver()) {
-    
-              eadgeScroleDistV=(int)verticleEdgeScrollSlider.getValue();
-              JSONObject scroll=settings.getJSONObject(1);
-              scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
-              settings.setJSONObject(1, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-            }
+          if (verticleEdgeScrollSlider.button.isMouseOver()) {
+
+            eadgeScroleDistV=(int)verticleEdgeScrollSlider.getValue();
+            JSONObject scroll=settings.getJSONObject(1);
+            scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
+            settings.setJSONObject(1, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
-          if (settingsMenue.equals("outher")) {
-            musicVolumeSlider.mouseDragged();
-            SFXVolumeSlider.mouseDragged();
-            
-            if (musicVolumeSlider.button.isMouseOver()) {
-              musicVolume=musicVolumeSlider.getValue()/100.0;
-              JSONObject scroll=settings.getJSONObject(4);
-              scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
-              settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-              soundHandler.setMusicVolume(musicVolume);
-            }
-            if (SFXVolumeSlider.button.isMouseOver()) {
-  
-              sfxVolume=SFXVolumeSlider.getValue()/100.0;
-              JSONObject scroll=settings.getJSONObject(4);
-              scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
-              settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
-              soundHandler.setSoundsVolume(sfxVolume);
-            }
+        }
+        if (settingsMenue.equals("outher")) {
+          musicVolumeSlider.mouseDragged();
+          SFXVolumeSlider.mouseDragged();
+
+          if (musicVolumeSlider.button.isMouseOver()) {
+            musicVolume=musicVolumeSlider.getValue()/100.0;
+            JSONObject scroll=settings.getJSONObject(4);
+            scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
+            settings.setJSONObject(4, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            soundHandler.setMusicVolume(musicVolume);
           }
-          
+          if (SFXVolumeSlider.button.isMouseOver()) {
+
+            sfxVolume=SFXVolumeSlider.getValue()/100.0;
+            JSONObject scroll=settings.getJSONObject(4);
+            scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
+            settings.setJSONObject(4, scroll);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            soundHandler.setSoundsVolume(sfxVolume);
+          }
+        }
       }
     }
   }
@@ -2868,7 +2861,7 @@ void drawSettings() {
     shadowOff.draw();
     narrationMode1.draw();
     narrationMode0.draw();
-    
+
     musicVolumeSlider.draw();
     SFXVolumeSlider.draw();
 
@@ -3019,7 +3012,7 @@ void drawLevelSelect(boolean bcakground) {
   select_lvl_UGC.draw();
 }
 
-void drawLevelSelectUGC(){
+void drawLevelSelectUGC() {
   background(7646207);
   fill(0);
   lsUGC_title.draw();//menue title
@@ -3742,21 +3735,21 @@ void programLoad() {
   loadProgress++;
 
   println("initlizing sound handler");
-  
+
   SoundHandler.Builder soundBuilder = SoundHandler.builder(this);
   String[] musicTracks=loadStrings("data/music/music.txt");
-  for(int i=0;i<musicTracks.length;i++){
-    soundBuilder.addMusic(musicTracks[i],0);
+  for (int i=0; i<musicTracks.length; i++) {
+    soundBuilder.addMusic(musicTracks[i], 0);
   }
   String[] sfxTracks=loadStrings("data/sounds/sounds.txt");
-  for(int i=0;i<sfxTracks.length;i++){
+  for (int i=0; i<sfxTracks.length; i++) {
     soundBuilder.addSound(sfxTracks[i]);
   }
-  
-  
+
+
   soundHandler =soundBuilder.build();
   loadProgress++;
-  
+
   soundHandler.setMusicVolume(musicVolume);
   soundHandler.setSoundsVolume(sfxVolume);
 
@@ -3894,7 +3887,7 @@ void programLoad() {
   LevelCreatorLogo=loadShape("data/modles/LevelCreatorLogo/LCL.obj");
   loadProgress++;
   LevelCreatorLogo.scale(3*Scale);
-  
+
   musicVolumeSlider.setValue(musicVolume*100);
   SFXVolumeSlider.setValue(sfxVolume*100);
   verticleEdgeScrollSlider.setValue(eadgeScroleDistV);
@@ -3916,7 +3909,7 @@ void  initButtons() {
   select_lvl_3 =new UiButton(ui, (600), (100), (200), (100), "lvl 3", -59135, -1791).setStrokeWeight( (10));
   select_lvl_4 =new UiButton(ui, (850), (100), (200), (100), "lvl 4", -59135, -1791).setStrokeWeight( (10));
   sdSlider=new UiButton(ui, (800), (50), (440), (30), 255, 0).setStrokeWeight( (5));
-  horozontalEdgeScrollSlider = new UiSlider(ui, 800,50,440,30).setStrokeWeight(5).setColors(255,0).showValue(false).setRounding(1).setMax(630).setMin(100);
+  horozontalEdgeScrollSlider = new UiSlider(ui, 800, 50, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1).setMax(630).setMin(100);
   disableFPS =new UiButton(ui, (1130), (50), (40), (40), 255, 0).setStrokeWeight( (5));
   enableFPS =new UiButton(ui, (1200), (50), (40), (40), 255, 0).setStrokeWeight( (5));
   disableDebug =new UiButton(ui, (1130), (120), (40), (40), 255, 0).setStrokeWeight( (5));
@@ -3936,9 +3929,9 @@ void  initButtons() {
   vsdSlider =new UiButton(ui, (800), (120), (440), (30), 255, 0).setStrokeWeight( (5));
   MusicSlider=new UiButton(ui, (800), (190), (440), (30), 255, 0).setStrokeWeight( (5));
   SFXSlider=new UiButton(ui, (800), (260), (440), (30), 255, 0).setStrokeWeight( (5));
-  musicVolumeSlider = new UiSlider(ui, 800,190,440,30).setStrokeWeight(5).setColors(255,0).showValue(false).setRounding(1);
-  SFXVolumeSlider = new UiSlider(ui,800,260,440,30).setStrokeWeight(5).setColors(255,0).showValue(false).setRounding(1);
-  verticleEdgeScrollSlider = new UiSlider(ui,800,120,440,30).setStrokeWeight(5).setColors(255,0).showValue(false).setRounding(1).setMax(320).setMin(100);
+  musicVolumeSlider = new UiSlider(ui, 800, 190, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1);
+  SFXVolumeSlider = new UiSlider(ui, 800, 260, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1);
+  verticleEdgeScrollSlider = new UiSlider(ui, 800, 120, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1).setMax(320).setMin(100);
   shadowOn = new UiButton(ui, (1200), (330), (40), (40), 255, 0).setStrokeWeight(5);
   shadowOff = new UiButton(ui, (1130), (330), (40), (40), 255, 0).setStrokeWeight(5);
   narrationMode1 =new UiButton(ui, (1200), (460), (40), (40), 255, 0).setStrokeWeight(5);
@@ -4227,7 +4220,7 @@ void initText() {
   lc_newbp_describe = new UiText(ui, "enter blueprint name", 40, 100, 20, LEFT, BOTTOM);
   lc_exit_question = new UiText(ui, "Are you sure?", 640, 120, 50, CENTER, CENTER);
   lc_exit_disclaimer = new UiText(ui, "Any unsaved data will be lost.", 640, 200, 50, CENTER, CENTER);
-  lc_fullScreenWarning = new UiText(ui, "Full screen mode is not recommended for the Level Creator", 640,420,45,CENTER,CENTER);
+  lc_fullScreenWarning = new UiText(ui, "Full screen mode is not recommended for the Level Creator", 640, 420, 45, CENTER, CENTER);
   deadText = new UiText(ui, "you died", 640, 360, 50, CENTER, CENTER);
   fpsText = new UiText(ui, "fps: ", 1220, 15, 10, LEFT, BOTTOM);
   dbg_mspc = new UiText(ui, "mspc: V", 1275, 10, 10, RIGHT, TOP);

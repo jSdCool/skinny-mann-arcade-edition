@@ -9,7 +9,7 @@ class SoundHandler extends Thread {
   PApplet ggn;
   private int musNum=0, currentMusicTrack=0, trackToSwitchTo=0;
   private float masterVolume=1, musicVolume=1, sfxVolume=1, prevVol=1;
-  private boolean switchMusicTrack=false, keepAlive=true, enableSounds=false,startMusic=false;
+  private boolean switchMusicTrack=false, keepAlive=true, enableSounds=false, startMusic=false;
 
 
   private SoundHandler(String[][] musicFiles, String[] soundsFiles, PApplet X) {
@@ -47,31 +47,31 @@ class SoundHandler extends Thread {
 
   private void tick() {
     if (enableSounds) {//if sounds are enabled rn
-      if(startMusic){
+      if (startMusic) {
         music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);
         startMusic=false;
       }
-    
+
       if (prevVol!=musicVolume) {//if the volume changed
         music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);//change the volume of the currently playing music track
         prevVol=musicVolume;
-        if(musicVolume*masterVolume==0){
+        if (musicVolume*masterVolume==0) {
           music[currentMusicTrack][musNum].stop();
         }
       }
-      
-      if (!music[currentMusicTrack][musNum].isPlaying()&& musicVolume*masterVolume!=0) {//if the current track has ended 
+
+      if (!music[currentMusicTrack][musNum].isPlaying()&& musicVolume*masterVolume!=0) {//if the current track has ended
         musNum++;//switch to the next track
         if (musNum==music[currentMusicTrack].length)//if rached the end of the track go bat to the start
           musNum=0;
         System.out.println(musNum+" "+music[currentMusicTrack].length);
         music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the music
       }
-      
-      playSound(cSound,0);//do sound slot 1 
-      playSound(cSound,1);//do sound slot 2
-      playSound(cSound,2);//do sound slot 3
-      
+
+      playSound(cSound, 0);//do sound slot 1
+      playSound(cSound, 1);//do sound slot 2
+      playSound(cSound, 2);//do sound slot 3
+
 
 
       if (switchMusicTrack&&trackToSwitchTo!=currentMusicTrack) {
@@ -86,9 +86,9 @@ class SoundHandler extends Thread {
 
   void addToQueue(int soundNum) {
     SoundFile sound;
-    if(soundNum<sounds.length){
+    if (soundNum<sounds.length) {
       sound=sounds[soundNum];
-    }else{
+    } else {
       sound=levelSounds.get(soundNum-sounds.length);
     }
     if (queue[0]==null) {
@@ -134,12 +134,12 @@ class SoundHandler extends Thread {
     return false;
   }
 
-  private void playSound(SoundFile[] R,int n) {
+  private void playSound(SoundFile[] R, int n) {
     if (moveUp(R[n])) {
 
       R[n]=queue[0];
       if (R[n]!=null)
-        if(masterVolume*sfxVolume!=0)
+        if (masterVolume*sfxVolume!=0)
           R[n].play(1, masterVolume*sfxVolume);
 
       for (int i =0; i<7; i++) {
@@ -177,69 +177,66 @@ class SoundHandler extends Thread {
     enableSounds=false;
     music[currentMusicTrack][musNum].pause();
   }
-  
-  public int registerLevelSound(String path){
+
+  public int registerLevelSound(String path) {
     SoundFile sound = new SoundFile(ggn, path);
     int id =sounds.length+levelSounds.size();
     levelSounds.add(sound);
     return id;
   }
-  
-  public boolean isPlaying(int n){
-   if(n<sounds.length){
-    return sounds[n].isPlaying(); 
-   }else{
-     return levelSounds.get(n-sounds.length).isPlaying();
-   }
+
+  public boolean isPlaying(int n) {
+    if (n<sounds.length) {
+      return sounds[n].isPlaying();
+    } else {
+      return levelSounds.get(n-sounds.length).isPlaying();
+    }
   }
-  
-  public boolean isInQueue(int n){
+
+  public boolean isInQueue(int n) {
     SoundFile s;
-    if(n<sounds.length){
-    s= sounds[n]; 
-   }else{
-     s= levelSounds.get(n-sounds.length);
-   }
-   for(int i=0;i<queue.length;i++){
-     if(queue[i]!=null&&s.equals(queue[i])){
-       return true;
-     }
-   }
-   return false;
-   
+    if (n<sounds.length) {
+      s= sounds[n];
+    } else {
+      s= levelSounds.get(n-sounds.length);
+    }
+    for (int i=0; i<queue.length; i++) {
+      if (queue[i]!=null&&s.equals(queue[i])) {
+        return true;
+      }
+    }
+    return false;
   }
-  
-  public void cancleSound(int n){
-     SoundFile s;
-     if(n<sounds.length){
-       s= sounds[n]; 
-     }else{
-       s= levelSounds.get(n-sounds.length);
-     }
-     
-     if(s.isPlaying()){
-       s.stop();
-       return;
-     }
-     for(int i=0;i<queue.length;i++){
-       if(queue[i]!=null&&s.equals(queue[i])){
-         queue[i]=null;
-         return;
-       }
-     }
-     
+
+  public void cancleSound(int n) {
+    SoundFile s;
+    if (n<sounds.length) {
+      s= sounds[n];
+    } else {
+      s= levelSounds.get(n-sounds.length);
+    }
+
+    if (s.isPlaying()) {
+      s.stop();
+      return;
+    }
+    for (int i=0; i<queue.length; i++) {
+      if (queue[i]!=null&&s.equals(queue[i])) {
+        queue[i]=null;
+        return;
+      }
+    }
   }
-  
-  public void dumpLS(){//dump level sounds and allow them to be garbage collected
-    for(int i=0;i<levelSounds.size();i++){
+
+  public void dumpLS() {//dump level sounds and allow them to be garbage collected
+    for (int i=0; i<levelSounds.size(); i++) {
       levelSounds.get(i).removeFromCache();
     }
     levelSounds = new ArrayList<>();
     System.gc();//run garbage collection to remove old uloaded sound files from memory
-    
   }
 
-//===============================BUILDER===============================
+  //===============================BUILDER===============================
 
   public static class Builder {
     private Builder(PApplet a) {

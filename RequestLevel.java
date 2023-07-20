@@ -1,2 +1,2 @@
-class RequestLevel extends DataPacket{
+class RequestLevel extends DataPacket {
 }

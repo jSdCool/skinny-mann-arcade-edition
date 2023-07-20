@@ -55,9 +55,9 @@ class Goal extends StageComponent {//ground component
       if (!source.level_complete) {
         source.level.logicBoards.get(source.level.levelCompleteBoard).superTick();
       }
-      if(source.level.multyplayerMode!=2){
+      if (source.level.multyplayerMode!=2) {
         source.level_complete=true;
-      }else{
+      } else {
         source.reachedEnd=true;
       }
     }

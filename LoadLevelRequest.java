@@ -1,6 +1,6 @@
 class LoadLevelRequest extends DataPacket {
   boolean isBuiltIn=false;
-  String path,hash;
+  String path, hash;
   int id;
   LoadLevelRequest(String location) {
     isBuiltIn=true;

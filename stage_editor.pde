@@ -335,7 +335,7 @@ void stageEditGUI() {
       if (index==-1) {//if the mouse was over nothing then do nothing
       } else {
         StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
-        if(current.interactables.contains(removed)){
+        if (current.interactables.contains(removed)) {
           current.interactables.remove(removed);
         }
       }
@@ -367,7 +367,7 @@ void stageEditGUI() {
     }
 
     if (sloap&&draw) {//if drawing a triangle
-      int X1=0, X2=0, Y1=0, Y2=0;  
+      int X1=0, X2=0, Y1=0, Y2=0;
       if (grid_mode) {//if gridmode is on
 
 
@@ -521,7 +521,7 @@ void stageEditGUI() {
       } else {
         current.parts.add(new LogicButton((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));
       }
-        current.interactables.add(current.parts.get(current.parts.size()-1));
+      current.interactables.add(current.parts.get(current.parts.size()-1));
       draw=false;
     }
 
@@ -698,7 +698,7 @@ void stageEditGUI() {
         if (index==-1) {//if the mouse is over nothing then do nothing
         } else {
           StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
-          if(current.interactables.contains(removed)){
+          if (current.interactables.contains(removed)) {
             current.interactables.remove(removed);
           }
         }
@@ -967,7 +967,7 @@ void stageEditGUI() {
           rotateX(radians(90));
           translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
 
-          //scaling of objects in 3D 
+          //scaling of objects in 3D
           if (grid_mode) {
             if (transformComponentNumber==1) {
               if (translateZaxis) {
@@ -1064,29 +1064,29 @@ void GUImouseClicked() {
 
 
     if (check_point) {//if checkoint
-        draw=true;
+      draw=true;
     }
     if (goal) {//if placing finishline
-        draw=true;
+      draw=true;
     }
     if (placingLogicButton) {//if placing logic button
       draw=true;
     }
     if (deleteing) {//if deleteing
-        delete=true;
+      delete=true;
     }
     if (moving_player) {//if moving the player
-        //set the players new position
-        players[currentPlayer].setX(mouseX/Scale+camPos);
-        players[currentPlayer].setY(mouseY/Scale-camPosY);
-        if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-          players[currentPlayer].z=startingDepth;
-        }
-        tpCords[0]=mouseX/Scale+camPos;
-        tpCords[1]=mouseY/Scale-camPosY;
-        tpCords[2]=startingDepth;
-      
-        setPlayerPosTo=true;
+      //set the players new position
+      players[currentPlayer].setX(mouseX/Scale+camPos);
+      players[currentPlayer].setY(mouseY/Scale-camPosY);
+      if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
+        players[currentPlayer].z=startingDepth;
+      }
+      tpCords[0]=mouseX/Scale+camPos;
+      tpCords[1]=mouseY/Scale-camPosY;
+      tpCords[2]=startingDepth;
+
+      setPlayerPosTo=true;
     }
     if (drawCoins) {//if drawing coin
       String tpe = current.type;
@@ -1611,18 +1611,18 @@ void mouseClicked3D() {
       }
     }
   }
-  if(deleteing){
-   for (int i=0; i<5000; i++) {
+  if (deleteing) {
+    for (int i=0; i<5000; i++) {
       Point3D testPoint = genMousePoint(i);
       int deleteIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, level.stages.get(currentStageIndex));
-      if (deleteIndex!=-1){
+      if (deleteIndex!=-1) {
         StageComponent removed = level.stages.get(currentStageIndex).parts.remove(deleteIndex);
-        if(level.stages.get(currentStageIndex).interactables.contains(removed)){
+        if (level.stages.get(currentStageIndex).interactables.contains(removed)) {
           level.stages.get(currentStageIndex).interactables.remove(removed);
         }
         break;
       }
-    } 
+    }
   }
 }
 

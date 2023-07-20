@@ -13,11 +13,11 @@ float[] multXZ;
 float logorx=-75, logory=-180, logorz=0, start_wate=0;
 
 PShape CBiSphere;
-void drawlogo(boolean controllCamera,boolean setBackground) {
+void drawlogo(boolean controllCamera, boolean setBackground) {
   directionalLight(255, 255, 255, 1, 0.8, -1);
   ambientLight(102, 102, 102);
 
-  if(setBackground)
+  if (setBackground)
     background(0);
   if (logorx<0) {
     logorx+=(1.0/frameRate)*25;
@@ -27,7 +27,7 @@ void drawlogo(boolean controllCamera,boolean setBackground) {
     start_wate+=1.0/frameRate;
   }
   fill(255);
-  if(controllCamera)
+  if (controllCamera)
     camera(width/2, height/2, 623.5382907, width/2, height/2, 0, 0, 1, 0);
 
   pushMatrix();
@@ -35,7 +35,7 @@ void drawlogo(boolean controllCamera,boolean setBackground) {
   rotateZ(radians(logorz));
   rotateX(radians(logorx));
   rotateY(radians(logory));
-  shape(CBiSphere,0,0);
+  shape(CBiSphere, 0, 0);
   //textureSphere(200, 200, 200, CBi);
   popMatrix();
 }
@@ -74,10 +74,10 @@ void initializeSphere(int numPtsW, int numPtsH_2pi) {
   }
 }
 
-void textureSphere(float rx, float ry, float rz, PImage t) { 
-  // These are so we can map certain parts of the image on to the shape 
-  float changeU=t.width/(float)(numPointsW-1); 
-  float changeV=t.height/(float)(numPointsH-1); 
+void textureSphere(float rx, float ry, float rz, PImage t) {
+  // These are so we can map certain parts of the image on to the shape
+  float changeU=t.width/(float)(numPointsW-1);
+  float changeV=t.height/(float)(numPointsH-1);
   float u=0;  // Width variable for the texture
   float v=0;  // Height variable for the texture
   CBiSphere= createShape();

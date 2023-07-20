@@ -3,7 +3,7 @@ import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-class LogicBoard implements Serializable{//stores all the logic components
+class LogicBoard implements Serializable {//stores all the logic components
   static transient skiny_mann source;
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
