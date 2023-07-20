@@ -160,13 +160,13 @@ void transition_logoToSettings() {
 void transition_mainToSettings(){
   if(transitionProgress<0.5){
     float senctionProgress = (transitionProgress)/0.5;
-    float camYpos = -900*senctionProgress*ui.scale()+height/2;
+    float camYpos = -height*senctionProgress+height/2;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
     drawMainMenu(true);
   }else{
     float senctionProgress = (transitionProgress-0.5)/0.5;
-    float camYpos = -900*senctionProgress*ui.scale()+height/2+900*ui.scale();
+    float camYpos = -height*senctionProgress+height/2+height;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
     drawSettings();
@@ -178,13 +178,13 @@ void transition_mainToSettings(){
 void transition_settingsToMain(){
   if(transitionProgress<0.5){
     float senctionProgress = (transitionProgress)/0.5;
-    float camYpos = 900*senctionProgress*ui.scale()+height/2;
+    float camYpos = height*senctionProgress+height/2;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
     drawSettings();
   }else{
     float senctionProgress = (transitionProgress-0.5)/0.5;
-    float camYpos = 900*senctionProgress*ui.scale()+height/2-900*ui.scale();
+    float camYpos = height*senctionProgress+height/2-height;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
     drawMainMenu(true);
@@ -197,7 +197,7 @@ void transition_mainToLevelSelect(){
   if(transitionProgress<0.5){
     float senctionProgress = (transitionProgress)/0.5;
     float camZpos = (height/2)/tan(radians(60)/2);
-    float camXpos = 1500*senctionProgress*ui.scale()+width/2;
+    float camXpos = width*senctionProgress+width/2;
     camera(camXpos,height/2,camZpos,camXpos,height/2,0,0,1,0);
     background(#74ABFF);
     fill(-16732415);
@@ -207,13 +207,12 @@ void transition_mainToLevelSelect(){
   }else{
     float senctionProgress = (transitionProgress-0.5)/0.5;
     float camZpos = (height/2)/tan(radians(60)/2);
-    float camXpos = 1500*senctionProgress*ui.scale()+width/2-1500*ui.scale();
+    float camXpos = width*senctionProgress+width/2-width;
     camera(camXpos,height/2,camZpos,camXpos,height/2,0,0,1,0);
     background(#74ABFF);
     fill(-16732415);
     rect(-width*7,height/2,width*8,height/2);
     drawLevelSelect(false);
-    
     
   }
   
@@ -224,7 +223,7 @@ void transition_levelSelectToMain(){
   if(transitionProgress<0.5){
     float senctionProgress = (transitionProgress)/0.5;
     float camZpos = (height/2)/tan(radians(60)/2);
-    float camXpos = -1500*senctionProgress*ui.scale()+width/2;
+    float camXpos = -width*senctionProgress+width/2;
     camera(camXpos,height/2,camZpos,camXpos,height/2,0,0,1,0);
     background(#74ABFF);
     fill(-16732415);
@@ -234,15 +233,13 @@ void transition_levelSelectToMain(){
   }else{
     float senctionProgress = (transitionProgress-0.5)/0.5;
     float camZpos = (height/2)/tan(radians(60)/2);
-    float camXpos = -1500*senctionProgress*ui.scale()+width/2+1500*ui.scale();
+    float camXpos = -width*senctionProgress+width/2+width;
     camera(camXpos,height/2,camZpos,camXpos,height/2,0,0,1,0);
     background(#74ABFF);
     fill(-16732415);
     rect(0,height/2,width*8,height/2);
     drawMainMenu(false);
-    
-    
-    
+
   }
   
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
