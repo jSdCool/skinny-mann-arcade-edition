@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton,tickLogicButton;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -101,6 +101,7 @@ class ToolBox extends PApplet {
     addGroup=new Button(this, 640, 190, 30, 30, "+");
     typeGroopName=new Button(this, 680, 190, 400, 30);
     runLoad=new Button(this, 500, 550, 200, 50, "load").setHoverText("run the load logic board");
+    tickLogicButton = new Button(this, 500,650,200,50,"tick").setHoverText("run 1 logic tick on the current logic board");
 
 
     multyplayerModeSpeedrunButton=new Button(this, 220, 190, 80, 30, "speed run", 255, #F6FF03);
@@ -1367,6 +1368,11 @@ class ToolBox extends PApplet {
           else
             text(newGroopName, 680, 218);
           runLoad.draw();
+          
+          if(editinglogicBoard){
+            tickLogicButton.draw();
+            tickLogicButton.drawHoverText();
+          }
           runLoad.drawHoverText();
         }//end of editing level
       }//end of variables and groups
@@ -2156,6 +2162,9 @@ class ToolBox extends PApplet {
           }
           if (runLoad.isMouseOver()) {
             level.logicBoards.get(level.loadBoard).superTick();
+          }
+          if(editinglogicBoard && tickLogicButton.isMouseOver()){
+            level.logicBoards.get(logicBoardIndex).tick();
           }
         }//end of editing a level
       }//end if page is varioables and groups

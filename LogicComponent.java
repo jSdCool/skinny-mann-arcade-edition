@@ -66,7 +66,11 @@ abstract class LogicComponent implements Serializable{//the base of all logic ga
 
   void drawConnections() {
     for (int i=0; i<connections.size(); i++) {
-      source.stroke(0);
+      if(outputTerminal){
+        source.stroke(220,0,0);
+      }else{
+        source.stroke(0);
+      }
       source.strokeWeight(5*source.Scale);
       Integer[] connectionInfo =connections.get(i);
       float[] thisTerminal = getTerminalPos(2), toTerminal=lb.components.get(connectionInfo[0]).getTerminalPos(connectionInfo[1]);

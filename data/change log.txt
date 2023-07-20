@@ -17,6 +17,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: upgraded sound systems, all in level sounds now folow sound volume set in settings
 -removed: old music*
 -added: mew music
+-changed: in the logic board editor active logic connections are new red
+-added: tick logic board button to varibles and groups page of tool box
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
