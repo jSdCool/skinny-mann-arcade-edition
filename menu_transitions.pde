@@ -23,6 +23,14 @@ void menuTransition() {
   case LEVEL_SELECT_TO_MAIN:
     transition_levelSelectToMain();
     break;
+  
+  case LEVEL_SELECT_TO_UGC:
+    transition_levelSelectToUGC();
+    break;
+    
+  case UGC_TO_LEVEL_SELECT:
+    transition_UGCToLevelSelect();
+    break;
 
   default:
     transitionProgress=1;
@@ -39,7 +47,9 @@ enum Transitions {
   MAIN_TO_SETTINGS,
   SETTINGS_TO_MAIN,
   MAIN_TO_LEVEL_SELECT,
-  LEVEL_SELECT_TO_MAIN
+  LEVEL_SELECT_TO_MAIN,
+  LEVEL_SELECT_TO_UGC,
+  UGC_TO_LEVEL_SELECT
 };
 
 Transitions currentTransition;
@@ -240,6 +250,42 @@ void transition_levelSelectToMain(){
     rect(0,height/2,width*8,height/2);
     drawMainMenu(false);
 
+  }
+  
+  transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
+}
+
+void transition_levelSelectToUGC(){
+  if(transitionProgress<0.5){
+    float senctionProgress = (transitionProgress)/0.5;
+    float camYpos = -height*senctionProgress+height/2;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
+    drawLevelSelect(true);
+  }else{
+    float senctionProgress = (transitionProgress-0.5)/0.5;
+    float camYpos = -height*senctionProgress+height/2+height;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
+    drawLevelSelectUGC();
+  }
+  
+  transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
+}
+
+void transition_UGCToLevelSelect(){
+  if(transitionProgress<0.5){
+    float senctionProgress = (transitionProgress)/0.5;
+    float camYpos = height*senctionProgress+height/2;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
+    drawLevelSelectUGC();
+  }else{
+    float senctionProgress = (transitionProgress-0.5)/0.5;
+    float camYpos = height*senctionProgress+height/2-height;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2,camYpos,camZpos,width/2,camYpos,0,0,1,0);
+    drawLevelSelect(true);
   }
   
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;

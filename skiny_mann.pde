@@ -221,30 +221,7 @@ void draw() {// the function that is called every fraim
           drawLevelSelect(true);
         }
         if (Menue.equals("level select UGC")) {
-          background(7646207);
-          fill(0);
-          lsUGC_title.draw();//menue title
-
-          select_lvl_back.draw();
-          UGC_open_folder.draw();
-          levelcreatorLink.draw();
-          fill(0);
-          if (UGCNames.size()==0) {
-            lsUGC_noLevelFound.draw();
-          } else {
-            lsUGC_levelName.setText(UGCNames.get(UGC_lvl_indx));
-            lsUGC_levelName.draw();
-            if ((boolean)compatibles.get(UGC_lvl_indx)) {
-              lsUGC_levelNotCompatible.draw();
-            }
-            if (UGC_lvl_indx<UGCNames.size()-1) {
-              UGC_lvls_next.draw();
-            }
-            if (UGC_lvl_indx>0) {
-              UGC_lvls_prev.draw();
-            }
-            UGC_lvl_play.draw();
-          }
+          drawLevelSelectUGC();
         }
         if (Menue.equals("pause")) {//when in the pause emnue cancle all motion
           player1_moving_right=false;
@@ -1225,8 +1202,10 @@ void mouseClicked() {// when you click the mouse
           }
           if (select_lvl_UGC.isMouseOver()) {
             Menue="level select UGC";
+            menue=false;
             loadUGCList();
             UGC_lvl_indx=0;
+            initMenuTransition(Transitions.LEVEL_SELECT_TO_UGC);
             return;
           }
 
@@ -1236,6 +1215,8 @@ void mouseClicked() {// when you click the mouse
         if (Menue.equals("level select UGC")) {
           if (select_lvl_back.isMouseOver()) {
             Menue="level select";
+            menue=false;
+            initMenuTransition(Transitions.UGC_TO_LEVEL_SELECT);
           }
           if (UGC_open_folder.isMouseOver()) {
             openUGCFolder();
@@ -3036,6 +3017,33 @@ void drawLevelSelect(boolean bcakground) {
   select_lvl_10.draw();
   select_lvl_back.draw();
   select_lvl_UGC.draw();
+}
+
+void drawLevelSelectUGC(){
+  background(7646207);
+  fill(0);
+  lsUGC_title.draw();//menue title
+
+  select_lvl_back.draw();
+  UGC_open_folder.draw();
+  levelcreatorLink.draw();
+  fill(0);
+  if (UGCNames.size()==0) {
+    lsUGC_noLevelFound.draw();
+  } else {
+    lsUGC_levelName.setText(UGCNames.get(UGC_lvl_indx));
+    lsUGC_levelName.draw();
+    if ((boolean)compatibles.get(UGC_lvl_indx)) {
+      lsUGC_levelNotCompatible.draw();
+    }
+    if (UGC_lvl_indx<UGCNames.size()-1) {
+      UGC_lvls_next.draw();
+    }
+    if (UGC_lvl_indx>0) {
+      UGC_lvls_prev.draw();
+    }
+    UGC_lvl_play.draw();
+  }
 }
 
 void generateSettings() {
