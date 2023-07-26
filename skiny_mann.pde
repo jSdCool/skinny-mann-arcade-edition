@@ -123,6 +123,7 @@ Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0,
 UiFrame ui;
 UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning;
 UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider;
+ArrayList<GlitchBox> glitchBoxes = new ArrayList<>();
 //▄
 
 
@@ -991,6 +992,7 @@ void draw() {// the function that is called every fraim
     if (millis()<gmillis) {
       glitchEffect();
     }
+
     if (displayTextUntill>=millis()) {
       fill(255);
       game_displayText.setText(displayText);
@@ -3386,148 +3388,30 @@ void exit(int i) {
 }
 
 void glitchEffect() {
-  int n=millis()/100%10;
+  int bsepnum = 25;
+  int n=millis()/100%bsepnum;
   //n=9;
+  int bsep = glitchBoxes.size()/bsepnum;
   strokeWeight(0);
-  if (n==0) {
-    fill(0, 255, 0, 120);
-    rect(12*Scale, 30*Scale, 200*Scale, 80*Scale);
-    rect(800*Scale, 300*Scale, 100*Scale, 300*Scale);
-    rect(400*Scale, 240*Scale, 500*Scale, 20*Scale);
-    fill(124, 0, 250, 120);
-    rect(620*Scale, 530*Scale, 240*Scale, 50*Scale);
-    rect(100*Scale, 400*Scale, 300*Scale, 40*Scale);
-    rect(50*Scale, 600*Scale, 550*Scale, 20*Scale);
-    fill(115, 0, 58, 120);
-    rect(720*Scale, 90*Scale, 360*Scale, 112*Scale);
-    rect(150*Scale, 619*Scale, 203*Scale, 90*Scale);
-    rect(526*Scale, 306*Scale, 266*Scale, 165*Scale);
+  for(int i=0;i<bsep;i++){
+    glitchBoxes.get(i+bsep*n).draw();
   }
-  if (n==1) {
-    fill(0, 255, 0, 120);
-    rect(925*Scale, 60*Scale, 89*Scale, 96*Scale);
-    rect(305*Scale, 522*Scale, 84*Scale, 140*Scale);
-    rect(13*Scale, 332*Scale, 234*Scale, 313*Scale);
-    fill(124, 0, 250, 120);
-    rect(716*Scale, 527*Scale, 317*Scale, 111*Scale);
-    rect(318*Scale, 539*Scale, 233*Scale, 118*Scale);
-    rect(902*Scale, 3*Scale, 255*Scale, 42*Scale);
-    fill(115, 0, 58, 120);
-    rect(163*Scale, 150*Scale, 221*Scale, 127*Scale);
-    rect(216*Scale, 142*Scale, 7*Scale, 49*Scale);
-    rect(538*Scale, 224*Scale, 41*Scale, 48*Scale);
+}
+
+class GlitchBox{
+  int x,y,w,h,c;
+  GlitchBox(String in){
+    String[] bs = in.split(",");
+    x=Integer.parseInt(bs[0]);
+    y=Integer.parseInt(bs[1]);
+    w=Integer.parseInt(bs[2]);
+    h=Integer.parseInt(bs[3]);
+    c=Integer.parseInt(bs[4]);
   }
-  if (n==2) {
-    fill(0, 255, 0, 120);
-    rect(410*Scale, 335*Scale, 94*Scale, 74*Scale);
-    rect(45*Scale, 222*Scale, 276*Scale, 90*Scale);
-    rect(871*Scale, 287*Scale, 268*Scale, 174*Scale);
-    fill(124, 0, 250, 120);
-    rect(996*Scale, 535*Scale, 18*Scale, 28*Scale);
-    rect(722*Scale, 523*Scale, 82*Scale, 107*Scale);
-    rect(263*Scale, 201*Scale, 161*Scale, 88*Scale);
-    fill(115, 0, 58, 120);
-    rect(697*Scale, 436*Scale, 165*Scale, 44*Scale);
-    rect(843*Scale, 486*Scale, 98*Scale, 105*Scale);
-    rect(755*Scale, 20*Scale, 151*Scale, 51*Scale);
-  }
-  if (n==3) {
-    fill(0, 255, 0, 120);
-    rect(5*Scale, 228*Scale, 226*Scale, 131*Scale);
-    rect(813*Scale, 428*Scale, 83*Scale, 60*Scale);
-    rect(285*Scale, 452*Scale, 166*Scale, 135*Scale);
-    fill(124, 0, 250, 120);
-    rect(277*Scale, 514*Scale, 11*Scale, 87*Scale);
-    rect(905*Scale, 152*Scale, 8*Scale, 160*Scale);
-    rect(369*Scale, 80*Scale, 279*Scale, 153*Scale);
-    fill(115, 0, 58, 120);
-    rect(179*Scale, 96*Scale, 159*Scale, 65*Scale);
-    rect(432*Scale, 296*Scale, 47*Scale, 12*Scale);
-    rect(944*Scale, 412*Scale, 22*Scale, 50*Scale);
-  }
-  if (n==4) {
-    fill(0, 255, 0, 120);
-    rect(679*Scale, 159*Scale, 76*Scale, 168*Scale);
-    rect(144*Scale, 58*Scale, 180*Scale, 61*Scale);
-    rect(950*Scale, 89*Scale, 155*Scale, 13*Scale);
-    fill(124, 0, 250, 120);
-    rect(542*Scale, 463*Scale, 177*Scale, 156*Scale);
-    rect(527*Scale, 70*Scale, 115*Scale, 28*Scale);
-    rect(211*Scale, 151*Scale, 58*Scale, 164*Scale);
-    fill(115, 0, 58, 120);
-    rect(88*Scale, 440*Scale, 278*Scale, 23*Scale);
-    rect(642*Scale, 440*Scale, 231*Scale, 91*Scale);
-    rect(737*Scale, 524*Scale, 69*Scale, 71*Scale);
-  }
-  if (n==5) {
-    fill(0, 255, 0, 120);
-    rect(226*Scale, 71*Scale, 291*Scale, 37*Scale);
-    rect(91*Scale, 436*Scale, 210*Scale, 8*Scale);
-    rect(396*Scale, 72*Scale, 10*Scale, 136*Scale);
-    fill(124, 0, 250, 120);
-    rect(666*Scale, 274*Scale, 175*Scale, 171*Scale);
-    rect(251*Scale, 513*Scale, 280*Scale, 13*Scale);
-    rect(663*Scale, 141*Scale, 290*Scale, 33*Scale);
-    fill(115, 0, 58, 120);
-    rect(900*Scale, 47*Scale, 315*Scale, 125*Scale);
-    rect(10*Scale, 156*Scale, 231*Scale, 73*Scale);
-    rect(377*Scale, 253*Scale, 175*Scale, 22*Scale);
-  }
-  if (n==6) {
-    fill(0, 255, 0, 120);
-    rect(756*Scale, 447*Scale, 205*Scale, 161*Scale);
-    rect(304*Scale, 341*Scale, 276*Scale, 144*Scale);
-    rect(4*Scale, 141*Scale, 35*Scale, 176*Scale);
-    fill(124, 0, 250, 120);
-    rect(307*Scale, 98*Scale, 204*Scale, 89*Scale);
-    rect(478*Scale, 476*Scale, 44*Scale, 52*Scale);
-    rect(620*Scale, 57*Scale, 242*Scale, 144*Scale);
-    fill(115, 0, 58, 120);
-    rect(495*Scale, 374*Scale, 199*Scale, 62*Scale);
-    rect(724*Scale, 71*Scale, 34*Scale, 2*Scale);
-    rect(853*Scale, 88*Scale, 199*Scale, 114*Scale);
-  }
-  if (n==7) {
-    fill(0, 255, 0, 120);
-    rect(276*Scale, 181*Scale, 220*Scale, 38*Scale);
-    rect(955*Scale, 514*Scale, 33*Scale, 51*Scale);
-    rect(621*Scale, 135*Scale, 100*Scale, 74*Scale);
-    fill(124, 0, 250, 120);
-    rect(200*Scale, 333*Scale, 165*Scale, 99*Scale);
-    rect(709*Scale, 503*Scale, 84*Scale, 117*Scale);
-    rect(212*Scale, 275*Scale, 238*Scale, 27*Scale);
-    fill(115, 0, 58, 120);
-    rect(787*Scale, 477*Scale, 115*Scale, 9*Scale);
-    rect(239*Scale, 443*Scale, 155*Scale, 149*Scale);
-    rect(794*Scale, 267*Scale, 185*Scale, 80*Scale);
-  }
-  if (n==8) {
-    fill(0, 255, 0, 120);
-    rect(543*Scale, 498*Scale, 22*Scale, 125*Scale);
-    rect(749*Scale, 151*Scale, 79*Scale, 174*Scale);
-    rect(667*Scale, 380*Scale, 311*Scale, 45*Scale);
-    fill(124, 0, 250, 120);
-    rect(886*Scale, 193*Scale, 87*Scale, 50*Scale);
-    rect(135*Scale, 128*Scale, 151*Scale, 83*Scale);
-    rect(651*Scale, 128*Scale, 20*Scale, 85*Scale);
-    fill(115, 0, 58, 120);
-    rect(862*Scale, 374*Scale, 319*Scale, 136*Scale);
-    rect(258*Scale, 149*Scale, 65*Scale, 143*Scale);
-    rect(299*Scale, 63*Scale, 297*Scale, 152*Scale);
-  }
-  if (n==9) {
-    fill(0, 255, 0, 120);
-    rect(953*Scale, 386*Scale, 11*Scale, 30*Scale);
-    rect(453*Scale, 104*Scale, 50*Scale, 95*Scale);
-    rect(71*Scale, 157*Scale, 23*Scale, 49*Scale);
-    fill(124, 0, 250, 120);
-    rect(373*Scale, 447*Scale, 28*Scale, 136*Scale);
-    rect(598*Scale, 321*Scale, 227*Scale, 19*Scale);
-    rect(500*Scale, 314*Scale, 218*Scale, 113*Scale);
-    fill(115, 0, 58, 120);
-    rect(423*Scale, 512*Scale, 295*Scale, 30*Scale);
-    rect(186*Scale, 489*Scale, 208*Scale, 76*Scale);
-    rect(178*Scale, 269*Scale, 117*Scale, 133*Scale);
+  
+  void draw(){
+    fill(c,128);
+    rect(ui.topX()+x*ui.scale(),ui.topY()+y*ui.scale(),w*ui.scale(),h*ui.scale());
   }
 }
 
@@ -3892,6 +3776,12 @@ void programLoad() {
   SFXVolumeSlider.setValue(sfxVolume*100);
   verticleEdgeScrollSlider.setValue(eadgeScroleDistV);
   horozontalEdgeScrollSlider.setValue(eadgeScroleDist);
+  
+  String[] rawGlitchBoxes = loadStrings("data/glitch.txt");
+  loadProgress++;
+  for(int i=0;i<rawGlitchBoxes.length;i++){
+    glitchBoxes.add(new GlitchBox(rawGlitchBoxes[i]));
+  }
 
   println("starting physics thread");
   thread("thrdCalc2");
