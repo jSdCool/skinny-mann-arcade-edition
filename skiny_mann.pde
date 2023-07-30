@@ -956,6 +956,11 @@ void draw() {// the function that is called every fraim
         player1_moving_right=false;
         player1_moving_left=false;
         player1_jumping=false;
+        SPressed=false;
+        WPressed=false;
+      }
+      if(!inGame){
+        dead=false;
       }
     }
 
