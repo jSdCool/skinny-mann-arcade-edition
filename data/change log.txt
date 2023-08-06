@@ -20,6 +20,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -changed: in the logic board editor active logic connections are new red
 -added: tick logic board button to varibles and groups page of tool box
 -changed: glitch effect is now a bit diffrent
+-fixed: if you tryed to stop playing a level when dead it would put you back in after the respawn cool down
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels

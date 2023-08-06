@@ -17,6 +17,8 @@ void stageLevelDraw() {
     viewingItemIndex=-1;
   }
   if (stage.type.equals("stage")) {//if tthe cuurent thing that is being drawn is a stage
+    SPressed=false;
+    WPressed=false;
     e3DMode=false;//turn 3D mode off
     camera();//reset the camera
     drawCamPosX=camPos;//versions of the camera position variblaes that only get updated once every frame and not on every physics tick
@@ -134,6 +136,8 @@ void stageLevelDraw() {
         }
       }
     } else {//redner the level in 2D
+    SPressed=false;
+    WPressed=false;
       camera();//reset the camera
       drawCamPosX=camPos;//versions of the camera position variblaes that only get updated once every frame and not on every physics tick
       drawCamPosY=camPosY;
