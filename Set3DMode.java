@@ -15,12 +15,14 @@ class Set3DMode extends LogicOutputComponent {
   }
   void tick() {
     if (inputTerminal1) {
-      if (source.level.multyplayerMode!=2)
-        source.e3DMode=true;
+      if (source.level.stages.get(source.currentStageIndex).type.equals("3Dstage"))
+        if (source.level.multyplayerMode!=2)
+          source.e3DMode=true;
     }
     if (inputTerminal2) {
-      if (source.level.multyplayerMode!=2)
-        source.e3DMode=false;
+      if (source.level.stages.get(source.currentStageIndex).type.equals("3Dstage"))
+        if (source.level.multyplayerMode!=2)
+          source.e3DMode=false;
     }
   }
 
