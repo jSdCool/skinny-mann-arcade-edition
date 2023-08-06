@@ -1269,6 +1269,7 @@ void mouseClicked() {// when you click the mouse
             levelOverview=false;
             newFile=false;
             levelCreator=true;
+            filesScrole=0;
             return;
           }
         }
