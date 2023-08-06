@@ -1140,7 +1140,7 @@ void mouseClicked() {// when you click the mouse
             initMenuTransition(Transitions.MAIN_TO_SETTINGS);
             return;
           }
-          if (howToPlayButton.isMouseOver()) {//how to play button
+          if (howToPlayButton.isMouseOver()) {//tutorial button
             //how to play
             menue=false;
             tutorialMode=true;
@@ -2144,6 +2144,9 @@ void mouseClicked() {// when you click the mouse
           if (lc_exitConfirm.isMouseOver()) {
             exitLevelCreator=false;
             levelCreator=false;
+            inGame=false;
+            menue=true;
+            
           }
 
           if (lc_exitCancle.isMouseOver()) {
@@ -2319,6 +2322,10 @@ void keyPressed() {// when a key is pressed
       }
     }
     if (levelCreator) {
+      if (key == ESC){
+        key=0;
+        return;  
+      }
       if (editingStage||editingBlueprint) {//if edditng a stage
         if (key=='r'||key=='R') {//if 'R' is pressed
           triangleMode++;//increase the current rotation
