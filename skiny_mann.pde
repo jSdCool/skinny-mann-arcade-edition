@@ -89,7 +89,7 @@ void setup() {//seccond function called
   }
 }
 //define a shit tone of varibles
-PImage CBi, icon, discordIcon;
+PImage CBi, discordIcon;
 PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenScaler, blueScaler, yellowScaler, LevelCreatorLogo;
 ;
 PApplet primaryWindow=this;
@@ -2420,6 +2420,9 @@ void keyPressed() {// when a key is pressed
     }
 
     //System.out.println(keyCode);
+    if(key=='b'||key=='B'){
+      println("p"); //<>//
+    }
   }
   catch(Throwable e) {
     handleError(e);
