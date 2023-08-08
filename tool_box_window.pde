@@ -1561,6 +1561,7 @@ class ToolBox extends PApplet {
               turnThingsOff();
               levelOverview=true;
               editingStage=false;
+              level_complete=false;
             }
             if (sign.isMouseOver()) {
               turnThingsOff();

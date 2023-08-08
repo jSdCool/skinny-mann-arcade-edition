@@ -9,7 +9,7 @@ void stageLevelDraw() {
   background(stage.skyColor);//sky color
   int selectIndex=-1;//reset the selected obejct
   if (selecting) {//if you are currently using the selection tool
-    selectIndex=colid_index(mouseX+camPos, mouseY-camPosY, stage);//figure out what eleiment you are hovering over
+    selectIndex=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, stage);//figure out what eleiment you are hovering over
   }
   if (E_pressed&&viewingItemContents) {//if you are viewing the contence of an element and you press E
     E_pressed=false;//close the contence of the eleiment

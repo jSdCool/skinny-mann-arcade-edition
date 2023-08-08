@@ -902,7 +902,7 @@ void draw() {// the function that is called every fraim
           if (selectedIndex==i) {
             strokeWeight(0);
             fill(255, 0, 0);
-            rect((level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10)*Scale);
+            rect((level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10*Scale), (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10*Scale));
           }
           level.logicBoards.get(logicBoardIndex).components.get(i).draw();
         }
