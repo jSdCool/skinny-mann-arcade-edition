@@ -33,6 +33,8 @@ class Interdimentional_Portal extends StageComponent {//ground component
     part.setFloat("y", y);
     if (stage_3D) {
       part.setFloat("z", z);
+    }
+    if(source.level.stages.get(linkIndex).is3D){
       part.setFloat("linkZ", linkZ);
     }
     part.setString("type", type);
