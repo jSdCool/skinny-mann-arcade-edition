@@ -802,7 +802,7 @@ void playerPhysics() {
     players[calcingPlayer].verticalVelocity=0;
   }
   //////////////////////////////
-  if (level.multyplayerMode==1 || (level.multyplayerMode==2 && isHost)||(levelCreator&&simulating)) {//--------------------------------------------------------------------------------------------------modify this line in the final game
+  if ((!levelCreator && (level.multyplayerMode==1 || (level.multyplayerMode==2 && isHost))) || (levelCreator&&simulating)) {
     if (!logicTickingThread.isAlive()) {//if the ticking thread has stoped for some reason
       logicTickingThread=new LogicThread();
       logicTickingThread.shouldRun=true;//then start it
