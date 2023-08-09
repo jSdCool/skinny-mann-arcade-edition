@@ -1,0 +1,25 @@
+[
+  {"name": "level complete"},
+  {
+    "x": 139.60000610351562,
+    "y": 205.60000610351562,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 0
+      },
+      {
+        "index": 1,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 0,
+    "x": 376.3999938964844,
+    "y": 201.60000610351562,
+    "type": "set var",
+    "connections": []
+  }
+]
