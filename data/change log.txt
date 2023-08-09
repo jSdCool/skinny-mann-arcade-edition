@@ -23,6 +23,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: if you tryed to stop playing a level when dead it would put you back in after the respawn cool down
 -fixed: portals that transport between 2D and 3D not saving the z position of the destination
 -removed: discord icon on main menu
++added: level-11
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels
