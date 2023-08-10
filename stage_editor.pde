@@ -1652,7 +1652,7 @@ void generateDisplayBlueprint() {
     }
     displayBlueprint.parts.get(i).x+=ix;
     displayBlueprint.parts.get(i).y+=iy;
-    System.out.println(displayBlueprint.parts.get(i).x);
+    //System.out.println(displayBlueprint.parts.get(i).x);
   }
 }
 

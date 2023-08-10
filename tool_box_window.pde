@@ -1562,6 +1562,7 @@ class ToolBox extends PApplet {
               levelOverview=true;
               editingStage=false;
               level_complete=false;
+              viewingItemContents=false;
             }
             if (sign.isMouseOver()) {
               turnThingsOff();
@@ -1642,6 +1643,7 @@ class ToolBox extends PApplet {
                 turnThingsOff();
                 levelOverview=true;
                 editingStage=false;
+                viewingItemContents=false;
               }
 
 
