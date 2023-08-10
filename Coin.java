@@ -63,7 +63,7 @@ class Coin extends StageComponent {//ground component
     float x2=(x+group.xOffset)-source.drawCamPosX;
     if (!collected) {
       source.drawCoin(source.Scale*x2, source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*3);
-      if (Math.sqrt(Math.pow(playx-source.drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30) {
+      if (Math.sqrt(Math.pow(playx-source.drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30 && !source.selectingBlueprint) {
         source.coins.set(coinId, true);
         source.coinCount++;
       }
