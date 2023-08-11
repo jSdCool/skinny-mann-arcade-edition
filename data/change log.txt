@@ -25,6 +25,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -removed: discord icon on main menu
 +added: level-11
 -fixed: crashed caused when placing a bluprint and the coins in the bluprint hologram colided with the player
+-changed: polay sound logic component now outputs wether the sound is playing or queued
+-added: level-12
 
 0.7.1_Early_Access
 -fixed: max and min players werer reversed level info display for co-op levels

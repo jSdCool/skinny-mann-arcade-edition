@@ -1,0 +1,2509 @@
+[
+  {
+    "name": "stage 4",
+    "sky color": -9131009,
+    "type": "stage"
+  },
+  {
+    "dx": 650,
+    "color": -16732415,
+    "dy": 130,
+    "x": 240,
+    "y": -430,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -6597103,
+    "dy": 120,
+    "x": 330,
+    "y": -550,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 80,
+    "color": -16748799,
+    "dy": 30,
+    "x": 300,
+    "y": -590,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 120,
+    "color": -16748799,
+    "dy": 50,
+    "x": 280,
+    "y": -570,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 160,
+    "color": -16748799,
+    "dy": 40,
+    "x": 260,
+    "y": -550,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -6597103,
+    "dy": 120,
+    "x": 780,
+    "y": -550,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 80,
+    "color": -16748799,
+    "dy": 30,
+    "x": 750,
+    "y": -590,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 120,
+    "color": -16748799,
+    "dy": 50,
+    "x": 730,
+    "y": -570,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 160,
+    "color": -16748799,
+    "dy": 40,
+    "x": 710,
+    "y": -550,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "link Index": 3,
+    "x": 570,
+    "y": -480,
+    "type": "interdimentional Portal",
+    "linkY": -1050,
+    "linkX": 27820,
+    "group": -1
+  },
+  {
+    "dx": 240,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1060,
+    "y": -430,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -7254783,
+    "dy": 20,
+    "x": 1530,
+    "y": -600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 200,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2000,
+    "y": -490,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 240,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2430,
+    "y": -490,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 330,
+    "color": -7254783,
+    "dy": 20,
+    "x": 2900,
+    "y": -660,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 250,
+    "color": -7254783,
+    "dy": 20,
+    "x": 3560,
+    "y": -650,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 230,
+    "color": -7254783,
+    "dy": 20,
+    "x": 4130,
+    "y": -600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 290,
+    "color": -7254783,
+    "dy": 20,
+    "x": 4660,
+    "y": -520,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 220,
+    "color": -7254783,
+    "dy": 20,
+    "x": 5270,
+    "y": -570,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 200,
+    "color": -7254783,
+    "dy": 20,
+    "x": 5750,
+    "y": -780,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 220,
+    "color": -7254783,
+    "dy": 20,
+    "x": 6120,
+    "y": -650,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 230,
+    "color": -7254783,
+    "dy": 20,
+    "x": 6560,
+    "y": -480,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -7254783,
+    "dy": 20,
+    "x": 7030,
+    "y": -550,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 190,
+    "color": -7254783,
+    "dy": 20,
+    "x": 7430,
+    "y": -490,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -7254783,
+    "dy": 20,
+    "x": 7930,
+    "y": -510,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 250,
+    "color": -7254783,
+    "dy": 20,
+    "x": 8420,
+    "y": -610,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 230,
+    "color": -7254783,
+    "dy": 20,
+    "x": 8910,
+    "y": -850,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 310,
+    "color": -7254783,
+    "dy": 20,
+    "x": 9400,
+    "y": -920,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 330,
+    "color": -7254783,
+    "dy": 20,
+    "x": 10040,
+    "y": -930,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 290,
+    "color": -7254783,
+    "dy": 20,
+    "x": 10650,
+    "y": -840,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 280,
+    "color": -7254783,
+    "dy": 20,
+    "x": 11280,
+    "y": -830,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 530,
+    "color": -16732415,
+    "dy": 80,
+    "x": 11790,
+    "y": -830,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 320,
+    "x": 12300,
+    "y": -1230,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 370,
+    "x": 12300,
+    "y": -1600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 750,
+    "color": -6381921,
+    "dy": 620,
+    "x": 12320,
+    "y": -1370,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 750,
+    "color": -6381921,
+    "dy": 230,
+    "x": 12320,
+    "y": -1600,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 750,
+    "color": -6381921,
+    "dy": 410,
+    "x": 12320,
+    "y": -750,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 750,
+    "color": -6381921,
+    "dy": 260,
+    "x": 12320,
+    "y": -350,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 750,
+    "color": -8882055,
+    "dy": 10,
+    "x": 12320,
+    "y": -830,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 760,
+    "color": -8882055,
+    "dy": 20,
+    "x": 12310,
+    "y": -1150,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 470,
+    "x": 13070,
+    "y": -1380,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 220,
+    "x": 13070,
+    "y": -1600,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 10,
+    "x": 13070,
+    "y": -830,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 10,
+    "x": 13070,
+    "y": -820,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -8882055,
+    "dy": 420,
+    "x": 13070,
+    "y": -810,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "x": 12360,
+    "variable": 3,
+    "y": -830,
+    "type": "logic button",
+    "group": -1
+  },
+  {
+    "contents": "Soulless incorporated\nmine No 7",
+    "x": 12200,
+    "y": -830,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "dx": 770,
+    "color": -8882055,
+    "dy": 10,
+    "x": 12320,
+    "y": -830,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -7254783,
+    "dy": 80,
+    "x": 12310,
+    "y": -910,
+    "type": "ground",
+    "group": 43
+  },
+  {
+    "dx": 1030,
+    "color": -10132121,
+    "dy": 530,
+    "x": 13090,
+    "y": -1440,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 410,
+    "color": -10132121,
+    "dy": 530,
+    "x": 14120,
+    "y": -1440,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1270,
+    "color": -10132121,
+    "dy": 160,
+    "x": 13090,
+    "y": -1600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1010,
+    "color": -10132121,
+    "dy": 410,
+    "x": 13090,
+    "y": -830,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 370,
+    "color": -10132121,
+    "dy": 410,
+    "x": 14100,
+    "y": -830,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1240,
+    "color": -10132121,
+    "dy": 640,
+    "x": 13230,
+    "y": -420,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1240,
+    "color": -10132121,
+    "dy": 400,
+    "x": 13230,
+    "y": 220,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1250,
+    "color": -10132121,
+    "dy": 60,
+    "x": 13220,
+    "y": 620,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 550,
+    "color": -10132121,
+    "dy": 730,
+    "x": 12680,
+    "y": -50,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 140,
+    "color": -10132121,
+    "dy": 370,
+    "x": 13090,
+    "y": -420,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -10132121,
+    "dy": 340,
+    "x": 13070,
+    "y": -390,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 390,
+    "color": -10132121,
+    "dy": 40,
+    "x": 12680,
+    "y": -90,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 980,
+    "color": -10132121,
+    "dy": 60,
+    "x": 13690,
+    "y": 680,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 660,
+    "color": -10132121,
+    "dy": 60,
+    "x": 13030,
+    "y": 680,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 350,
+    "color": -10132121,
+    "dy": 40,
+    "x": 12680,
+    "y": 680,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 280,
+    "color": -10132121,
+    "dy": 40,
+    "x": 14670,
+    "y": 680,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "x": 14480,
+    "y": 680,
+    "type": "goal",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -10132121,
+    "dy": 710,
+    "x": 14740,
+    "y": -30,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -10132121,
+    "dy": 640,
+    "x": 14740,
+    "y": -670,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -10132121,
+    "dy": 650,
+    "x": 14740,
+    "y": -1320,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 590,
+    "color": -10132121,
+    "dy": 280,
+    "x": 14360,
+    "y": -1600,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 210,
+    "color": -10132121,
+    "dy": 410,
+    "x": 14530,
+    "y": -1320,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1100,
+    "color": -10132121,
+    "dy": 700,
+    "x": 14950,
+    "y": -1590,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1110,
+    "color": -10132121,
+    "dy": 20,
+    "x": 14940,
+    "y": -900,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1110,
+    "color": -10132121,
+    "dy": 520,
+    "x": 14940,
+    "y": -880,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1160,
+    "color": -10132121,
+    "dy": 430,
+    "x": 14890,
+    "y": -350,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1110,
+    "color": -10132121,
+    "dy": 10,
+    "x": 14940,
+    "y": -360,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1100,
+    "color": -10132121,
+    "dy": 210,
+    "x": 14950,
+    "y": 50,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1110,
+    "color": -10132121,
+    "dy": 490,
+    "x": 14940,
+    "y": 260,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 1040,
+    "color": -9408385,
+    "dy": 80,
+    "x": 13070,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 630,
+    "color": -9408385,
+    "dy": 80,
+    "x": 14110,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 270,
+    "color": -9408385,
+    "dy": 690,
+    "x": 14470,
+    "y": -830,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 270,
+    "color": -9408385,
+    "dy": 710,
+    "x": 14470,
+    "y": -140,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 270,
+    "color": -9408385,
+    "dy": 120,
+    "x": 14470,
+    "y": 560,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -5741823,
+    "dy": 80,
+    "x": 13280,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -5741823,
+    "dy": 80,
+    "x": 13590,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -5741823,
+    "dy": 80,
+    "x": 13840,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -5741823,
+    "dy": 80,
+    "x": 14130,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -5741823,
+    "dy": 80,
+    "x": 14440,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 0,
+    "y1": -910,
+    "x1": 13270,
+    "y2": -900,
+    "x2": 13280,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 1,
+    "y1": -910,
+    "x1": 13290,
+    "y2": -900,
+    "x2": 13300,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 0,
+    "y1": -910,
+    "x1": 13580,
+    "y2": -900,
+    "x2": 13590,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 1,
+    "y1": -910,
+    "x1": 13600,
+    "y2": -900,
+    "x2": 13610,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 1,
+    "y1": -910,
+    "x1": 13850,
+    "y2": -900,
+    "x2": 13860,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 0,
+    "y1": -910,
+    "x1": 13830,
+    "y2": -900,
+    "x2": 13840,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 0,
+    "y1": -910,
+    "x1": 14120,
+    "y2": -900,
+    "x2": 14130,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 1,
+    "y1": -910,
+    "x1": 14140,
+    "y2": -900,
+    "x2": 14150,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 1,
+    "y1": -910,
+    "x1": 14450,
+    "y2": -900,
+    "x2": 14460,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -5741823,
+    "rotation": 0,
+    "y1": -910,
+    "x1": 14430,
+    "y2": -900,
+    "x2": 14440,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -9886207,
+    "dy": 30,
+    "x": 12620,
+    "y": -860,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -9886207,
+    "dy": 10,
+    "x": 12640,
+    "y": -860,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -13551810,
+    "dy": 10,
+    "x": 12630,
+    "y": -870,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -13551810,
+    "dy": 20,
+    "x": 12630,
+    "y": -890,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 1,
+    "y1": -740,
+    "x1": 14620,
+    "y2": -650,
+    "x2": 14710,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "color": -16777215,
+    "rotation": 0,
+    "y1": -740,
+    "x1": 14530,
+    "y2": -650,
+    "x2": 14620,
+    "type": "holoTriangle",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 14600,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 20,
+    "color": -16777215,
+    "dy": 170,
+    "x": 14620,
+    "y": -910,
+    "type": "holo",
+    "group": -1
+  },
+  {
+    "dx": 180,
+    "color": -7254783,
+    "dy": 10,
+    "x": 12310,
+    "y": -920,
+    "type": "ground",
+    "group": -1
+  },
+  {
+    "dx": 10,
+    "color": -7254783,
+    "dy": 80,
+    "x": 12480,
+    "y": -910,
+    "type": "ground",
+    "group": 43
+  },
+  {
+    "contents": "To The Mines",
+    "x": 13160,
+    "y": -830,
+    "type": "WritableSign",
+    "group": -1
+  },
+  {
+    "dx": 80,
+    "color": -65793,
+    "dy": 20,
+    "x": 14270,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 70,
+    "x": 14300,
+    "y": 80,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14380,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 20,
+    "x": 14400,
+    "y": 130,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14430,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 20,
+    "x": 14400,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14490,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 10,
+    "x": 14510,
+    "y": 140,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 30,
+    "x": 14530,
+    "y": 110,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 10,
+    "x": 14510,
+    "y": 100,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 30,
+    "x": 14530,
+    "y": 70,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 10,
+    "x": 14510,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14570,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14590,
+    "y": 60,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14590,
+    "y": 130,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 10,
+    "x": 14590,
+    "y": 100,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 60,
+    "color": -65793,
+    "dy": 20,
+    "x": 14440,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 70,
+    "x": 14460,
+    "y": 190,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 60,
+    "color": -65793,
+    "dy": 20,
+    "x": 14440,
+    "y": 260,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14370,
+    "y": 190,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 80,
+    "color": -65793,
+    "dy": 20,
+    "x": 14340,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14300,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 10,
+    "color": -65793,
+    "dy": 30,
+    "x": 14290,
+    "y": 230,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14270,
+    "y": 210,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14250,
+    "y": 190,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14230,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14190,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 20,
+    "x": 14160,
+    "y": 260,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14140,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 20,
+    "x": 14160,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 60,
+    "color": -65793,
+    "dy": 20,
+    "x": 14060,
+    "y": 260,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14060,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14080,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14520,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14540,
+    "y": 190,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14560,
+    "y": 210,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 10,
+    "color": -65793,
+    "dy": 30,
+    "x": 14580,
+    "y": 230,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 110,
+    "x": 14590,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14630,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14650,
+    "y": 260,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 90,
+    "x": 14690,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 120,
+    "x": 14730,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14750,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14750,
+    "y": 270,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 30,
+    "color": -65793,
+    "dy": 10,
+    "x": 14750,
+    "y": 230,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 120,
+    "x": 14810,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14830,
+    "y": 170,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 40,
+    "color": -65793,
+    "dy": 20,
+    "x": 14830,
+    "y": 270,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 80,
+    "x": 14870,
+    "y": 190,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14910,
+    "y": 270,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14950,
+    "y": 270,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "dx": 20,
+    "color": -65793,
+    "dy": 20,
+    "x": 14990,
+    "y": 270,
+    "type": "holo",
+    "group": 44
+  },
+  {
+    "coin id": 665,
+    "x": 520,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 666,
+    "x": 470,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 667,
+    "x": 420,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 668,
+    "x": 370,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 669,
+    "x": 630,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 670,
+    "x": 680,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 671,
+    "x": 730,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 672,
+    "x": 820,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 673,
+    "x": 870,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 674,
+    "x": 1080,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 675,
+    "x": 1130,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 676,
+    "x": 1180,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 677,
+    "x": 1230,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 678,
+    "x": 1280,
+    "y": -450,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 679,
+    "x": 1560,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 680,
+    "x": 1610,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 681,
+    "x": 1660,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 682,
+    "x": 1710,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 683,
+    "x": 2030,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 684,
+    "x": 2070,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 685,
+    "x": 2110,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 686,
+    "x": 2150,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 687,
+    "x": 2450,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 688,
+    "x": 2500,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 689,
+    "x": 2550,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 690,
+    "x": 2610,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 691,
+    "x": 2660,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 692,
+    "x": 2930,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 693,
+    "x": 2980,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 694,
+    "x": 3030,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 695,
+    "x": 3080,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 696,
+    "x": 3130,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 697,
+    "x": 3190,
+    "y": -680,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 698,
+    "x": 3580,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 699,
+    "x": 3630,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 700,
+    "x": 3680,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 701,
+    "x": 3730,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 702,
+    "x": 3780,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 703,
+    "x": 4160,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 704,
+    "x": 4210,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 705,
+    "x": 4260,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 706,
+    "x": 4310,
+    "y": -620,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 707,
+    "x": 4690,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 708,
+    "x": 4730,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 709,
+    "x": 4770,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 710,
+    "x": 4810,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 711,
+    "x": 4850,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 712,
+    "x": 4890,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 713,
+    "x": 4940,
+    "y": -540,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 714,
+    "x": 5290,
+    "y": -590,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 715,
+    "x": 5340,
+    "y": -590,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 716,
+    "x": 5390,
+    "y": -590,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 717,
+    "x": 5440,
+    "y": -590,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 718,
+    "x": 5780,
+    "y": -800,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 719,
+    "x": 5830,
+    "y": -800,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 720,
+    "x": 5880,
+    "y": -800,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 721,
+    "x": 5930,
+    "y": -800,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 722,
+    "x": 6150,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 723,
+    "x": 6200,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 724,
+    "x": 6250,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 725,
+    "x": 6300,
+    "y": -670,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 726,
+    "x": 6590,
+    "y": -500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 727,
+    "x": 6640,
+    "y": -500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 728,
+    "x": 6690,
+    "y": -500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 729,
+    "x": 6740,
+    "y": -500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 730,
+    "x": 7070,
+    "y": -570,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 731,
+    "x": 7120,
+    "y": -570,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 732,
+    "x": 7170,
+    "y": -570,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 733,
+    "x": 7460,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 734,
+    "x": 7510,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 735,
+    "x": 7570,
+    "y": -510,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 736,
+    "x": 7960,
+    "y": -530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 737,
+    "x": 8020,
+    "y": -530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 738,
+    "x": 8070,
+    "y": -530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 739,
+    "x": 8120,
+    "y": -530,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 740,
+    "x": 8450,
+    "y": -630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 741,
+    "x": 8500,
+    "y": -630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 742,
+    "x": 8550,
+    "y": -630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 743,
+    "x": 8600,
+    "y": -630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 744,
+    "x": 8650,
+    "y": -630,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 745,
+    "x": 8940,
+    "y": -870,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 746,
+    "x": 8990,
+    "y": -870,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 747,
+    "x": 9040,
+    "y": -870,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 748,
+    "x": 9090,
+    "y": -870,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 749,
+    "x": 9430,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 750,
+    "x": 9480,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 751,
+    "x": 9530,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 752,
+    "x": 9580,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 753,
+    "x": 9630,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 754,
+    "x": 9690,
+    "y": -940,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 755,
+    "x": 10080,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 756,
+    "x": 10130,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 757,
+    "x": 10180,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 758,
+    "x": 10230,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 759,
+    "x": 10280,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 760,
+    "x": 10330,
+    "y": -950,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 761,
+    "x": 10680,
+    "y": -860,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 762,
+    "x": 10730,
+    "y": -860,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 763,
+    "x": 10780,
+    "y": -860,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 764,
+    "x": 10830,
+    "y": -860,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 765,
+    "x": 10880,
+    "y": -860,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 766,
+    "x": 11310,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 767,
+    "x": 11360,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 768,
+    "x": 11410,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 769,
+    "x": 11460,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 770,
+    "x": 11520,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 771,
+    "x": 11820,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 772,
+    "x": 11870,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 773,
+    "x": 11920,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 774,
+    "x": 11970,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 775,
+    "x": 12020,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 776,
+    "x": 12070,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 777,
+    "x": 12130,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 778,
+    "x": 12260,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 779,
+    "x": 12310,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 780,
+    "x": 12720,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 781,
+    "x": 12780,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 782,
+    "x": 12840,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 783,
+    "x": 12890,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 784,
+    "x": 12950,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 785,
+    "x": 13010,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 786,
+    "x": 13070,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 787,
+    "x": 13230,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 788,
+    "x": 13330,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 789,
+    "x": 13380,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 790,
+    "x": 13430,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 791,
+    "x": 13480,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 792,
+    "x": 13530,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 793,
+    "x": 13640,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 794,
+    "x": 13690,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 795,
+    "x": 13740,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 796,
+    "x": 13790,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 797,
+    "x": 13910,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 798,
+    "x": 13950,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 799,
+    "x": 13990,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 800,
+    "x": 14030,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 801,
+    "x": 14070,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 802,
+    "x": 14200,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 803,
+    "x": 14250,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 804,
+    "x": 14300,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 805,
+    "x": 14350,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 806,
+    "x": 14410,
+    "y": -850,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 807,
+    "x": 14600,
+    "y": -600,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 808,
+    "x": 14600,
+    "y": -500,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 809,
+    "x": 14600,
+    "y": -390,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 810,
+    "x": 14600,
+    "y": -270,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 811,
+    "x": 14600,
+    "y": -150,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 812,
+    "x": 14600,
+    "y": -60,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 813,
+    "x": 14600,
+    "y": 340,
+    "type": "coin",
+    "group": -1
+  },
+  {
+    "coin id": 814,
+    "x": 14600,
+    "y": 540,
+    "type": "coin",
+    "group": -1
+  }
+]

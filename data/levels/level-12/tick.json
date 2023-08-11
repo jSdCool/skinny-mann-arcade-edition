@@ -1,0 +1,1814 @@
+[
+  {"name": "tick"},
+  {
+    "x": 455.9000244140625,
+    "y": 101.19999694824219,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 455.9000244140625,
+    "y": 196.39999389648438,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 466.29998779296875,
+    "y": 306,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 463.0999755859375,
+    "y": 431.6000061035156,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 473.5,
+    "y": 578.7999877929688,
+    "group number": 5,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 466.29998779296875,
+    "y": 705.2000122070312,
+    "group number": 6,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 468.70001220703125,
+    "y": 819.5999755859375,
+    "group number": 7,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 464.70001220703125,
+    "y": 936.4000244140625,
+    "group number": 8,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 462.29998779296875,
+    "y": 1056.4000244140625,
+    "group number": 9,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 463.9000244140625,
+    "y": 1160.4000244140625,
+    "group number": 10,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 463.0999755859375,
+    "y": 1280.4000244140625,
+    "group number": 11,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 456.70001220703125,
+    "y": 1394,
+    "group number": 12,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 461.5,
+    "y": 1498,
+    "group number": 13,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 459.0999755859375,
+    "y": 1602,
+    "group number": 14,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 453.5,
+    "y": 1707.5999755859375,
+    "group number": 15,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 450.29998779296875,
+    "y": 1818,
+    "group number": 16,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 446.29998779296875,
+    "y": 1930.800048828125,
+    "group number": 17,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 442.29998779296875,
+    "y": 2038.800048828125,
+    "group number": 18,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 441.5,
+    "y": 2132.39990234375,
+    "group number": 19,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 442.29998779296875,
+    "y": 2249.199951171875,
+    "group number": 20,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 442.29998779296875,
+    "y": 2346,
+    "group number": 21,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 442.29998779296875,
+    "y": 2443.60009765625,
+    "group number": 22,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 439.8999938964844,
+    "y": 2540.39990234375,
+    "group number": 23,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 439.8999938964844,
+    "y": 2644.39990234375,
+    "group number": 24,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 439.8999938964844,
+    "y": 2756.39990234375,
+    "group number": 25,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 438.29998779296875,
+    "y": 2866,
+    "group number": 26,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 435.8999938964844,
+    "y": 2985.199951171875,
+    "group number": 27,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 431.8999938964844,
+    "y": 3098.800048828125,
+    "group number": 28,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 3098.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 27,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2970.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 26,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2862.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 25,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2758.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 24,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2658.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 23,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2554.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 22,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2450.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 21,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2346.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 20,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2250.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 19,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2130.39990234375,
+    "type": "NOR",
+    "connections": [{
+      "index": 18,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 2042.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 17,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1922.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 16,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1822.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 15,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1694.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 14,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1582.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 13,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1498.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 12,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1390.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 11,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1262.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 10,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1130.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 9,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 1042.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 8,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 930.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 7,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 810.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 6,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 682.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 5,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 558.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 4,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 434.3999938964844,
+    "type": "NOR",
+    "connections": [{
+      "index": 3,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 143.60000610351562,
+    "y": 290.3999938964844,
+    "type": "NOR",
+    "connections": [{
+      "index": 2,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 141.5,
+    "y": 199.60000610351562,
+    "type": "NOR",
+    "connections": [{
+      "index": 1,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 139.89999389648438,
+    "y": 101.19999694824219,
+    "type": "NOR",
+    "connections": [{
+      "index": 0,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": -5.200000762939453,
+    "y": 124.80000305175781,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 55,
+        "terminal": 0
+      },
+      {
+        "index": 84,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": -2,
+    "y": 219.1999969482422,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 54,
+        "terminal": 0
+      },
+      {
+        "index": 85,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 318.3999938964844,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 53,
+        "terminal": 0
+      },
+      {
+        "index": 86,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 474.3999938964844,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 52,
+        "terminal": 0
+      },
+      {
+        "index": 87,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 579.2000122070312,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 51,
+        "terminal": 0
+      },
+      {
+        "index": 88,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 703.2000122070312,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 50,
+        "terminal": 0
+      },
+      {
+        "index": 89,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 835.2000122070312,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 49,
+        "terminal": 0
+      },
+      {
+        "index": 90,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 959.2000122070312,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 48,
+        "terminal": 0
+      },
+      {
+        "index": 91,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1079.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 47,
+        "terminal": 0
+      },
+      {
+        "index": 92,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1151.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 46,
+        "terminal": 0
+      },
+      {
+        "index": 93,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1263.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 45,
+        "terminal": 0
+      },
+      {
+        "index": 94,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1411.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 44,
+        "terminal": 0
+      },
+      {
+        "index": 95,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1539.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 43,
+        "terminal": 0
+      },
+      {
+        "index": 96,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1611.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 42,
+        "terminal": 0
+      },
+      {
+        "index": 97,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1715.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 41,
+        "terminal": 0
+      },
+      {
+        "index": 98,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1835.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 40,
+        "terminal": 0
+      },
+      {
+        "index": 99,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 1955.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 39,
+        "terminal": 0
+      },
+      {
+        "index": 100,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2083.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 38,
+        "terminal": 0
+      },
+      {
+        "index": 101,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2163.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 37,
+        "terminal": 0
+      },
+      {
+        "index": 102,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2287.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 36,
+        "terminal": 0
+      },
+      {
+        "index": 103,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2367.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 35,
+        "terminal": 0
+      },
+      {
+        "index": 104,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2471.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 34,
+        "terminal": 0
+      },
+      {
+        "index": 105,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2575.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 33,
+        "terminal": 0
+      },
+      {
+        "index": 106,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2679.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 32,
+        "terminal": 0
+      },
+      {
+        "index": 107,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2783.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 31,
+        "terminal": 0
+      },
+      {
+        "index": 108,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2891.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 30,
+        "terminal": 0
+      },
+      {
+        "index": 109,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 2987.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 29,
+        "terminal": 0
+      },
+      {
+        "index": 110,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 14.800003051757812,
+    "y": 3087.199951171875,
+    "type": " random ",
+    "connections": [
+      {
+        "index": 28,
+        "terminal": 0
+      },
+      {
+        "index": 111,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 289.20001220703125,
+    "y": 104.80000305175781,
+    "type": "OR",
+    "connections": [{
+      "index": 0,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 289.20001220703125,
+    "y": 189.60000610351562,
+    "type": "OR",
+    "connections": [{
+      "index": 1,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 289.20001220703125,
+    "y": 301.6000061035156,
+    "type": "OR",
+    "connections": [{
+      "index": 2,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 293.20001220703125,
+    "y": 432,
+    "type": "OR",
+    "connections": [{
+      "index": 3,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 293.20001220703125,
+    "y": 555.2000122070312,
+    "type": "OR",
+    "connections": [{
+      "index": 4,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 708.7999877929688,
+    "type": "OR",
+    "connections": [{
+      "index": 5,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 812.7999877929688,
+    "type": "OR",
+    "connections": [{
+      "index": 6,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 924.7999877929688,
+    "type": "OR",
+    "connections": [{
+      "index": 7,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 1052.800048828125,
+    "type": "OR",
+    "connections": [{
+      "index": 8,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 1152.800048828125,
+    "type": "OR",
+    "connections": [{
+      "index": 9,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 1268.800048828125,
+    "type": "OR",
+    "connections": [{
+      "index": 10,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294,
+    "y": 1400.800048828125,
+    "type": "OR",
+    "connections": [{
+      "index": 11,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 1496,
+    "type": "OR",
+    "connections": [{
+      "index": 12,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 1588,
+    "type": "OR",
+    "connections": [{
+      "index": 13,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 1696,
+    "type": "OR",
+    "connections": [{
+      "index": 14,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 1836,
+    "type": "OR",
+    "connections": [{
+      "index": 15,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 1924,
+    "type": "OR",
+    "connections": [{
+      "index": 16,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2044,
+    "type": "OR",
+    "connections": [{
+      "index": 17,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2156,
+    "type": "OR",
+    "connections": [{
+      "index": 18,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2272,
+    "type": "OR",
+    "connections": [{
+      "index": 19,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2360,
+    "type": "OR",
+    "connections": [{
+      "index": 20,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2460,
+    "type": "OR",
+    "connections": [{
+      "index": 21,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2552,
+    "type": "OR",
+    "connections": [{
+      "index": 22,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2652,
+    "type": "OR",
+    "connections": [{
+      "index": 23,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2756,
+    "type": "OR",
+    "connections": [{
+      "index": 24,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2868,
+    "type": "OR",
+    "connections": [{
+      "index": 25,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 294.79998779296875,
+    "y": 2964,
+    "type": "OR",
+    "connections": [{
+      "index": 26,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 292.3999938964844,
+    "y": 3117.60009765625,
+    "type": "OR",
+    "connections": [{
+      "index": 27,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 997.2000122070312,
+    "y": 101.60000610351562,
+    "group number": 29,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 995.5999755859375,
+    "y": 201.60000610351562,
+    "group number": 30,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 994.7999877929688,
+    "y": 317.6000061035156,
+    "group number": 31,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 993.5,
+    "y": 415.6000061035156,
+    "group number": 32,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 994.7999877929688,
+    "y": 521.5999755859375,
+    "group number": 33,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1298.800048828125,
+    "y": 521.5999755859375,
+    "group number": 34,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1297.5,
+    "y": 418.79998779296875,
+    "group number": 35,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1298.800048828125,
+    "y": 317.6000061035156,
+    "group number": 36,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1298.800048828125,
+    "y": 221.60000610351562,
+    "group number": 37,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1298.800048828125,
+    "y": 120.80000305175781,
+    "group number": 38,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "delay": 10,
+    "x": 783.5999755859375,
+    "y": 105.60000610351562,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 123,
+        "terminal": 0
+      },
+      {
+        "index": 112,
+        "terminal": 0
+      },
+      {
+        "index": 121,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 778.7999877929688,
+    "y": 189.60000610351562,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 124,
+        "terminal": 0
+      },
+      {
+        "index": 113,
+        "terminal": 0
+      },
+      {
+        "index": 120,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 766.7999877929688,
+    "y": 304,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 125,
+        "terminal": 0
+      },
+      {
+        "index": 114,
+        "terminal": 0
+      },
+      {
+        "index": 119,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 759.5999755859375,
+    "y": 395.20001220703125,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 126,
+        "terminal": 0
+      },
+      {
+        "index": 115,
+        "terminal": 0
+      },
+      {
+        "index": 118,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 765.2000122070312,
+    "y": 529.5999755859375,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 127,
+        "terminal": 0
+      },
+      {
+        "index": 116,
+        "terminal": 0
+      },
+      {
+        "index": 117,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 783.5999755859375,
+    "y": 646.4000244140625,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 128,
+        "terminal": 0
+      },
+      {
+        "index": 116,
+        "terminal": 1
+      },
+      {
+        "index": 117,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 778.7999877929688,
+    "y": 742.4000244140625,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 129,
+        "terminal": 0
+      },
+      {
+        "index": 115,
+        "terminal": 1
+      },
+      {
+        "index": 118,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 778,
+    "y": 837.5999755859375,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 130,
+        "terminal": 0
+      },
+      {
+        "index": 114,
+        "terminal": 1
+      },
+      {
+        "index": 119,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 778,
+    "y": 925.5999755859375,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 131,
+        "terminal": 0
+      },
+      {
+        "index": 113,
+        "terminal": 1
+      },
+      {
+        "index": 120,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 778,
+    "y": 1013.5999755859375,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 132,
+        "terminal": 1
+      },
+      {
+        "index": 112,
+        "terminal": 1
+      },
+      {
+        "index": 121,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 645.5,
+    "y": 176.39999389648438,
+    "type": "OR",
+    "connections": [{
+      "index": 122,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 613.2000122070312,
+    "y": 80,
+    "type": "pulse",
+    "connections": [{
+      "index": 132,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 468.3999938964844,
+    "y": 19.200000762939453,
+    "type": "ON",
+    "connections": [{
+      "index": 133,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1253.199951171875,
+    "y": 1164.800048828125,
+    "group number": 40,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1249.199951171875,
+    "y": 1267.199951171875,
+    "group number": 41,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 1035.5999755859375,
+    "y": 1207.199951171875,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 135,
+        "terminal": 0
+      },
+      {
+        "index": 136,
+        "terminal": 0
+      },
+      {
+        "index": 144,
+        "terminal": 1
+      },
+      {
+        "index": 155,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "offset": 10,
+    "x": 1246.800048828125,
+    "y": 1408.800048828125,
+    "group number": 39,
+    "type": "y-offset",
+    "connections": []
+  },
+  {
+    "x": 1054,
+    "y": 1412.800048828125,
+    "type": "NOR",
+    "connections": [{
+      "index": 138,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 874.7999877929688,
+    "y": 1219.199951171875,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 137,
+        "terminal": 0
+      },
+      {
+        "index": 135,
+        "terminal": 1
+      },
+      {
+        "index": 136,
+        "terminal": 1
+      },
+      {
+        "index": 143,
+        "terminal": 0
+      },
+      {
+        "index": 144,
+        "terminal": 0
+      },
+      {
+        "index": 162,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "delay": 10,
+    "x": 895.0999755859375,
+    "y": 1630.800048828125,
+    "type": "delay",
+    "connections": [{
+      "index": 142,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 900.7000122070312,
+    "y": 1520.4000244140625,
+    "type": "NOR",
+    "connections": [
+      {
+        "index": 141,
+        "terminal": 0
+      },
+      {
+        "index": 139,
+        "terminal": 1
+      },
+      {
+        "index": 138,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 843.5999755859375,
+    "y": 1388,
+    "type": "NOR",
+    "connections": [{
+      "index": 142,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1247.5999755859375,
+    "y": 1074.4000244140625,
+    "group number": 42,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 2,
+    "x": 1024.699951171875,
+    "y": 963,
+    "type": "read var",
+    "connections": [{
+      "index": 155,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 1407.9000244140625,
+    "y": 961.2000122070312,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 3,
+    "x": 772.4000244140625,
+    "y": 1910.4000244140625,
+    "type": "read var",
+    "connections": [{
+      "index": 149,
+      "terminal": 0
+    }]
+  },
+  {
+    "variable number": 4,
+    "x": 774.7999877929688,
+    "y": 1984,
+    "type": "read var",
+    "connections": [{
+      "index": 150,
+      "terminal": 1
+    }]
+  },
+  {
+    "x": 1082,
+    "y": 1896.800048828125,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 151,
+        "terminal": 0
+      },
+      {
+        "index": 151,
+        "terminal": 1
+      },
+      {
+        "index": 163,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 926.7999877929688,
+    "y": 1938.4000244140625,
+    "type": "NOR",
+    "connections": [{
+      "index": 149,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 4,
+    "x": 1238.300048828125,
+    "y": 1950,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "variable number": 4,
+    "x": 761.2000122070312,
+    "y": 2090.39990234375,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 154,
+        "terminal": 0
+      },
+      {
+        "index": 170,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 1244.4000244140625,
+    "y": 2079.199951171875,
+    "group number": 43,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 968.699951171875,
+    "y": 2086,
+    "type": "pulse",
+    "connections": [{
+      "index": 153,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1231.9000244140625,
+    "y": 970.7999877929688,
+    "type": "AND",
+    "connections": [
+      {
+        "index": 146,
+        "terminal": 0
+      },
+      {
+        "index": 146,
+        "terminal": 1
+      },
+      {
+        "index": 156,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "sound key": "news",
+    "x": 1411.5999755859375,
+    "y": 857.5999755859375,
+    "type": "play sound",
+    "connections": [{
+      "index": 157,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1538,
+    "y": 867.2000122070312,
+    "type": "NOR",
+    "connections": [{
+      "index": 161,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1543.5999755859375,
+    "y": 1068.800048828125,
+    "type": "pulse",
+    "connections": [{
+      "index": 159,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 50,
+    "x": 1542.800048828125,
+    "y": 1178.4000244140625,
+    "type": "delay",
+    "connections": [{
+      "index": 160,
+      "terminal": 1
+    }]
+  },
+  {
+    "variable number": 1,
+    "x": 1544.4000244140625,
+    "y": 1309.5999755859375,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 1540.4000244140625,
+    "y": 968.7999877929688,
+    "type": "AND",
+    "connections": [{
+      "index": 158,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1384.4000244140625,
+    "y": 1071.199951171875,
+    "type": "OR",
+    "connections": [{
+      "index": 161,
+      "terminal": 1
+    }]
+  },
+  {
+    "sound key": "CEO",
+    "x": 1237.5,
+    "y": 1850.800048828125,
+    "type": "play sound",
+    "connections": [{
+      "index": 164,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1361.199951171875,
+    "y": 1851.199951171875,
+    "type": "NOR",
+    "connections": [{
+      "index": 165,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1515.5999755859375,
+    "y": 1850.4000244140625,
+    "type": "AND",
+    "connections": [{
+      "index": 166,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 1658,
+    "y": 1870.4000244140625,
+    "type": "pulse",
+    "connections": [{
+      "index": 167,
+      "terminal": 0
+    }]
+  },
+  {
+    "delay": 50,
+    "x": 1516.699951171875,
+    "y": 2022.800048828125,
+    "type": "delay",
+    "connections": [
+      {
+        "index": 168,
+        "terminal": 1
+      },
+      {
+        "index": 169,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "variable number": 4,
+    "x": 1650.300048828125,
+    "y": 1981.199951171875,
+    "type": "set var",
+    "connections": []
+  },
+  {
+    "x": 1651.0999755859375,
+    "y": 2079.60009765625,
+    "group number": 43,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "delay": 2,
+    "x": 1358,
+    "y": 1977.5999755859375,
+    "type": "delay",
+    "connections": [{
+      "index": 165,
+      "terminal": 1
+    }]
+  }
+]

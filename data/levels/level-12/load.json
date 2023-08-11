@@ -1,0 +1,32 @@
+[
+  {"name": "load"},
+  {
+    "x": 358.79998779296875,
+    "y": 187.1999969482422,
+    "group number": 43,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 113.19999694824219,
+    "y": 215.1999969482422,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 0,
+        "terminal": 1
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 365.20001220703125,
+    "y": 320,
+    "group number": 44,
+    "type": "set visable",
+    "connections": []
+  }
+]

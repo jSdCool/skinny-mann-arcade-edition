@@ -1,0 +1,19 @@
+[
+  {"name": "level complete"},
+  {
+    "x": 217.20001220703125,
+    "y": 240,
+    "type": "ON",
+    "connections": [{
+      "index": 1,
+      "terminal": 0
+    }]
+  },
+  {
+    "x": 423.6000061035156,
+    "y": 222.39999389648438,
+    "group number": 44,
+    "type": "set visable",
+    "connections": []
+  }
+]

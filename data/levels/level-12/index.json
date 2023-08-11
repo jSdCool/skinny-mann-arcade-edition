@@ -1,0 +1,115 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 815,
+    "min players": 2,
+    "author": "jSdCool",
+    "level_id": 12,
+    "spawnX": 20,
+    "groups": [
+      "group 0",
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8",
+      "s9",
+      "s10",
+      "s11",
+      "s12",
+      "s13",
+      "s14",
+      "s15",
+      "s16",
+      "s17",
+      "s18",
+      "s19",
+      "s20",
+      "s21",
+      "s22",
+      "s23",
+      "s24",
+      "s25",
+      "s26",
+      "s27",
+      "s28",
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5",
+      "O1",
+      "O2",
+      "O3",
+      "O4",
+      "O5",
+      "news mouth",
+      "news cover",
+      "news logo",
+      "news breaking",
+      "end trap",
+      "To Be Continued"
+    ],
+    "game version": "0.8.0_Early_Access",
+    "spawnY": 588,
+    "max players": 2,
+    "number of variable": 5,
+    "name": "level-12",
+    "spawn pointX": 20,
+    "spawn pointY": 588,
+    "multyplayer mode": 1
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "/stage 2.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 4",
+    "location": "/stage 4.json",
+    "type": "stage"
+  },
+  {
+    "name": "debate",
+    "location": "/debate.wav",
+    "type": "sound"
+  },
+  {
+    "name": "news",
+    "location": "/news.wav",
+    "type": "sound"
+  },
+  {
+    "name": "CEO",
+    "location": "/ceo2.wav",
+    "type": "sound"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]
