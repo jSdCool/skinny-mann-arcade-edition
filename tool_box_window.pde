@@ -2233,6 +2233,19 @@ class ToolBox extends PApplet {
           }
         }
       }//end of if page is colors
+      if (page.equals("tools")) {
+        float wheel_direction = event.getCount()*-1;
+        if (grid_mode) {//if grid mode is active
+          if (grid_size==10&&wheel_direction<0) {
+          } else {
+
+            grid_size+=wheel_direction*10;//change the grid size
+          }
+          if (grid_size<10) {
+            grid_size=10;
+          }
+        }
+      }
     }
   }
 
