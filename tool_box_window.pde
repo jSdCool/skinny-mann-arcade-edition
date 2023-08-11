@@ -1385,7 +1385,7 @@ class ToolBox extends PApplet {
         variablesAndGroups.draw();
         levelSettingsPage.draw();
 
-        if (level==null) {
+        if (level==null||!(editingStage||levelOverview)) {
           textAlign(CENTER, CENTER);
           fill(0);
           textSize(25);
@@ -2172,6 +2172,7 @@ class ToolBox extends PApplet {
         }//end of editing a level
       }//end if page is varioables and groups
       if (page.equals("level settings")) {
+        if(editingStage||levelOverview){
         if (multyplayerModeSpeedrunButton.isMouseOver()) {
           level.multyplayerMode=1;
         }
@@ -2192,6 +2193,7 @@ class ToolBox extends PApplet {
           if (level.maxPLayers>level.minPlayers&&maxplayersDecrease.isMouseOver()) {
             level.maxPLayers--;
           }
+        }
         }
       }//end of page is level settings
     }
