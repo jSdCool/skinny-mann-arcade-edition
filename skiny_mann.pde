@@ -1890,7 +1890,7 @@ void mouseClicked() {// when you click the mouse
             System.out.println("save complete");
           }
           if (help.isMouseOver()) {//help button in the level overview
-            link("https://youtu.be/5QXhi2uu1RM");
+            link("https://youtu.be/anmV3GknDL4");
           }
           if (overviewSelection!=-1) {//if something is selected
             if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
