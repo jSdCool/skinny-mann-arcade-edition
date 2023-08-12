@@ -128,7 +128,7 @@ class LogicButton extends StageComponent {//ground component
       Group group=getGroup();
       if (!group.visable)
         return;
-      if (variable!=-1)
+      if (variable!=-1){
         for (int i=0; i<source.currentNumberOfPlayers; i++) {
           if (source.players[i].stage!=data)//test if the player is in the same stage as the button
             continue;
@@ -145,6 +145,7 @@ class LogicButton extends StageComponent {//ground component
           }
         }
       source.level.variables.set(variable, false);
+      }
     }
   }
 }
