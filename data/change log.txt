@@ -2,30 +2,30 @@ if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
 0.8.0_Early_Access
--fixed: update screen button not being centerd at all resolutions
+-fixed: update screen button not being centered at all resolutions
 +added: integrated level creator into game
--changed: error window that pops up when the game crashes is now allways on top
--changed: level creator now stores content created by the user in appdata or equivlent
--fixed: "grass" on main menu and level select screen is now properly renderd based on the screen size rather then fixed position
+-changed: error window that pops up when the game crashes is now always on top
+-changed: level creator now stores content created by the user in appdata or equivalent
+-fixed: "grass" on main menu and level select screen is now properly rendered based on the screen size rather then fixed position
 -fixed: spelling of shadows in settings
 -changed: finally updated buttons on pause menu
--changed: imporoved UI scaleing
+-changed: improved UI scaling
 -fixed: startup logo randomly loosing texture
--fixed: player number not being reset when leaving multyplayer
+-fixed: player number not being reset when leaving multiplayer
 +added: menu transitions
 -changed: sliders in settings have been upgraded
--changed: upgraded sound systems, all in level sounds now folow sound volume set in settings
+-changed: upgraded sound systems, all in level sounds now follow sound volume set in settings
 -removed: old music
 -added: mew music (thanks SuperTylerMan)
 -changed: in the logic board editor active logic connections are new red
--added: tick logic board button to varibles and groups page of tool box
--changed: glitch effect is now a bit diffrent
--fixed: if you tryed to stop playing a level when dead it would put you back in after the respawn cool down
+-added: tick logic board button to variables and groups page of tool box
+-changed: glitch effect is now a bit different
+-fixed: if you tried to stop playing a level when dead it would put you back in after the respawn cool down
 -fixed: portals that transport between 2D and 3D not saving the z position of the destination
 -removed: discord icon on main menu
 +added: level-11
--fixed: crashed caused when placing a bluprint and the coins in the bluprint hologram colided with the player
--changed: polay sound logic component now outputs wether the sound is playing or queued
+-fixed: crashed caused when placing a blueprint and the coins in the blueprint hologram collided with the player
+-changed: play sound logic component now outputs whether the sound is playing or queued
 -added: level-12
 
 0.7.1_Early_Access
