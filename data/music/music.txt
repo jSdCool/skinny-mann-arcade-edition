@@ -1,2 +1,2 @@
 data/music/Skinny_Mann_Theme-Song.wav
-data/music/track3.wav
+data/music/Skinny_Mann_Theme-Song_2.wav

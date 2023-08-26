@@ -15,8 +15,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: menu transitions
 -changed: sliders in settings have been upgraded
 -changed: upgraded sound systems, all in level sounds now folow sound volume set in settings
--removed: old music*
--added: mew music
+-removed: old music
+-added: mew music (thanks SuperTylerMan)
 -changed: in the logic board editor active logic connections are new red
 -added: tick logic board button to varibles and groups page of tool box
 -changed: glitch effect is now a bit diffrent
