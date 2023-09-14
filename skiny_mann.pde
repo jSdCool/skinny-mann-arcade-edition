@@ -14,6 +14,7 @@ import java.awt.Desktop;
 import javax.swing.*;
 
 void settings() {//first function called
+  UniversalErrorManager.init(this);
   if (platform==WINDOWS) {
     appdata=System.getenv("AppData");
   } else {
