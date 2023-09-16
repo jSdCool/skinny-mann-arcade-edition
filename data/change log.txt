@@ -1,6 +1,10 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.8.1_Early_Access
++added: Universal error handler (crashes will now wllways show an error window)
++added: grid mode indicarot in level creator
+
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions
 +added: integrated level creator into game
