@@ -2,7 +2,7 @@ class UiSlider {
   UiFrame ui;
   UiButton button;
   float ix, iy, iwidth, iheight, x, y, width, height, pScale, minVal=0, maxVal=100, value=50, istroke=3, stroke=3, round=0;
-  boolean displayValue=true;
+  boolean displayValue=true,selected=false;
   int fillColor=255, strokeColor=-5592405;
 
   UiSlider(UiFrame ui, float x, float y, float width, float height) {
@@ -45,7 +45,11 @@ class UiSlider {
     }
     button.draw();
     ui.getSource().noStroke();
-    ui.getSource().fill(strokeColor);
+    if(selected){
+      ui.getSource().fill(255,0,0);
+    }else{
+      ui.getSource().fill(strokeColor);
+    }
     ui.getSource().rect(sliderPosX-slierWidth/2-stroke, y-sliderHeightOffset-stroke, slierWidth+stroke*2, 2*sliderHeightOffset+height+stroke*2);
     ui.getSource().fill(fillColor);
     ui.getSource().rect(sliderPosX-slierWidth/2, y-sliderHeightOffset, slierWidth, 2*sliderHeightOffset+height);
@@ -93,7 +97,7 @@ class UiSlider {
   }
 
   UiSlider setValue(float v) {
-    value=v;
+    value=Math.min(Math.max(v, minVal), maxVal);//make shure that value is allways inside of the upper and lower boundss
     return this;
   }
 
@@ -121,5 +125,9 @@ class UiSlider {
     this.strokeColor=strokeColor;
     button.setColor(fillColor, strokeColor);
     return this;
+  }
+  
+  void setSelecetd(boolean s){
+    selected=s;
   }
 }

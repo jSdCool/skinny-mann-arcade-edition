@@ -106,8 +106,8 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12;//button
-String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access"};
+Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton, select_lvl_11, select_lvl_12;//button
+String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access", "0.8.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 JSONObject portalStage1, portalStage2;
@@ -963,11 +963,11 @@ void draw() {// the function that is called every fraim
         SPressed=false;
         WPressed=false;
       }
-      if(!inGame){
+      if (!inGame) {
         dead=false;
       }
     }
-    
+
     if (settingPlayerSpawn && levelCreator) {
       draw_mann(mouseX, mouseY, 1, Scale, 0);
       fill(0);
@@ -1208,20 +1208,20 @@ void mouseClicked() {// when you click the mouse
             menue=false;
             inGame=true;
           }
-          
-          if(select_lvl_11.isMouseOver()&&progress>=11){
+
+          if (select_lvl_11.isMouseOver()&&progress>=11) {
             loadLevel("data/levels/level-11");
             menue=false;
             inGame=true;
           }
-          
-          if(select_lvl_12.isMouseOver()&&progress>=12){
+
+          if (select_lvl_12.isMouseOver()&&progress>=12) {
             loadLevel("data/levels/level-12");
             menue=false;
             inGame=true;
           }
-          
-          
+
+
 
           if (select_lvl_back.isMouseOver()) {
             Menue="main";
@@ -2167,7 +2167,6 @@ void mouseClicked() {// when you click the mouse
             levelCreator=false;
             inGame=false;
             menue=true;
-            
           }
 
           if (lc_exitCancle.isMouseOver()) {
@@ -2343,9 +2342,9 @@ void keyPressed() {// when a key is pressed
       }
     }
     if (levelCreator) {
-      if (key == ESC){
+      if (key == ESC) {
         key=0;
-        return;  
+        return;
       }
       if (editingStage||editingBlueprint) {//if edditng a stage
         if (key=='r'||key=='R') {//if 'R' is pressed
@@ -2441,7 +2440,7 @@ void keyPressed() {// when a key is pressed
     }
 
     //System.out.println(keyCode);
-    if(key=='b'||key=='B'){
+    if (key=='b'||key=='B') {
       println("p");
     }
   }
@@ -2616,6 +2615,27 @@ void mouseDragged() {
   }
 }
 
+void updateSettingsFromSliderValues(){
+  eadgeScroleDist=(int)horozontalEdgeScrollSlider.getValue();
+  JSONObject scroll=settings.getJSONObject(1);
+  scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
+  eadgeScroleDistV=(int)verticleEdgeScrollSlider.getValue();
+  scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
+  settings.setJSONObject(1, scroll);
+  
+  musicVolume=musicVolumeSlider.getValue()/100.0;
+  scroll=settings.getJSONObject(4);
+  scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
+  soundHandler.setMusicVolume(musicVolume);
+  sfxVolume=SFXVolumeSlider.getValue()/100.0;
+  scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
+  soundHandler.setSoundsVolume(sfxVolume);
+  settings.setJSONObject(4, scroll);
+            
+            
+  saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+}
+
 void windowResized() {
   ui.reScale();
   Scale = height/720.0;
@@ -2642,10 +2662,10 @@ void thrdCalc2() {
   while (loopThread2) {
     curMills=millis();
     mspc=curMills-lasMills;
-    
+
     ReadController.read(gamepad);
     handleControllerState();
-    
+
     if (tutorialMode) {
       tutorialLogic();
     }
@@ -3039,12 +3059,12 @@ void drawLevelSelect(boolean bcakground) {
   } else {
     select_lvl_10.setColor(-59135, -1791);
   }
-  if (progress < 11){
+  if (progress < 11) {
     select_lvl_11.setColor(#B40F00, #B4AF00);
   } else {
     select_lvl_11.setColor(-59135, -1791);
   }
-  if (progress < 12){
+  if (progress < 12) {
     select_lvl_12.setColor(#B40F00, #B4AF00);
   } else {
     select_lvl_12.setColor(-59135, -1791);
@@ -3444,14 +3464,14 @@ void glitchEffect() {
   //n=9;
   int bsep = glitchBoxes.size()/bsepnum;
   strokeWeight(0);
-  for(int i=0;i<bsep;i++){
+  for (int i=0; i<bsep; i++) {
     glitchBoxes.get(i+bsep*n).draw();
   }
 }
 
-class GlitchBox{
-  int x,y,w,h,c;
-  GlitchBox(String in){
+class GlitchBox {
+  int x, y, w, h, c;
+  GlitchBox(String in) {
     String[] bs = in.split(",");
     x=Integer.parseInt(bs[0]);
     y=Integer.parseInt(bs[1]);
@@ -3459,10 +3479,10 @@ class GlitchBox{
     h=Integer.parseInt(bs[3]);
     c=Integer.parseInt(bs[4]);
   }
-  
-  void draw(){
-    fill(c,128);
-    rect(ui.topX()+x*ui.scale(),ui.topY()+y*ui.scale(),w*ui.scale(),h*ui.scale());
+
+  void draw() {
+    fill(c, 128);
+    rect(ui.topX()+x*ui.scale(), ui.topY()+y*ui.scale(), w*ui.scale(), h*ui.scale());
   }
 }
 
@@ -3821,10 +3841,10 @@ void programLoad() {
   SFXVolumeSlider.setValue(sfxVolume*100);
   verticleEdgeScrollSlider.setValue(eadgeScroleDistV);
   horozontalEdgeScrollSlider.setValue(eadgeScroleDist);
-  
+
   String[] rawGlitchBoxes = loadStrings("data/glitch.txt");
   loadProgress++;
-  for(int i=0;i<rawGlitchBoxes.length;i++){
+  for (int i=0; i<rawGlitchBoxes.length; i++) {
     glitchBoxes.add(new GlitchBox(rawGlitchBoxes[i]));
   }
 
@@ -3880,17 +3900,17 @@ void  initButtons() {
   select_lvl_8 =new UiButton(ui, (850), (250), (200), (100), "lvl 8", -59135, -1791).setStrokeWeight( (10));
   select_lvl_9 = new UiButton(ui, (100), (400), (200), (100), "lvl 9", -59135, -1791).setStrokeWeight( (10));
   select_lvl_10 = new UiButton(ui, (350), (400), (200), (100), "lvl 10", -59135, -1791).setStrokeWeight( (10));
-  select_lvl_11 = new UiButton(ui, 600, 400, 200, 100 , "lvl 11",-59135, -1791).setStrokeWeight(10);
-  select_lvl_12 = new UiButton(ui, 850, 400, 200, 100, "lvl 12",-59135, -1791).setStrokeWeight(10);
+  select_lvl_11 = new UiButton(ui, 600, 400, 200, 100, "lvl 11", -59135, -1791).setStrokeWeight(10);
+  select_lvl_12 = new UiButton(ui, 850, 400, 200, 100, "lvl 12", -59135, -1791).setStrokeWeight(10);
   playButton=new UiButton(ui, 540, 310, 200, 50, "Play", #FF1900, #FFF900).setStrokeWeight(10);
-  mainMenuButtonConfig.add(new ButtonInMenu(playButton,0,0));
+  mainMenuButtonConfig.add(new ButtonInMenu(playButton, 0, 0));
   exitButton=new UiButton(ui, 540, 470, 200, 50, "Exit", #FF1900, #FFF900).setStrokeWeight(10);
-  mainMenuButtonConfig.add(new ButtonInMenu(exitButton,0,1));
+  mainMenuButtonConfig.add(new ButtonInMenu(exitButton, 0, 1));
   joinButton=new UiButton(ui, 540, 390, 200, 50, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10);
   settingsButton=new UiButton(ui, 540, 550, 200, 50, "Settings", #FF1900, #FFF900).setStrokeWeight(10);
-  mainMenuButtonConfig.add(new ButtonInMenu(settingsButton,0,2));
+  mainMenuButtonConfig.add(new ButtonInMenu(settingsButton, 0, 2));
   howToPlayButton=new UiButton(ui, 540, 630, 200, 50, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10);
-  mainMenuButtonConfig.add(new ButtonInMenu(howToPlayButton,0,3));
+  mainMenuButtonConfig.add(new ButtonInMenu(howToPlayButton, 0, 3));
   downloadUpdateButton=new UiButton(ui, 390, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10);
   updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
   updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
@@ -3963,32 +3983,65 @@ void  initButtons() {
   lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
-  
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_1,0,0));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_2,1,0));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_3,2,0));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_4,3,0));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_5,0,1));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_6,1,1));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_7,2,1));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_8,3,1));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_9,0,2));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_10,1,2));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_11,2,2));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_12,3,2));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_back,0,3));
-  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_UGC,1,3));
-  
-  pauseMenuButtonConfig.add(new ButtonInMenu(pauseResumeButton,0,0));
-  pauseMenuButtonConfig.add(new ButtonInMenu(pauseOptionsButton,0,1));
-  pauseMenuButtonConfig.add(new ButtonInMenu(pauseQuitButton,0,2));
-  
-  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(select_lvl_back,0,1));
-  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvl_play,1,1));
-  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_prev,0,0));
-  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_next,1,0));
 
-  
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_1, 0, 0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_2, 1, 0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_3, 2, 0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_4, 3, 0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_5, 0, 1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_6, 1, 1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_7, 2, 1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_8, 3, 1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_9, 0, 2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_10, 1, 2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_11, 2, 2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_12, 3, 2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_back, 0, 3));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_UGC, 1, 3));
+
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseResumeButton, 0, 0));
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseOptionsButton, 0, 1));
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseQuitButton, 0, 2));
+
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(select_lvl_back, 0, 1));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvl_play, 1, 1));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_prev, 0, 0));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_next, 1, 0));
+
+  settingsGameplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 2));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(horozontalEdgeScrollSlider, 2, 0));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(verticleEdgeScrollSlider, 2, 1));
+
+  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 2));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 3));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(rez720, 0, 0));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(rez900, 1, 0));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(rez1080, 2, 0));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(rez1440, 3, 0));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(rez4k, 4, 0));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(fullScreenOff, 3, 1));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(fullScreenOn, 4, 1));
+
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 6));
+  settingsOutherMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 6));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 6));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 7));
+  settingsOutherMenuConfig.add(new ButtonInMenu(disableFPS, 2, 0));
+  settingsOutherMenuConfig.add(new ButtonInMenu(enableFPS, 3, 0));
+  settingsOutherMenuConfig.add(new ButtonInMenu(disableDebug, 2, 1));
+  settingsOutherMenuConfig.add(new ButtonInMenu(enableDebug, 3, 1));
+  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOff, 2, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOn, 3, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode0, 2, 5));
+  settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
+  settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
+  settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
+  //
   currentMenuConfig.set();
 }
 
@@ -4201,271 +4254,336 @@ void initText() {
   dbg_tutorialPos = new UiText(ui, "tutorial position: V", 1275, 90, 10, RIGHT, TOP);
   game_displayText = new UiText(ui, "V", 640, 144, 200, CENTER, CENTER);
   lebelCompleteText = new UiText(ui, "LEVEL COMPLETE!!!", 200, 400, 100, LEFT, BOTTOM);
-  settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player",640,72,35,CENTER,CENTER);
+  settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player", 640, 72, 35, CENTER, CENTER);
 }
 
 
-ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1,4),levelSelectMenuButtonConfig = new ButtonMenuConfig(4,4),pauseMenuButtonConfig = new ButtonMenuConfig(1,3),levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig();
+ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
+  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8);
+
+
 ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
-boolean controller_set_b=false,controller_set_a=false;
-int currentSelectedButton=0,lastMenuControllerInput=0;
-void handleControllerState(){
-  if(menue){//if nagigating a menu
-  
-    //joystick inputs
-    if(millis()-lastMenuControllerInput>200){
-      if(gamepad.leftStickY()>0.3){
-        lastMenuControllerInput = millis();
-        handleNewMenuButtonSelection(currentMenuConfig.down(currentSelectedButton));
+boolean controller_set_b=false, controller_set_a=false, controllerConfigSlider=false;
+int currentSelectedButton=0, lastMenuControllerInput=0;
+void handleControllerState() {
+  if (menue) {//if nagigating a menu
+    if (controllerConfigSlider) {
+      if (!controller_set_a&&gamepad.a()) {
+        controllerConfigSlider=false;
+        currentMenuConfig.get(currentSelectedButton).getSlider().setSelecetd(false);
       }
-      if(gamepad.leftStickY()<-0.3){
-        lastMenuControllerInput = millis();
-        handleNewMenuButtonSelection(currentMenuConfig.up(currentSelectedButton));
+      controller_set_a = gamepad.a();
+      if (millis()-lastMenuControllerInput>80) {
+      if (gamepad.leftStickX()>0.3) {
+          lastMenuControllerInput = millis();
+          UiSlider slider = currentMenuConfig.get(currentSelectedButton).getSlider();
+          slider.setValue(slider.getValue()+1);
+          updateSettingsFromSliderValues();
+        }
+        if (gamepad.leftStickX()<-0.3) {
+          lastMenuControllerInput = millis();
+          UiSlider slider = currentMenuConfig.get(currentSelectedButton).getSlider();
+          slider.setValue(slider.getValue()-1);
+          updateSettingsFromSliderValues();
+        }
       }
-      if(gamepad.leftStickX()>0.3){
-        lastMenuControllerInput = millis();
-        handleNewMenuButtonSelection(currentMenuConfig.right(currentSelectedButton));
+    } else {
+      //joystick inputs
+      if (millis()-lastMenuControllerInput>200) {
+        if (gamepad.leftStickY()>0.3) {
+          lastMenuControllerInput = millis();
+          handleNewMenuButtonSelection(currentMenuConfig.down(currentSelectedButton));
+        }
+        if (gamepad.leftStickY()<-0.3) {
+          lastMenuControllerInput = millis();
+          handleNewMenuButtonSelection(currentMenuConfig.up(currentSelectedButton));
+        }
+        if (gamepad.leftStickX()>0.3) {
+          lastMenuControllerInput = millis();
+          handleNewMenuButtonSelection(currentMenuConfig.right(currentSelectedButton));
+        }
+        if (gamepad.leftStickX()<-0.3) {
+          lastMenuControllerInput = millis();
+          handleNewMenuButtonSelection(currentMenuConfig.left(currentSelectedButton));
+        }
       }
-      if(gamepad.leftStickX()<-0.3){
-        lastMenuControllerInput = millis();
-        handleNewMenuButtonSelection(currentMenuConfig.left(currentSelectedButton));
-      }
-    }
 
-    //check menu switch
-    if(Menue.equals("main")){
-      if(currentMenuConfig!=mainMenuButtonConfig){
-        currentMenuConfig.reset();
-        mainMenuButtonConfig.set();
-        currentSelectedButton=0;
-        currentMenuConfig=mainMenuButtonConfig;
+      //check menu switch
+      if (Menue.equals("main")) {
+        if (currentMenuConfig!=mainMenuButtonConfig) {
+          currentMenuConfig.reset();
+          mainMenuButtonConfig.set();
+          currentSelectedButton=0;
+          currentMenuConfig=mainMenuButtonConfig;
+        }
+      } else if (Menue.equals("level select")) {
+        if (currentMenuConfig!=levelSelectMenuButtonConfig) {
+          currentMenuConfig.reset();
+          levelSelectMenuButtonConfig.set();
+          currentSelectedButton=0;
+          currentMenuConfig=levelSelectMenuButtonConfig;
+        }
+      } else if (Menue.equals("pause")) {
+        if (currentMenuConfig!=pauseMenuButtonConfig) {
+          currentMenuConfig.reset();
+          pauseMenuButtonConfig.set();
+          currentSelectedButton=0;
+          currentMenuConfig=pauseMenuButtonConfig;
+        }
+      } else if (Menue.equals("level select UGC")) {
+        if (currentMenuConfig!=levelSelectUGCMenuButtonConfig) {
+          currentMenuConfig.reset();
+          levelSelectUGCMenuButtonConfig.set();
+          currentSelectedButton=0;
+          currentMenuConfig=levelSelectUGCMenuButtonConfig;
+        }
+      } else if (Menue.equals("settings")) {
+        if (settingsMenue.equals("game play")) {
+          if (currentMenuConfig!=settingsGameplayMenuConfig) {
+            currentMenuConfig.reset();
+            settingsGameplayMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=settingsGameplayMenuConfig;
+          }
+        } else if (settingsMenue.equals("display")) {
+          if (currentMenuConfig!=settingsDisplayMenuConfig) {
+            currentMenuConfig.reset();
+            settingsDisplayMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=settingsDisplayMenuConfig;
+          }
+        } else if (settingsMenue.equals("outher")) {
+          if (currentMenuConfig!=settingsOutherMenuConfig) {
+            currentMenuConfig.reset();
+            settingsOutherMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=settingsOutherMenuConfig;
+          }
+        }
       }
-    } else if(Menue.equals("level select")){
-      if(currentMenuConfig!=levelSelectMenuButtonConfig){
-        currentMenuConfig.reset();
-        levelSelectMenuButtonConfig.set();
-        currentSelectedButton=0;
-        currentMenuConfig=levelSelectMenuButtonConfig;
-      }
-    } else if(Menue.equals("pause")){
-      if(currentMenuConfig!=pauseMenuButtonConfig){
-        currentMenuConfig.reset();
-        pauseMenuButtonConfig.set();
-        currentSelectedButton=0;
-        currentMenuConfig=pauseMenuButtonConfig;
-      }
-    } else if(Menue.equals("level select UGC")){
-      if(currentMenuConfig!=levelSelectUGCMenuButtonConfig){
-        currentMenuConfig.reset();
-        levelSelectUGCMenuButtonConfig.set();
-        currentSelectedButton=0;
-        currentMenuConfig=levelSelectUGCMenuButtonConfig;
-      }
-    }
-    
-    //use button action
-    if(!controller_set_a&&gamepad.a()){//rizeing edge pulse only
-      Button button =currentMenuConfig.get(currentSelectedButton).button();
-      int xpos =(int)( button.x + button.lengthX/2),ypos = (int)(button.y + button.lengthY/2);
-      mouseX=xpos;
-      mouseY=ypos;
-      mouseClicked();
-      lastMenuControllerInput = millis();
-    }
-    controller_set_a = gamepad.a();
 
-    
-    
-  }else if (inGame){//if in game 
-     player1_moving_right=gamepad.leftStickX()>0.4;
-     player1_moving_left=gamepad.leftStickX()<-0.4;
-     WPressed=gamepad.leftStickY()<-0.4;
-     SPressed=gamepad.leftStickY()>0.4;
-     if(millis()-lastMenuControllerInput>200)
-       player1_jumping=gamepad.a();
-     cam_left=gamepad.rightStickX()<-0.4;
-     cam_right=gamepad.rightStickX()>0.4;
-     cam_down=gamepad.rightStickY()>0.4;
-     cam_up=gamepad.rightStickY()<-0.4;
-     if(!controller_set_b&&gamepad.b()){
-       E_pressed=true;
-     }
-     controller_set_b = gamepad.b();
-     if(!controller_set_b){
-       E_pressed=false;
-     }
-     if(gamepad.y()){
-       menue=true;
-       Menue="pause";
-     }
-    
+      //use button action
+      if (!controller_set_a&&gamepad.a()) {//rizeing edge pulse only
+        if (currentMenuConfig.get(currentSelectedButton).isSlider()) {
+          controllerConfigSlider=true;
+          currentMenuConfig.get(currentSelectedButton).getSlider().setSelecetd(true);
+        } else {
+          Button button =currentMenuConfig.get(currentSelectedButton).button();
+          int xpos =(int)( button.x + button.lengthX/2), ypos = (int)(button.y + button.lengthY/2);
+          mouseX=xpos;
+          mouseY=ypos;
+          mouseClicked();
+          lastMenuControllerInput = millis();
+        }
+      }
+      controller_set_a = gamepad.a();
+    }
+  } else if (inGame) {//if in game
+    player1_moving_right=gamepad.leftStickX()>0.4;
+    player1_moving_left=gamepad.leftStickX()<-0.4;
+    WPressed=gamepad.leftStickY()<-0.4;
+    SPressed=gamepad.leftStickY()>0.4;
+    if (millis()-lastMenuControllerInput>200)
+      player1_jumping=gamepad.a();
+    cam_left=gamepad.rightStickX()<-0.4;
+    cam_right=gamepad.rightStickX()>0.4;
+    cam_down=gamepad.rightStickY()>0.4;
+    cam_up=gamepad.rightStickY()<-0.4;
+    if (!controller_set_b&&gamepad.b()) {
+      E_pressed=true;
+    }
+    controller_set_b = gamepad.b();
+    if (!controller_set_b) {
+      E_pressed=false;
+    }
+    if (gamepad.y()) {
+      menue=true;
+      Menue="pause";
+    }
   }
 }
 
-void handleNewMenuButtonSelection(int newSelection){
-  if(newSelection!=currentSelectedButton){
+void handleNewMenuButtonSelection(int newSelection) {
+  if (newSelection!=currentSelectedButton) {
     currentMenuConfig.get(currentSelectedButton).button().selected(false);
     currentMenuConfig.get(newSelection).button().selected(true);
     currentSelectedButton=newSelection;
   }
 }
 
-class ButtonInMenu{
+class ButtonInMenu {
   Button b;
-  int x,y;
-  ButtonInMenu(Button button,int x, int y){
+  UiSlider s;
+  int x, y;
+  boolean isSlider=false;
+  ButtonInMenu(Button button, int x, int y) {
     b=button;
     this.x=x;
     this.y=y;
   }
-  Button button(){
-    return b;
+  ButtonInMenu(UiSlider slider, int x, int y) {
+    s=slider;
+    this.x=x;
+    this.y=y;
+    isSlider=true;
   }
-  float distance(int x,int y){
-    return dist(1.0*this.x,this.y,x,y);
+  Button button() {
+    if (!isSlider)
+      return b;
+    else {
+      return s.button;
+    }
   }
-  int x(){
+  UiSlider getSlider() {
+    return s;
+  }
+  float distance(int x, int y) {
+    return dist(1.0*this.x, this.y, x, y);
+  }
+  int x() {
     return x;
   }
-  int y(){
+  int y() {
     return y;
+  }
+  boolean isSlider() {
+    return isSlider;
   }
 }
 
-class ButtonMenuConfig{
+class ButtonMenuConfig {
   ArrayList<ButtonInMenu> buttons=new ArrayList<>();
-  int maxX,  maxY;
-  ButtonMenuConfig(int width,int height){
+  int maxX, maxY;
+  ButtonMenuConfig(int width, int height) {
     maxX=width;
     maxY=height;
   }
-  
-  ButtonInMenu get(int index){
+
+  ButtonInMenu get(int index) {
     return buttons.get(index);
   }
-  
-  void add(ButtonInMenu button){
+
+  void add(ButtonInMenu button) {
     buttons.add(button);
   }
-  
-  int nearest(int ix,int iy,int index){
+
+  int nearest(int ix, int iy, int index) {
     float dist=10000;
     int nerindx=0;
-    for(int i=0;i<buttons.size();i++){
-      if(i==index)//don't return the element being moved from 
+    for (int i=0; i<buttons.size(); i++) {
+      if (i==index)//don't return the element being moved from
         continue;
-      float nd = get(i).distance(ix,iy);
-      if(nd < dist){
+      float nd = get(i).distance(ix, iy);
+      if (nd < dist) {
         dist=nd;
         nerindx=i;
       }
     }
     return nerindx;
   }
-  
-  int right(int index){
+
+  int right(int index) {
     int x=get(index).x()+1;
     int y=get(index).y();
-    if(x>=maxX){
+    if (x>=maxX) {
       return index;
     }
-    return nearest(x,y,index);
+    return nearest(x, y, index);
   }
-  
-  int left(int index){
+
+  int left(int index) {
     int x=get(index).x()-1;
     int y=get(index).y();
-    if(x<0){
+    if (x<0) {
       return index;
     }
-    return nearest(x,y,index);
+    return nearest(x, y, index);
   }
-  
-  int down(int index){
+
+  int down(int index) {
     int x=get(index).x();
     int y=get(index).y()+1;
-    if(y>=maxY){
+    if (y>=maxY) {
       return index;
     }
-    return nearest(x,y,index);
+    return nearest(x, y, index);
   }
-  int up(int index){
+  int up(int index) {
     int x=get(index).x();
     int y=get(index).y()-1;
-    if(y<0){
+    if (y<0) {
       return index;
     }
-    return nearest(x,y,index);
+    return nearest(x, y, index);
   }
-  
-  void reset(){
-    for(int i=0;i<buttons.size();i++){
+
+  void reset() {
+    for (int i=0; i<buttons.size(); i++) {
       get(i).button().selected(false);
     }
   }
-  
-  void set(){
+
+  void set() {
     get(0).button().selected(true);
   }
-  
 }
 /*
 if (UGC_lvl_indx<UGCNames.size()-1) {
-      UGC_lvls_next.draw();
-    }
-    if (UGC_lvl_indx>0) {
-      UGC_lvls_prev.draw();
-    }
-*/
-class UGCButtonMenuConfig extends ButtonMenuConfig{
-  UGCButtonMenuConfig(){
-    super(2,2);
+ UGC_lvls_next.draw();
+ }
+ if (UGC_lvl_indx>0) {
+ UGC_lvls_prev.draw();
+ }
+ */
+class UGCButtonMenuConfig extends ButtonMenuConfig {
+  UGCButtonMenuConfig() {
+    super(2, 2);
   }
-  
-  int right(int index){
+
+  int right(int index) {
     int x=get(index).x()+1;
     int y=get(index).y();
-    if(x>=maxX){
+    if (x>=maxX) {
       return index;
     }
-    int near = nearest(x,y,index);
+    int near = nearest(x, y, index);
     if (!(UGC_lvl_indx<UGCNames.size()-1) && index==2) {
-       return 1;
+      return 1;
     }
     return near;
   }
-  
-  int left(int index){
+
+  int left(int index) {
     int x=get(index).x()-1;
     int y=get(index).y();
-    if(x<0){
+    if (x<0) {
       return index;
     }
-    if(!(UGC_lvl_indx>0)&& index ==3){
+    if (!(UGC_lvl_indx>0)&& index ==3) {
       return 1;
     }
-    return nearest(x,y,index);
+    return nearest(x, y, index);
   }
-  
 
-  int up(int index){
+
+  int up(int index) {
     int x=get(index).x();
     int y=get(index).y()-1;
-    if(y<0){
+    if (y<0) {
       return index;
     }
-    int near = nearest(x,y,index);
+    int near = nearest(x, y, index);
     if (!(UGC_lvl_indx>0) && near==2) {
       if (UGC_lvl_indx<UGCNames.size()-1) {
         return 3;
-      }else{
+      } else {
         return index;
       }
     }
-    if(!(UGC_lvl_indx<UGCNames.size()-1) && near == 3){
+    if (!(UGC_lvl_indx<UGCNames.size()-1) && near == 3) {
       if (UGC_lvl_indx>0) {
         return 2;
-      }else{
+      } else {
         return index;
       }
     }
