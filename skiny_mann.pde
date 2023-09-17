@@ -179,7 +179,7 @@ void draw() {// the function that is called every fraim
               String inver = readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates  inver = internet version
               inver =inver.substring(0, inver.length()-1);
               internetVersion=inver;
-              if (!inver.equals(version)) {//if an update exists
+              if (false) {//if an update exists
                 Menue="update";//go to update menue
               } else {//if no update exists go to main menue
                 if (showSettingsAfterStart) {
@@ -2642,11 +2642,13 @@ void thrdCalc2() {
   while (loopThread2) {
     curMills=millis();
     mspc=curMills-lasMills;
+    
+    ReadController.read(gamepad);
+    handleControllerState();
+    
     if (tutorialMode) {
       tutorialLogic();
     }
-    ReadController.read(gamepad);
-    handleControllerState();
     if (inGame||(levelCreator&&editingStage)) {
       try {
         playerPhysics();
@@ -2824,7 +2826,7 @@ void drawMainMenu(boolean background) {
 
   playButton.draw();
   exitButton.draw();
-  joinButton.draw();
+  //joinButton.draw();
   settingsButton.draw();
   howToPlayButton.draw();
 
@@ -3069,8 +3071,8 @@ void drawLevelSelectUGC() {
   lsUGC_title.draw();//menue title
 
   select_lvl_back.draw();
-  UGC_open_folder.draw();
-  levelcreatorLink.draw();
+  //UGC_open_folder.draw();
+  //levelcreatorLink.draw();
   fill(0);
   if (UGCNames.size()==0) {
     lsUGC_noLevelFound.draw();
@@ -3881,10 +3883,14 @@ void  initButtons() {
   select_lvl_11 = new UiButton(ui, 600, 400, 200, 100 , "lvl 11",-59135, -1791).setStrokeWeight(10);
   select_lvl_12 = new UiButton(ui, 850, 400, 200, 100, "lvl 12",-59135, -1791).setStrokeWeight(10);
   playButton=new UiButton(ui, 540, 310, 200, 50, "Play", #FF1900, #FFF900).setStrokeWeight(10);
+  mainMenuButtonConfig.add(new ButtonInMenu(playButton,0,0));
   exitButton=new UiButton(ui, 540, 470, 200, 50, "Exit", #FF1900, #FFF900).setStrokeWeight(10);
+  mainMenuButtonConfig.add(new ButtonInMenu(exitButton,0,1));
   joinButton=new UiButton(ui, 540, 390, 200, 50, "Multiplayer", #FF1900, #FFF900).setStrokeWeight(10);
   settingsButton=new UiButton(ui, 540, 550, 200, 50, "Settings", #FF1900, #FFF900).setStrokeWeight(10);
+  mainMenuButtonConfig.add(new ButtonInMenu(settingsButton,0,2));
   howToPlayButton=new UiButton(ui, 540, 630, 200, 50, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10);
+  mainMenuButtonConfig.add(new ButtonInMenu(howToPlayButton,0,3));
   downloadUpdateButton=new UiButton(ui, 390, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10);
   updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
   updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
@@ -3957,6 +3963,33 @@ void  initButtons() {
   lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
+  
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_1,0,0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_2,1,0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_3,2,0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_4,3,0));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_5,0,1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_6,1,1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_7,2,1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_8,3,1));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_9,0,2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_10,1,2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_11,2,2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_12,3,2));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_back,0,3));
+  levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_UGC,1,3));
+  
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseResumeButton,0,0));
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseOptionsButton,0,1));
+  pauseMenuButtonConfig.add(new ButtonInMenu(pauseQuitButton,0,2));
+  
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(select_lvl_back,0,1));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvl_play,1,1));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_prev,0,0));
+  levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_next,1,0));
+
+  
+  currentMenuConfig.set();
 }
 
 
@@ -4171,16 +4204,85 @@ void initText() {
   settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player",640,72,35,CENTER,CENTER);
 }
 
-boolean controller_set_b=false;
+
+ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1,4),levelSelectMenuButtonConfig = new ButtonMenuConfig(4,4),pauseMenuButtonConfig = new ButtonMenuConfig(1,3),levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig();
+ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
+boolean controller_set_b=false,controller_set_a=false;
+int currentSelectedButton=0,lastMenuControllerInput=0;
 void handleControllerState(){
   if(menue){//if nagigating a menu
+  
+    //joystick inputs
+    if(millis()-lastMenuControllerInput>200){
+      if(gamepad.leftStickY()>0.3){
+        lastMenuControllerInput = millis();
+        handleNewMenuButtonSelection(currentMenuConfig.down(currentSelectedButton));
+      }
+      if(gamepad.leftStickY()<-0.3){
+        lastMenuControllerInput = millis();
+        handleNewMenuButtonSelection(currentMenuConfig.up(currentSelectedButton));
+      }
+      if(gamepad.leftStickX()>0.3){
+        lastMenuControllerInput = millis();
+        handleNewMenuButtonSelection(currentMenuConfig.right(currentSelectedButton));
+      }
+      if(gamepad.leftStickX()<-0.3){
+        lastMenuControllerInput = millis();
+        handleNewMenuButtonSelection(currentMenuConfig.left(currentSelectedButton));
+      }
+    }
+
+    //check menu switch
+    if(Menue.equals("main")){
+      if(currentMenuConfig!=mainMenuButtonConfig){
+        currentMenuConfig.reset();
+        mainMenuButtonConfig.set();
+        currentSelectedButton=0;
+        currentMenuConfig=mainMenuButtonConfig;
+      }
+    } else if(Menue.equals("level select")){
+      if(currentMenuConfig!=levelSelectMenuButtonConfig){
+        currentMenuConfig.reset();
+        levelSelectMenuButtonConfig.set();
+        currentSelectedButton=0;
+        currentMenuConfig=levelSelectMenuButtonConfig;
+      }
+    } else if(Menue.equals("pause")){
+      if(currentMenuConfig!=pauseMenuButtonConfig){
+        currentMenuConfig.reset();
+        pauseMenuButtonConfig.set();
+        currentSelectedButton=0;
+        currentMenuConfig=pauseMenuButtonConfig;
+      }
+    } else if(Menue.equals("level select UGC")){
+      if(currentMenuConfig!=levelSelectUGCMenuButtonConfig){
+        currentMenuConfig.reset();
+        levelSelectUGCMenuButtonConfig.set();
+        currentSelectedButton=0;
+        currentMenuConfig=levelSelectUGCMenuButtonConfig;
+      }
+    }
+    
+    //use button action
+    if(!controller_set_a&&gamepad.a()){//rizeing edge pulse only
+      Button button =currentMenuConfig.get(currentSelectedButton).button();
+      int xpos =(int)( button.x + button.lengthX/2),ypos = (int)(button.y + button.lengthY/2);
+      mouseX=xpos;
+      mouseY=ypos;
+      mouseClicked();
+      lastMenuControllerInput = millis();
+    }
+    controller_set_a = gamepad.a();
+
+    
     
   }else if (inGame){//if in game 
      player1_moving_right=gamepad.leftStickX()>0.4;
      player1_moving_left=gamepad.leftStickX()<-0.4;
      WPressed=gamepad.leftStickY()<-0.4;
      SPressed=gamepad.leftStickY()>0.4;
-     player1_jumping=gamepad.a();
+     if(millis()-lastMenuControllerInput>200)
+       player1_jumping=gamepad.a();
      cam_left=gamepad.rightStickX()<-0.4;
      cam_right=gamepad.rightStickX()>0.4;
      cam_down=gamepad.rightStickY()>0.4;
@@ -4192,6 +4294,181 @@ void handleControllerState(){
      if(!controller_set_b){
        E_pressed=false;
      }
+     if(gamepad.y()){
+       menue=true;
+       Menue="pause";
+     }
     
+  }
+}
+
+void handleNewMenuButtonSelection(int newSelection){
+  if(newSelection!=currentSelectedButton){
+    currentMenuConfig.get(currentSelectedButton).button().selected(false);
+    currentMenuConfig.get(newSelection).button().selected(true);
+    currentSelectedButton=newSelection;
+  }
+}
+
+class ButtonInMenu{
+  Button b;
+  int x,y;
+  ButtonInMenu(Button button,int x, int y){
+    b=button;
+    this.x=x;
+    this.y=y;
+  }
+  Button button(){
+    return b;
+  }
+  float distance(int x,int y){
+    return dist(1.0*this.x,this.y,x,y);
+  }
+  int x(){
+    return x;
+  }
+  int y(){
+    return y;
+  }
+}
+
+class ButtonMenuConfig{
+  ArrayList<ButtonInMenu> buttons=new ArrayList<>();
+  int maxX,  maxY;
+  ButtonMenuConfig(int width,int height){
+    maxX=width;
+    maxY=height;
+  }
+  
+  ButtonInMenu get(int index){
+    return buttons.get(index);
+  }
+  
+  void add(ButtonInMenu button){
+    buttons.add(button);
+  }
+  
+  int nearest(int ix,int iy,int index){
+    float dist=10000;
+    int nerindx=0;
+    for(int i=0;i<buttons.size();i++){
+      if(i==index)//don't return the element being moved from 
+        continue;
+      float nd = get(i).distance(ix,iy);
+      if(nd < dist){
+        dist=nd;
+        nerindx=i;
+      }
+    }
+    return nerindx;
+  }
+  
+  int right(int index){
+    int x=get(index).x()+1;
+    int y=get(index).y();
+    if(x>=maxX){
+      return index;
+    }
+    return nearest(x,y,index);
+  }
+  
+  int left(int index){
+    int x=get(index).x()-1;
+    int y=get(index).y();
+    if(x<0){
+      return index;
+    }
+    return nearest(x,y,index);
+  }
+  
+  int down(int index){
+    int x=get(index).x();
+    int y=get(index).y()+1;
+    if(y>=maxY){
+      return index;
+    }
+    return nearest(x,y,index);
+  }
+  int up(int index){
+    int x=get(index).x();
+    int y=get(index).y()-1;
+    if(y<0){
+      return index;
+    }
+    return nearest(x,y,index);
+  }
+  
+  void reset(){
+    for(int i=0;i<buttons.size();i++){
+      get(i).button().selected(false);
+    }
+  }
+  
+  void set(){
+    get(0).button().selected(true);
+  }
+  
+}
+/*
+if (UGC_lvl_indx<UGCNames.size()-1) {
+      UGC_lvls_next.draw();
+    }
+    if (UGC_lvl_indx>0) {
+      UGC_lvls_prev.draw();
+    }
+*/
+class UGCButtonMenuConfig extends ButtonMenuConfig{
+  UGCButtonMenuConfig(){
+    super(2,2);
+  }
+  
+  int right(int index){
+    int x=get(index).x()+1;
+    int y=get(index).y();
+    if(x>=maxX){
+      return index;
+    }
+    int near = nearest(x,y,index);
+    if (!(UGC_lvl_indx<UGCNames.size()-1) && index==2) {
+       return 1;
+    }
+    return near;
+  }
+  
+  int left(int index){
+    int x=get(index).x()-1;
+    int y=get(index).y();
+    if(x<0){
+      return index;
+    }
+    if(!(UGC_lvl_indx>0)&& index ==3){
+      return 1;
+    }
+    return nearest(x,y,index);
+  }
+  
+
+  int up(int index){
+    int x=get(index).x();
+    int y=get(index).y()-1;
+    if(y<0){
+      return index;
+    }
+    int near = nearest(x,y,index);
+    if (!(UGC_lvl_indx>0) && near==2) {
+      if (UGC_lvl_indx<UGCNames.size()-1) {
+        return 3;
+      }else{
+        return index;
+      }
+    }
+    if(!(UGC_lvl_indx<UGCNames.size()-1) && near == 3){
+      if (UGC_lvl_indx>0) {
+        return 2;
+      }else{
+        return index;
+      }
+    }
+    return near;
   }
 }

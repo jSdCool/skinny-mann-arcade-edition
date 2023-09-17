@@ -1,4 +1,4 @@
-//button class V1.2.0
+//button class V1.2.0a
 import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
@@ -8,6 +8,7 @@ class Button implements Serializable {
   private String text="", hoverText="";
   private float textScaleFactor=2.903f, strokeWeight=3;
   private transient PApplet window;
+  private boolean selected=false;
   Button(PApplet window, float X, float Y, float DX, float DY) {
     this.window=window;
     x=X;
@@ -63,7 +64,11 @@ class Button implements Serializable {
 
   public Button draw() {
     window.strokeWeight(0);
-    window.fill(sColor);
+    if(selected){
+      window.fill(1,0,183);
+    }else{
+      window.fill(sColor);
+    }
     window.rect(x-strokeWeight, y-strokeWeight, lengthX+strokeWeight*2, lengthY+strokeWeight*2);
     window.fill(fColor);
     window.rect(x, y, lengthX, lengthY);
@@ -143,5 +148,9 @@ class Button implements Serializable {
   public Button setHoverText(String t) {
     hoverText=t;
     return this;
+  }
+  
+  public void selected(boolean select){
+    selected=select;
   }
 }
