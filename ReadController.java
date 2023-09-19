@@ -11,7 +11,7 @@ class ReadController{
       }
 
       for (int i = 0; i < controllers.length; i++) {
-        if(!controllers[i].getType().equals(Controller.Type.GAMEPAD)) {
+        if(!controllers[i].getType().equals(Controller.Type.GAMEPAD)&&!controllers[i].getType().equals(Controller.Type.STICK)) {
           continue;
         }
         /* Remember to poll each one */
