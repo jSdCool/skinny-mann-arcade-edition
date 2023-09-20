@@ -173,43 +173,43 @@ class GamePadWrapper{
       }
     }
     
-    if(component.equals(Component.Identifier.Button._0)){
+    if(component.equals(Component.Identifier.Button._0)||component.equals(Component.Identifier.Button.A)){
       buttons[0]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._1)){
+    if(component.equals(Component.Identifier.Button._1)||component.equals(Component.Identifier.Button.B)){
       buttons[1]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._2)){
+    if(component.equals(Component.Identifier.Button._2)||component.equals(Component.Identifier.Button.X)){
       buttons[2]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._3)){
+    if(component.equals(Component.Identifier.Button._3)||component.equals(Component.Identifier.Button.Y)){
       buttons[3]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._4)){
+    if(component.equals(Component.Identifier.Button._4)||component.equals(Component.Identifier.Button.LEFT_THUMB)){
       buttons[4]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._5)){
+    if(component.equals(Component.Identifier.Button._5)||component.equals(Component.Identifier.Button.RIGHT_THUMB)){
       buttons[5]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._6)){
+    if(component.equals(Component.Identifier.Button._6)||component.equals(Component.Identifier.Button.SELECT)){
       buttons[6]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._7)){
+    if(component.equals(Component.Identifier.Button._7)||component.equals(Component.Identifier.Button.START)){
       buttons[7]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._8)){
+    if(component.equals(Component.Identifier.Button._8)||component.equals(Component.Identifier.Button.LEFT_THUMB3)){
       buttons[8]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._9)){
+    if(component.equals(Component.Identifier.Button._9)||component.equals(Component.Identifier.Button.RIGHT_THUMB3)){
       buttons[9]= value==1;
       return;
     }
