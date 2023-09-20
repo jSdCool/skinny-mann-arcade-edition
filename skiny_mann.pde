@@ -84,7 +84,7 @@ void setup() {//seccond function called
     initializeSphere(ptsW, ptsH);
     textureSphere(200, 200, 200, CBi);
     thread("programLoad");
-    leaderBoards = new ArcadeLeaderBoard("leaderBoard.csv",this);
+    leaderBoards = new ArcadeLeaderBoard(arcadeLeaderBoardFilePath,this);
     println("leaderBoards:\n"+leaderBoards);
   }
   catch(Throwable e) {
@@ -98,7 +98,7 @@ PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenSca
 ;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false;
- String Menue ="creds"/*,level="n"*/, version="0.8.1_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
+ String Menue ="creds"/*,level="n"*/, version="0.8.1_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="",arcadeLeaderBoardFilePath="leaderBoard.csv";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY;
@@ -125,10 +125,12 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay,levelCompleteTitle,levelCompleteLevelName,levelCompleteLeaderBoardLeftColumn,levelCompleteLeaderBoardCenterColumn,levelCompleteLeaderBoardRightColumn;
+UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay,levelCompleteTitle,levelCompleteLevelName,levelCompleteLeaderBoardLeftColumn,levelCompleteLeaderBoardCenterColumn,levelCompleteLeaderBoardRightColumn,enterNameText,highScoreName,yourScore;
 UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider;
 ArrayList<GlitchBox> glitchBoxes = new ArrayList<>();
 ArcadeLeaderBoard leaderBoards;
+Button[][] onScreenKeyboardButtons = new Button[4][];
+String[] onScreenKeyboardButtonLabels = {"1234567890","qwertyuiop","asdfghjkl","zxcvbnm"},onScreenKeyboardButtonLabelsUpperCase = {"1234567890","QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
 
 GamePadWrapper gamepad = new GamePadWrapper();
 //▄
@@ -499,7 +501,24 @@ void draw() {// the function that is called every fraim
           levelCompleteLeaderBoardLeftColumn.draw();
           levelCompleteLeaderBoardCenterColumn.draw();
           levelCompleteLeaderBoardRightColumn.draw();
+          yourScore.draw();
+          
           levelCompleteScreenContinue.draw();
+        }
+        
+        if(Menue.equals("high score")){
+          background(-9131009);
+          fill(255);
+          enterNameText.draw();
+          for(int i=0;i<onScreenKeyboardButtons.length;i++){
+            for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
+              if(onScreenKeyboardButtons[i][j]!=null){
+                onScreenKeyboardButtons[i][j].draw();
+              }
+            }
+          }
+          fill(255);
+          highScoreName.draw();
         }
         
       }
@@ -1773,6 +1792,10 @@ void mouseClicked() {// when you click the mouse
               UGC_lvl=false;
             }
           }
+        }
+        
+        if(Menue.equals("high score")){
+          highScoreMouseClicked();
         }
       }
       if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
@@ -4028,6 +4051,27 @@ void  initButtons() {
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
   
   levelCompleteScreenContinue = new UiButton(ui,550, 620, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
+  
+  onScreenKeyboardButtons[0] = new Button[10];
+  onScreenKeyboardButtons[1] = new Button[10];
+  onScreenKeyboardButtons[2] = new Button[9];
+  onScreenKeyboardButtons[3] = new Button[9];
+  //onScreenKeyboardButtonLabels
+  for(int j=0;j<2;j++){
+    for(int i=0;i<onScreenKeyboardButtons[j].length;i++){
+      onScreenKeyboardButtons[j][i]=new UiButton(ui,60+120*i,308+100*j,60,60,onScreenKeyboardButtonLabels[j].charAt(i)+"",#FF1900, #FFF900).setStrokeWeight(10);
+    }
+  }
+  for(int i=0;i<onScreenKeyboardButtons[2].length;i++){
+    onScreenKeyboardButtons[2][i]=new UiButton(ui,75+120*i,508,60,60,onScreenKeyboardButtonLabels[2].charAt(i)+"",#FF1900, #FFF900).setStrokeWeight(10);
+  }
+  
+  for(int i=0;i<onScreenKeyboardButtons[3].length-2;i++){
+    onScreenKeyboardButtons[3][i]=new UiButton(ui,105+120*i,608,60,60,onScreenKeyboardButtonLabels[3].charAt(i)+"",#FF1900, #FFF900).setStrokeWeight(10);
+  }
+  
+  onScreenKeyboardButtons[3][7] = new UiButton(ui,945,608,90,60,"Shift",#FF1900, #FFF900).setStrokeWeight(10);
+  onScreenKeyboardButtons[3][8] = new UiButton(ui,1095,608,90,60,"Enter",#FF1900, #FFF900).setStrokeWeight(10);
 
   levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_1, 0, 0));
   levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_2, 1, 0));
@@ -4088,6 +4132,13 @@ void  initButtons() {
   settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
   
   levelCompleteMenuConfig.add(new ButtonInMenu(levelCompleteScreenContinue,0,0));
+  
+  for(int i=0;i<onScreenKeyboardButtons.length;i++){
+    for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
+      onScreenKeyboardMenuConfig.add(new ButtonInMenu(onScreenKeyboardButtons[i][j],j,i));
+    }
+  }
+  
   //
   currentMenuConfig.set();
 }
@@ -4308,11 +4359,14 @@ void initText() {
   levelCompleteLeaderBoardLeftColumn = new UiText(ui,"1)\n2)\n3)\n4)\n5)\n6)\n7)\n8)\n9)\n10)",250,200,20,LEFT,TOP);
   levelCompleteLeaderBoardCenterColumn = new UiText(ui,"NAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME",300,200,20,LEFT,TOP);
   levelCompleteLeaderBoardRightColumn = new UiText(ui,"0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0",840,200,20,LEFT,TOP);
+  enterNameText = new UiText(ui,"Enter Name",640,40,50,CENTER,CENTER);
+  highScoreName = new UiText(ui,"NAME HERE",640,150,60,CENTER,CENTER);
+  yourScore = new UiText(ui,"Your Time: 0:0:0",640,120,30,CENTER,CENTER);
 }
 
 
 ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
-  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1);
+  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
 
 
 ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
@@ -4419,6 +4473,13 @@ void handleControllerState() {
             levelCompleteMenuConfig.set();
             currentSelectedButton=0;
             currentMenuConfig=levelCompleteMenuConfig;
+          }
+      } else if(Menue.equals("high score")){
+        if (currentMenuConfig!=onScreenKeyboardMenuConfig) {
+            currentMenuConfig.reset();
+            onScreenKeyboardMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=onScreenKeyboardMenuConfig;
           }
       }
 
@@ -4661,4 +4722,49 @@ void populateLeaderBoardVisual(){
   levelCompleteLeaderBoardCenterColumn.setText(names);
   levelCompleteLeaderBoardRightColumn.setText(times);
   
+}
+
+void highScoreMouseClicked(){
+  for(int i=0;i<onScreenKeyboardButtons.length;i++){
+    for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
+      if(onScreenKeyboardButtons[i][j].isMouseOver()){
+        if(onScreenKeyboardButtons[i][j].getText().length()==1){
+          highScoreName.setText(highScoreName.getText()+onScreenKeyboardButtons[i][j].getText());
+          if(onScreenKeyboardButtons[1][0].getText().equals("Q")){//if the keyboard is uppercase
+            changeOnScreenKeyboardCase(false);
+          }
+        }else{
+          if(onScreenKeyboardButtons[i][j].getText().equals("Shift")){
+            if(onScreenKeyboardButtons[1][0].getText().equals("Q")){//if the keyboard is uppercase
+              changeOnScreenKeyboardCase(false);
+            }else{
+              changeOnScreenKeyboardCase(true);
+            }
+          }
+          if(onScreenKeyboardButtons[i][j].getText().equals("Enter")){
+            Menue="level complete";
+            leaderBoards.addScore(level.name,formatMillis(clearTime).replaceAll("\\.",":"),highScoreName.getText());
+            populateLeaderBoardVisual();
+            leaderBoards.save(arcadeLeaderBoardFilePath,this);
+            levelCompleteLevelName.setText(level.name);
+            yourScore.setText("Your Time:  "+formatMillis(clearTime).replaceAll("\\.",":"));
+          }
+        }
+      }
+    }
+  }
+}
+
+void changeOnScreenKeyboardCase(boolean upper){
+  for(int i=0;i<onScreenKeyboardButtons.length;i++){
+    for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
+      if(onScreenKeyboardButtons[i][j].getText().length()==1){
+        if(upper){
+          onScreenKeyboardButtons[i][j].setText(onScreenKeyboardButtonLabelsUpperCase[i].charAt(j)+"");
+        }else{
+          onScreenKeyboardButtons[i][j].setText(onScreenKeyboardButtonLabels[i].charAt(j)+"");
+        }
+      }
+    } 
+  }
 }

@@ -36,6 +36,9 @@ class UiText {
     x=ui.topX()+ix*ui.scale();
     y=ui.topY()+iy*ui.scale();
     size=isize*ui.scale();
-    ;
+  }
+  
+  String getText(){
+    return text;
   }
 }

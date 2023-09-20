@@ -92,6 +92,9 @@ class ArcadeLeaderBoard{
     if(aints[0] == 0 && aints[1] == 0 && aints[2] == 0){//if it is 0 then it is greater. zero is greater then everything
       return true;
     }
+    if(bints[0] == 0 && bints[1] == 0 && bints[2] == 0){//if it is 0 then it is greater. zero is greater then everything
+      return false;
+    }
     
     if(aints[0]>bints[0]){//if a part 1 is greater then b part 1
       return true;//return true

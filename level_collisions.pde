@@ -184,10 +184,20 @@ void stageLevelDraw() {
       endOfLevelButton.draw();
     }
     clearTime = millis()-startTime;
-    populateLeaderBoardVisual();
-    inGame=false;
-    menue=true;
-    Menue="level complete";
+    if(leaderBoards.checkScore(level.name,formatMillis(clearTime).replaceAll("\\.",":"))){
+      populateLeaderBoardVisual();
+      highScoreName.setText("");
+      inGame=false;
+      menue=true;
+      Menue="high score";
+    }else{
+      populateLeaderBoardVisual();
+      levelCompleteLevelName.setText(level.name);
+      yourScore.setText("Your Time:  "+formatMillis(clearTime).replaceAll("\\.",":"));
+      inGame=false;
+      menue=true;
+      Menue="level complete";
+    }
     
   }
 
