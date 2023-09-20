@@ -183,6 +183,11 @@ void stageLevelDraw() {
     if (level.multyplayerMode!=2||isHost) {
       endOfLevelButton.draw();
     }
+    clearTime = millis()-startTime;
+    inGame=false;
+    menue=true;
+    Menue="level complete";
+    
   }
 
   if (viewingItemContents) {//if viewing the contence of an element
