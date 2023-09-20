@@ -184,6 +184,7 @@ void stageLevelDraw() {
       endOfLevelButton.draw();
     }
     clearTime = millis()-startTime;
+    populateLeaderBoardVisual();
     inGame=false;
     menue=true;
     Menue="level complete";

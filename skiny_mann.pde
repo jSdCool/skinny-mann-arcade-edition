@@ -98,7 +98,7 @@ PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenSca
 ;
 PApplet primaryWindow=this;
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false;
- String Menue ="creds"/*,level="n"*/, version="0.8.0_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
+ String Menue ="creds"/*,level="n"*/, version="0.8.1_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames, playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY;
@@ -108,7 +108,7 @@ ArrayList<Client> clients= new ArrayList<>();
 
 int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55,clearTime;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
-Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton, select_lvl_11, select_lvl_12;//button
+Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton, select_lvl_11, select_lvl_12,levelCompleteScreenContinue;//button
 String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access", "0.8.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
@@ -125,7 +125,7 @@ LeaderBoard leaderBoard= new LeaderBoard(new String[]{"", "", "", "", "", "", ""
 Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
-UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay;
+UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay,levelCompleteTitle,levelCompleteLevelName,levelCompleteLeaderBoardLeftColumn,levelCompleteLeaderBoardCenterColumn,levelCompleteLeaderBoardRightColumn;
 UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider;
 ArrayList<GlitchBox> glitchBoxes = new ArrayList<>();
 ArcadeLeaderBoard leaderBoards;
@@ -493,7 +493,15 @@ void draw() {// the function that is called every fraim
         
         if(Menue.equals("level complete")){
           background(-9131009);
+          fill(255);
+          levelCompleteTitle.draw();
+          levelCompleteLevelName.draw();
+          levelCompleteLeaderBoardLeftColumn.draw();
+          levelCompleteLeaderBoardCenterColumn.draw();
+          levelCompleteLeaderBoardRightColumn.draw();
+          levelCompleteScreenContinue.draw();
         }
+        
       }
       //end of menue draw
 
@@ -1742,6 +1750,27 @@ void mouseClicked() {// when you click the mouse
               multiplayer=false;
               currentPlayer=0;
               return;
+            }
+          }
+        }
+        
+        if(Menue.equals("level complete")){
+          if(levelCompleteScreenContinue.isMouseOver()){
+            menue=true;
+            inGame=false;
+            Menue="level select";
+            level_complete=false;
+            coinCount=0;
+            if (!UGC_lvl) {
+              JSONObject lvlinfo=mainIndex.getJSONObject(0);
+              if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
+                JSONObject p=new JSONObject();
+                p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
+                levelProgress.setJSONObject(0, p);
+                saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
+              }
+            } else {
+              UGC_lvl=false;
             }
           }
         }
@@ -3997,6 +4026,8 @@ void  initButtons() {
   lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
+  
+  levelCompleteScreenContinue = new UiButton(ui,550, 620, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
 
   levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_1, 0, 0));
   levelSelectMenuButtonConfig.add(new ButtonInMenu(select_lvl_2, 1, 0));
@@ -4055,6 +4086,8 @@ void  initButtons() {
   settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
   settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
   settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
+  
+  levelCompleteMenuConfig.add(new ButtonInMenu(levelCompleteScreenContinue,0,0));
   //
   currentMenuConfig.set();
 }
@@ -4181,7 +4214,7 @@ void fileSelected(File selection) {
 
 void initText() {
   mm_title = new UiText(ui, "Skinny Mann", 640, 80, 100, CENTER, CENTER);
-  mm_EarlyAccess = new UiText(ui, "Early Access", 640, 180, 100, CENTER, CENTER);
+  mm_EarlyAccess = new UiText(ui, "Arcade Edition  ", 640, 180, 100, CENTER, CENTER);
   mm_version = new UiText(ui, version, 0, 718, 20, LEFT, BOTTOM);
   ls_levelSelect = new UiText(ui, "Level Select", 640, 54, 50, CENTER, CENTER);
   lsUGC_title = new UiText(ui, "User Generated Levels", 640, 54, 35, CENTER, CENTER);
@@ -4270,11 +4303,16 @@ void initText() {
   lebelCompleteText = new UiText(ui, "LEVEL COMPLETE!!!", 200, 400, 100, LEFT, BOTTOM);
   settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player", 640, 72, 35, CENTER, CENTER);
   elapsedTimeDisplay = new UiText(ui, "TIME" ,640,20,20,CENTER,CENTER);
+  levelCompleteTitle = new UiText(ui, "Level Complete!!",640, 40, 50,CENTER,CENTER);
+  levelCompleteLevelName = new UiText(ui, "LEVEL NAME HERE",640, 90, 30,CENTER,CENTER);
+  levelCompleteLeaderBoardLeftColumn = new UiText(ui,"1)\n2)\n3)\n4)\n5)\n6)\n7)\n8)\n9)\n10)",250,200,20,LEFT,TOP);
+  levelCompleteLeaderBoardCenterColumn = new UiText(ui,"NAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME\nNAME",300,200,20,LEFT,TOP);
+  levelCompleteLeaderBoardRightColumn = new UiText(ui,"0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0\n0:0:0",840,200,20,LEFT,TOP);
 }
 
 
 ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
-  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8);
+  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1);
 
 
 ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
@@ -4375,6 +4413,13 @@ void handleControllerState() {
             currentMenuConfig=settingsOutherMenuConfig;
           }
         }
+      }else if(Menue.equals("level complete")){
+        if (currentMenuConfig!=levelCompleteMenuConfig) {
+            currentMenuConfig.reset();
+            levelCompleteMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=levelCompleteMenuConfig;
+          }
       }
 
       //use button action
@@ -4604,4 +4649,16 @@ class UGCButtonMenuConfig extends ButtonMenuConfig {
     }
     return near;
   }
+}
+
+void populateLeaderBoardVisual(){
+  String[][] scores = leaderBoards.getScores(level.name);
+  String names="",times="";
+  for(int i=0;i<scores.length;i++){
+    names+=scores[i][0]+"\n";
+    times+=scores[i][1]+"\n";
+  }
+  levelCompleteLeaderBoardCenterColumn.setText(names);
+  levelCompleteLeaderBoardRightColumn.setText(times);
+  
 }
