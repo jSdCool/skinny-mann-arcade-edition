@@ -1,4 +1,4 @@
-import net.java.games.input.*; //<>// //<>//
+import net.java.games.input.*; //<>//
 import processing.sound.*;//import the stuffs
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,6 +84,8 @@ void setup() {//seccond function called
     initializeSphere(ptsW, ptsH);
     textureSphere(200, 200, 200, CBi);
     thread("programLoad");
+    leaderBoards = new ArcadeLeaderBoard("leaderBoard.csv",this);
+    println("leaderBoards:\n"+leaderBoards);
   }
   catch(Throwable e) {
     println("an error occored in the setup function");
@@ -126,6 +128,7 @@ UiFrame ui;
 UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay;
 UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider;
 ArrayList<GlitchBox> glitchBoxes = new ArrayList<>();
+ArcadeLeaderBoard leaderBoards;
 
 GamePadWrapper gamepad = new GamePadWrapper();
 //▄

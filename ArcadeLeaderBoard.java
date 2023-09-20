@@ -108,6 +108,14 @@ class ArcadeLeaderBoard{
     return false;
   }
   
+  
+  public String toString(){
+    String out="";
+    for(int i=0;i<leaderBoards.length;i++){
+      out+=leaderBoards[i].toString()+"\n";
+    }
+    return out;
+  }
   class LeaderBoard{
     String levelName;
     Score[] scores = new Score[10];
