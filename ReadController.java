@@ -1,13 +1,29 @@
 import net.java.games.input.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 class ReadController{
   static void read(GamePadWrapper gp){
     /* Get the available controllers */
       Controller[] controllers = ControllerEnvironment
           .getDefaultEnvironment().getControllers();
-      if (controllers.length == 0) {
-        System.out.println("Found no controllers.");
-        System.exit(0);
+      boolean hasValidController =false;
+      for (int i = 0; i < controllers.length; i++) {
+        if(controllers[i].getType().equals(Controller.Type.GAMEPAD)||controllers[i].getType().equals(Controller.Type.STICK)) {
+          hasValidController = true;
+          break;
+        }
+      }
+      if (!hasValidController) {
+        System.out.println("Found no valid controllers.");
+        String conectedControllers ="";
+        for (int i = 0; i < controllers.length; i++) {
+          conectedControllers += "device: "+controllers[i]+" | type: "+controllers[i].getType()+"\n";
+        }
+        JFrame jf=new JFrame();
+        jf.setAlwaysOnTop(true);
+        JOptionPane.showMessageDialog(jf,"We were not able to find any controller devices connected to this system.\nA GamePad controller/joystick controller is required to play this version of the game.\nList of found controll devices ======\n"+conectedControllers+"======\nThe game will now close","No Controllers Found!", JOptionPane.ERROR_MESSAGE);
+        System.exit(420);
       }
 
       for (int i = 0; i < controllers.length; i++) {
