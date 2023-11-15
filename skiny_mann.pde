@@ -3319,6 +3319,7 @@ void tutorialLogic() {
   }
   if (tutorialPos==23) {
     if (players[currentPlayer].x >= 6739 && currentStageIndex == 1 && players[currentPlayer].x <= 7000) {
+      println((players[currentPlayer].x >= 6739)+" "+(currentStageIndex == 1)+" "+(players[currentPlayer].x <= 7000)+" "+players[currentPlayer].x);
       tutorialPos++;
       currentTutorialSound=16;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
