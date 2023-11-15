@@ -3152,7 +3152,7 @@ void tutorialLogic() {
     player1_moving_right=false;
     player1_jumping=false;
     if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
-      loadLevel("/data/levels/tutorial");
+      loadLevel("data/levels/tutorial");
       inGame=true;
       tutorialDrawLimit=3;
       currentTutorialSound=2;

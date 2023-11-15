@@ -4,6 +4,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 0.8.1_Early_Access
 +added: Universal error handler (crashes will now wllways show an error window)
 +added: grid mode indicarot in level creator
+-fixed: tutorial crashing on unix based systems
 
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions
