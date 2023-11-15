@@ -103,14 +103,14 @@ Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
 
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55;//int
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=3, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55,narrationVolume=1;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
 Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12;//button
-String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access"};
+String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 JSONObject portalStage1, portalStage2;
-SoundFile[][] tutorialNarration=new SoundFile[2][17];
+int[][] tutorialNarration=new int[2][17];
 float [] tpCords=new float[3];
 Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
@@ -2183,7 +2183,7 @@ void mouseClicked() {// when you click the mouse
 
 void keyPressed() {// when a key is pressed
   try {
-    if (!menue&&tutorialMode&&key == ESC) {
+    if (!menue&&tutorialMode&&key == ESC&&tutorialPos<3) {
       exit(1);
     }
 
@@ -3131,7 +3131,7 @@ void tutorialLogic() {
   if (tutorialPos==0) {
     soundHandler.setMusicVolume(0.01);
     currentTutorialSound=0;
-    tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+    soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
     tutorialPos++;
     player1_moving_left=false;
     player1_moving_right=false;
@@ -3141,9 +3141,9 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=1;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
@@ -3151,12 +3151,12 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       loadLevel("data/levels/tutorial");
       inGame=true;
       tutorialDrawLimit=3;
       currentTutorialSound=2;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
@@ -3164,9 +3164,9 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=3;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
@@ -3174,32 +3174,32 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=4;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==5) {
     player1_moving_left=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=5;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==6) {
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=6;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==7) {
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
@@ -3207,7 +3207,7 @@ void tutorialLogic() {
     player1_jumping=false;
     if (players[currentPlayer].x>=1604) {
       currentTutorialSound=7;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
       tutorialDrawLimit=14;
     }
@@ -3216,7 +3216,7 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
@@ -3224,21 +3224,21 @@ void tutorialLogic() {
     player1_jumping=false;
     if (dead) {
       currentTutorialSound=8;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==11) {
     if (players[currentPlayer].x>=1819) {
       currentTutorialSound=9;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==12) {
     if (players[currentPlayer].x>=3875) {
       currentTutorialSound=10;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
@@ -3246,7 +3246,7 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
       tutorialDrawLimit=28;
     }
@@ -3255,7 +3255,7 @@ void tutorialLogic() {
   if (tutorialPos==14) {
     if (players[currentPlayer].x>=5338) {
       currentTutorialSound=11;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
@@ -3263,7 +3263,7 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
@@ -3271,20 +3271,20 @@ void tutorialLogic() {
   if (tutorialPos==16) {
     if (coinCount>=10) {
       currentTutorialSound=12;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
     }
   }
   if (tutorialPos==17) {
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=13;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
       tutorialPos++;
       coinCount=0;
     }
   }
   if (tutorialPos==18) {
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
       tutorialDrawLimit=51;
     }
@@ -3293,14 +3293,14 @@ void tutorialLogic() {
     if (players[currentPlayer].x>=7315) {
       tutorialPos++;
       currentTutorialSound=14;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
     }
   }
   if (tutorialPos==20) {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
       tutorialDrawLimit=600;
     }
@@ -3309,19 +3309,19 @@ void tutorialLogic() {
     if (currentStageIndex==1) {
       tutorialPos++;
       currentTutorialSound=15;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
     }
   }
   if (tutorialPos==22) {
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
   if (tutorialPos==23) {
-    if (players[currentPlayer].x>=6739&&currentStageIndex==1&&players[currentPlayer].x<=7000) {
+    if (players[currentPlayer].x >= 6739 && currentStageIndex == 1 && players[currentPlayer].x <= 7000) {
       tutorialPos++;
       currentTutorialSound=16;
-      tutorialNarration[tutorialNarrationMode][currentTutorialSound].play();
+      soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
     }
   }
 
@@ -3329,7 +3329,7 @@ void tutorialLogic() {
     player1_moving_left=false;
     player1_moving_right=false;
     player1_jumping=false;
-    if (!tutorialNarration[tutorialNarrationMode][currentTutorialSound].isPlaying()) {
+    if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       soundHandler.setMusicVolume(musicVolume);
       tutorialMode=false;
     }
@@ -3668,116 +3668,119 @@ void programLoad() {
     soundBuilder.addSound(sfxTracks[i]);
   }
 
-
-  soundHandler =soundBuilder.build();
+  int[] idcb = {0};//narration id call back array. used to get the id the narration will be set to out of the builder
+  soundBuilder.addNarration("data/sounds/tutorial/T1a.wav",idcb);
+  tutorialNarration[0][0]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T2a.wav",idcb);
+  tutorialNarration[0][1]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
+  tutorialNarration[0][2]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T4a.wav",idcb);
+  tutorialNarration[0][3]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T5a.wav",idcb);
+  tutorialNarration[0][4]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T6a.wav",idcb);
+  tutorialNarration[0][5]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
+  tutorialNarration[0][6]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T8a.wav",idcb);
+  tutorialNarration[0][7]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T9a.wav",idcb);
+  tutorialNarration[0][8]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
+  tutorialNarration[0][9]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
+  tutorialNarration[0][10]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
+  tutorialNarration[0][11]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
+  tutorialNarration[0][12]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T14a.wav",idcb);
+  tutorialNarration[0][13]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
+  tutorialNarration[0][14]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
+  tutorialNarration[0][15]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
+  tutorialNarration[0][16]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T1b.wav",idcb);
+  tutorialNarration[1][0]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T2b.wav",idcb);
+  tutorialNarration[1][1]=idcb[0];
+ 
+  soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
+  tutorialNarration[1][2]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T4b.wav",idcb);
+  tutorialNarration[1][3]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T5b.wav",idcb);
+  tutorialNarration[1][4]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T6b.wav",idcb);
+  tutorialNarration[1][5]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
+  tutorialNarration[1][6]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T8b.wav",idcb);
+  tutorialNarration[1][7]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T9b.wav",idcb);
+  tutorialNarration[1][8]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
+  tutorialNarration[1][9]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
+  tutorialNarration[1][10]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
+  tutorialNarration[1][11]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
+  tutorialNarration[1][12]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T14b.wav",idcb);
+  tutorialNarration[1][13]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
+  tutorialNarration[1][14]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
+  tutorialNarration[1][15]=idcb[0];
+  
+  soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
+  tutorialNarration[1][16]=idcb[0];
+  
+  println("loading sounds");
+  soundHandler = soundBuilder.build();//finilze the sound handler. this is what accualy loads the sound files
   loadProgress++;
 
   soundHandler.setMusicVolume(musicVolume);
   soundHandler.setSoundsVolume(sfxVolume);
-
-  println("starting to load tutorial audio tracks");
-  tutorialNarration[0][0]=new SoundFile(this, "data/sounds/tutorial/T1a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T1a");
-  tutorialNarration[0][1]=new SoundFile(this, "data/sounds/tutorial/T2a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T2a");
-  tutorialNarration[0][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T3");
-  tutorialNarration[0][3]=new SoundFile(this, "data/sounds/tutorial/T4a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T4a");
-  tutorialNarration[0][4]=new SoundFile(this, "data/sounds/tutorial/T5a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T5a");
-  tutorialNarration[0][5]=new SoundFile(this, "data/sounds/tutorial/T6a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T6a");
-  tutorialNarration[0][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T7");
-  tutorialNarration[0][7]=new SoundFile(this, "data/sounds/tutorial/T8a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T8a");
-  tutorialNarration[0][8]=new SoundFile(this, "data/sounds/tutorial/T9a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T9a");
-  tutorialNarration[0][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T10");
-  tutorialNarration[0][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T11");
-  tutorialNarration[0][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T12");
-  tutorialNarration[0][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T13");
-  tutorialNarration[0][13]=new SoundFile(this, "data/sounds/tutorial/T14a.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T14a");
-  tutorialNarration[0][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T15");
-  tutorialNarration[0][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T16");
-  tutorialNarration[0][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T17");
-  tutorialNarration[1][0]=new SoundFile(this, "data/sounds/tutorial/T1b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T1b");
-  tutorialNarration[1][1]=new SoundFile(this, "data/sounds/tutorial/T2b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T2b");
-  tutorialNarration[1][2]=new SoundFile(this, "data/sounds/tutorial/T3.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T3");
-  tutorialNarration[1][3]=new SoundFile(this, "data/sounds/tutorial/T4b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T4b");
-  tutorialNarration[1][4]=new SoundFile(this, "data/sounds/tutorial/T5b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T5b");
-  tutorialNarration[1][5]=new SoundFile(this, "data/sounds/tutorial/T6b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T6b");
-  tutorialNarration[1][6]=new SoundFile(this, "data/sounds/tutorial/T7.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T7");
-  tutorialNarration[1][7]=new SoundFile(this, "data/sounds/tutorial/T8b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T8b");
-  tutorialNarration[1][8]=new SoundFile(this, "data/sounds/tutorial/T9b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T9b");
-  tutorialNarration[1][9]=new SoundFile(this, "data/sounds/tutorial/T10.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T10");
-  tutorialNarration[1][10]=new SoundFile(this, "data/sounds/tutorial/T11.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T11");
-  tutorialNarration[1][11]=new SoundFile(this, "data/sounds/tutorial/T12.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T12");
-  tutorialNarration[1][12]=new SoundFile(this, "data/sounds/tutorial/T13.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T13");
-  tutorialNarration[1][13]=new SoundFile(this, "data/sounds/tutorial/T14b.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T14b");
-  tutorialNarration[1][14]=new SoundFile(this, "data/sounds/tutorial/T15.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T15");
-  tutorialNarration[1][15]=new SoundFile(this, "data/sounds/tutorial/T16.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T16");
-  tutorialNarration[1][16]=new SoundFile(this, "data/sounds/tutorial/T17.wav");
-  loadProgress++;
-  println("loaded tutorial audio track T17");
+  soundHandler.setNarrationVolume(narrationVolume);
+  
+  
+  
 
   println("loading saved colors");
   if (new File(appdata+"/CBi-games/skinny mann level creator/colors.json").exists()) {

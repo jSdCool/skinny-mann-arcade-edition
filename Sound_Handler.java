@@ -337,7 +337,7 @@ class SoundHandler extends Thread {
     public SoundHandler build() {
       String[] sounds=soundPaths.toArray(new String[]{});
       String[][] music=new String[numMusicTracks][];
-      String[] narrations = new String[]{};
+      String[] narrations = narrationPaths.toArray(new String[]{});
       for (int i=0; i<numMusicTracks; i++) {
         music[i]=musicPaths.get(i).toArray(new String[]{});
       }
