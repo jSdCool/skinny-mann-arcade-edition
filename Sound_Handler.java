@@ -261,6 +261,21 @@ class SoundHandler extends Thread {
     }
   }
   
+  public boolean anyNarrationPlaying(){
+    for(SoundFile s: narrations){
+      if(s.isPlaying()){
+        return true;
+      }
+    }
+    for(SoundFile s: levelNarrations){
+      if(s.isPlaying()){
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
   public void stopNarration(int n){
     SoundFile s;
     if (n<narrations.length) {
