@@ -22,9 +22,10 @@ class StageSound implements Serializable {
     }
 
   }
-  StageSound(String Name, String location) {
+  StageSound(String Name, String location,boolean narration) {
     name=Name;
     path=location;
+    isNarration = narration;
     if(isNarration){
       sound = source.soundHandler.registerLevelNarration(source.rootPath+path);
     }else{

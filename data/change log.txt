@@ -10,6 +10,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: new setting narration volume
 +added: new settings page: sound
 -changed: narration mode setting is now under the sound page
+-changed: when adding a sound in the level creator there is now a choice between narration and normal sound
+-changed: all prevously added sounds will be treated as narrations by default
 
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions
