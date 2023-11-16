@@ -5,6 +5,11 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: Universal error handler (crashes will now wllways show an error window)
 +added: grid mode indicarot in level creator
 -fixed: tutorial crashing on unix based systems
++added: new sound type: narration
+-changed: setting version is now 4
++added: new setting narration volume
++added: new settings page: sound
+-changed: narration mode setting is now under the sound page
 
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions
