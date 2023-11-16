@@ -3909,8 +3909,8 @@ void  initButtons() {
   SFXVolumeSlider = new UiSlider(ui, 800, 140, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1);
   narrationVolumeSlider = new UiSlider(ui,800,210,440,30).setStrokeWeight(5).setColors(255,0).showValue(false).setRounding(1);
   verticleEdgeScrollSlider = new UiSlider(ui, 800, 120, 440, 30).setStrokeWeight(5).setColors(255, 0).showValue(false).setRounding(1).setMax(320).setMin(100);
-  shadowOn = new UiButton(ui, (1200), (330), (40), (40), 255, 0).setStrokeWeight(5);
-  shadowOff = new UiButton(ui, (1130), (330), (40), (40), 255, 0).setStrokeWeight(5);
+  shadowOn = new UiButton(ui, (1200), (190), (40), (40), 255, 0).setStrokeWeight(5);
+  shadowOff = new UiButton(ui, (1130), (190), (40), (40), 255, 0).setStrokeWeight(5);
   narrationMode1 =new UiButton(ui, (1200), (340), (40), (40), 255, 0).setStrokeWeight(5);
   narrationMode0 = new UiButton(ui, (1130), (340), (40), (40), 255, 0).setStrokeWeight(5);
   select_lvl_UGC=new UiButton(ui, (350), (600), (200), (50), "UGC", -59135, -1791).setStrokeWeight( (10));
@@ -4156,7 +4156,7 @@ void initText() {
   st_o_debugINFO = new UiText(ui, "display debug info", 40, 140, 40, LEFT, BOTTOM);
   st_snd_musicVol = new UiText(ui, "music volume", 40, 110, 40, LEFT, BOTTOM);
   st_snd_SFXvol = new UiText(ui, "sounds volume", 40, 180, 40, LEFT, BOTTOM);
-  st_o_3DShadow = new UiText(ui, "3D shadows", 40, 350, 40, LEFT, BOTTOM);
+  st_o_3DShadow = new UiText(ui, "3D shadows", 40, 210, 40, LEFT, BOTTOM);
   st_snd_narration = new UiText(ui, "narration mode", 40, 380, 40, LEFT, BOTTOM);
   st_o_yes = new UiText(ui, "yes", 1190, 45, 20, LEFT, BOTTOM);
   st_o_no = new UiText(ui, "no", 1120, 45, 20, LEFT, BOTTOM);
