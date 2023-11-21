@@ -173,27 +173,27 @@ class GamePadWrapper{
       }
     }
     
-    if(component.equals(Component.Identifier.Button._0)||component.equals(Component.Identifier.Button.A)){
+    if(component.equals(Component.Identifier.Button._0)||component.equals(Component.Identifier.Button.A)||component.equals(Component.Identifier.Button.TRIGGER)){
       buttons[0]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._1)||component.equals(Component.Identifier.Button.B)){
+    if(component.equals(Component.Identifier.Button._1)||component.equals(Component.Identifier.Button.B)||component.equals(Component.Identifier.Button.THUMB)){
       buttons[1]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._2)||component.equals(Component.Identifier.Button.X)){
+    if(component.equals(Component.Identifier.Button._2)||component.equals(Component.Identifier.Button.X)||component.equals(Component.Identifier.Button.TOP)){
       buttons[2]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._3)||component.equals(Component.Identifier.Button.Y)){
+    if(component.equals(Component.Identifier.Button._3)||component.equals(Component.Identifier.Button.Y)||component.equals(Component.Identifier.Button.TOP2)){
       buttons[3]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._4)||component.equals(Component.Identifier.Button.LEFT_THUMB)){
+    if(component.equals(Component.Identifier.Button._4)||component.equals(Component.Identifier.Button.LEFT_THUMB)||component.equals(Component.Identifier.Button.PINKIE)){
       buttons[4]= value==1;
       return;
     }
-    if(component.equals(Component.Identifier.Button._5)||component.equals(Component.Identifier.Button.RIGHT_THUMB)){
+    if(component.equals(Component.Identifier.Button._5)||component.equals(Component.Identifier.Button.RIGHT_THUMB)||component.equals(Component.Identifier.Button.BASE)){
       buttons[5]= value==1;
       return;
     }
