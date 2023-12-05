@@ -1,10 +1,12 @@
 import processing.core.*;
+import java.util.ArrayList;
 
 class ArcadeLeaderBoard{
-  LeaderBoard[] leaderBoards = new LeaderBoard[12];
+  LeaderBoard[] leaderBoards;
   
   ArcadeLeaderBoard(String file,PApplet source){
     String[] rawCSV = source.loadStrings(file);
+    leaderBoards = new LeaderBoard[rawCSV.length];
     for(int i=0;i<rawCSV.length;i++){
       leaderBoards[i] = new LeaderBoard(rawCSV[i]);
     }
@@ -69,10 +71,31 @@ class ArcadeLeaderBoard{
         break;
       }
     }
+    if(lb == null){
+      lb = addNewLeaderBoard(levelName);
+    }
     if(lb==null){
-      throw new RuntimeException("lb was null");
+      throw new RuntimeException("Leader Board instace(ld) was null");
     }
     return lb;
+  }
+  
+  LeaderBoard addNewLeaderBoard(String levelName){
+    String newBoard = "";
+    newBoard += levelName ;
+    for(int i=0;i<10;i++){
+      newBoard+=",---";
+      newBoard+=",0:0:0";
+    }
+    ArrayList<LeaderBoard> boards = new ArrayList<>();
+    
+    for(int i=0;i<leaderBoards.length;i++){
+      boards.add(leaderBoards[i]);
+    }
+    LeaderBoard nb = new LeaderBoard(newBoard);
+    boards.add(nb);
+    leaderBoards = boards.toArray(leaderBoards);
+    return nb;
   }
   
   boolean scoreGreater(String scoreA,String scoreB){
