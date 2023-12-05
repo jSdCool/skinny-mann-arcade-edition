@@ -261,6 +261,21 @@ class SoundHandler extends Thread {
     }
   }
   
+  public boolean anyNarrationPlaying(){
+    for(SoundFile s: narrations){
+      if(s.isPlaying()){
+        return true;
+      }
+    }
+    for(SoundFile s: levelNarrations){
+      if(s.isPlaying()){
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
   public void stopNarration(int n){
     SoundFile s;
     if (n<narrations.length) {
@@ -337,7 +352,7 @@ class SoundHandler extends Thread {
     public SoundHandler build() {
       String[] sounds=soundPaths.toArray(new String[]{});
       String[][] music=new String[numMusicTracks][];
-      String[] narrations = new String[]{};
+      String[] narrations = narrationPaths.toArray(new String[]{});
       for (int i=0; i<numMusicTracks; i++) {
         music[i]=musicPaths.get(i).toArray(new String[]{});
       }

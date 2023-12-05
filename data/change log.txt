@@ -2,9 +2,16 @@ if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
 0.8.1_Early_Access
-+added: Universal error handler (crashes will now wllways show an error window)
 +added: grid mode indicarot in level creator
 -fixed: tutorial crashing on unix based systems
++added: new sound type: narration
+-changed: setting version is now 4
++added: new setting narration volume
++added: new settings page: sound
+-changed: narration mode setting is now under the sound page
+-changed: when adding a sound in the level creator there is now a choice between narration and normal sound
+-changed: all prevously added sounds will be treated as narrations by default
+-added: narration "notification" when a narrtion sound is playing and the narration volume is less then 20
 
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions

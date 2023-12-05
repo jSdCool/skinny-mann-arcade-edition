@@ -8,15 +8,29 @@ class StageSound implements Serializable {
   static transient skiny_mann source;
   String path, name, type="sound";
   protected transient int sound;
+  boolean isNarration = true;
   StageSound(JSONObject input) {
     name=input.getString("name");
     path=input.getString("location");
-    sound = source.soundHandler.registerLevelSound(source.rootPath+path);
+    if(!input.isNull("narration")){
+      isNarration = input.getBoolean("narration");
+    }
+    if(isNarration){
+      sound = source.soundHandler.registerLevelNarration(source.rootPath+path);
+    }else{
+      sound = source.soundHandler.registerLevelSound(source.rootPath+path);
+    }
+
   }
-  StageSound(String Name, String location) {
+  StageSound(String Name, String location,boolean narration) {
     name=Name;
     path=location;
-    sound = source.soundHandler.registerLevelSound(source.rootPath+path);
+    isNarration = narration;
+    if(isNarration){
+      sound = source.soundHandler.registerLevelNarration(source.rootPath+path);
+    }else{
+      sound = source.soundHandler.registerLevelSound(source.rootPath+path);
+    }
   }
 
   JSONObject save() {
@@ -24,6 +38,7 @@ class StageSound implements Serializable {
     out.setString("location", path);
     out.setString("name", name);
     out.setString("type", type);
+    out.setBoolean("narration", isNarration);
     return out;
   }
 }

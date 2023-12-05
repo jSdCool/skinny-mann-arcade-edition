@@ -19,20 +19,36 @@ class LogicPlaySound extends LogicComponent {
   void tick() {
     try {
       StageSound sound = source.level.sounds.get(soundKey);
-      boolean isPlaying = source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound);
-      if (inputTerminal1) {//if the play terminal is high then  play the sound if it is not playing
-        if (!(isPlaying)) {
-          source.soundHandler.addToQueue(sound.sound);
+      if(sound.isNarration){
+        boolean isPlaying = source.soundHandler.isNarrationPlaying(sound.sound);
+        if (inputTerminal1) {//if the play terminal is high then  play the sound if it is not playing
+          if (!(isPlaying)) {
+            source.soundHandler.playNarration(sound.sound);
+          }
         }
-      }
-      if (inputTerminal2) {//if the stop terminal is high then stop the sound if it is playing
-
-        if ((isPlaying)) {
-          source.soundHandler.cancleSound(sound.sound);
+        if (inputTerminal2) {//if the stop terminal is high then stop the sound if it is playing
+          if ((isPlaying)) {
+            source.soundHandler.stopNarration(sound.sound);
+          }
         }
+        
+        outputTerminal = isPlaying;
+      }else{
+        boolean isPlaying = source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound);
+        if (inputTerminal1) {//if the play terminal is high then  play the sound if it is not playing
+          if (!(isPlaying)) {
+            source.soundHandler.addToQueue(sound.sound);
+          }
+        }
+        if (inputTerminal2) {//if the stop terminal is high then stop the sound if it is playing
+  
+          if ((isPlaying)) {
+            source.soundHandler.cancleSound(sound.sound);
+          }
+        }
+        
+        outputTerminal = isPlaying;
       }
-
-      outputTerminal = isPlaying;
     }
     catch(Exception e) {
     }
