@@ -28,7 +28,7 @@ class SoundBox extends StageComponent {
       return;
     source.drawSoundBox((x+group.xOffset)*source.Scale-source.drawCamPosX*source.Scale, (y+group.yOffset)*source.Scale+source.drawCamPosY*source.Scale);
     if (source.players[source.currentPlayer].getX()>=(x+group.xOffset)-30&&source.players[source.currentPlayer].getX()<=(x+group.xOffset)+30&&source.players[source.currentPlayer].y>=(y+group.yOffset)-30&&source.players[source.currentPlayer].getY()<(y+group.yOffset)+30) {
-      source.displayText="Press E";
+      source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
       if (source.E_pressed) {
         try {

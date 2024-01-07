@@ -46,7 +46,7 @@ class WritableSign extends StageComponent {
     if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)) {//display the press e message to the player
       source.fill(255);
       source.textSize(source.Scale*20);
-      source.displayText="Press E";
+      source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
 
       if (source.E_pressed) {
@@ -65,7 +65,7 @@ class WritableSign extends StageComponent {
     if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& source.players[source.currentPlayer].z >= (z+group.zOffset)-20 && source.players[source.currentPlayer].z <= (z+group.zOffset)+20) {
       source.fill(255);
       source.textSize(source.Scale*20);
-      source.displayText="Press E";
+      source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
       if (source.E_pressed) {
         source.E_pressed=false;

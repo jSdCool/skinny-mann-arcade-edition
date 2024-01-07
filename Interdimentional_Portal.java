@@ -54,7 +54,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
     if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60)) {
       source.fill(255);
       source.textSize(source.Scale*20);
-      source.displayText="Press E";
+      source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
     }
 
@@ -90,7 +90,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
     if ((playx>(x+group.xOffset)-25&&playx<(x+group.xOffset)+25&&playy>(y+group.yOffset)-50&&playy<(y+group.yOffset)+60&& source.players[source.currentPlayer].z >= z-20 && source.players[source.currentPlayer].z <= z+20)) {
       source.fill(255);
       source.textSize(20);
-      source.displayText="Press E";
+      source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
     }
 

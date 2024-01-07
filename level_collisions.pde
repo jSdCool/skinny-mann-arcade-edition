@@ -184,7 +184,12 @@ void stageLevelDraw() {
       endOfLevelButton.draw();
     }
     clearTime = millis()-startTime;
-    if(leaderBoards.checkScore(level.name,formatMillis(clearTime).replaceAll("\\.",":"))){
+
+    if(level.levelID==-1){
+      inGame=false;
+      menue=true;
+      Menue="level select";
+    }else if(leaderBoards.checkScore(level.name,formatMillis(clearTime).replaceAll("\\.",":"))){
       populateLeaderBoardVisual();
       highScoreName.setText("");
       inGame=false;
@@ -214,7 +219,7 @@ void stageLevelDraw() {
       fill(0);
       text(item.getData(), width/2, height/2);//the text of the sign
       textSize(20*Scale);
-      text("press E to continue", width/2, height*0.85);
+      text("press B to continue", width/2, height*0.85);
       displayTextUntill=millis()-1;//make shure that "Press R" is not displayed on the screen while in the sign
     }
     disEngageHUDPosition();//rest the hud condishen

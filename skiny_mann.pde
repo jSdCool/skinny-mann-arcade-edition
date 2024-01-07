@@ -1066,7 +1066,7 @@ void draw() {// the function that is called every fraim
       game_displayText.draw();
     }
 
-    if(inGame){
+    if(inGame&&!tutorialMode&&level.levelID!=-1){
       fill(255);
       String curtime_=formatMillis(millis()-startTime);
       elapsedTimeDisplay.setText(curtime_);
@@ -4406,7 +4406,7 @@ void initText() {
   dev_info = new UiText(ui, "this is a development build of the game, there may be bugs or unfinished features", 640, 72, 25, CENTER, CENTER);
   tut_notToday = new UiText(ui, "this feture is disabled during the tutorial\npres ECS to return", 640, 360, 50, CENTER, CENTER);
   tut_disclaimer = new UiText(ui, "ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", 640, 360, 50, CENTER, CENTER);
-  tut_toClose = new UiText(ui, "press ESC to close", 640, 698.4, 25, CENTER, CENTER);
+  tut_toClose = new UiText(ui, "press C to close", 640, 698.4, 25, CENTER, CENTER);
   coinCountText = new UiText(ui, "coins: ", 0, 0, 50, LEFT, TOP);
   pa_title = new UiText(ui, "GAME PAUSED", 640, 100, 100, CENTER, BOTTOM);
   logoText = new UiText(ui, "GAMES", 640, 600, 100, CENTER, CENTER);
