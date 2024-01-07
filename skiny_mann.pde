@@ -4404,7 +4404,7 @@ void initText() {
   mp_dc_reason = new UiText(ui, "V", 640, 216, 25, CENTER, CENTER);
   dev_title = new UiText(ui, "Developer Menue", 640, 36, 50, CENTER, CENTER);
   dev_info = new UiText(ui, "this is a development build of the game, there may be bugs or unfinished features", 640, 72, 25, CENTER, CENTER);
-  tut_notToday = new UiText(ui, "this feture is disabled during the tutorial\npres ECS to return", 640, 360, 50, CENTER, CENTER);
+  tut_notToday = new UiText(ui, "this feture is disabled during the tutorial\npres C to return", 640, 360, 50, CENTER, CENTER);
   tut_disclaimer = new UiText(ui, "ATTENTION\n\nThe folowing contains content language\nthat some may find disterbing.\nIf you don't like foul language,\nmake shure you setting are set accordingly.\n\nAudio in use turn your volume up!", 640, 360, 50, CENTER, CENTER);
   tut_toClose = new UiText(ui, "press C to close", 640, 698.4, 25, CENTER, CENTER);
   coinCountText = new UiText(ui, "coins: ", 0, 0, 50, LEFT, TOP);
@@ -4569,6 +4569,13 @@ void handleControllerState() {
             currentMenuConfig=onScreenKeyboardMenuConfig;
           }
       }
+      if (tutorialMode&&!inGame&&gamepad.y()) {
+          Menue="pause";
+          inGame=true;
+          prevousInGame=false;
+      }
+      
+      
 
       //use button action
       if (!controller_set_a&&gamepad.a()) {//rizeing edge pulse only
@@ -4609,6 +4616,14 @@ void handleControllerState() {
       Menue="pause";
     }
   }
+  
+  if (!menue&&tutorialMode&&gamepad.y()&&tutorialPos<3) {
+    Menue="main";
+    menue=true;
+    tutorialMode=false;
+    soundHandler.stopNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
+  }
+  
 }
 
 void handleNewMenuButtonSelection(int newSelection) {
