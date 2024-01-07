@@ -1408,7 +1408,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject scroll=settings.getJSONObject(1);
               scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
               settings.setJSONObject(1, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (verticleEdgeScrollSlider.button.isMouseOver()) {
@@ -1416,7 +1416,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject scroll=settings.getJSONObject(1);
               scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
               settings.setJSONObject(1, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
           }//end of game play settings
 
@@ -1431,7 +1431,7 @@ void mouseClicked() {// when you click the mouse
               rez.setFloat("scale", 2160/720.0);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (rez1440.isMouseOver()) {// 1440 resolition button
@@ -1442,7 +1442,7 @@ void mouseClicked() {// when you click the mouse
               rez.setFloat("scale", 1440/720.0);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (rez1080.isMouseOver()) {// 1080 resolution button
@@ -1453,7 +1453,7 @@ void mouseClicked() {// when you click the mouse
               rez.setFloat("scale", 1080/720.0);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (rez900.isMouseOver()) {////900 resolution button
@@ -1464,7 +1464,7 @@ void mouseClicked() {// when you click the mouse
               rez.setFloat("scale", 900/720.0);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (rez720.isMouseOver()) {// 720 resolution button
@@ -1475,7 +1475,7 @@ void mouseClicked() {// when you click the mouse
               rez.setFloat("scale", 720/720.0);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
 
@@ -1483,14 +1483,14 @@ void mouseClicked() {// when you click the mouse
               rez.setBoolean("full_Screen", true);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
 
             if (fullScreenOff.isMouseOver()) {//turn fullscreen off button
               rez.setBoolean("full_Screen", false);
 
               settings.setJSONObject(2, rez);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
           }//end of display settings menue
 
@@ -1505,7 +1505,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setMusicVolume(musicVolume);
             }
             if (SFXVolumeSlider.button.isMouseOver()) {
@@ -1513,7 +1513,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setSoundsVolume(sfxVolume);
             }
             if (narrationVolumeSlider.button.isMouseOver()) {
@@ -1521,7 +1521,7 @@ void mouseClicked() {// when you click the mouse
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("narration volume", narrationVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setNarrationVolume(narrationVolume);
             }
             
@@ -1530,14 +1530,14 @@ void mouseClicked() {// when you click the mouse
               sv3.setInt("narrationMode", 0);
               tutorialNarrationMode=0;
               settings.setJSONObject(4, sv3);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             if (narrationMode1.isMouseOver()) {
               JSONObject sv3=settings.getJSONObject(4);
               sv3.setInt("narrationMode", 1);
               tutorialNarrationMode=1;
               settings.setJSONObject(4, sv3);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             
           }//end of sound settings
@@ -1547,25 +1547,25 @@ void mouseClicked() {// when you click the mouse
               debug.setBoolean("fps", true);
               displayFPS=true;
               settings.setJSONObject(3, debug);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             if (disableFPS.isMouseOver()) {
               debug.setBoolean("fps", false);
               displayFPS=false;
               settings.setJSONObject(3, debug);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             if (enableDebug.isMouseOver()) {
               debug.setBoolean("debug info", true);
               displayDebugInfo=true;
               settings.setJSONObject(3, debug);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             if (disableDebug.isMouseOver()) {
               debug.setBoolean("debug info", false);
               displayDebugInfo=false;
               settings.setJSONObject(3, debug);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             
             if (shadowOn.isMouseOver()) {
@@ -1573,14 +1573,14 @@ void mouseClicked() {// when you click the mouse
               sv3.setBoolean("3D shaows", true);
               shadow3D=true;
               settings.setJSONObject(5, sv3);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             if (shadowOff.isMouseOver()) {
               JSONObject sv3=settings.getJSONObject(5);
               sv3.setBoolean("3D shaows", false);
               shadow3D=false;
               settings.setJSONObject(5, sv3);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             
           }//end of outher settings menue
@@ -2685,7 +2685,7 @@ void mouseDragged() {
             JSONObject scroll=settings.getJSONObject(1);
             scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
             settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
           }
 
           if (verticleEdgeScrollSlider.button.isMouseOver()) {
@@ -2694,7 +2694,7 @@ void mouseDragged() {
             JSONObject scroll=settings.getJSONObject(1);
             scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
             settings.setJSONObject(1, scroll);
-            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
           }
         }
         
@@ -2709,7 +2709,7 @@ void mouseDragged() {
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setMusicVolume(musicVolume);
             }
             if (SFXVolumeSlider.button.isMouseOver()) {
@@ -2717,7 +2717,7 @@ void mouseDragged() {
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setSoundsVolume(sfxVolume);
             }
             if (narrationVolumeSlider.button.isMouseOver()) {
@@ -2725,7 +2725,7 @@ void mouseDragged() {
               JSONObject scroll=settings.getJSONObject(4);
               scroll.setFloat("narration volume", narrationVolumeSlider.getValue()/100.0);
               settings.setJSONObject(4, scroll);
-              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setNarrationVolume(narrationVolume);
             }
             
@@ -2756,7 +2756,7 @@ void updateSettingsFromSliderValues(){
   settings.setJSONObject(4, scroll);
             
             
-  saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+  saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
 }
 
 void windowResized() {
@@ -3070,7 +3070,7 @@ void drawSettings() {
 
   //end of check boxes and stuffs
 
-  settings =loadJSONArray(appdata+"/CBi-games/skinny mann/settings.json");
+  settings =saveLoadJSONArray(null,appdata+"/CBi-games/skinny mann/settings.json",false);
 
   strokeWeight(5*Scale);
   stroke(255, 0, 0);
@@ -4182,14 +4182,16 @@ void  initButtons() {
 
   settingsGameplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
   settingsGameplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
-  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 2));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsSND,2,2));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 2));
   settingsGameplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 3));
   settingsGameplayMenuConfig.add(new ButtonInMenu(horozontalEdgeScrollSlider, 2, 0));
   settingsGameplayMenuConfig.add(new ButtonInMenu(verticleEdgeScrollSlider, 2, 1));
 
   settingsDisplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
   settingsDisplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
-  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 2));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsSND,2,2));
+  settingsDisplayMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 2));
   settingsDisplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 3));
   settingsDisplayMenuConfig.add(new ButtonInMenu(rez720, 0, 0));
   settingsDisplayMenuConfig.add(new ButtonInMenu(rez900, 1, 0));
@@ -4199,20 +4201,32 @@ void  initButtons() {
   settingsDisplayMenuConfig.add(new ButtonInMenu(fullScreenOff, 3, 1));
   settingsDisplayMenuConfig.add(new ButtonInMenu(fullScreenOn, 4, 1));
 
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsOUT, 2, 6));
-  settingsOutherMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 6));
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 6));
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 7));
+  settingsSoundMenuConfig.add(new ButtonInMenu(settingsSND,2,4));
+  settingsSoundMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 4));
+  settingsSoundMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 4));
+  settingsSoundMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 4));
+  settingsSoundMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 5));
+  settingsSoundMenuConfig.add(new ButtonInMenu(narrationMode0,3,3));
+  settingsSoundMenuConfig.add(new ButtonInMenu(narrationMode1,4,3));
+  settingsSoundMenuConfig.add(new ButtonInMenu(musicVolumeSlider,3,0));
+  settingsSoundMenuConfig.add(new ButtonInMenu(SFXVolumeSlider,3,1));
+  settingsSoundMenuConfig.add(new ButtonInMenu(narrationVolumeSlider,3,2));
+
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsSND,2,3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 4));
   settingsOutherMenuConfig.add(new ButtonInMenu(disableFPS, 2, 0));
   settingsOutherMenuConfig.add(new ButtonInMenu(enableFPS, 3, 0));
   settingsOutherMenuConfig.add(new ButtonInMenu(disableDebug, 2, 1));
   settingsOutherMenuConfig.add(new ButtonInMenu(enableDebug, 3, 1));
-  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOff, 2, 4));
-  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOn, 3, 4));
-  settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode0, 2, 5));
-  settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
-  settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
-  settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOff, 2, 2));
+  settingsOutherMenuConfig.add(new ButtonInMenu(shadowOn, 3, 2));
+  //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode0, 2, 5));
+  //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
+  //settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
+  //settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
   
   levelCompleteMenuConfig.add(new ButtonInMenu(levelCompleteScreenContinue,0,0));
   
@@ -4453,7 +4467,7 @@ void initText() {
 
 
 ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
-  settingsGameplayMenuConfig=new ButtonMenuConfig(3, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
+  settingsGameplayMenuConfig=new ButtonMenuConfig(4, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4),settingsSoundMenuConfig = new ButtonMenuConfig(5,6), settingsOutherMenuConfig = new ButtonMenuConfig(4, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
 
 
 ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
@@ -4546,7 +4560,14 @@ void handleControllerState() {
             currentSelectedButton=0;
             currentMenuConfig=settingsDisplayMenuConfig;
           }
-        } else if (settingsMenue.equals("outher")) {
+        } else if(settingsMenue.equals("sound")){
+          if (currentMenuConfig!=settingsSoundMenuConfig) {
+            currentMenuConfig.reset();
+            settingsSoundMenuConfig.set();
+            currentSelectedButton=0;
+            currentMenuConfig=settingsSoundMenuConfig;
+          }
+        }else if (settingsMenue.equals("outher")) {
           if (currentMenuConfig!=settingsOutherMenuConfig) {
             currentMenuConfig.reset();
             settingsOutherMenuConfig.set();
@@ -4868,5 +4889,15 @@ void changeOnScreenKeyboardCase(boolean upper){
         }
       }
     } 
+  }
+}
+/**Synchronize access to a json array for multy threading applications
+*/
+synchronized JSONArray saveLoadJSONArray(JSONArray data,String path,boolean save){
+  if(save){
+    saveJSONArray(data,path);
+    return null;
+  }else{
+    return loadJSONArray(path);
   }
 }
