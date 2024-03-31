@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop;
 import javax.swing.*;
+import net.java.games.input.*;
+import net.java.games.util.plugins.*;
+import net.java.games.util.*;
 
 
 void settings() {//first function called
@@ -1867,8 +1870,7 @@ void mouseClicked() {// when you click the mouse
             level_complete=false;
             coinCount=0;
             if (!UGC_lvl) {
-              JSONObject lvlinfo=mainIndex.getJSONObject(0);
-              if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
+              if (level.levelID>levelProgress.getJSONObject(0).getInt("progress")) {
                 JSONObject p=new JSONObject();
                 p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
                 levelProgress.setJSONObject(0, p);
@@ -2857,6 +2859,13 @@ void updateSettingsFromSliderValues(){
   sfxVolume=SFXVolumeSlider.getValue()/100.0;
   scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
   soundHandler.setSoundsVolume(sfxVolume);
+  
+  
+  narrationVolume=narrationVolumeSlider.getValue()/100.0;
+  scroll=settings.getJSONObject(4);
+  scroll.setFloat("narration volume", narrationVolumeSlider.getValue()/100.0);
+  soundHandler.setNarrationVolume(narrationVolume);
+  
   settings.setJSONObject(4, scroll);
 
 
@@ -3215,7 +3224,7 @@ void drawSettings() {
     st_o_yes.draw();
     st_o_no.draw();
     st_o_diableTransitions.draw();
-    st_o_defaultAuthor.draw();
+    //st_o_defaultAuthor.draw();
 
     
 
@@ -3227,7 +3236,7 @@ void drawSettings() {
     shadowOff.draw();
     disableMenuTransistionsButton.draw();
     enableMenuTransitionButton.draw();
-    defaultAuthorNameTextBox.draw();
+    //defaultAuthorNameTextBox.draw();
 
 
     textSize(50*Scale);
@@ -4395,17 +4404,20 @@ void  initButtons() {
   settingsSoundMenuConfig.add(new ButtonInMenu(SFXVolumeSlider,3,1));
   settingsSoundMenuConfig.add(new ButtonInMenu(narrationVolumeSlider,3,2));
 
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 3));
-  settingsOutherMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 3));
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 3));
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsSND,2,3));
-  settingsOutherMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsSND, 2, 4));
+  settingsOutherMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 5));
   settingsOutherMenuConfig.add(new ButtonInMenu(disableFPS, 2, 0));
   settingsOutherMenuConfig.add(new ButtonInMenu(enableFPS, 3, 0));
   settingsOutherMenuConfig.add(new ButtonInMenu(disableDebug, 2, 1));
   settingsOutherMenuConfig.add(new ButtonInMenu(enableDebug, 3, 1));
   settingsOutherMenuConfig.add(new ButtonInMenu(shadowOff, 2, 2));
   settingsOutherMenuConfig.add(new ButtonInMenu(shadowOn, 3, 2));
+  settingsOutherMenuConfig.add(new ButtonInMenu(enableMenuTransitionButton, 2, 3));
+  settingsOutherMenuConfig.add(new ButtonInMenu(disableMenuTransistionsButton, 3, 3));
+  
   //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode0, 2, 5));
   //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
   //settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
