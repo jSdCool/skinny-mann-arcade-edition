@@ -1,4 +1,10 @@
 void menuTransition() {
+  if(disableMenuTransitions){
+    transitionProgress=1;
+    transitioningMenu=false;
+    menue=true;
+    return;
+  }
   switch(currentTransition) {
   case LOGO_TO_MAIN:
     transition_logoToMain();
@@ -55,6 +61,7 @@ enum Transitions {
 Transitions currentTransition;
 float transitionProgress;
 int transitionStartMillis;
+boolean disableMenuTransitions =false;
 
 void initMenuTransition(Transitions transition) {
   currentTransition=transition;

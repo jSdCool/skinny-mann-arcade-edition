@@ -24,14 +24,25 @@ class LogicButton extends StageComponent {//ground component
     z=Z;
     type="logic button";
   }
+  
   StageComponent copy() {
     return new LogicButton(x, y, z);
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new LogicButton(x+offsetX,y+offsetY);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    return new LogicButton(x+offsetX,y+offsetY,z+offsetZ);
+  }
+  
   LogicButton(float X, float Y) {
     x=X;
     y=Y;
     type="logic button";
   }
+  
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);

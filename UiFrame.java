@@ -18,7 +18,7 @@ class UiFrame {
   public void reScale() {
     centerX=source.width/2;
     centerY=source.height/2;
-    scale=source.min((float)source.width/baseWidth, (float)source.height/baseHeight);
+    scale=PApplet.min((float)source.width/baseWidth, (float)source.height/baseHeight);
     topX=centerX-baseWidth*scale/2;
     topY=centerY-baseHeight*scale/2;
   }

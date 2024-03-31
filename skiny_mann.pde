@@ -1,4 +1,3 @@
-import net.java.games.input.*; //<>//
 import processing.sound.*;//import the stuffs
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop;
 import javax.swing.*;
+
 
 void settings() {//first function called
   UniversalErrorManager.init(this);
@@ -99,11 +99,11 @@ PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenSca
 PApplet primaryWindow=this;
 //check carefult when merging
 boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false,newSoundAsNarration =false;
-//check carefult when merging 
-String Menue ="creds"/*,level="n"*/, version="0.8.1_Early_Access", EDITOR_version="0.1.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="",arcadeLeaderBoardFilePath="leaderBoard.csv";
+//check carefult when merging
+String Menue ="creds"/*,level="n"*/, version="0.8.2_Early_Access", EDITOR_version="0.2.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="",defaultAuthor = "can't be botherd to change it",arcadeLeaderBoardFilePath="leaderBoard.csv";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames = new ArrayList<>(), playerNames=new ArrayList<>();
-float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY,narrationVolume=1;
+float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY,narrationVolume=1,blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ;
 Player players[] =new Player[10];
 
 ArrayList<Client> clients= new ArrayList<>();
@@ -113,14 +113,14 @@ int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, sc
 
 JSONArray  settings, mainIndex, levelProgress, colors;
 //check carefult when merging
-Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12,settingsSND,lc_newSoundAsSoundButton,lc_newSoundAsNarrationButton,levelCompleteScreenContinue;//button
+Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12,settingsSND,lc_newSoundAsSoundButton,lc_newSoundAsNarrationButton,levelCompleteScreenContinue,disableMenuTransistionsButton,enableMenuTransitionButton;//button
 //check carefult when merging
-String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access"};
+String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access","0.8.2_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 JSONObject portalStage1, portalStage2;
 int[][] tutorialNarration=new int[2][17];
-float [] tpCords=new float[3];
+float [] tpCords=new float[3],blueprintMax=new float[3],blueprintMin = new float[3];
 Stage workingBlueprint;
 ArrayList<Boolean> compatibles;
 LogicThread logicTickingThread =new LogicThread();
@@ -132,7 +132,7 @@ Stage blueprints[], displayBlueprint;
 Point3D initalMousePoint=new Point3D(0, 0, 0), initalObjectPos=new Point3D(0, 0, 0), initialObjectDim=new Point3D(0, 0, 0);
 UiFrame ui;
 //check carefult when merging
-UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_o_musicVol, st_o_SFXvol, st_o_3DShadow, st_o_narration, st_o_yes, st_o_no, st_o_better, st_o_demonitized, st_o_currentMusicVolume, st_o_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,elapsedTimeDisplay,levelCompleteTitle,levelCompleteLevelName,levelCompleteLeaderBoardLeftColumn,levelCompleteLeaderBoardCenterColumn,levelCompleteLeaderBoardRightColumn,enterNameText,highScoreName,yourScore,narrationCaptionText,st_snd_musicVol,st_snd_SFXvol,st_snd_currentMusicVolume,st_snd_currentSoundsVolume,st_snd_currentNarrationVolume,st_snd_better,st_snd_demonitized,st_snd_narration,st_snd_narrationVol,st_sound;
+UiText mm_title, mm_EarlyAccess, mm_version, ls_levelSelect, lsUGC_title, lsUGC_noLevelFound, lsUGC_levelNotCompatible, lsUGC_levelName, st_title, st_Hssr, st_Vssr, st_gameplay, st_vsrp, st_hsrp, st_dsp_vsr, st_dsp_fs, st_dsp_4k, st_dsp_1440, st_dsp_1080, st_dsp_900, st_dsp_720, st_dsp_fsYes, st_dsp_fsNo, st_display, st_o_displayFPS, st_o_debugINFO, st_snd_musicVol, st_snd_SFXvol, st_o_3DShadow, st_snd_narration, st_o_yes, st_o_no, st_snd_better, st_snd_demonitized, st_snd_currentMusicVolume, st_snd_currentSoundsVolume, st_other, initMultyplayerScreenTitle, mp_hostSeccion, mp_host_Name, mp_host_enterdName, mp_host_port, mp_host_endterdPort, mp_joinSession, mp_join_name, mp_join_enterdName, mp_join_port, mp_join_enterdPort, mp_join_ip, mp_join_enterdIp, mp_disconnected, mp_dc_reason, dev_title, dev_info, tut_notToday, tut_disclaimer, tut_toClose, coinCountText, pa_title, logoText, up_title, up_info, up_wait, lc_start_version, lc_start_author, lc_load_new_describe, lc_load_new_enterd, lc_load_notFound, lc_newf_enterdName, lc_newf_fileName, lc_dp2_info, lc_newbp_describe, lc_exit_question, lc_exit_disclaimer, deadText, fpsText, dbg_mspc, dbg_playerX, dbg_playerY, dbg_vertvel, dbg_animationCD, dbg_pose, dbg_camX, dbg_camY, dbg_tutorialPos, game_displayText, lebelCompleteText, lc_fullScreenWarning, settingPlayerSpawnText,st_sound,st_snd_narrationVol,st_snd_currentNarrationVolume,narrationCaptionText,st_o_diableTransitions,st_o_defaultAuthor,elapsedTimeDisplay,levelCompleteTitle,levelCompleteLevelName,levelCompleteLeaderBoardLeftColumn,levelCompleteLeaderBoardCenterColumn,levelCompleteLeaderBoardRightColumn,enterNameText,highScoreName,yourScore,narrationCaptionText,st_snd_musicVol,st_snd_SFXvol,st_snd_currentMusicVolume,st_snd_currentSoundsVolume,st_snd_currentNarrationVolume,st_snd_better,st_snd_demonitized,st_snd_narration,st_snd_narrationVol,st_sound;
 //check carefult when merging
 UiSlider musicVolumeSlider, SFXVolumeSlider, verticleEdgeScrollSlider, horozontalEdgeScrollSlider,narrationVolumeSlider;
 
@@ -142,6 +142,7 @@ Button[][] onScreenKeyboardButtons = new Button[4][];
 String[] onScreenKeyboardButtonLabels = {"1234567890","qwertyuiop","asdfghjkl","zxcvbnm"},onScreenKeyboardButtonLabelsUpperCase = {"1234567890","QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
 
 GamePadWrapper gamepad = new GamePadWrapper();
+UiTextBox defaultAuthorNameTextBox;
 //▄
 
 
@@ -501,7 +502,7 @@ void draw() {// the function that is called every fraim
         if (Menue.equals("dev")) {
           drawDevMenue();
         }
-        
+
         if(Menue.equals("level complete")){
           background(-9131009);
           fill(255);
@@ -511,10 +512,10 @@ void draw() {// the function that is called every fraim
           levelCompleteLeaderBoardCenterColumn.draw();
           levelCompleteLeaderBoardRightColumn.draw();
           yourScore.draw();
-          
+
           levelCompleteScreenContinue.draw();
         }
-        
+
         if(Menue.equals("high score")){
           background(-9131009);
           fill(255);
@@ -529,7 +530,7 @@ void draw() {// the function that is called every fraim
           fill(255);
           highScoreName.draw();
         }
-        
+
       }
       //end of menue draw
 
@@ -704,8 +705,10 @@ void draw() {// the function that is called every fraim
         stageEditGUI();//level gui code
 
         if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
-          generateDisplayBlueprint();//visualize the blueprint that is selected
-          renderBlueprint();//render blueprint
+        if(!e3DMode){
+            generateDisplayBlueprint();//visualize the blueprint that is selected
+            renderBlueprint();//render blueprint
+          }
         }
       }
 
@@ -919,6 +922,15 @@ void draw() {// the function that is called every fraim
 
         createBlueprintGo.draw();//create button
         lc_backButton.draw();
+        if(newBlueprintIs3D){
+          new2DStage.setColor(#BB48ED, #4857ED);
+          new3DStage.setColor(#BB48ED, #51DFFA);
+        }else{
+          new2DStage.setColor(#BB48ED, #51DFFA);
+          new3DStage.setColor(#BB48ED, #4857ED);
+        }
+        new2DStage.draw();
+        new3DStage.draw();
         stroke(0);
         strokeWeight(1*Scale);
         line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//text line
@@ -944,10 +956,12 @@ void draw() {// the function that is called every fraim
 
       if (editingBlueprint) {//if edditing blueprint
         background(7646207);
-        fill(0);
-        strokeWeight(0);
-        rect(width/2-0.5, 0, 1, height);//draw lines in the center of the screen that indicate wherer (0,0) is
-        rect(0, height/2-0.5, width, 1);
+        if(!e3DMode){
+          fill(0);
+          strokeWeight(0);
+          rect(width/2-0.5, 0, 1, height);//draw lines in the center of the screen that indicate wherer (0,0) is
+          rect(0, height/2-0.5, width, 1);
+        }
         blueprintEditDraw();//draw the accual blueprint
         stageEditGUI();//overlays when placing things
       }//end of edit blueprint
@@ -1072,7 +1086,7 @@ void draw() {// the function that is called every fraim
       elapsedTimeDisplay.setText(curtime_);
       elapsedTimeDisplay.draw();
     }
-    
+
     if(soundHandler!=null && narrationVolume< 0.2 && soundHandler.anyNarrationPlaying()){
       fill(255);
       narrationCaptionText.draw();
@@ -1350,20 +1364,21 @@ void mouseClicked() {// when you click the mouse
             newFile=false;
             levelCreator=true;
             filesScrole=0;
+            author = defaultAuthor;//set the author to the default
             return;
           }
         }
 
         if (Menue.equals("pause")) {//if that menue is pause
-          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 200*Scale && mouseY <= 260*Scale) {//resume game button
+          if (pauseResumeButton.isMouseOver()) {//resume game button
             menue=false;
           }
-          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 300*Scale && mouseY <= 360*Scale) {//resume game button
+          if (pauseOptionsButton.isMouseOver()) {//resume game button
             Menue="settings";
             prevousInGame=true;
             inGame=false;
           }
-          if (mouseX >= 500*Scale && mouseX <= 800*Scale && mouseY >= 400*Scale && mouseY <= 460*Scale) {//quit button
+          if (pauseQuitButton.isMouseOver()) {//quit button
             menue=true;
             inGame=false;
             tutorialMode=false;
@@ -1583,18 +1598,44 @@ void mouseClicked() {// when you click the mouse
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
             }
             
+            if(enableMenuTransitionButton.isMouseOver()){
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setBoolean("disableMenuTransitions", false);
+              disableMenuTransitions=false;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+            if(disableMenuTransistionsButton.isMouseOver()){
+              JSONObject sv3=settings.getJSONObject(5);
+              sv3.setBoolean("disableMenuTransitions", true);
+              disableMenuTransitions=true;
+              settings.setJSONObject(5, sv3);
+              saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+            }
+
+
+            defaultAuthorNameTextBox.mouseClicked();
+
           }//end of outher settings menue
 
-          if (sttingsGPL.isMouseOver())
+          if (sttingsGPL.isMouseOver()){
             settingsMenue="game play";
-          if (settingsDSP.isMouseOver())
+            defaultAuthorNameTextBox.resetState();
+          }
+          if (settingsDSP.isMouseOver()){
             settingsMenue="display";
-          if (settingsSND.isMouseOver())
+            defaultAuthorNameTextBox.resetState();
+          }
+          if (settingsSND.isMouseOver()){
             settingsMenue="sound";
+            defaultAuthorNameTextBox.resetState();
+          }
           if (settingsOUT.isMouseOver())
             settingsMenue="outher";
 
           if (settingsBackButton.isMouseOver()) {//back button
+            defaultAuthorNameTextBox.resetState();
             if (prevousInGame) {
               Menue="pause";
               inGame=true;
@@ -1617,6 +1658,10 @@ void mouseClicked() {// when you click the mouse
         if (Menue.equals("update")) {//if that menue is update
           updae_screen_click(); //check the update clicks
         }
+        if (Menue.equals("downloading update")) {
+          updateDownloadingScreenClick();
+        }
+
         if (Menue.equals("multiplayer strart")) {
           if (multyplayerExit.isMouseOver()) {
             Menue="main";
@@ -1813,7 +1858,7 @@ void mouseClicked() {// when you click the mouse
             }
           }
         }
-        
+
         if(Menue.equals("level complete")){
           if(levelCompleteScreenContinue.isMouseOver()){
             menue=true;
@@ -1834,7 +1879,7 @@ void mouseClicked() {// when you click the mouse
             }
           }
         }
-        
+
         if(Menue.equals("high score")){
           highScoreMouseClicked();
         }
@@ -1854,8 +1899,7 @@ void mouseClicked() {// when you click the mouse
             level_complete=false;
             coinCount=0;
             if (!UGC_lvl) {
-              JSONObject lvlinfo=mainIndex.getJSONObject(0);
-              if (lvlinfo.getInt("level_id")>levelProgress.getJSONObject(0).getInt("progress")) {
+              if (level.levelID>levelProgress.getJSONObject(0).getInt("progress")) {
                 JSONObject p=new JSONObject();
                 p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
                 levelProgress.setJSONObject(0, p);
@@ -1904,6 +1948,7 @@ void mouseClicked() {// when you click the mouse
             entering_file_path=true;
           }
           if (lcLoadLevelButton.isMouseOver()) {//load button
+          JSONArray mainIndex = null;
             try {//attempt to load the level
               String tmp=rootPath;
               rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+rootPath;
@@ -1920,6 +1965,7 @@ void mouseClicked() {// when you click the mouse
               levelNotFound=false;
             }
             catch(Throwable e) {//do nothign if loading fails
+              e.printStackTrace();
             }
             level=new Level(mainIndex);
             level.logicBoards.get(level.loadBoard).superTick();
@@ -2154,19 +2200,30 @@ void mouseClicked() {// when you click the mouse
         if (creatingNewBlueprint) {//if creating a new blueprint
           if (createBlueprintGo.isMouseOver()) {//create button
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
-              workingBlueprint=new Stage(new_name, "blueprint");//creat and load the new blueprint
+              if(newBlueprintIs3D){
+                workingBlueprint=new Stage(new_name, "3D blueprint");//creat and load the new blueprint
+              }else{
+                workingBlueprint=new Stage(new_name, "blueprint");//creat and load the new blueprint
+              }
               entering_name=false;//set up enviormatn vaibles
               creatingNewBlueprint=false;
               editingBlueprint=true;
               camPos=-640;
               camPosY=360;
               rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
+
             }//end of name was enterd
           }//end of create button
           if (lc_backButton.isMouseOver()) {
             startup=true;
             creatingNewBlueprint=false;
             entering_name=false;
+          }
+          if (new3DStage.isMouseOver()) {//buttons to set type
+            newBlueprintIs3D=true;
+          }
+          if (new2DStage.isMouseOver()) {
+            newBlueprintIs3D=false;
           }
         }//end of creating new bluepint
 
@@ -2382,12 +2439,29 @@ void keyPressed() {// when a key is pressed
       if (Menue.equals("settings")) {
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
+          defaultAuthorNameTextBox.resetState();
           if (prevousInGame) {
             Menue="pause";
             inGame=true;
             prevousInGame=false;
           } else {
             Menue ="main";
+          }
+        }
+        if (settingsMenue.equals("outher")) {
+          defaultAuthorNameTextBox.keyPressed();
+          if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
+            JSONObject sv3=settings.getJSONObject(5);
+            String newName =  defaultAuthorNameTextBox.getContence();
+
+            if(!newName.isEmpty()){
+              defaultAuthor = newName;
+            }else{
+              defaultAuthor = "can't be botherd to change it";
+            }
+            sv3.setString("default author", defaultAuthor);
+            settings.setJSONObject(5, sv3);
+            saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
           }
         }
       }
@@ -2659,9 +2733,39 @@ void keyReleased() {//when you release a key
         }
       }
     }
+    if(menue){
+      if (Menue.equals("settings")) {
+        if (settingsMenue.equals("outher")) {
+          defaultAuthorNameTextBox.keyReleased();
+        }
+      }
+    }
   }
   catch(Throwable e) {
     handleError(e);
+  }
+}
+
+void keyTyped(){
+  if(menue){
+    if (Menue.equals("settings")) {
+      if (settingsMenue.equals("outher")) {
+        defaultAuthorNameTextBox.keyTyped();
+        if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
+          JSONObject sv3=settings.getJSONObject(5);
+          String newName =  defaultAuthorNameTextBox.getContence();
+
+          if(!newName.isEmpty()){
+            defaultAuthor = newName;
+          }else{
+            defaultAuthor = "can't be botherd to change it";
+          }
+          sv3.setString("default author", defaultAuthor);
+          settings.setJSONObject(5, sv3);
+          saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+        }
+      }
+    }
   }
 }
 
@@ -2745,7 +2849,7 @@ void updateSettingsFromSliderValues(){
   eadgeScroleDistV=(int)verticleEdgeScrollSlider.getValue();
   scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
   settings.setJSONObject(1, scroll);
-  
+
   musicVolume=musicVolumeSlider.getValue()/100.0;
   scroll=settings.getJSONObject(4);
   scroll.setFloat("music volume", musicVolumeSlider.getValue()/100.0);
@@ -2754,8 +2858,8 @@ void updateSettingsFromSliderValues(){
   scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
   soundHandler.setSoundsVolume(sfxVolume);
   settings.setJSONObject(4, scroll);
-            
-            
+
+
   saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
 }
 
@@ -2764,12 +2868,12 @@ void windowResized() {
   Scale = height/720.0;
 }
 
-void loadLevel(String fdp) {
+void loadLevel(String path) {
   soundHandler.dumpLS();
   try {
     reachedEnd=false;
-    rootPath=fdp;
-    mainIndex=loadJSONArray(rootPath+"/index.json");
+    rootPath=path;
+    JSONArray mainIndex=loadJSONArray(rootPath+"/index.json");
     level=new Level(mainIndex);
     level.logicBoards.get(level.loadBoard).superTick();
     startTime = millis();
@@ -2840,7 +2944,14 @@ void mousePressed() {
         }
       }//end of editng logic board
       if (e3DMode&&selectedIndex!=-1) {
-        StageComponent ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        StageComponent ct = null;
+          if (editingStage) {
+            ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
+          }
+          if (editingBlueprint) {
+            ct = workingBlueprint.parts.get(selectedIndex);
+          }
+
         for (int i=0; i<5000; i++) {
           Point3D testPoint=genMousePoint(i);
           if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
@@ -2882,6 +2993,53 @@ void mousePressed() {
         initalMousePoint=mousePoint;
         initalObjectPos=new Point3D(ct.x, ct.y, ct.z);
         initialObjectDim=new Point3D(ct.dx, ct.dy, ct.dz);
+      }
+
+      //placing a blueprint in 3D movement
+      if (e3DMode && selectingBlueprint && blueprints.length!=0){
+        float cdx = blueprintMax[0]-blueprintMin[0];
+        float cdy = blueprintMax[1]-blueprintMin[1];
+        float cdz = blueprintMax[2]-blueprintMin[2];
+        for (int i=0; i<5000; i++) {
+          Point3D testPoint=genMousePoint(i);
+          if (testPoint.x >= (blueprintMin[0]+cdx/2)-5 && testPoint.x <= (blueprintMin[0]+cdx/2)+5 && testPoint.y >= (blueprintMin[1]+cdy/2)-5 && testPoint.y <= (blueprintMin[1]+cdy/2)+5 && testPoint.z >= blueprintMin[2]+cdz && testPoint.z <= blueprintMin[2]+cdz+60) {
+            translateZaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+
+          if (testPoint.x >= (blueprintMin[0]+cdx/2)-5 && testPoint.x <= (blueprintMin[0]+cdx/2)+5 && testPoint.y >= (blueprintMin[1]+cdy/2)-5 && testPoint.y <= (blueprintMin[1]+cdy/2)+5 && testPoint.z >= blueprintMin[2]-60 && testPoint.z <= blueprintMin[2]) {
+            translateZaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= blueprintMin[0]-60 && testPoint.x <= blueprintMin[0] && testPoint.y >= (blueprintMin[1]+cdy/2)-5 && testPoint.y <= (blueprintMin[1]+cdy/2)+5 && testPoint.z >= (blueprintMin[2]+cdz/2)-5 && testPoint.z <= (blueprintMin[2]+cdz/2)+5) {
+            translateXaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= blueprintMin[0]+cdx && testPoint.x <= blueprintMin[0]+cdx+60 && testPoint.y >= (blueprintMin[1]+cdy/2)-5 && testPoint.y <= (blueprintMin[1]+cdy/2)+5 && testPoint.z >= (blueprintMin[2]+cdz/2)-5 && testPoint.z <= (blueprintMin[2]+cdz/2)+5) {
+            translateXaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+
+          if (testPoint.x >= (blueprintMin[0]+cdx/2)-5 && testPoint.x <= (blueprintMin[0]+cdx/2)+5 && testPoint.y >= blueprintMin[1]-60 && testPoint.y <= blueprintMin[1] && testPoint.z >= (blueprintMin[2]+cdz/2)-5 && testPoint.z <= (blueprintMin[2]+cdz/2)+5) {
+            translateYaxis=true;
+            transformComponentNumber=2;
+            break;
+          }
+
+          if (testPoint.x >= (blueprintMin[0]+cdx/2)-5 && testPoint.x <= (blueprintMin[0]+cdx/2)+5 && testPoint.y >= blueprintMin[1]+cdy && testPoint.y <= blueprintMin[1]+cdy+60 && testPoint.z >= (blueprintMin[2]+cdz/2)-5 && testPoint.z <= (blueprintMin[2]+cdz/2)+5) {
+            translateYaxis=true;
+            transformComponentNumber=1;
+            break;
+          }
+        }
+        initalMousePoint=mousePoint;
+        initalObjectPos=new Point3D(blueprintPlacemntX, blueprintPlacemntY, blueprintPlacemntZ);
       }
     }
   }
@@ -2944,6 +3102,11 @@ void mouseReleased() {
         }
       }//end of editing logic board
       if (e3DMode&&selectedIndex!=-1) {
+        translateZaxis=false;
+        translateXaxis=false;
+        translateYaxis=false;
+      }
+      if (e3DMode && selectingBlueprint){
         translateZaxis=false;
         translateXaxis=false;
         translateYaxis=false;
@@ -3051,7 +3214,9 @@ void drawSettings() {
     st_o_3DShadow.draw();
     st_o_yes.draw();
     st_o_no.draw();
-    
+    st_o_diableTransitions.draw();
+    st_o_defaultAuthor.draw();
+
     
 
     enableFPS.draw();
@@ -3060,7 +3225,10 @@ void drawSettings() {
     disableDebug.draw();
     shadowOn.draw();
     shadowOff.draw();
-    
+    disableMenuTransistionsButton.draw();
+    enableMenuTransitionButton.draw();
+    defaultAuthorNameTextBox.draw();
+
 
     textSize(50*Scale);
     textAlign(CENTER, TOP);
@@ -3129,6 +3297,12 @@ void drawSettings() {
         chechMark(shadowOff.x+shadowOff.lengthX/2, shadowOff.y+shadowOff.lengthY/2);
       } else {
         chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
+      }
+
+      if(!disableMenuTransitions){
+        chechMark(enableMenuTransitionButton.x+enableMenuTransitionButton.lengthX/2, enableMenuTransitionButton.y+enableMenuTransitionButton.lengthY/2);
+      } else {
+        chechMark(disableMenuTransistionsButton.x+disableMenuTransistionsButton.lengthX/2, disableMenuTransistionsButton.y+disableMenuTransistionsButton.lengthY/2);
       }
 
       
@@ -3286,7 +3460,9 @@ void generateSettings() {
 
   sv3.setBoolean("3D shaows", true);
   sv3.setString("label","outher");
-  
+  sv3.setBoolean("disableMenuTransitions",false);
+  sv3.setString("default author", defaultAuthor);
+
   settings.setJSONObject(5, sv3);
 
   saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
@@ -3792,7 +3968,10 @@ void programLoad() {
   JSONObject sv3=settings.getJSONObject(5);
   loadProgress++;
   shadow3D=sv3.getBoolean("3D shaows");
- 
+  disableMenuTransitions = sv3.getBoolean("disableMenuTransitions");
+  defaultAuthor = sv3.getString("default author");
+  defaultAuthorNameTextBox.setContence(defaultAuthor);
+  author = defaultAuthor;
   loadProgress++;
 
   println("loading level progress");
@@ -4003,7 +4182,7 @@ void programLoad() {
 //musicVolumeSlider,SFXVolumeSlider,verticleEdgeScrollSlider,horozontalEdgeScrollSlider;
 void  initButtons() {
   select_lvl_1=new UiButton(ui, (100), (100), (200), (100), "lvl 1", -59135, -1791).setStrokeWeight( (10));
-  select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "back", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "Back", -59135, -1791).setStrokeWeight( (10));
   select_lvl_2 =new UiButton(ui, (350), (100), (200), (100), "lvl 2", -59135, -1791).setStrokeWeight( (10));
   select_lvl_3 =new UiButton(ui, (600), (100), (200), (100), "lvl 3", -59135, -1791).setStrokeWeight( (10));
   select_lvl_4 =new UiButton(ui, (850), (100), (200), (100), "lvl 4", -59135, -1791).setStrokeWeight( (10));
@@ -4058,15 +4237,17 @@ void  initButtons() {
   mainMenuButtonConfig.add(new ButtonInMenu(settingsButton, 0, 2));
   howToPlayButton=new UiButton(ui, 540, 630, 200, 50, "Tutorial", #FF1900, #FFF900).setStrokeWeight(10);
   mainMenuButtonConfig.add(new ButtonInMenu(howToPlayButton, 0, 3));
-  downloadUpdateButton=new UiButton(ui, 390, 350*Scale, 500*Scale2, 50*Scale, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10);
+  downloadUpdateButton=new UiButton(ui, 390, 350, 500, 50, "Download & Install", #FF0004, #FFF300).setStrokeWeight(10);
   updateGetButton=new UiButton(ui, 390, 150, 500, 50, "Get it", #FF0004, #FFF300).setStrokeWeight(10);
-  updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10*Scale);
+  updateOkButton=new UiButton(ui, 390, 250, 500, 50, "Ok", #FF0004, #FFF300).setStrokeWeight(10);
   pauseRestart=new UiButton(ui, 500, 100, 300, 60, "Restart", #FF0004, #FFF300).setStrokeWeight(10);
   settingsBackButton = new UiButton(ui, 40, 620, 200, 50, "Back", #FF1900, #FFF900).setStrokeWeight(10);
   pauseResumeButton = new UiButton(ui, 500, 200, 300, 60, "Resume", #FF1900, #FFF900).setStrokeWeight(10);
   pauseOptionsButton = new UiButton(ui, 500, 300, 300, 60, "Options", #FF1900, #FFF900).setStrokeWeight(10);
   pauseQuitButton = new UiButton(ui, 500, 400, 300, 60, "Quit", #FF1900, #FFF900).setStrokeWeight(10);
-  endOfLevelButton = new UiButton(ui, 550, 450, 200, 40, "continue", #FF1900, #FFF900).setStrokeWeight(10);
+  endOfLevelButton = new UiButton(ui, 550, 450, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
+  enableMenuTransitionButton = new UiButton(ui, (1130), (260), (40), (40), 255, 0).setStrokeWeight(5);
+  disableMenuTransistionsButton = new UiButton(ui, (1200), (260), (40), (40), 255, 0).setStrokeWeight(5);
 
 
 
@@ -4084,24 +4265,24 @@ void  initButtons() {
   multyplayerHost = new UiButton(ui, 680, 300, 200, 50, "Host", #FF0004, #FFF300).setStrokeWeight(10);
   multyplayerExit = new UiButton(ui, 100, 600, 200, 50, "back", -59135, -1791).setStrokeWeight(10);
   multyplayerGo = new UiButton(ui, 640-100, 600, 200, 50, "GO", -59135, -1791).setStrokeWeight(10);
-  multyplayerLeave = new UiButton(ui, 10, 660, 200, 50, "leave", -59135, -1791).setStrokeWeight(10);
+  multyplayerLeave = new UiButton(ui, 10, 660, 200, 50, "Leave", -59135, -1791).setStrokeWeight(10);
 
-  multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "speed run", -59135, -1791).setStrokeWeight(10*Scale);
+  multyplayerSpeedrun = new Button(this, width*0.18125, height*0.916666, width*0.19296875, height*0.0694444444, "Speed Run", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerCoop = new Button(this, width*0.38984375, height*0.916666, width*0.19375, height*0.0694444444, "co-op", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerUGC = new Button(this, width*0.59921875, height*0.916666, width*0.19296875, height*0.0694444444, "UGC", -59135, -1791).setStrokeWeight(10*Scale);
   multyplayerPlay = new Button(this, width*0.809375, height*0.916666, width*0.1828125, height*0.0694444444, "Play", -59135, -1791).setStrokeWeight(10*Scale);
   increaseTime = new Button(this, width*0.80546875, height*0.7, width*0.03, width*0.03, "^", -59135, -1791).setStrokeWeight(5*Scale);
   decreaseTime = new Button(this, width*0.96609375, height*0.7, width*0.03, width*0.03, "v", -59135, -1791).setStrokeWeight(5*Scale);
 
-  newBlueprint=new UiButton(ui, 200, 500, 200, 80, "new blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
-  loadBlueprint=new UiButton(ui, 800, 500, 200, 80, "load blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  newBlueprint=new UiButton(ui, 200, 500, 200, 80, "New Blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
+  loadBlueprint=new UiButton(ui, 800, 500, 200, 80, "Load Blueprint", #BB48ED, #4857ED).setStrokeWeight(10);
   newLevelButton=new UiButton(ui, 200, 300, 200, 80, "NEW", #BB48ED, #4857ED).setStrokeWeight(10);
   loadLevelButton=new UiButton(ui, 800, 300, 200, 80, "LOAD", #BB48ED, #4857ED).setStrokeWeight(10);
 
   newStage=new UiButton(ui, 1200, 10, 60, 60, "+", #0092FF, 0).setStrokeWeight(3);
-  newFileCreate=new UiButton(ui, 300, 600, 200, 40, "create", #BB48ED, #4857ED).setStrokeWeight(5);
-  newFileBack=new UiButton(ui, 600, 600, 200, 40, "back", #BB48ED, #4857ED).setStrokeWeight(5);
-  chooseFileButton=new UiButton(ui, 300, 540, 200, 40, "choose file", #BB48ED, #4857ED).setStrokeWeight(5);
+  newFileCreate=new UiButton(ui, 300, 600, 200, 40, "Create", #BB48ED, #4857ED).setStrokeWeight(5);
+  newFileBack=new UiButton(ui, 600, 600, 200, 40, "Back", #BB48ED, #4857ED).setStrokeWeight(5);
+  chooseFileButton=new UiButton(ui, 300, 540, 200, 40, "Choose File", #BB48ED, #4857ED).setStrokeWeight(5);
   lc_newSoundAsSoundButton = new UiButton(ui,600,540,200,40,"Sound",#BB48ED, #4857ED).setStrokeWeight(5);
   lc_newSoundAsNarrationButton  = new UiButton(ui,820,540,200,40,"Narration",#BB48ED, #4857ED).setStrokeWeight(5);
 
@@ -4117,11 +4298,11 @@ void  initButtons() {
   new3DStage=new UiButton(ui, 600, 200, 80, 80, "3D", #BB48ED, #4857ED).setStrokeWeight(5);
   addSound=new UiButton(ui, 800, 200, 80, 80, #BB48ED, #4857ED).setStrokeWeight(5);
 
-  overview_saveLevel=new UiButton(ui, 60, 20, 50, 50, "save", #0092FF, 0).setStrokeWeight(5);
+  overview_saveLevel=new UiButton(ui, 60, 20, 50, 50, "Save", #0092FF, 0).setStrokeWeight(5);
   help=new UiButton(ui, 130, 20, 50, 50, " ? ", #0092FF, 0).setStrokeWeight(3);
   overviewUp=new UiButton(ui, 270, 20, 50, 50, " ^ ", #0092FF, 0).setStrokeWeight(3);
   overviewDown=new UiButton(ui, 200, 20, 50, 50, " v ", #0092FF, 0).setStrokeWeight(3);
-  createBlueprintGo=new UiButton(ui, 40, 400, 200, 40, "start", #BB48ED, #4857ED).setStrokeWeight(10);
+  createBlueprintGo=new UiButton(ui, 40, 400, 200, 40, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lcLoadLevelButton=new UiButton(ui, 40, 400, 200, 40, "Load", #BB48ED, #4857ED).setStrokeWeight(10);
   lcNewLevelButton=new UiButton(ui, 40, 400, 200, 40, "Start", #BB48ED, #4857ED).setStrokeWeight(10);
@@ -4132,9 +4313,11 @@ void  initButtons() {
   lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
-  
+
+  defaultAuthorNameTextBox = new UiTextBox(ui,900,330,340,40).setColors(#FFFFFF,0).setStrokeWeight(5).setTextSize(26).setPlaceHolder("Name Goes Here").setContence(defaultAuthor);
+
   levelCompleteScreenContinue = new UiButton(ui,550, 620, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
-  
+
   onScreenKeyboardButtons[0] = new Button[10];
   onScreenKeyboardButtons[1] = new Button[10];
   onScreenKeyboardButtons[2] = new Button[9];
@@ -4148,11 +4331,11 @@ void  initButtons() {
   for(int i=0;i<onScreenKeyboardButtons[2].length;i++){
     onScreenKeyboardButtons[2][i]=new UiButton(ui,75+120*i,508,60,60,onScreenKeyboardButtonLabels[2].charAt(i)+"",#FF1900, #FFF900).setStrokeWeight(10);
   }
-  
+
   for(int i=0;i<onScreenKeyboardButtons[3].length-2;i++){
     onScreenKeyboardButtons[3][i]=new UiButton(ui,105+120*i,608,60,60,onScreenKeyboardButtonLabels[3].charAt(i)+"",#FF1900, #FFF900).setStrokeWeight(10);
   }
-  
+
   onScreenKeyboardButtons[3][7] = new UiButton(ui,945,608,90,60,"Shift",#FF1900, #FFF900).setStrokeWeight(10);
   onScreenKeyboardButtons[3][8] = new UiButton(ui,1095,608,90,60,"Enter",#FF1900, #FFF900).setStrokeWeight(10);
 
@@ -4227,15 +4410,15 @@ void  initButtons() {
   //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
   //settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
   //settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
-  
+
   levelCompleteMenuConfig.add(new ButtonInMenu(levelCompleteScreenContinue,0,0));
-  
+
   for(int i=0;i<onScreenKeyboardButtons.length;i++){
     for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
       onScreenKeyboardMenuConfig.add(new ButtonInMenu(onScreenKeyboardButtons[i][j],j,i));
     }
   }
-  
+
   //
   currentMenuConfig.set();
 }
@@ -4372,7 +4555,7 @@ void initText() {
   st_title = new UiText(ui, "Settings", 640, 720, 100, CENTER, BOTTOM);
   st_Hssr = new UiText(ui, "horozontal screen scrolling location", 40, 90, 40, LEFT, BOTTOM);
   st_Vssr = new UiText(ui, "vertical  screen scrolling location", 40, 160, 40, LEFT, BOTTOM);
-  st_gameplay = new UiText(ui, "Game Play", 640, -10, 50, CENTER, TOP);
+  st_gameplay = new UiText(ui, "Game Play", 640, 0, 50, CENTER, TOP);
   st_vsrp = new UiText(ui, "V", 700, 160, 40, LEFT, BOTTOM);
   st_hsrp = new UiText(ui, "V", 700, 90, 40, LEFT, BOTTOM);
   st_dsp_vsr = new UiText(ui, "verticle screen resolution (requires restart)", 40, 80, 40, LEFT, BOTTOM);
@@ -4384,8 +4567,8 @@ void initText() {
   st_dsp_720 = new UiText(ui, "720", 920, 45, 20, LEFT, BOTTOM);
   st_dsp_fsYes = new UiText(ui, "yes", 1190, 115, 20, LEFT, BOTTOM);
   st_dsp_fsNo = new UiText(ui, "no", 1120, 115, 20, LEFT, BOTTOM);
-  st_display = new UiText(ui, "Display", 640, -10, 50, CENTER, TOP);
-  st_sound = new UiText(ui, "Sound",640,-10,50,CENTER,TOP);
+  st_display = new UiText(ui, "Display", 640, 0, 50, CENTER, TOP);
+  st_sound = new UiText(ui, "Sound",640,0,50,CENTER,TOP);
   st_snd_narrationVol = new UiText(ui, "narration volume", 40, 250, 40, LEFT, BOTTOM);
   st_snd_currentNarrationVolume = new UiText(ui, "N", 700, 250, 40, LEFT, BOTTOM);
   st_o_displayFPS = new UiText(ui, "display fps", 40, 70, 40, LEFT, BOTTOM);
@@ -4396,11 +4579,13 @@ void initText() {
   st_snd_narration = new UiText(ui, "narration mode", 40, 380, 40, LEFT, BOTTOM);
   st_o_yes = new UiText(ui, "yes", 1190, 45, 20, LEFT, BOTTOM);
   st_o_no = new UiText(ui, "no", 1120, 45, 20, LEFT, BOTTOM);
+  st_o_diableTransitions = new UiText(ui,"Disable Menu Transitions",40,280,40,LEFT,BOTTOM);
+  st_o_defaultAuthor = new UiText(ui,"Default Level Creator Author",40,350,40,LEFT,BOTTOM);
   st_snd_better = new UiText(ui, "better", 1190, 340, 20, LEFT, BOTTOM);
   st_snd_demonitized = new UiText(ui, "please don't\ndemonetize\nme youtube", 1070, 340, 20, LEFT, BOTTOM);
   st_snd_currentMusicVolume = new UiText(ui, "V", 700, 110, 40, LEFT, BOTTOM);
   st_snd_currentSoundsVolume = new UiText(ui, "B", 700, 180, 40, LEFT, BOTTOM);
-  st_other = new UiText(ui, "Outher", 640, -10, 50, CENTER, TOP);
+  st_other = new UiText(ui, "Outher", 640, 0, 50, CENTER, TOP);
   initMultyplayerScreenTitle = new UiText(ui, "Multiplayer", 640, 36, 50, CENTER, CENTER);
   mp_hostSeccion = new UiText(ui, "Host session", 640, 36, 50, CENTER, CENTER);
   mp_host_Name = new UiText(ui, "Name", 640, 93.6, 25, CENTER, CENTER);
@@ -4454,6 +4639,7 @@ void initText() {
   lebelCompleteText = new UiText(ui, "LEVEL COMPLETE!!!", 200, 400, 100, LEFT, BOTTOM);
   settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player",640,72,35,CENTER,CENTER);
   narrationCaptionText = new UiText(ui,"*Narration in progress*",640,695,20,CENTER,BOTTOM);
+
   elapsedTimeDisplay = new UiText(ui, "TIME" ,640,20,20,CENTER,CENTER);
   levelCompleteTitle = new UiText(ui, "Level Complete!!",640, 40, 50,CENTER,CENTER);
   levelCompleteLevelName = new UiText(ui, "LEVEL NAME HERE",640, 90, 30,CENTER,CENTER);
@@ -4595,8 +4781,8 @@ void handleControllerState() {
           inGame=true;
           prevousInGame=false;
       }
-      
-      
+
+
 
       //use button action
       if (!controller_set_a&&gamepad.a()) {//rizeing edge pulse only
@@ -4637,14 +4823,14 @@ void handleControllerState() {
       Menue="pause";
     }
   }
-  
+
   if (!menue&&tutorialMode&&gamepad.y()&&tutorialPos<3) {
     Menue="main";
     menue=true;
     tutorialMode=false;
     soundHandler.stopNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
   }
-  
+
 }
 
 void handleNewMenuButtonSelection(int newSelection) {
@@ -4844,7 +5030,7 @@ void populateLeaderBoardVisual(){
   }
   levelCompleteLeaderBoardCenterColumn.setText(names);
   levelCompleteLeaderBoardRightColumn.setText(times);
-  
+
 }
 
 void highScoreMouseClicked(){
@@ -4888,7 +5074,7 @@ void changeOnScreenKeyboardCase(boolean upper){
           onScreenKeyboardButtons[i][j].setText(onScreenKeyboardButtonLabels[i].charAt(j)+"");
         }
       }
-    } 
+    }
   }
 }
 /**Synchronize access to a json array for multy threading applications

@@ -29,7 +29,7 @@ class Stage implements Serializable {
     }
 
     if (type.equals("stage")||type.equals("3Dstage")||type.equals("blueprint")||type.equals("3D blueprint")) {
-      is3D=type.equals("3Dstage");
+      is3D=type.equals("3Dstage")||type.equals("3D blueprint");
       for (int i=1; i<file.size(); i++) {
         try {
           JSONObject ob=file.getJSONObject(i);

@@ -255,6 +255,67 @@ void blueprintEditDraw() {
       }
     }
   }
+  if (workingBlueprint.type.equals("3D blueprint")) {//if the type is a normalk blueprint
+    if (e3DMode) {
+      cam3Dx=0;
+      cam3Dy=0;
+      cam3Dz=0;
+      camera3DpositionNotSimulating();
+      cam3Dx=0;
+      cam3Dy=0;
+      cam3Dz=0;
+      camera(cam3Dx+DX, cam3Dy-DY, cam3Dz-DZ, cam3Dx, cam3Dy, cam3Dz, 0, 1, 0);//set the camera
+      directionalLight(255, 255, 255, 0.8, 1, -0.35);//setr up the lighting
+      ambientLight(102, 102, 102);
+      coinRotation+=3;//rotate the coins
+      if (coinRotation>360)//reset the coin totation if  it is over 360 degrees
+        coinRotation-=360;
+      stroke(255,0,0);
+      strokeWeight(2);
+      line(-700,0,0,700,0,0);//x-axis
+      stroke(0,255,0);
+      line(0,700,0,0,-700,0);
+      stroke(0,0,255);
+      line(0,0,700,0,0,-700);
+      noStroke();
+      for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {//loop through all elements in the blueprint
+        strokeWeight(0);
+        noStroke();
+        if (selectIndex==i) {//blue selection highlighting
+          stroke(#FFFF00);
+          strokeWeight(2);
+        }
+        if (selectedIndex==i) {//yellow selection highlighting
+          stroke(#0A03FF);
+          strokeWeight(2);
+        }
+        workingBlueprint.parts.get(i).draw3D();//draw sll the elements in the blueprint
+        if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
+          viewingItemIndex=i;//set the cuurent viewing item to this element
+        }
+      }
+    }else{
+      camera();//reset the camera
+      drawCamPosX=camPos;//camera positions used for drawing that only gets updted once every fram instead of evcery physics tick
+      drawCamPosY=camPosY;
+      for (int i=0; stageLoopCondishen(i, workingBlueprint); i++) {//loop through all elements in the blueprint
+        strokeWeight(0);
+        noStroke();
+        if (selectIndex==i) {//blue selection highlighting
+          stroke(#FFFF00);
+          strokeWeight(2);
+        }
+        if (selectedIndex==i) {//yellow selection highlighting
+          stroke(#0A03FF);
+          strokeWeight(2);
+        }
+        workingBlueprint.parts.get(i).draw();//draw sll the elements in the blueprint
+        if (viewingItemContents&&viewingItemIndex==-1) {//if the current element has decided that you want to view it's contence but no element has been selected
+          viewingItemIndex=i;//set the cuurent viewing item to this element
+        }
+      }
+    }
+  }
 }
 
 void camera3DpositionSimulating() {

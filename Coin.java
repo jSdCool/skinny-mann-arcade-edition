@@ -33,6 +33,15 @@ class Coin extends StageComponent {//ground component
   StageComponent copy() {
     return new Coin(x, y, z, coinId);
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new Coin(x+offsetX,y+offsetY,coinId);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    return new Coin(x+offsetX,y+offsetY,z+offsetZ,coinId);
+  }
+  
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);
@@ -75,7 +84,15 @@ class Coin extends StageComponent {//ground component
     if (!group.visable)
       return;
     float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY(), playz=source.players[source.currentPlayer].z;
-    boolean collected=source.coins.get(coinId);
+    boolean collected;
+    if (source.editingBlueprint) {
+      collected=false;
+    } else {
+      if (source.coins.size()==0)
+        collected=false;
+      else
+        collected=source.coins.get(coinId);
+    }
 
     if (!collected) {
       source.translate((x+group.xOffset), (y+group.yOffset), (z+group.zOffset));

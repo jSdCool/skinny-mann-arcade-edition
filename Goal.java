@@ -24,6 +24,16 @@ class Goal extends StageComponent {//ground component
   StageComponent copy() {
     return new Goal(x, y);
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new Goal(x+offsetX,y+offsetY);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("attempted to copy a goal in 3D. This opperation is not supported");
+    return null;
+  }
+  
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);

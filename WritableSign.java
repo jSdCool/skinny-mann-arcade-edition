@@ -30,10 +30,23 @@ class WritableSign extends StageComponent {
     contents="";
     type="WritableSign";
   }
+  
   StageComponent copy() {
     WritableSign e=new WritableSign(x, y, z);
     e.contents=contents;
     return  e;
+  }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    WritableSign e = new WritableSign(x+offsetX,y+offsetY);
+    e.contents = contents;
+    return e;
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    WritableSign e = new WritableSign(x+offsetX,y+offsetY,z+offsetZ);
+    e.contents = contents;
+    return e;
   }
 
   void draw() {

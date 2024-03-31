@@ -28,6 +28,15 @@ class DethPlane extends StageComponent {//ground component
   StageComponent copy() {
     return new DethPlane(x, y, dx, dy);
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new DethPlane(x+offsetX,y+offsetY,dx,dy);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("Attempted to create a 3D copy of a deth plane. This opperation is not supported");
+    return null;
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
@@ -49,7 +58,7 @@ class DethPlane extends StageComponent {//ground component
     if (!group.visable)
       return;
     source.fill(-114431);
-    source.rect(source.Scale*((x+group.xOffset)-source.drawCamPosX)-1, source.Scale*((y+group.yOffset)+source.drawCamPosY)-1, source.Scale*dx+2, source.Scale*dy+2);
+    source.rect(source.Scale*((x+group.xOffset)-source.drawCamPosX)-0.02f, source.Scale*((y+group.yOffset)+source.drawCamPosY)-0.02f, source.Scale*dx+0.04f, source.Scale*dy+0.04f);
   }
 
   void draw3D() {

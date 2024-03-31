@@ -26,6 +26,16 @@ class Interdimentional_Portal extends StageComponent {//ground component
   StageComponent copy() {
     return null;
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    System.err.println("Attempted to copy portal. This opperation is not supported");
+    return null;
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("attempted to copy portal. This opperation is not supported");
+    return null;
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();

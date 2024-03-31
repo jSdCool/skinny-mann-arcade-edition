@@ -31,8 +31,18 @@ class Sloap extends StageComponent {//ground component
     direction=rot;
     ccolor=fcolor;
   }
+  
   StageComponent copy() {
     return new Sloap(x, y, dx, dy, direction, ccolor);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new Sloap(x+offsetX,y+offsetY,dx+offsetX,dy+offsetY,direction,ccolor);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("attempted to copy holotriangle in 3D. This opperation is not supported");
+    return null;
   }
 
   JSONObject save(boolean stage_3D) {

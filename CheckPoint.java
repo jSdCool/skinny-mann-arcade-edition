@@ -31,6 +31,14 @@ class CheckPoint extends StageComponent {//ground component
   StageComponent copy() {
     return new CheckPoint(x, y, z);
   }
+  
+  StageComponent copy(float offsetX,float  offsetY){
+    return new CheckPoint(x+offsetX,y+offsetY);
+  }
+  
+  StageComponent copy(float offsetX,float  offsetY,float offsetZ){
+    return new CheckPoint(x+offsetZ,y+offsetY,z+offsetZ);
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();

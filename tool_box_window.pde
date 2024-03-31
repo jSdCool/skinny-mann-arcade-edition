@@ -9,7 +9,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton, tickLogicButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton, tickLogicButton,placeBlueprint3DButton;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -102,6 +102,7 @@ class ToolBox extends PApplet {
     typeGroopName=new Button(this, 680, 190, 400, 30);
     runLoad=new Button(this, 500, 550, 200, 50, "load").setHoverText("run the load logic board");
     tickLogicButton = new Button(this, 500, 650, 200, 50, "tick").setHoverText("run 1 logic tick on the current logic board");
+    placeBlueprint3DButton = new Button(this,590,600,100,50,"Place").setHoverText("place the current blueprint");
 
 
     multyplayerModeSpeedrunButton=new Button(this, 220, 190, 80, 30, "speed run", 255, #F6FF03);
@@ -162,7 +163,7 @@ class ToolBox extends PApplet {
         fill(0);
         textSize(15);
         text("save color", 640, 570);
-        if (level!=null&&level.stages.size()>0&&currentStageIndex!=-1&&level.stages.get(currentStageIndex).type.equals("3Dstage")) {
+        if ((level!=null&&level.stages.size()>0&&currentStageIndex!=-1&&level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
 
           fill(255);
           rect(100, 550, 200, 150);
@@ -570,6 +571,14 @@ class ToolBox extends PApplet {
               drawCoin(605, 65+100, 4);
 
               saveLevel.draw();
+              
+              if (selectingBlueprint) {
+                placeBlueprint.setColor(#0F1AD3, #F2F258);
+              } else {
+                placeBlueprint.setColor(#0F1AD3, 203);
+              }
+              placeBlueprint.draw();
+              
               textAlign(LEFT, BOTTOM);
               toggle3DMode.drawHoverText();
               switch3D1.drawHoverText();
@@ -593,6 +602,7 @@ class ToolBox extends PApplet {
               exitStageEdit.drawHoverText();
               gridModeButton.drawHoverText();
               deleteButton.drawHoverText();
+              placeBlueprint.drawHoverText();
             }//end of if not in 3D mode
             else {
               toggle3DMode.setColor(255, #F2F258);
@@ -714,6 +724,16 @@ class ToolBox extends PApplet {
               rect(315, 60+100, 5, 20);
               rect(298, 60+100, 5, 20);
               rect(307, 60+100, 5, 20);
+              
+              if (selectingBlueprint) {
+                placeBlueprint.setColor(#0F1AD3, #F2F258);
+                if(blueprints.length!=0)
+                  placeBlueprint3DButton.draw();
+              } else {
+                placeBlueprint.setColor(#0F1AD3, 203);
+              }
+              placeBlueprint.draw();
+              
 
               move3DButton.drawHoverText();
               size3DButton.drawHoverText();
@@ -737,6 +757,10 @@ class ToolBox extends PApplet {
               sign.drawHoverText();
               logicButtonButton.drawHoverText();
               deleteButton.drawHoverText();
+              placeBlueprint.drawHoverText();
+              if (selectingBlueprint && blueprints.length != 0) {
+                placeBlueprint3DButton.drawHoverText();
+              }
             }
           }//end of if stage is 3D
 
@@ -887,6 +911,130 @@ class ToolBox extends PApplet {
             draw_holoTriangle.drawHoverText();
             exitStageEdit.drawHoverText();
           }//end of type is blueprint
+          else if (workingBlueprint.type.equals("3D blueprint")) {
+            strokeWeight(0);
+            if (ground) {
+              groundButton.setColor(255, #F2F258);
+            } else {
+              groundButton.setColor(255, 203);
+            }
+            groundButton.draw();
+            fill(-7254783);
+            stroke(-7254783);
+            rect(100, 70+100, 50, 20);
+            fill(-16732415);
+            stroke(-16732415);
+            rect(100, 60+100, 50, 10);
+
+            strokeWeight(0);
+            if (check_point) {
+              checkpointButton.setColor(255, #F2F258);
+            } else {
+              checkpointButton.setColor(255, 203);
+            }
+            checkpointButton.draw();
+            fill(#B9B9B9);
+            strokeWeight(0);
+            rect(168, 45+100, 5, 40);
+            fill(#EA0202);
+            stroke(#EA0202);
+            strokeWeight(0);
+            triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
+            strokeWeight(0);
+
+            textAlign(LEFT, BOTTOM);
+
+            if (grid_mode) {
+              gridModeButton.setColor(255, #F2F258);
+            } else {
+              gridModeButton.setColor(255, 203);
+            }
+            gridModeButton.draw();
+            textSize(20);
+            fill(0);
+            stroke(0);
+            strokeWeight(1);
+            line(410, 42+100, 410, 87+100);
+            line(420, 42+100, 420, 87+100);
+            line(430, 42+100, 430, 87+100);
+            line(440, 42+100, 440, 87+100);
+            line(402, 50+100, 448, 50+100);
+            line(402, 60+100, 448, 60+100);
+            line(402, 70+100, 448, 70+100);
+            line(402, 80+100, 448, 80+100);
+            text(grid_size, 410, 80+100);
+            strokeWeight(0);
+            if (deleteing) {
+              deleteButton.setColor(255, #F2F258);
+            } else {
+              deleteButton.setColor(255, 203);
+            }
+            deleteButton.draw();
+            fill(203);
+            stroke(203);
+            strokeWeight(0);
+            rect(285, 55+100, 40, 5);
+            rect(300, 50+100, 10, 5);
+            rect(290, 60+100, 5, 20);
+            rect(290, 80+100, 30, 5);
+            rect(315, 60+100, 5, 20);
+            rect(298, 60+100, 5, 20);
+            rect(307, 60+100, 5, 20);
+
+            if (drawCoins) {
+              draw_coin.setColor(255, #F2F258);
+            } else {
+              draw_coin.setColor(255, 203);
+            }
+            draw_coin.draw();
+            drawCoin(605, 65+100, 4);
+            
+            if (holo_gram) {
+              holoButton.setColor(255, #F2F258);
+            } else {
+              holoButton.setColor(255, 203);
+            }
+            holoButton.draw();
+            saveLevel.draw();
+            
+            
+            if (!e3DMode) {
+              toggle3DMode.setColor(255, 203);
+              toggle3DMode.draw();
+              exitStageEdit.draw();
+              
+              exitStageEdit.drawHoverText();
+              //end of not in 3D mode
+            }else{
+              toggle3DMode.setColor(255, #F2F258);
+              toggle3DMode.draw();
+              if (current3DTransformMode==2&&selecting) {
+                size3DButton.setColor(255, #F2F258);
+              } else {
+                size3DButton.setColor(255, 203);
+              }
+              size3DButton.draw();
+              if (current3DTransformMode==1&&selecting) {
+                move3DButton.setColor(255, #F2F258);
+              } else {
+                move3DButton.setColor(255, 203);
+              }
+              move3DButton.draw();
+              
+              move3DButton.drawHoverText();
+              size3DButton.drawHoverText();
+            }//end of 3D mode
+            textAlign(LEFT, BOTTOM);
+            toggle3DMode.drawHoverText();
+            groundButton.drawHoverText();
+            gridModeButton.drawHoverText();
+            deleteButton.drawHoverText();
+            holoButton.drawHoverText();
+            draw_coin.drawHoverText();
+            saveLevel.drawHoverText();
+            checkpointButton.drawHoverText();
+            
+          }//end of type is 3D blueprint
         } else if (editinglogicBoard) {
           //draw buttons
           if (connectingLogic) {
@@ -1580,19 +1728,24 @@ class ToolBox extends PApplet {
             if (placeBlueprint.isMouseOver()) {
               turnThingsOff();
 
-              String[] files=new File(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints").list();
+              String[] files=new File(appdata+"/CBi-games/skinny mann level creator/blueprints").list();
               int numofjsons=0;
               for (int i=0; i<files.length; i++) {
                 if (files[i].contains(".json")) {
-                  numofjsons++;
+                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                  if(bpType.equals("blueprint"))
+                    numofjsons++;
                 }
               }
               blueprints=new Stage[numofjsons];
               int pointer=0;
               for (int i=0; i<files.length; i++) {
                 if (files[i].contains(".json")) {
-                  blueprints[pointer]=new Stage(loadJSONArray(System.getenv("AppData")+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
-                  pointer++;
+                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                  if(bpType.equals("blueprint")){
+                    blueprints[pointer]=new Stage(loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
+                    pointer++;
+                  }
                 }
               }
               System.out.println(blueprints.length);
@@ -1758,7 +1911,64 @@ class ToolBox extends PApplet {
                 turnThingsOff();
                 deleteing=true;
               }
+              
+              if (selectingBlueprint && blueprints.length != 0 && placeBlueprint3DButton.isMouseOver()) {
+                StageComponent tmp;
+                Stage current=level.stages.get(currentStageIndex);
+                for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
+                  tmp=blueprints[currentBluieprintIndex].parts.get(i);
+                  //coins are special
+                  if (tmp instanceof Coin) {
+                    Coin g;
+                    //make a copy of the coin for the apprirate dimention 
+                    g=(Coin)tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ);
+
+                    //set the correct ID for the coin
+                    g.coinId = level.numOfCoins;
+                    //add the coin to the stage
+                    current.parts.add(g);
+                    coins.add(false);
+                    level.numOfCoins++;
+                    continue;
+                  }
+                  
+                  
+                  current.parts.add(tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ));//preform a 3D copy on the curernt part and add it to the stage
+                }
+                  
+              }
             }//end of 3D mode is on
+            
+            if (placeBlueprint.isMouseOver()) {
+              turnThingsOff();
+
+              String[] files=new File(appdata+"/CBi-games/skinny mann level creator/blueprints").list();
+              int numofjsons=0;
+              for (int i=0; i<files.length; i++) {
+                if (files[i].contains(".json")) {
+                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                  if(bpType.equals("3D blueprint"))
+                    numofjsons++;
+                }
+              }
+              blueprints=new Stage[numofjsons];
+              int pointer=0;
+              for (int i=0; i<files.length; i++) {
+                if (files[i].contains(".json")) {
+                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                  if(bpType.equals("3D blueprint")){
+                    blueprints[pointer]=new Stage(loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
+                    pointer++;
+                  }
+                }
+              }
+              System.out.println(blueprints.length);
+              selectingBlueprint=true;
+              currentBluieprintIndex=0;
+              blueprintPlacemntX=cam3Dx;
+              blueprintPlacemntY=cam3Dy;
+              blueprintPlacemntZ=cam3Dz;
+            }
           }
 
           if (saveLevel.isMouseOver()) {
@@ -1827,6 +2037,70 @@ class ToolBox extends PApplet {
               editingBlueprint=false;
             }
           }//end of type is blueprint
+          else if (workingBlueprint.type.equals("3D blueprint")) {
+            if (groundButton.isMouseOver()) {
+              turnThingsOff();
+              ground=true;
+            }
+
+            if (deleteButton.isMouseOver()) {
+              turnThingsOff();
+              deleteing=true;
+            }
+
+            if (gridModeButton.isMouseOver()) {
+              grid_mode=!grid_mode;
+            }
+            if (holoButton.isMouseOver()) {
+              turnThingsOff();
+              holo_gram=true;
+            }
+            if (draw_coin.isMouseOver()) {
+              turnThingsOff();
+              drawCoins=true;
+            }
+            if (checkpointButton.isMouseOver()) {
+              turnThingsOff();
+              check_point=true;
+            }
+            
+            if (saveLevel.isMouseOver()) {
+              System.out.println("saving blueprint");
+              workingBlueprint.save();
+              gmillis=millis()+400+millisOffset;
+              System.out.println("save complete"+gmillis);
+            }
+            if (!e3DMode) {
+              if (exitStageEdit.isMouseOver()) {
+                levelCreator=false;
+                editingBlueprint=false;
+              }
+              
+              if (toggle3DMode.isMouseOver()) {
+                e3DMode=true;
+                turnThingsOff();
+                selecting=true;
+                return;
+              }
+              //end of 3D mode off
+            }else{
+              if (toggle3DMode.isMouseOver()) {
+                e3DMode=false;
+                turnThingsOff();
+              }
+              
+              if (size3DButton.isMouseOver()) {
+                current3DTransformMode=2;
+                turnThingsOff();
+                selecting=true;
+              }
+              if (move3DButton.isMouseOver()) {
+                current3DTransformMode=1;
+                turnThingsOff();
+                selecting=true;
+              }
+            }//end of 3D mode on
+          }
         }//end of editing blueprint
         else if (editinglogicBoard) {
           if (connectLogicButton.isMouseOver()) {
@@ -2220,7 +2494,7 @@ class ToolBox extends PApplet {
       if (page.equals("colors")) {
         float wheel_direction = event.getCount()*-1;
 
-        if (level!=null&&level.stages.size()>0&&level.stages.get(currentStageIndex).type.equals("3Dstage")) {
+        if ((level!=null&&level.stages.size()>0&&currentStageIndex!=-1&&level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
           if (mouseX>=100&&mouseX<=300&&mouseY>=550&&mouseY<=700) {
             startingDepth+=wheel_direction*5;
             if (startingDepth<0) {

@@ -1,8 +1,17 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.8.2_Early_Access
+-fixed: coin placement preview was too small in 3D stages
++changed: automatic update installer is now available on Mac OS for future versions
+-fixed: settings menu titles attempting to displaying above the window
+-fixed: default level creator author name not being presistant through game restarts
+-changed: capitlized text on certan buttons
+-changed: reduced certain strage components overscan
+
 0.8.1_Early_Access
-+added: grid mode indicarot in level creator
++added: Universal error handler (crashes will now always show an error window)
++added: grid mode indicator in level creator
 -fixed: tutorial crashing on unix based systems
 +added: new sound type: narration
 -changed: setting version is now 4
@@ -10,8 +19,15 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: new settings page: sound
 -changed: narration mode setting is now under the sound page
 -changed: when adding a sound in the level creator there is now a choice between narration and normal sound
--changed: all prevously added sounds will be treated as narrations by default
--added: narration "notification" when a narrtion sound is playing and the narration volume is less then 20
+-changed: all previously added sounds will be treated as narrations by default
++added: narration "notification" when a narration sound is playing and the narration volume is less then 20
++added: 3D Blueprints in level creator
+-changed: new level complete sound (thanks SuperTylerMan)
++added: new setting disable menu transitions
++added: new setting default level creator author name
+-fixed: level progression bug
++changed: automatic update installer is now available on linux for future versions
++changed: new version of automatic updater, now with new options
 
 0.8.0_Early_Access
 -fixed: update screen button not being centered at all resolutions

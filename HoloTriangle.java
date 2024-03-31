@@ -33,6 +33,15 @@ class HoloTriangle extends StageComponent {//ground component
   StageComponent copy() {
     return new HoloTriangle(x, y, dx, dy, direction, ccolor);
   }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    return new HoloTriangle(x+offsetX,y+offsetY,dx+offsetX,dy+offsetY,direction,ccolor);
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("attempted to copy holotriangle in 3D. This opperation is not supported");
+    return null;
+  }
 
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();

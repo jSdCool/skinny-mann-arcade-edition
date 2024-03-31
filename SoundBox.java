@@ -12,6 +12,7 @@ class SoundBox extends StageComponent {
     y=Y;
     type = "sound box";
   }
+  
   SoundBox(JSONObject data, boolean stage_3D) {
     type = "sound box";
     x=data.getFloat("x");
@@ -75,6 +76,17 @@ class SoundBox extends StageComponent {
     SoundBox e=new SoundBox(x, y);
     e.soundKey=soundKey;
     return  e;
+  }
+  
+  StageComponent copy(float offsetX,float offsetY){
+    SoundBox e = new SoundBox(x+offsetX,y+offsetY);
+    e.soundKey=soundKey;
+    return e;
+  }
+  
+  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+    System.err.println("Attempted to copy sound box in 3D. This opperation is not allowed");
+    return null;
   }
 
   void setData(String data) {
