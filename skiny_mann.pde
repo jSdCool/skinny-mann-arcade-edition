@@ -157,6 +157,7 @@ UiTextBox defaultAuthorNameTextBox;
 PlayerMovementManager playerMovementManager = new PlayerMovementManager();
 CollisionDetection collisionDetection = new CollisionDetection();
 HashMap<String,StageEntity> entityRegistry = new HashMap<>();
+HashMap<String,ButtonMenuConfig> buttonMenuConfigMapping = new HashMap<>();
 StatisticManager stats;
 boolean placingGoon = false;
 //▄
@@ -4557,12 +4558,25 @@ void  initButtons() {
   //settingsOutherMenuConfig.add(new ButtonInMenu(SFXVolumeSlider, 2, 3));
 
   levelCompleteMenuConfig.add(new ButtonInMenu(levelCompleteScreenContinue,0,0));
+  
 
   for(int i=0;i<onScreenKeyboardButtons.length;i++){
     for(int j=0;j<onScreenKeyboardButtons[i].length;j++){
       onScreenKeyboardMenuConfig.add(new ButtonInMenu(onScreenKeyboardButtons[i][j],j,i));
     }
   }
+  
+  buttonMenuConfigMapping.put("main",mainMenuButtonConfig);
+  buttonMenuConfigMapping.put("level select",levelSelectMenuButtonConfig);
+  buttonMenuConfigMapping.put("pause",pauseMenuButtonConfig);
+  buttonMenuConfigMapping.put("level select UGC",levelSelectUGCMenuButtonConfig);
+  buttonMenuConfigMapping.put("settings_game play",settingsGameplayMenuConfig);
+  buttonMenuConfigMapping.put("settings_display",settingsDisplayMenuConfig);
+  buttonMenuConfigMapping.put("settings_sound",settingsSoundMenuConfig);
+  buttonMenuConfigMapping.put("settings_outher",settingsOutherMenuConfig);
+  buttonMenuConfigMapping.put("level complete",levelCompleteMenuConfig);
+  buttonMenuConfigMapping.put("high score",onScreenKeyboardMenuConfig);
+  buttonMenuConfigMapping.put("level select 2",levelSelect2MenuButtonConfig);
 
   //
   currentMenuConfig.set();
@@ -4849,89 +4863,23 @@ void handleControllerState() {
           handleNewMenuButtonSelection(currentMenuConfig.left(currentSelectedButton));
         }
       }
-
-      //check menu switch
-      if (Menue.equals("main")) {
-        if (currentMenuConfig!=mainMenuButtonConfig) {
-          currentMenuConfig.reset();
-          mainMenuButtonConfig.set();
-          currentSelectedButton=0;
-          currentMenuConfig=mainMenuButtonConfig;
-        }
-      } else if (Menue.equals("level select")) {
-        if (currentMenuConfig!=levelSelectMenuButtonConfig) {
-          currentMenuConfig.reset();
-          levelSelectMenuButtonConfig.set();
-          currentSelectedButton=0;
-          currentMenuConfig=levelSelectMenuButtonConfig;
-        }
-      } else if (Menue.equals("pause")) {
-        if (currentMenuConfig!=pauseMenuButtonConfig) {
-          currentMenuConfig.reset();
-          pauseMenuButtonConfig.set();
-          currentSelectedButton=0;
-          currentMenuConfig=pauseMenuButtonConfig;
-        }
-      } else if (Menue.equals("level select UGC")) {
-        if (currentMenuConfig!=levelSelectUGCMenuButtonConfig) {
-          currentMenuConfig.reset();
-          levelSelectUGCMenuButtonConfig.set();
-          currentSelectedButton=0;
-          currentMenuConfig=levelSelectUGCMenuButtonConfig;
-        }
-      } else if (Menue.equals("settings")) {
-        if (settingsMenue.equals("game play")) {
-          if (currentMenuConfig!=settingsGameplayMenuConfig) {
-            currentMenuConfig.reset();
-            settingsGameplayMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=settingsGameplayMenuConfig;
-          }
-        } else if (settingsMenue.equals("display")) {
-          if (currentMenuConfig!=settingsDisplayMenuConfig) {
-            currentMenuConfig.reset();
-            settingsDisplayMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=settingsDisplayMenuConfig;
-          }
-        } else if(settingsMenue.equals("sound")){
-          if (currentMenuConfig!=settingsSoundMenuConfig) {
-            currentMenuConfig.reset();
-            settingsSoundMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=settingsSoundMenuConfig;
-          }
-        }else if (settingsMenue.equals("outher")) {
-          if (currentMenuConfig!=settingsOutherMenuConfig) {
-            currentMenuConfig.reset();
-            settingsOutherMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=settingsOutherMenuConfig;
-          }
-        }
-      }else if(Menue.equals("level complete")){
-        if (currentMenuConfig!=levelCompleteMenuConfig) {
-            currentMenuConfig.reset();
-            levelCompleteMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=levelCompleteMenuConfig;
-          }
-      } else if(Menue.equals("high score")){
-        if (currentMenuConfig!=onScreenKeyboardMenuConfig) {
-            currentMenuConfig.reset();
-            onScreenKeyboardMenuConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=onScreenKeyboardMenuConfig;
-          }
-      } else if(Menue.equals("level select 2")){
-        //
-        if (currentMenuConfig!=levelSelect2MenuButtonConfig) {
-            currentMenuConfig.reset();
-            levelSelect2MenuButtonConfig.set();
-            currentSelectedButton=0;
-            currentMenuConfig=levelSelect2MenuButtonConfig;
-          }
+      
+      //check if the current menu config needs to be changed and chnage it if so
+      ButtonMenuConfig screenConfig;
+      if (Menue.equals("settings")) {
+        screenConfig = buttonMenuConfigMapping.get(Menue+"_"+settingsMenue);
+      }else{
+        screenConfig = buttonMenuConfigMapping.get(Menue);
       }
+      if(screenConfig!=null){
+        if (currentMenuConfig!=screenConfig) {
+          currentMenuConfig.reset();
+          screenConfig.set();
+          currentSelectedButton=0;
+          currentMenuConfig=screenConfig;
+        }
+      }
+      
       if (tutorialMode&&!inGame&&gamepad.y()) {
           Menue="pause";
           inGame=true;
