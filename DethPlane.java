@@ -28,12 +28,12 @@ class DethPlane extends StageComponent {//ground component
   StageComponent copy() {
     return new DethPlane(x, y, dx, dy);
   }
-  
-  StageComponent copy(float offsetX,float offsetY){
-    return new DethPlane(x+offsetX,y+offsetY,dx,dy);
+
+  StageComponent copy(float offsetX, float offsetY) {
+    return new DethPlane(x+offsetX, y+offsetY, dx, dy);
   }
-  
-  StageComponent copy(float offsetX,float offsetY,float offsetZ){
+
+  StageComponent copy(float offsetX, float offsetY, float offsetZ) {
     System.err.println("Attempted to create a 3D copy of a deth plane. This opperation is not supported");
     return null;
   }
@@ -92,5 +92,32 @@ class DethPlane extends StageComponent {//ground component
       return true;
     }
     return false;
+  }
+
+  public Collider2D getCollider2D() {
+    Group group=getGroup();
+    if (!group.visable)
+        return null;
+    return new Collider2D(new PVector[]{
+      new PVector(x+group.xOffset, y+group.yOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset+dy),
+      new PVector(x+group.xOffset, y+group.yOffset+dy)
+      });
+  }
+  public Collider3D getCollider3D() {
+    Group group=getGroup();
+    if (!group.visable)
+        return null;
+    return new Collider3D(new PVector[]{
+      new PVector(x+group.xOffset, y+group.yOffset, z+group.zOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset, z+group.zOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset+dy, z+group.zOffset),
+      new PVector(x+group.xOffset, y+group.yOffset+dy, z+group.zOffset),
+      new PVector(x+group.xOffset, y+group.yOffset, z+group.zOffset+dz),
+      new PVector(x+group.xOffset+dx, y+group.yOffset, z+group.zOffset+dz),
+      new PVector(x+group.xOffset+dx, y+group.yOffset+dy, z+group.zOffset+dz),
+      new PVector(x+group.xOffset, y+group.yOffset+dy, z+group.zOffset+dz)
+      });
   }
 }

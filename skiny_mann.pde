@@ -86,6 +86,11 @@ void setup() {//seccond function called
     println("initilizing CBi sphere");
     initializeSphere(ptsW, ptsH);
     textureSphere(200, 200, 200, CBi);
+
+    //add entites to the entity regisrty
+    entityRegistry.put("simple entity",new SimpleEntity(0,0,0,null));
+    entityRegistry.put("goon",new Goon(0,0,0,null));
+    //start the load thread
     thread("programLoad");
     leaderBoards = new ArcadeLeaderBoard(arcadeLeaderBoardFilePath,this);
     println("leaderBoards:\n"+leaderBoards);
@@ -94,6 +99,7 @@ void setup() {//seccond function called
     println("an error occored in the setup function");
     handleError(e);
   }
+
 }
 //define a shit tone of varibles
 PImage CBi;
@@ -101,9 +107,9 @@ PShape coin3D, redArrow, greenArrow, blueArrow, yellowArrow, redScaler, greenSca
 
 PApplet primaryWindow=this;
 //check carefult when merging
-boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false,newSoundAsNarration =false,newBlueprintIs3D=false;
+boolean menue =true, inGame=false, player1_moving_right=false, player1_moving_left=false, dev_mode=false, player1_jumping=false, dead=false, level_complete=false, reset_spawn=false, fs, E_pressed=false, loopThread2=true, showSettingsAfterStart=false, displayFPS=true, displayDebugInfo=false, prevousInGame=false, setPlayerPosTo=false, e3DMode=false, checkpointIn3DStage=false, WPressed=false, SPressed=false, levelCompleteSoundPlayed=false, tutorialMode=false, shadow3D=true, UGC_lvl=false, levelCompatible=false, editingBlueprint=false, viewingItemContents=false, selecting=false, s3D=false, w3D=false, shift3D=false, space3D=false, d3D=false, a3D=false, cam_down=false, cam_up=false, cam_right=false, cam_left=false, isHost=false, killPhysics=false, enteringName=false, enteringPort=false, enteringIP=false, multiplayer=false, clientQuitting=false, waitingForReady=false, loaded=false, reachedEnd=false, editingStage=false, simulating=false, ground=false, check_point=false, goal=false, deleteing=false, moving_player=false, grid_mode=false, holo_gram=false, drawCoins=false, drawingPortal=false, sloap=false, holoTriangle=false, dethPlane=false, selectingBlueprint=false, placingSound=false, drawingSign=false, placingLogicButton=false, draw3DSwitch1=false, draw3DSwitch2=false, editinglogicBoard=false, connectingLogic=false, moveLogicComponents=false, placingAndGate=false, placingOrGate=false, placingXorGate=false, placingNandGate=false, placingNorGate=false, placingXnorGate=false, placingOnSingal=false, placingReadVariable=false, placingSetVaravle=false, placingSetVisibility=false, placingXOffset=false, placingYOffset=false, placingDelay=false, placingZOffset=false, placing3Dsetter=false, placing3Dreader=false, placingPlaySoundLogic=false, placingPulse=false, placingRandom=false, saveColors=false, levelOverview=false, drawingPortal3=false, placingTestLogic=false, settingPlayerSpawn=false, levelCreator=false, drawing=false, draw=false, delete=false, translateXaxis=false, translateYaxis=false, translateZaxis=false, drawingPortal2=false, startup=false, loading=false, newLevel=false, newFile=false, creatingNewBlueprint=false, entering_name=false, loadingBlueprint=false, entering_file_path=false, coursor=false, connecting=false, movingLogicComponent=false, exitLevelCreator=false, levelNotFound=false, transitioningMenu=false,newSoundAsNarration =false,newBlueprintIs3D = false;
 //check carefult when merging
-String Menue ="creds"/*,level="n"*/, version="0.8.2_Early_Access", EDITOR_version="0.2.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="",defaultAuthor = "can't be botherd to change it",arcadeLeaderBoardFilePath="leaderBoard.csv";
+ String Menue ="creds"/*,level="n"*/, version="0.9.0_Early_Access", EDITOR_version="0.2.0_EAc", ip="localhost", name="can't_be_botherd_to_chane_it", input, file_path, rootPath, stageType="", settingsMenue="game play", author="", displayText="", GAME_version=version, internetVersion, cursor="", disconnectReason="", multyplayerSelectionLevels="speed", multyplayerSelectedLevelPath, appdata, coursorr="", new_name, newFileName="", newFileType="2D", fileToCoppyPath="",defaultAuthor = "can't be botherd to change it";
 ArrayList<Boolean> coins;
 ArrayList<String> UGCNames = new ArrayList<>(), playerNames=new ArrayList<>();
 float Scale =1, Scale2=1, musicVolume=1, sfxVolume=1, gravity=0.001, downX, downY, upX, upY,narrationVolume=1,blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ;
@@ -112,13 +118,12 @@ Player players[] =new Player[10];
 ArrayList<Client> clients= new ArrayList<>();
 
 //check carefult when merging
-int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=4, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55,clearTime;//int
-
+int camPos=0, camPosY=0, death_cool_down, start_down, port=9367, scroll_left, scroll_right, respawnX=20, respawnY=700, respawnZ=150, spdelay=0, vres, hres, respawnStage, stageIndex, coinCount=0, eadgeScroleDist=100, esdPos=800, setPlayerPosX, setPlayerPosY, setPlayerPosZ, gmillis=0, coinRotation=0, vesdPos=800, eadgeScroleDistV=100, settingsVersion=4, musVolSllid=800, sfxVolSllid=800, currentStageIndex, tutorialDrawLimit=0, displayTextUntill=0, tutorialPos=0, currentTutorialSound, tutorialNarrationMode=0, UGC_lvl_indx, selectedIndex=-1, viewingItemIndex=-1, drawCamPosX=0, drawCamPosY=0, currentPlayer=0, currentNumberOfPlayers=10, startTime, bestTime=0, sessionTime=600000, timerEndTime, startingDepth=0, totalDepth=300, grid_size=10, current3DTransformMode=1, currentBluieprintIndex=0, logicBoardIndex=0, Color=0, RedPos=0, BluePos=0, GreenPos=0, RC=0, GC=0, BC=0, triangleMode=0, transformComponentNumber=0, preSI=0, overviewSelection=-1, filesScrole=0, connectingFromIndex=0, movingLogicIndex=0, loadProgress=0, totalLoad=55;//int
 JSONArray  settings, mainIndex, levelProgress, colors;
 //check carefult when merging
-Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12,settingsSND,lc_newSoundAsSoundButton,lc_newSoundAsNarrationButton,levelCompleteScreenContinue,disableMenuTransistionsButton,enableMenuTransitionButton;//button
+Button select_lvl_1, select_lvl_back, select_lvl_2, select_lvl_3, select_lvl_4, select_lvl_5, select_lvl_6, sdSlider, enableFPS, disableFPS, enableDebug, disableDebug, sttingsGPL, settingsDSP, settingsOUT, rez720, rez900, rez1080, rez1440, rez4k, fullScreenOn, fullScreenOff, vsdSlider, MusicSlider, SFXSlider, shadowOn, shadowOff, narrationMode1, narrationMode0, select_lvl_UGC, UGC_open_folder, UGC_lvls_next, UGC_lvls_prev, UGC_lvl_play, levelcreatorLink, select_lvl_7, select_lvl_8, select_lvl_9, select_lvl_10, playButton, joinButton, settingsButton, howToPlayButton, exitButton, downloadUpdateButton, updateGetButton, updateOkButton, dev_main, dev_quit, dev_levels, dev_tutorial, dev_settings, dev_UGC, dev_multiplayer, multyplayerJoin, multyplayerHost, multyplayerExit, multyplayerGo, multyplayerLeave, multyplayerSpeedrun, multyplayerCoop, multyplayerUGC, multyplayerPlay, increaseTime, decreaseTime, pauseRestart, newLevelButton, loadLevelButton, newStage, newFileCreate, newFileBack, edditStage, setMainStage, selectStage, new2DStage, new3DStage, overview_saveLevel, help, newBlueprint, loadBlueprint, createBlueprintGo, addSound, overviewUp, overviewDown, chooseFileButton, lcLoadLevelButton, lcNewLevelButton, dev_levelCreator, lc_backButton, lcOverviewExitButton, lc_exitConfirm, lc_exitCancle, lc_openLevelsFolder, settingsBackButton, pauseResumeButton, pauseOptionsButton, pauseQuitButton, endOfLevelButton,select_lvl_11,select_lvl_12,settingsSND,lc_newSoundAsSoundButton,lc_newSoundAsNarrationButton,levelCompleteScreenContinue,disableMenuTransistionsButton,enableMenuTransitionButton,select_lvl_13,select_lvl_14,select_lvl_next;//button
 //check carefult when merging
-String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access","0.8.2_Early_Access"};
+String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"}, sfxTracks={"data/sounds/level complete.wav"}, compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access","0.8.2_Early_Access","0.9.0_Early_Access"};
 SoundHandler soundHandler;
 Level level;
 JSONObject portalStage1, portalStage2;
@@ -147,6 +152,11 @@ String[] onScreenKeyboardButtonLabels = {"1234567890","qwertyuiop","asdfghjkl","
 
 GamePadWrapper gamepad = new GamePadWrapper();
 UiTextBox defaultAuthorNameTextBox;
+PlayerMovementManager playerMovementManager = new PlayerMovementManager();
+CollisionDetection collisionDetection = new CollisionDetection();
+HashMap<String,StageEntity> entityRegistry = new HashMap<>();
+StatisticManager stats;
+boolean placingGoon = false;
 //▄
 
 
@@ -242,10 +252,13 @@ void draw() {// the function that is called every fraim
           drawMainMenu(true);
         }
         if (Menue.equals("level select")) {//if selecting level
-          drawLevelSelect(true);
+          drawLevelSelect(true,0);
         }
         if (Menue.equals("level select UGC")) {
           drawLevelSelectUGC();
+        }
+        if(Menue.equals("level select 2")){
+         drawLevelSelect2(true);
         }
         if (Menue.equals("pause")) {//when in the pause emnue cancle all motion
           player1_moving_right=false;
@@ -437,7 +450,7 @@ void draw() {// the function that is called every fraim
               multyplayerSpeedrun.setColor(-59135, -35185);
               multyplayerCoop.setColor(-59135, -1791);
               multyplayerUGC.setColor(-59135, -1791);
-              int numOfBuiltInLevels=12;
+              int numOfBuiltInLevels=14;
               calcTextSize("level 30", width*0.1);
               textAlign(CENTER, CENTER);
               for (int i=0; i<numOfBuiltInLevels; i++) {
@@ -706,6 +719,17 @@ void draw() {// the function that is called every fraim
         }
 
         stageLevelDraw();//level draw code
+        
+        //if placing a blueprint in 3D, render the blueprint that is being palced
+        if (e3DMode && selectingBlueprint && blueprints.length!=0){
+          generateDisplayBlueprint3D();
+          renderBlueprint3D();
+          float cdx = blueprintMax[0]-blueprintMin[0];
+          float cdy = blueprintMax[1]-blueprintMin[1];
+          float cdz = blueprintMax[2]-blueprintMin[2];
+          renderTranslationArrows(blueprintMin[0],blueprintMin[1],blueprintMin[2],cdx,cdy,cdz);
+        }
+        
         stageEditGUI();//level gui code
 
         if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
@@ -714,6 +738,7 @@ void draw() {// the function that is called every fraim
             renderBlueprint();//render blueprint
           }
         }
+        engageHUDPosition();
       }
 
       if (levelOverview) {//if on the level overview
@@ -968,6 +993,7 @@ void draw() {// the function that is called every fraim
         }
         blueprintEditDraw();//draw the accual blueprint
         stageEditGUI();//overlays when placing things
+        engageHUDPosition();
       }//end of edit blueprint
 
       if (editinglogicBoard) {//if editing a logic board
@@ -1033,11 +1059,11 @@ void draw() {// the function that is called every fraim
         SPressed=false;
         WPressed=false;
       }
-      if (!inGame) {
+      if(!inGame){
         dead=false;
       }
     }
-
+    
     if (settingPlayerSpawn && levelCreator) {
       draw_mann(mouseX, mouseY, 1, Scale, 0);
       fill(0);
@@ -1094,7 +1120,6 @@ void draw() {// the function that is called every fraim
     if(soundHandler!=null && narrationVolume< 0.2 && soundHandler.anyNarrationPlaying()){
       fill(255);
       narrationCaptionText.draw();
-
     }
     //TODO: text stuff for multyplayer in game
     if (multiplayer&&inGame) {
@@ -1202,6 +1227,7 @@ void draw() {// the function that is called every fraim
     catch(Exception e) {
     }
   }
+
 }
 
 
@@ -1291,25 +1317,30 @@ void mouseClicked() {// when you click the mouse
             menue=false;
             inGame=true;
           }
-
-          if (select_lvl_11.isMouseOver()&&progress>=11) {
+          
+          if(select_lvl_11.isMouseOver()&&progress>=11){
             loadLevel("data/levels/level-11");
             menue=false;
             inGame=true;
           }
-
-          if (select_lvl_12.isMouseOver()&&progress>=12) {
+          
+          if(select_lvl_12.isMouseOver()&&progress>=12){
             loadLevel("data/levels/level-12");
             menue=false;
             inGame=true;
           }
-
-
+          
+          
 
           if (select_lvl_back.isMouseOver()) {
             Menue="main";
             menue=false;
             initMenuTransition(Transitions.LEVEL_SELECT_TO_MAIN);
+          }
+          if (select_lvl_next.isMouseOver()) {
+            Menue="level select 2";
+            menue=false;
+            initMenuTransition(Transitions.LEVEL_SELECT_TO_LEVEL_SELECT_2);
           }
           if (select_lvl_UGC.isMouseOver()) {
             Menue="level select UGC";
@@ -1323,6 +1354,26 @@ void mouseClicked() {// when you click the mouse
 
           return;
         }
+        if (Menue.equals("level select 2")) {//if that menue is level select
+          int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+          if (select_lvl_13.isMouseOver()&&progress>=13) {
+            loadLevel("data/levels/level-13");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_2.isMouseOver()&&progress>=14) {
+            loadLevel("data/levels/level-14");
+            menue=false;
+            inGame=true;
+          }
+
+          if (select_lvl_back.isMouseOver()) {
+            Menue="level select";
+            menue=false;
+            initMenuTransition(Transitions.LEVEL_SELECT_2_TO_LEVEL_SELECT);
+          }
+        }
+
         if (Menue.equals("level select UGC")) {
           if (select_lvl_back.isMouseOver()) {
             Menue="level select";
@@ -1401,6 +1452,8 @@ void mouseClicked() {// when you click the mouse
               }
             } else {
               Menue="level select";
+              stats.incrementGamesQuit();
+              stats.save();
             }
             soundHandler.setMusicVolume(musicVolume);
             coinCount=0;
@@ -1428,6 +1481,7 @@ void mouseClicked() {// when you click the mouse
               scroll.setInt("horozontal", (int)horozontalEdgeScrollSlider.getValue());
               settings.setJSONObject(1, scroll);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (verticleEdgeScrollSlider.button.isMouseOver()) {
@@ -1436,6 +1490,7 @@ void mouseClicked() {// when you click the mouse
               scroll.setInt("vertical", (int)verticleEdgeScrollSlider.getValue());
               settings.setJSONObject(1, scroll);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
           }//end of game play settings
 
@@ -1451,6 +1506,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (rez1440.isMouseOver()) {// 1440 resolition button
@@ -1462,6 +1518,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (rez1080.isMouseOver()) {// 1080 resolution button
@@ -1473,6 +1530,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (rez900.isMouseOver()) {////900 resolution button
@@ -1484,6 +1542,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (rez720.isMouseOver()) {// 720 resolution button
@@ -1495,6 +1554,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
 
@@ -1503,6 +1563,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
 
             if (fullScreenOff.isMouseOver()) {//turn fullscreen off button
@@ -1510,6 +1571,7 @@ void mouseClicked() {// when you click the mouse
 
               settings.setJSONObject(2, rez);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
           }//end of display settings menue
 
@@ -1526,6 +1588,7 @@ void mouseClicked() {// when you click the mouse
               settings.setJSONObject(4, scroll);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setMusicVolume(musicVolume);
+              stats.incrementSettingsChnaged();
             }
             if (SFXVolumeSlider.button.isMouseOver()) {
               sfxVolume=SFXVolumeSlider.getValue()/100.0;
@@ -1534,6 +1597,7 @@ void mouseClicked() {// when you click the mouse
               settings.setJSONObject(4, scroll);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setSoundsVolume(sfxVolume);
+              stats.incrementSettingsChnaged();
             }
             if (narrationVolumeSlider.button.isMouseOver()) {
               narrationVolume=narrationVolumeSlider.getValue()/100.0;
@@ -1542,6 +1606,7 @@ void mouseClicked() {// when you click the mouse
               settings.setJSONObject(4, scroll);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
               soundHandler.setNarrationVolume(narrationVolume);
+              stats.incrementSettingsChnaged();
             }
             
             if (narrationMode0.isMouseOver()) {
@@ -1550,6 +1615,7 @@ void mouseClicked() {// when you click the mouse
               tutorialNarrationMode=0;
               settings.setJSONObject(4, sv3);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             if (narrationMode1.isMouseOver()) {
               JSONObject sv3=settings.getJSONObject(4);
@@ -1557,6 +1623,7 @@ void mouseClicked() {// when you click the mouse
               tutorialNarrationMode=1;
               settings.setJSONObject(4, sv3);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             
           }//end of sound settings
@@ -1567,24 +1634,28 @@ void mouseClicked() {// when you click the mouse
               displayFPS=true;
               settings.setJSONObject(3, debug);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             if (disableFPS.isMouseOver()) {
               debug.setBoolean("fps", false);
               displayFPS=false;
               settings.setJSONObject(3, debug);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             if (enableDebug.isMouseOver()) {
               debug.setBoolean("debug info", true);
               displayDebugInfo=true;
               settings.setJSONObject(3, debug);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             if (disableDebug.isMouseOver()) {
               debug.setBoolean("debug info", false);
               displayDebugInfo=false;
               settings.setJSONObject(3, debug);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             
             if (shadowOn.isMouseOver()) {
@@ -1593,6 +1664,7 @@ void mouseClicked() {// when you click the mouse
               shadow3D=true;
               settings.setJSONObject(5, sv3);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             if (shadowOff.isMouseOver()) {
               JSONObject sv3=settings.getJSONObject(5);
@@ -1600,6 +1672,7 @@ void mouseClicked() {// when you click the mouse
               shadow3D=false;
               settings.setJSONObject(5, sv3);
               saveLoadJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json",true);
+              stats.incrementSettingsChnaged();
             }
             
             if(enableMenuTransitionButton.isMouseOver()){
@@ -1608,19 +1681,21 @@ void mouseClicked() {// when you click the mouse
               disableMenuTransitions=false;
               settings.setJSONObject(5, sv3);
               saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              stats.incrementSettingsChnaged();
             }
-
+            
             if(disableMenuTransistionsButton.isMouseOver()){
               JSONObject sv3=settings.getJSONObject(5);
               sv3.setBoolean("disableMenuTransitions", true);
               disableMenuTransitions=true;
               settings.setJSONObject(5, sv3);
               saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
+              stats.incrementSettingsChnaged();
             }
 
 
             defaultAuthorNameTextBox.mouseClicked();
-
+            
           }//end of outher settings menue
 
           if (sttingsGPL.isMouseOver()){
@@ -1649,6 +1724,7 @@ void mouseClicked() {// when you click the mouse
               menue=false;
               initMenuTransition(Transitions.SETTINGS_TO_MAIN);
             }
+            stats.save();
           }
         }
 
@@ -1760,7 +1836,7 @@ void mouseClicked() {// when you click the mouse
             if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
               int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
               if (multyplayerSelectionLevels.equals("speed")) {
-                if (slotSelected<=11) {//set speed run max levels here for selection
+                if (slotSelected<=13) {//set speed run max levels here for selection
                   multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
                   genSelectedInfo(multyplayerSelectedLevelPath, false);
                 }
@@ -1888,7 +1964,7 @@ void mouseClicked() {// when you click the mouse
         }
       }
       if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
-        if (mouseX >= 550*Scale && mouseX <= 750*Scale && mouseY >= 450*Scale && mouseY <= 490*Scale) {//continue button
+        if (endOfLevelButton.isMouseOver()) {//continue button
           if (multiplayer) {
             menue=true;
             inGame=false;
@@ -1911,6 +1987,8 @@ void mouseClicked() {// when you click the mouse
             } else {
               UGC_lvl=false;
             }
+            stats.incrementLevelsCompleted();
+            stats.save();
           }
         }
       }
@@ -2214,7 +2292,7 @@ void mouseClicked() {// when you click the mouse
               camPos=-640;
               camPosY=360;
               rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
-
+              
             }//end of name was enterd
           }//end of create button
           if (lc_backButton.isMouseOver()) {
@@ -2339,6 +2417,7 @@ void mouseClicked() {// when you click the mouse
             levelCreator=false;
             inGame=false;
             menue=true;
+            
           }
 
           if (lc_exitCancle.isMouseOver()) {
@@ -2368,13 +2447,13 @@ void keyPressed() {// when a key is pressed
         Menue="pause";
       }
       if (keyCode==65) {//if A is pressed
-        player1_moving_left=true;
+        playerMovementManager.setLeft(true);
       }
       if (keyCode==68) {//if D is pressed
-        player1_moving_right=true;
+        playerMovementManager.setRight(true);
       }
       if (keyCode==32) {//if space is pressed
-        player1_jumping=true;
+        playerMovementManager.setJump(true);
       }
       if (dev_mode) {//if in dev mode
         if (keyCode==81) {//if q is pressed print the player position
@@ -2386,13 +2465,12 @@ void keyPressed() {// when a key is pressed
       }
       if (e3DMode) {
         if (keyCode==87) {//w
-          WPressed=true;
+          playerMovementManager.setIn(true);
         }
         if (keyCode==83) {//s
-          SPressed=true;
+          playerMovementManager.setOut(true);
         }
-      }//end of 3d mode
-      if (e3DMode) {
+      //level creator camera controlls
         if (keyCode==65) {//if 'A' is pressed
           a3D=true;
         }
@@ -2456,7 +2534,7 @@ void keyPressed() {// when a key is pressed
           if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
             JSONObject sv3=settings.getJSONObject(5);
             String newName =  defaultAuthorNameTextBox.getContence();
-
+            
             if(!newName.isEmpty()){
               defaultAuthor = newName;
             }else{
@@ -2531,9 +2609,9 @@ void keyPressed() {// when a key is pressed
       }
     }
     if (levelCreator) {
-      if (key == ESC) {
+      if (key == ESC){
         key=0;
-        return;
+        return;  
       }
       if (editingStage||editingBlueprint) {//if edditng a stage
         if (key=='r'||key=='R') {//if 'R' is pressed
@@ -2636,32 +2714,29 @@ void keyPressed() {// when a key is pressed
   catch(Throwable e) {
     handleError(e);
   }
-  if (key =='l') {
-    killPhysics=true;
-  }
 }
 
 void keyReleased() {//when you release a key
   try {
     if (inGame||(levelCreator&&editingStage)) {//whehn in game
       if (keyCode==65) {//if A is released
-        player1_moving_left=false;
+        playerMovementManager.setLeft(false);
       }
       if (keyCode==68) {//if D is released
-        player1_moving_right=false;
+        playerMovementManager.setRight(false);
       }
       if (keyCode==32) {//if SPACE is released
-        player1_jumping=false;
+        playerMovementManager.setJump(false);
       }
       if (key=='e'||key=='E') {
         E_pressed=false;
       }
       if (e3DMode) {
         if (keyCode==87) {//w
-          WPressed=false;
+          playerMovementManager.setIn(false);
         }
         if (keyCode==83) {//s
-          SPressed=false;
+          playerMovementManager.setOut(false);
         }
       }//end of 3d mode
       if (e3DMode) {
@@ -2757,7 +2832,7 @@ void keyTyped(){
         if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
           JSONObject sv3=settings.getJSONObject(5);
           String newName =  defaultAuthorNameTextBox.getContence();
-
+          
           if(!newName.isEmpty()){
             defaultAuthor = newName;
           }else{
@@ -2860,13 +2935,13 @@ void updateSettingsFromSliderValues(){
   sfxVolume=SFXVolumeSlider.getValue()/100.0;
   scroll.setFloat("SFX volume", SFXVolumeSlider.getValue()/100.0);
   soundHandler.setSoundsVolume(sfxVolume);
-  
-  
+
+
   narrationVolume=narrationVolumeSlider.getValue()/100.0;
   scroll=settings.getJSONObject(4);
   scroll.setFloat("narration volume", narrationVolumeSlider.getValue()/100.0);
   soundHandler.setNarrationVolume(narrationVolume);
-  
+
   settings.setJSONObject(4, scroll);
 
 
@@ -2895,29 +2970,38 @@ void loadLevel(String path) {
 
 int curMills=0, lasMills=0, mspc=0;
 
+/**physics thread main loop
+*/
 void thrdCalc2() {
 
+  //while the thread should be active
   while (loopThread2) {
+    //calculate how long has passed since the last time the loop started
     curMills=millis();
     mspc=curMills-lasMills;
 
     ReadController.read(gamepad);
     handleControllerState();
 
+
+    //run tutorial logic if in the tutorial
     if (tutorialMode) {
       tutorialLogic();
     }
+    //if in game or in the levelcreator while editing a stage
     if (inGame||(levelCreator&&editingStage)) {
+      //calcualte a frame of player physics
       try {
         playerPhysics();
       }
       catch(Throwable e) {
+        e.printStackTrace();
       }
     } else {
       if (logicTickingThread.isAlive()) {//if the ticking thread is running when we dont want it to be
         logicTickingThread.shouldRun=false;//then stop it
       }
-      random(10);//some how make it so it doesent stop the thread
+      random(10);//some how make it so processing doesent stop the thread(also increase CPU useage :D )
     }
     lasMills=curMills;
     //println(mspc);
@@ -2961,7 +3045,7 @@ void mousePressed() {
           if (editingBlueprint) {
             ct = workingBlueprint.parts.get(selectedIndex);
           }
-
+        
         for (int i=0; i<5000; i++) {
           Point3D testPoint=genMousePoint(i);
           if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
@@ -3004,7 +3088,7 @@ void mousePressed() {
         initalObjectPos=new Point3D(ct.x, ct.y, ct.z);
         initialObjectDim=new Point3D(ct.dx, ct.dy, ct.dz);
       }
-
+      
       //placing a blueprint in 3D movement
       if (e3DMode && selectingBlueprint && blueprints.length!=0){
         float cdx = blueprintMax[0]-blueprintMin[0];
@@ -3149,7 +3233,7 @@ void drawMainMenu(boolean background) {
 
   fill(255);
   mm_version.draw();
-  
+
   fill(0,30,255);
   mainMenuWebsite.draw();
 }
@@ -3311,7 +3395,7 @@ void drawSettings() {
       } else {
         chechMark(shadowOn.x+shadowOn.lengthX/2, shadowOn.y+shadowOn.lengthY/2);
       }
-
+      
       if(!disableMenuTransitions){
         chechMark(enableMenuTransitionButton.x+enableMenuTransitionButton.lengthX/2, enableMenuTransitionButton.y+enableMenuTransitionButton.lengthY/2);
       } else {
@@ -3330,14 +3414,18 @@ void drawSettings() {
   settingsBackButton.draw();
 }//end of draw settings
 
-void drawLevelSelect(boolean bcakground) {
+void drawLevelSelect(boolean bcakground,int gc) {
   levelCompleteSoundPlayed=false;
   if (bcakground)
     background(7646207);
-  fill(-16732415);
-  stroke(-16732415);
+  if(bcakground){
+    fill(-16732415);
+    stroke(-16732415);
+  }else{
+    fill(gc);
+  }
   strokeWeight(0);
-  rect(0, height/2, width, height/2);//green rectangle
+  rect(0, height/2, width, height);//green rectangle
   fill(0);
   ls_levelSelect.draw();
   int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
@@ -3386,12 +3474,12 @@ void drawLevelSelect(boolean bcakground) {
   } else {
     select_lvl_10.setColor(-59135, -1791);
   }
-  if (progress < 11) {
+  if (progress < 11){
     select_lvl_11.setColor(#B40F00, #B4AF00);
   } else {
     select_lvl_11.setColor(-59135, -1791);
   }
-  if (progress < 12) {
+  if (progress < 12){
     select_lvl_12.setColor(#B40F00, #B4AF00);
   } else {
     select_lvl_12.setColor(-59135, -1791);
@@ -3410,6 +3498,30 @@ void drawLevelSelect(boolean bcakground) {
   select_lvl_12.draw();
   select_lvl_back.draw();
   select_lvl_UGC.draw();
+  select_lvl_next.draw();
+}
+
+void drawLevelSelect2(boolean bcakground){
+  levelCompleteSoundPlayed=false;
+  if (bcakground)
+    background(#66696F);
+  fill(0);
+  ls_levelSelect.draw();
+  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+  if (progress<13) {
+    select_lvl_13.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_13.setColor(-59135, -1791);
+  }
+  if (progress<14) {
+    select_lvl_14.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_14.setColor(-59135, -1791);
+  }
+
+  select_lvl_13.draw();
+  select_lvl_14.draw();
+  select_lvl_back.draw();
 }
 
 void drawLevelSelectUGC() {
@@ -3475,7 +3587,7 @@ void generateSettings() {
   sv3.setString("label","outher");
   sv3.setBoolean("disableMenuTransitions",false);
   sv3.setString("default author", defaultAuthor);
-
+  
   settings.setJSONObject(5, sv3);
 
   saveJSONArray(settings, appdata+"/CBi-games/skinny mann/settings.json");
@@ -3488,18 +3600,18 @@ void chechMark(float x, float y) {
 
 void tutorialLogic() {
   if (tutorialPos==0) {
-    soundHandler.setMusicVolume(0.01);
+    soundHandler.setMusicVolume(0.01*musicVolume);
     currentTutorialSound=0;
     soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
     tutorialPos++;
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
   }
   if (tutorialPos==1) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=1;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3507,9 +3619,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==2) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       loadLevel("data/levels/tutorial");
       inGame=true;
@@ -3520,9 +3632,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==3) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=3;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3530,9 +3642,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==4) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=4;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3540,8 +3652,8 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==5) {
-    player1_moving_left=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=5;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3549,7 +3661,7 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==6) {
-    player1_jumping=false;
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       currentTutorialSound=6;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3557,13 +3669,13 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==7) {
-    player1_jumping=false;
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
   if (tutorialPos==8) {
-    player1_jumping=false;
+    playerMovementManager.setJump(false);
     if (players[currentPlayer].x>=1604) {
       currentTutorialSound=7;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3572,15 +3684,15 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==9) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
   }
   if (tutorialPos==10) {
-    player1_jumping=false;
+    playerMovementManager.setJump(false);
     if (dead) {
       currentTutorialSound=8;
       soundHandler.playNarration(tutorialNarration[tutorialNarrationMode][currentTutorialSound]);
@@ -3602,9 +3714,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==13) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
       tutorialDrawLimit=28;
@@ -3619,9 +3731,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==15) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
     }
@@ -3656,9 +3768,9 @@ void tutorialLogic() {
     }
   }
   if (tutorialPos==20) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       tutorialPos++;
       tutorialDrawLimit=600;
@@ -3686,9 +3798,9 @@ void tutorialLogic() {
   }
 
   if (tutorialPos==24) {
-    player1_moving_left=false;
-    player1_moving_right=false;
-    player1_jumping=false;
+    playerMovementManager.setLeft(false);
+    playerMovementManager.setRight(false);
+    playerMovementManager.setJump(false);
     if (!soundHandler.isNarrationPlaying(tutorialNarration[tutorialNarrationMode][currentTutorialSound])) {
       soundHandler.setMusicVolume(musicVolume);
       tutorialMode=false;
@@ -3797,14 +3909,14 @@ void glitchEffect() {
   //n=9;
   int bsep = glitchBoxes.size()/bsepnum;
   strokeWeight(0);
-  for (int i=0; i<bsep; i++) {
+  for(int i=0;i<bsep;i++){
     glitchBoxes.get(i+bsep*n).draw();
   }
 }
 
-class GlitchBox {
-  int x, y, w, h, c;
-  GlitchBox(String in) {
+class GlitchBox{
+  int x,y,w,h,c;
+  GlitchBox(String in){
     String[] bs = in.split(",");
     x=Integer.parseInt(bs[0]);
     y=Integer.parseInt(bs[1]);
@@ -3812,10 +3924,10 @@ class GlitchBox {
     h=Integer.parseInt(bs[3]);
     c=Integer.parseInt(bs[4]);
   }
-
-  void draw() {
-    fill(c, 128);
-    rect(ui.topX()+x*ui.scale(), ui.topY()+y*ui.scale(), w*ui.scale(), h*ui.scale());
+  
+  void draw(){
+    fill(c,128);
+    rect(ui.topX()+x*ui.scale(),ui.topY()+y*ui.scale(),w*ui.scale(),h*ui.scale());
   }
 }
 
@@ -3829,6 +3941,8 @@ void sourceInitilize() {
   LogicComponent.source=this;
   Client.source=this;
   Server.source=this;
+  Player.source=this;
+  StageEntityCollisionManager.set(this);
 }
 
 void networkError(Throwable error) {
@@ -3954,6 +4068,7 @@ String formatMillis(int millis) {
   float secs=(millis/1000.0)-mins*60;
   return mins+":"+String.format("%.3f", secs);
 }
+
 
 void programLoad() {
   println("loading 3D coin modle");
@@ -4178,12 +4293,15 @@ void programLoad() {
   narrationVolumeSlider.setValue(narrationVolume*100);
   verticleEdgeScrollSlider.setValue(eadgeScroleDistV);
   horozontalEdgeScrollSlider.setValue(eadgeScroleDist);
-
+  
   String[] rawGlitchBoxes = loadStrings("data/glitch.txt");
   loadProgress++;
-  for (int i=0; i<rawGlitchBoxes.length; i++) {
+  for(int i=0;i<rawGlitchBoxes.length;i++){
     glitchBoxes.add(new GlitchBox(rawGlitchBoxes[i]));
   }
+
+  println("loading stats");
+  stats = new StatisticManager(appdata+"/CBi-games/skinny mann/stats.json",this);
 
   println("starting physics thread");
   thread("thrdCalc2");
@@ -4196,6 +4314,7 @@ void programLoad() {
 void  initButtons() {
   select_lvl_1=new UiButton(ui, (100), (100), (200), (100), "lvl 1", -59135, -1791).setStrokeWeight( (10));
   select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "Back", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_next=new UiButton(ui, (600), (600), (200), (50), "Next", -59135, -1791).setStrokeWeight( (10));
   select_lvl_2 =new UiButton(ui, (350), (100), (200), (100), "lvl 2", -59135, -1791).setStrokeWeight( (10));
   select_lvl_3 =new UiButton(ui, (600), (100), (200), (100), "lvl 3", -59135, -1791).setStrokeWeight( (10));
   select_lvl_4 =new UiButton(ui, (850), (100), (200), (100), "lvl 4", -59135, -1791).setStrokeWeight( (10));
@@ -4239,8 +4358,8 @@ void  initButtons() {
   select_lvl_8 =new UiButton(ui, (850), (250), (200), (100), "lvl 8", -59135, -1791).setStrokeWeight( (10));
   select_lvl_9 = new UiButton(ui, (100), (400), (200), (100), "lvl 9", -59135, -1791).setStrokeWeight( (10));
   select_lvl_10 = new UiButton(ui, (350), (400), (200), (100), "lvl 10", -59135, -1791).setStrokeWeight( (10));
-  select_lvl_11 = new UiButton(ui, 600, 400, 200, 100, "lvl 11", -59135, -1791).setStrokeWeight(10);
-  select_lvl_12 = new UiButton(ui, 850, 400, 200, 100, "lvl 12", -59135, -1791).setStrokeWeight(10);
+  select_lvl_11 = new UiButton(ui, 600, 400, 200, 100 , "lvl 11",-59135, -1791).setStrokeWeight(10);
+  select_lvl_12 = new UiButton(ui, 850, 400, 200, 100, "lvl 12",-59135, -1791).setStrokeWeight(10);
   playButton=new UiButton(ui, 540, 310, 200, 50, "Play", #FF1900, #FFF900).setStrokeWeight(10);
   mainMenuButtonConfig.add(new ButtonInMenu(playButton, 0, 0));
   exitButton=new UiButton(ui, 540, 470, 200, 50, "Exit", #FF1900, #FFF900).setStrokeWeight(10);
@@ -4261,6 +4380,8 @@ void  initButtons() {
   endOfLevelButton = new UiButton(ui, 550, 450, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
   enableMenuTransitionButton = new UiButton(ui, (1130), (260), (40), (40), 255, 0).setStrokeWeight(5);
   disableMenuTransistionsButton = new UiButton(ui, (1200), (260), (40), (40), 255, 0).setStrokeWeight(5);
+  select_lvl_13 = new UiButton(ui, (100), (100), (200), (100), "lvl 13", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_14 = new UiButton(ui, (350), (100), (200), (100), "lvl 14", -59135, -1791).setStrokeWeight( (10));
 
 
 
@@ -4326,7 +4447,7 @@ void  initButtons() {
   lc_exitCancle = new UiButton(ui, 840, 400, 200, 50, "Cancle", #BB48ED, #4857ED).setStrokeWeight(10);
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
-
+  
   defaultAuthorNameTextBox = new UiTextBox(ui,900,330,340,40).setColors(#FFFFFF,0).setStrokeWeight(5).setTextSize(26).setPlaceHolder("Name Goes Here").setContence(defaultAuthor);
 
   levelCompleteScreenContinue = new UiButton(ui,550, 620, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
@@ -4421,7 +4542,7 @@ void  initButtons() {
   settingsOutherMenuConfig.add(new ButtonInMenu(shadowOn, 3, 2));
   settingsOutherMenuConfig.add(new ButtonInMenu(enableMenuTransitionButton, 2, 3));
   settingsOutherMenuConfig.add(new ButtonInMenu(disableMenuTransistionsButton, 3, 3));
-  
+
   //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode0, 2, 5));
   //settingsOutherMenuConfig.add(new ButtonInMenu(narrationMode1, 3, 5));
   //settingsOutherMenuConfig.add(new ButtonInMenu(musicVolumeSlider, 2, 2));
@@ -4540,6 +4661,7 @@ void turnThingsOff() {
   placingPlaySoundLogic=false;
   placingPulse=false;
   placingRandom=false;
+  placingGoon=false;
 }
 
 void fileSelected(File selection) {
@@ -4665,7 +4787,7 @@ void initText() {
   enterNameText = new UiText(ui,"Enter Name",640,40,50,CENTER,CENTER);
   highScoreName = new UiText(ui,"NAME HERE",640,150,60,CENTER,CENTER);
   yourScore = new UiText(ui,"Your Time: 0:0:0",640,120,30,CENTER,CENTER);
-  
+
   mainMenuWebsite = new UiText(ui, "More at: https://cbi-games.org",640,415,60,CENTER,CENTER);
 }
 

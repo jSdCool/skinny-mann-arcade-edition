@@ -127,6 +127,10 @@ class Client extends Thread {
             //respond with the data
             dataToSend.add(new LevelFileComponentData(sendBytes));
           }
+          if(di instanceof KillEntityDataPacket){
+            KillEntityDataPacket ke = (KillEntityDataPacket)di;
+            source.level.stages.get(ke.getStage()).entities.get(ke.getIndex()).kill();
+          }
         }
 
         ArrayList<String> names=new ArrayList<>();
@@ -152,6 +156,13 @@ class Client extends Thread {
           }
           if (source.level.multyplayerMode==2) {
             dataToSend.add(new CoOpStateInfo(source.level.variables, source.level.groups, source.level_complete));
+            
+            //send the lient info aboutb all entities in the level                            
+            for(int i=0;i<source.level.stages.size();i++){
+              for(int j=0;j<source.level.stages.get(i).entities.size();j++){
+                dataToSend.add(new MultyPlayerEntityInfo(i,j,source.level.stages.get(i).entities.get(j)));
+              }
+            }
           }
         }
         //create the next packet to send
@@ -292,6 +303,11 @@ class Client extends Thread {
               currentDownloadingFile[j+currentDownloadblock*blockSize] = lfcd.data[j];
             }
             getNextLevelComponent();
+          }
+          if(di instanceof MultyPlayerEntityInfo){
+            MultyPlayerEntityInfo mei = (MultyPlayerEntityInfo)di;
+            mei.setPos(source.level.stages.get(mei.getStage()).entities.get(mei.getIndex()));
+            mei.setDead(source.level.stages.get(mei.getStage()).entities.get(mei.getIndex()));
           }
         }
 

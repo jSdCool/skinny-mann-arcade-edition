@@ -109,7 +109,6 @@ class Level implements Serializable {
           levelCompleteBoard=logicBoards.size()-1;
           System.out.print(" board id set to: "+levelCompleteBoard);
         }
-        System.out.println("");
       }
     }
     source.coins=new ArrayList<Boolean>();
@@ -128,7 +127,7 @@ class Level implements Serializable {
       levelCompleteBoard=2;
     }
     System.out.println("level load complete");
-  }
+  }//end of constructor
 
   void psudoLoad() {
     System.out.println("psudo loading level");
@@ -175,6 +174,7 @@ class Level implements Serializable {
     source.respawnY=(int)RespawnY;
     source.respawnStage=source.currentStageIndex;
     logicBoards.get(loadBoard).superTick();
+    respawnEntities();
   }
 
   void reloadCoins() {
@@ -271,5 +271,11 @@ class Level implements Serializable {
       }
     }
     return names;
+  }
+  
+  void respawnEntities(){
+    for(Stage s : stages){
+      s.respawnEntities();
+    }
   }
 }

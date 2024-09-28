@@ -9,7 +9,8 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton, tickLogicButton,placeBlueprint3DButton;
+  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton, tickLogicButton,placeBlueprint3DButton,respawnEntitiesButton;
+  Button goonEntity;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
   public void settings() {
@@ -18,6 +19,7 @@ class ToolBox extends PApplet {
   }
   void setup() {
     textSize(50);
+    //all page buttons
     colorPage=new Button(this, 50, 50, 100, 50, "colors/depth");
     toolsPage=new Button(this, 155, 50, 100, 50, "tools");
     selectionPage=new Button(this, 260, 50, 100, 50, "selection");
@@ -27,7 +29,8 @@ class ToolBox extends PApplet {
 
     prevousPlayerButton=new Button(this, 330, 105, 28, 28, "<");
     nextPlayerButton=new Button(this, 400, 105, 28, 28, ">");
-
+    
+    //stage editing tools
     toggle3DMode=new Button(this, 820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
     switch3D1=new Button(this, 880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
     switch3D2=new Button(this, 940, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D off switch");
@@ -60,7 +63,9 @@ class ToolBox extends PApplet {
     logicButtonButton=new Button(this, 100, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place button");
     move3DButton=new Button(this, 160, 200, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
     size3DButton=new Button(this, 220, 200, 50, 50, "size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
+    goonEntity = new Button(this,280,200,50,50,255,203).setStrokeWeight(5).setHoverText("Goon");
 
+    //logic editor tools
     connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
     moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
     andGateButton=new Button(this, 160, 40+100, 50, 50, "AND", 255, 203).setStrokeWeight(5).setHoverText("and gate");
@@ -84,7 +89,8 @@ class ToolBox extends PApplet {
     playLogicSoundButton=new Button(this, 280, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play sounds woth logic");
     pulseButton=new Button(this, 340, 200, 50, 50, "pulse", 255, 203).setStrokeWeight(5).setHoverText("generates a 1 tick pulse");
     randomButton= new Button(this, 400, 200, 50, 50, "random", 255, 203).setStrokeWeight(5).setHoverText("sets its output randomly each tick");
-
+    
+    //variables and groups buttons
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
     increaseMore=new Button(this, width/2+240, height*0.5, 50, 50, "++", 255, 203).setStrokeWeight(5);
     increaseAlot=new Button(this, width/2+300, height*0.5, 50, 50, "+++", 255, 203).setStrokeWeight(5);
@@ -104,13 +110,14 @@ class ToolBox extends PApplet {
     tickLogicButton = new Button(this, 500, 650, 200, 50, "tick").setHoverText("run 1 logic tick on the current logic board");
     placeBlueprint3DButton = new Button(this,590,600,100,50,"Place").setHoverText("place the current blueprint");
 
-
+    //level settings screen buttons
     multyplayerModeSpeedrunButton=new Button(this, 220, 190, 80, 30, "speed run", 255, #F6FF03);
     multyplayerModeCoOpButton=new Button(this, 320, 190, 80, 30, "co-op", 255, 100);
     minplayersIncrease=new Button(this, 230, 240, 30, 30, ">");
     minPlayersDecrease=new Button(this, 160, 240, 30, 30, "<");
     maxplayersIncrease=new Button(this, 230, 290, 30, 30, ">");
     maxplayersDecrease=new Button(this, 160, 290, 30, 30, "<");
+    respawnEntitiesButton = new Button(this, 160,340, 80,30,"Respawn Entities",255,100);
   }
 
 
@@ -370,6 +377,14 @@ class ToolBox extends PApplet {
               }
               playSound.draw();
               drawSpeakericon(this, playSound.x+playSound.lengthX/2, playSound.y+playSound.lengthY/2, 0.5);
+              
+              //tmp
+              if(placingGoon){
+                goonEntity.setColor(255, #F2F258);
+              } else {
+                goonEntity.setColor(255, 203);
+              }
+              goonEntity.draw();
             }//end of level is not 3D
 
             if (drawingSign) {
@@ -420,12 +435,14 @@ class ToolBox extends PApplet {
               draw_holoTriangle.drawHoverText();
               draw_dethPlane.drawHoverText();
               placeBlueprint.drawHoverText();
+              goonEntity.drawHoverText();
             }//end of level is not 3D
             playSound.drawHoverText();
 
             sign.drawHoverText();
             select.drawHoverText();
             logicButtonButton.drawHoverText();
+            
           }//end of not 3d mode
 
           saveLevel.drawHoverText();
@@ -578,6 +595,7 @@ class ToolBox extends PApplet {
                 placeBlueprint.setColor(#0F1AD3, 203);
               }
               placeBlueprint.draw();
+              
               
               textAlign(LEFT, BOTTOM);
               toggle3DMode.drawHoverText();
@@ -761,6 +779,7 @@ class ToolBox extends PApplet {
               if (selectingBlueprint && blueprints.length != 0) {
                 placeBlueprint3DButton.drawHoverText();
               }
+              
             }
           }//end of if stage is 3D
 
@@ -1575,6 +1594,7 @@ class ToolBox extends PApplet {
             if (level.maxPLayers>level.minPlayers)
               maxplayersDecrease.draw();
           }
+          respawnEntitiesButton.draw();
         }
       }//end of page is level settings
     } else {
@@ -1762,6 +1782,10 @@ class ToolBox extends PApplet {
               turnThingsOff();
               placingSound=true;
             }
+            if(goonEntity.isMouseOver()){
+              turnThingsOff();
+              placingGoon=true;
+            }
           }
 
           if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
@@ -1843,6 +1867,11 @@ class ToolBox extends PApplet {
               if (logicButtonButton.isMouseOver()) {
                 turnThingsOff();
                 placingLogicButton=true;
+              }
+             
+              if(goonEntity.isMouseOver()){
+                turnThingsOff();
+                placingGoon=true;
               }
             } else {
               if (toggle3DMode.isMouseOver()) {
@@ -2467,6 +2496,9 @@ class ToolBox extends PApplet {
           if (level.maxPLayers>level.minPlayers&&maxplayersDecrease.isMouseOver()) {
             level.maxPLayers--;
           }
+        }
+        if(respawnEntitiesButton.isMouseOver()){
+          level.respawnEntities();
         }
         }
       }//end of page is level settings

@@ -119,4 +119,11 @@ class HoloTriangle extends StageComponent {//ground component
     }
     return false;
   }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
+  }
 }

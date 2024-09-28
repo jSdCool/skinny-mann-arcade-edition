@@ -83,16 +83,19 @@
     "type": "stage"
   },
   {
+    "narration": true,
     "name": "debate",
     "location": "/debate.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "news",
     "location": "/news.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "CEO",
     "location": "/ceo2.wav",
     "type": "sound"

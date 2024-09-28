@@ -37,6 +37,14 @@ void menuTransition() {
   case UGC_TO_LEVEL_SELECT:
     transition_UGCToLevelSelect();
     break;
+    
+  case LEVEL_SELECT_TO_LEVEL_SELECT_2:
+    transition_levelSelectToLevelSelect2();
+    break;
+    
+  case LEVEL_SELECT_2_TO_LEVEL_SELECT:
+    transition_levelSelect2ToLevelSelect();
+    break;
 
   default:
     transitionProgress=1;
@@ -55,7 +63,9 @@ enum Transitions {
     MAIN_TO_LEVEL_SELECT,
     LEVEL_SELECT_TO_MAIN,
     LEVEL_SELECT_TO_UGC,
-    UGC_TO_LEVEL_SELECT
+    UGC_TO_LEVEL_SELECT,
+    LEVEL_SELECT_TO_LEVEL_SELECT_2,
+    LEVEL_SELECT_2_TO_LEVEL_SELECT
 };
 
 Transitions currentTransition;
@@ -222,7 +232,7 @@ void transition_mainToLevelSelect() {
     background(#74ABFF);
     fill(-16732415);
     rect(-width*7, height/2, width*8, height/2);
-    drawLevelSelect(false);
+    drawLevelSelect(false,-16732415);
   }
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
@@ -237,7 +247,7 @@ void transition_levelSelectToMain() {
     background(#74ABFF);
     fill(-16732415);
     rect(-width*7, height/2, width*8, height/2);
-    drawLevelSelect(false);
+    drawLevelSelect(false,-16732415);
   } else {
     float senctionProgress = (transitionProgress-0.5)/0.5;
     float camZpos = (height/2)/tan(radians(60)/2);
@@ -258,7 +268,7 @@ void transition_levelSelectToUGC() {
     float camYpos = -height*senctionProgress+height/2;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
-    drawLevelSelect(true);
+    drawLevelSelect(true,-16732415);
   } else {
     float senctionProgress = (transitionProgress-0.5)/0.5;
     float camYpos = -height*senctionProgress+height/2+height;
@@ -282,7 +292,57 @@ void transition_UGCToLevelSelect() {
     float camYpos = height*senctionProgress+height/2-height;
     float camZpos = (height/2)/tan(radians(60)/2);
     camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
-    drawLevelSelect(true);
+    drawLevelSelect(true,-16732415);
+  }
+
+  transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
+}
+
+void transition_levelSelect2ToLevelSelect() {
+  int groundCOlor = -16732415;
+  if(transitionProgress<0.75){
+    background(lerpColor(#66696F,-16732415,transitionProgress/0.75));
+    groundCOlor = lerpColor(#66696F,-16732415,transitionProgress/0.75);
+  }else{
+    background(7646207);
+  }
+  if (transitionProgress<0.5) {
+    float senctionProgress = (transitionProgress)/0.5;
+    float camYpos = -height*senctionProgress+height/2;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
+    drawLevelSelect2(false);
+  } else {
+    float senctionProgress = (transitionProgress-0.5)/0.5;
+    float camYpos = -height*senctionProgress+height/2+height;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
+    drawLevelSelect(false,groundCOlor);
+  }
+
+  transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
+}
+
+void transition_levelSelectToLevelSelect2() {
+  int groundCOlor = -16732415;
+  if(transitionProgress>0.25){
+    background(lerpColor(-16732415,#66696F,(transitionProgress-0.25)/0.75));
+    groundCOlor = lerpColor(-16732415,#66696F,(transitionProgress-0.25)/0.75);
+  }else{
+    background(7646207);
+  }
+  if (transitionProgress<0.5) {
+    float senctionProgress = (transitionProgress)/0.5;
+    float camYpos = height*senctionProgress+height/2;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
+    drawLevelSelect(false,groundCOlor);
+  } else {
+    float senctionProgress = (transitionProgress-0.5)/0.5;
+    float camYpos = height*senctionProgress+height/2-height;
+    float camZpos = (height/2)/tan(radians(60)/2);
+    camera(width/2, camYpos, camZpos, width/2, camYpos, 0, 0, 1, 0);
+    drawLevelSelect2(false);
   }
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;

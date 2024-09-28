@@ -1,0 +1,63 @@
+[
+  {"name": "tick"},
+  {
+    "variable number": 0,
+    "x": 259.2525939941406,
+    "y": 164.59791564941406,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 1
+      },
+      {
+        "index": 2,
+        "terminal": 0
+      }
+    ]
+  },
+  {
+    "x": 548.7511596679688,
+    "y": 157.5402069091797,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 550.113525390625,
+    "y": 267.2090759277344,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 535.127685546875,
+    "y": 393.2261047363281,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 538.5335693359375,
+    "y": 505.61968994140625,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "variable number": 1,
+    "x": 278.325439453125,
+    "y": 428.89306640625,
+    "type": "read var",
+    "connections": [
+      {
+        "index": 3,
+        "terminal": 1
+      },
+      {
+        "index": 4,
+        "terminal": 0
+      }
+    ]
+  }
+]

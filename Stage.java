@@ -6,6 +6,7 @@ import java.util.ArrayList;
 class Stage implements Serializable {
   static transient skiny_mann source;
   public ArrayList<StageComponent> parts = new ArrayList<>(), interactables=new ArrayList<>();
+  public ArrayList<StageEntity> entities = new ArrayList<>();
   public boolean is3D=false;
   public String type, name;
   public int stageID, skyColor=-9131009;
@@ -37,46 +38,54 @@ class Stage implements Serializable {
           if (otype.equals("ground")) {
             parts.add(new Ground(ob, is3D));
           }
-          if (otype.equals("holo")) {
+          else if (otype.equals("holo")) {
             parts.add(new Holo(ob, is3D));
           }
-          if (otype.equals("dethPlane")) {
+          else if (otype.equals("dethPlane")) {
             parts.add(new DethPlane(ob, is3D));
           }
-          if (otype.equals("check point")) {
+          else if (otype.equals("check point")) {
             parts.add(new CheckPoint(ob, is3D));
           }
-          if (otype.equals("goal")) {
+          else if (otype.equals("goal")) {
             parts.add(new Goal(ob, is3D));
           }
-          if (otype.equals("coin")) {
+          else if (otype.equals("coin")) {
             parts.add(new Coin(ob, is3D));
           }
-          if (otype.equals("interdimentional Portal")) {
+          else if (otype.equals("interdimentional Portal")) {
             parts.add(new Interdimentional_Portal(ob, is3D));
           }
-          if (otype.equals("sloap")) {
+          else if (otype.equals("sloap")) {
             parts.add(new Sloap(ob, is3D));
           }
-          if (otype.equals("holoTriangle")) {
+          else if (otype.equals("holoTriangle")) {
             parts.add(new HoloTriangle(ob, is3D));
           }
-          if (otype.equals("3DonSW")) {
+          else if (otype.equals("3DonSW")) {
             parts.add(new SWon3D(ob, is3D));
           }
-          if (otype.equals("3DoffSW")) {
+          else if (otype.equals("3DoffSW")) {
             parts.add(new SWoff3D(ob, is3D));
           }
-          if (otype.equals("WritableSign")) {
+          else if (otype.equals("WritableSign")) {
             parts.add(new WritableSign(ob, is3D));
           }
-          if (otype.equals("sound box")) {
+          else if (otype.equals("sound box")) {
             parts.add(new SoundBox(ob, is3D));
           }
-          if (otype.equals("logic button")) {
+          else if (otype.equals("logic button")) {
             parts.add(new LogicButton(ob, is3D));
             interactables.add(parts.get(parts.size()-1));
           }
+          else{
+            //if the current thing is an entity, load it
+            StageEntity ent = source.entityRegistry.get(otype);
+            if(ent!=null){
+              entities.add(ent.create(ob,this));
+            }
+          }
+          
         }
         catch(Throwable e) {
         }
@@ -92,9 +101,18 @@ class Stage implements Serializable {
     head.setInt("sky color", skyColor);
     staeg.setJSONObject(0, head);
     for (int i=0; i<parts.size(); i++) {
-      staeg.setJSONObject(i+1, parts.get(i).save(is3D));
+      staeg.append(parts.get(i).save(is3D));
+    }
+    for(int i=0;i<entities.size();i++){
+      staeg.append(entities.get(i).save());
     }
     source.saveJSONArray(staeg, source.rootPath+"/"+name+".json");
     return "/"+name+".json";
+  }
+  
+  void respawnEntities(){
+    for(StageEntity se : entities){
+      se.respawn();
+    }
   }
 }

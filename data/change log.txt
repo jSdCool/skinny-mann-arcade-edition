@@ -1,6 +1,15 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.9.0_Early_Access
+-changed: new collision detection system
++added: new NPC system
++added: NPC enemy Goon
++added: level 13
+-fixed: check point preview no being in correct position while on 3D stage
+-fixed: HUD not being renderd on top of level in 3D while in the level creator
++added: level 14
+
 0.8.2_Early_Access
 -fixed: coin placement preview was too small in 3D stages
 +changed: automatic update installer is now available on Mac OS for future versions

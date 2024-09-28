@@ -42,6 +42,7 @@
     "type": "stage"
   },
   {
+    "narration": true,
     "name": "in 3D",
     "location": "/in3D.wav",
     "type": "sound"

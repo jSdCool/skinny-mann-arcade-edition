@@ -3,7 +3,6 @@
     "mainStage": 0,
     "coins": 202,
     "min players": 2,
-	"author": "jSdCool",
     "level_id": 7,
     "spawnX": 20,
     "groups": ["group 0"],
@@ -11,7 +10,7 @@
     "spawnY": 700,
     "max players": 2,
     "number of variable": 5,
-    "name": "level-7",
+    "name": "level-6",
     "spawn pointX": 20,
     "spawn pointY": 700,
     "multyplayer mode": 1
@@ -37,26 +36,31 @@
     "type": "stage"
   },
   {
+    "narration": true,
     "name": "pirate narration 4",
     "location": "/L7p4a.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "pirate narration 3",
     "location": "/L7p3a.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "pirate narration 2",
     "location": "/L7p2a.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "pirate narration 1",
     "location": "/L7p1a.wav",
     "type": "sound"
   },
   {
+    "narration": true,
     "name": "pirate narration 5",
     "location": "/L7p5a.wav",
     "type": "sound"

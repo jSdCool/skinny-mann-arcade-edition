@@ -43,9 +43,10 @@ class SoundHandler extends Thread {
         Thread.sleep(10);//wait 10ms before handling things again. this lowers CPU useage and prevent the audio from being studdery from over interation
       }
     }
-    catch(InterruptedException i) {
+    catch(Exception i) {
       System.out.println("the sound handler ran into an error");
       i.printStackTrace();
+      ((skiny_mann)ggn).handleError(i);
     }
   }
 
@@ -142,9 +143,11 @@ class SoundHandler extends Thread {
     if (moveUp(R[n])) {
 
       R[n]=queue[0];
-      if (R[n]!=null)
+      if (R[n]!=null){
         if (masterVolume*sfxVolume!=0)
           R[n].play(1, masterVolume*sfxVolume);
+          R[n].amp(masterVolume*sfxVolume);//sound lib is broken so this is nessary to deal with the volume
+      }
 
       for (int i =0; i<7; i++) {
         queue[i]=queue[i+1];
@@ -251,6 +254,8 @@ class SoundHandler extends Thread {
       sound=levelNarrations.get(n-narrations.length);
     }
     sound.play(1, masterVolume*narrationVolume);
+    sound.amp(masterVolume*narrationVolume);
+    System.out.println(masterVolume*narrationVolume);
   }
   
   public boolean isNarrationPlaying(int n){

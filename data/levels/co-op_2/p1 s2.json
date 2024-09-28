@@ -604,6 +604,7 @@
   },
   {
     "link Index": 5,
+    "linkZ": 0,
     "x": 850,
     "y": 590,
     "type": "interdimentional Portal",

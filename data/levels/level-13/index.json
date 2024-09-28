@@ -1,0 +1,72 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 241,
+    "min players": 2,
+    "author": "jSdCool",
+    "level_id": 13,
+    "spawnX": 211.1999969482422,
+    "groups": [
+      "group 0",
+      "Objective",
+      "Post Objective",
+      "Pizza Door",
+      "Pizza Door 2"
+    ],
+    "game version": "0.9.0_Early_Access",
+    "spawnY": 0,
+    "max players": 2,
+    "number of variable": 5,
+    "name": "level-13",
+    "spawn pointX": 211.1999969482422,
+    "spawn pointY": 610.4000244140625,
+    "multyplayer mode": 1
+  },
+  {
+    "name": "Stage 1",
+    "location": "/Stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "/stage 2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
+    "type": "stage"
+  },
+  {
+    "name": "Pizza shop",
+    "location": "/Pizza shop.json",
+    "type": "stage"
+  },
+  {
+    "narration": true,
+    "name": "Quset Complete",
+    "location": "/completed.wav",
+    "type": "sound"
+  },
+  {
+    "narration": true,
+    "name": "First Encounter",
+    "location": "/first encounter.wav",
+    "type": "sound"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

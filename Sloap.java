@@ -119,4 +119,47 @@ class Sloap extends StageComponent {//ground component
     }
     return false;
   }
+  
+  public Collider2D getCollider2D(){
+    Group group=getGroup();
+    if (!group.visable)
+      return null;
+    float x2 = dx+group.xOffset, y2=dy+group.yOffset, y1=(this.y+group.yOffset), x1=(this.x+group.xOffset);
+    int rot=direction;
+
+    
+    
+    switch(rot){
+      case 0:
+        return new Collider2D(new PVector[]{
+          new PVector(x+group.xOffset, y+group.yOffset),
+          new PVector(dx+group.xOffset, dy+group.yOffset),
+          new PVector(dx+group.xOffset, y+group.yOffset)
+        });
+      case 1:
+        return new Collider2D(new PVector[]{
+          new PVector(x+group.xOffset, y+group.yOffset),
+          new PVector(x+group.xOffset, dy+group.yOffset),
+          new PVector(dx+group.xOffset, y+group.yOffset)
+        });
+      case 2:
+        return new Collider2D(new PVector[]{
+          new PVector(x+group.xOffset, y+group.yOffset),
+          new PVector(dx+group.xOffset, dy+group.yOffset),
+          new PVector(x+group.xOffset, dy+group.yOffset)
+        });
+      case 3:
+        return new Collider2D(new PVector[]{
+          new PVector(x+group.xOffset, dy+group.yOffset),
+          new PVector(dx+group.xOffset, dy+group.yOffset),
+          new PVector(dx+group.xOffset, y+group.yOffset)
+        });
+      default:
+        return null;
+        
+    }
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
+  }
 }

@@ -345,6 +345,14 @@ void stageEditGUI() {
     if (deleteing&&delete) {//if attempting to delete something
       int index=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, current);//get the index of the elemtn the mouse is currently over
       if (index==-1) {//if the mouse was over nothing then do nothing
+        Collider2D c2D = Collider2D.createRectHitbox(mouseX/Scale+camPos-0.5f,mouseY/Scale-camPosY-0.5f,1,1);
+        //check for collision with entities
+        for(int i=0;i<current.entities.size();i++){
+          if(collisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){
+            current.entities.remove(i);
+            break;
+          }
+        }
       } else {
         StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
         if (current.interactables.contains(removed)) {
@@ -717,6 +725,14 @@ void stageEditGUI() {
       if (deleteing&&delete) {//if deleting things
         int index=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, level.stages.get(currentStageIndex));//figure out what thing the mouse is over
         if (index==-1) {//if the mouse is over nothing then do nothing
+          Collider2D c2D = Collider2D.createRectHitbox(mouseX/Scale+camPos-0.5f,mouseY/Scale-camPosY-0.5f,1,1);
+          //check for collision with entities
+          for(int i=0;i<current.entities.size();i++){
+            if(collisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){
+              current.entities.remove(i);
+              break;
+            }
+          }
         } else {
           StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
           if (current.interactables.contains(removed)) {
@@ -783,9 +799,9 @@ void stageEditGUI() {
       }
       if (check_point) {//if adding checkoint
         if (grid_mode) {//display a checkoint
-          drawCheckPoint((Math.round((mouseX/Scale+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round((mouseY/Scale-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale);
+          drawCheckPoint((Math.round((mouseX/Scale+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round((mouseY/Scale-camPosY)*1.0/grid_size)*grid_size+camPosY));
         } else {
-          drawCheckPoint((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale);
+          drawCheckPoint((int)(mouseX/Scale), (int)(mouseY/Scale));
         }
       }
       if (drawCoins) {//if adding coins
@@ -1298,6 +1314,10 @@ void GUImouseClicked() {
         current.parts.add(new SoundBox((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));
       }
     }
+    
+    if(placingGoon){
+      current.entities.add(new Goon((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY,0,current));
+    }
   }//end of eddit stage
 }
 
@@ -1790,6 +1810,14 @@ void mouseClicked3D() {
           current.interactables.remove(removed);
         }
         break;
+      }else{
+        Collider3D c3D = Collider3D.createBoxHitBox(testPoint.x-0.5, testPoint.y-0.5, testPoint.z-0.5,1,1,1);
+        for(int j=0;j<current.entities.size();j++){
+          if(collisionDetection.collide3D(current.entities.get(j).getHitBox3D(0,0,0),c3D)){
+            current.entities.remove(j);
+            return;
+          }
+        }
       }
     }
   }

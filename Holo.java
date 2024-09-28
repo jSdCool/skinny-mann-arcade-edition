@@ -107,4 +107,24 @@ class Holo extends StageComponent {//ground component
     }
     return false;
   }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  
+  public Collider3D getCollider3D() {
+    Group group=getGroup();
+    if (!group.visable)
+        return null;
+    return new Collider3D(new PVector[]{
+      new PVector(x+group.xOffset, y+group.yOffset, z+group.zOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset, z+group.zOffset),
+      new PVector(x+group.xOffset+dx, y+group.yOffset+dy, z+group.zOffset),
+      new PVector(x+group.xOffset, y+group.yOffset+dy, z+group.zOffset),
+      new PVector(x+group.xOffset, y+group.yOffset, z+group.zOffset+dz),
+      new PVector(x+group.xOffset+dx, y+group.yOffset, z+group.zOffset+dz),
+      new PVector(x+group.xOffset+dx, y+group.yOffset+dy, z+group.zOffset+dz),
+      new PVector(x+group.xOffset, y+group.yOffset+dy, z+group.zOffset+dz)
+      });
+  }
 }

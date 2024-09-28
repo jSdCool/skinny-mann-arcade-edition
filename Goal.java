@@ -59,9 +59,9 @@ class Goal extends StageComponent {//ground component
     source.rect(source.Scale*(x2+50), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
     source.rect(source.Scale*(x2+150), source.Scale*(y2+source.drawCamPosY), source.Scale*50, source.Scale*50);
 
-    float px =source.players[source.currentPlayer].getX(), py=source.players[source.currentPlayer].getY();
+    Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
 
-    if (px >= x2+source.drawCamPosX && px <= x2+source.drawCamPosX + 250 && py >= y2 - 50 && py <= y2 + 50) {
+    if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x+group.xOffset,y+group.yOffset-50,250,100))) {
       if (!source.level_complete) {
         source.level.logicBoards.get(source.level.levelCompleteBoard).superTick();
       }
@@ -86,5 +86,12 @@ class Goal extends StageComponent {//ground component
       }
     }
     return false;
+  }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
   }
 }

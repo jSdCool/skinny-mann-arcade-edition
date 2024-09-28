@@ -75,6 +75,7 @@
   },
   {
     "link Index": 3,
+    "linkZ": 0,
     "x": 100,
     "y": 570,
     "type": "interdimentional Portal",

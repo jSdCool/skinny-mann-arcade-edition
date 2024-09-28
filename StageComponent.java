@@ -15,6 +15,7 @@ abstract class StageComponent implements Serializable {//the base class for all 
   void draw3D() {
   }
   
+  //used for mouse click detecteion
   boolean colide(float x, float y, boolean c) {
     return false;
   }//c= is colideing with click box
@@ -59,6 +60,10 @@ abstract class StageComponent implements Serializable {//the base class for all 
 
   void worldInteractions(int data) {
   }
+  
+  //used for entity collision detection 
+  abstract public Collider2D getCollider2D();
+  abstract public Collider3D getCollider3D();
   
   
 }

@@ -1,0 +1,54 @@
+[
+  {"name": "load"},
+  {
+    "x": 332.13812255859375,
+    "y": 245.65750122070312,
+    "type": "ON",
+    "connections": [
+      {
+        "index": 1,
+        "terminal": 0
+      },
+      {
+        "index": 2,
+        "terminal": 1
+      },
+      {
+        "index": 3,
+        "terminal": 0
+      },
+      {
+        "index": 4,
+        "terminal": 1
+      }
+    ]
+  },
+  {
+    "x": 692.4786987304688,
+    "y": 80.56764221191406,
+    "group number": 1,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 680.8987426757812,
+    "y": 178.6565704345703,
+    "group number": 2,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 683.6234130859375,
+    "y": 295.1371765136719,
+    "group number": 3,
+    "type": "set visable",
+    "connections": []
+  },
+  {
+    "x": 670.68115234375,
+    "y": 397.99432373046875,
+    "group number": 4,
+    "type": "set visable",
+    "connections": []
+  }
+]

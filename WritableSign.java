@@ -55,8 +55,8 @@ class WritableSign extends StageComponent {
       return;
     source.drawSign(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale);
 
-    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
-    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)) {//display the press e message to the player
+    Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
+    if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x-35,y-40,70,40))) {//display the press e message to the player
       source.fill(255);
       source.textSize(source.Scale*20);
       source.displayText="Press B";
@@ -65,6 +65,9 @@ class WritableSign extends StageComponent {
       if (source.E_pressed) {
         source.E_pressed=false;
         source.viewingItemContents=true;
+        if(!source.levelCreator){
+          source.stats.incrementSignsRead();
+        }
       }
     }
   }
@@ -74,8 +77,8 @@ class WritableSign extends StageComponent {
       return;
     source.drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
 
-    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
-    if (playx>(x+group.xOffset)-35&&playx<(x+group.xOffset)+35&&playy>(y+group.yOffset)-40&&playy<(y+group.yOffset)&& source.players[source.currentPlayer].z >= (z+group.zOffset)-20 && source.players[source.currentPlayer].z <= (z+group.zOffset)+20) {
+     Collider3D playerHitBox = source.players[source.currentPlayer].getHitBox3D(0,0,0);
+    if (source.collisionDetection.collide3D(playerHitBox,Collider3D.createBoxHitBox(x-35,y-40,z-20,70,40,40))) {
       source.fill(255);
       source.textSize(source.Scale*20);
       source.displayText="Press B";
@@ -83,6 +86,9 @@ class WritableSign extends StageComponent {
       if (source.E_pressed) {
         source.E_pressed=false;
         source.viewingItemContents=true;
+        if(!source.levelCreator){
+          source.stats.incrementSignsRead();
+        }
       }
     }
   }
@@ -129,5 +135,12 @@ class WritableSign extends StageComponent {
 
   String getData() {
     return contents;
+  }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
   }
 }

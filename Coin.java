@@ -59,7 +59,6 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY();
     boolean collected;
     if (source.editingBlueprint) {
       collected=false;
@@ -72,9 +71,13 @@ class Coin extends StageComponent {//ground component
     float x2=(x+group.xOffset)-source.drawCamPosX;
     if (!collected) {
       source.drawCoin(source.Scale*x2, source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*3);
-      if (Math.sqrt(Math.pow(playx-source.drawCamPosX-x2, 2)+Math.pow(playy-(y+group.yOffset), 2))<30 && !source.selectingBlueprint) {
+      Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
+      if (!source.selectingBlueprint && source.collisionDetection.collide2D(playerHitBox,new CircleCollider(new PVector(x,y),14))) {
         source.coins.set(coinId, true);
         source.coinCount++;
+        if(!source.levelCreator){
+          source.stats.incrementCollectedCoins();
+        }
       }
     }
   }
@@ -83,7 +86,6 @@ class Coin extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.players[source.currentPlayer].getX(), playy=source.players[source.currentPlayer].getY(), playz=source.players[source.currentPlayer].z;
     boolean collected;
     if (source.editingBlueprint) {
       collected=false;
@@ -100,9 +102,14 @@ class Coin extends StageComponent {//ground component
       source.shape(source.coin3D);
       source.rotateY(source.radians(-source.coinRotation));
       source.translate(-(x+group.xOffset), -(y+group.yOffset), -(z+group.zOffset));
-      if (Math.sqrt(Math.pow(playx-(x+group.xOffset), 2)+Math.pow(playy-(y+group.yOffset), 2)+Math.pow(playz-(z+group.zOffset), 2))<35) {
+
+      Collider3D playerHitBox = source.players[source.currentPlayer].getHitBox3D(0,0,0);
+      if (!source.selectingBlueprint && source.collisionDetection.collide3D(playerHitBox, new SphereCollider(new PVector(x,y,z),14))) {
         source.coins.set(coinId, true);
         source.coinCount++;
+        if(!source.levelCreator){
+          source.stats.incrementCollectedCoins();
+        }
       }
     }
   }
@@ -129,5 +136,12 @@ class Coin extends StageComponent {//ground component
       }
     }
     return false;
+  }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
   }
 }

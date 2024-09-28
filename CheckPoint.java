@@ -2,6 +2,7 @@ import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
+import processing.core.*;
 
 class CheckPoint extends StageComponent {//ground component
   static transient skiny_mann source;
@@ -56,9 +57,9 @@ class CheckPoint extends StageComponent {//ground component
     Group group=getGroup();
     if (!group.visable)
       return;
-    float playx=source.players[source.currentPlayer].getX();
+    Collider2D playerBox=source.players[source.currentPlayer].getHitBox2D(0,0);
     boolean po=false;
-    if (playx>=(x+group.xOffset)-5 && playx<= (x+group.xOffset)+5 && (y+group.yOffset)-50 <= source.players[source.currentPlayer].getY() && (y+group.yOffset)>=source.players[source.currentPlayer].getY()-10) {
+    if (source.collisionDetection.collide2D(playerBox,new Collider2D(new PVector[]{new PVector(x-3,y-60),new PVector(x+3,y-60),new PVector(x+3,y),new PVector(x-3,y)}))) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
       source.respawnStage=source.currentStageIndex;
@@ -82,9 +83,9 @@ class CheckPoint extends StageComponent {//ground component
     if (!group.visable)
       return;
     //noStroke();
-    float playx=source.players[source.currentPlayer].getX();
+    Collider3D playerBox = source.players[source.currentPlayer].getHitBox3D(0,0,0);
     boolean po=false;
-    if (playx>=(x+group.xOffset)-20 && playx<= (x+group.xOffset)+20 && (y+group.yOffset)-50 <= source.players[source.currentPlayer].getY() && (y+group.yOffset)>=source.players[source.currentPlayer].getY()-10 && source.players[source.currentPlayer].z >= (z+group.zOffset)-20 && source.players[source.currentPlayer].z <= (z+group.zOffset)+20) {
+    if (source.collisionDetection.collide3D(playerBox,new Collider3D(new PVector[]{ new PVector(x-3,y-60,z-3),new PVector(x+3,y-60,z-3),new PVector(x+3,y,z-3),new PVector(x-3,y,z-3),new PVector(x-3,y-60,z+3),new PVector(x+3,y-60,z+3),new PVector(x+3,y,z+3),new PVector(x-3,y,z+3) } ))) {
       source.respawnX=(int)x;
       source.respawnY=(int)y;
       source.respawnZ=(int)source.players[source.currentPlayer].z;
@@ -130,5 +131,12 @@ class CheckPoint extends StageComponent {//ground component
       }
     }
     return false;
+  }
+  
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){ 
+    return null;
   }
 }

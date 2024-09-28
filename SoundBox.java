@@ -28,7 +28,8 @@ class SoundBox extends StageComponent {
     if (!group.visable)
       return;
     source.drawSoundBox((x+group.xOffset)*source.Scale-source.drawCamPosX*source.Scale, (y+group.yOffset)*source.Scale+source.drawCamPosY*source.Scale);
-    if (source.players[source.currentPlayer].getX()>=(x+group.xOffset)-30&&source.players[source.currentPlayer].getX()<=(x+group.xOffset)+30&&source.players[source.currentPlayer].y>=(y+group.yOffset)-30&&source.players[source.currentPlayer].getY()<(y+group.yOffset)+30) {
+    Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
+    if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x-30,y-30,60,60))) {
       source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
       if (source.E_pressed) {
@@ -37,10 +38,16 @@ class SoundBox extends StageComponent {
           if(sound.isNarration){
             if (!(source.soundHandler.isNarrationPlaying(sound.sound))) {
               source.soundHandler.playNarration(sound.sound);
+              if(!source.levelCreator){
+                source.stats.incrementSoundBoxesUsed();
+              }
             }
           }else{
             if (!(source.soundHandler.isPlaying(sound.sound)||source.soundHandler.isInQueue(sound.sound))) {
               source.soundHandler.addToQueue(sound.sound);
+              if(!source.levelCreator){
+                source.stats.incrementSoundBoxesUsed();
+              }
             }
           }
         }
@@ -95,5 +102,12 @@ class SoundBox extends StageComponent {
 
   String getData() {
     return soundKey;
+  }
+
+  public Collider2D getCollider2D(){
+    return null;
+  }
+  public Collider3D getCollider3D(){
+    return null;
   }
 }
