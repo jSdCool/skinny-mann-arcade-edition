@@ -526,7 +526,31 @@ ToolBox scr2;
 //===================================================
 //reserved for arcade edition vars
 
+String arcadeLeaderBoardFilePath="leaderBoard.csv";
 
+int clearTime;
+
+UiText elapsedTimeDisplay;
+UiText levelCompleteTitle;
+UiText levelCompleteLevelName;
+UiText levelCompleteLeaderBoardLeftColumn;
+UiText levelCompleteLeaderBoardCenterColumn;
+UiText levelCompleteLeaderBoardRightColumn;
+UiText enterNameText;
+UiText highScoreName;
+UiText yourScore;
+UiText mainMenuWebsite;
+
+ArcadeLeaderBoard leaderBoards;
+
+Button levelCompleteScreenContinue;
+Button[][] onScreenKeyboardButtons = new Button[4][];
+
+String[] onScreenKeyboardButtonLabels = {"1234567890","qwertyuiop","asdfghjkl","zxcvbnm"},onScreenKeyboardButtonLabelsUpperCase = {"1234567890","QWERTYUIOP","ASDFGHJKL","ZXCVBNM"};
+
+GamePadWrapper gamepad = new GamePadWrapper();
+
+HashMap<String,ButtonMenuConfig> buttonMenuConfigMapping = new HashMap<>();
 
 //===================================================
 //DO NOT EDIT THEESE LINES, EVER
