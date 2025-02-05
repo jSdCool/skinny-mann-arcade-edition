@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Big area",
+    "sky color": -9131009,
+    "type": "3Dstage"
+  },
+  {
+    "dx": 8080,
+    "color": -16777215,
+    "dy": 30,
+    "dz": 6340,
+    "x": -1740,
+    "y": 690,
+    "z": 0,
+    "type": "ground",
+    "group": -1
+  }
+]

@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class SetVariable extends LogicOutputComponent {
+  
+  public static final Identifier ID = new Identifier("SetVariable");
+  
   int variableNumber=0;
   SetVariable(float x, float y, LogicBoard lb) {
     super(x, y, "set var", lb);
@@ -15,6 +17,12 @@ class SetVariable extends LogicOutputComponent {
     variableNumber=data.getInt("variable number");
     button.setText("  set var b"+variableNumber);
   }
+  
+  public SetVariable(SerialIterator iterator){
+    super(iterator);
+    variableNumber = iterator.getInt();
+  }
+  
   void tick() {
     if (inputTerminal2)
       source.level.variables.set(variableNumber, inputTerminal1);
@@ -38,5 +46,18 @@ class SetVariable extends LogicOutputComponent {
   }
   int getData() {
     return variableNumber;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(variableNumber);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

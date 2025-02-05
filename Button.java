@@ -1,8 +1,8 @@
 //button class V1.2.0a
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
-class Button implements Serializable {
+class Button implements Serialization {
+  public static final Identifier ID = new Identifier("Button");
   protected float x, y, lengthX, lengthY;
   private int fColor=255, sColor=-5592405, textcolor=0, htFill=200, htStroke=0, htColor=0;
   private String text="", hoverText="";
@@ -50,6 +50,23 @@ class Button implements Serializable {
     sColor=c2;
     findTextScale();
     strokeWeight=3;
+  }
+  
+  public Button(SerialIterator iterator){
+    x = iterator.getFloat();
+    y = iterator.getFloat();
+    lengthX = iterator.getInt();
+    lengthY = iterator.getInt();
+    fColor = iterator.getInt();
+    sColor = iterator.getInt();
+    textcolor = iterator.getInt();
+    htFill = iterator.getInt();
+    htStroke = iterator.getInt();
+    htColor = iterator.getInt();
+    text = iterator.getString();
+    hoverText = iterator.getString();
+    textScaleFactor = iterator.getFloat();
+    strokeWeight = iterator.getFloat();
   }
 
   void findTextScale() {
@@ -150,7 +167,33 @@ class Button implements Serializable {
     return this;
   }
   
+
   public void selected(boolean select){
     selected=select;
+  }
+ 
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addFloat(x);
+    data.addFloat(y);
+    data.addFloat(lengthX);
+    data.addFloat(lengthY);
+    data.addInt(fColor);
+    data.addInt(sColor);
+    data.addInt(textcolor);
+    data.addInt(htFill);
+    data.addInt(htStroke);
+    data.addInt(htColor);
+    data.addObject(SerializedData.ofString(text));
+    data.addObject(SerializedData.ofString(hoverText));
+    data.addFloat(textScaleFactor);
+    data.addFloat(strokeWeight);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

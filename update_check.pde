@@ -23,7 +23,7 @@ void drawUpdateDownloadingScreen() {
     if(exeNameErrorText == null){
       exeNameErrorText = new UiText(ui, "Executable Not Found!", 640, 102.857, 50, CENTER, BASELINE);
       exeErrorExplainText = new UiText(ui, "The game Execuable MUST be named 'skiny_mann.app' exactly.\nIf the name differs in any way this will not work!\n(Thank you apple for your genius)",640,130,30,CENTER,BASELINE);
-      exeErrorCloseButton = new UiButton(ui, 390, 350*Scale, 500*Scale2, 50*Scale, "Close", #FF0004, #FFF300).setStrokeWeight(10);
+      exeErrorCloseButton = new UiButton(ui, 390, 350, 500, 50, "Close", #FF0004, #FFF300).setStrokeWeight(10);
     }
     exeNameErrorText.draw();
     exeErrorExplainText.draw();

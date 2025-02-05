@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class LogicPlaySound extends LogicComponent {
+  
+  public static final Identifier ID = new Identifier("LogicPlaySound");
+  
   String soundKey="";
   LogicPlaySound(float x, float y, LogicBoard lb) {
     super(x, y, "play sound", lb);
@@ -14,6 +16,11 @@ class LogicPlaySound extends LogicComponent {
     super(data.getFloat("x"), data.getFloat("y"), "play sound", lb, data.getJSONArray("connections"));
     soundKey=data.getString("sound key");
     button.setText("  play sound: "+soundKey);
+  }
+  
+  public LogicPlaySound(SerialIterator iterator){
+    super(iterator);
+    soundKey = iterator.getString();
   }
 
   void tick() {
@@ -88,5 +95,18 @@ class LogicPlaySound extends LogicComponent {
     source.text("stop", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
     source.textAlign(source.RIGHT, source.CENTER);
     source.text("playing", (x+97-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addObject(SerializedData.ofString(soundKey));
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

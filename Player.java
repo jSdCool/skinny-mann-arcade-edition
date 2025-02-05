@@ -1,6 +1,8 @@
-import java.io.Serializable;
 import processing.core.*;
-class Player extends Entity implements Serializable {
+class Player extends Entity implements Serialization {
+  
+  public static final Identifier ID = new Identifier("Player");
+  
   public float x, y, z=0, scale, animationCooldown, verticalVelocity=0;
   private final float arbitrayNumber=0.0023f;//slight adjustemnt to the hitboxes just to make shure all collisions are as accurate as posible
   public int pose=1, stage=0;
@@ -14,6 +16,22 @@ class Player extends Entity implements Serializable {
     scale=Scale;
     shirt=Color;
   }
+  
+  public Player(SerialIterator iterator){
+    x = iterator.getFloat();
+    y = iterator.getFloat();
+    z = iterator.getFloat();
+    scale = iterator.getFloat();
+    animationCooldown = iterator.getFloat();
+    verticalVelocity = iterator.getFloat();
+    pose = iterator.getInt();
+    stage = iterator.getInt();
+    shirt = iterator.getInt();
+    jumping = iterator.getBoolean();
+    in3D = iterator.getBoolean();
+    name = iterator.getString();
+  }
+  
   public Entity setX(float X) {
     x=X;
     return this;
@@ -115,7 +133,33 @@ class Player extends Entity implements Serializable {
   }
   
   //mabby implment theese later
-  public void draw(skiny_mann context){}
-  public void draw3D(skiny_mann context){}
+  public void draw(skiny_mann context,PGraphics render){}
+  public void draw3D(skiny_mann context,PGraphics render){}
   public Entity create(float x,float y,float z){return null;}
+  
+  //
+  
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addFloat(x);
+    data.addFloat(y);
+    data.addFloat(z);
+    data.addFloat(scale);
+    data.addFloat(animationCooldown);
+    data.addFloat(verticalVelocity);
+    data.addInt(pose);
+    data.addInt(stage);
+    data.addInt(shirt);
+    data.addBool(jumping);
+    data.addBool(in3D);
+    data.addObject(SerializedData.ofString(name));
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
+  }
 }

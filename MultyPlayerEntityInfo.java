@@ -1,6 +1,9 @@
 /** sends data about an entity from the server to the client in multyplayer mode 2
 */
 class MultyPlayerEntityInfo extends DataPacket{
+  
+  public static final Identifier ID = new Identifier("MultyplayerEntityInfo");
+  
   float x,y,z;
   int stage,index;
   boolean dead;
@@ -16,6 +19,15 @@ class MultyPlayerEntityInfo extends DataPacket{
     this.y = entity.getY();
     this.z = entity.getZ();
     this.dead = entity.isDead();
+  }
+  
+  public MultyPlayerEntityInfo(SerialIterator iterator){
+    x = iterator.getFloat();
+    y = iterator.getFloat();
+    z = iterator.getFloat();
+    stage = iterator.getInt();
+    index = iterator.getInt();
+    dead = iterator.getBoolean();
   }
   
   /** used by the client to extract entity position information
@@ -48,5 +60,22 @@ class MultyPlayerEntityInfo extends DataPacket{
   
   int getIndex(){
     return index;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addFloat(x);
+    data.addFloat(y);
+    data.addFloat(z);
+    data.addInt(stage);
+    data.addInt(index);
+    data.addBool(dead);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

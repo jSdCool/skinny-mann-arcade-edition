@@ -1,4 +1,11 @@
 class PlayerMovementManager extends MovementManager{
+  
+  public static final Identifier ID = new Identifier("PlayerMovementManager");
+  
+  public PlayerMovementManager(){}
+  
+  public PlayerMovementManager(SerialIterator iterator){}
+  
   boolean left,right,in,out,jump;
    public boolean left(){
      return left;
@@ -37,4 +44,14 @@ class PlayerMovementManager extends MovementManager{
    public void setJump(boolean j){
      jump=j;
    }
+   
+  @Override
+  public SerializedData serialize() {
+    return new SerializedData(id());
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
+  }
 }

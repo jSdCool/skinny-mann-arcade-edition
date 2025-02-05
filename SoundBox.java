@@ -1,10 +1,12 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 import processing.sound.*;
 
 class SoundBox extends StageComponent {
+  
+  public static final Identifier ID = new Identifier("SoundBox");
+  
   String soundKey="";
 
   SoundBox(float X, float Y) {
@@ -22,12 +24,17 @@ class SoundBox extends StageComponent {
       group=data.getInt("group");
     }
   }
+  
+  public SoundBox(SerialIterator iterator){
+    deserial(iterator);
+    soundKey = iterator.getString();
+  }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.drawSoundBox((x+group.xOffset)*source.Scale-source.drawCamPosX*source.Scale, (y+group.yOffset)*source.Scale+source.drawCamPosY*source.Scale);
+    source.drawSoundBox((x+group.xOffset)*source.Scale-source.drawCamPosX*source.Scale, (y+group.yOffset)*source.Scale+source.drawCamPosY*source.Scale,render);
     Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
     if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x-30,y-30,60,60))) {
       source.displayText="Press B";
@@ -56,6 +63,8 @@ class SoundBox extends StageComponent {
       }
     }
   }
+  
+  void draw3D(PGraphics render){}
 
   boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
@@ -109,5 +118,18 @@ class SoundBox extends StageComponent {
   }
   public Collider3D getCollider3D(){
     return null;
+  }
+ 
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addObject(SerializedData.ofString(soundKey));
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

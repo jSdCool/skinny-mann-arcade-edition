@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class ReadVariable extends LogicInputComponent {
+  
+  public static final Identifier ID = new Identifier("ReadVariable");
+  
   int variableNumber=0;
   ReadVariable(float x, float y, LogicBoard lb) {
     super(x, y, "read var", lb);
@@ -15,6 +17,12 @@ class ReadVariable extends LogicInputComponent {
     variableNumber=data.getInt("variable number");
     button.setText("read var b"+variableNumber+"  ");
   }
+  
+  public ReadVariable(SerialIterator iterator){
+    super(iterator);
+    variableNumber = iterator.getInt();
+  }
+  
   void tick() {
     outputTerminal=source.level.variables.get(variableNumber);
   }
@@ -29,5 +37,18 @@ class ReadVariable extends LogicInputComponent {
   }
   int getData() {
     return variableNumber;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(variableNumber);
+    return data; 
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

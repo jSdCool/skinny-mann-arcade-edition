@@ -1,10 +1,12 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 import processing.sound.*;
 
-class StageSound implements Serializable {
+class StageSound implements Serialization {
+  
+  public static final Identifier ID = new Identifier("StageSound");
+  
   static transient skiny_mann source;
   String path, name, type="sound";
   protected transient int sound;
@@ -22,6 +24,7 @@ class StageSound implements Serializable {
     }
 
   }
+  
   StageSound(String Name, String location,boolean narration) {
     name=Name;
     path=location;
@@ -32,6 +35,12 @@ class StageSound implements Serializable {
       sound = source.soundHandler.registerLevelSound(source.rootPath+path);
     }
   }
+  
+  public StageSound(SerialIterator iterator){
+    path = iterator.getString();
+    name = iterator.getString();
+    isNarration = iterator.getBoolean();
+  }
 
   JSONObject save() {
     JSONObject out=new JSONObject();
@@ -40,5 +49,19 @@ class StageSound implements Serializable {
     out.setString("type", type);
     out.setBoolean("narration", isNarration);
     return out;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addObject(SerializedData.ofString(path));
+    data.addObject(SerializedData.ofString(name));
+    data.addBool(isNarration);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

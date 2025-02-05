@@ -1,10 +1,9 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 
-abstract class LogicComponent implements Serializable {//the base of all logic gam=ts and things
+abstract class LogicComponent implements Serialization {//the base of all logic gates and things
   static transient skiny_mann source;
   float x, y;//for visuals only
   String type;
@@ -30,6 +29,21 @@ abstract class LogicComponent implements Serializable {//the base of all logic g
       JSONObject data= cnects.getJSONObject(i);
       connections.add(new Integer[]{data.getInt("index"), data.getInt("terminal")});
     }
+  }
+  
+  LogicComponent(SerialIterator iterator){
+    x = iterator.getFloat();
+    y = iterator.getFloat();
+    type = iterator.getString();
+    
+    button=new Button(source, x, y, 100*source.Scale, 80*source.Scale, "  "+type+"  ");
+    //connections
+    int numConnections = iterator.getInt();
+    for(int i=0;i<numConnections;i++){
+      connections.add(new Integer[]{iterator.getInt(),iterator.getInt()});
+    }
+    
+    
   }
 
   void draw() {
@@ -125,5 +139,16 @@ abstract class LogicComponent implements Serializable {//the base of all logic g
 
   int getData() {
     return 0;
+  }
+  
+  public void serialize(SerializedData data) {
+    data.addFloat(x);
+    data.addFloat(y);
+    data.addObject(SerializedData.ofString(type));
+    data.addInt(connections.size());
+    for(int i=0;i<connections.size();i++){
+      data.addInt(connections.get(i)[0]);
+      data.addInt(connections.get(i)[1]);
+    }
   }
 }

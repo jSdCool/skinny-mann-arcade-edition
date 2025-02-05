@@ -1,6 +1,26 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.9.1_Early_Access
+-fixed: all music after the first music track would ignore the set volume
+-changed: 3D Shadow setting now has 5 values
+-changed: settings version has been increased
++added: new shadow type
++added: loading text to startup logo
+-fixed: auto key repeat when holding down a key and typing
+-changed: new multiplayer networking system
++added: new debug info line, current multiplayer ping
+-changed: Collision hitboxes are now pre grouped into combo boxes before collisions are calculated 
+-changed: 3D camera now collides with things between its default position and the player
+-fixed: moving in and out in 3D mode remaining active when the corresponding button was held as the player was transitioning out of 3D moe
+-fixed: most font glyphs disappearing when certain letters were typed in a text box (may not have effected release builds)
+-changed: updated many text entering fields to now be text boxes
++added: adjustable 3D FOV
++added: new setting Camera FOV
+-fixed: level creator not saving the correct version
+-changed: reduced then number of enemies in level 13 and 14
+-fixed: FPS text rendering over debug text
+
 0.9.0_Early_Access
 -changed: new collision detection system
 +added: new NPC system
@@ -9,6 +29,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: check point preview no being in correct position while on 3D stage
 -fixed: HUD not being renderd on top of level in 3D while in the level creator
 +added: level 14
+-fixed: game sounds ignoring the set sound volume
 
 0.8.2_Early_Access
 -fixed: coin placement preview was too small in 3D stages

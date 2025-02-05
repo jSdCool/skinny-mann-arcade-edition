@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class SetXOffset extends LogicOutputComponent {
+  
+  public static final Identifier ID = new Identifier("SetXOffet");
+  
   int groupNumber=0;
   float offset=0;
   SetXOffset(float x, float y, LogicBoard lb) {
@@ -17,6 +19,13 @@ class SetXOffset extends LogicOutputComponent {
     offset=data.getFloat("offset");
     button.setText("x-offset "+level.groupNames.get(groupNumber)+" by "+offset);
   }
+  
+  public SetXOffset(SerialIterator iterator){
+    super(iterator);
+    groupNumber = iterator.getInt();
+    offset = iterator.getFloat();
+  }
+  
   void tick() {
     if (inputTerminal1) {
       source.level.groups.get(groupNumber).xOffset=offset;
@@ -53,5 +62,20 @@ class SetXOffset extends LogicOutputComponent {
   }
   float getOffset() {
     return offset;
+  }
+  
+  //SerialIterator iterator
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(groupNumber);
+    data.addFloat(offset);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

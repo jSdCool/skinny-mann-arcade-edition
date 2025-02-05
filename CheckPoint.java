@@ -1,4 +1,3 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
@@ -6,6 +5,7 @@ import processing.core.*;
 
 class CheckPoint extends StageComponent {//ground component
   static transient skiny_mann source;
+  public static final Identifier ID = new Identifier("CheckPoint");
   CheckPoint(JSONObject data, boolean stage_3D) {
     type="check point";
     x=data.getFloat("x");
@@ -29,6 +29,11 @@ class CheckPoint extends StageComponent {//ground component
     y=Y;
     z=Z;
   }
+  
+  public CheckPoint(SerialIterator iterator){
+    deserial(iterator);
+  }
+  
   StageComponent copy() {
     return new CheckPoint(x, y, z);
   }
@@ -53,8 +58,9 @@ class CheckPoint extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
+    //TODO: move this off the render thread
     if (!group.visable)
       return;
     Collider2D playerBox=source.players[source.currentPlayer].getHitBox2D(0,0);
@@ -70,15 +76,15 @@ class CheckPoint extends StageComponent {//ground component
     float x2=(x+group.xOffset)-source.drawCamPosX;
     float y2=(y+group.yOffset)+source.drawCamPosY;
     if (po)
-      source.fill(-1719293);
+      render.fill(-1719293);
     else
-      source.fill(-4605510);
-    source.rect((x2-3)*source.Scale, (y2-60)*source.Scale, 5*source.Scale, 60*source.Scale);
-    source.fill(-1441277);
-    source.triangle(x2*source.Scale, (y2-60)*source.Scale, x2*source.Scale, (y2-40)*source.Scale, (x2+30)*source.Scale, (y2-50)*source.Scale);
+      render.fill(-4605510);
+    render.rect((x2-3)*source.Scale, (y2-60)*source.Scale, 5*source.Scale, 60*source.Scale);
+    render.fill(-1441277);
+    render.triangle(x2*source.Scale, (y2-60)*source.Scale, x2*source.Scale, (y2-40)*source.Scale, (x2+30)*source.Scale, (y2-50)*source.Scale);
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
@@ -96,17 +102,17 @@ class CheckPoint extends StageComponent {//ground component
 
 
     if (po)
-      source.fill(-1719293);
+      render.fill(-1719293);
     else
-      source.fill(-4605510);
+      render.fill(-4605510);
     //strokeWeight(0);
-    source.translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
-    source.box(4, 60, 4);
-    source.translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
-    source.fill(-1441277);
-    source.translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
-    source.box(20, 20, 2);
-    source.translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
+    render.translate((x+group.xOffset), (y+group.yOffset)-30, (z+group.zOffset));
+    render.box(4, 60, 4);
+    render.translate(-(x+group.xOffset), -((y+group.yOffset)-30), -(z+group.zOffset));
+    render.fill(-1441277);
+    render.translate((x+group.xOffset)+10, (y+group.yOffset)-50, (z+group.zOffset));
+    render.box(20, 20, 2);
+    render.translate(-((x+group.xOffset)+10), -((y+group.yOffset)-50), -(z+group.zOffset));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -138,5 +144,18 @@ class CheckPoint extends StageComponent {//ground component
   }
   public Collider3D getCollider3D(){ 
     return null;
+  }
+  
+  //SerialIterator iterator
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

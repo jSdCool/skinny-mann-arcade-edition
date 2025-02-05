@@ -1,7 +1,13 @@
 class GoonMovementManager extends MovementManager{
   
+  public static final Identifier ID = new Identifier("goonMovementManager");
+  
   GoonMovementManager(Goon goon){
     this.goon=goon;
+  }
+  
+  GoonMovementManager(SerialIterator iterator){
+    
   }
   
   Goon goon;
@@ -78,6 +84,16 @@ class GoonMovementManager extends MovementManager{
       }
     }
     //StageEntityCollisionManager.level_colide(
+  }
+  
+  public SerializedData serialize(){
+    SerializedData data = new SerializedData(id());
+    
+    return data;
+  }
+  
+  public Identifier id(){
+    return ID;
   }
   
 }

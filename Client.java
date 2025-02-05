@@ -5,8 +5,8 @@ class Client extends Thread {
   static transient skiny_mann source;
   int playernumber, blockSize=10240, currentDownloadIndex, currentDownloadblock;
   Socket socket;
-  ObjectOutputStream output;
-  ObjectInputStream input;
+  ObjectSerializingOutputStream output;
+  ObjectDeserializingInputStream input;
   String ip="uninitilized", name="uninitilized";
   ArrayList<DataPacket> dataToSend=new ArrayList<>();
   NetworkDataPacket toSend=new NetworkDataPacket(), recieved;
@@ -17,6 +17,7 @@ class Client extends Thread {
   String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&()-_=+`~[]{}";
   byte outherFiles[][];
   byte currentDownloadingFile[];
+  long lastContactTime, ping;
 
   Client(Socket s) {
     init(s);
@@ -31,8 +32,8 @@ class Client extends Thread {
     System.out.println("creating new client");
     try {
       socket=s;
-      output=new ObjectOutputStream(socket.getOutputStream());
-      input = new ObjectInputStream(socket.getInputStream());
+      output=new ObjectSerializingOutputStream(socket.getOutputStream());
+      input = new ObjectDeserializingInputStream(socket.getInputStream());
       socket.setSoTimeout(5000);
     }
     catch(Exception i) {
@@ -40,7 +41,6 @@ class Client extends Thread {
       source.networkError(i);
       return;
     }
-
     ip=socket.getInetAddress().toString();
     System.out.println(ip);
     start();
@@ -61,24 +61,21 @@ class Client extends Thread {
 
   void host() {
     try {
-      long sent=0, processStart=0;
-      double sr=0, rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
         //send data to client
-        //System.out.println("sending "+source.frameCount);
-        output.writeObject(toSend);
-        sent=System.nanoTime();
+        
+        output.write(toSend);
         output.flush();
-        output.reset();
-        rs=(double)(sent/1000000-processStart/1000000);
-        //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
+        
+        //calculate Ping
+        ping = System.nanoTime() - lastContactTime;
+        lastContactTime = System.nanoTime();
 
         //recieve data from client
-        Object rawInput = input.readObject();
-        processStart=System.nanoTime();
-        sr=(double)(processStart/1000000-sent/1000000);
-        //System.out.println("recieved "+source.frameCount);
-        //process input
+        Object rawInput = input.readSerializedObject();
+
+        
+        //process input data from client
         recieved=(NetworkDataPacket)rawInput;
         for (int i=0; i<recieved.data.size(); i++) {
           DataPacket di = recieved.data.get(i);
@@ -132,6 +129,8 @@ class Client extends Thread {
             source.level.stages.get(ke.getStage()).entities.get(ke.getIndex()).kill();
           }
         }
+        
+        //prepair data to send client
 
         ArrayList<String> names=new ArrayList<>();
         names.add(source.name);
@@ -145,6 +144,7 @@ class Client extends Thread {
           }
         }
         if (source.inGame) {
+          //collect info about which shirt colors are currenly in use
           viablePlayers=new boolean[10];
           viablePlayers[0]=true;
           for (int i=0; i<source.clients.size(); i++) {
@@ -157,7 +157,7 @@ class Client extends Thread {
           if (source.level.multyplayerMode==2) {
             dataToSend.add(new CoOpStateInfo(source.level.variables, source.level.groups, source.level_complete));
             
-            //send the lient info aboutb all entities in the level                            
+            //send the client info about all entities in the level                            
             for(int i=0;i<source.level.stages.size();i++){
               for(int j=0;j<source.level.stages.get(i).entities.size();j++){
                 dataToSend.add(new MultyPlayerEntityInfo(i,j,source.level.stages.get(i).entities.get(j)));
@@ -176,21 +176,21 @@ class Client extends Thread {
       i.printStackTrace();
       //source.networkError(i);
     }
-    catch(ClassNotFoundException c) {
-      c.printStackTrace();
-      //source.networkError(c);
+    catch(Exception e){
+      e.printStackTrace();
     }
   }
 
   void joined() {
     try {
-      long sent=0, processStart=0;
-      double sr=0, rs=0;
       while (socket.isConnected()&&!socket.isClosed()) {
+        //calculate Ping
+        ping = System.nanoTime() - lastContactTime;
+        lastContactTime = System.nanoTime();
+        
         //recieve data from server
-        Object rawInput = input.readObject();
-        processStart=System.nanoTime();
-        sr=(double)(processStart/1000000-sent/1000000);
+        Object rawInput = input.readSerializedObject();
+
         //process input
         recieved=(NetworkDataPacket)rawInput;
         for (int i=0; i<recieved.data.size(); i++) {
@@ -292,7 +292,9 @@ class Client extends Thread {
             blockSize=ldi.blockSize;
 
             source.rootPath=source.appdata+"/CBi-games/skinny mann/UGC/levels/"+ldi.level.name+generateRandomString(20);
-            ldi.level.save();
+            source.level = ldi.level;
+            ldi.level.save(false);
+            source.level = null;
             currentDownloadIndex=-1;
             currentDownloadblock=-1;
             getNextLevelComponent();
@@ -312,7 +314,6 @@ class Client extends Thread {
         }
 
         //outher misolenous processing
-        //System.out.println(readdy);
         dataToSend.add(new ClientInfo(source.name, readdy, source.reachedEnd));
         if (source.inGame) {
           source.players[playernumber].name=source.name;
@@ -325,14 +326,9 @@ class Client extends Thread {
         generateSendPacket();
 
         //send data to server
-        //System.out.println("sending "+source.frameCount);
-        output.writeObject(toSend);
-        sent=System.nanoTime();
+        output.write(toSend);
         output.flush();
-        output.reset();
 
-        rs=(double)(sent/1000000-processStart/1000000);
-        //System.out.println("send to recieve: "+sr+"\nrecieve to send: "+rs);
       }
     }
     catch(java.net.SocketTimeoutException s) {
@@ -341,8 +337,8 @@ class Client extends Thread {
     catch(IOException i) {
       source.networkError(i);
     }
-    catch(ClassNotFoundException c) {
-      source.networkError(c);
+    catch(Exception e){
+      source.networkError(e);
     }
   }
 
@@ -395,11 +391,16 @@ class Client extends Thread {
     return out;
   }
 
+  /**called by the client to initiate requesting the next level component from the server
+  */
   void getNextLevelComponent() {
+    //if this is the first thing to be rquested
     if (currentDownloadIndex==-1) {
+      
       currentDownloadIndex=0;
       currentDownloadblock=0;
-      if (ldi.files.length==0) {//if there are no file to download
+      if (ldi.files.length==0) {//if there are no files to download
+        //load the level that was downloaded and send the ready signal to the server
         source.loadLevel(source.rootPath);
         source.bestTime=0;
         dataToSend.add(new BestScore(source.name, source.bestTime));
@@ -407,17 +408,23 @@ class Client extends Thread {
         downloadingLevel=false;
         return;
       }
+      //alocate the memory for the file to download
       currentDownloadingFile=new byte[ldi.realSize[currentDownloadIndex]];
-    } else {
+    } else {//if this is not the first time this method was called
+      //set the block to download to the next one
       currentDownloadblock++;
+      //if the next block is outside the number of blocks that file has
       if (currentDownloadblock==ldi.fileSizes[currentDownloadIndex]) {
         //save that file to the disc
         source.saveBytes(source.rootPath+ldi.files[currentDownloadIndex], currentDownloadingFile);
 
+        //reset the block index to 0 and increase the file index
         currentDownloadblock=0;
         currentDownloadIndex++;
+        //if the file index is the same the the number of total files to download
         if (currentDownloadIndex==ldi.fileSizes.length) {
           //your done downloading
+          //load the level and send the ready signal to the server
           source.loadLevel(source.rootPath);
           source.bestTime=0;
           dataToSend.add(new BestScore(source.name, source.bestTime));
@@ -427,11 +434,12 @@ class Client extends Thread {
           ldi=null;
           return;
         }
+        //allocate the space for the next file to download
         currentDownloadingFile=new byte[ldi.realSize[currentDownloadIndex]];
       }
     }
     //you now have the next segemnt to download
-
+    //request that block from the server
     dataToSend.add(new RequestLevelFileComponent(currentDownloadIndex, currentDownloadblock));//request that segment
   }
 }

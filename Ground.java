@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class Ground extends StageComponent {//ground component
+
+  public static final Identifier ID = new Identifier("Ground");
+
   Ground(JSONObject data, boolean stage_3D) {
     type="ground";
     x=data.getFloat("x");
@@ -38,6 +40,10 @@ class Ground extends StageComponent {//ground component
     ccolor=fcolor;
   }
   
+  public Ground(SerialIterator iterator){
+    deserial(iterator);
+  }
+  
   StageComponent copy() {
     return new Ground(x, y, z, dx, dy, dz, ccolor);
   }
@@ -66,23 +72,23 @@ class Ground extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.fill(ccolor);
-    source.rect(source.Scale*((x+group.xOffset)-source.drawCamPosX)-0.02f, source.Scale*((y+group.yOffset)+source.drawCamPosY)-0.02f, source.Scale*dx+0.04f, source.Scale*dy+0.04f);
+    render.fill(ccolor);
+    render.rect(source.Scale*((x+group.xOffset)-source.drawCamPosX)-0.02f, source.Scale*((y+group.yOffset)+source.drawCamPosY)-0.02f, source.Scale*dx+0.04f, source.Scale*dy+0.04f);
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.fill(ccolor);
+    render.fill(ccolor);
     //strokeWeight(0);
-    source.translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
-    source.box(dx, dy, dz);
-    source.translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
+    render.translate((x+group.xOffset)+dx/2, (y+group.yOffset)+dy/2, (z+group.zOffset)+dz/2);
+    render.box(dx, dy, dz);
+    render.translate(-1*((x+group.xOffset)+dx/2), -1*((y+group.yOffset)+dy/2), -1*((z+group.zOffset)+dz/2));
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -132,5 +138,17 @@ class Ground extends StageComponent {//ground component
       new PVector(x+group.xOffset+dx, y+group.yOffset+dy, z+group.zOffset+dz),
       new PVector(x+group.xOffset, y+group.yOffset+dy, z+group.zOffset+dz)
       });
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

@@ -12,6 +12,9 @@ float[] coorZ;
 float[] multXZ;
 float logorx=-75, logory=-180, logorz=0, start_wate=0;
 
+boolean skipFrameInumeration = true;
+int startupMillisTimer =0,prevstartupMillis=0;
+
 PShape CBiSphere;
 void drawlogo(boolean controllCamera, boolean setBackground) {
   directionalLight(255, 255, 255, 1, 0.8, -1);
@@ -19,17 +22,34 @@ void drawlogo(boolean controllCamera, boolean setBackground) {
 
   if (setBackground)
     background(0);
+  if(!skipFrameInumeration){
+    startupMillisTimer=millis()-prevstartupMillis;
+  }else{
+    skipFrameInumeration = false;
+    startupMillisTimer = 0;
+  }
+  
   if (logorx<0) {
-    logorx+=(1.0/frameRate)*25;
+    logorx+=(startupMillisTimer/1000.0)*25;
   } else {
     fill(#03FA0C);
+    
+    
     logoText.draw();
-    start_wate+=1.0/frameRate;
+    start_wate+=startupMillisTimer/1000.0;
   }
+  prevstartupMillis = millis();
   fill(255);
   if (controllCamera)
     camera(width/2, height/2, 623.5382907, width/2, height/2, 0, 0, 1, 0);
 
+  if(setBackground){
+    //loadingText.draw();
+    textSize(30);
+    textAlign(CENTER,TOP);
+    //loadingText = new UiText(ui,"Loading ...",640,180,20,CENTER,TOP);
+    text("Loading ...",width/2,height/2-300);
+  }
   pushMatrix();
   translate(width/2, height/2, 0);
   rotateZ(radians(logorz));

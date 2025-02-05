@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class Interdimentional_Portal extends StageComponent {//ground component
+
+  public static final Identifier ID = new Identifier("InterdimentionalPortal");
+  
   float linkX, linkY, linkZ;
   int linkIndex;
   Interdimentional_Portal(JSONObject data, boolean stage_3D) {
@@ -23,6 +25,15 @@ class Interdimentional_Portal extends StageComponent {//ground component
       group=data.getInt("group");
     }
   }
+  
+  public Interdimentional_Portal(SerialIterator iterator){
+    deserial(iterator);
+    linkX = iterator.getFloat();
+    linkY = iterator.getFloat();
+    linkZ = iterator.getFloat();
+    linkIndex = iterator.getInt();
+  }
+  
   StageComponent copy() {
     return null;
   }
@@ -55,12 +66,12 @@ class Interdimentional_Portal extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
     Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0, 0);
-    source.drawPortal(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*1);
+    source.drawPortal(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale*1,render);
     //if the player is colliding with the portal
     if (source.collisionDetection.collide2D(playerHitBox, Collider2D.createRectHitbox(x-25, y-50, 50, 100))) {
       //display the "Press E" text
@@ -77,7 +88,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
         source.stageIndex=linkIndex;
         source.currentStageIndex=linkIndex;
 
-        source.background(0);
+        render.background(0);
         if (linkZ!=-1) {
           source.setPlayerPosZ=(int)linkZ;
           source.players[source.currentPlayer].z=linkZ;
@@ -96,16 +107,16 @@ class Interdimentional_Portal extends StageComponent {//ground component
     }
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
 
     Collider3D playerHitbox = source.players[source.currentPlayer].getHitBox3D(0, 0, 0);
 
-    source.translate(0, 0, z);
-    source.drawPortal((x+group.xOffset), (y+group.yOffset), 1);
-    source.translate(0, 0, -z);
+    render.translate(0, 0, z);
+    source.drawPortal((x+group.xOffset), (y+group.yOffset), 1,render);
+    render.translate(0, 0, -z);
     if (source.collisionDetection.collide3D(playerHitbox, Collider3D.createBoxHitBox(x-25, y-50, z-20, 50, 100, 20))) {
       source.fill(255);
       source.textSize(20);
@@ -119,7 +130,7 @@ class Interdimentional_Portal extends StageComponent {//ground component
         source.stageIndex=linkIndex;
         source.currentStageIndex=linkIndex;
 
-        source.background(0);
+        render.background(0);
         if (linkZ!=-1) {
           source.setPlayerPosZ=(int)linkZ;
           source.players[source.currentPlayer].z=linkZ;
@@ -166,5 +177,21 @@ class Interdimentional_Portal extends StageComponent {//ground component
   }
   public Collider3D getCollider3D() {
     return null;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addFloat(linkX);
+    data.addFloat(linkY);
+    data.addFloat(linkZ);
+    data.addInt(linkIndex);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

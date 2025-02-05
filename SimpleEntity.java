@@ -1,6 +1,10 @@
 import java.util.Random;
 import processing.data.*;
+import processing.core.*;
 class SimpleEntity extends StageEntity{
+  
+  public static final Identifier ID = new Identifier("SimpleEntity");
+  
   public SimpleEntity(float x,float y,float z,Stage stage){
     super(stage);
     spawnX=x;
@@ -9,6 +13,18 @@ class SimpleEntity extends StageEntity{
     setX(x);
     setY(y);
     setZ(z);
+  }
+  
+  public SimpleEntity(SerialIterator iterator){
+    super(null);
+    x = iterator.getFloat();
+    y = iterator.getFloat();
+    z = iterator.getFloat();
+    spawnX = iterator.getFloat();
+    spawnY = iterator.getFloat();
+    spawnZ = iterator.getFloat();
+    vVelcoity = iterator.getFloat();
+    dead = iterator.getBoolean();
   }
   
   public Entity create(float x,float y,float z){
@@ -43,6 +59,16 @@ class SimpleEntity extends StageEntity{
         az = (int)(r.nextInt(-1,2));
         j = (int)(Math.random()*2)==1;
       };
+      //SerialIterator iterator
+      @Override
+      public SerializedData serialize() {
+        return null;
+      }
+      
+      @Override
+      public Identifier id() {
+        return null;
+      }
     };
   
   public MovementManager getMovementmanager(){
@@ -104,20 +130,20 @@ class SimpleEntity extends StageEntity{
     return this;
   }
   
-  public void draw(skiny_mann context){
-    context.fill(40);
-    context.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),40*context.Scale,40*context.Scale);
+  public void draw(skiny_mann context,PGraphics render){
+    render.fill(40);
+    render.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),40*context.Scale,40*context.Scale);
     if(m.left()){
-      context.fill(130,130,0);
-      context.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),10*context.Scale,40*context.Scale);
+      render.fill(130,130,0);
+      render.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),10*context.Scale,40*context.Scale);
     }
     if(m.right()){
-      context.fill(0,130,0);
-      context.rect(context.Scale*(x-context.drawCamPosX+30),context.Scale*(y+context.drawCamPosY),10*context.Scale,40*context.Scale);
+      render.fill(0,130,0);
+      render.rect(context.Scale*(x-context.drawCamPosX+30),context.Scale*(y+context.drawCamPosY),10*context.Scale,40*context.Scale);
     }
     if(m.jump()){
-      context.fill(130,0,0);
-      context.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),40*context.Scale,10*context.Scale);
+      render.fill(130,0,0);
+      render.rect(context.Scale*(x-context.drawCamPosX),context.Scale*(y+context.drawCamPosY),40*context.Scale,10*context.Scale);
     }
     if(to ==0 ){
       to = 20;
@@ -126,11 +152,11 @@ class SimpleEntity extends StageEntity{
     to--;
   }
   
-  public void draw3D(skiny_mann context){
-    context.fill(40);
-    context.translate(x+20,y+20,z+20);
-    context.box(40);
-    context.translate(-x-20,-y-20,-z-20);
+  public void draw3D(skiny_mann context,PGraphics render){
+    render.fill(40);
+    render.translate(x+20,y+20,z+20);
+    render.box(40);
+    render.translate(-x-20,-y-20,-z-20);
     if(to ==0 ){
       to = 20;
       m.reset();
@@ -159,5 +185,24 @@ class SimpleEntity extends StageEntity{
   
   public PlayerIniteractionResult playerInteraction(Collider3D playerHitBox){
     return null;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addFloat(x);
+    data.addFloat(y);
+    data.addFloat(z);
+    data.addFloat(spawnX);
+    data.addFloat(spawnY);
+    data.addFloat(spawnZ);
+    data.addFloat(vVelcoity);
+    data.addBool(dead);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

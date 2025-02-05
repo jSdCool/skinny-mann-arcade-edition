@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-class Stage implements Serializable {
+class Stage implements Serialization {
+  
+  public static final Identifier ID = new Identifier("Stage");
+  
   static transient skiny_mann source;
   public ArrayList<StageComponent> parts = new ArrayList<>(), interactables=new ArrayList<>();
   public ArrayList<StageEntity> entities = new ArrayList<>();
@@ -13,10 +15,21 @@ class Stage implements Serializable {
   Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }
+  
   Stage(String Name, String Type) {
     name=Name;
     type=Type;
     is3D=type.equals("3Dstage")||type.equals("3D blueprint");
+  }
+  
+  public Stage(SerialIterator iterator){
+    parts = iterator.getArrayList();
+    entities = iterator.getArrayList();
+    is3D = iterator.getBoolean();
+    type = iterator.getString();
+    name = iterator.getString();
+    stageID = iterator.getInt();
+    skyColor = iterator.getInt();
   }
 
 
@@ -114,5 +127,47 @@ class Stage implements Serializable {
     for(StageEntity se : entities){
       se.respawn();
     }
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addObject(SerializedData.ofArrayList(parts,new Identifier("StageComponent")));
+    data.addObject(SerializedData.ofArrayList(entities,new Identifier("StageEntity")));
+    data.addBool(is3D);
+    data.addObject(SerializedData.ofString(type));
+    data.addObject(SerializedData.ofString(name));
+    data.addInt(stageID);
+    data.addInt(skyColor);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
+  }
+  
+  public boolean equals(Object o){
+    if(o instanceof Stage){
+      Stage s = (Stage)o;
+      if(!s.name.equals(name)){
+        return false;
+      }
+      if(!s.type.equals(type)){
+        return false;
+      }
+      if(stageID!=s.stageID){
+        return false;
+      }
+      if(skyColor!=s.skyColor){
+        return false;
+      }
+      if(parts.size()!=s.parts.size()){
+        return false;
+      }
+      
+      return true;
+    }
+    return false;
   }
 }

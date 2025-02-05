@@ -1,24 +1,87 @@
 import processing.core.*;
 import java.util.ArrayList;
 class CollisionDetection{
-  public boolean collide2D(Collider2D c1, Collider2D c2){
-    //AABB
+  public static boolean collide2D(Collider2D c1, Collider2D c2){
+    //AABB    check if the 2 args may be colliding using the Axis Aligned Bounding Boxes method
     if(!AABB2D(c1,c2))
       return false;
-    //GJK
+    
+    //check for combo boxes
+    
+    //check if the first arg is a combo box
+    if(c1 instanceof ComboBox2D){
+      ComboBox2D cb = (ComboBox2D)c1;
+      //for each of the sub Boxes, check collision on it
+      for(Collider2D box: cb.getBoxes()){
+        if(collide2D(box,c2)){
+          //if the collision check return true then a collision occored, return true
+          return true;
+        }
+      }
+      //if none of the boxes were successful then no collsion could posibly have tken palce, return false
+      return false;
+    }
+    //check if the second arg is a conbo box
+    if(c2 instanceof ComboBox2D){
+     ComboBox2D cb = (ComboBox2D)c2;
+     //for each of the sub Boxes, check collision on it
+      for(Collider2D box: cb.getBoxes()){
+        if(collide2D(c1,box)){
+          //if the collision check return true then a collision occored, return true
+          return true;
+        }
+      }
+      //if none of the boxes were successful then no collsion could posibly have tken palce, return false
+      return false;
+    }
+    
+    //now we have verified that nether arg is a combo box and that the boudnign boxes of the 2 args overlap
+    
+    //GJK    check for collision using the GLK collision algorythem 
     return GJK2D(c1,c2);
   }
   
-  public boolean collide3D(Collider3D c1, Collider3D c2){
+  public static boolean collide3D(Collider3D c1, Collider3D c2){
     
-    //AABB
+    //AABB    check if the 2 args may be colliding using the Axis Aligned Bounding Boxes method
     if(!AABB3D(c1,c2))
       return false;
-    //GJK
+    
+    //check for combo boxes
+    
+    //check if the first arg is a combo box
+    if(c1 instanceof ComboBox3D){
+      ComboBox3D cb = (ComboBox3D)c1;
+      //for each of the sub Boxes, check collision on it
+      for(Collider3D box: cb.getBoxes()){
+        if(collide3D(box,c2)){
+          //if the collision check return true then a collision occored, return true
+          return true;
+        }
+      }
+      //if none of the boxes were successful then no collsion could posibly have tken palce, return false
+      return false;
+    }
+    //check if the second arg is a conbo box
+    if(c2 instanceof ComboBox3D){
+     ComboBox3D cb = (ComboBox3D)c2;
+     //for each of the sub Boxes, check collision on it
+      for(Collider3D box: cb.getBoxes()){
+        if(collide3D(c1,box)){
+          //if the collision check return true then a collision occored, return true
+          return true;
+        }
+      }
+      //if none of the boxes were successful then no collsion could posibly have tken palce, return false
+      return false;
+    }
+    //now we have verified that nether arg is a combo box and that the boudnign boxes of the 2 args overlap
+    
+    //GJK    check for collision using the GLK collision algorythem
     return GJK3D(c1,c2);
   }
   
-  private boolean GJK2D(Collider2D s1, Collider2D s2) {
+  private static boolean GJK2D(Collider2D s1, Collider2D s2) {
     //true if shapes s1 and s2 intersect
     //all  vextors/points are 3D Pvectors but the z value will almost always be 0
     PVector d = new PVector();
@@ -52,7 +115,7 @@ class CollisionDetection{
     return false;
   }
 
-  private PVector support2D(Collider2D s1, Collider2D s2, PVector d) {
+  private static PVector support2D(Collider2D s1, Collider2D s2, PVector d) {
     PVector supportPoint = new PVector(), reverseDirection = new PVector();
     PVector.mult(d, -1, reverseDirection);
     PVector.sub( s2.furthestPoint(reverseDirection),s1.furthestPoint(d), supportPoint);
@@ -60,14 +123,14 @@ class CollisionDetection{
     return supportPoint;
   }
 
-  private boolean handleSimplex2D(ArrayList<PVector> simplex, PVector d) {//find new direction and update the simplex
+  private static boolean handleSimplex2D(ArrayList<PVector> simplex, PVector d) {//find new direction and update the simplex
     if (simplex.size()==2) {
       return lineCase2D(simplex, d);
     }
     return triangleCase2D(simplex, d);
   }
   
-  private boolean lineCase2D(ArrayList<PVector> simplex, PVector d) {
+  private static boolean lineCase2D(ArrayList<PVector> simplex, PVector d) {
     PVector A = simplex.get(1),B = simplex.get(0);
     PVector AB = new PVector(),AO = new PVector();
     PVector.sub(B,A,AB);
@@ -82,7 +145,7 @@ class CollisionDetection{
     
   }
   
-  private boolean triangleCase2D(ArrayList<PVector> simplex, PVector d) {
+  private static boolean triangleCase2D(ArrayList<PVector> simplex, PVector d) {
     PVector A = simplex.get(2),B = simplex.get(1),C = simplex.get(0);
     PVector AB = new PVector(),AC = new PVector(),AO = new PVector();
     //create the vectors that represent the line of the simplex triangle
@@ -115,7 +178,7 @@ class CollisionDetection{
     
   }
   
-  private PVector trippleProd2D(PVector A, PVector B , PVector C){
+  private static PVector trippleProd2D(PVector A, PVector B , PVector C){
     PVector aXb = new PVector(), axbXc = new PVector();
     PVector.cross(A,B,aXb);
     PVector.cross(aXb,C,axbXc);
@@ -123,7 +186,7 @@ class CollisionDetection{
     return axbXc;
   }
   
-  private boolean AABB2D(Collider2D c1, Collider2D c2){
+  private static boolean AABB2D(Collider2D c1, Collider2D c2){
     PVector min1 = c1.getMin();
     PVector min2 = c2.getMin();
     PVector max1 = c1.getMax();
@@ -137,7 +200,7 @@ class CollisionDetection{
   }
   
   // 3D stuff 
-  class Simplex{
+  static class Simplex{
     private PVector[] m_points = new PVector[4];
     private int size=0;
   
@@ -170,12 +233,12 @@ class CollisionDetection{
     }
   }
   
-  private PVector support3D(Collider3D colliderA, Collider3D colliderB, PVector direction){
+  private static PVector support3D(Collider3D colliderA, Collider3D colliderB, PVector direction){
     return PVector.sub(colliderA.findFurthestPoint(direction)
          ,colliderB.findFurthestPoint(PVector.mult(direction,-1)));
   }
   
-  private boolean GJK3D(Collider3D colliderA,Collider3D colliderB) {
+  private static boolean GJK3D(Collider3D colliderA,Collider3D colliderB) {
     // Get initial support point in any direction
     PVector support = support3D(colliderA, colliderB, new PVector(1, 0, 0));
     // Simplex is an array of points, max count is 4
@@ -198,7 +261,7 @@ class CollisionDetection{
     }
   }
   
-  private boolean nextSimplex3D(Simplex points, PVector direction){
+  private static boolean nextSimplex3D(Simplex points, PVector direction){
     switch (points.size()) {
       case 2: return line       (points, direction);
       case 3: return triangle3D   (points, direction);
@@ -209,11 +272,11 @@ class CollisionDetection{
     return false;
   }
   
-  private boolean sameDirection3D(PVector direction,PVector ao){
+  private static boolean sameDirection3D(PVector direction,PVector ao){
     return PVector.dot(direction, ao) > 0;
   }
   
-  private boolean line(Simplex points, PVector direction){
+  private static boolean line(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
   
@@ -230,7 +293,7 @@ class CollisionDetection{
     return false;
   }
   
-  private boolean triangle3D(Simplex points, PVector direction){
+  private static boolean triangle3D(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
     PVector c = points.get(2);
@@ -264,7 +327,7 @@ class CollisionDetection{
     return false;
   }
   
-  private boolean tetrahedron3D(Simplex points, PVector direction){
+  private static boolean tetrahedron3D(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
     PVector c = points.get(2);
@@ -294,7 +357,7 @@ class CollisionDetection{
     return true;
   }
   
-  private boolean AABB3D(Collider3D c1, Collider3D c2){
+  private static boolean AABB3D(Collider3D c1, Collider3D c2){
     PVector min1 = c1.getMin();
     PVector min2 = c2.getMin();
     PVector max1 = c1.getMax();

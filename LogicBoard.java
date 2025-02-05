@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
-class LogicBoard implements Serializable {//stores all the logic components
+class LogicBoard implements Serialization {//stores all the logic components
+
+  public static final Identifier ID = new Identifier("LogicBoard");
+
   static transient skiny_mann source;
   public String name="eee";//temp name
   public ArrayList<LogicComponent> components=new ArrayList<>();
@@ -56,9 +58,16 @@ class LogicBoard implements Serializable {//stores all the logic components
       }
     }
   }
+  
   LogicBoard(String name) {
     this.name=name;
   }
+
+  public LogicBoard(SerialIterator iterator){
+    name = iterator.getString();
+    components = iterator.getArrayList();
+  }
+  
   String save() {
     JSONArray logicComponents=new JSONArray();
     JSONObject head=new JSONObject();
@@ -100,9 +109,23 @@ class LogicBoard implements Serializable {//stores all the logic components
       components.get(i).flushBuffer();
     }
   }
+  
   void superTick() {//ticked the logic board 256 times with no delay inbetween ticks
     for (int i=0; i<256; i++) {
       tick();
     }
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    data.addObject(SerializedData.ofString(name));
+    data.addObject(SerializedData.ofArrayList(components,new Identifier("LogicComponent")));
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

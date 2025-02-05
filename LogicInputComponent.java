@@ -1,5 +1,4 @@
 //LogicInputComponent
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
@@ -12,6 +11,9 @@ abstract class LogicInputComponent extends LogicComponent {
   LogicInputComponent(float x, float y, String type, LogicBoard board, JSONArray cnects) {
     super(x, y, type, board, cnects);
     button=new Button(source, x, y, 100*source.Scale, 40*source.Scale, "  "+type+"  ");
+  }
+  public LogicInputComponent(SerialIterator iterator){
+    super(iterator);
   }
   void draw() {
     button.x=(x-source.camPos)*source.Scale;

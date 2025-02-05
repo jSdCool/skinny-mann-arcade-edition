@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class SWon3D extends StageComponent {//ground component
+
+  public static final Identifier ID = new Identifier("SWon3D");
+
   SWon3D(JSONObject data, boolean stage_3D) {
     type="3DonSW";
     x=data.getFloat("x");
@@ -21,6 +23,10 @@ class SWon3D extends StageComponent {//ground component
     y=Y;
     z=Z;
     type="3DonSW";
+  }
+  
+  public SWon3D(SerialIterator iterator){
+    deserial(iterator);
   }
   
   StageComponent copy() {
@@ -47,11 +53,11 @@ class SWon3D extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch1(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale);
+    source.draw3DSwitch1(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale,render);
     Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
     if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x+group.xOffset-10,y+group.yOffset-10,20,10))) {
       source.players[source.currentPlayer].z=z;
@@ -63,11 +69,11 @@ class SWon3D extends StageComponent {//ground component
     }
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch1((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
+    source.draw3DSwitch1((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale,render);
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -99,5 +105,18 @@ class SWon3D extends StageComponent {//ground component
   }
   public Collider3D getCollider3D(){ 
     return null;
+  }
+  
+  //SerialIterator iterator
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

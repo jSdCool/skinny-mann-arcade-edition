@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class LogicButton extends StageComponent {//ground component
+  
+  public static final Identifier ID = new Identifier("LogicButton");
+
   int variable=-1;
   LogicButton(JSONObject data, boolean stage_3D) {
     type="logic button";
@@ -43,6 +45,11 @@ class LogicButton extends StageComponent {//ground component
     type="logic button";
   }
   
+  public LogicButton(SerialIterator iterator){
+    deserial(iterator);
+    variable = iterator.getInt();
+  }
+  
   JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);
@@ -56,7 +63,7 @@ class LogicButton extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
@@ -81,10 +88,10 @@ class LogicButton extends StageComponent {//ground component
     if (variable!=-1) {
       state=source.level.variables.get(variable);
     }
-    source.drawLogicButton(source, ((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale, state);
+    source.drawLogicButton(((x+group.xOffset)-source.drawCamPosX)*source.Scale, ((y+group.yOffset)+source.drawCamPosY)*source.Scale, source.Scale, state,render);
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
@@ -109,7 +116,7 @@ class LogicButton extends StageComponent {//ground component
     if (variable!=-1) {
       state=source.level.variables.get(variable);
     }
-    source.drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), 1, state);
+    source.drawLogicButton((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), 1, state,render);
   }
 
   boolean colide(float x, float y, boolean c) {
@@ -179,6 +186,19 @@ class LogicButton extends StageComponent {//ground component
   }
   public Collider3D getCollider3D(){ 
     return null;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(variable);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
   
 }

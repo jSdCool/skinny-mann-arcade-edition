@@ -1,3 +1,4 @@
+import processing.core.*;
 abstract class Entity{
   //entity specific movemnt manger. responcable for storing movement commands
   public abstract MovementManager getMovementmanager();
@@ -25,8 +26,8 @@ abstract class Entity{
   public abstract boolean in3D(boolean playerIn3D);
 
   //rener methods
-  public abstract void draw(skiny_mann context);
-  public abstract void draw3D(skiny_mann context);
+  public abstract void draw(skiny_mann context,PGraphics render);
+  public abstract void draw3D(skiny_mann context,PGraphics render);
   
   //factory methhod
   public abstract Entity create(float x,float y,float z);

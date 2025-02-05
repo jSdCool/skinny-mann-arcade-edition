@@ -57,9 +57,9 @@ class SoundHandler extends Thread {
         startMusic=false;
       }
 
-      if (prevVol!=musicVolume) {//if the volume changed
+      if (prevVol!=masterVolume*musicVolume) {//if the volume changed
         music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);//change the volume of the currently playing music track
-        prevVol=musicVolume;
+        prevVol=masterVolume*musicVolume;
         if (musicVolume*masterVolume==0) {
           music[currentMusicTrack][musNum].stop();
         }
@@ -67,10 +67,14 @@ class SoundHandler extends Thread {
 
       if (!music[currentMusicTrack][musNum].isPlaying()&& musicVolume*masterVolume!=0) {//if the current track has ended
         musNum++;//switch to the next track
-        if (musNum==music[currentMusicTrack].length)//if rached the end of the track go bat to the start
+        if (musNum==music[currentMusicTrack].length)//if rached the end of the track go back to the start
           musNum=0;
-        System.out.println(musNum+" "+music[currentMusicTrack].length);
+        System.out.println(musNum+" "+music[currentMusicTrack].length+" "+masterVolume*musicVolume);
         music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the music
+        //there appears to be a bug in the audio librarie that prevents passing the volume as a parameter in play from working
+        //so we will manualy set the volume emedialy after
+        music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);
+        //what is weird is that play just calls the amp method under the hood 
       }
 
       playSound(cSound, 0);//do sound slot 1

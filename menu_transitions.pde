@@ -1,5 +1,5 @@
 void menuTransition() {
-  if(disableMenuTransitions){
+  if(settings.getDisableMenuTransitions()){
     transitionProgress=1;
     transitioningMenu=false;
     menue=true;
@@ -71,7 +71,6 @@ enum Transitions {
 Transitions currentTransition;
 float transitionProgress;
 int transitionStartMillis;
-boolean disableMenuTransitions =false;
 
 void initMenuTransition(Transitions transition) {
   currentTransition=transition;

@@ -39,7 +39,7 @@ class UiTextBox{
       reScale();
     }
     button.draw();
-    ui.getSource().clip(x,y,width,height);
+    //ui.getSource().clip(x,y,width,height);
     //if there is no text
     if(contence.isEmpty() && ! typing){
       ui.getSource().fill(placeHolderColor);
@@ -51,35 +51,94 @@ class UiTextBox{
       ui.getSource().fill(textColor);
       ui.getSource().textAlign(PApplet.LEFT,PApplet.CENTER);
       ui.getSource().textSize(textSize);
+      
+      float maxTextWidth = width - ui.getSource().textWidth("|");
       if(typing){
         boolean showCursor = ui.getSource().millis() % 1000 > 500;
-        float maxTextWidth = width - ui.getSource().textWidth("|");
         float cursorOffset = ui.getSource().textWidth(contence.substring(0,cursorPos));
         if(cursorOffset>maxTextWidth){//if the width of the text extends outside of the box, then move the text so you can see what your typing
-          ui.getSource().text(contence,x-cursorOffset+maxTextWidth,y+height/2);
+        
+          for(int i=0;i<cursorPos;i++){
+            float tw = ui.getSource().textWidth(contence.substring(i,cursorPos));
+            if( tw < maxTextWidth){//
+               ui.getSource().text(contence.substring(i,Math.min(cursorPos+1,contence.length())),x+(maxTextWidth-tw),y+height/2);
+               break;
+            }
+          }
+          
           if(showCursor)
             ui.getSource().rect(x+maxTextWidth,y+height*0.1f,2*ui.scale(),height*0.8f);//cursor
             
           if(highLighting){
             ui.getSource().fill(highLightColor);
-            ui.getSource().rect(x + ui.getSource().textWidth(contence.substring(0,highLightStart))-cursorOffset+maxTextWidth, y+height*0.1f, ui.getSource().textWidth(contence.substring(highLightStart,highLightEnd)),height*0.8f);
+            float highX = x + ui.getSource().textWidth(contence.substring(0,highLightStart))-cursorOffset+maxTextWidth;
+            highX = Math.max(x,highX);
+            float highWidth = ui.getSource().textWidth(contence.substring(highLightStart,highLightEnd));
+            if( (highX - x +  highWidth) > width){
+              highWidth = width - (highX - x);
+            }
+            ui.getSource().rect(highX, y+height*0.1f, highWidth,height*0.8f);
           }
-        }else{
-          ui.getSource().text(contence,x,y+height/2);
+        }else{//if the width of the text with the cursor does not extend outside of the text box
+          
+          if(ui.getSource().textWidth(contence)> maxTextWidth){
+            //if the text is longer then the width of the box figure out how much can be rednerd
+            //verry ineffshent
+            boolean rednerd = false;
+            for(int i=0;i<contence.length();i++){
+              if(ui.getSource().textWidth(contence.substring(0,i)) > maxTextWidth){
+                ui.getSource().text(contence.substring(0,i-1),x,y+height/2);
+                rednerd = true;
+                break;
+              }
+            }
+            //if the edge case of the loop not rendering it happens, then just render the whole thing
+            if(!rednerd){
+              ui.getSource().text(contence,x,y+height/2);
+            }
+          }else{
+            ui.getSource().text(contence,x,y+height/2);
+          }
+          
+          
           if(showCursor)
             ui.getSource().rect(x+cursorOffset,y+height*0.1f,2*ui.scale(),height*0.8f);//cursor
           
           if(highLighting){
             ui.getSource().fill(highLightColor);
-            ui.getSource().rect(x + ui.getSource().textWidth(contence.substring(0,highLightStart)), y+height*0.1f, ui.getSource().textWidth(contence.substring(highLightStart,highLightEnd)),height*0.8f);
+            float highX = x + ui.getSource().textWidth(contence.substring(0,highLightStart));
+            float highWidth = ui.getSource().textWidth(contence.substring(highLightStart,highLightEnd));
+            if( (highX - x +  highWidth) > width){
+              highWidth = width - (highX - x);
+            }
+            ui.getSource().rect(highX, y+height*0.1f, highWidth,height*0.8f);
           }
         }
       }else{
-        ui.getSource().text(contence,x,y+height/2);
+        //only reder text inside of the box
+        if(ui.getSource().textWidth(contence)> maxTextWidth){
+          //if the text is longer then the width of the box figure out how much can be rednerd
+          //verry ineffshent
+          boolean rednerd = false;
+          for(int i=0;i<contence.length();i++){
+            if(ui.getSource().textWidth(contence.substring(0,i)) > maxTextWidth){
+              ui.getSource().text(contence.substring(0,i-1),x,y+height/2);
+              rednerd = true;
+              break;
+            }
+          }
+          //if the edge case of the loop not rendering it happens, then just render the whole thing
+          if(!rednerd){
+            ui.getSource().text(contence,x,y+height/2);
+          }
+        }else{
+          //if the text is shorter then the width of the box just render the next
+          ui.getSource().text(contence,x,y+height/2);
+        }
       }
     }
     
-    ui.getSource().noClip();
+    //ui.getSource().noClip();
   }
   
   void mouseClicked(){

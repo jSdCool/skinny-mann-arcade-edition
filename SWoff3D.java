@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class SWoff3D extends StageComponent {//ground component
+
+  public static final Identifier ID = new Identifier("SWoff3D");
+
   SWoff3D(JSONObject data, boolean stage_3D) {
     type="3DoffSW";
     x=data.getFloat("x");
@@ -21,6 +23,10 @@ class SWoff3D extends StageComponent {//ground component
     y=Y;
     z=Z;
     type="3DoffSW";
+  }
+  
+  public SWoff3D(SerialIterator iterator){
+    deserial(iterator);
   }
   
   StageComponent copy() {
@@ -47,18 +53,18 @@ class SWoff3D extends StageComponent {//ground component
     return part;
   }
 
-  void draw() {
+  void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch2(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale);
+    source.draw3DSwitch2(((x+group.xOffset)-source.drawCamPosX), ((y+group.yOffset)+source.drawCamPosY), source.Scale,render);
   }
 
-  void draw3D() {
+  void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
-    source.draw3DSwitch2((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale);
+    source.draw3DSwitch2((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale,render);
     Collider3D playerHitBox = source.players[source.currentPlayer].getHitBox3D(0,0,0);
     if (source.collisionDetection.collide3D(playerHitBox,Collider3D.createBoxHitBox(x+group.xOffset-10,y+group.yOffset-10,z+group.zOffset-10,20,10,20))) {
       source.e3DMode=false;
@@ -100,5 +106,17 @@ class SWoff3D extends StageComponent {//ground component
   }
   public Collider3D getCollider3D(){ 
     return null;
+  }
+ 
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

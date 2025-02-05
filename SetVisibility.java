@@ -1,9 +1,11 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class SetVisibility extends LogicOutputComponent {
+  
+  public static final Identifier ID = new Identifier("SetVisability");
+  
   int groupNumber=0;
   SetVisibility(float x, float y, LogicBoard lb) {
     super(x, y, "set visable", lb);
@@ -15,6 +17,12 @@ class SetVisibility extends LogicOutputComponent {
     groupNumber=data.getInt("group number");
     button.setText("  visibility of "+level.groupNames.get(groupNumber));
   }
+  
+  public SetVisibility(SerialIterator iterator){
+    super(iterator);
+    groupNumber = iterator.getInt();
+  }
+  
   void tick() {
     if (inputTerminal1) {
       source.level.groups.get(groupNumber).visable=true;
@@ -43,5 +51,18 @@ class SetVisibility extends LogicOutputComponent {
     source.textAlign(source.LEFT, source.CENTER);
     source.text("true", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
     source.text("false", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(groupNumber);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

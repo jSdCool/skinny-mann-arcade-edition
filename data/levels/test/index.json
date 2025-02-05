@@ -28,7 +28,7 @@
       "19",
       "20"
     ],
-    "game version": "0.7.0_Early_Access",
+    "game version": "0.9.0_Early_Access",
     "spawnY": 698,
     "max players": 3,
     "number of variable": 50,
@@ -96,6 +96,11 @@
     "name": "Entites 2D",
     "location": "/Entites 2D.json",
     "type": "stage"
+  },
+  {
+    "name": "Big area",
+    "location": "/Big area.json",
+    "type": "3Dstage"
   },
   {
     "narration": true,

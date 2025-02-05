@@ -5,6 +5,8 @@ import java.io.File;
 
 */
 class StatisticManager {
+  static StatisticManager instace;
+  
   final String statsFileName;
 
   private int coinsColected;
@@ -40,7 +42,12 @@ class StatisticManager {
       soundBoxesUsed = statsObject.getInt("sound boxes used");
       //load stats here
     }
+    instace = this;
   }
+  
+  static StatisticManager getInstace(){
+    return instace;
+  } 
 
   void save() {
     JSONObject statsObject = new JSONObject();

@@ -1,10 +1,12 @@
 //Delay
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 
 class Delay extends LogicComponent {
+  
+  public static final Identifier ID = new Identifier("Delay");
+  
   int time=10;
   ArrayList<Boolean> mem=new ArrayList<>();
   Delay(float x, float y, LogicBoard lb) {
@@ -22,6 +24,11 @@ class Delay extends LogicComponent {
     for (int i=0; i<time; i++) {
       mem.add(false);
     }
+  }
+  
+  public Delay(SerialIterator iterator){
+    super(iterator);
+    time = iterator.getInt();
   }
 
   void draw() {
@@ -60,5 +67,18 @@ class Delay extends LogicComponent {
     JSONObject contence=super.save();
     contence.setInt("delay", time);
     return contence;
+  }
+  
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    serialize(data);
+    data.addInt(time);
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }

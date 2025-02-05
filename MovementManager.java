@@ -1,5 +1,5 @@
-import java.io.Serializable;
-abstract class MovementManager implements Serializable{
+
+abstract class MovementManager implements Serialization {
   abstract boolean left();
   abstract boolean right();
   abstract boolean in();

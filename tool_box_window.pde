@@ -376,7 +376,7 @@ class ToolBox extends PApplet {
                 playSound.setColor(255, 203);
               }
               playSound.draw();
-              drawSpeakericon(this, playSound.x+playSound.lengthX/2, playSound.y+playSound.lengthY/2, 0.5);
+              drawSpeakericon(playSound.x+playSound.lengthX/2, playSound.y+playSound.lengthY/2, 0.5,g);
               
               //tmp
               if(placingGoon){
@@ -407,7 +407,7 @@ class ToolBox extends PApplet {
               logicButtonButton.setColor(255, 203);
             }
             logicButtonButton.draw();
-            drawLogicButton(this, logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false);
+            drawLogicButton(logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false,g);
           }//end of not in 3D mode
 
           saveLevel.draw();
@@ -725,7 +725,7 @@ class ToolBox extends PApplet {
                 logicButtonButton.setColor(255, 203);
               }
               logicButtonButton.draw();
-              drawLogicButton(this, logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false);
+              drawLogicButton(logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false,g);
               if (deleteing) {
                 deleteButton.setColor(255, #F2F258);
               } else {
@@ -1201,7 +1201,7 @@ class ToolBox extends PApplet {
             playLogicSoundButton.setColor(255, 203);
           }
           playLogicSoundButton.draw();
-          drawSpeakericon(this, playLogicSoundButton.x+playLogicSoundButton.lengthX/2, playLogicSoundButton.y+playLogicSoundButton.lengthY/2, 0.5);
+          drawSpeakericon(playLogicSoundButton.x+playLogicSoundButton.lengthX/2, playLogicSoundButton.y+playLogicSoundButton.lengthY/2, 0.5,g);
 
           if (placingPulse) {
             pulseButton.setColor(255, #F2F258);
@@ -2002,7 +2002,7 @@ class ToolBox extends PApplet {
 
           if (saveLevel.isMouseOver()) {
             System.out.println("saving level");
-            level.save();
+            level.save(true);
             gmillis=millis()+400+millisOffset;
             System.out.println("save complete"+gmillis);
           }
@@ -2158,7 +2158,7 @@ class ToolBox extends PApplet {
           }
           if (saveLevel.isMouseOver()) {
             System.out.println("saving level");
-            level.save();
+            level.save(true);
             gmillis=millis()+400+millisOffset;
             System.out.println("save complete"+gmillis);
           }
@@ -2502,6 +2502,8 @@ class ToolBox extends PApplet {
         }
         }
       }//end of page is level settings
+      
+      
     }
   }
 

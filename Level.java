@@ -1,10 +1,12 @@
-import java.io.Serializable;
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class Level implements Serializable {
+class Level implements Serialization {
+  
+  public static final Identifier ID = new Identifier("Level");
+  
   static transient skiny_mann source;
   public ArrayList<Stage> stages=new ArrayList<>();
   public ArrayList<LogicBoard> logicBoards=new ArrayList<>();
@@ -128,6 +130,61 @@ class Level implements Serializable {
     }
     System.out.println("level load complete");
   }//end of constructor
+  
+  
+  /*
+  public ArrayList<Stage> stages=new ArrayList<>();
+  public ArrayList<LogicBoard> logicBoards=new ArrayList<>();
+  public ArrayList<Boolean> variables=new ArrayList<>();**
+  public ArrayList<Group> groups=new ArrayList<>();
+  public ArrayList<String> groupNames=new ArrayList<>();**
+  public int mainStage, numOfCoins, levelID, numlogicBoards=0, loadBoard, tickBoard, levelCompleteBoard, multyplayerMode=1, maxPLayers=2, minPlayers=2;
+  public String name, createdVersion, author;
+  public float SpawnX, SpawnY, RewspawnX, RespawnY;
+  public HashMap<String, StageSound> sounds=new HashMap<>();**
+  */
+  public Level(SerialIterator iterator){
+    stages = iterator.getArrayList();
+    logicBoards = iterator.getArrayList();
+    int numVars = iterator.getInt();
+    for(int i=0;i<numVars;i++){
+      variables.add(iterator.getBoolean());
+    }
+    groups = iterator.getArrayList();
+    int numGroups = iterator.getInt();
+    for(int i=0;i<numGroups;i++){
+      groupNames.add(iterator.getString());
+    }
+    mainStage = iterator.getInt();
+    numOfCoins = iterator.getInt();
+    levelID = iterator.getInt();
+    numlogicBoards = iterator.getInt();
+    loadBoard = iterator.getInt();
+    tickBoard = iterator.getInt();
+    levelCompleteBoard = iterator.getInt();
+    multyplayerMode = iterator.getInt();
+    maxPLayers = iterator.getInt();
+    minPlayers = iterator.getInt();
+    
+    name = iterator.getString();
+    createdVersion = iterator.getString();
+    author = iterator.getString();
+    
+    SpawnX = iterator.getFloat();
+    SpawnY = iterator.getFloat();
+    RewspawnX = iterator.getFloat();
+    RespawnY = iterator.getFloat();
+    
+    int numKeys = iterator.getInt();
+    String[] keys = new String[numKeys];
+    for(int i=0;i<numKeys;i++){
+      keys[i] = iterator.getString();
+    }
+    for(int i=0;i<numKeys;i++){
+      sounds.put(keys[i],(StageSound)iterator.getObject(StageSound::new));
+    }
+    
+  }
 
   void psudoLoad() {
     System.out.println("psudo loading level");
@@ -184,7 +241,7 @@ class Level implements Serializable {
     }
   }
 
-  void save() {
+  void save(boolean inLevelCreator) {
     JSONArray index=new JSONArray();
     JSONObject head = new JSONObject();
     head.setInt("mainStage", mainStage);
@@ -195,7 +252,11 @@ class Level implements Serializable {
     head.setFloat("spawn pointX", RewspawnX);
     head.setFloat("spawn pointY", RespawnY);
     head.setString("name", name);
-    head.setString("game version", createdVersion);//when integrating the level creator make shure this line is changed to reflect the correct version
+    if(inLevelCreator){
+      head.setString("game version", source.version);
+    }else {
+      head.setString("game version", createdVersion);//when integrating the level creator make shure this line is changed to reflect the correct version
+    }
     head.setString("author", author);
     head.setInt("number of variable", variables.size());
     head.setInt("multyplayer mode", multyplayerMode);
@@ -277,5 +338,56 @@ class Level implements Serializable {
     for(Stage s : stages){
       s.respawnEntities();
     }
+  }
+  @Override
+  public SerializedData serialize() {
+    SerializedData data = new SerializedData(id());
+    
+    data.addObject(SerializedData.ofArrayList(stages,new Identifier("Stage")));
+    data.addObject(SerializedData.ofArrayList(logicBoards,new Identifier("LogicBoard")));
+    //vars
+    data.addInt(variables.size());
+    for(Boolean b:variables){
+      data.addBool(b);
+    }
+    data.addObject(SerializedData.ofArrayList(groups,new Identifier("Group")));
+    //group names
+    data.addInt(groupNames.size());
+    for(String s:groupNames){
+      data.addObject(SerializedData.ofString(s));
+    }
+    data.addInt(mainStage);
+    data.addInt(numOfCoins);
+    data.addInt(levelID);
+    data.addInt(numlogicBoards);
+    data.addInt(loadBoard);
+    data.addInt(tickBoard);
+    data.addInt(levelCompleteBoard);
+    data.addInt(multyplayerMode);
+    data.addInt(maxPLayers);
+    data.addInt(minPlayers);
+    data.addObject(SerializedData.ofString(name));
+    data.addObject(SerializedData.ofString(createdVersion));
+    data.addObject(SerializedData.ofString(author));
+    data.addFloat(SpawnX);
+    data.addFloat(SpawnY);
+    data.addFloat(RewspawnX);
+    data.addFloat(RespawnY);
+    
+    String[] keys=new String[0];
+    keys=(String[])sounds.keySet().toArray(keys);
+    data.addInt(keys.length);
+    for(String k:keys){
+      data.addObject(SerializedData.ofString(k));
+    }
+    for(int i=0;i<keys.length;i++){
+      data.addObject(sounds.get(keys[i]).serialize());
+    }
+    return data;
+  }
+  
+  @Override
+  public Identifier id() {
+    return ID;
   }
 }
