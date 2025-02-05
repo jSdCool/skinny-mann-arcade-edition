@@ -4513,13 +4513,14 @@ void  initButtons() {
   levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_prev, 0, 0));
   levelSelectUGCMenuButtonConfig.add(new ButtonInMenu(UGC_lvls_next, 1, 0));
 
-  settingsGameplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
-  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
-  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsSND,2,2));
-  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 2));
-  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsSND,2, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsOUT, 3, 3));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(settingsBackButton, 0, 4));
   settingsGameplayMenuConfig.add(new ButtonInMenu(horozontalEdgeScrollSlider, 2, 0));
   settingsGameplayMenuConfig.add(new ButtonInMenu(verticleEdgeScrollSlider, 2, 1));
+  settingsGameplayMenuConfig.add(new ButtonInMenu(fovSlider, 2, 2));
 
   settingsDisplayMenuConfig.add(new ButtonInMenu(settingsDSP, 1, 2));
   settingsDisplayMenuConfig.add(new ButtonInMenu(sttingsGPL, 0, 2));
@@ -4836,7 +4837,7 @@ void initText() {
 
 
 ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), levelSelect2MenuButtonConfig = new ButtonMenuConfig(4, 2), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
-  settingsGameplayMenuConfig=new ButtonMenuConfig(4, 4), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4),settingsSoundMenuConfig = new ButtonMenuConfig(5,6), settingsOutherMenuConfig = new ButtonMenuConfig(5, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
+  settingsGameplayMenuConfig=new ButtonMenuConfig(4, 5), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4),settingsSoundMenuConfig = new ButtonMenuConfig(5,6), settingsOutherMenuConfig = new ButtonMenuConfig(5, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
 
 
 ButtonMenuConfig currentMenuConfig=mainMenuButtonConfig;
