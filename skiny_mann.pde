@@ -635,26 +635,13 @@ void draw() {// the function that is called every fraim
         fill(0);
         lc_load_new_describe.draw();
 
-        if (rootPath!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
-          if (entering_file_path&&coursor) {
-            lc_load_new_enterd.setText(rootPath+"|");
-          } else {
-            lc_load_new_enterd.setText(rootPath);
-          }
-        } else if (entering_file_path&&coursor) {
-          lc_load_new_enterd.setText("|");
-        }
-        lc_load_new_enterd.draw();
+        lcEnterLevelTextBox.draw();
         if (levelNotFound) {
           fill(200, 0, 0);
           lc_load_notFound.draw();
         }
-        stroke(0);
-        strokeWeight(1*Scale);
-        line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);//draw the line the the text sits on
         stroke(#4857ED);
         fill(#BB48ED);
-        strokeWeight(10*Scale);
         lcLoadLevelButton.draw();//draw load button
         lc_backButton.draw();
         lc_openLevelsFolder.draw();
@@ -665,23 +652,9 @@ void draw() {// the function that is called every fraim
         background(#48EDD8);
         fill(0);
         lc_load_new_describe.draw();
-        if (new_name!=null) {//manual cursor blinking becasue apperently I hadent made the global system yet
-          if (entering_name&&coursor) {
-            lc_load_new_enterd.setText(new_name+"|");
-          } else {
-            lc_load_new_enterd.setText(new_name);
-          }
-        } else if (entering_name&&coursor) {
-          lc_load_new_enterd.setText("|");
-        }
-        lc_load_new_enterd.draw();
-
+        lcEnterLevelTextBox.draw();
         lcNewLevelButton.draw();//start button
         lc_backButton.draw();
-        fill(0);
-        stroke(0);
-        strokeWeight(1*Scale);
-        line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//line for name text
         lc_openLevelsFolder.draw();
       }//end of make new level
 
@@ -847,7 +820,6 @@ void draw() {// the function that is called every fraim
         fill(0);
 
         if (newFileType.equals("sound")) {//if the selected type is sound
-          lc_newf_enterdName.setText("name: "+newFileName+coursorr);//display the entered name
           String pathSegments[]=fileToCoppyPath.split("/|\\\\");
           lc_newf_fileName.setText(pathSegments[pathSegments.length-1]);//display the name of the selected file
           lc_newf_fileName.draw();
@@ -861,10 +833,8 @@ void draw() {// the function that is called every fraim
           }
           lc_newSoundAsSoundButton.draw();
           lc_newSoundAsNarrationButton.draw();
-        } else {
-          lc_newf_enterdName.setText(newFileName+coursorr);//display the entered name
         }
-        lc_newf_enterdName.draw();
+        lcNewFileTextBox.draw();
       }//end of new file
 
       if (drawingPortal2) {//if drawing portal part 2 aka outher overview selection screen
@@ -929,12 +899,7 @@ void draw() {// the function that is called every fraim
         background(#48EDD8);
         fill(0);
         lc_newbp_describe.draw();
-        if (new_name!=null) {//display the name entered
-          lc_load_new_enterd.setText(new_name+coursorr);
-        } else if (coursor) {
-          lc_load_new_enterd.setText("|");
-        }
-        lc_load_new_enterd.draw();
+        lcEnterLevelTextBox.draw();
 
         createBlueprintGo.draw();//create button
         lc_backButton.draw();
@@ -947,24 +912,13 @@ void draw() {// the function that is called every fraim
         }
         new2DStage.draw();
         new3DStage.draw();
-        stroke(0);
-        strokeWeight(1*Scale);
-        line(40*Scale, 152*Scale, 800*Scale, 152*Scale);//text line
       }//end of creating new blueprint
 
       if (loadingBlueprint) {//if loading blueprint
         background(#48EDD8);
         fill(0);
         lc_newbp_describe.draw();
-        if (new_name!=null) {//coursor and entrd name
-          lc_load_new_enterd.setText(new_name+coursorr);
-        } else if (coursor) {
-          lc_load_new_enterd.setText("|");
-        }
-        lc_load_new_enterd.draw();
-        stroke(0);
-        strokeWeight(1*Scale);
-        line(40*Scale, 152*Scale, 1200*Scale, 152*Scale);
+        lcEnterLevelTextBox.draw();
         createBlueprintGo.setText("load");//load button
         createBlueprintGo.draw();
         lc_backButton.draw();
@@ -1504,27 +1458,27 @@ void mouseClicked() {// when you click the mouse
           if (settingsMenue.equals("display")) {
             String arat = "16:9";
             if (rez4k.isMouseOver()) {//2160 resolution button
-              settings.setResolution(1260,2160*16/9);
+              settings.setResolution((int)(2160*16.0/9),2160);
               settings.save();
             }
 
             if (rez1440.isMouseOver()) {// 1440 resolition button
-              settings.setResolution(1440,1440*16/9);
+              settings.setResolution((int)(1440*16.0/9),1440);
               settings.save();
             }
 
             if (rez1080.isMouseOver()) {// 1080 resolution button
-              settings.setResolution(1080,1080*16/9);
+              settings.setResolution((int)(1080*16.0/9),1080);
               settings.save();
             }
 
             if (rez900.isMouseOver()) {////900 resolution button
-              settings.setResolution(900,900*16/9);
+              settings.setResolution((int)(900*16.0/9),900);
               settings.save();
             }
 
             if (rez720.isMouseOver()) {// 720 resolution button
-              settings.setResolution(720,720*16/9);
+              settings.setResolution((int)(720*16.0/9),720);
               settings.save();
             }
 
@@ -1952,37 +1906,44 @@ void mouseClicked() {// when you click the mouse
           if (newLevelButton.isMouseOver()) {//new level button
             startup=false;
             newLevel=true;
-            entering_name=true;
             rootPath="";
+            lcEnterLevelTextBox.setContence("");
+            lcEnterLevelTextBox.activate();
+            return;
           }
           if (loadLevelButton.isMouseOver()) {//load level button
             startup=false;
             loading=true;
-            entering_file_path=true;
             rootPath="";
+            lcEnterLevelTextBox.setContence("");
+            lcEnterLevelTextBox.activate();
+            return;
           }
           if (newBlueprint.isMouseOver()) {//new blurprint button
             startup=false;
             creatingNewBlueprint=true;
             new_name="my blueprint";
-            entering_name=true;
+            lcEnterLevelTextBox.setContence("my blueprint");
+            lcEnterLevelTextBox.activate();
+            return;
           }
-          if (loadBlueprint.isMouseOver()) {//loaf blueprint button
+          if (loadBlueprint.isMouseOver()) {//load blueprint button
             startup=false;
             loadingBlueprint=true;
             new_name="";
-            entering_name=true;
+            lcEnterLevelTextBox.setContence("");
+            lcEnterLevelTextBox.activate();
+            return;
           }
           if (lc_backButton.isMouseOver()) {
             levelCreator=false;
           }
         }
         if (loading) {//if loading level
-          if (mouseX >=40*Scale && mouseX <= 1200*Scale && mouseY >= 100*Scale && mouseY <= 150*Scale) {//click box for the line to type the name
-            entering_file_path=true;
-          }
+          lcEnterLevelTextBox.mouseClicked();
           if (lcLoadLevelButton.isMouseOver()) {//load button
           JSONArray mainIndex = null;
+          rootPath = lcEnterLevelTextBox.getContence();
             try {//attempt to load the level
               String tmp=rootPath;
               rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+rootPath;
@@ -1993,7 +1954,7 @@ void mouseClicked() {// when you click the mouse
                 return;
               }
               mainIndex=loadJSONArray(rootPath+"/index.json");
-              entering_file_path=false;
+              lcEnterLevelTextBox.resetState();
               loading=false;
               levelOverview=true;
               levelNotFound=false;
@@ -2011,18 +1972,16 @@ void mouseClicked() {// when you click the mouse
           if (lc_backButton.isMouseOver()) {
             startup=true;
             loading=false;
-            entering_file_path=false;
+            lcEnterLevelTextBox.resetState();
           }
           if (lc_openLevelsFolder.isMouseOver()) {
             openLevelCreatorLevelsFolder();
           }
         }
         if (newLevel) {//if creating a new level
-          if (mouseX >=40*Scale && mouseX <= 1200*Scale && mouseY >= 100*Scale && mouseY <= 150*Scale) {//text line click box
-            entering_name=true;
-          }//rect(40,400,200,40);
+          lcEnterLevelTextBox.mouseClicked();
           if (lcNewLevelButton.isMouseOver()) {//create button
-            entering_name=false;
+            new_name = lcEnterLevelTextBox.getContence();
             newLevel=false;
             rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+new_name;
             JSONArray mainIndex=new JSONArray();//set up a new level
@@ -2041,12 +2000,13 @@ void mouseClicked() {// when you click the mouse
             levelOverview=true;
             level=new Level(mainIndex);
             level.save(true);
+            lcEnterLevelTextBox.resetState();
             return;
           }
           if (lc_backButton.isMouseOver()) {
             startup=true;
             newLevel=false;
-            entering_name=false;
+            lcEnterLevelTextBox.resetState();
           }
           if (lc_openLevelsFolder.isMouseOver()) {
             openLevelCreatorLevelsFolder();
@@ -2064,7 +2024,9 @@ void mouseClicked() {// when you click the mouse
           if (newStage.isMouseOver()) {//if the new file button is clicked
             levelOverview=false;
             newFile=true;
-            newFileName="";
+            lcNewFileTextBox.setContence("");
+            lcNewFileTextBox.activate();
+            return;
           }
           if (mouseY>80*Scale) {//if the mouse is in the files section of the screen
             overviewSelection=(int)(mouseY/Scale-80)/60+ filesScrole;//figure out witch thing to select
@@ -2135,13 +2097,15 @@ void mouseClicked() {// when you click the mouse
         }//end of level overview
 
         if (newFile) {//if on the new file page
+          lcNewFileTextBox.mouseClicked();
           if (newFileBack.isMouseOver()) {//back button
             levelOverview=true;
             newFile=false;
+            lcNewFileTextBox.resetState();
           }
 
           if (newFileCreate.isMouseOver()) {//create button
-            if (newFileName.equals("")) {//if no name has been entered
+            if (lcNewFileTextBox.getContence().isEmpty()) {//if no name has been entered
               return;
             }
             if (newFileType.equals("sound")) {//if the type that is selected is sound
@@ -2157,32 +2121,34 @@ void mouseClicked() {// when you click the mouse
                 i.printStackTrace();
               }
               System.out.println("adding sound to level");
+              String newFileName = lcNewFileTextBox.getContence();
               level.sounds.put(newFileName, new StageSound(newFileName, "/"+pathSegments[pathSegments.length-1],newSoundAsNarration));//add the sound to the level
               System.out.println("saving level");
               level.save(true);//save the level
               gmillis=millis()+400;///glitch effect
               System.out.println("save complete"+gmillis);
               newFile=false;//return back to the obverview
-              newFileName="";
               fileToCoppyPath="";
               levelOverview=true;
+              lcNewFileTextBox.resetState();
               return;
             }
             currentStageIndex=level.stages.size();//set the current sateg to the new stage
             respawnStage=currentStageIndex;
             if (newFileType.equals("2D")) {//create the approriate type of stage based on what is selectd
-              level.stages.add(new Stage(newFileName, "stage"));
+              level.stages.add(new Stage(lcNewFileTextBox.getContence(), "stage"));
             }
             if (newFileType.equals("3D")) {
-              level.stages.add(new Stage(newFileName, "3Dstage"));
+              level.stages.add(new Stage(lcNewFileTextBox.getContence(), "3Dstage"));
             }
 
             editingStage=true;
             newFile=false;
+            lcNewFileTextBox.resetState();
           }
           if (newFileType.equals("sound")) {
             if (chooseFileButton.isMouseOver()) {//choose file button for when the type is sound
-              selectInput("select audio file: .WAV .AFI .MP3:", "fileSelected");//open file selection diaglog
+              selectInput("select audio file: .WAV .AIF .MP3:", "fileSelected");//open file selection diaglog
             }
             if(lc_newSoundAsSoundButton.isMouseOver()){
               newSoundAsNarration=false;
@@ -2232,14 +2198,16 @@ void mouseClicked() {// when you click the mouse
         }//end of drawing portal 2
 
         if (creatingNewBlueprint) {//if creating a new blueprint
+        lcEnterLevelTextBox.mouseClicked();
           if (createBlueprintGo.isMouseOver()) {//create button
+            new_name = lcEnterLevelTextBox.getContence();
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
               if(newBlueprintIs3D){
                 workingBlueprint=new Stage(new_name, "3D blueprint");//creat and load the new blueprint
               }else{
                 workingBlueprint=new Stage(new_name, "blueprint");//creat and load the new blueprint
               }
-              entering_name=false;//set up enviormatn vaibles
+              lcEnterLevelTextBox.resetState();
               creatingNewBlueprint=false;
               editingBlueprint=true;
               camPos=-640;
@@ -2251,7 +2219,7 @@ void mouseClicked() {// when you click the mouse
           if (lc_backButton.isMouseOver()) {
             startup=true;
             creatingNewBlueprint=false;
-            entering_name=false;
+            lcEnterLevelTextBox.resetState();
           }
           if (new3DStage.isMouseOver()) {//buttons to set type
             newBlueprintIs3D=true;
@@ -2262,11 +2230,13 @@ void mouseClicked() {// when you click the mouse
         }//end of creating new bluepint
 
         if (loadingBlueprint) {//if loading blueprint
+        lcEnterLevelTextBox.mouseClicked();
           if (createBlueprintGo.isMouseOver()) {//load button
+          new_name = lcEnterLevelTextBox.getContence();
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
               rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
               workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));//load the blueprint
-              entering_name=false;//set enviormaent varibles
+              lcEnterLevelTextBox.resetState();
               loadingBlueprint=false;
               editingBlueprint=true;
               camPos=-640;
@@ -2276,7 +2246,7 @@ void mouseClicked() {// when you click the mouse
           if (lc_backButton.isMouseOver()) {
             startup=true;
             loadingBlueprint=false;
-            entering_name=false;
+            lcEnterLevelTextBox.resetState();
           }
         }//end of loading blueprint
         if (editinglogicBoard) {
@@ -2512,24 +2482,6 @@ void keyPressed() {// when a key is pressed
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
-        //if (enteringName) {
-        //  name=getInput(name, 0);
-        //}
-        //if (enteringPort) {
-        //  if (getInput(port+"", 1).equals("")) {
-        //    port=0;
-        //  } else {
-        //    if (port==0) {
-        //      port=Integer.parseInt(getInput("0", 1));
-        //    } else {
-        //      try {
-        //        port=Integer.parseInt(getInput(port+"", 1));
-        //      }
-        //      catch(java.lang.NumberFormatException n) {
-        //      }
-        //    }
-        //  }
-        //}
         multyPlayerNameTextBox.keyPressed();
         multyPlayerPortTextBox.keyPressed();
       }
@@ -2538,27 +2490,6 @@ void keyPressed() {// when a key is pressed
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
-        //if (enteringName) {
-        //  name=getInput(name, 0);
-        //}
-        //if (enteringPort) {
-        //  if (getInput(port+"", 1).equals("")) {
-        //    port=0;
-        //  } else {
-        //    if (port==0) {
-        //      port=Integer.parseInt(getInput("0", 1));
-        //    } else {
-        //      try {
-        //        port=Integer.parseInt(getInput(port+"", 1));
-        //      }
-        //      catch(java.lang.NumberFormatException n) {
-        //      }
-        //    }
-        //  }
-        //}
-        //if (enteringIP) {
-        //  ip=getInput(ip, 4);
-        //}
         multyPlayerNameTextBox.keyPressed();
         multyPlayerPortTextBox.keyPressed();
         multyPlayerIpTextBox.keyPressed();
@@ -2576,50 +2507,14 @@ void keyPressed() {// when a key is pressed
             triangleMode=0;
         }
       }
+      
+      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
+        lcEnterLevelTextBox.keyPressed();
+      }
 
-      if (entering_file_path) {//if ennering "file path"
-        if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
-
-          if (rootPath==null) {//if the path is blank
-            rootPath=key+"";//add current key pressed to path
-          } else {
-            rootPath+=key;//add current key pressed to path
-          }
-        }
-        if (keyCode==8) {//if the key is BACKSPACE
-          if (rootPath==null) {//if there3 is nothing then do nothing
-          } else {
-            if (rootPath.length()==1) {//delet if only 1 charcter
-              rootPath=null;
-            } else {
-              rootPath=rootPath.substring(0, rootPath.length()-1);//remove last charicter
-            }
-          }
-        }
-      }//end of entering file path
-
-      if (entering_name) {//if entering anme
-        if (keyCode>=48&&keyCode<=57/*numbers*/||keyCode==46/*decimal*/||keyCode==32/*space*/||(keyCode>=65&&keyCode<=90)/*a-z*/||keyCode==59/*;:*/||keyCode==92/*\*/||keyCode==45/*-_*/) {
-
-          if (new_name==null) {//if the path is blank
-            new_name=key+"";//add current key pressed to path
-          } else {
-            new_name+=key;//add current key pressed to path
-          }
-        }
-        if (keyCode==8) {//if the key is BACKSPACE
-          if (new_name==null) {
-          } else {
-            if (new_name.length()==1) {
-              new_name=null;
-            } else {
-              new_name=new_name.substring(0, new_name.length()-1);//remove the last charicter
-            }
-          }
-        }
-      }//end of entering name
+      
       if (newFile) {//if new file
-        newFileName=getInput(newFileName, 0);//use the cencable typing functions
+        lcNewFileTextBox.keyPressed();
       }
 
       if (startup) {//if on the main menue
@@ -2660,8 +2555,8 @@ void keyPressed() {// when a key is pressed
         if (keyCode==83) {//if 'S' is pressed
           s3D=true;
         }
-      }
-    }
+      }//end of not simulating and in 3D
+    }//end of level creator
 
     if(keyCode == 108 && dev_mode){//F12
       showDepthBuffer = !showDepthBuffer;
@@ -2744,6 +2639,12 @@ void keyReleased() {//when you release a key
     }
 
     if (levelCreator) {//when in the level creator
+      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
+        lcEnterLevelTextBox.keyReleased();
+      }
+      if(newFile){
+        lcNewFileTextBox.keyReleased();
+      }
       if (!simulating||editinglogicBoard||e3DMode) {//this seems to be for the logic boards as the pervous section hanldes all insatces of being in the stage editor
         if (keyCode==37) {//if LEFT ARROW released
           cam_left=false;
@@ -2828,6 +2729,15 @@ void keyTyped(){
       multyPlayerNameTextBox.keyTyped();
       multyPlayerPortTextBox.keyTyped();
       multyPlayerIpTextBox.keyTyped();
+    }
+  }
+  
+  if(levelCreator){
+    if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
+      lcEnterLevelTextBox.keyTyped();
+    }
+    if(newFile){
+      lcNewFileTextBox.keyTyped();
     }
   }
 }
@@ -4016,8 +3926,8 @@ String formatMillis(int millis) {
 void programLoad() {
   //do this first becasue it causes a momentary freez on the render thread that we want to avoid later in the animation
   println("loading shaders");
-  depthBufferShader = loadShader("shaders/depthBufferFrag.glsl","shaders/depthBufferVert.glsl");
-  shadowShader = loadShader("shaders/shadowMapFrag.glsl","shaders/shadowMapVert.glsl");
+  depthBufferShader = loadShader("data/shaders/depthBufferFrag.glsl","shaders/depthBufferVert.glsl");
+  shadowShader = loadShader("data/shaders/shadowMapFrag.glsl","shaders/shadowMapVert.glsl");
 
   requestDepthBufferInit = true;
   //this init can only happen on the main render thread
@@ -4451,6 +4361,9 @@ void  initButtons() {
 
   lc_openLevelsFolder = new UiButton(ui, 1060, 650, 200, 40, "Open Folder", #BB48ED, #4857ED).setStrokeWeight(10);
   
+  lcEnterLevelTextBox = new UiTextBox(ui, 40, 100, 1160, 50).setColors(#48EDD8,0).setTextSize(20).setPlaceHolder("Level Name Here");
+  lcNewFileTextBox = new UiTextBox(ui, 100, 375, 1100, 75).setColors(#0092FF,0).setTextSize(70).setPlaceHolder("");
+  
   defaultAuthorNameTextBox = new UiTextBox(ui,900,330,340,40).setColors(#FFFFFF,0).setStrokeWeight(5).setTextSize(26).setPlaceHolder("Name Goes Here").setContence(defaultAuthor);
   
   //perhapse dont use default suthor for this, or do
@@ -4459,7 +4372,13 @@ void  initButtons() {
   multyPlayerIpTextBox = new UiTextBox(ui, 128, 266, 1024, 36).setColors(#FF8000,0).setTextSize(25).setPlaceHolder("Host Address Here").setContence("localhost").setAllowList(".0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-");
 
 
-
+  //DO NOT EDIT BELOW THIS LINE ON THE MAIN PROJECT!
+  //===================================================
+  //DO NOT EDIT THEESE LINES, EVER
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++
+  //===================================================
+  //reserved for arcade edition vars
+  
   levelCompleteScreenContinue = new UiButton(ui,550, 620, 200, 40, "Continue", #FF1900, #FFF900).setStrokeWeight(10);
 
   onScreenKeyboardButtons[0] = new Button[10];
@@ -4592,6 +4511,13 @@ void  initButtons() {
 
   //
   currentMenuConfig.set();
+  
+  
+  //===================================================
+  //DO NOT EDIT THEESE LINES, EVER
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++
+  //===================================================
+
 }
 
 
@@ -4706,7 +4632,7 @@ void fileSelected(File selection) {
   System.out.println(path);
   String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();
   System.out.println(extenchen);
-  if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("afi")) {//check if the file type is valid
+  if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("aif")) {//check if the file type is valid
 
     fileToCoppyPath=path;
   } else {
@@ -4795,9 +4721,7 @@ void initText() {
   lc_start_version = new UiText(ui, "game ver: "+GAME_version+ "  editor ver: "+EDITOR_version, 0, 718, 15, LEFT, BOTTOM);
   lc_start_author = new UiText(ui, "author: ", 10, 30, 15, LEFT, BOTTOM);
   lc_load_new_describe = new UiText(ui, "enter level name", 40, 100, 20, LEFT, BOTTOM);
-  lc_load_new_enterd = new UiText(ui, "EEEEEEEEE", 40, 150, 20, LEFT, BOTTOM);
   lc_load_notFound = new UiText(ui, "Level Not Found!", 640, 300, 50, CENTER, CENTER);
-  lc_newf_enterdName = new UiText(ui, "VAL", 100, 445, 70, LEFT, BOTTOM);
   lc_newf_fileName = new UiText(ui, "VAL", 305, 520, 30, LEFT, BOTTOM);
   lc_dp2_info = new UiText(ui, "select destenation stage", 640, 30, 60, CENTER, CENTER);
   lc_newbp_describe = new UiText(ui, "enter blueprint name", 40, 100, 20, LEFT, BOTTOM);
@@ -4820,8 +4744,14 @@ void initText() {
   settingPlayerSpawnText = new UiText(ui, "Select the spawn location of the player",640,72,35,CENTER,CENTER);
   narrationCaptionText = new UiText(ui,"*Narration in progress*",640,695,20,CENTER,BOTTOM);
   dbg_ping = new UiText(ui,"Ping: N/A",1275,100,10,RIGHT,TOP);
-
-
+  
+  //DO NOT EDIT BELOW THIS LINE ON THE MAIN PROJECT!
+  //===================================================
+  //DO NOT EDIT THEESE LINES, EVER
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++
+  //===================================================
+  //reserved for arcade edition vars
+  
   elapsedTimeDisplay = new UiText(ui, "TIME" ,640,20,20,CENTER,CENTER);
   levelCompleteTitle = new UiText(ui, "Level Complete!!",640, 40, 50,CENTER,CENTER);
   levelCompleteLevelName = new UiText(ui, "LEVEL NAME HERE",640, 90, 30,CENTER,CENTER);
@@ -4833,8 +4763,19 @@ void initText() {
   yourScore = new UiText(ui,"Your Time: 0:0:0",640,120,30,CENTER,CENTER);
 
   mainMenuWebsite = new UiText(ui, "More at: https://cbi-games.org",640,415,60,CENTER,CENTER);
+  
+  //===================================================
+  //DO NOT EDIT THEESE LINES, EVER
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++
+  //===================================================
 }
 
+//DO NOT EDIT BELOW THIS LINE ON THE MAIN PROJECT!
+//===================================================
+//DO NOT EDIT THEESE LINES, EVER
+//+++++++++++++++++++++++++++++++++++++++++++++++++++
+//===================================================
+//reserved for arcade edition vars
 
 ButtonMenuConfig mainMenuButtonConfig=new ButtonMenuConfig(1, 4), levelSelectMenuButtonConfig = new ButtonMenuConfig(4, 4), levelSelect2MenuButtonConfig = new ButtonMenuConfig(4, 2), pauseMenuButtonConfig = new ButtonMenuConfig(1, 3), levelSelectUGCMenuButtonConfig = new UGCButtonMenuConfig(),
   settingsGameplayMenuConfig=new ButtonMenuConfig(4, 5), settingsDisplayMenuConfig=new ButtonMenuConfig(5, 4),settingsSoundMenuConfig = new ButtonMenuConfig(5,6), settingsOutherMenuConfig = new ButtonMenuConfig(5, 8),levelCompleteMenuConfig = new ButtonMenuConfig(1,1),onScreenKeyboardMenuConfig=new ButtonMenuConfig(10,4);
@@ -5216,3 +5157,9 @@ synchronized JSONArray saveLoadJSONArray(JSONArray data,String path,boolean save
     return loadJSONArray(path);
   }
 }
+
+
+//===================================================
+//DO NOT EDIT THEESE LINES, EVER
+//+++++++++++++++++++++++++++++++++++++++++++++++++++
+//===================================================

@@ -69,7 +69,7 @@ class SoundHandler extends Thread {
         musNum++;//switch to the next track
         if (musNum==music[currentMusicTrack].length)//if rached the end of the track go back to the start
           musNum=0;
-        System.out.println(musNum+" "+music[currentMusicTrack].length+" "+masterVolume*musicVolume);
+        //System.out.println(musNum+" "+music[currentMusicTrack].length+" "+masterVolume*musicVolume);
         music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the music
         //there appears to be a bug in the audio librarie that prevents passing the volume as a parameter in play from working
         //so we will manualy set the volume emedialy after

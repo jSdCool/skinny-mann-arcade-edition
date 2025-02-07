@@ -445,4 +445,8 @@ class UiTextBox{
     controlPressed = false;
   }
   
+  public void activate(){
+    typing = true;
+  }
+  
 }

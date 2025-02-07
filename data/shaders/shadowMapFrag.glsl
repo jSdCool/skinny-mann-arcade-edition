@@ -1,5 +1,3 @@
-#version 120
-
 // Used a bigger poisson disk kernel than in the tutorial to get smoother results
 const vec2 poissonDisk[9] = vec2[] (
    vec2(0.95581, -0.18159), vec2(0.50147, -0.35807), vec2(0.69607, 0.35559),

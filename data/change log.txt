@@ -1,6 +1,10 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.9.2_Early_Access
+-fixed: changing the resolution setting would save the incorrect values for screen width and height
+-changed: text boxes in level creator have been updated to the new text box system
+
 0.9.1_Early_Access
 -fixed: all music after the first music track would ignore the set volume
 -changed: 3D Shadow setting now has 5 values
