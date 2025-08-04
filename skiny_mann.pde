@@ -4734,6 +4734,8 @@ void  initButtons() {
   levelSelect2MenuButtonConfig.add(new ButtonInMenu(select_lvl_back, 0, 1));
   levelSelect2MenuButtonConfig.add(new ButtonInMenu(select_lvl_13, 0, 0));
   levelSelect2MenuButtonConfig.add(new ButtonInMenu(select_lvl_14, 1, 0));
+  levelSelect2MenuButtonConfig.add(new ButtonInMenu(select_lvl_15, 2, 0));
+  levelSelect2MenuButtonConfig.add(new ButtonInMenu(select_lvl_16, 3, 0));
   
 
   pauseMenuButtonConfig.add(new ButtonInMenu(pauseResumeButton, 0, 0));
