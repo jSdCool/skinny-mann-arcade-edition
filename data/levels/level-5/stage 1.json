@@ -11,7 +11,10 @@
     "x": 0,
     "y": 660,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 120,
@@ -20,7 +23,10 @@
     "x": 670,
     "y": 610,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 110,
@@ -29,7 +35,10 @@
     "x": 1030,
     "y": 610,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 90,
@@ -38,7 +47,10 @@
     "x": 1280,
     "y": 550,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 130,
@@ -47,7 +59,10 @@
     "x": 1530,
     "y": 520,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 150,
@@ -56,7 +71,10 @@
     "x": 1790,
     "y": 430,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 140,
@@ -65,7 +83,10 @@
     "x": 2060,
     "y": 510,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 650,
@@ -74,17 +95,25 @@
     "x": 2310,
     "y": 610,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 3,
+    "type": "sloap",
+    "dz": 0,
     "y1": 440,
     "x1": 2960,
     "y2": 610,
     "x2": 3190,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 50,
@@ -93,17 +122,25 @@
     "x": 3190,
     "y": 440,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 2,
+    "type": "sloap",
+    "dz": 0,
     "y1": 440,
     "x1": 3240,
     "y2": 610,
     "x2": 3420,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 460,
@@ -112,7 +149,10 @@
     "x": 2960,
     "y": 610,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "link Index": 2,

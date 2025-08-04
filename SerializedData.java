@@ -1,20 +1,29 @@
 import java.util.ArrayList;
 
+/**A container for serialized data that makes it conveient to format data into serialized bytes
+*/
 public class SerializedData {
     private final Identifier identifier;
     private final ArrayList<Byte> data2;
+    /**Create a new data serializer
+    @param identifier The identifier of the object that is being serialized. This will be the identifier used to deserialized the object later
+    */
     public SerializedData(Identifier identifier){
         this.identifier=identifier;
         data2 = new ArrayList<>();
     }
-
+    /**Create a new data serializer.<br>
+    used intrenally for serializing raw java types like string
+    @param identifier The identifier of the object that is being serialized. This will be the identifier used to deserialized the object later
+    @param data Allready serialized byte data of the object
+    */
     private SerializedData(Identifier identifier, ArrayList<Byte> data){
         this.identifier = identifier;
         data2 = data;
     }
 
-    /**get the serialized data as an array of bytes that can be sent to an output stream and interpreted on the other side
-     * @return byte array with the following arrangement: {identifier\<string: null terminated\> length\<int: 4bytes\> data\<length bytes\>}
+    /**Get the serialized data as an array of bytes that can be sent to an output stream and interpreted on the other side
+     * @return Byte array with the following arrangement: {identifierLength: 4 bytes, Identifier: length bytes, objectLength: 4 bytes, objectData: length bytes}
      */
     public byte[] getSerializedData(){
         byte[] idAsBytes = identifier.asBytes();
@@ -27,17 +36,19 @@ public class SerializedData {
         byte[] length = Serializers.intToBytes(data2.size());
         System.arraycopy(length,0,serialized,index,length.length);
         index+=length.length;
-        //copy the content into the output
-
+        //copy the content from the array list into the output
         for(int i=index;i<index+data2.size();i++){
             serialized[i] = data2.get(i-index);
         }
-
         return serialized;
     }
-
+    
+    /**Get the current serialized data as an array list
+    @return An array list containg the fully serialized bytes from this serialized object
+    */
     private ArrayList<Byte> getData(){
         ArrayList<Byte> out = new ArrayList<>();
+        //copy the identitier and length into the output
         for(byte b: identifier.asBytes()){
             out.add(b);
         }
@@ -46,20 +57,20 @@ public class SerializedData {
         out.add(length[1]);
         out.add(length[2]);
         out.add(length[3]);
-
+        //copy the byte data to the output
         out.addAll(data2);
         return out;
     }
 
-    /**write a byte to the data
-     * @param b the byte to wright
+    /**Write a byte to the data
+     * @param b The byte to wright
      */
     public void addByte(byte b){
         data2.add(b);
     }
 
-    /**write a short to the data
-     * @param s the short to write
+    /**Write a short to the data
+     * @param s The short to write
      */
     public void addShort(short s){
         byte[] tmp = Serializers.shortToBytes(s);
@@ -67,8 +78,8 @@ public class SerializedData {
         data2.add(tmp[1]);
     }
 
-    /**write an int to the data
-     * @param i the int to write
+    /**Write an int to the data
+     * @param i The int to write
      */
     public void addInt(int i){
         byte[] tmp = Serializers.intToBytes(i);
@@ -78,8 +89,8 @@ public class SerializedData {
         data2.add(tmp[3]);
     }
 
-    /**write a long to the data
-     * @param l the long to write
+    /**Write a long to the data
+     * @param l The long to write
      */
     public void addLong(long l){
         byte[] tmp = Serializers.longToBytes(l);
@@ -93,8 +104,8 @@ public class SerializedData {
         data2.add(tmp[7]);
     }
 
-    /**write a float to the data
-     * @param f the float to write
+    /**Write a float to the data
+     * @param f The float to write
      */
     void addFloat(float f){
         byte[] tmp = Serializers.floatToBytes(f);
@@ -104,8 +115,8 @@ public class SerializedData {
         data2.add(tmp[3]);
     }
 
-    /**write a double to the data
-     * @param d the double to write
+    /**Write a double to the data
+     * @param d The double to write
      */
     void addDouble(double d){
         byte[] tmp = Serializers.doubleToBytes(d);
@@ -119,8 +130,8 @@ public class SerializedData {
         data2.add(tmp[7]);
     }
 
-    /**write a char to the data
-     * @param c the char to write
+    /**Write a char to the data
+     * @param c The char to write
      */
     void addChar(char c){
         byte[] tmp = Serializers.charToBytes(c);
@@ -128,23 +139,23 @@ public class SerializedData {
         data2.add(tmp[1]);
     }
 
-    /**write a boolean to the data
-     * @param b the boolean to write
+    /**Write a boolean to the data
+     * @param b The boolean to write
      */
     void addBool(boolean b){
         data2.add(Serializers.booleanToByte(b));
     }
 
-    /**write an object to the data
-     * @param obj the object to write
+    /**Write an object to the data
+     * @param obj The object to write
      */
     void addObject(SerializedData obj){
         data2.addAll(obj.getData());
     }
 
-    /**create a serialized representation of a string
-     * @param s the string to serialize
-     * @return the serial representation of the passed in string
+    /**Create a serialized representation of a string
+     * @param s The string to serialize
+     * @return The serial representation of the passed in string
      */
     public static SerializedData ofString(String s){
         if(s==null){
@@ -158,10 +169,10 @@ public class SerializedData {
         return new SerializedData(Serializers.STRING_ID,gb);
     }
 
-    /**create a serialized representation of an array list
-     * @param list the list to serialized
-     * @param type the type of the list
-     * @return a serialized representation of the passed in array list
+    /**Create a serialized representation of an array list
+     * @param list The list to serialized
+     * @param type The type of the list
+     * @return A serialized representation of the passed in array list
      */
     public static SerializedData ofArrayList(ArrayList<? extends Serialization> list,Identifier type){
 

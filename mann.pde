@@ -1,4 +1,14 @@
+//start of mann.pde
+/**Render the player in 2D
+@param x The x position of the player
+@param y The y position of the player
+@param pose The player's current pose
+@param scale The scale to draw the player at
+@param shirt_color The index of the shirt color (0-9)
+@param render The place to draw the player
+*/
 void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphics render) {
+  //first set the shirt color
   render.strokeWeight(0);
   if (shirt_color==0) {//red
     render.fill(255, 0, 0);
@@ -42,13 +52,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==1) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-10*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+4*scale, y-20*scale, scale*6, scale*10);
@@ -57,13 +67,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==2) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-12*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+6*scale, y-20*scale, scale*6, scale*10);
@@ -72,13 +82,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==3) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-13*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+7*scale, y-20*scale, scale*6, scale*10);
@@ -86,13 +96,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
     render.rect(x+12*scale, y-10*scale, scale*6, scale*10);
   }
   if (pose==4) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-12*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-12*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+6*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-16*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+10*scale, y-20*scale, scale*6, scale*10);
@@ -101,13 +111,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==5) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-13*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+7*scale, y-20*scale, scale*6, scale*10);
@@ -116,13 +126,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==6) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-12*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+6*scale, y-20*scale, scale*6, scale*10);
@@ -131,13 +141,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==7) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-10*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+4*scale, y-20*scale, scale*6, scale*10);
@@ -146,13 +156,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==8) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-8*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+2*scale, y-20*scale, scale*6, scale*10);
@@ -161,13 +171,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==9) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-7*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+1*scale, y-20*scale, scale*6, scale*10);
@@ -176,13 +186,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==10) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-8*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-8*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+2*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-4*scale, y-20*scale, scale*6, scale*10);
     render.rect(x-4*scale, y-20*scale, scale*6, scale*10);
@@ -191,13 +201,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==11) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-7*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+1*scale, y-20*scale, scale*6, scale*10);
@@ -206,13 +216,13 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 
   if (pose==12) {
-    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);
+    render.rect(x-10*scale, y-55*scale, scale*20, scale*25);//shirt
     render.fill(-17813);
     render.stroke(-17813);
-    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);
+    render.rect(x-15*scale, y-75*scale, scale*30, scale*20);//head
     render.fill(-16763137);
     render.stroke(-16763137);
-    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);
+    render.rect(x-10*scale, y-30*scale, scale*6, scale*10);//legs
     render.rect(x+4*scale, y-30*scale, scale*6, scale*10);
     render.rect(x-8*scale, y-20*scale, scale*6, scale*10);
     render.rect(x+2*scale, y-20*scale, scale*6, scale*10);
@@ -221,10 +231,20 @@ void draw_mann(float x, float y, int pose, float scale, int shirt_color,PGraphic
   }
 }
 
+/**Render the player in 3D
+@param x The x position of the player
+@param y The y position of the player
+@param z The z position of the player
+@param pose The player's current pose
+@param scale The scale to draw the player at
+@param shirt_color The index of the shirt color (0-9)
+@param render The place to draw the player
+*/
 void draw_mann_3D(float x, float y, float z, int pose, float scale, int shirt_color,PGraphics render) {
   render.translate(x, y, z);
   render.rotateY(radians(90));
   render.strokeWeight(0);
+  //set the shirt color
   if (shirt_color==0) {//red
     render.fill(255, 0, 0);
     render.stroke(255, 0, 0);
@@ -267,16 +287,17 @@ void draw_mann_3D(float x, float y, float z, int pose, float scale, int shirt_co
   }
 
   render.translate(0, -42.5*scale, 0);
-  render.box(scale*20, scale*25, 10*scale);
+  render.box(scale*20, scale*25, 10*scale);//shirt
   render.translate(0, 0-42.5*scale*-1, 0);
   render.fill(-17813);
   render.stroke(-17813);
   render.translate( 0, 0-65*scale, 0);
 
-  render.box(scale*30, scale*20, 20*scale);
+  render.box(scale*30, scale*20, 20*scale);//head
 
   render.translate(- 0, (0-65*scale)*-1, -0);
 
+  //legs
   if (pose==1) {
     render.fill(-16763137);
     render.stroke(-16763137);
@@ -698,3 +719,4 @@ void draw_mann_3D(float x, float y, float z, int pose, float scale, int shirt_co
   render.rotateY(radians(-90));
   render.translate(-x, -y, -z);
 }
+//end of mann.pde

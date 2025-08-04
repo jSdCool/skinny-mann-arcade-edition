@@ -3,7 +3,7 @@
   {
     "x": 80,
     "y": 80,
-    "type": "generic",
+    "type": "GenericLogicComponent",
     "connections": [{
       "index": 1,
       "terminal": 1
@@ -12,7 +12,7 @@
   {
     "x": 580,
     "y": 360,
-    "type": "generic",
+    "type": "GenericLogicComponent",
     "connections": []
   },
   {

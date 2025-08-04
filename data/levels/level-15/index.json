@@ -1,0 +1,54 @@
+[
+  {
+    "mainStage": 0,
+    "coins": 205,
+    "min players": 2,
+    "author": "jSdCool",
+    "level_id": 15,
+    "spawnX": 247.1999969482422,
+    "groups": ["group 0"],
+    "game version": "0.10.0_Early_Access",
+    "spawnY": 96.79998779296875,
+    "max players": 2,
+    "number of variable": 5,
+    "name": "level-15",
+    "spawn pointX": 247.1999969482422,
+    "spawn pointY": 96.79998779296875,
+    "multyplayer mode": 1
+  },
+  {
+    "name": "stage 1",
+    "location": "/stage 1.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 2",
+    "location": "/stage 2.json",
+    "type": "3Dstage"
+  },
+  {
+    "name": "stage 3",
+    "location": "/stage 3.json",
+    "type": "stage"
+  },
+  {
+    "name": "stage 4",
+    "location": "/stage 4.json",
+    "type": "stage"
+  },
+  {
+    "name": "load",
+    "location": "/load.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "tick",
+    "location": "/tick.json",
+    "type": "logicBoard"
+  },
+  {
+    "name": "level complete",
+    "location": "/level complete.json",
+    "type": "logicBoard"
+  }
+]

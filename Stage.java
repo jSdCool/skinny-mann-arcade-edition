@@ -1,8 +1,10 @@
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
-
-class Stage implements Serialization {
+import java.util.function.Function;
+/**Structure that represens a specific stage and contiains all of its components
+*/
+public class Stage implements Serialization {
   
   public static final Identifier ID = new Identifier("Stage");
   
@@ -12,16 +14,26 @@ class Stage implements Serialization {
   public boolean is3D=false;
   public String type, name;
   public int stageID, skyColor=-9131009;
-  Stage(JSONArray file) {//single varible instance for a stage
+  /**Load a stage from a saved json file
+  @param file The file to load from
+  */
+  public Stage(JSONArray file) {//single varible instance for a stage
     load(file);
   }
   
-  Stage(String Name, String Type) {
+  /**Create a new stage
+  @param Name The name of the stage
+  @param Type The type of the level (stage/3Dstage/blueprint/3D blueprint)
+  */
+  public Stage(String Name, String Type) {
     name=Name;
     type=Type;
     is3D=type.equals("3Dstage")||type.equals("3D blueprint");
   }
   
+  /**Recreate a stage from serialized binarry data
+  @param iterator The source of the serialized binarry data
+  */
   public Stage(SerialIterator iterator){
     parts = iterator.getArrayList();
     entities = iterator.getArrayList();
@@ -32,81 +44,57 @@ class Stage implements Serialization {
     skyColor = iterator.getInt();
   }
 
-
-  void load(JSONArray file) {
-    type=file.getJSONObject(0).getString("type");
+  /**Load the level, no idea why this is seperate from the constructor but ok
+  @param file The file to load from
+  */
+  private void load(JSONArray file) {
+    type=file.getJSONObject(0).getString("type");//load the name and type
     name=file.getJSONObject(0).getString("name");
     try {
-      skyColor=file.getJSONObject(0).getInt("sky color");
-    }
-    catch(Throwable e) {
-    }
+      skyColor=file.getJSONObject(0).getInt("sky color");//load the sky color if possible
+    } catch(Throwable e) { }
 
-    if (type.equals("stage")||type.equals("3Dstage")||type.equals("blueprint")||type.equals("3D blueprint")) {
-      is3D=type.equals("3Dstage")||type.equals("3D blueprint");
-      for (int i=1; i<file.size(); i++) {
-        try {
-          JSONObject ob=file.getJSONObject(i);
-          String otype=ob.getString("type");
-          if (otype.equals("ground")) {
-            parts.add(new Ground(ob, is3D));
+    if (type.equals("stage")||type.equals("3Dstage")||type.equals("blueprint")||type.equals("3D blueprint")) {//if the type is valid
+      is3D=type.equals("3Dstage")||type.equals("3D blueprint");//check if it is a 3D type
+      for (int i=1; i<file.size(); i++) {//for each element
+        
+        JSONObject ob=file.getJSONObject(i);
+        String otype=Identifier.convertToId(ob.getString("type"));
+        ob.setBoolean("s3d",is3D);
+        Identifier typeID = new Identifier(otype);
+        Function<JSONObject, StageComponent> constructor = StageComponentRegistry.getJsonConstructor(typeID);//get the constructor for this component
+        if(constructor == null){//check if it is an entity
+          //if the current thing is an entity, load it
+          Function<JSONObject, StageEntity> entityConstructor = EntityRegistry.getJsonConstructor(typeID);//get the constrcutor for this entity
+          if(entityConstructor!=null){//as long as the cnstructr exsists
+            entities.add(entityConstructor.apply(ob));//run the constructor
+          }else{
+            System.err.println("No constructor found for idntifier: "+typeID);
+            throw new RuntimeException("No constructor found for identifier: "+typeID);
           }
-          else if (otype.equals("holo")) {
-            parts.add(new Holo(ob, is3D));
-          }
-          else if (otype.equals("dethPlane")) {
-            parts.add(new DethPlane(ob, is3D));
-          }
-          else if (otype.equals("check point")) {
-            parts.add(new CheckPoint(ob, is3D));
-          }
-          else if (otype.equals("goal")) {
-            parts.add(new Goal(ob, is3D));
-          }
-          else if (otype.equals("coin")) {
-            parts.add(new Coin(ob, is3D));
-          }
-          else if (otype.equals("interdimentional Portal")) {
-            parts.add(new Interdimentional_Portal(ob, is3D));
-          }
-          else if (otype.equals("sloap")) {
-            parts.add(new Sloap(ob, is3D));
-          }
-          else if (otype.equals("holoTriangle")) {
-            parts.add(new HoloTriangle(ob, is3D));
-          }
-          else if (otype.equals("3DonSW")) {
-            parts.add(new SWon3D(ob, is3D));
-          }
-          else if (otype.equals("3DoffSW")) {
-            parts.add(new SWoff3D(ob, is3D));
-          }
-          else if (otype.equals("WritableSign")) {
-            parts.add(new WritableSign(ob, is3D));
-          }
-          else if (otype.equals("sound box")) {
-            parts.add(new SoundBox(ob, is3D));
-          }
-          else if (otype.equals("logic button")) {
-            parts.add(new LogicButton(ob, is3D));
-            interactables.add(parts.get(parts.size()-1));
-          }
-          else{
-            //if the current thing is an entity, load it
-            StageEntity ent = source.entityRegistry.get(otype);
-            if(ent!=null){
-              entities.add(ent.create(ob,this));
-            }
-          }
-          
+          continue;
         }
-        catch(Throwable e) {
-        }
+        
+        StageComponent component = constructor.apply(ob);//run the constructor
+        add(component);
       }
     }
   }
+  
+  /**Add a new component to the stage
+  @param component The component to add
+  */
+  public void add(StageComponent component){
+    parts.add(component);
+    if(component instanceof Interactable){//if the component can be interacted with
+      interactables.add(component);//add it to the list of things that can be interacted with
+    }
+  }
 
-  String save() {
+  /**Save this stage to a file
+  @return The file name of the saved file
+  */
+  public String save() {
     JSONArray staeg = new JSONArray();
     JSONObject head=new JSONObject();
     head.setString("name", name);
@@ -123,12 +111,17 @@ class Stage implements Serialization {
     return "/"+name+".json";
   }
   
-  void respawnEntities(){
+  /**Respawn all entities resetting them back to their spawn positions
+  */
+  public void respawnEntities(){
     for(StageEntity se : entities){
       se.respawn();
     }
   }
   
+  /**Convert this stage to a byte representation that can be sent over the network or saved to a file.<br>
+  @return This stage as a binarry representation
+  */
   @Override
   public SerializedData serialize() {
     SerializedData data = new SerializedData(id());
@@ -141,12 +134,17 @@ class Stage implements Serialization {
     data.addInt(skyColor);
     return data;
   }
-  
+  /**Get the id of this objet
+  @return The Identifier representing this object
+  */
   @Override
   public Identifier id() {
     return ID;
   }
   
+  /**Check if this stage is the same as another stage. note: this only does a shallow compare, components and entities are not individially checked for equality
+  @param o The object to check equality for
+  */
   public boolean equals(Object o){
     if(o instanceof Stage){
       Stage s = (Stage)o;
@@ -163,6 +161,9 @@ class Stage implements Serialization {
         return false;
       }
       if(parts.size()!=s.parts.size()){
+        return false;
+      }
+      if(entities.size()!=s.entities.size()){
         return false;
       }
       

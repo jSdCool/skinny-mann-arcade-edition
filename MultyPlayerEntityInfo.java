@@ -1,4 +1,4 @@
-/** sends data about an entity from the server to the client in multyplayer mode 2
+/**Sends data about an entity from the server to the client in multyplayer mode 2
 */
 class MultyPlayerEntityInfo extends DataPacket{
   
@@ -7,10 +7,10 @@ class MultyPlayerEntityInfo extends DataPacket{
   float x,y,z;
   int stage,index;
   boolean dead;
-  /**used on the server to create a data packet of info to send to the clients
-  @param stage the index of the stages the entity is on
-  @param entityIndex the index of the entity on the stage
-  @param entity the entity to send data of
+  /**Used on the server to create a data packet of info to send to the clients
+  @param stage The index of the stages the entity is on
+  @param entityIndex The index of the entity on the stage
+  @param entity The entity to send data of
   */
   public MultyPlayerEntityInfo(int stage,int entityIndex,StageEntity entity){
     this.stage=stage;
@@ -21,6 +21,9 @@ class MultyPlayerEntityInfo extends DataPacket{
     this.dead = entity.isDead();
   }
   
+  /**Recreate this packet from serialized binarry data
+  @param iterator The source of the data
+  */
   public MultyPlayerEntityInfo(SerialIterator iterator){
     x = iterator.getFloat();
     y = iterator.getFloat();
@@ -30,8 +33,8 @@ class MultyPlayerEntityInfo extends DataPacket{
     dead = iterator.getBoolean();
   }
   
-  /** used by the client to extract entity position information
-  @param entity the entity to set the position of
+  /**Used by the client to extract entity position information
+  @param entity The entity to set the position of
   */
   void setPos(StageEntity entity){
     entity.setX(x);
@@ -39,8 +42,8 @@ class MultyPlayerEntityInfo extends DataPacket{
     entity.setZ(z);
   }
   
-  /** used by the client to extract the entiotes death status
-  @param entity the entity to set the death stsatus of
+  /**Used by the client to extract the entiotes death status
+  @param entity The entity to set the death stsatus of
   */
   void setDead(StageEntity entity){
     if(dead){
@@ -54,14 +57,22 @@ class MultyPlayerEntityInfo extends DataPacket{
     }
   }
   
+  /**Get the index of the stage this entity is on
+  @return The stage index of the entity
+  */
   int getStage(){
     return stage;
   }
   
+  /**Get the index of the entity
+  @return The index of the entity on the stage
+  */
   int getIndex(){
     return index;
   }
-  
+  /**Convert this packet to a byte representation that can be sent over the network or saved to a file.<br>
+  @return This packet as a binarry representation
+  */
   @Override
   public SerializedData serialize() {
     SerializedData data = new SerializedData(id());
@@ -73,7 +84,9 @@ class MultyPlayerEntityInfo extends DataPacket{
     data.addBool(dead);
     return data;
   }
-  
+  /**Get the id of this objet
+  @return The Identifier representing this object
+  */
   @Override
   public Identifier id() {
     return ID;

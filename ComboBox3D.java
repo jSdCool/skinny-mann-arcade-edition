@@ -1,15 +1,21 @@
 import processing.core.PVector;
 import java.util.ArrayList;
-class ComboBox3D extends Collider3D{
+/**A 3D Collider consisting of other 3D colliders
+*/
+public class ComboBox3D extends Collider3D{
   
   private ArrayList<Collider3D> hitBoxes;
-  
+  /**Create an empty 3D combo box
+  */
   public ComboBox3D(){
     super(new PVector[]{});
     hitBoxes = new ArrayList<>();
   }
   
-  void addBox(Collider3D box){
+  /**Add a collider to this combo box
+  @param box The collider to add
+  */
+  public void addBox(Collider3D box){
     //add the box to the combo collection
     hitBoxes.add(box);
     
@@ -33,6 +39,9 @@ class ComboBox3D extends Collider3D{
     }
   }
   
+  /**Get the enclosed colliders
+  @return the enclosed colliders
+  */
   public ArrayList<Collider3D> getBoxes(){
     return hitBoxes;
   }

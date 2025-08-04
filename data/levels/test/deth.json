@@ -11,7 +11,10 @@
     "x": 0,
     "y": 700,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 180,
@@ -28,27 +31,40 @@
     "x": 850,
     "y": 700,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16777215,
     "rotation": 0,
+    "type": "sloap",
+    "dz": 0,
     "y1": 32,
     "x1": 517,
     "y2": 147,
     "x2": 662,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16777215,
     "rotation": 2,
+    "type": "sloap",
+    "dz": 0,
     "y1": -10,
     "x1": 790,
     "y2": 110,
     "x2": 920,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 170,
@@ -57,7 +73,10 @@
     "x": 1080,
     "y": -50,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 150,
@@ -66,7 +85,10 @@
     "x": 940,
     "y": 210,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "link Index": 8,

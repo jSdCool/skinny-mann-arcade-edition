@@ -1,6 +1,13 @@
 import processing.core.*;
 import java.util.ArrayList;
-class CollisionDetection{
+/**This class handles the collision detection algorythem for the game
+*/
+public class CollisionDetection{
+  /**Check the collision of 2 2D objects
+  @param c1 The first object
+  @param c2 The second object
+  @return true if the objects collide
+  */
   public static boolean collide2D(Collider2D c1, Collider2D c2){
     //AABB    check if the 2 args may be colliding using the Axis Aligned Bounding Boxes method
     if(!AABB2D(c1,c2))
@@ -35,12 +42,17 @@ class CollisionDetection{
       return false;
     }
     
-    //now we have verified that nether arg is a combo box and that the boudnign boxes of the 2 args overlap
+    //now we have verified that nether arg is a combo box and that the bounding boxes of the 2 args overlap
     
     //GJK    check for collision using the GLK collision algorythem 
     return GJK2D(c1,c2);
   }
   
+  /**Check the collision of 2 3D objects
+  @param c1 The first object
+  @param c2 The second object
+  @return true if the objects collide
+  */
   public static boolean collide3D(Collider3D c1, Collider3D c2){
     
     //AABB    check if the 2 args may be colliding using the Axis Aligned Bounding Boxes method
@@ -75,12 +87,17 @@ class CollisionDetection{
       //if none of the boxes were successful then no collsion could posibly have tken palce, return false
       return false;
     }
-    //now we have verified that nether arg is a combo box and that the boudnign boxes of the 2 args overlap
+    //now we have verified that nether arg is a combo box and that the bounding boxes of the 2 args overlap
     
     //GJK    check for collision using the GLK collision algorythem
     return GJK3D(c1,c2);
   }
   
+  /**2D implmentation of the GJK collsiion algorythm
+  @param s1 the first object
+  @param s2 the seccond object
+  @return true if the objects collide
+  */
   private static boolean GJK2D(Collider2D s1, Collider2D s2) {
     //true if shapes s1 and s2 intersect
     //all  vextors/points are 3D Pvectors but the z value will almost always be 0
@@ -115,6 +132,12 @@ class CollisionDetection{
     return false;
   }
 
+  /**Support point function for the 2D GJK
+  @param s1 The first object
+  @param s2 The seccond object
+  @param d The direction to get the support point in
+  @return The normalized support point
+  */
   private static PVector support2D(Collider2D s1, Collider2D s2, PVector d) {
     PVector supportPoint = new PVector(), reverseDirection = new PVector();
     PVector.mult(d, -1, reverseDirection);
@@ -123,13 +146,23 @@ class CollisionDetection{
     return supportPoint;
   }
 
-  private static boolean handleSimplex2D(ArrayList<PVector> simplex, PVector d) {//find new direction and update the simplex
+  /**Simplex handling funxtion for 2D GJK.<br>
+  Find new direction and update the simplex.
+  @param simplex The current simplex
+  @param d The current direction vector
+  @return true if the shaps are touching
+  */
+  private static boolean handleSimplex2D(ArrayList<PVector> simplex, PVector d) {
     if (simplex.size()==2) {
       return lineCase2D(simplex, d);
     }
     return triangleCase2D(simplex, d);
   }
-  
+  /**2D simplex generator line case
+  @param simplex The current simplex
+  @param d The direction to search in
+  @return false
+  */
   private static boolean lineCase2D(ArrayList<PVector> simplex, PVector d) {
     PVector A = simplex.get(1),B = simplex.get(0);
     PVector AB = new PVector(),AO = new PVector();
@@ -145,6 +178,11 @@ class CollisionDetection{
     
   }
   
+  /**2D simplex generatir triangle case
+  @param simplex The current simplex
+  @param d The direction to search in
+  @return true if the shapes touch
+  */
   private static boolean triangleCase2D(ArrayList<PVector> simplex, PVector d) {
     PVector A = simplex.get(2),B = simplex.get(1),C = simplex.get(0);
     PVector AB = new PVector(),AC = new PVector(),AO = new PVector();
@@ -178,6 +216,12 @@ class CollisionDetection{
     
   }
   
+  /**Calculate the 2D tripple product 
+  @param A factor 1
+  @param B factor 2
+  @param C factor 3
+  @return The triple product of the input
+  */
   private static PVector trippleProd2D(PVector A, PVector B , PVector C){
     PVector aXb = new PVector(), axbXc = new PVector();
     PVector.cross(A,B,aXb);
@@ -186,6 +230,11 @@ class CollisionDetection{
     return axbXc;
   }
   
+  /**2D Axis Aligned Bounding Boxes.<br>
+  Check if the bounding boxes of the colliders overlap
+  @param c1 The first object
+  @param c2 The second object
+  */
   private static boolean AABB2D(Collider2D c1, Collider2D c2){
     PVector min1 = c1.getMin();
     PVector min2 = c2.getMin();
@@ -200,44 +249,73 @@ class CollisionDetection{
   }
   
   // 3D stuff 
+  /**3D Simplex representation
+  */
   static class Simplex{
     private PVector[] m_points = new PVector[4];
     private int size=0;
   
   
-    public Simplex(){
-  
-    }
-  
+    /**Create a new simpelx
+    */
+    public Simplex(){}
+    
+    /**Set the simplex to this list of points.<br>
+    Note: this resets the current content
+    @param list a list of points to add to the simplex 
+    @return this
+    */
     Simplex add(PVector[] list) {
-      m_points = new PVector[4];
+      m_points = new PVector[4];//reset the content of the simplex
       size=0;
-      for (PVector point : list)
+      for (PVector point : list){
         m_points[size++] = point;
+      }
   
       return this;
     }
   
+    /**Add a point to the front of the simplex.
+    @param point The point to add to the simplex
+    */
     public void push_front(PVector point) 
     {
       m_points = new PVector[]{ point, m_points[0], m_points[1], m_points[2] };
       size = PApplet.min(size + 1, 4);
     }
   
+    /**Get an element from the simplex
+    @param i The index of the point to get
+    @return The element from the simplex
+    */
     public PVector get(int i) { 
       return m_points[i]; 
     }
     
+    /**Get the size of the simplex
+    @return the size of the simplex
+    */
     public int size(){ 
       return size; 
     }
   }
   
+  /**Support point function for the 3D GJK
+  @param colliderA The first object
+  @param colliderB The seccond object
+  @param direction The direction to get the support point in
+  @return The support point
+  */
   private static PVector support3D(Collider3D colliderA, Collider3D colliderB, PVector direction){
     return PVector.sub(colliderA.findFurthestPoint(direction)
          ,colliderB.findFurthestPoint(PVector.mult(direction,-1)));
   }
   
+  /**3D implmentation of the GJK collsiion algorythm
+  @param colliderA the first object
+  @param colliderB the seccond object
+  @return true if the objects collide
+  */
   private static boolean GJK3D(Collider3D colliderA,Collider3D colliderB) {
     // Get initial support point in any direction
     PVector support = support3D(colliderA, colliderB, new PVector(1, 0, 0));
@@ -261,6 +339,11 @@ class CollisionDetection{
     }
   }
   
+  /**Create the next 3D simplex
+  @param points The current simplex
+  @param direction The direction to search in
+  @return true if the objects touch
+  */
   private static boolean nextSimplex3D(Simplex points, PVector direction){
     switch (points.size()) {
       case 2: return line       (points, direction);
@@ -268,14 +351,24 @@ class CollisionDetection{
       case 4: return tetrahedron3D(points, direction);
     }
    
-    // never should be here
+    // never should reach here
     return false;
   }
   
+  /**Test if 2 directions are pointing near the same direction
+  @param direction The direction to check
+  @param ao The other direction to check
+  @return true if the dot product is greater then 0
+  */
   private static boolean sameDirection3D(PVector direction,PVector ao){
     return PVector.dot(direction, ao) > 0;
   }
   
+  /**3D GJK line case
+  @param points The current simplex
+  @param direction The direction to look in
+  @return false
+  */
   private static boolean line(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
@@ -293,6 +386,11 @@ class CollisionDetection{
     return false;
   }
   
+  /**3D GJK trianlge case
+  @param points The current simplex
+  @param direction The direction to look in
+  @return false
+  */
   private static boolean triangle3D(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
@@ -327,6 +425,11 @@ class CollisionDetection{
     return false;
   }
   
+  /**3D GJK tetrahedron case
+  @param points The current simplex
+  @param direction The direction to look in
+  @return true if the shapes touch
+  */
   private static boolean tetrahedron3D(Simplex points, PVector direction){
     PVector a = points.get(0);
     PVector b = points.get(1);
@@ -357,6 +460,11 @@ class CollisionDetection{
     return true;
   }
   
+  /**3D Axis Aligned Bounding Boxes<br>
+  @param c1 The first object
+  @param c2 The seccond object
+  @return true if the objecrs bounding boxes overlap 
+  */
   private static boolean AABB3D(Collider3D c1, Collider3D c2){
     PVector min1 = c1.getMin();
     PVector min2 = c2.getMin();

@@ -1,14 +1,19 @@
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
+/**A portal stage component to allow the player to switch between stages
+*/
+public class Interdimentional_Portal extends StageComponent {
 
-class Interdimentional_Portal extends StageComponent {//ground component
-
-  public static final Identifier ID = new Identifier("InterdimentionalPortal");
+  public static final Identifier ID = new Identifier("interdimentional_Portal");
   
   float linkX, linkY, linkZ;
   int linkIndex;
-  Interdimentional_Portal(JSONObject data, boolean stage_3D) {
+  /**Load a portal from saved JOSN data.<br>
+  Note: This is the primarry method for placement of prtals as well as loading.
+  @param data The JSON Object containing the check point data
+  */
+  public Interdimentional_Portal(JSONObject data) {
     type="interdimentional Portal";
     x=data.getFloat("x");
     y=data.getFloat("y");
@@ -26,6 +31,9 @@ class Interdimentional_Portal extends StageComponent {//ground component
     }
   }
   
+  /**Create a portal from serialized binarry data
+  @param iterator The source of the data
+  */
   public Interdimentional_Portal(SerialIterator iterator){
     deserial(iterator);
     linkX = iterator.getFloat();
@@ -34,21 +42,25 @@ class Interdimentional_Portal extends StageComponent {//ground component
     linkIndex = iterator.getInt();
   }
   
-  StageComponent copy() {
+  public StageComponent copy() {//no coppy
     return null;
   }
 
-  StageComponent copy(float offsetX, float offsetY) {
+  public StageComponent copy(float offsetX, float offsetY) {
     System.err.println("Attempted to copy portal. This opperation is not supported");
     return null;
   }
 
-  StageComponent copy(float offsetX, float offsetY, float offsetZ) {
+  public StageComponent copy(float offsetX, float offsetY, float offsetZ) {
     System.err.println("attempted to copy portal. This opperation is not supported");
     return null;
   }
 
-  JSONObject save(boolean stage_3D) {
+  /**Get a JSONObject representation of this component that can be saved to a file
+  @param stage_3D Wether this stage is a 3D stage
+  @return JSONObject representation of this object
+  */
+  public JSONObject save(boolean stage_3D) {
     JSONObject part=new JSONObject();
     part.setFloat("x", x);
     part.setFloat("y", y);
@@ -66,7 +78,11 @@ class Interdimentional_Portal extends StageComponent {//ground component
     return part;
   }
 
-  void draw(PGraphics render) {
+  /**Render the 2D representation of this component.<br>
+  NOTE: this method may be called more then once per frame
+  @param render The surface to draw to
+  */
+  public void draw(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
@@ -107,7 +123,11 @@ class Interdimentional_Portal extends StageComponent {//ground component
     }
   }
 
-  void draw3D(PGraphics render) {
+  /**Render the 3D representation of this component.<br>
+  NOTE: this method may be called more then once per frame
+  @param render The surface to draw to
+  */
+  public void draw3D(PGraphics render) {
     Group group=getGroup();
     if (!group.visable)
       return;
@@ -148,7 +168,13 @@ class Interdimentional_Portal extends StageComponent {//ground component
     }
   }
 
-  boolean colide(float x, float y, boolean c) {
+  /**used for mouse click detecteion
+  @param x The x position of the mouse
+  @param y The y position of the mouse
+  @param c Check colliding with hitbox reghuardless of if the compoennt normally has collision during gameplay
+  @return true if a collision is occoring
+  */
+  public boolean colide(float x, float y, boolean c) {
     Group group=getGroup();
     if (!group.visable)
       return false;
@@ -160,7 +186,14 @@ class Interdimentional_Portal extends StageComponent {//ground component
     return false;
   }
 
-  boolean colide(float x, float y, float z, boolean c) {
+  /**used for mouse click detecteion
+  @param x The x position of the mouse
+  @param y The y position of the mouse
+  @param z The z position of the mouse
+  @param c Check colliding with hitbox reghuardless of if the compoennt normally has collision during gameplay
+  @return true if a collision is occoring
+  */
+  public boolean colide(float x, float y, float z, boolean c) {
     Group group=getGroup();
     if (!group.visable)
       return false;
@@ -172,13 +205,22 @@ class Interdimentional_Portal extends StageComponent {//ground component
     return false;
   }
 
-  public Collider2D getCollider2D() {
+  /**Get the 2D collision box for entitiy collisions
+  @return 2D hitbox for this component or null for none
+  */
+  public Collider2D getCollider2D(){
     return null;
   }
-  public Collider3D getCollider3D() {
+  /**Get the 3D collision box for entitiy collisions
+  @return 3D hitbox for this component or null for none
+  */
+  public Collider3D getCollider3D(){ 
     return null;
   }
   
+  /**Convert this component to a byte representation that can be sent over the network or saved to a file.<br>
+  @return This component as a binarry representation
+  */
   @Override
   public SerializedData serialize() {
     SerializedData data = new SerializedData(id());
@@ -190,6 +232,9 @@ class Interdimentional_Portal extends StageComponent {//ground component
     return data;
   }
   
+  /**Get the id of this objet
+  @return The Identifier representing this object
+  */
   @Override
   public Identifier id() {
     return ID;

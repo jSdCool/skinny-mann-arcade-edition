@@ -1,19 +1,21 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
-
+/**Stores a refrence to how to reconstruct objects from serialized binarry data.<br>
+All classes involved in netowrking MUST be registerd to this registry
+*/
 public class SerialRegistry {
     private static final HashMap<Identifier, Function<SerialIterator, Serialization>> reg = new HashMap<>();
 
-    static{
+    static{//automatically pre register string and array list to the registry because they are base included java classes
         register(Serializers.STRING_ID,SerialString::new);
         register(Serializers.ARRAYLIST_ID,SerialArrayList::new);
     }
 
 
-    /**register an object to be deserialized
-     * @param id the ID of the object
-     * @param constructor a reference to a constructor for an object. this constructor sakes a SerialIterator as an argument. Pass in MyClass::new
+    /**Register an object to be deserialized
+     * @param id The ID of the object
+     * @param constructor A reference to a constructor for an object. This constructor takes a SerialIterator as an argument. (use MyClass::new)
      */
     public static void register(Identifier id,Function<SerialIterator, Serialization> constructor){
         if(reg.containsKey(id)){
@@ -23,9 +25,9 @@ public class SerialRegistry {
         reg.put(id,constructor);
     }
 
-    /**get the constructor for a given object
-     * @param id the ID of the object to get the constructor of
-     * @return the constructor corresponding to the object ID
+    /**Get the constructor for a given object
+     * @param id The ID of the object to get the constructor of
+     * @return The constructor corresponding to the object ID
      */
     public static Function<SerialIterator, Serialization> get(Identifier id){
         Function<SerialIterator, Serialization> ser = reg.get(id);
@@ -35,7 +37,7 @@ public class SerialRegistry {
         return ser;
     }
 
-    /**wrapper class for the java string class allowing it to be deserialized with this system
+    /**Wrapper class for the java string class allowing it to be deserialized with this system
      */
     static class SerialString implements Serialization{
 
@@ -58,8 +60,7 @@ public class SerialRegistry {
         }
     }
 
-    /**wrapper class for the java array list allowing it to be automatically deserialized in this system
-     *
+    /**Wrapper class for the java array list allowing it to be automatically deserialized in this system<br>
      * DO NOT RELY ON THIS. array lists should be wrapped in a class that can properly determine the type of the list
      */
     public static class SerialArrayList implements Serialization{

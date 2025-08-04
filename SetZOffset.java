@@ -1,32 +1,42 @@
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
-
-class SetZOffset extends LogicOutputComponent {
+/**A logic component to set the z offset of a group
+*/
+public class SetZOffset extends LogicOutputComponent {
   
-  public static final Identifier ID = new Identifier("SetZOffset");
+  public static final Identifier ID = new Identifier("z-offset");
   
   int groupNumber=0;
   float offset=0;
-  SetZOffset(float x, float y, LogicBoard lb) {
-    super(x, y, "z-offset", lb);
+  boolean reText = false;
+  /**Place a new set z offset 
+  @param context The context for the placement
+  */
+  public SetZOffset(LogicCompoentnPlacementContext context) {
+    super(context.getX(), context.getY(), "z-offset", context.getLogicBoard());
     button.setText("z-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
-
-  SetZOffset(JSONObject data, LogicBoard lb, Level level) {
-    super(data.getFloat("x"), data.getFloat("y"), "z-offset", lb, data.getJSONArray("connections"));
+  /**Create a new set z offset from saved json data
+  @param data The saved json data
+  */
+  public SetZOffset(JSONObject data) {
+    super(data.getFloat("x"), data.getFloat("y"), "z-offset", data.getJSONArray("connections"));
     groupNumber=data.getInt("group number");
     offset=data.getFloat("offset");
-    button.setText("z-offset "+level.groupNames.get(groupNumber)+" by "+offset);
+    reText=false;
   }
-  
+  /**Create an set z offset from serialized binarry data
+  @param iterator The source of the data
+  */
   public SetZOffset(SerialIterator iterator){
     super(iterator);
     groupNumber = iterator.getInt();
     offset = iterator.getFloat();
   }
-  
-  void tick() {
+  /**The function where the logic/functionality of this component is execuated
+  */
+  public void tick() {
     if (inputTerminal1) {
       source.level.groups.get(groupNumber).zOffset=offset;
     }
@@ -34,21 +44,35 @@ class SetZOffset extends LogicOutputComponent {
       source.level.groups.get(groupNumber).zOffset=0;
     }
   }
-  JSONObject save() {
+   /**Get a JSONObject representation of this component that can be saved to a file
+  @return JSONObject representation of this object
+  */
+  public JSONObject save() {
     JSONObject component=super.save();
     component.setInt("group number", groupNumber);
     component.setFloat("offset", offset);
     return component;
   }
-  void setData(int data) {
+  /**set an integer data field
+  @param data The data to set
+  */
+  public void setData(int data) {
     groupNumber=data;
     button.setText("z-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
-  int getData() {
+  /**Get an integer data field
+  @return the value of that data
+  */
+  public int getData() {
     return groupNumber;
   }
-
-  void draw() {
+  /**renders the logic component a long with its I/O terminals
+  */
+  public void draw() {
+    if(reText){
+      button.setText("z-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
+      reText=false;
+    }
     super.draw();
     source.fill(0);
     source.textSize(15*source.Scale);
@@ -56,15 +80,22 @@ class SetZOffset extends LogicOutputComponent {
     source.text("set", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
     source.text("reset", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
-  void setOffset(float of) {
+  /**Set the value of the offset
+  @param of The new value of the offset
+  */
+  public void setOffset(float of) {
     offset=of;
     button.setText("z-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
   }
-  float getOffset() {
+  /**Get the current value of the offset
+  */
+  public float getOffset() {
     return offset;
   }
   
-  //SerialIterator iterator
+  /**Convert this component to a byte representation that can be sent over the network or saved to a file.<br>
+  @return This component as a binarry representation
+  */
   @Override
   public SerializedData serialize() {
     SerializedData data = new SerializedData(id());
@@ -74,6 +105,9 @@ class SetZOffset extends LogicOutputComponent {
     return data;
   }
   
+  /**Get the id of this objet
+  @return The Identifier representing this object
+  */
   @Override
   public Identifier id() {
     return ID;

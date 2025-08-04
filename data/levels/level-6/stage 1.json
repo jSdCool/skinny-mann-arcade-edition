@@ -11,7 +11,10 @@
     "x": 0,
     "y": 670,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 110,
@@ -20,7 +23,10 @@
     "x": 780,
     "y": 580,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 100,
@@ -29,7 +35,10 @@
     "x": 1030,
     "y": 530,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 100,
@@ -38,7 +47,10 @@
     "x": 1270,
     "y": 520,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 120,
@@ -47,7 +59,10 @@
     "x": 1470,
     "y": 530,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 150,
@@ -56,7 +71,10 @@
     "x": 1680,
     "y": 580,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 680,
@@ -65,7 +83,10 @@
     "x": 1880,
     "y": 650,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "coin id": 1,
@@ -154,32 +175,47 @@
   {
     "color": -16732415,
     "rotation": 3,
+    "type": "sloap",
+    "dz": 0,
     "y1": 470,
     "x1": 2440,
     "y2": 640,
     "x2": 2560,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 2,
+    "type": "sloap",
+    "dz": 0,
     "y1": 270,
     "x1": 2250,
     "y2": 440,
     "x2": 2380,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 3,
+    "type": "sloap",
+    "dz": 0,
     "y1": 640,
     "x1": 2400,
     "y2": 650,
     "x2": 2440,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 120,
@@ -188,7 +224,10 @@
     "x": 2440,
     "y": 640,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 130,
@@ -197,7 +236,10 @@
     "x": 2560,
     "y": 0,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 50,
@@ -206,7 +248,10 @@
     "x": 2200,
     "y": -240,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 130,
@@ -215,7 +260,10 @@
     "x": 2560,
     "y": -560,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 50,
@@ -224,47 +272,70 @@
     "x": 2200,
     "y": -560,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 3,
+    "type": "sloap",
+    "dz": 0,
     "y1": 60,
     "x1": 2450,
     "y2": 220,
     "x2": 2560,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 2,
+    "type": "sloap",
+    "dz": 0,
     "y1": -100,
     "x1": 2250,
     "y2": 120,
     "x2": 2300,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 3,
+    "type": "sloap",
+    "dz": 0,
     "y1": -270,
     "x1": 2450,
     "y2": -150,
     "x2": 2560,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "color": -16732415,
     "rotation": 2,
+    "type": "sloap",
+    "dz": 0,
     "y1": -490,
     "x1": 2250,
     "y2": -340,
     "x2": 2320,
-    "type": "sloap",
-    "group": -1
+    "z": 0,
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 50,
@@ -273,7 +344,10 @@
     "x": 2200,
     "y": -1020,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "dx": 480,
@@ -282,7 +356,10 @@
     "x": 2690,
     "y": -560,
     "type": "ground",
-    "group": -1
+    "rotateX": 0,
+    "rotateY": 0,
+    "group": -1,
+    "rotateZ": 0
   },
   {
     "coin id": 13,

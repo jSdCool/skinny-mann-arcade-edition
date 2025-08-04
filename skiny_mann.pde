@@ -12,63 +12,81 @@ import java.util.List;
 import java.util.Map;
 import java.awt.Desktop;
 import javax.swing.*;
+import java.util.function.Function;
 import net.java.games.input.*;
 import net.java.games.util.plugins.*;
 import net.java.games.util.*;
 
 
+/**First method called during initilization.<br>
+Used to initilize the most basic of things before the window is created.
+*/
 void settings() {//first function called
+  //setup the univertal error handler
   UniversalErrorManager.init(this);
+  //if on winodws
   if (platform==WINDOWS) {
-    appdata=System.getenv("AppData");
+    appdata=System.getenv("AppData");//set the appadata path to the users appdata directory
   } else {
-    appdata=System.getenv("HOME");
+    appdata=System.getenv("HOME");//set the appdata path to the current users home directory
   }
   try {
     println("attempting to load settings");
+    //load settings
     settings = new Settings(appdata+"/CBi-games/skinny mann/settings.json");
     
     if (!settings.getFullScreen()) {//check for fullscreeen
-      //Scale=rez.getFloat("scale");//TODO, replace scale
+      //set the window size to what is congfigured in settings
       size(settings.getResolutionHorozontal(), settings.getResolutionVertical(), P3D);
     } else {
-      fullScreen(P3D, settings.getFullScreenScreen());//if full screen then turn full screen on
+      //create a fullscreen window on the requested display, note the displays start at index 1, index 0 will streach across all displays
+      fullScreen(P3D, settings.getFullScreenScreen());
     }
     println("loading window icon");
+    //smet the window icon / task bar icon, why does this not wotk on lunix?
     PJOGL.setIcon("data/assets/skinny mann face.PNG");
+    //give a fair ammount of classes a static refence to this class, note: WE NEED TO REMOVE THIS!
     sourceInitilize();
-  }
-  catch(Throwable e) {
+  }catch(Throwable e) {
     println("an error orrored in the settings function");
     handleError(e);
   }
-}
+}//after this setup will be called after more initilization happens like creating the window surface 
 
 
-
+/**Second function called during initialization.<br>
+Used as the primary place to load and initilize things and spawn threads to load / initilize things, after the window has been created.
+*/
 void setup() {//seccond function called
   try {
-    frameRate(60);//limet the frame reate
+    frameRate(60);//set the FPS limit, note set this to a lerger number to get higher frame rates
     background(0);
-    if (settings.getFullScreen()) {//get and set some data if in fullscreen
-      Scale=height/720.0;
+    if (settings.getFullScreen()) {
+      Scale=height/720.0;//if in fullscreen calculate the scale
     }else{
-      Scale = settings.getScale();
+      Scale = settings.getScale();//if not in fullscreen then load the scale from settings
     }
+    //cretae the Ui frame
     ui=new UiFrame(this, 1280, 720);
+    
     println(height+" "+Scale);//debung info
     println("loading texture for start screen");
     CBi = loadImage("data/assets/CBi.png");//load the CBi logo
 
+    //load the font at a size of 500 so that normal sized fronts dont look like 3 pixles
     textSize(100*Scale);//500
     println("initilizing buttons");
+    //initilize all buttons and text
     initButtons();
     initText();
 
+    //initilize variables re;ated to the 3D sphere in the startup logo
     ptsW=100;
     ptsH=100;
     println("initilizing CBi sphere");
+    //genrate the verticies coordintaes for the 3D sphere
     initializeSphere(ptsW, ptsH);
+    //generate the PSahoe for the sphere and apply the texture to it
     textureSphere(200, 200, 200, CBi);
 
     //add entites to the entity regisrty
@@ -76,6 +94,8 @@ void setup() {//seccond function called
     entityRegistry.put("goon",new Goon(0,0,0,null));
     //start the load thread
     thread("programLoad");
+	
+	//load the leaderboards
     leaderBoards = new ArcadeLeaderBoard(arcadeLeaderBoardFilePath,this);
     println("leaderBoards:\n"+leaderBoards);
 
@@ -85,9 +105,8 @@ void setup() {//seccond function called
     handleError(e);
   }
 
-}
+}//after this normal program execution begins with draw being called for every frame
 //define a shit tone of varibles
-
 
 PApplet primaryWindow=this;
 
@@ -121,13 +140,17 @@ ArrayList<Client> clients= new ArrayList<>();
 
 //▄
 
-
+//definitiion of the default camera function
 //camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0);
 //defCameraX = width/2;
 //defCameraY = height/2;
 //defCameraFOV = 60 * DEG_TO_RAD;
 //defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
-void draw() {// the function that is called every fraim
+/**The primary render Loop,<br>
+This function is automatically called once every frame to record data to the render command buffer. Aything visual happend in this funtion.
+*/
+void draw() {// the function that is called every frame
+  //cursor blinking things, perhas this should be changed 
   if (frameCount%20==0) {
     cursor="|";
     coursorr="|";
@@ -138,23 +161,25 @@ void draw() {// the function that is called every fraim
     coursorr="";
     coursor=false;
   }
+  
+  //if  the depth buffer bas been requested to be initilized (usually from the load thread)
   if(requestDepthBufferInit){
-    requestDepthBufferInit=false;
-    initDepthBuffer();
-    skipFrameInumeration = true;
+    requestDepthBufferInit=false;//set the varaible back to false
+    initDepthBuffer();//initilize the depth buffer (this is what causes the game to freez on startup, it must be done on a thread with an opengl context)
+    skipFrameInumeration = true;//for startup logo animarion purpuses dont advance the animation for a frame becaus if extream lag
   }
   
 
   try {//catch all fatal errors and display them
 
-    if (saveColors) {//save the saved colors if you want to save colors
-      saveJSONArray(colors, appdata+"/CBi-games/skinny mann level creator/colors.json");
+    if (saveColors) {//if saved colors should be saved
+      saveJSONArray(colors, appdata+"/CBi-games/skinny mann level creator/colors.json");//save the saved colors
       saveColors=false;
     }
 
-    if (!levelCreator) {
-      if (transitioningMenu) {
-        menuTransition();
+    if (!levelCreator) {//if not in the level creator
+      if (transitioningMenu) {//if a menu transition is currently in progress
+        menuTransition();//process the menu transistion 
       }
 
       if (menue) {//when in a menue
@@ -162,29 +187,32 @@ void draw() {// the function that is called every fraim
           background(0);
           noStroke();
 
-          drawlogo(true, true);
+          drawlogo(true, true);//draw the 3D sphere 
 
           if (start_wate>=2&&loaded) {// wait for the animation to complete and loading to finish before continuing to the game 
-            soundHandler.startSounds();
-            if (dev_mode) {
-              Menue="dev";
+            soundHandler.startSounds();//start the sound engine
+            if (dev_mode) {//if dev mode is on
+              Menue="dev";//set the menu to the dev menu 
               println("dev mode activated");
-              return;
+              return;//dont conitnue to process anything else in this frame 
             }
 
             try {
               String inver = readFileFromGithub("https://raw.githubusercontent.com/jSdCool/CBI-games-version-checker/master/skinny_mann.txt");//check for updates  inver = internet version
-              inver =inver.substring(0, inver.length()-1);
-              internetVersion=inver;
-              if (false) {//if an update exists
-                Menue="update";//go to update menue
-              } else {//if no update exists go to main menue
-                if (settings.getSettingsAfterStart()) {
+
+              inver =inver.substring(0, inver.length()-1);//remove the last char from the string (its a new line)
+              internetVersion=inver;//not sure why this is here
+              if (false)) {//if an update exists, in the arcade edition we do not care about this so just ignoore it
+                Menue="update";//go to update menu
+              } else {//if no update exists go to main menu
+                if (settings.getSettingsAfterStart()) {//if no settings file exsisted or was the wrong version,
+                  //start the treansition to the settings menu
                   menue=false;
                   Menue="settings";
                   initMenuTransition(Transitions.LOGO_TO_SETTINGS);
                   return;
                 } else {
+                  //start the transition to the main menu
                   menue=false;
                   Menue="main";
                   initMenuTransition(Transitions.LOGO_TO_MAIN);
@@ -194,12 +222,14 @@ void draw() {// the function that is called every fraim
             }
             catch(Throwable e) {//if an error occors or no return then go to main menue
               println(e);//print to console the cause of the error
-              if (settings.getSettingsAfterStart()) {
+              if (settings.getSettingsAfterStart()) {//if no settings file exsisted or was the wrong version,
+                //start the treansition to the settings menu
                 menue=false;
                 Menue="settings";
                 initMenuTransition(Transitions.LOGO_TO_SETTINGS);
                 return;
               } else {
+                //start the transition to the main menu
                 menue=false;
                 Menue="main";
                 initMenuTransition(Transitions.LOGO_TO_MAIN);
@@ -209,35 +239,36 @@ void draw() {// the function that is called every fraim
           }
         }
 
-        if (Menue.equals("update")) {//if there is an updat draw the update screen
+        if (Menue.equals("update")) {//if there is an update draw the update screen
           draw_updae_screen();
         }
-        if (Menue.equals("downloading update")) {
+        if (Menue.equals("downloading update")) {//if on the dwnloading update the draw the downloading update screen
           drawUpdateDownloadingScreen();
         }
 
         if (Menue.equals("main")) {//if on main menue
           hint(DISABLE_KEY_REPEAT);
-          drawMainMenu(true);
+          drawMainMenu(true);//draw the main menu
         }
         if (Menue.equals("level select")) {//if selecting level
-          drawLevelSelect(true,0);
+          drawLevelSelect(true,0);//draw the level select screen
         }
-        if (Menue.equals("level select UGC")) {
-          drawLevelSelectUGC();
+        if (Menue.equals("level select UGC")) {//if on the UGC menu
+          drawLevelSelectUGC();//draw the UGC menu
         }
-        if(Menue.equals("level select 2")){
-         drawLevelSelect2(true);
+        if(Menue.equals("level select 2")){//if on the second level selct menu
+         drawLevelSelect2(true); //draw the second level selcet menu
         }
-        if (Menue.equals("pause")) {//when in the pause emnue cancle all motion
+        if (Menue.equals("pause")) {//when in the pause menu cancel all motion
           player1_moving_right=false;
           player1_moving_left=false;
           player1_jumping=false;
+          playerMovementManager.reset();
         }
 
 
         if (Menue.equals("settings")) {//the settings menue
-          hint(ENABLE_KEY_REPEAT);
+          hint(ENABLE_KEY_REPEAT);//allow key repeat for the text box
           drawSettings();
         }
 
@@ -258,85 +289,76 @@ void draw() {// the function that is called every fraim
           text("back", 60*Scale, 655*Scale);
         }
 
-        if (Menue.equals("multiplayer strart")) {
+        if (Menue.equals("multiplayer strart")) {//if on the multyplayer starting menu
           background(#FF8000);
-          hint(ENABLE_KEY_REPEAT);
+          hint(ENABLE_KEY_REPEAT);//allow key repeat for the textb boxes
           fill(0);
-          initMultyplayerScreenTitle.draw();
+          initMultyplayerScreenTitle.draw();//draw the page title
 
+          //draw the join, host, and exit button
           multyplayerJoin.draw();
           multyplayerHost.draw();
           multyplayerExit.draw();
         }
 
-        if (Menue.equals("start host")) {
+        if (Menue.equals("start host")) {//if on the seting up hosting menu
           background(#FF8000);
           fill(0);
+          //draw the text on the menu
           mp_hostSeccion.draw();
           mp_host_Name.draw();
-          //mp_host_enterdName.setText(name+((enteringName)? cursor:""));
-          //mp_host_enterdName.draw();
           mp_host_port.draw();
-          //mp_host_endterdPort.setText(port+((enteringPort)? cursor:""));
-          //mp_host_endterdPort.draw();
           
+          //draw the text boxes on the menu
           multyPlayerNameTextBox.draw();
           multyPlayerPortTextBox.draw();
-
-          //noStroke();
-          //rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-
-          //rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-
+          //draw the exit an go buttons
           multyplayerExit.draw();
           multyplayerGo.draw();
         }
-        if (Menue.equals("start join")) {
+        
+        if (Menue.equals("start join")) {//if on the setup joining menu
           background(#FF8000);
           fill(0);
+          //draw the text on the menu
           mp_joinSession.draw();
           mp_join_name.draw();
-          //mp_join_enterdName.setText(name+((enteringName)? cursor:""));
-          //mp_join_enterdName.draw();
           mp_join_port.draw();
-          //mp_join_enterdPort.setText(port+((enteringPort)? cursor:""));
-          //mp_join_enterdPort.draw();
           mp_join_ip.draw();
-          //mp_join_enterdIp.setText(ip+((enteringIP)?cursor:""));
-          //mp_join_enterdIp.draw();
-          
+          //draw the text boxes on the menu
           multyPlayerNameTextBox.draw();
           multyPlayerPortTextBox.draw();
           multyPlayerIpTextBox.draw();
-          
-          //noStroke();
-          //rect(width/2-width*0.4, height*0.2, width*0.8, 2*Scale);
-          //rect(width/2-width*0.05, height*0.31, width*0.1, 2*Scale);
-          //rect(width/2-width*0.3, height*0.42, width*0.6, 2*Scale);
-
+          //draw the exit and go buttons
           multyplayerExit.draw();
           multyplayerGo.draw();
         }
-        if (Menue.equals("disconnected")) {
+        
+        if (Menue.equals("disconnected")) {//if on the multyplauer disconnection screen 
 
           background(200);
           fill(0);
+          //draw the menu title
           mp_disconnected.draw();
+          //set then draw the disconnect reason(error)
           mp_dc_reason.setText(disconnectReason);
           mp_dc_reason.draw();
-
+          //draw the exit button
           multyplayerExit.draw();
         }
         //TODO: update text in multyplayer selection menu to UiText
-        if (Menue.equals("multiplayer selection")) {
+        if (Menue.equals("multiplayer selection")) {//the main multyplayer screen
           background(-9131009);
           fill(0);
+          
+          //oh god what the fuck did I do here
           rect(width*0.171875, 0, 2*Scale, height);//verticle line on the left of the screen
           textAlign(CENTER, CENTER);
           textSize(20*Scale);
           text("players", width*0.086, height*0.015);
           rect(0, height*0.04, width*0.171875, height*(2.0/720));//horozontal line ath the top of the left colum
-
+          //why have I not modernized any of this yet?
+          
           //horozontal lines that seperate the names of the players
           for (int i=0; i<10; i++) {
             rect(0, height*0.04+((height*0.91666-height*0.04)/10)*i, width*0.171875, height*(1.0/720));
@@ -350,7 +372,7 @@ void draw() {// the function that is called every fraim
           rect(width*0.8, height*0.2, width*0.2, height*(2.0/720));
           textSize(10*Scale);
           textAlign(LEFT, CENTER);
-          if (multyplayerSelectedLevel.exsists) {
+          if (multyplayerSelectedLevel.exsists) {//if something is selcted then display its information
             text("Name: "+multyplayerSelectedLevel.name, width*0.81, height*0.22);
             text("Author: "+multyplayerSelectedLevel.author, width*0.81, height*0.24);
             text("Game Version: "+multyplayerSelectedLevel.gameVersion, width*0.81, height*0.26);
@@ -367,7 +389,7 @@ void draw() {// the function that is called every fraim
               calcTextSize(time, width*0.96609375-width*0.8463194444);
               text(time, width*0.901, height*0.72);
             }
-            if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
+            if (multyplayerSelectedLevel.gameVersion!=null&&!gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {//check if the currenly selected level is compatiable with this version of the game
               textSize(10*Scale);
               textAlign(LEFT, CENTER);
               text("Level is incompatible with current version of game", width*0.81, height*0.34);
@@ -493,10 +515,12 @@ void draw() {// the function that is called every fraim
             }
           }
           multyplayerLeave.draw();
+          
+          //if you are wondering what that was, it was an attempt at amking a scalable UI but clearly it did not work very well. no I am just not able to be botherd to fix it
         }//end of multyplayer selection
 
-        if (Menue.equals("dev")) {
-          drawDevMenue();
+        if (Menue.equals("dev")) {//if on the dev menu
+          drawDevMenue();//draw the dev menu
         }
 
         if(Menue.equals("level complete")){
@@ -531,57 +555,59 @@ void draw() {// the function that is called every fraim
       //end of menue draw
 
 
-      if (inGame) {
-        hint(DISABLE_KEY_REPEAT);
-        //================================================================================================
-        background(7646207);
-        stageLevelDraw();
-        if (level_complete&&!levelCompleteSoundPlayed) {
-          if (multiplayer) {
-            if (level.multyplayerMode==1) {
-              players[currentPlayer].setX(-100);
+      if (inGame) {//if in game
+        hint(DISABLE_KEY_REPEAT);//diable the key repeat because it causes issues with input handling 
+        //================================================================================================ dont remember what this was for anymore
+        background(7646207);//wait, this should not be here anymore
+        stageLevelDraw();//render the level
+        
+        if (level_complete&&!levelCompleteSoundPlayed) {//if the level has been completed and the sound has not been played yet
+          if (multiplayer) {//if in multyplayer
+            if (level.multyplayerMode==1) {//if this level is in speedrun mode
+              players[currentPlayer].setX(-100);//move the player to -100,-100
               players[currentPlayer].setY(-100);
-              level.psudoLoad();
-              level_complete=false;
-              int completeTime=millis()-startTime;
+              level.psudoLoad();//run a fake load on the level
+              level_complete=false;//set the level to not be complete
+              int completeTime=millis()-startTime;//calculate the time it took to complete
               println("completed in: "+completeTime+" "+formatMillis(completeTime));
-              if (completeTime<bestTime||bestTime==0) {
-                bestTime=completeTime;
+              if (completeTime<bestTime||bestTime==0) {//if this was better then your best time, or your best time was 0
+                bestTime=completeTime;//set this to be your best time
               }
-              startTime=millis();
+              startTime=millis();//reset stage start time
             }
-          } else {
-            soundHandler.addToQueue(0);
-            levelCompleteSoundPlayed=true;
+          } else {//if not in multyplayer
+            soundHandler.addToQueue(0);//queue the level complete sound to playe (sound 0)
+            levelCompleteSoundPlayed=true;//set the sound to played
           }
         }
       }
-      perspective();//reset the perspecive / fov fro 3D mode
+      perspective();//reset the perspecive / fov for 3D mode
 
-      if (tutorialMode&&!inGame) {
-        if (Menue.equals("settings")) {
+      if (tutorialMode&&!inGame) {//if in the tutorial and not currenly in a level
+        if (Menue.equals("settings")) {//if the menu is settings
           background(0);
           fill(255);
-          tut_notToday.draw();
-        } else {
+          tut_notToday.draw();//display the rejection message
+        } else {//otherwize 
           background(0);
-          fill(255);
+          fill(255);//dsiplay the disclaimer text 
           tut_disclaimer.draw();
           tut_toClose.draw();
         }
       }
-      engageHUDPosition();//anything hud
+      engageHUDPosition();//prepair for rendering HUD elements
 
-      if (inGame) {
-        fill(255);
+      if (inGame) {//if in the game
+        fill(255);//render the coin count
         coinCountText.setText("coins: "+coinCount);
         coinCountText.draw();
       }
 
       if (menue) {
         if (Menue.equals("pause")) {//when paused
+        //render the pause menu
           fill(50, 200);
-          rect(0, 0, width, height);
+          rect(0, 0, width, height);//darken the background
           fill(0);
           pa_title.draw();
 
@@ -589,17 +615,18 @@ void draw() {// the function that is called every fraim
           pauseOptionsButton.draw();
           pauseQuitButton.draw();
 
-          if (multiplayer) {
+          if (multiplayer) {//if in multyplayer then display the reset time button
             if (level.multyplayerMode==1) {
               pauseRestart.draw();
             }
           }
         }
       }
-      //level creator here
+      //end of not in level creator
     } else {
+      //if in the level creator
       if (startup) {//if on the startup screen
-        hint(ENABLE_KEY_REPEAT);
+        hint(ENABLE_KEY_REPEAT);//allow key repeat for the author field
         background(#48EDD8);
         translate(width/2, 150*Scale, 0);
         rotateX(PI);
@@ -609,7 +636,6 @@ void draw() {// the function that is called every fraim
         noLights();
         rotateX(-PI);
         translate(-width/2, -150*Scale, 0);
-
 
         newLevelButton.draw();
         loadLevelButton.draw();
@@ -648,7 +674,7 @@ void draw() {// the function that is called every fraim
       }//end of loading level
 
       if (newLevel) {//if creating a new level
-      hint(ENABLE_KEY_REPEAT);
+        hint(ENABLE_KEY_REPEAT);
         background(#48EDD8);
         fill(0);
         lc_load_new_describe.draw();
@@ -659,7 +685,7 @@ void draw() {// the function that is called every fraim
       }//end of make new level
 
       if (editingStage) {//if edditing the stage
-      hint(DISABLE_KEY_REPEAT);
+        hint(DISABLE_KEY_REPEAT);//again disable the key repeat for input reasons
         if (!simulating) {//if not simulating allow the camera to be moved by the arrow keys
           if (cam_left&&camPos>0) {
             camPos-=4;
@@ -675,28 +701,29 @@ void draw() {// the function that is called every fraim
           }
         }
 
-        stageLevelDraw();//level draw code
+        stageLevelDraw();//render the level
         
         //if placing a blueprint in 3D, render the blueprint that is being palced
         if (e3DMode && selectingBlueprint && blueprints.length!=0){
           generateDisplayBlueprint3D();
           renderBlueprint3D();
+          //calculate the width, height, and depth of the blueprint
           float cdx = blueprintMax[0]-blueprintMin[0];
           float cdy = blueprintMax[1]-blueprintMin[1];
           float cdz = blueprintMax[2]-blueprintMin[2];
           renderTranslationArrows(blueprintMin[0],blueprintMin[1],blueprintMin[2],cdx,cdy,cdz);
         }
         
-        stageEditGUI();//level gui code
+        stageEditGUI();//draw the editing gui/placemnt logic 
 
         if (selectingBlueprint&&blueprints.length!=0) {//if selecting blueprint
-        if(!e3DMode){
-            generateDisplayBlueprint();//visualize the blueprint that is selected
+          if(!e3DMode){//if not in 3D mode 
+            generateDisplayBlueprint();//prepair to visualize the blueprint that is selected
             renderBlueprint();//render blueprint
           }
         }
         perspective();//reset the perspecive / fov
-        engageHUDPosition();
+        engageHUDPosition();//setup for rendering HUD elements
       }
 
       if (levelOverview) {//if on the level overview
@@ -708,7 +735,7 @@ void draw() {// the function that is called every fraim
         if (overviewSelection!=-1) {//if something is selected
           rect(0, ((overviewSelection- filesScrole)*60+80)*Scale, 1280*Scale, 60*Scale);//draw the highlight
           if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
-            if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
+            if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a 2D stage
               edditStage.draw();//draw edit button
               fill(255, 255, 0);
               strokeWeight(1*Scale);
@@ -745,9 +772,10 @@ void draw() {// the function that is called every fraim
         fill(0);
         textSize(30*Scale);
         //TODO: update the text here. outher stuff def needs to be changed to scale well with it
+        //load the names of the sounds
         String[] keys=new String[0];//create a string array that can be used to place the sound keys in
         keys=level.sounds.keySet().toArray(keys);//place the sound keys into the array
-        for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages and sounds and display 11 of them on screen
+        for (int i=0; i < 11 && i + filesScrole < level.stages.size()+level.sounds.size()+level.logicBoards.size(); i++) {//loop through all the stages, sounds, and logic boards to display 11 of them on screen
           if (i+ filesScrole<level.stages.size()) {//if the current thing attemping to diaply is in the range of stages
             fill(0);
             String displayName=level.stages.get(i+ filesScrole).name, type=level.stages.get(i+ filesScrole).type;//get the name and type of the stages
@@ -765,11 +793,11 @@ void draw() {// the function that is called every fraim
             if (type.equals("sound")) {//if the thing is a sound then display the sound icon
               drawSpeakericon(40*Scale, (110+60*(i))*Scale, 0.5*Scale,g);
             }
-          } else {
+          } else {//at this point in the the only other type of thing is a logic board
             fill(0);
             String displayName=level.logicBoards.get(i+ filesScrole-(level.stages.size()+level.sounds.size())).name;//get the name of the logic board
             text(displayName, 80*Scale, (130+60*(i))*Scale);//display the name
-            logicIcon(40*Scale, (100+60*i)*Scale, 1*Scale,g);
+            logicIcon(40*Scale, (100+60*i)*Scale, 1*Scale,g);//draw the logic board icon
           }
         }
 
@@ -777,25 +805,27 @@ void draw() {// the function that is called every fraim
         textAlign(CENTER, CENTER);
         newStage.draw();//draw the new file button
         textAlign(LEFT, BOTTOM);
+        //why is this happening every frame on the overview?
         respawnX=(int)level.SpawnX;//set the respawn info to that of the current level
         respawnY=(int)level.SpawnY;
         respawnStage=level.mainStage;
 
         overview_saveLevel.draw();//draw save button
+        saveIcon(overview_saveLevel.x+overview_saveLevel.lengthX/2,overview_saveLevel.y+overview_saveLevel.lengthY/2,settings.getScale(),g);
         help.draw();//draw help button
-        if (filesScrole>0)//draw scroll buttons
+        if (filesScrole>0)//draw scroll buttons if nessarry
           overviewUp.draw();
         if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size())
           overviewDown.draw();
         lcOverviewExitButton.draw();
-      }//end of level over view
+      }//end of level overview
 
       if (newFile) {//if on the new file screen
-        hint(ENABLE_KEY_REPEAT);
+        hint(ENABLE_KEY_REPEAT);//allow key repeat for text boxes
         background(#0092FF);
         stroke(0);
         strokeWeight(2*Scale);
-        line(100*Scale, 450*Scale, 1200*Scale, 450*Scale);
+        line(100*Scale, 450*Scale, 1200*Scale, 450*Scale);//text input line
         //highlight the option that is currently set
         if (newFileType.equals("2D")) {
           new2DStage.setColor(#BB48ED, #51DFFA);
@@ -824,7 +854,7 @@ void draw() {// the function that is called every fraim
           lc_newf_fileName.setText(pathSegments[pathSegments.length-1]);//display the name of the selected file
           lc_newf_fileName.draw();
           chooseFileButton.draw();
-          if(newSoundAsNarration){
+          if(newSoundAsNarration){//change the hilight for the sound vs narration options
             lc_newSoundAsSoundButton.setColor(#BB48ED, #4857ED);
             lc_newSoundAsNarrationButton.setColor(#BB48ED, #51DFFA);
           }else{
@@ -838,6 +868,7 @@ void draw() {// the function that is called every fraim
       }//end of new file
 
       if (drawingPortal2) {//if drawing portal part 2 aka outher overview selection screen
+        //cant be bottherd to do more comments in this part becasue it is bascially the same as the ovreview
         background(#0092FF);
         fill(#7CC7FF);
         stroke(#7CC7FF);
@@ -903,7 +934,7 @@ void draw() {// the function that is called every fraim
 
         createBlueprintGo.draw();//create button
         lc_backButton.draw();
-        if(newBlueprintIs3D){
+        if(newBlueprintIs3D){//hilght for 2D or 3D bluepint buttons
           new2DStage.setColor(#BB48ED, #4857ED);
           new3DStage.setColor(#BB48ED, #51DFFA);
         }else{
@@ -925,8 +956,9 @@ void draw() {// the function that is called every fraim
       }//end of loading blueprint
 
       if (editingBlueprint) {//if edditing blueprint
+        hint(DISABLE_KEY_REPEAT);
         background(7646207);
-        if(!e3DMode){
+        if(!e3DMode){//if not in 3D mode
           fill(0);
           strokeWeight(0);
           rect(width/2-0.5, 0, 1, height);//draw lines in the center of the screen that indicate wherer (0,0) is
@@ -940,28 +972,28 @@ void draw() {// the function that is called every fraim
       if (editinglogicBoard) {//if editing a logic board
         background(#FFECA0);
         for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the components
-          if (selectedIndex==i) {
+          if (selectedIndex==i) {//if the current component is selected
             strokeWeight(0);
-            fill(255, 0, 0);
+            fill(255, 0, 0);//draw the hilight arrounf the comonnent
             rect((level.logicBoards.get(logicBoardIndex).components.get(i).x-5-camPos)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).y-5-camPosY)*Scale, (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthX+10*Scale), (level.logicBoards.get(logicBoardIndex).components.get(i).button.lengthY+10*Scale));
           }
-          level.logicBoards.get(logicBoardIndex).components.get(i).draw();
+          level.logicBoards.get(logicBoardIndex).components.get(i).draw();//draw the component
         }
         for (int i=0; i<level.logicBoards.get(logicBoardIndex).components.size(); i++) {//draw the connections
           level.logicBoards.get(logicBoardIndex).components.get(i).drawConnections();
         }
 
-        if (connectingLogic&&connecting) {//draw the connnecting line
+        if (connectingLogic&&connecting) {//draw the connnecting line to the mouse
           float[] nodePos = level.logicBoards.get(logicBoardIndex).components.get(connectingFromIndex).getTerminalPos(2);
           stroke(0);
           strokeWeight(5*Scale);
           line(nodePos[0]*Scale, nodePos[1]*Scale, mouseX, mouseY);
         }
 
-        if (movingLogicComponent&&moveLogicComponents) {
+        if (movingLogicComponent&&moveLogicComponents) {//if moving logic components
           level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX/Scale+camPos, mouseY/Scale+camPosY);
         }
-        if (cam_left&&camPos>0) {
+        if (cam_left&&camPos>0) {//camera movement
           camPos-=4;
         }
         if (cam_right) {
@@ -975,7 +1007,7 @@ void draw() {// the function that is called every fraim
         }
       }
 
-      if (exitLevelCreator) {
+      if (exitLevelCreator) {//if on the exiting level creator screen
         background(#0092FF);
         fill(0);
         lc_exit_question.draw();
@@ -989,36 +1021,37 @@ void draw() {// the function that is called every fraim
 
     if (dead) {// when  dead
       fill(255, 0, 0);
-      deadText.draw();
+      deadText.draw();//draw the dead text
       death_cool_down++;
       if (death_cool_down>75) {// respawn cool down
         dead=false;
         inGame=true;
-        player1_moving_right=false;
+        player1_moving_right=false;//reset movemnt 
         player1_moving_left=false;
         player1_jumping=false;
         SPressed=false;
         WPressed=false;
+        playerMovementManager.reset();
       }
-      if(!inGame){
+      if(!inGame){//if not in game then turn dead off
         dead=false;
       }
     }
     
-    if (settingPlayerSpawn && levelCreator) {
-      draw_mann(mouseX, mouseY, 1, Scale, 0,g);
+    if (settingPlayerSpawn && levelCreator) {//if setting the player spawn point 
+      draw_mann(mouseX, mouseY, 1, Scale, 0,g);//draw the example player
       fill(0);
-      settingPlayerSpawnText.draw();
+      settingPlayerSpawnText.draw();//draw the explain text
     }
 
 
-    if (settings.getDebugFPS()) {
+    if (settings.getDebugFPS()) {//if displaying FPS
       fill(255);
-      fpsText.setText("FPS: "+ frameRate);
+      fpsText.setText("FPS: "+ frameRate);//redner the FPS
       fpsText.draw();
     }
-    if (settings.getDebugInfo()) {
-      fill(255);
+    if (settings.getDebugInfo()) {//if displaying debug info
+      fill(255);//render the debig info as long as the current player exsists
       if (players[currentPlayer]!=null) {
         dbg_mspc.setText("mspc: "+ mspc);
         dbg_playerX.setText("player X: "+ players[currentPlayer].x);
@@ -1030,21 +1063,22 @@ void draw() {// the function that is called every fraim
         dbg_camY.setText("camera y: "+camPosY);
         dbg_tutorialPos.setText("tutorial position: "+tutorialPos);
       }
-      if(multiplayer){
-        if(clients.size()==0){
-          dbg_ping.setText("Ping: N/A");
-        }else if(clients.size()==1){
-          long pingl = clients.get(0).ping;
+      if(multiplayer){//if in multyplayer
+        if(clients.size()==0){//if there are no conections
+          dbg_ping.setText("Ping: N/A");//report the ping as N/A
+        }else if(clients.size()==1){//if there is exactly 1 connection
+          long pingl = clients.get(0).ping;//displaly the ping of that connection
           float pingDisp = (int)(pingl/10000)/100.0;
           dbg_ping.setText("Ping: "+pingDisp);
-        }else{
+        }else{//if there is more then 1 connection
+          //display the average ping
           long totalPing = clients.stream().map( c -> c.ping).reduce(0l, Long::sum);
           long avgPingl = totalPing / clients.size();
           float pingDisp = (int)(avgPingl/10000)/100.0;
           dbg_ping.setText("avgPing: "+pingDisp);
         }
-      }else{
-        dbg_ping.setText("Ping: N/A");
+      }else{//if not in multyplayer
+        dbg_ping.setText("Ping: N/A");//display the ping as N/A
       }
       dbg_mspc.draw();
       dbg_playerX.draw();
@@ -1058,17 +1092,17 @@ void draw() {// the function that is called every fraim
       dbg_ping.draw();
     }
 
-    if (millis()<gmillis) {
-      glitchEffect();
+    if (millis()<gmillis) {//if the glish effect should be shown 
+      glitchEffect();//draw the glitch effect
     }
     
-    if(showDepthBuffer&&dev_mode&&shadowMap!=null){
-      image(shadowMap,0,height/2,width/2,height/2);
+    if(showDepthBuffer&&dev_mode&&shadowMap!=null){//if the depth buffer should be renderd
+      image(shadowMap,0,height/2,width/2,height/2);//redner the depth buffer
     }
 
-    if (displayTextUntill>=millis()) {
+    if (displayTextUntill>=millis()) {//if text is being displayed on screen
       fill(255);
-      game_displayText.setText(displayText);
+      game_displayText.setText(displayText);//render the display text
       game_displayText.draw();
     }
 
@@ -1079,9 +1113,9 @@ void draw() {// the function that is called every fraim
       elapsedTimeDisplay.draw();
     }
     
-    if(soundHandler!=null && settings.getSoundNarrationVolume()< 0.2 && soundHandler.anyNarrationPlaying()){
+    if(soundHandler!=null && settings.getSoundNarrationVolume()< 0.2 && soundHandler.anyNarrationPlaying()){//if a narration is playing and the volume is low,
       fill(255);
-      narrationCaptionText.draw();
+      narrationCaptionText.draw();//display the cation notice
     }
     //TODO: text stuff for multyplayer in game
     if (multiplayer&&inGame) {
@@ -1090,8 +1124,8 @@ void draw() {// the function that is called every fraim
         String curtime=formatMillis(millis()-startTime);
         calcTextSize(curtime, width*0.06);
         textAlign(CENTER, CENTER);
-        text(curtime, width/2, height*0.015);
-
+        text(curtime, width/2, height*0.015);//redner the current level time
+        //if host calculate the order of the score board
         if (isHost) {
           BestScore[] scores=new BestScore[10];
           for (int i=0; i<10; i++) {
@@ -1122,6 +1156,7 @@ void draw() {// the function that is called every fraim
         }
         calcTextSize("12345678910", width*0.06);
         textAlign(LEFT, TOP);
+        //redner the leaderboard
         String lb ="Leader Board\n";
         for (int i=0; i<leaderBoard.leaderboard.length; i++) {
           lb+=leaderBoard.leaderboard[i]+"\n";
@@ -1131,17 +1166,18 @@ void draw() {// the function that is called every fraim
         calcTextSize(timeLeft, width*0.05);
         text(timeLeft, width*0.01, height*0.12);
         calcTextSize("Time Left", width*0.05);
+        //redner ho much time is left in this level
         text("Time Left", width*0.01, height*0.1);
-        if (isHost) {
+        if (isHost) {//if your the host and time is up,
           if (timerEndTime-millis()<=0) {
             Menue="multiplayer selection";
-            returnToSlection();
+            returnToSlection();//return to the seldction screen
             menue=true;
             inGame=false;
           }
         }
       }
-      if (level.multyplayerMode==2) {
+      if (level.multyplayerMode==2) {//if in co-op mode and all players are on a finish line
         if (isHost) {
           boolean allDone=true;
           for (int i=0; i<clients.size(); i++) {
@@ -1150,14 +1186,14 @@ void draw() {// the function that is called every fraim
           }
           allDone = allDone && reachedEnd;
           if (allDone) {
-            level_complete=true;
+            level_complete=true;//complete the level
           }
         }
       }
     }
 
 
-    disEngageHUDPosition();
+    disEngageHUDPosition();//turn the HUD things off
   }
   catch(Throwable e) {//cath and display all the fatail errors that occor
     handleError(e);
@@ -1194,14 +1230,16 @@ void draw() {// the function that is called every fraim
 
 
 
-
+/**Automaticaly called when a mouse click is detected in the window.
+Executes on the render thread
+*/
 void mouseClicked() {// when you click the mouse
 
   try {
     if (!levelCreator) {
 
-      if (menue) {//if your in a menue
-        if (Menue.equals("main")) {//if that menue is the main menue
+      if (menue) {//if your in a menu
+        if (Menue.equals("main")) {//if that menu is the main menu
           if (playButton.isMouseOver()) {//level select button
             Menue = "level select";
             menue=false;
@@ -1227,8 +1265,10 @@ void mouseClicked() {// when you click the mouse
             tutorialPos=0;
           }
         }
-        if (Menue.equals("level select")) {//if that menue is level select
+        if (Menue.equals("level select")) {//if that menu is level select
+          //get the current level progress
           int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+          // if the mouse clicks on a level and the progress has unlocked that level then load that level
           if (select_lvl_1.isMouseOver()) {
             loadLevel("data/levels/level-1");
             menue=false;
@@ -1294,17 +1334,17 @@ void mouseClicked() {// when you click the mouse
           
           
 
-          if (select_lvl_back.isMouseOver()) {
+          if (select_lvl_back.isMouseOver()) {//back button
             Menue="main";
             menue=false;
             initMenuTransition(Transitions.LEVEL_SELECT_TO_MAIN);
           }
-          if (select_lvl_next.isMouseOver()) {
+          if (select_lvl_next.isMouseOver()) {//next page button
             Menue="level select 2";
             menue=false;
             initMenuTransition(Transitions.LEVEL_SELECT_TO_LEVEL_SELECT_2);
           }
-          if (select_lvl_UGC.isMouseOver()) {
+          if (select_lvl_UGC.isMouseOver()) {//UGC level select button
             Menue="level select UGC";
             menue=false;
             loadUGCList();
@@ -1314,53 +1354,65 @@ void mouseClicked() {// when you click the mouse
           }
 
 
-          return;
+          return;//do no conitune attempting to process this mouse click incase the screen changed
         }
-        if (Menue.equals("level select 2")) {//if that menue is level select
+        if (Menue.equals("level select 2")) {//if that menu is level select2
+          //get the current level progress
           int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+          // if the mouse clicks on a level and the progress has unlocked that level then load that level
           if (select_lvl_13.isMouseOver()&&progress>=13) {
             loadLevel("data/levels/level-13");
             menue=false;
             inGame=true;
           }
-          if (select_lvl_2.isMouseOver()&&progress>=14) {
+          if (select_lvl_14.isMouseOver()&&progress>=14) {
             loadLevel("data/levels/level-14");
             menue=false;
             inGame=true;
           }
-
-          if (select_lvl_back.isMouseOver()) {
+          if (select_lvl_15.isMouseOver()&&progress>=15) {
+            loadLevel("data/levels/level-15");
+            menue=false;
+            inGame=true;
+          }
+          if (select_lvl_16.isMouseOver()&&progress>=16) {
+            loadLevel("data/levels/level-16");
+            menue=false;
+            inGame=true;
+          }
+          
+          if (select_lvl_back.isMouseOver()) {// back button
             Menue="level select";
             menue=false;
             initMenuTransition(Transitions.LEVEL_SELECT_2_TO_LEVEL_SELECT);
           }
         }
 
-        if (Menue.equals("level select UGC")) {
-          if (select_lvl_back.isMouseOver()) {
+        if (Menue.equals("level select UGC")) {//if that menu is the UGC level select screne
+          if (select_lvl_back.isMouseOver()) {//back button
             Menue="level select";
             menue=false;
             initMenuTransition(Transitions.UGC_TO_LEVEL_SELECT);
           }
-          if (UGC_open_folder.isMouseOver()) {
+          if (UGC_open_folder.isMouseOver()) {//open folder button
             openUGCFolder();
           }
 
-          if (UGCNames.size()==0) {
-          } else {
-            if (UGC_lvl_indx<UGCNames.size()-1) {
-              if (UGC_lvls_next.isMouseOver()) {
+          if (UGCNames.size()==0) {//if there are no UGC levels do nothing
+          } else {//if there are UGC levels then
+            if (UGC_lvl_indx<UGCNames.size()-1) {//if there is another level
+              if (UGC_lvls_next.isMouseOver()) {//next button
                 UGC_lvl_indx++;
               }
             }
-            if (UGC_lvl_indx>0) {
-              if (UGC_lvls_prev.isMouseOver()) {
+            if (UGC_lvl_indx>0) {//if not on the first level
+              if (UGC_lvls_prev.isMouseOver()) {//prevous level button
                 UGC_lvl_indx--;
               }
             }
-            if (UGC_lvl_play.isMouseOver()) {
+            if (UGC_lvl_play.isMouseOver()) {//play level button
               loadLevel(appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(UGC_lvl_indx));
-              if (!levelCompatible) {
+              if (!levelCompatible) {//if the level version is not compatable with this version of the game
                 Menue="level select";
                 return;
               }
@@ -1370,10 +1422,11 @@ void mouseClicked() {// when you click the mouse
             }
           }
           if (levelcreatorLink.isMouseOver()) {//this now opens the level creator
-            //link("https://cbi-games.glitch.me/level%20creator.html");
-            if (scr2==null)//create the 2nd screen if it does not exsist
+            //link("https://cbi-games.glitch.me/level%20creator.html");//old level creator webpage
+            if (scr2==null){//create the 2nd screen if it does not exsist
               scr2 =new ToolBox(millis());
-            startup=true;
+            }
+            startup=true;//set the level creator screen variables
             loading=false;
             newLevel=false;
             editingStage=false;
@@ -1384,13 +1437,13 @@ void mouseClicked() {// when you click the mouse
             author = settings.getDefaultAuthor();//set the author to the default
             return;
           }
-        }
+        }//end of UGC menu
 
-        if (Menue.equals("pause")) {//if that menue is pause
+        if (Menue.equals("pause")) {//if that menu is pause
           if (pauseResumeButton.isMouseOver()) {//resume game button
             menue=false;
           }
-          if (pauseOptionsButton.isMouseOver()) {//resume game button
+          if (pauseOptionsButton.isMouseOver()) {//options button
             Menue="settings";
             prevousInGame=true;
             inGame=false;
@@ -1399,11 +1452,11 @@ void mouseClicked() {// when you click the mouse
             menue=true;
             inGame=false;
             tutorialMode=false;
-            if (multiplayer) {
-              if (isHost) {
+            if (multiplayer) {//hanlde multyplayer quitting
+              if (isHost) {//if host then just go back to the level selcetion screen
                 Menue="multiplayer selection";
                 returnToSlection();
-              } else {
+              } else {//if a client then leave multyplayer
                 Menue="main";
                 println("quitting multyplayer joined");
                 clientQuitting=true;
@@ -1417,10 +1470,10 @@ void mouseClicked() {// when you click the mouse
               stats.incrementGamesQuit();
               stats.save();
             }
-            soundHandler.setMusicVolume(settings.getSoundMusicVolume());
+            soundHandler.setMusicVolume(settings.getSoundMusicVolume());//reset the music volume, incase you are quitting the tutorial
             coinCount=0;
           }
-          if (multiplayer) {
+          if (multiplayer) {//mulyplayer restart level button
             if (level.multyplayerMode==1) {
               if (pauseRestart.isMouseOver()) {
                 level.psudoLoad();
@@ -1431,13 +1484,15 @@ void mouseClicked() {// when you click the mouse
           }
         }
 
-        if (Menue.equals("settings")) {     //if that menue is settings
-
-          if (settingsMenue.equals("game play")) {
-
+        if (Menue.equals("settings")) {//if that menu is settings
+          //oh boy here we go..
+          
+          if (settingsMenue.equals("game play")) {//if on the gamplay tab
+            //process clicks for the sliders
             verticleEdgeScrollSlider.mouseClicked();
             horozontalEdgeScrollSlider.mouseClicked();
             fovSlider.mouseClicked();
+            //update the settings if any of the sliders have been clicked on
             if (horozontalEdgeScrollSlider.button.isMouseOver()) {
               settings.setScrollHorozontal((int)horozontalEdgeScrollSlider.getValue(),true);
               settings.save();
@@ -1455,9 +1510,10 @@ void mouseClicked() {// when you click the mouse
             
           }//end of game play settings
 
-          if (settingsMenue.equals("display")) {
-            String arat = "16:9";
-            if (rez4k.isMouseOver()) {//2160 resolution button
+          if (settingsMenue.equals("display")) {//if on the display tab
+            String arat = "16:9";//default aspect ratio
+            //when clicking on buttons update the approprate settings
+            if (rez4k.isMouseOver()) {//2160 (4K) resolution button
               settings.setResolution((int)(2160*16.0/9),2160);
               settings.save();
             }
@@ -1494,12 +1550,13 @@ void mouseClicked() {// when you click the mouse
             }
           }//end of display settings menue
 
-          if (settingsMenue.equals("sound")) {
+          if (settingsMenue.equals("sound")) {//if on the sound tab
             
+            //process clicks for the sliders
             musicVolumeSlider.mouseClicked();
             SFXVolumeSlider.mouseClicked();
             narrationVolumeSlider.mouseClicked();
-            
+            //if the sliders have been clicked on then update settings
             if (musicVolumeSlider.button.isMouseOver()) {
               settings.setSoundMusicVolume(musicVolumeSlider.getValue()/100.0,true);
               soundHandler.setMusicVolume(settings.getSoundMusicVolume());
@@ -1517,7 +1574,7 @@ void mouseClicked() {// when you click the mouse
               settings.save();
 
             }
-            
+            //narration mode buttons
             if (narrationMode0.isMouseOver()) {
               settings.setSoundNarrationMode(0);
               settings.save();
@@ -1528,7 +1585,9 @@ void mouseClicked() {// when you click the mouse
             }
             
           }//end of sound settings
-          if (settingsMenue.equals("outher")) {
+          
+          if (settingsMenue.equals("outher")) {//if on the other tab
+            //when clicking on buttons update the approprate settings
             if (enableFPS.isMouseOver()) {
               settings.setDebugFPS(true);
               settings.save();
@@ -1579,29 +1638,30 @@ void mouseClicked() {// when you click the mouse
               settings.save();
             }
 
-
+            //process clicks on the default author text box
             defaultAuthorNameTextBox.mouseClicked();
             
           }//end of outher settings menue
 
-          if (sttingsGPL.isMouseOver()){
+          if (sttingsGPL.isMouseOver()){//gameplay button
             settingsMenue="game play";
             defaultAuthorNameTextBox.resetState();
           }
-          if (settingsDSP.isMouseOver()){
+          if (settingsDSP.isMouseOver()){//dsiplay button
             settingsMenue="display";
             defaultAuthorNameTextBox.resetState();
           }
-          if (settingsSND.isMouseOver()){
+          if (settingsSND.isMouseOver()){//sound button
             settingsMenue="sound";
             defaultAuthorNameTextBox.resetState();
           }
-          if (settingsOUT.isMouseOver())
+          if (settingsOUT.isMouseOver()){//other button
             settingsMenue="outher";
+          }
 
           if (settingsBackButton.isMouseOver()) {//back button
             defaultAuthorNameTextBox.resetState();
-            if (prevousInGame) {
+            if (prevousInGame) {//hanlde going back to the game if opened from inside a level
               Menue="pause";
               inGame=true;
               prevousInGame=false;
@@ -1610,129 +1670,117 @@ void mouseClicked() {// when you click the mouse
               menue=false;
               initMenuTransition(Transitions.SETTINGS_TO_MAIN);
             }
-            stats.save();
+            stats.save();//save statistics
           }
         }
 
-        //back button for the old how to play menue NOT REMOVING THIS!
-        if (Menue.equals("how to play")) {//if that menue is how to play
+        //back button for the old how to play menu NOT REMOVING THIS!
+        if (Menue.equals("how to play")) {//if that menu is how to play
           if (mouseX >= 40*Scale && mouseX <= 240*Scale && mouseY >= 610*Scale && mouseY <= 660*Scale) {//back button
             Menue ="main";
           }
         }
 
-        if (Menue.equals("update")) {//if that menue is update
+        if (Menue.equals("update")) {//if that menu is update
           updae_screen_click(); //check the update clicks
         }
+
         if (Menue.equals("downloading update")) {
           updateDownloadingScreenClick();
         }
 
-        if (Menue.equals("multiplayer strart")) {
-          if (multyplayerExit.isMouseOver()) {
+
+        if (Menue.equals("multiplayer strart")) {//if the menu is multyplayer start
+          if (multyplayerExit.isMouseOver()) {//exit button
             Menue="main";
           }
-          if (multyplayerJoin.isMouseOver()) {
+          if (multyplayerJoin.isMouseOver()) {//join button
             Menue="start join";
           }
-          if (multyplayerHost.isMouseOver()) {
+          if (multyplayerHost.isMouseOver()) {//host button
             Menue="start host";
           }
         }
-        if (Menue.equals("start host")) {
-          if (multyplayerExit.isMouseOver()) {
+        
+        if (Menue.equals("start host")) {//if the menu is setting up hosting
+          if (multyplayerExit.isMouseOver()) {//bakc button
             Menue="main";
             multyPlayerNameTextBox.resetState();
             multyPlayerPortTextBox.resetState();
           }
-          //if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
-          //  enteringName=true;
-          //  enteringPort=false;
-          //}
-          //if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
-          //  enteringName=false;
-          //  enteringPort=true;
-          //}
+          //hanlde text box mouse clicks
           multyPlayerNameTextBox.mouseClicked();
           multyPlayerPortTextBox.mouseClicked();
-          if (multyplayerGo.isMouseOver()) {
+          
+          if (multyplayerGo.isMouseOver()) {//go button
             name = multyPlayerNameTextBox.getContence();
             port = Integer.parseInt(multyPlayerPortTextBox.getContence());
-            multyPlayerNameTextBox.resetState();
+            multyPlayerNameTextBox.resetState();//make sure the text boxes are not slected
             multyPlayerPortTextBox.resetState();
             
             isHost=true;
-            Menue="multiplayer selection";
+            Menue = "multiplayer selection";
             multiplayer = true;
-            server= new Server(port);
-            players[0].name=name;
+            server = new Server(port);//start the multyplayer session
+            players[0].name = name;
           }
           return;
-        }
-        if (Menue.equals("start join")) {
-          if (multyplayerExit.isMouseOver()) {
+        }//end f setting up hosting
+        
+        if (Menue.equals("start join")) {//if setting up joining
+          if (multyplayerExit.isMouseOver()) {//back button
             Menue="main";
             multyPlayerNameTextBox.resetState();
             multyPlayerPortTextBox.resetState();
             multyPlayerIpTextBox.resetState();
           }
-          //if (mouseX >= width/2-width*0.4 && mouseX <= width/2+width*0.4 && mouseY >= height*0.15 && mouseY <= height*0.2) {//name line
-          //  enteringName=true;
-          //  enteringPort=false;
-          //  enteringIP=false;
-          //}
-          //if (mouseX >= width/2-width*0.05 && mouseX <= width/2+width*0.05 && mouseY >= height*0.26 && mouseY <= height*0.31) {//port line
-          //  enteringName=false;
-          //  enteringPort=true;
-          //  enteringIP=false;
-          //}
-          //if (mouseX >= width/2-width*0.3 && mouseX <= width/2+width*0.3 && mouseY >= height*0.37 && mouseY <= height*0.42) {//ip line
-          //  enteringName=false;
-          //  enteringPort=false;
-          //  enteringIP=true;
-          //}
+          
+          //handle text box clicks
           multyPlayerNameTextBox.mouseClicked();
           multyPlayerPortTextBox.mouseClicked();
           multyPlayerIpTextBox.mouseClicked();
-          if (multyplayerGo.isMouseOver()) {
+          
+          if (multyplayerGo.isMouseOver()) {//go button
             name = multyPlayerNameTextBox.getContence();
             port = Integer.parseInt(multyPlayerPortTextBox.getContence());
             ip = multyPlayerIpTextBox.getContence();
-            multyPlayerNameTextBox.resetState();
+            multyPlayerNameTextBox.resetState();//make sure the text boxes are not still active
             multyPlayerPortTextBox.resetState();
             multyPlayerIpTextBox.resetState();
             isHost=false;
             Menue="multiplayer selection";
             multiplayer=true;
             try {
-              clients.add(new Client(new Socket(ip, port)));
-            }
-            catch(Exception c) {
-              c.printStackTrace();
+              clients.add(new Client(new Socket(ip, port)));//try to connect to the server
+            } catch(Exception c) {//if the connection failed 
+              c.printStackTrace();//go to the disconnedeted screen
               multiplayer=false;
               Menue="disconnected";
               disconnectReason="failed to connect to server\n"+c.toString();
             }
             return;
           }
-        }
-        if (Menue.equals("disconnected")) {
-          if (multyplayerExit.isMouseOver()) {
+        }//end of setting up joining
+        
+        
+        if (Menue.equals("disconnected")) {//if that menu is the disconnedted menu
+          if (multyplayerExit.isMouseOver()) {//back button
             Menue="start join";
             multiplayer=false;
             currentPlayer=0;
           }
         }
 
-        if (Menue.equals("dev")) {
-          clickDevMenue();
+        if (Menue.equals("dev")) {//if that menu is dev
+          clickDevMenue();//handle clicks for the dev menu
           return;
         }
-        if (Menue.equals("multiplayer selection")) {
-          if (isHost) {
-            if (multyplayerLeave.isMouseOver()) {
+        
+        if (Menue.equals("multiplayer selection")) {//if that menu is multyplayer selection  
+          if (isHost) {//if you are the host
+            if (multyplayerLeave.isMouseOver()) {//leave button
               println("quitting multyplayer host");
-              server.end();
+              server.end();//stop the server
               println("returning to main menu");
               Menue="main";
               multiplayer=false;
@@ -1740,100 +1788,104 @@ void mouseClicked() {// when you click the mouse
               currentPlayer=0;
               return;
             }
+            //this is the mouse side of the old terrible attempt at a resizable UI
             if (mouseX>=width*0.171875 && mouseX<= width*0.8 && mouseY >=height*0.09 && mouseY <=height*0.91666) {//if the mouse is in the area to select a level
-              int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));
-              if (multyplayerSelectionLevels.equals("speed")) {
+              int slotSelected=(int)( (mouseY - height*0.09)/(height*0.8127777777/16));//calculate the slot selceted
+              if (multyplayerSelectionLevels.equals("speed")) {//if on the speedrun tab
                 if (slotSelected<=13) {//set speed run max levels here for selection
                   multyplayerSelectedLevelPath="data/levels/level-"+(slotSelected+1);
                   genSelectedInfo(multyplayerSelectedLevelPath, false);
                 }
               }
-              if (multyplayerSelectionLevels.equals("coop")) {
+              if (multyplayerSelectionLevels.equals("coop")) {//if on the co op tab
                 if (slotSelected<=1) {// set co op max levels here for selection
                   multyplayerSelectedLevelPath="data/levels/co-op_"+(slotSelected+1);
                   genSelectedInfo(multyplayerSelectedLevelPath, false);
                 }
               }
-              if (multyplayerSelectionLevels.equals("UGC")) {
+              if (multyplayerSelectionLevels.equals("UGC")) {//if on the UGC tab
                 if (slotSelected<=UGCNames.size()-1) {// set co op max levels here for selection
                   multyplayerSelectedLevelPath=appdata+"/CBi-games/skinny mann/UGC/levels/"+UGCNames.get(slotSelected);
                   genSelectedInfo(multyplayerSelectedLevelPath, true);
                 }
               }
               return;
-            }
-            if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {
-              if (multyplayerPlay.isMouseOver()) {
-                if (!multyplayerSelectedLevel.isUGC) {
-                  if (multyplayerSelectedLevel.multyplayerMode==1) {
-                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
-                    for (int i=0; i<clients.size(); i++) {
+            }//end of mouse clicked in the levels area
+            
+            if (multyplayerSelectedLevel.gameVersion!=null && gameVersionCompatibilityCheck(multyplayerSelectedLevel.gameVersion)) {//if the selected level is compatbale with this version of the game
+              if (multyplayerPlay.isMouseOver()) {//if the play button is clicked
+                if (!multyplayerSelectedLevel.isUGC) {//if the level is not UGC
+                  if (multyplayerSelectedLevel.multyplayerMode==1) {//if in speedrun mode
+                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);//make a level load request
+                    for (int i=0; i<clients.size(); i++) {//send it to all the clients
                       clients.get(i).dataToSend.add(req);
                     }
-                    loadLevel(multyplayerSelectedLevelPath);
-                    waitingForReady=true;
+                    loadLevel(multyplayerSelectedLevelPath);//load the level
+                    waitingForReady=true;//be waiting for all clients to be readdy
                     bestTime=0;
-                  }
+                  }//end of speed run mode
 
-                  if (multyplayerSelectedLevel.multyplayerMode==2) {
-                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
-                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);
-                      for (int i=0; i<clients.size(); i++) {
+                  if (multyplayerSelectedLevel.multyplayerMode==2) {//if in co-op mode
+                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {//if the number of players is within the allowed number
+                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevelPath);//create a level load request
+                      for (int i=0; i<clients.size(); i++) {//send it to all the clients
                         clients.get(i).dataToSend.add(req);
                       }
-                      loadLevel(multyplayerSelectedLevelPath);
-                      waitingForReady=true;
-                    }
-                  }
-                } else {
-                  if (multyplayerSelectedLevel.multyplayerMode==1) {
+                      loadLevel(multyplayerSelectedLevelPath);//load the level
+                      waitingForReady=true;//be waiting for all the clients to be readdy
+                    }//end of good number of players
+                  }//end of co - op mode
+                } else {//if the level is UGC
+                  if (multyplayerSelectedLevel.multyplayerMode==1) {//if in speedrun mode
 
-                    loadLevel(multyplayerSelectedLevelPath);
-                    LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
-                    for (int i=0; i<clients.size(); i++) {
+                    loadLevel(multyplayerSelectedLevelPath);//load the level
+                    LoadLevelRequest req = new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));//create a level load request and calculate the level hash to send as well
+                    for (int i=0; i<clients.size(); i++) {//send the request to all clients
                       clients.get(i).dataToSend.add(req);
                     }
 
-                    waitingForReady=true;
+                    waitingForReady=true;//be waiting for all the clients to be readdy
                     bestTime=0;
-                  }
+                  }//end of speed run mode
 
-                  if (multyplayerSelectedLevel.multyplayerMode==2) {
-                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {
-                      loadLevel(multyplayerSelectedLevelPath);
-                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));
-                      for (int i=0; i<clients.size(); i++) {
+                  if (multyplayerSelectedLevel.multyplayerMode==2) {//if co-op mode
+                    if (clients.size()+1 >= multyplayerSelectedLevel.minPlayers && clients.size()+1 <= multyplayerSelectedLevel.maxPlayers) {//if the number of players is within the allowed number
+                      loadLevel(multyplayerSelectedLevelPath);//load the level
+                      LoadLevelRequest req =new LoadLevelRequest(multyplayerSelectedLevel.id, getLevelHash(multyplayerSelectedLevelPath));//create a level load request and calculate the level hash to send as well
+                      for (int i=0; i<clients.size(); i++) {//send the request to all clients
                         clients.get(i).dataToSend.add(req);
                       }
 
-                      waitingForReady=true;
-                    }
-                  }
-                }
+                      waitingForReady=true;//be waiting for all the clients to be readdy
+                    }//end of good number of players
+                  }//end of co - op mode
+                }//end of UGC
               }//end of multyplayer play button
-            }
-            if (multyplayerSelectedLevel.multyplayerMode==1) {
-              if (increaseTime.isMouseOver()) {
+            }//end of level compable with this version
+            
+            if (multyplayerSelectedLevel.multyplayerMode==1) {//if the selected level is speed run
+              if (increaseTime.isMouseOver()) {//increase time button
                 sessionTime+=30000;
               }
-              if (decreaseTime.isMouseOver()) {
+              if (decreaseTime.isMouseOver()) {//decrease time button
                 if (sessionTime>30000)
                   sessionTime-=30000;
               }
             }
-            if (multyplayerCoop.isMouseOver()) {
+            
+            if (multyplayerCoop.isMouseOver()) {//coop button
               multyplayerSelectionLevels="coop";
             }
-            if (multyplayerSpeedrun.isMouseOver()) {
+            if (multyplayerSpeedrun.isMouseOver()) {//speed run button
               multyplayerSelectionLevels="speed";
             }
-            if (multyplayerUGC.isMouseOver()) {
+            if (multyplayerUGC.isMouseOver()) {//UGC button
               multyplayerSelectionLevels="UGC";
               //load a list of all the UGC levels
               loadUGCList();
             }
           } else {//if joined
-            if (multyplayerLeave.isMouseOver()) {
+            if (multyplayerLeave.isMouseOver()) {//leave button
               println("quitting multyplayer joined");
               clientQuitting=true;
               clients.get(0).disconnect();
@@ -1843,8 +1895,9 @@ void mouseClicked() {// when you click the mouse
               currentPlayer=0;
               return;
             }
-          }
-        }
+			//as you can see there is not much if the player has joined
+          }//end of joined
+        }//end of multyplayer menu 
 
         if(Menue.equals("level complete")){
           if(levelCompleteScreenContinue.isMouseOver()){
@@ -1869,37 +1922,39 @@ void mouseClicked() {// when you click the mouse
         if(Menue.equals("high score")){
           highScoreMouseClicked();
         }
-      }
+      }//end of in menu
+
       if (level_complete&&(level.multyplayerMode!=2||isHost)) {//if you completed a level and have not joined
         if (endOfLevelButton.isMouseOver()) {//continue button
-          if (multiplayer) {
+          if (multiplayer) {//multyplayer version of the button
             menue=true;
             inGame=false;
             level_complete=false;
             Menue="multiplayer selection";
             returnToSlection();
-          } else {
+          } else {//single player version of the button
             menue=true;
             inGame=false;
             Menue="level select";
             level_complete=false;
             coinCount=0;
-            if (!UGC_lvl) {
-              if (level.levelID>levelProgress.getJSONObject(0).getInt("progress")) {
-                JSONObject p=new JSONObject();
+            if (!UGC_lvl) {//if the level was not UGC
+              if (level.levelID>levelProgress.getJSONObject(0).getInt("progress")) {//if the level ID was greater then your level progress
+                JSONObject p=new JSONObject();//increease your level progress by 1
                 p.setInt("progress", levelProgress.getJSONObject(0).getInt("progress")+1);
                 levelProgress.setJSONObject(0, p);
                 saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
               }
-            } else {
-              UGC_lvl=false;
+            } else {//if it was UGC
+              UGC_lvl=false;//set UGC level to false
             }
-            stats.incrementLevelsCompleted();
+            stats.incrementLevelsCompleted();//adjust stats
             stats.save();
           }
         }
-      }
-    } else {//level creator
+      }//end of level complete
+      
+    } else {//if in level creator
       if (mouseButton==LEFT) {//if the button pressed was the left button
         //System.out.println(mouseX+" "+mouseY);//print the location the mouse clicked to the console
         if (startup) {//if on the startup screen
@@ -1935,7 +1990,7 @@ void mouseClicked() {// when you click the mouse
             lcEnterLevelTextBox.activate();
             return;
           }
-          if (lc_backButton.isMouseOver()) {
+          if (lc_backButton.isMouseOver()) {//exit level creator button
             levelCreator=false;
           }
         }
@@ -1947,7 +2002,7 @@ void mouseClicked() {// when you click the mouse
             try {//attempt to load the level
               String tmp=rootPath;
               rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+rootPath;
-              boolean exsists=new File(rootPath+"/index.json").exists();
+              boolean exsists=new File(rootPath+"/index.json").exists();//check if the level even exsists
               if (!exsists) {
                 levelNotFound=true;
                 rootPath=tmp;
@@ -1958,26 +2013,29 @@ void mouseClicked() {// when you click the mouse
               loading=false;
               levelOverview=true;
               levelNotFound=false;
-            }
-            catch(Throwable e) {//do nothign if loading fails
+            } catch(Throwable e) {//do nothings if loading fails
               e.printStackTrace();
             }
-            level=new Level(mainIndex);
-            level.logicBoards.get(level.loadBoard).superTick();
-            if (level.multyplayerMode==2) {
+            
+            level=new Level(mainIndex);//load the level
+            level.logicBoards.get(level.loadBoard).superTick();//run the level load board
+            if (level.multyplayerMode==2) {//set the number of players if in co-op mode
               currentNumberOfPlayers=level.maxPLayers;
             }
             return;
           }
-          if (lc_backButton.isMouseOver()) {
+          
+          if (lc_backButton.isMouseOver()) {//back button
             startup=true;
             loading=false;
             lcEnterLevelTextBox.resetState();
           }
-          if (lc_openLevelsFolder.isMouseOver()) {
+          
+          if (lc_openLevelsFolder.isMouseOver()) {//open folder button
             openLevelCreatorLevelsFolder();
           }
         }
+        
         if (newLevel) {//if creating a new level
           lcEnterLevelTextBox.mouseClicked();
           if (lcNewLevelButton.isMouseOver()) {//create button
@@ -1985,7 +2043,7 @@ void mouseClicked() {// when you click the mouse
             newLevel=false;
             rootPath=appdata+"/CBi-games/skinny mann level creator/levels/"+new_name;
             JSONArray mainIndex=new JSONArray();//set up a new level
-            JSONObject terain = new JSONObject();
+            JSONObject terain = new JSONObject();//create all the basic into nessarry for a new level
             terain.setInt("level_id", (int)(Math.random()*1000000000%999999999));
             terain.setString("name", new_name);
             terain.setString("game version", GAME_version);
@@ -1996,26 +2054,29 @@ void mouseClicked() {// when you click the mouse
             terain.setInt("mainStage", -1);
             terain.setInt("coins", 0);
             terain.setString("author", author);
-            mainIndex.setJSONObject(0, terain);
+            mainIndex.setJSONObject(0, terain);//put that info into a JOSN Array
             levelOverview=true;
-            level=new Level(mainIndex);
-            level.save(true);
+            level=new Level(mainIndex);//load that new level
+            level.save(true);//save the level to disc
             lcEnterLevelTextBox.resetState();
             return;
           }
-          if (lc_backButton.isMouseOver()) {
+          
+          if (lc_backButton.isMouseOver()) {//back button
             startup=true;
             newLevel=false;
             lcEnterLevelTextBox.resetState();
           }
-          if (lc_openLevelsFolder.isMouseOver()) {
+          
+          if (lc_openLevelsFolder.isMouseOver()) {//open folder button
             openLevelCreatorLevelsFolder();
           }
         }
-        if (!e3DMode)
-          GUImouseClicked();//gui clicking code
-        else {
-          mouseClicked3D();
+        
+        if (!e3DMode){
+          GUImouseClicked();//level editor gui clicking code
+        } else {
+          mouseClicked3D();//3D level editor GUI clicking code
         }
 
 
@@ -2041,9 +2102,11 @@ void mouseClicked() {// when you click the mouse
             gmillis=millis()+400;//glitch effect
             System.out.println("save complete");
           }
+          
           if (help.isMouseOver()) {//help button in the level overview
-            link("https://youtu.be/anmV3GknDL4");
+            link("https://youtu.be/Ufn94mrjz8s");//tutorial video
           }
+          
           if (overviewSelection!=-1) {//if something is selected
             if (overviewSelection<level.stages.size()) {//if the selection is in rage of the stages
               if (level.stages.get(overviewSelection).type.equals("stage")) {//if the selected thing is a stage
@@ -2065,6 +2128,7 @@ void mouseClicked() {// when you click the mouse
                   return;
                 }
               }
+              
               if (level.stages.get(overviewSelection).type.equals("3Dstage")) {//if the selected thing is a 3D stage
                 if (edditStage.isMouseOver()) {//eddit button
                   editingStage=true;
@@ -2074,6 +2138,7 @@ void mouseClicked() {// when you click the mouse
                 }
               }
             }//end if if selection is in range of the stages
+            
             if (overviewSelection>=level.stages.size()+level.sounds.size()) {//if the selecion is in the logic board range
               if (edditStage.isMouseOver()) {//eddit button
                 levelOverview=false;
@@ -2085,19 +2150,21 @@ void mouseClicked() {// when you click the mouse
             }
           }//end of if something is selected
 
-          if (filesScrole>0&&overviewUp.isMouseOver())//scroll up button
+          if (filesScrole>0&&overviewUp.isMouseOver()){//scroll up button
             filesScrole--;
-          if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size()&&overviewDown.isMouseOver())//scroll down button
+          }
+          if (filesScrole+11<level.stages.size()+level.sounds.size()+level.logicBoards.size()&&overviewDown.isMouseOver()){//scroll down button
             filesScrole++;
+          }
 
-          if (lcOverviewExitButton.isMouseOver()) {
+          if (lcOverviewExitButton.isMouseOver()) {//exit level creator button
             levelOverview=false;
             exitLevelCreator=true;
           }
         }//end of level overview
 
         if (newFile) {//if on the new file page
-          lcNewFileTextBox.mouseClicked();
+          lcNewFileTextBox.mouseClicked();//process clicks on the text box
           if (newFileBack.isMouseOver()) {//back button
             levelOverview=true;
             newFile=false;
@@ -2116,9 +2183,9 @@ void mouseClicked() {// when you click the mouse
               try {//attempt to coppy the file
                 System.out.println("attempting to coppy file");
                 java.nio.file.Files.copy(new File(fileToCoppyPath).toPath(), new File(rootPath+"/"+pathSegments[pathSegments.length-1]).toPath());
-              }
-              catch(IOException i) {
+              } catch(IOException i) {
                 i.printStackTrace();
+                return;
               }
               System.out.println("adding sound to level");
               String newFileName = lcNewFileTextBox.getContence();
@@ -2133,12 +2200,12 @@ void mouseClicked() {// when you click the mouse
               lcNewFileTextBox.resetState();
               return;
             }
-            currentStageIndex=level.stages.size();//set the current sateg to the new stage
+            currentStageIndex=level.stages.size();//set the current stage to the new stage
             respawnStage=currentStageIndex;
             if (newFileType.equals("2D")) {//create the approriate type of stage based on what is selectd
               level.stages.add(new Stage(lcNewFileTextBox.getContence(), "stage"));
             }
-            if (newFileType.equals("3D")) {
+            if (newFileType.equals("3D")) {//create the approriate type of stage based on what is selectd
               level.stages.add(new Stage(lcNewFileTextBox.getContence(), "3Dstage"));
             }
 
@@ -2146,25 +2213,26 @@ void mouseClicked() {// when you click the mouse
             newFile=false;
             lcNewFileTextBox.resetState();
           }
+          
           if (newFileType.equals("sound")) {
             if (chooseFileButton.isMouseOver()) {//choose file button for when the type is sound
               selectInput("select audio file: .WAV .AIF .MP3:", "fileSelected");//open file selection diaglog
             }
-            if(lc_newSoundAsSoundButton.isMouseOver()){
+            if(lc_newSoundAsSoundButton.isMouseOver()){//sound button
               newSoundAsNarration=false;
             }
-            if(lc_newSoundAsNarrationButton.isMouseOver()){
+            if(lc_newSoundAsNarrationButton.isMouseOver()){//narration button
               newSoundAsNarration=true;
             }
           }
 
-          if (new3DStage.isMouseOver()) {//buttons to set type
+          if (new3DStage.isMouseOver()) {//3D stage button
             newFileType="3D";
           }
-          if (new2DStage.isMouseOver()) {
+          if (new2DStage.isMouseOver()) {//2D stage Button
             newFileType="2D";
           }
-          if (addSound.isMouseOver()) {
+          if (addSound.isMouseOver()) {//sound type buttpn
             newFileType="sound";
           }
         }
@@ -2198,7 +2266,7 @@ void mouseClicked() {// when you click the mouse
         }//end of drawing portal 2
 
         if (creatingNewBlueprint) {//if creating a new blueprint
-        lcEnterLevelTextBox.mouseClicked();
+          lcEnterLevelTextBox.mouseClicked();//handle text box clicks
           if (createBlueprintGo.isMouseOver()) {//create button
             new_name = lcEnterLevelTextBox.getContence();
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
@@ -2234,116 +2302,67 @@ void mouseClicked() {// when you click the mouse
           if (createBlueprintGo.isMouseOver()) {//load button
           new_name = lcEnterLevelTextBox.getContence();
             if (new_name!=null&&!new_name.equals("")) {//if something was entered
-              rootPath=System.getenv("appdata")+"/CBi-games/skinny mann level creator/blueprints";
-              workingBlueprint=new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));//load the blueprint
+              rootPath = appdata + "/CBi-games/skinny mann level creator/blueprints";
+              workingBlueprint = new Stage(loadJSONArray(rootPath+"/"+new_name+".json"));//load the blueprint
               lcEnterLevelTextBox.resetState();
-              loadingBlueprint=false;
-              editingBlueprint=true;
-              camPos=-640;
-              camPosY=360;
+              loadingBlueprint = false;
+              editingBlueprint = true;
+              camPos = -640;
+              camPosY = 360;
             }//end of thing were entered
           }//end of load button
-          if (lc_backButton.isMouseOver()) {
+          if (lc_backButton.isMouseOver()) {//back button
             startup=true;
             loadingBlueprint=false;
             lcEnterLevelTextBox.resetState();
           }
         }//end of loading blueprint
+        
         if (editinglogicBoard) {
-          if (placingAndGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new AndGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
+          //add new logic component to the current logic board
+          if(currentlyPlaceing != null){
+            LogicCompoentnPlacementContext placementContext = new LogicCompoentnPlacementContext(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex));//create the placement info
+            Function<LogicCompoentnPlacementContext,LogicComponent> constructor = LogicComponentRegistry.getPlacementConstructor(currentlyPlaceing);//get the object constructor
+            if(constructor != null){
+              level.logicBoards.get(logicBoardIndex).components.add(constructor.apply(placementContext));//create the new compoentn and add it to the logic board
+            }
           }
-          if (placingOrGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new OrGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingXorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new XorGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingNandGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new NAndGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingNorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new NOrGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingXnorGate) {
-            level.logicBoards.get(logicBoardIndex).components.add(new XNorGate(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (deleteing) {
-            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
-              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
-                level.logicBoards.get(logicBoardIndex).remove(i);
+          
+          if (deleteing) {//if deleteing componetns
+            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {//loop through all the components on this board
+              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {//if the mouse was over this one
+                level.logicBoards.get(logicBoardIndex).remove(i);//delete it
                 return;
               }
             }
           }
-          if (placingTestLogic) {
-            //level.logicBoards.get(logicBoardIndex).components.add(new GIL(mouseX-50+camPos, mouseY-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingOnSingal) {
-            level.logicBoards.get(logicBoardIndex).components.add(new ConstantOnSignal(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingSetVaravle) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetVariable(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingReadVariable) {
-            level.logicBoards.get(logicBoardIndex).components.add(new ReadVariable(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (selecting) {
-            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {
-              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {
-                selectedIndex=i;
+          
+          if (selecting) {//if selecting componentss
+            for (int i=0; i< level.logicBoards.get(logicBoardIndex).components.size(); i++) {//loop through all the components on this board
+              if (level.logicBoards.get(logicBoardIndex).components.get(i).button.isMouseOver()) {//if the mouse was over this one
+                selectedIndex=i;//set this one as selected
               }
             }
           }
-          if (placingSetVisibility) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetVisibility(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingXOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetXOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingYOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetYOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingDelay) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Delay(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingZOffset) {
-            level.logicBoards.get(logicBoardIndex).components.add(new SetZOffset(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placing3Dsetter) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Set3DMode(mouseX/Scale-50+camPos, mouseY/Scale-40+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placing3Dreader) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Read3DMode(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingPlaySoundLogic) {
-            level.logicBoards.get(logicBoardIndex).components.add(new LogicPlaySound(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingPulse) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Pulse(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
-          if (placingRandom) {
-            level.logicBoards.get(logicBoardIndex).components.add(new Random(mouseX/Scale-50+camPos, mouseY/Scale-20+camPosY, level.logicBoards.get(logicBoardIndex)));
-          }
         }//end of edditing logic board
 
-        if (settingPlayerSpawn) {
-          level.SpawnX=mouseX/Scale+camPos;
+        if (settingPlayerSpawn) {//if a request to set the player spawn as been made
+          level.SpawnX=mouseX/Scale+camPos;//set the spawn to where the mouse is
           level.SpawnY=mouseY/Scale-camPosY;
           level.RewspawnX=mouseX/Scale+camPos;
           level.RespawnY=mouseY/Scale-camPosY;
           settingPlayerSpawn=false;
         }
-        if (exitLevelCreator) {
-          if (lc_exitConfirm.isMouseOver()) {
+        
+        if (exitLevelCreator) {//if on the exiting level creator 
+          if (lc_exitConfirm.isMouseOver()) {//exit button
             exitLevelCreator=false;
             levelCreator=false;
             inGame=false;
             menue=true;
-            
           }
 
-          if (lc_exitCancle.isMouseOver()) {
+          if (lc_exitCancle.isMouseOver()) {//cancle exit button
             exitLevelCreator=false;
             levelOverview=true;
           }
@@ -2351,22 +2370,25 @@ void mouseClicked() {// when you click the mouse
       }//end of left mouse button clicked
     }//end of level creator
   }
-  catch(Throwable e) {
-    handleError(e);
+  catch(Throwable e) {//if any errors occor
+    handleError(e);//display the error and close the game
   }
 }
 
 
+/**Automatically called when a key is pressed down and this window is active.<br>
+Executes on the render thread.
+*/
 void keyPressed() {// when a key is pressed
   try {
-    if (!menue&&tutorialMode&&key == ESC&&tutorialPos<3) {
-      exit(1);
+    if (!menue && tutorialMode && key == ESC && tutorialPos<3) {//if escape is pressed and in the start of the turial
+      exit(1);//close the game
     }
 
-    if (inGame||(levelCreator&&editingStage&&simulating)) {//if in game
-      if (key == ESC&&!levelCreator) {
+    if (inGame || (levelCreator && editingStage && simulating)) {//if in game or in the level creator editing a stage and not paused
+      if (key == ESC && !levelCreator) {//if escape and not in the level creator
         key = 0;  //clear the key so it doesnt close the program
-        menue=true;
+        menue=true;//open the pause menu
         Menue="pause";
       }
       if (keyCode==65) {//if A is pressed
@@ -2383,16 +2405,16 @@ void keyPressed() {// when a key is pressed
           System.out.println(players[currentPlayer].getX()+" "+players[currentPlayer].getY());
         }
       }
-      if (key=='e'||key=='E') {
+      if (key=='e'||key=='E') {//if E is pressed
         E_pressed=true;
       }
-      if (keyCode==87) {//w
+      if (keyCode==87) {//if W is pressed
         playerMovementManager.setIn(true);
       }
-      if (keyCode==83) {//s
+      if (keyCode==83) {//if S is pressed
         playerMovementManager.setOut(true);
       }
-      if (e3DMode) {
+      if (e3DMode) {//if in 3D mode
         //level creator camera controlls
         if (keyCode==65) {//if 'A' is pressed
           a3D=true;
@@ -2427,20 +2449,23 @@ void keyPressed() {// when a key is pressed
         }
       }
     }
-    if (menue&&!levelCreator) {
-      if (Menue.equals("level select")) {
-        if (key == ESC) {
+    
+    if (menue && !levelCreator) {//if in a menu and not in the level creator
+      if (Menue.equals("level select")) {//if on the level select screen
+        if (key == ESC) {//if escape
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
       }
-      if (Menue.equals("level select UGC")) {
+      
+      if (Menue.equals("level select UGC")) {//if on the UGC screen
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
           Menue="level select";
         }
       }
-      if (Menue.equals("settings")) {
+      
+      if (Menue.equals("settings")) {//if on the seettings screen
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
           defaultAuthorNameTextBox.resetState();
@@ -2452,9 +2477,10 @@ void keyPressed() {// when a key is pressed
             Menue ="main";
           }
         }
-        if (settingsMenue.equals("outher")) {
-          defaultAuthorNameTextBox.keyPressed();
-          if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
+        
+        if (settingsMenue.equals("outher")) {//if the setting tab is other
+          defaultAuthorNameTextBox.keyPressed();//process the text box
+          if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){//change the default author if it has changed
             String newName =  defaultAuthorNameTextBox.getContence();
             
             if(!newName.isEmpty()){
@@ -2467,39 +2493,48 @@ void keyPressed() {// when a key is pressed
           }
         }
       }
-      if (Menue.equals("how to play")) {
+      
+      if (Menue.equals("how to play")) {//if on the old how to play menu
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
       }
-      if (Menue.equals("main")) {
-        if (key == ESC)
-          exit(0);
+      
+      if (Menue.equals("main")) {//if on the main menu
+        if (key == ESC){
+          exit(0);//close the program
+        }
       }
-      if (Menue.equals("start host")) {
+      
+      if (Menue.equals("start host")) {//if on the setting up hosting menu
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
+        //handle typing in the text boxes
         multyPlayerNameTextBox.keyPressed();
         multyPlayerPortTextBox.keyPressed();
       }
-      if (Menue.equals("start join")) {
+      
+      if (Menue.equals("start join")) {//if on the setting up joining menu
         if (key == ESC) {
           key = 0;  //clear the key so it doesnt close the program
           Menue="main";
         }
+        //hanlde typing in the text boxes
         multyPlayerNameTextBox.keyPressed();
         multyPlayerPortTextBox.keyPressed();
         multyPlayerIpTextBox.keyPressed();
       }
     }
-    if (levelCreator) {
-      if (key == ESC){
+    
+    if (levelCreator) {//if in the level creator
+      if (key == ESC){//blanket eat the escape key
         key=0;
         return;  
       }
+      
       if (editingStage||editingBlueprint) {//if edditng a stage
         if (key=='r'||key=='R') {//if 'R' is pressed
           triangleMode++;//increase the current rotation
@@ -2508,18 +2543,19 @@ void keyPressed() {// when a key is pressed
         }
       }
       
-      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
-        lcEnterLevelTextBox.keyPressed();
+      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){//if on any of the loading / new setup screens
+        lcEnterLevelTextBox.keyPressed();//handle typing in that text box
       }
 
       
       if (newFile) {//if new file
-        lcNewFileTextBox.keyPressed();
+        lcNewFileTextBox.keyPressed();//hanle typing in that text box
       }
 
       if (startup) {//if on the main menue
         author = getInput(author, 0);//typing for the author name
       }
+      
       //this shit is redundent
       if (!simulating||editinglogicBoard||e3DMode) {//if the simulation is paused
         if (keyCode==37) {//if LEFT ARROW is pressed
@@ -2558,14 +2594,14 @@ void keyPressed() {// when a key is pressed
       }//end of not simulating and in 3D
     }//end of level creator
 
-    if(keyCode == 108 && dev_mode){//F12
-      showDepthBuffer = !showDepthBuffer;
+    if(keyCode == 108 && dev_mode){//F12 and dev mode
+      showDepthBuffer = !showDepthBuffer;//toggle viewing the depth buffer
     }
-    if(keyCode == 107 && dev_mode){//F11
-      shadowShaderOutputSampledDepthInfo = !shadowShaderOutputSampledDepthInfo;
+    if(keyCode == 107 && dev_mode){//F11 and dev mode
+      shadowShaderOutputSampledDepthInfo = !shadowShaderOutputSampledDepthInfo;//toggle rednering depth buffer value on level instread of correct colors
     }
-    if(keyCode == 106 && dev_mode){//F10
-      shadowShader = loadShader("shaders/shadowMapFrag.glsl","shaders/shadowMapVert.glsl");
+    if(keyCode == 106 && dev_mode){//F10 and dev mode
+      shadowShader = loadShader("data/shaders/shadowMapFrag.glsl","data/shaders/shadowMapVert.glsl");//reload shadow shader
       println("Relaoded Shaders");
     }
     
@@ -2573,15 +2609,17 @@ void keyPressed() {// when a key is pressed
     if (key=='b'||key=='B') {
       println("p");
     }
-  }
-  catch(Throwable e) {
-    handleError(e);
+  }catch(Throwable e) {//if an error occors
+    handleError(e);//display the error and close the program
   }
 }
 
+/**Automatically called when a key is released and this window is active.<br>
+Executes on the render thread.
+*/
 void keyReleased() {//when you release a key
   try {
-    if (inGame||(levelCreator&&editingStage)) {//when in a level or when in the levelcreate and in a level
+    if (inGame || (levelCreator && editingStage)) {//when in a level or when in the level creator and editng a stage
       //update movement manager inputs
       if (keyCode==65) {//if A is released
         playerMovementManager.setLeft(false);
@@ -2602,8 +2640,7 @@ void keyReleased() {//when you release a key
         playerMovementManager.setOut(false);
       }
       
-      if (e3DMode) {
-        //level creater 3D camera inputs
+      if (e3DMode) {//if in 3D mode
         if (keyCode==65) {//if 'A' is pressed
           a3D=false;
         }
@@ -2639,13 +2676,14 @@ void keyReleased() {//when you release a key
     }
 
     if (levelCreator) {//when in the level creator
-      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
-        lcEnterLevelTextBox.keyReleased();
+      if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){//when on one of the new / loading screens
+        lcEnterLevelTextBox.keyReleased();//process key releases for that text box
       }
-      if(newFile){
-        lcNewFileTextBox.keyReleased();
+      
+      if(newFile){//if adding something new to the stage
+        lcNewFileTextBox.keyReleased();//process key release for that text box
       }
-      if (!simulating||editinglogicBoard||e3DMode) {//this seems to be for the logic boards as the pervous section hanldes all insatces of being in the stage editor
+      if (!simulating || editinglogicBoard || e3DMode) {//this seems to be for the logic boards as the pervous section hanldes all insatces of being in the stage editor
         if (keyCode==37) {//if LEFT ARROW released
           cam_left=false;
         }
@@ -2681,34 +2719,39 @@ void keyReleased() {//when you release a key
         }
       }
     }
-    if(menue){
-      if (Menue.equals("settings")) {
-        if (settingsMenue.equals("outher")) {
-          defaultAuthorNameTextBox.keyReleased();
+    
+    if(menue){//if in a menu
+      if (Menue.equals("settings")) {//if that menu is settings
+        if (settingsMenue.equals("outher")) {//if the setting tab is other
+          defaultAuthorNameTextBox.keyReleased();//process key releases for the default author text box
         }
       }
+      //process key releases on the text boxes for the start multyplayer screeness
       if (Menue.equals("start host")) {
         multyPlayerNameTextBox.keyReleased();
         multyPlayerPortTextBox.keyReleased();
       }
+      
       if (Menue.equals("start join")) {
         multyPlayerNameTextBox.keyReleased();
         multyPlayerPortTextBox.keyReleased();
         multyPlayerIpTextBox.keyReleased();
       }
     }
-  }
-  catch(Throwable e) {
-    handleError(e);
+  } catch(Throwable e) {//if an error occors
+    handleError(e);//display the error and close the program
   }
 }
 
+/**Automatically called when a key is pressed down, this window is active, and the charater is a regular typeable charaters(ie not shift, ctrl, alt ect...)<br>
+Executes on the render thread.
+*/
 void keyTyped(){
-  if(menue){
-    if (Menue.equals("settings")) {
-      if (settingsMenue.equals("outher")) {
-        defaultAuthorNameTextBox.keyTyped();
-        if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){
+  if(menue){//if in a menu
+    if (Menue.equals("settings")) {//if that menu is settings
+      if (settingsMenue.equals("outher")) {//if the setting tab is other
+        defaultAuthorNameTextBox.keyTyped();//process key typing for the default euthor text box
+        if(!defaultAuthorNameTextBox.getContence().equals(defaultAuthor)){//save the new name if a change was made
           String newName =  defaultAuthorNameTextBox.getContence();
           
           if(!newName.isEmpty()){
@@ -2721,6 +2764,7 @@ void keyTyped(){
         }
       }
     }
+    //process typing on the text boxes for the start multyplayer screens
     if (Menue.equals("start host")) {
       multyPlayerNameTextBox.keyTyped();
       multyPlayerPortTextBox.keyTyped();
@@ -2732,28 +2776,25 @@ void keyTyped(){
     }
   }
   
-  if(levelCreator){
-    if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){
-      lcEnterLevelTextBox.keyTyped();
+  if(levelCreator){//if in the level creator
+    if(loading || newLevel || creatingNewBlueprint || loadingBlueprint){//if on the new / load screens
+      lcEnterLevelTextBox.keyTyped();//hanld typing for that text box
     }
-    if(newFile){
-      lcNewFileTextBox.keyTyped();
+    
+    if(newFile){//if adding a new file to a level
+      lcNewFileTextBox.keyTyped();//hanle typing for that text box
     }
   }
 }
 
+/**Automaticaly called when the mouse is being clicked and dragged withing the window. This triggers oftain while this is happening.<br>
+Executes on the render thread.
+*/
 void mouseDragged() {
   try {
-    if (levelCreator) {
-      if (Menue.equals("settings")) {
-        if (settingsMenue.equals("game play")) {
-        }
-        if (settingsMenue.equals("outher")) {
-        }
-      }
-    } else {
+    if (!levelCreator) {//when not in the level creator
       if (Menue.equals("settings")) {     //if that menue is settings
-
+        //hanle dragging arround all the sliders in the settings menu
         if (settingsMenue.equals("game play")) {
           verticleEdgeScrollSlider.mouseDragged();
           horozontalEdgeScrollSlider.mouseDragged();
@@ -2775,32 +2816,30 @@ void mouseDragged() {
         
         if (settingsMenue.equals("sound")) {
             
-            musicVolumeSlider.mouseDragged();
-            SFXVolumeSlider.mouseDragged();
-            narrationVolumeSlider.mouseDragged();
-            
-            if (musicVolumeSlider.button.isMouseOver()) {
-              settings.setSoundMusicVolume(musicVolumeSlider.getValue()/100.0,false);
-              soundHandler.setMusicVolume(settings.getSoundMusicVolume());
-              settings.save();
-            }
-            if (SFXVolumeSlider.button.isMouseOver()) {
-              settings.setSoundSoundVolume(SFXVolumeSlider.getValue()/100.0,false);
-              soundHandler.setSoundsVolume(settings.getSoundSoundVolume());
-              settings.save();
-            }
-            if (narrationVolumeSlider.button.isMouseOver()) {
-              settings.setSoundNarrationVolume(narrationVolumeSlider.getValue()/100.0,false);
-              soundHandler.setNarrationVolume(settings.getSoundNarrationVolume());
-              settings.save();
-            }
-            
+          musicVolumeSlider.mouseDragged();
+          SFXVolumeSlider.mouseDragged();
+          narrationVolumeSlider.mouseDragged();
+          
+          if (musicVolumeSlider.button.isMouseOver()) {
+            settings.setSoundMusicVolume(musicVolumeSlider.getValue()/100.0,false);
+            soundHandler.setMusicVolume(settings.getSoundMusicVolume());
+            settings.save();
+          }
+          if (SFXVolumeSlider.button.isMouseOver()) {
+            settings.setSoundSoundVolume(SFXVolumeSlider.getValue()/100.0,false);
+            soundHandler.setSoundsVolume(settings.getSoundSoundVolume());
+            settings.save();
+          }
+          if (narrationVolumeSlider.button.isMouseOver()) {
+            settings.setSoundNarrationVolume(narrationVolumeSlider.getValue()/100.0,false);
+            soundHandler.setNarrationVolume(settings.getSoundNarrationVolume());
+            settings.save();
+          }
         }
       }
     }
-  }
-  catch(Throwable e) {
-    handleError(e);
+  }catch(Throwable e) {//if an error occors
+    handleError(e);//display the error and close the program
   }
 }
 
@@ -2825,29 +2864,33 @@ void updateSettingsFromSliderValues(){
 
 }
 
+
+/**Automaticaly called when the window gets resized.<br>
+Executes on the render thread.
+*/
 void windowResized() {
-  ui.reScale();
-  Scale = height/720.0;
+  ui.reScale();//have the Ui frame recaluate its scale and position
+  Scale = height/720.0;//recalcualte the 2D level scale
 }
 
+/**Load a given level
+@param path The file path of the level folder
+*/
 void loadLevel(String path) {
-  soundHandler.dumpLS();
+  soundHandler.dumpLS();//unload any sounds from the prevous level and let them be garbage collected
   try {
     reachedEnd=false;
-    rootPath=path;
+    rootPath=path;//load the level
     JSONArray mainIndex=loadJSONArray(rootPath+"/index.json");
     level=new Level(mainIndex);
-    level.logicBoards.get(level.loadBoard).superTick();
+    level.logicBoards.get(level.loadBoard).superTick();//run the load logic board
     startTime = millis();
-  }
-  catch(Throwable e) {
+  } catch(Throwable e) {
     handleError(e);
   }
 }
 
-int curMills=0, lasMills=0, mspc=0;
-
-/**physics thread main loop
+/**Physics thread
 */
 void thrdCalc2() {
 
@@ -2856,10 +2899,9 @@ void thrdCalc2() {
     //calculate how long has passed since the last time the loop started
     curMills=millis();
     mspc=curMills-lasMills;
-
+	//process controlller inputs
     ReadController.read(gamepad);
     handleControllerState();
-
 
     //run tutorial logic if in the tutorial
     if (tutorialMode) {
@@ -2870,8 +2912,7 @@ void thrdCalc2() {
       //calcualte a frame of player physics
       try {
         playerPhysics();
-      }
-      catch(Throwable e) {
+      } catch(Throwable e) {//if an error occors, just print it to the console and move on
         e.printStackTrace();
       }
     } else {
@@ -2880,99 +2921,215 @@ void thrdCalc2() {
       }
       random(10);//some how make it so processing doesent stop the thread(also increase CPU useage :D )
     }
-    lasMills=curMills;
+    lasMills = curMills;
     //println(mspc);
   }
 }
 
+/**Automaticaly called every time a mouse button is pressed down while this window is activated.<br>
+Execuated on the render thread.
+*/
 void mousePressed() {
-  if (levelCreator) {
-    if (mouseButton==LEFT) {
+  if (levelCreator) {//if in the level creator
+    if (mouseButton==LEFT) {//if the button is the left button
       if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
         GUImousePressed();
       }
-      if (editinglogicBoard) {
-        if (connectingLogic) {
-          LogicBoard board=level.logicBoards.get(logicBoardIndex);
-          for (int i=0; i<board.components.size(); i++) {
+      if (editinglogicBoard) {//if editing a logic board
+        if (connectingLogic) {//if connecting logic terminals
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);//get the current logic board
+          for (int i=0; i<board.components.size(); i++) {//check all the terminals to see if the mouse if over any of them
             float[] nodePos=board.components.get(i).getTerminalPos(2);
             if (Math.sqrt(Math.pow(nodePos[0]-mouseX/Scale, 2)+Math.pow(nodePos[1]-mouseY/Scale, 2))<=10) {
-              connecting=true;
+              connecting=true;//if the mouse is over any of them, then set this as the one to start connecting from
               connectingFromIndex=i;
               return;
             }
           }
         }
-        if (moveLogicComponents) {
-          LogicBoard board=level.logicBoards.get(logicBoardIndex);
-          for (int i=0; i<board.components.size(); i++) {
+        
+        if (moveLogicComponents) {//if moving logic components
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);//get the logic board
+          for (int i=0; i<board.components.size(); i++) {//check if the mouse of over a component
             if (board.components.get(i).button.isMouseOver()) {
-              movingLogicIndex=i;
+              movingLogicIndex=i;//if so then set this one as the one that is being moved
               movingLogicComponent=true;
               return;
             }
           }
         }
       }//end of editng logic board
-      if (e3DMode&&selectedIndex!=-1) {
-        StageComponent ct = null;
-          if (editingStage) {
-            ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
-          }
-          if (editingBlueprint) {
-            ct = workingBlueprint.parts.get(selectedIndex);
-          }
+      
+      StageComponent ct = null;
+      if (e3DMode && selectedIndex != -1) {//if in 3D mode and selecting something
+        //get that thing
+        if (editingStage) {
+          ct = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        }
+        if (editingBlueprint) {
+          ct = workingBlueprint.parts.get(selectedIndex);
+        }
         
-        for (int i=0; i<5000; i++) {
+        for (int i=0; i<5000; i++) {//ray cast from the camera
           Point3D testPoint=genMousePoint(i);
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
-            translateZaxis=true;
-            transformComponentNumber=1;
-            break;
-          }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z) {
-            translateZaxis=true;
-            transformComponentNumber=2;
-            break;
-          }
-
-          if (testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            translateXaxis=true;
-            transformComponentNumber=2;
-            break;
-          }
-
-          if (testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            translateXaxis=true;
-            transformComponentNumber=1;
-            break;
-          }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            translateYaxis=true;
-            transformComponentNumber=2;
-            break;
-          }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            translateYaxis=true;
-            transformComponentNumber=1;
-            break;
+          if(!(current3DTransformMode == 3 && ct instanceof Rotatable)){//if not rotate mmode
+            PVector center = ct.getCenter();//get the center position
+            //if the mouse was over one of the z-axis poles
+            if (testPoint.x >= center.x-5 && testPoint.x <= center.x+5 && testPoint.y >= center.y-5 && testPoint.y <= center.y+5 && testPoint.z >= center.z+ct.getDepth()/2 && testPoint.z <= center.z+ct.getDepth()/2+60) {
+              translateZaxis=true;
+              transformComponentNumber=1;
+              break;
+            }
+            //if the mouse was over one of the z-axis poles
+            if (testPoint.x >= center.x-5 && testPoint.x <= center.x+5 && testPoint.y >= center.y-5 && testPoint.y <= center.y+5 && testPoint.z >= center.z-ct.getDepth()/2-60 && testPoint.z <= center.z-ct.getDepth()/2) {
+              translateZaxis=true;
+              transformComponentNumber=2;
+              break;
+            }
+            //if the mouse was over one of the x-axis poles
+            if (testPoint.x >= center.x-ct.getWidth()/2-60 && testPoint.x <= center.x-ct.getWidth()/2 && testPoint.y >= center.y-5 && testPoint.y <= center.y+5 && testPoint.z >= center.z-5 && testPoint.z <= center.z+5) {
+              translateXaxis=true;
+              transformComponentNumber=2;
+              break;
+            }
+            //if the mouse was over one of the x-axis poles
+            if (testPoint.x >= center.x+ct.getWidth()/2 && testPoint.x <= center.x+ct.getWidth()/2+60 && testPoint.y >= center.y-5 && testPoint.y <= center.y+5 && testPoint.z >= center.z-5 && testPoint.z <= center.z+5) {
+              translateXaxis=true;
+              transformComponentNumber=1;
+              break;
+            }
+            //if the mouse was over one of the y-axis poles
+            if (testPoint.x >= center.x-5 && testPoint.x <= center.x+5 && testPoint.y >= center.y-ct.getHeight()/2-60 && testPoint.y <= center.y-ct.getHeight()/2 && testPoint.z >= center.z-5 && testPoint.z <= center.z+5) {
+              translateYaxis=true;
+              transformComponentNumber=2;
+              break;
+            }
+            //if the mouse was over one of the y-axis poles
+            if (testPoint.x >= center.x-5 && testPoint.x <= center.x+5 && testPoint.y >= center.y+ct.getHeight()/2 && testPoint.y <= center.y+ct.getHeight()/2+60 && testPoint.z >= center.z-5 && testPoint.z <= center.z+5) {
+              translateYaxis=true;
+              transformComponentNumber=1;
+              break;
+            }
           }
         }
-        initalMousePoint=mousePoint;
-        initalObjectPos=new Point3D(ct.x, ct.y, ct.z);
-        initialObjectDim=new Point3D(ct.dx, ct.dy, ct.dz);
+        
+        if(current3DTransformMode==3 && ct instanceof Rotatable){//if in rotate mode
+            PVector center = ct.getCenter();//get the center of the object
+            float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2)+pow(ct.getDepth()/2,2))/28;//calculate the aproximage size value
+            sze*=31;//scale factor to make the cyleners the right size
+            Rotatable rota = (Rotatable)ct;//cast to a rotatable type
+            PVector cameraVec = new PVector(cam3Dx+DX,cam3Dy-DY,cam3Dz-DZ), mousePointVec = new PVector(mousePoint.x,mousePoint.y,mousePoint.z);
+            //calculate the position on the rotation plane that intersects with the mouse
+            PVector inPlaneX = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getXRotationAxis());
+            PVector inPlaneY = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getYRotationAxis());
+            PVector inPlaneZ = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getZRotationAxis());
+            
+            PVector distToCenterX = new PVector(),distToCenterY = new PVector(),distToCenterZ = new PVector();
+            PVector distToCamX = new PVector(),distToCamY = new PVector(),distToCamZ = new PVector();
+            
+            //calculate the distance from to center of the object to the point
+            PVector.sub(inPlaneX,center,distToCenterX);
+            PVector.sub(inPlaneY,center,distToCenterY);
+            PVector.sub(inPlaneZ,center,distToCenterZ);
+            
+            //calculate the distance fron the point to the camera
+            PVector.sub(inPlaneX,cameraVec,distToCamX);
+            PVector.sub(inPlaneY,cameraVec,distToCamY);
+            PVector.sub(inPlaneZ,cameraVec,distToCamZ);
+            
+            
+            //find out what circles the mouse could be over
+            if(distToCenterX.mag() <= sze){
+              translateXaxis=true;
+            }
+            if(distToCenterY.mag() <= sze){
+              translateYaxis=true;
+            }
+            if(distToCenterZ.mag() <= sze){
+              translateZaxis=true;
+            }
+            
+            
+            //if multiple are selcted then only select the one that is closested to the camera
+            if(translateXaxis && translateYaxis){
+              if(distToCamX.mag() < distToCamY.mag()){
+                translateYaxis = false;
+              }else{
+                translateXaxis = false;
+              }
+            }
+            if(translateXaxis && translateZaxis){
+              if(distToCamX.mag() < distToCamZ.mag()){
+                translateZaxis = false;
+              }else{
+                translateXaxis = false;
+              }
+            }
+            if(translateYaxis && translateZaxis){
+              if(distToCamY.mag() < distToCamZ.mag()){
+                translateZaxis = false;
+              }else{
+                translateYaxis = false;
+              }
+            }
+            //save the current rotation
+            currentComponentRotation.x = rota.getRotateX();
+            currentComponentRotation.y = rota.getRotateY();
+            currentComponentRotation.z = rota.getRotateZ();
+            //save the correct plane point for the slected axis
+            if(translateXaxis){
+              initalMousePoint=new Point3D(inPlaneX);
+            }else if(translateYaxis){
+              initalMousePoint=new Point3D(inPlaneY);
+            }else if(translateZaxis){
+              initalMousePoint=new Point3D(inPlaneZ);
+            }
+            
+          }else{
+            initalMousePoint=mousePoint;
+          }
+        //save the initial position and size of the object
+        initalObjectPos=new Point3D(ct.getX(), ct.getY(), ct.getZ());
+        initialObjectDim=new Point3D(ct.getWidth(), ct.getHeight(), ct.getDepth());
+      }else if (selectedIndex!=-1) {//if somthing is selcetd and not in 3D
+        //get that thing
+        if (editingStage) {
+          ct=level.stages.get(currentStageIndex).parts.get(selectedIndex);
+        }
+        if (editingBlueprint) {
+          ct = workingBlueprint.parts.get(selectedIndex);
+        }
+        //2D Rotation
+        if(current3DTransformMode==3 && ct instanceof Rotatable){//if rotating
+          //prepair the visual center pos
+          PVector center = ct.getCenter();
+          center.z=0;
+          center.mult(Scale);
+          center.x -= drawCamPosX*Scale;
+          center.y += drawCamPosY*Scale;
+          float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2))*2.5;
+          Rotatable rota = (Rotatable)ct;
+
+          if(dist(mouseX,mouseY,center.x,center.y) <= sze/2*Scale){//if close enough to the center
+            translateZaxis=true;
+            currentComponentRotation.z = rota.getRotateZ();
+            initalMousePoint=new Point3D(mouseX,mouseY,0);
+          }
+          
+        }
+        
       }
       
       //placing a blueprint in 3D movement
       if (e3DMode && selectingBlueprint && blueprints.length!=0){
+        //get the center posisiton
         float cdx = blueprintMax[0]-blueprintMin[0];
         float cdy = blueprintMax[1]-blueprintMin[1];
         float cdz = blueprintMax[2]-blueprintMin[2];
+        //ray cast
         for (int i=0; i<5000; i++) {
           Point3D testPoint=genMousePoint(i);
+          //see if clicking on movement arrows
           if (testPoint.x >= (blueprintMin[0]+cdx/2)-5 && testPoint.x <= (blueprintMin[0]+cdx/2)+5 && testPoint.y >= (blueprintMin[1]+cdy/2)-5 && testPoint.y <= (blueprintMin[1]+cdy/2)+5 && testPoint.z >= blueprintMin[2]+cdz && testPoint.z <= blueprintMin[2]+cdz+60) {
             translateZaxis=true;
             transformComponentNumber=1;
@@ -3009,23 +3166,26 @@ void mousePressed() {
             break;
           }
         }
+        //store the inital mouse pos
         initalMousePoint=mousePoint;
         initalObjectPos=new Point3D(blueprintPlacemntX, blueprintPlacemntY, blueprintPlacemntZ);
       }
     }
   }
 }
-
+/**Automaticaly called every time a mouse button is released while this window is activated.<br>
+Execuated on the render thread.
+*/
 void mouseReleased() {
-  if (levelCreator) {
-    if (mouseButton==LEFT) {
+  if (levelCreator) {//if in the level creator
+    if (mouseButton==LEFT) {//if the button released was left
       if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
         GUImouseReleased();
       }
-      if (editinglogicBoard) {
+      if (editinglogicBoard) {//if editing a logic board
         if (connectingLogic&&connecting) {//if attempting to connect terminals
           connecting=false;//stop more connecting
-          LogicBoard board=level.logicBoards.get(logicBoardIndex);
+          LogicBoard board=level.logicBoards.get(logicBoardIndex);//get the current board
           for (int i=0; i<board.components.size(); i++) {//srech through all components in the current board
             float[] nodePos1=board.components.get(i).getTerminalPos(0), nodePos2=board.components.get(i).getTerminalPos(1);//gets the positions of the terminals of the component
             if (Math.sqrt(Math.pow(nodePos1[0]-mouseX/Scale, 2)+Math.pow(nodePos1[1]-mouseY/Scale, 2))<=10) {//if the mmouse is over terminal 0
@@ -3045,7 +3205,7 @@ void mouseReleased() {
               board.components.get(connectingFromIndex).connect(i, 0);//make the connection
               return;
             }
-            if (Math.sqrt(Math.pow(nodePos2[0]-mouseX/Scale, 2)+Math.pow(nodePos2[1]-mouseY/Scale, 2))<=10) {//if the mmouse is over terminal 1
+            if (Math.sqrt(Math.pow(nodePos2[0]-mouseX/Scale, 2)+Math.pow(nodePos2[1]-mouseY/Scale, 2))<=10) {//if the mouse is over terminal 1
               for (int j=0; j<board.components.get(connectingFromIndex).connections.size(); j++) {//checkif the connection allready exsists
                 if (board.components.get(connectingFromIndex).connections.get(j)[0]==i&&board.components.get(connectingFromIndex).connections.get(j)[1]==1) {//if so then remove the connection
                   board.components.get(connectingFromIndex).connections.remove(j);
@@ -3065,19 +3225,20 @@ void mouseReleased() {
             }
           }
         }
-        if (moveLogicComponents) {
+        if (moveLogicComponents) {//if moving logic omcponents
           if (movingLogicComponent) {
-            movingLogicComponent=false;
-            level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX/Scale+camPos, mouseY/Scale+camPosY);
+            movingLogicComponent=false;//stop moving
+            level.logicBoards.get(logicBoardIndex).components.get(movingLogicIndex).setPos(mouseX/Scale+camPos, mouseY/Scale+camPosY);//set the position
           }
         }
       }//end of editing logic board
-      if (e3DMode&&selectedIndex!=-1) {
+      
+      if (selectedIndex !=- 1) {//if something was selected then stop any movemnt
         translateZaxis=false;
         translateXaxis=false;
         translateYaxis=false;
       }
-      if (e3DMode && selectingBlueprint){
+      if (e3DMode && selectingBlueprint){ //if placeing a blueprint then stop any movement
         translateZaxis=false;
         translateXaxis=false;
         translateYaxis=false;
@@ -3086,9 +3247,13 @@ void mouseReleased() {
   }
 }
 
+/**Draws the main menu
+@param background wether or not to draw the backround
+*/
 void drawMainMenu(boolean background) {
-  if (background)
+  if (background){
     background(7646207);
+  }
   fill(0);
   //the title
   mm_title.draw();
@@ -3115,12 +3280,14 @@ void drawMainMenu(boolean background) {
   mainMenuWebsite.draw();
 }
 
+/**Draws the settings page
+*/
 void drawSettings() {
   fill(0);
   background(7646207);
   st_title.draw();
 
-  if (settingsMenue.equals("game play")) {
+  if (settingsMenue.equals("game play")) {//if on the gameplay tab
     fill(0);
     st_Hssr.draw();
     st_Vssr.draw();
@@ -3139,7 +3306,7 @@ void drawSettings() {
     st_gameplay.draw();
   }//end of gameplay settings
 
-  if (settingsMenue.equals("display")) {
+  if (settingsMenue.equals("display")) {//if on the display tab
     fill(0);
     st_dsp_vsr.draw();
     st_dsp_fs.draw();
@@ -3162,7 +3329,7 @@ void drawSettings() {
     st_display.draw();
   }//end of display settings
   
-  if(settingsMenue.equals("sound")){
+  if(settingsMenue.equals("sound")){//if on the sound tab
     fill(0);
     st_sound.draw();
     st_snd_musicVol.draw();
@@ -3185,7 +3352,7 @@ void drawSettings() {
     narrationMode1.draw();
     narrationMode0.draw();
   }
-  if (settingsMenue.equals("outher")) {
+  if (settingsMenue.equals("outher")) {//if on the other tab
     fill(0);
     st_o_displayFPS.draw();
     st_o_debugINFO.draw();
@@ -3227,7 +3394,7 @@ void drawSettings() {
 
   strokeWeight(5*Scale);
   stroke(255, 0, 0);
-  if (true) {
+  if (true) {//render the checkmarks on the options
     if (settingsMenue.equals("display")) {
       if (settings.getResolutionVertical()==720) {
         chechMark(rez720.x+rez720.lengthX/2, rez720.y+rez720.lengthY/2);
@@ -3260,7 +3427,7 @@ void drawSettings() {
       }
     }
     if (settingsMenue.equals("outher")) {
-      //enableFPS,disableFPS,enableDebug,disableDebug
+      
       if (!settings.getDebugFPS()) {
         chechMark(disableFPS.x+disableFPS.lengthX/2, disableFPS.y+disableFPS.lengthY/2);
       } else {
@@ -3272,7 +3439,7 @@ void drawSettings() {
         chechMark(enableDebug.x+enableDebug.lengthX/2, enableDebug.y+enableDebug.lengthY/2);
       }
 
-      //shadows0, shadows1, shadows2, shadows3, shadows4
+      
       switch(settings.getShadows()){
         case 4:
           chechMark(shadows4.x+shadows4.lengthX/2, shadows4.y+shadows4.lengthY/2);
@@ -3300,7 +3467,7 @@ void drawSettings() {
       
     }
   }//end of outher settings
-
+  //draw the common buttons
   sttingsGPL.draw();
   settingsDSP.draw();
   settingsSND.draw();
@@ -3309,6 +3476,10 @@ void drawSettings() {
   settingsBackButton.draw();
 }//end of draw settings
 
+/**Draw the first level select screen
+@param bcakground wether or not to draw the deafult
+@param gc the background color to draw if not the default
+*/
 void drawLevelSelect(boolean bcakground,int gc) {
   levelCompleteSoundPlayed=false;
   if (bcakground)
@@ -3323,7 +3494,8 @@ void drawLevelSelect(boolean bcakground,int gc) {
   rect(0, height/2, width, height);//green rectangle
   fill(0);
   ls_levelSelect.draw();
-  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;//load level progress
+  //make the buttons dark if they are not avawable
   if (progress<2) {
     select_lvl_2.setColor(#B40F00, #B4AF00);
   } else {
@@ -3396,13 +3568,17 @@ void drawLevelSelect(boolean bcakground,int gc) {
   select_lvl_next.draw();
 }
 
+/**Draw the second level select screen
+@param bcakground wether or not to draw the backround
+*/
 void drawLevelSelect2(boolean bcakground){
   levelCompleteSoundPlayed=false;
   if (bcakground)
     background(#66696F);
   fill(0);
   ls_levelSelect.draw();
-  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;
+  int progress=levelProgress.getJSONObject(0).getInt("progress")+1;//get the current level progress
+  //make buttons dark if they are not unlocked yet
   if (progress<13) {
     select_lvl_13.setColor(#B40F00, #B4AF00);
   } else {
@@ -3413,12 +3589,26 @@ void drawLevelSelect2(boolean bcakground){
   } else {
     select_lvl_14.setColor(-59135, -1791);
   }
+  if (progress<15) {
+    select_lvl_15.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_15.setColor(-59135, -1791);
+  }
+  if (progress<16) {
+    select_lvl_16.setColor(#B40F00, #B4AF00);
+  } else {
+    select_lvl_16.setColor(-59135, -1791);
+  }
 
   select_lvl_13.draw();
   select_lvl_14.draw();
+  select_lvl_15.draw();
+  select_lvl_16.draw();
   select_lvl_back.draw();
 }
 
+/** Draw the UGC level selecting screen
+*/
 void drawLevelSelectUGC() {
   background(7646207);
   fill(0);
@@ -3428,30 +3618,42 @@ void drawLevelSelectUGC() {
   //UGC_open_folder.draw();
   //levelcreatorLink.draw();
   fill(0);
+  //if there are no UGC levels
   if (UGCNames.size()==0) {
     lsUGC_noLevelFound.draw();
-  } else {
-    lsUGC_levelName.setText(UGCNames.get(UGC_lvl_indx));
+  } else {//if there are levels
+    lsUGC_levelName.setText(UGCNames.get(UGC_lvl_indx));//render the name of the current slecetd level
     lsUGC_levelName.draw();
-    if ((boolean)compatibles.get(UGC_lvl_indx)) {
-      lsUGC_levelNotCompatible.draw();
+    if ((boolean)compatibles.get(UGC_lvl_indx)) {//if this one is not compatable
+      lsUGC_levelNotCompatible.draw();//show it is not compatable
     }
+    //next and back buttons
     if (UGC_lvl_indx<UGCNames.size()-1) {
       UGC_lvls_next.draw();
     }
     if (UGC_lvl_indx>0) {
       UGC_lvls_prev.draw();
     }
-    UGC_lvl_play.draw();
+    UGC_lvl_play.draw();//play button
   }
 }
 
+/**Draws a properly scaled check mark at the screen coordinats provided.<br>
+Note: this uses stroke and does not automaticaly include the color.
+@param x the on screen x position of the check mark
+@param y the on screen y position of the check mark
+*/
 void chechMark(float x, float y) {
   line(x-15*Scale, y, x, y+15*Scale);
   line(x+25*Scale, y-15*Scale, x, y+15*Scale);
 }
 
+/**The logic for handling the narraion and stage effects in the tutorial
+*/
 void tutorialLogic() {
+  
+  //this should be simple enough
+  //I am not explaining this
   if (tutorialPos==0) {
     soundHandler.setMusicVolume(0.01*settings.getSoundMusicVolume());
     currentTutorialSound=0;
@@ -3661,6 +3863,8 @@ void tutorialLogic() {
   }
 }
 
+/**Opens the UGC levels folder in the system file explorer
+*/
 void openUGCFolder() {
   Desktop desktop = Desktop.getDesktop();
   File dirToOpen = null;
@@ -3675,6 +3879,8 @@ void openUGCFolder() {
   }
 }
 
+/**Opens the level creator levels folder in the system file explorer
+*/
 void openLevelCreatorLevelsFolder() {
   Desktop desktop = Desktop.getDesktop();
   File dirToOpen = null;
@@ -3689,6 +3895,11 @@ void openLevelCreatorLevelsFolder() {
   }
 }
 
+/**Checks if the given folder is a level.<br>
+Additinally this function also checks if a given level is compatable with this verion of the game. That result is stored in levelCompatible
+@param fil the file path of the folder to test
+@return wether the provided path points to a level
+*/
 boolean FileIsLevel(String fil) {
   try {
     JSONObject job =loadJSONArray(appdata+"/CBi-games/skinny mann/UGC/levels/"+fil+"/index.json").getJSONObject(0);
@@ -3705,12 +3916,16 @@ boolean FileIsLevel(String fil) {
   return true;
 }
 
+/**Checks if the input game version is compable with the current verion of the game
+@param vers the verion the check compatablility of
+@return true if the input verion is compatable
+*/
 boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inputed version is compatible
   if (levelCreator) {
     levelCompatible=true;
     return true;
   }
-  for (int i=0; i<compatibleVersions.length; i++) {
+  for (int i=0; i<compatibleVersions.length; i++) {//look through all listed compatable versions
     if (vers.equals(compatibleVersions[i])) {
       levelCompatible=true;
       return true;
@@ -3720,55 +3935,75 @@ boolean gameVersionCompatibilityCheck(String vers) {//returns ture if the inpute
   return false;
 }
 
+/**Prepairs for GUI rendering.<br>
+This is acomplished by resetting the camera, disabling any set lightings, and finally disabling the depth test.
+*/
 void engageHUDPosition() {
-
   camera();
   hint(DISABLE_DEPTH_TEST);
   noLights();
 }
 
+/**Enables the depth test to re allow normal rendering.
+*/
 void disEngageHUDPosition() {
-
   hint(ENABLE_DEPTH_TEST);
 }
 
+/**Used to handel any uncought errors in a way that allows users to report issues.<br>
+Displays a window containing error information including the stack trace, then closes the program when then window is closed.
+@param e the unhandled error
+*/
 void handleError(Throwable e) {
   System.err.println("an error occored but was intercepted");
   e.printStackTrace();
   StackTraceElement[] elements = e.getStackTrace();
   String stack="";
-  for (int ele=0; ele<elements.length; ele++) {
+  for (int ele=0; ele<elements.length; ele++) {//convert the stace trace elements inton a single string
     stack+=elements[ele].toString()+"\n";
   }
   stack+="\nyou may wish to take a screenshot of this window and resport this as an issue on github";
   JFrame jf=new JFrame();
-  jf.setAlwaysOnTop(true);
-  JOptionPane.showMessageDialog(jf, stack, e.toString(), JOptionPane.ERROR_MESSAGE);
-  exit(-1);
+  jf.setAlwaysOnTop(true);//make sure the error ends up on top of the game
+  JOptionPane.showMessageDialog(jf, stack, e.toString(), JOptionPane.ERROR_MESSAGE);//show the error to the user
+  exit(-1);//close the game
 }
 
+/**Overrides the default exit function so that the program only closes when we actually want it to.<br>
+To close the program use exit(code)
+*/
 void exit() {
   println("somehitng attempted to close the program");
 }
 
+/**closes the program and prints the provided code in the console
+@param i the exit code (note: this will not be the actual process exit code)
+*/
 void exit(int i) {
   println("exited with code: "+i);
   super.exit();
 }
 
+/**Displays the glitch effect
+*/
 void glitchEffect() {
-  int bsepnum = 25;
-  int n=millis()/100%bsepnum;
+  int bsepnum = 25;//a magical value
+  int n = millis() / 100 % bsepnum;//witch set of boxes to target for display
   //n=9;
-  int bsep = glitchBoxes.size()/bsepnum;
+  int bsep = glitchBoxes.size() / bsepnum;//the number of boxes to display at once
   strokeWeight(0);
-  for(int i=0;i<bsep;i++){
+  for(int i=0;i<bsep;i++){//display bsep glitch boxes on the screen
     glitchBoxes.get(i+bsep*n).draw();
   }
 }
 
+/**A simple datastrcture for holde the size, position and color of a single box in the glitch effect
+*/
 class GlitchBox{
   int x,y,w,h,c;
+  /**
+  @param in the string containing the box information (x,y,width,hright,color)
+  */
   GlitchBox(String in){
     String[] bs = in.split(",");
     x=Integer.parseInt(bs[0]);
@@ -3777,13 +4012,17 @@ class GlitchBox{
     h=Integer.parseInt(bs[3]);
     c=Integer.parseInt(bs[4]);
   }
-  
+  /**draw this glitch box on the screen
+  */
   void draw(){
     fill(c,128);
     rect(ui.topX()+x*ui.scale(),ui.topY()+y*ui.scale(),w*ui.scale(),h*ui.scale());
   }
 }
 
+/**Give various classes static refrences to this class to make the function properly.<br>
+NOTE: we are going to get rid of this :tm:
+*/
 void sourceInitilize() {
   Level.source=this;
   Stage.source=this;
@@ -3795,22 +4034,27 @@ void sourceInitilize() {
   Client.source=this;
   Server.source=this;
   Player.source=this;
-  StageEntityCollisionManager.set(this);
 }
 
+/**Hanlde any errors that pop up in multyplayer netwiorking.<br>
+Show the disconnect screen with the reason for the disconnection.
+@param error The error that was thrown
+*/
 void networkError(Throwable error) {
-  if (clientQuitting) {
+  if (clientQuitting) {//if the client was quitting then just do nothing
     clientQuitting=false;
     return;
   }
-  menue=true;
+  menue=true;//open the disconnected screen
   inGame=false;
-  error.printStackTrace();
+  error.printStackTrace();//print the error to the console
   Menue="disconnected";
   disconnectReason=error.toString();
   multiplayer=false;
 }
 
+/**Draws the developer menu
+*/
 void drawDevMenue() {
   background(#EDEDED);
   fill(0);
@@ -3825,8 +4069,10 @@ void drawDevMenue() {
   dev_UGC.draw();
   dev_multiplayer.draw();
   dev_levelCreator.draw();
+  dev_testLevel.draw();
 }
-
+/**Handles mouse clicks for the developer menu
+*/
 void clickDevMenue() {
   if (dev_main.isMouseOver()) {
     Menue="main";
@@ -3870,11 +4116,36 @@ void clickDevMenue() {
     levelCreator=true;
     return;
   }
+  if(dev_testLevel.isMouseOver()){//go to the test level by simulating human input very quickly to painlessly open the level
+    mouseButton = LEFT;
+    mouseX = (int)(dev_levelCreator.x + dev_levelCreator.lengthX/2);
+    mouseY = (int)(dev_levelCreator.y + dev_levelCreator.lengthY/2);
+    mouseClicked();
+    mouseX = (int)(loadLevelButton.x + loadLevelButton.lengthX/2);
+    mouseY = (int)(loadLevelButton.y + loadLevelButton.lengthY/2);
+    mouseClicked();
+    lcEnterLevelTextBox.setContence("test");
+    mouseX = (int)(lcLoadLevelButton.x + lcLoadLevelButton.lengthX/2);
+    mouseY = (int)(lcLoadLevelButton.y + lcLoadLevelButton.lengthY/2);
+    mouseClicked();
+    return;
+  }
 }
-
+/**Old function used to calculate the largest text size that can fit in a given width.
+@param text The text to find the size of
+@param width the length of the area to fit the text in
+*/
+@Deprecated
 void calcTextSize(String text, float width) {
   calcTextSize(text, width, 4837521);
 }
+
+/**Old function used to calculate the largest text size that can fit in a given width.
+@param text The text to find the size of
+@param width The length of the area to fit the text in
+@param max The maximum text size the output
+*/
+@Deprecated
 void calcTextSize(String text, float width, int max) {
   for (int i=1; i<max; i++) {
     textSize(i);
@@ -3885,6 +4156,10 @@ void calcTextSize(String text, float width, int max) {
   }
 }
 
+/**Generate the level info the for the selected multyplayer level. The result is placed in multyplayerSelectedLevel
+@param path The file path to the level folder
+@param UGC Wether the level is UGC or not
+*/
 void genSelectedInfo(String path, boolean UGC) {
   String name, author, gameVersion;
   int multyplayerMode=1, maxPlayers=-1, minPlayers=-1, id=0;
@@ -3898,267 +4173,300 @@ void genSelectedInfo(String path, boolean UGC) {
     multyplayerMode=info.getInt("multyplayer mode");
     maxPlayers=info.getInt("max players");
     minPlayers=info.getInt("min players");
-  }
-  catch(Exception e) {
+  } catch(Exception e) {
   }
 
   multyplayerSelectedLevel=new SelectedLevelInfo(name, author, gameVersion, multyplayerMode, minPlayers, maxPlayers, id, UGC);
 }
 
+/**Tells all connected clients to go back to the multplayer selcetion menu
+*/
 void returnToSlection() {
-  BackToMenuRequest mrq = new BackToMenuRequest();
+  BackToMenuRequest mrq = new BackToMenuRequest();//create the request
   try {
-    for (int i=0; i<clients.size(); i++) {
+    for (int i=0; i<clients.size(); i++) {//send it to each client
       clients.get(i).dataToSend.add(mrq);
     }
-  }
-  catch(Exception e) {
+  } catch(Exception e) {
   }
 }
 
+/**formats a given number of milliseconds into a time string
+@param millis The ammount of time in milliseconds
+@return A string showing how many minuets and seconds the input milliseconds are equivelent to
+*/
 String formatMillis(int millis) {
   int mins=millis/60000;
   float secs=(millis/1000.0)-mins*60;
   return mins+":"+String.format("%.3f", secs);
 }
 
-
+/**Thread responcible for most of the loading and configuration of the game during startup
+*/
 void programLoad() {
-  //do this first becasue it causes a momentary freez on the render thread that we want to avoid later in the animation
-  println("loading shaders");
-  depthBufferShader = loadShader("data/shaders/depthBufferFrag.glsl","shaders/depthBufferVert.glsl");
-  shadowShader = loadShader("data/shaders/shadowMapFrag.glsl","shaders/shadowMapVert.glsl");
-
-  requestDepthBufferInit = true;
-  //this init can only happen on the main render thread
+  try{
+    //do this first becasue it causes a momentary freez on the render thread that we want to avoid later in the animation
+    println("loading shaders");
+    depthBufferShader = loadShader("data/shaders/depthBufferFrag.glsl","data/shaders/depthBufferVert.glsl");
+    shadowShader = loadShader("data/shaders/shadowMapFrag.glsl","data/shaders/shadowMapVert.glsl");
   
-  println("loading 3D coin modle");
-  coin3D=loadShape("data/modles/coin/tinker.obj");
-  loadProgress++;
-  coin3D.scale(3);
-
-  defaultAuthorNameTextBox.setContence(settings.getDefaultAuthor());
-  author = settings.getDefaultAuthor();
-  loadProgress++;
-
-  println("loading level progress");
-  try {//load level prgress
-    levelProgress=loadJSONArray(appdata+"/CBi-games/skinny mann/progressions.json");
-    levelProgress.getJSONObject(0);
+    requestDepthBufferInit = true;
+    //this init can only happen on the main render thread because it requires an open Gl context
+    
+    println("loading 3D coin modle");//load the 3D coin modle
+    coin3D=loadShape("data/modles/coin/tinker.obj");
     loadProgress++;
-  }
-  catch(Throwable e) {
-    println("failed to load level progress. creating new progress data");
-    levelProgress=new JSONArray();
-    JSONObject p=new JSONObject();
-    p.setInt("progress", 0);
-    levelProgress.setJSONObject(0, p);
-    saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
+    coin3D.scale(3);
+    
+    //load the default author value
+    defaultAuthorNameTextBox.setContence(settings.getDefaultAuthor());
+    author = settings.getDefaultAuthor();
     loadProgress++;
+  
+    println("loading level progress");
+    try {//load level prgress
+      levelProgress=loadJSONArray(appdata+"/CBi-games/skinny mann/progressions.json");
+      levelProgress.getJSONObject(0);//throw an error if loadin failed
+      loadProgress++;
+    } catch(Throwable e) {//basically if there is not progress loaded then create the file with new progress
+      println("failed to load level progress. creating new progress data");
+      levelProgress=new JSONArray();
+      JSONObject p=new JSONObject();
+      p.setInt("progress", 0);
+      levelProgress.setJSONObject(0, p);
+      saveJSONArray(levelProgress, appdata+"/CBi-games/skinny mann/progressions.json");
+      loadProgress++;
+    }
+  
+    //initilize each player in the players array, this does not really need to be done here
+    println("inililizing players");
+    players[0]=new Player(20, 699, 1, 0);
+    players[1]=new Player(20, 699, 1, 1);
+    players[2]=new Player(20, 699, 1, 2);
+    players[3]=new Player(20, 699, 1, 3);
+    players[4]=new Player(20, 699, 1, 4);
+    players[5]=new Player(20, 699, 1, 5);
+    players[6]=new Player(20, 699, 1, 6);
+    players[7]=new Player(20, 699, 1, 7);
+    players[8]=new Player(20, 699, 1, 8);
+    players[9]=new Player(20, 699, 1, 9);
+    loadProgress++;
+    
+    //register all the classes in the corresponding registries
+    registerThings();
+  
+    println("initlizing sound handler");
+    //create the sound handler
+    SoundHandler.Builder soundBuilder = SoundHandler.builder(this);
+    //load the list of music tracks
+    String[] musicTracks=loadStrings("data/music/music.txt");
+    for (int i=0; i<musicTracks.length; i++) {
+      soundBuilder.addMusic(musicTracks[i], 0);
+    }
+    //load the list of global sounds
+    String[] sfxTracks=loadStrings("data/sounds/sounds.txt");
+    for (int i=0; i<sfxTracks.length; i++) {
+      soundBuilder.addSound(sfxTracks[i]);
+    }
+  
+    int[] idcb = {0};//narration id call back array. used to get the id of the narration, will be set to out of the builder
+    //register all the narrations for the tutorial
+    soundBuilder.addNarration("data/sounds/tutorial/T1a.wav",idcb);
+    tutorialNarration[0][0]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T2a.wav",idcb);
+    tutorialNarration[0][1]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
+    tutorialNarration[0][2]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T4a.wav",idcb);
+    tutorialNarration[0][3]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T5a.wav",idcb);
+    tutorialNarration[0][4]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T6a.wav",idcb);
+    tutorialNarration[0][5]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
+    tutorialNarration[0][6]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T8a.wav",idcb);
+    tutorialNarration[0][7]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T9a.wav",idcb);
+    tutorialNarration[0][8]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
+    tutorialNarration[0][9]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
+    tutorialNarration[0][10]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
+    tutorialNarration[0][11]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
+    tutorialNarration[0][12]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T14a.wav",idcb);
+    tutorialNarration[0][13]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
+    tutorialNarration[0][14]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
+    tutorialNarration[0][15]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
+    tutorialNarration[0][16]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T1b.wav",idcb);
+    tutorialNarration[1][0]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T2b.wav",idcb);
+    tutorialNarration[1][1]=idcb[0];
+   
+    soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
+    tutorialNarration[1][2]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T4b.wav",idcb);
+    tutorialNarration[1][3]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T5b.wav",idcb);
+    tutorialNarration[1][4]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T6b.wav",idcb);
+    tutorialNarration[1][5]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
+    tutorialNarration[1][6]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T8b.wav",idcb);
+    tutorialNarration[1][7]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T9b.wav",idcb);
+    tutorialNarration[1][8]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
+    tutorialNarration[1][9]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
+    tutorialNarration[1][10]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
+    tutorialNarration[1][11]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
+    tutorialNarration[1][12]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T14b.wav",idcb);
+    tutorialNarration[1][13]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
+    tutorialNarration[1][14]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
+    tutorialNarration[1][15]=idcb[0];
+    
+    soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
+    tutorialNarration[1][16]=idcb[0];
+    
+    println("loading sounds");
+    soundHandler = soundBuilder.build();//finilze the sound handler. this is what accualy loads the sound files
+    loadProgress++;
+  
+    //set the volumes to what is set in settings
+    soundHandler.setMusicVolume(settings.getSoundMusicVolume());
+    soundHandler.setSoundsVolume(settings.getSoundSoundVolume());
+    soundHandler.setNarrationVolume(settings.getSoundNarrationVolume());
+    
+    
+    
+    //load the saved colors for the level creator or create them if they do not exsist
+    println("loading saved colors");
+    if (new File(appdata+"/CBi-games/skinny mann level creator/colors.json").exists()) {
+      colors=loadJSONArray(appdata+"/CBi-games/skinny mann level creator/colors.json");//load saved colors
+    } else {
+      colors=JSONArray.parse("[{\"red\": 0,\"green\": 175,\"blue\": 0},{\"red\": 145,\"green\": 77,\"blue\": 0}]");
+    }
+    loadProgress++;
+  
+    //load 3D modles for 3D transfomrations
+    println("loading 3D arrows and scalar moddles");
+    redArrow=loadShape("data/modles/red arrow/arrow.obj");
+    loadProgress++;
+    greenArrow=loadShape("data/modles/green arrow/arrow.obj");
+    loadProgress++;
+    blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
+    loadProgress++;
+    yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
+    loadProgress++;
+  
+    redScaler=loadShape("data/modles/red scaler/obj.obj");
+    loadProgress++;
+    greenScaler=loadShape("data/modles/green scaler/obj.obj");
+    loadProgress++;
+    blueScaler=loadShape("data/modles/blue scaler/obj.obj");
+    loadProgress++;
+    yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
+    loadProgress++;
+    rotateCircleX = loadShape("data/modles/Rotate_X/obj.obj");
+    loadProgress++;
+    rotateCircleY = loadShape("data/modles/Rotate_Y/obj.obj");
+    loadProgress++;
+    rotateCircleZ = loadShape("data/modles/Rotate_Z/obj.obj");
+    loadProgress++;
+    rotateCircleHilight = loadShape("data/modles/Rotate_Hilight/obj.obj");
+    loadProgress++;
+  
+    //load the level creator logo
+    LevelCreatorLogo=loadShape("data/modles/LevelCreatorLogo/LCL.obj");
+    loadProgress++;
+    LevelCreatorLogo.scale(3*Scale);
+    
+    //setup the various sliders in the settings menu
+    musicVolumeSlider.setValue(settings.getSoundMusicVolume()*100);
+    SFXVolumeSlider.setValue(settings.getSoundSoundVolume()*100);
+    narrationVolumeSlider.setValue(settings.getSoundNarrationVolume()*100);
+    verticleEdgeScrollSlider.setValue(settings.getSrollVertical());
+    horozontalEdgeScrollSlider.setValue(settings.getScrollHorozontal());
+    fovSlider.setValue(degrees(settings.getFOV()));
+    
+    //load the boxes for the glitch effect
+    String[] rawGlitchBoxes = loadStrings("data/glitch.txt");
+    loadProgress++;
+    for(int i=0;i<rawGlitchBoxes.length;i++){
+      glitchBoxes.add(new GlitchBox(rawGlitchBoxes[i]));
+    }
+    
+    //load statistics
+    println("loading stats");
+    stats = new StatisticManager(appdata+"/CBi-games/skinny mann/stats.json",this);
+    loadProgress++;
+     
+    //load UV test image
+    uvTester = loadImage("data/assets/ic.png");
+  
+    //spawn the physics thread
+    println("starting physics thread");
+    thread("thrdCalc2");
+    //signal loading has completed
+    loaded=true;
+    println("loading complete");
+    println(loadProgress);
+  } catch(Throwable e) {
+    handleError(e);
   }
-
-  println("inililizing players");
-  players[0]=new Player(20, 699, 1, 0);
-  players[1]=new Player(20, 699, 1, 1);
-  players[2]=new Player(20, 699, 1, 2);
-  players[3]=new Player(20, 699, 1, 3);
-  players[4]=new Player(20, 699, 1, 4);
-  players[5]=new Player(20, 699, 1, 5);
-  players[6]=new Player(20, 699, 1, 6);
-  players[7]=new Player(20, 699, 1, 7);
-  players[8]=new Player(20, 699, 1, 8);
-  players[9]=new Player(20, 699, 1, 9);
-  loadProgress++;
-  
-  //register all the classes in the corresponding registries
-  registerThings();
-
-  println("initlizing sound handler");
-
-  SoundHandler.Builder soundBuilder = SoundHandler.builder(this);
-  String[] musicTracks=loadStrings("data/music/music.txt");
-  for (int i=0; i<musicTracks.length; i++) {
-    soundBuilder.addMusic(musicTracks[i], 0);
-  }
-  String[] sfxTracks=loadStrings("data/sounds/sounds.txt");
-  for (int i=0; i<sfxTracks.length; i++) {
-    soundBuilder.addSound(sfxTracks[i]);
-  }
-
-  int[] idcb = {0};//narration id call back array. used to get the id the narration will be set to out of the builder
-  soundBuilder.addNarration("data/sounds/tutorial/T1a.wav",idcb);
-  tutorialNarration[0][0]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T2a.wav",idcb);
-  tutorialNarration[0][1]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
-  tutorialNarration[0][2]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T4a.wav",idcb);
-  tutorialNarration[0][3]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T5a.wav",idcb);
-  tutorialNarration[0][4]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T6a.wav",idcb);
-  tutorialNarration[0][5]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
-  tutorialNarration[0][6]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T8a.wav",idcb);
-  tutorialNarration[0][7]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T9a.wav",idcb);
-  tutorialNarration[0][8]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
-  tutorialNarration[0][9]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
-  tutorialNarration[0][10]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
-  tutorialNarration[0][11]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
-  tutorialNarration[0][12]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T14a.wav",idcb);
-  tutorialNarration[0][13]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
-  tutorialNarration[0][14]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
-  tutorialNarration[0][15]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
-  tutorialNarration[0][16]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T1b.wav",idcb);
-  tutorialNarration[1][0]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T2b.wav",idcb);
-  tutorialNarration[1][1]=idcb[0];
- 
-  soundBuilder.addNarration("data/sounds/tutorial/T3.wav",idcb);
-  tutorialNarration[1][2]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T4b.wav",idcb);
-  tutorialNarration[1][3]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T5b.wav",idcb);
-  tutorialNarration[1][4]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T6b.wav",idcb);
-  tutorialNarration[1][5]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T7.wav",idcb);
-  tutorialNarration[1][6]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T8b.wav",idcb);
-  tutorialNarration[1][7]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T9b.wav",idcb);
-  tutorialNarration[1][8]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T10.wav",idcb);
-  tutorialNarration[1][9]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T11.wav",idcb);
-  tutorialNarration[1][10]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T12.wav",idcb);
-  tutorialNarration[1][11]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T13.wav",idcb);
-  tutorialNarration[1][12]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T14b.wav",idcb);
-  tutorialNarration[1][13]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T15.wav",idcb);
-  tutorialNarration[1][14]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T16.wav",idcb);
-  tutorialNarration[1][15]=idcb[0];
-  
-  soundBuilder.addNarration("data/sounds/tutorial/T17.wav",idcb);
-  tutorialNarration[1][16]=idcb[0];
-  
-  println("loading sounds");
-  soundHandler = soundBuilder.build();//finilze the sound handler. this is what accualy loads the sound files
-  loadProgress++;
-
-  soundHandler.setMusicVolume(settings.getSoundMusicVolume());
-  soundHandler.setSoundsVolume(settings.getSoundSoundVolume());
-  soundHandler.setNarrationVolume(settings.getSoundNarrationVolume());
-  
-  
-  
-
-  println("loading saved colors");
-  if (new File(appdata+"/CBi-games/skinny mann level creator/colors.json").exists()) {
-    colors=loadJSONArray(appdata+"/CBi-games/skinny mann level creator/colors.json");//load saved colors
-  } else {
-    colors=JSONArray.parse("[{\"red\": 0,\"green\": 175,\"blue\": 0},{\"red\": 145,\"green\": 77,\"blue\": 0}]");
-  }
-  loadProgress++;
-
-  println("loading 3D arrows and scalar moddles");
-  redArrow=loadShape("data/modles/red arrow/arrow.obj");
-  loadProgress++;
-  greenArrow=loadShape("data/modles/green arrow/arrow.obj");
-  loadProgress++;
-  blueArrow=loadShape("data/modles/blue arrow/arrow.obj");
-  loadProgress++;
-  yellowArrow=loadShape("data/modles/yellow arrow/arrow.obj");
-  loadProgress++;
-
-  redScaler=loadShape("data/modles/red scaler/obj.obj");
-  loadProgress++;
-  greenScaler=loadShape("data/modles/green scaler/obj.obj");
-  loadProgress++;
-  blueScaler=loadShape("data/modles/blue scaler/obj.obj");
-  loadProgress++;
-  yellowScaler=loadShape("data/modles/yellow scaler/obj.obj");
-  loadProgress++;
-
-  LevelCreatorLogo=loadShape("data/modles/LevelCreatorLogo/LCL.obj");
-  loadProgress++;
-  LevelCreatorLogo.scale(3*Scale);
-
-  musicVolumeSlider.setValue(settings.getSoundMusicVolume()*100);
-  SFXVolumeSlider.setValue(settings.getSoundSoundVolume()*100);
-  narrationVolumeSlider.setValue(settings.getSoundNarrationVolume()*100);
-  verticleEdgeScrollSlider.setValue(settings.getSrollVertical());
-  horozontalEdgeScrollSlider.setValue(settings.getScrollHorozontal());
-  fovSlider.setValue(degrees(settings.getFOV()));
-  
-  String[] rawGlitchBoxes = loadStrings("data/glitch.txt");
-  loadProgress++;
-  for(int i=0;i<rawGlitchBoxes.length;i++){
-    glitchBoxes.add(new GlitchBox(rawGlitchBoxes[i]));
-  }
-
-  println("loading stats");
-  stats = new StatisticManager(appdata+"/CBi-games/skinny mann/stats.json",this);
-  loadProgress++;
- 
-  uvTester = loadImage("data/assets/ic.png");
-
-  println("starting physics thread");
-  thread("thrdCalc2");
-  loaded=true;
-  println("loading complete");
-  println(loadProgress);
 }
 
+/**Initilise the depth buffer's render targets and initilize the sub shaodw maps.<br>
+IMPORTANT: This funtion must be run on a thread with an OpenGL context
+*/
 void initDepthBuffer(){
   int bufferSize;
-  switch(settings.getShadows()){
+  switch(settings.getShadows()){//figureout the buffer resolution
     case 2: 
       bufferSize =1024;
       break;
@@ -4176,12 +4484,13 @@ void initDepthBuffer(){
     default:
       bufferSize = 512;
   };
+  //create the on GPU buffers
   shadowMap = createGraphics(bufferSize, bufferSize, P3D);
   subShadowMaps[0] = createGraphics(bufferSize/2, bufferSize/2, P3D);
   subShadowMaps[1] = createGraphics(bufferSize/2, bufferSize/2, P3D);
   subShadowMaps[2] = createGraphics(bufferSize/2, bufferSize/2, P3D);
   subShadowMaps[3] = createGraphics(bufferSize/2, bufferSize/2, P3D);
-  cameraMatrixMap = createGraphics(bufferSize/2, bufferSize/2, P3D);
+  cameraMatrixMap = createGraphics(bufferSize/2, bufferSize/2, P3D);//this one is just for getting camera matrixes not for actual rendering
   
   println(bufferSize);
   
@@ -4190,20 +4499,21 @@ void initDepthBuffer(){
   lightDir.mult(800);
 
   shadowMap.noSmooth(); // Antialiasing on the shadowMap leads to weird artifacts
-  //shadowMap.loadPixels(); // Will interfere with noSmooth() (probably a bug in Processing)
+  
   shadowMap.beginDraw();
-  //shadowMap.noStroke();
+  
   shadowMap.shader(depthBufferShader);
-  //TODO: set the area coverd by shadows here
+  //set the area coverd by shadows here
   int shadowMapClibBoxSize = 2000;
   shadowMap.ortho(-shadowMapClibBoxSize, shadowMapClibBoxSize, -shadowMapClibBoxSize, shadowMapClibBoxSize, 1, 13000); // Setup orthogonal view matrix for the directional light
   shadowMap.endDraw();
+  //disable anti alising on the sub shaodw maps
   subShadowMaps[0].noSmooth();
   subShadowMaps[1].noSmooth();
   subShadowMaps[2].noSmooth();
   subShadowMaps[3].noSmooth();
   
-  cameraMatrixMap.beginDraw();
+  cameraMatrixMap.beginDraw();//setup the size of the camera matrix to be used for fun math
   cameraMatrixMap.ortho(-shadowMapClibBoxSize/2, shadowMapClibBoxSize/2, -shadowMapClibBoxSize/2, shadowMapClibBoxSize/2, 1, 13000);
   cameraMatrixMap.endDraw();
   
@@ -4211,7 +4521,7 @@ void initDepthBuffer(){
   shader(shadowShader);
   resetShader();
   
-  for(int i=0;i<subShadowMaps.length;i++){
+  for(int i=0;i<subShadowMaps.length;i++){//set the starting background on each sub map to be the infinite distance
     subShadowMaps[i].beginDraw();
     subShadowMaps[i].background(255);
     subShadowMaps[i].endDraw();
@@ -4219,8 +4529,11 @@ void initDepthBuffer(){
   
 }
 
-//musicVolumeSlider,SFXVolumeSlider,verticleEdgeScrollSlider,horozontalEdgeScrollSlider;
+/**Initilize all buttons.<br>
+This is nessrray becuse buttons require the renderer to exsist to properly get set up
+*/
 void  initButtons() {
+  //there buttons I do not need to explain them
   select_lvl_1=new UiButton(ui, (100), (100), (200), (100), "lvl 1", -59135, -1791).setStrokeWeight( (10));
   select_lvl_back=new UiButton(ui, (100), (600), (200), (50), "Back", -59135, -1791).setStrokeWeight( (10));
   select_lvl_next=new UiButton(ui, (600), (600), (200), (50), "Next", -59135, -1791).setStrokeWeight( (10));
@@ -4295,6 +4608,8 @@ void  initButtons() {
   disableMenuTransistionsButton = new UiButton(ui, (1200), (260), (40), (40), 255, 0).setStrokeWeight(5);
   select_lvl_13 = new UiButton(ui, (100), (100), (200), (100), "lvl 13", -59135, -1791).setStrokeWeight( (10));
   select_lvl_14 = new UiButton(ui, (350), (100), (200), (100), "lvl 14", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_15 =new UiButton(ui, (600), (100), (200), (100), "lvl 15", -59135, -1791).setStrokeWeight( (10));
+  select_lvl_16 =new UiButton(ui, (850), (100), (200), (100), "lvl 16", -59135, -1791).setStrokeWeight( (10));
 
 
 
@@ -4307,6 +4622,7 @@ void  initButtons() {
   dev_UGC = new UiButton(ui, 430, 170, 200, 50, "UGC");
   dev_multiplayer = new UiButton(ui, 650, 170, 200, 50, "Multiplayer");
   dev_levelCreator=new UiButton(ui, 870, 170, 200, 50, "Level Creator");
+  dev_testLevel = new UiButton(ui, 210, 240, 200, 50, "Test Level");
 
   multyplayerJoin = new UiButton(ui, 400, 300, 200, 50, "Join", #FF0004, #FFF300).setStrokeWeight(10);
   multyplayerHost = new UiButton(ui, 680, 300, 200, 50, "Host", #FF0004, #FFF300).setStrokeWeight(10);
@@ -4345,7 +4661,7 @@ void  initButtons() {
   new3DStage=new UiButton(ui, 600, 200, 80, 80, "3D", #BB48ED, #4857ED).setStrokeWeight(5);
   addSound=new UiButton(ui, 800, 200, 80, 80, #BB48ED, #4857ED).setStrokeWeight(5);
 
-  overview_saveLevel=new UiButton(ui, 60, 20, 50, 50, "Save", #0092FF, 0).setStrokeWeight(5);
+  overview_saveLevel=new UiButton(ui, 60, 20, 50, 50, #0092FF, 0).setStrokeWeight(5);
   help=new UiButton(ui, 130, 20, 50, 50, " ? ", #0092FF, 0).setStrokeWeight(3);
   overviewUp=new UiButton(ui, 270, 20, 50, 50, " ^ ", #0092FF, 0).setStrokeWeight(3);
   overviewDown=new UiButton(ui, 200, 20, 50, 50, " v ", #0092FF, 0).setStrokeWeight(3);
@@ -4520,21 +4836,26 @@ void  initButtons() {
 
 }
 
-
+/**Get the combined file hash of a given level
+@param path The file path to the level folder of the level to calculaet the hash of
+@return the concatenated SHA-256 hash of all the files that make up a level
+*/
 String getLevelHash(String path) {
   String basePath="";
-  if (path.startsWith("data")) {
-    basePath=sketchPath()+"/"+path;
+  if (path.startsWith("data")) {//check for levels that are bundled with the sketch (their paths will begin with data/)
+    basePath=sketchPath()+"/"+path;//prepend the sketch path to the path of local levels
   } else {
     basePath=path;
   }
-  String hash="";
+  String hash="";//get the hash of the level index file
   hash+=Hasher.getFileHash(basePath+"/index.json");
 
-  JSONArray file = loadJSONArray(basePath+"/index.json");
+  JSONArray file = loadJSONArray(basePath+"/index.json");//load the index file
   JSONObject job;
+  //for each file listed in the index file
   for (int i=1; i<file.size(); i++) {
     job=file.getJSONObject(i);
+    //extract the file name for each component and generate its hash
     if (job.getString("type").equals("stage")||job.getString("type").equals("3Dstage")) {
       hash+=Hasher.getFileHash(basePath+job.getString("location"));
       continue;
@@ -4547,22 +4868,26 @@ String getLevelHash(String path) {
       hash+=Hasher.getFileHash(basePath+job.getString("location"));
     }
   }
+  //return the total hash calculated
   return hash;
 }
 
+/**Generate the list of avawable UGC levels
+*/
 void loadUGCList() {
-  new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();
-  String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();
+  new File(appdata+"/CBi-games/skinny mann/UGC/levels").mkdirs();//create the level folder if it does not exsist
+  String[] files=new File(appdata+"/CBi-games/skinny mann/UGC/levels").list();//get the list of files/folder in the levels folder
 
-  compatibles=new ArrayList<>();
-  UGCNames=new ArrayList<>();
+  compatibles=new ArrayList<>();//list of comparable levels
+  UGCNames=new ArrayList<>();//list of the level names
   try {
-    if (files.length==0)
+    if (files.length==0){//if there are not levels stop
       return;
-  }
-  catch(NullPointerException e) {
+    }
+  } catch(NullPointerException e) {//if there are no levels and no object was returned
     return;
   }
+  //go through the levels and check if they are compatable with this verison of the game
   for (int i=0; i<files.length; i++) {
     if (FileIsLevel(files[i])) {
       UGCNames.add(files[i]);
@@ -4575,65 +4900,38 @@ void loadUGCList() {
   }
 }
 
+/**Rest various level creator variables to their default/off states.<br>
+Primarily used when switching tools to make sure everything is in the correct stsate
+*/
 void turnThingsOff() {
   selectedIndex=-1;
-  ground=false;
-  check_point=false;
-  goal=false;
   deleteing=false;
   moving_player=false;
-  holo_gram=false;
   levelOverview=false;
-  drawCoins=false;
   drawingPortal=false;
   drawingPortal3=false;
-  sloap=false;
-  holoTriangle=false;
-  dethPlane=false;
-  draw3DSwitch1=false;
-  draw3DSwitch2=false;
-  drawingSign=false;
   selecting=false;
-  selectedIndex=-1;
   selectingBlueprint=false;
-  placingSound=false;
   connectingLogic=false;
   moveLogicComponents=false;
-  placingAndGate=false;
-  placingOrGate=false;
-  placingXorGate=false;
-  placingNandGate=false;
-  placingNorGate=false;
-  placingXnorGate=false;
-  placingTestLogic=false;
-  placingOnSingal=false;
-  placingSetVaravle=false;
-  placingReadVariable=false;
-  placingSetVisibility=false;
-  placingYOffset=false;
-  placingXOffset=false;
-  placingLogicButton=false;
-  placingDelay=false;
-  placingZOffset=false;
   settingPlayerSpawn=false;
-  placing3Dreader=false;
-  placing3Dsetter=false;
-  placingPlaySoundLogic=false;
-  placingPulse=false;
-  placingRandom=false;
   placingGoon=false;
+  currentlyPlaceing = null;
+  rotating = false;
 }
 
+/**File selection callback from the level creator add sound screen
+@param selection The file that was selected
+*/
 void fileSelected(File selection) {
-  if (selection == null) {
+  if (selection == null) {//if there was no selection just return
     return;
   }
-  String path = selection.getAbsolutePath();
+  String path = selection.getAbsolutePath();//get the file path
   System.out.println(path);
-  String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();
+  String extenchen=path.substring(path.length()-3, path.length()).toLowerCase();//get the extention
   System.out.println(extenchen);
   if (extenchen.equals("wav")||extenchen.equals("mp3")||extenchen.equals("aif")) {//check if the file type is valid
-
     fileToCoppyPath=path;
   } else {
     System.out.println("invalid extenchen");
@@ -4641,7 +4939,11 @@ void fileSelected(File selection) {
   }
 }
 
+/**Initilize all scale managed text.<br>
+This is nessrray becuse text require the renderer to exsist to properly get set up
+*/
 void initText() {
+  //very simple not going to explain what is happening heres
   mm_title = new UiText(ui, "Skinny Mann", 640, 80, 100, CENTER, CENTER);
   mm_EarlyAccess = new UiText(ui, "Arcade Edition  ", 640, 180, 100, CENTER, CENTER);
   mm_version = new UiText(ui, version, 0, 718, 20, LEFT, BOTTOM);
@@ -4695,16 +4997,11 @@ void initText() {
   initMultyplayerScreenTitle = new UiText(ui, "Multiplayer", 640, 36, 50, CENTER, CENTER);
   mp_hostSeccion = new UiText(ui, "Host session", 640, 36, 50, CENTER, CENTER);
   mp_host_Name = new UiText(ui, "Name", 640, 93.6, 25, CENTER, CENTER);
-  //mp_host_enterdName = new UiText(ui, "V", 640, 126, 25, CENTER, CENTER);
   mp_host_port = new UiText(ui, "Port", 640, 172.8, 25, CENTER, CENTER);
-  //mp_host_endterdPort = new UiText(ui, "V", 640, 205.2, 25, CENTER, CENTER);
   mp_joinSession = new UiText(ui, "Join session", 640, 36, 50, CENTER, CENTER);
   mp_join_name = new UiText(ui, "Name", 640, 93.6, 25, CENTER, CENTER);
-  //mp_join_enterdName = new UiText(ui, "V", 640, 126, 25, CENTER, CENTER);
   mp_join_port = new UiText(ui, "Port", 640, 172.8, 25, CENTER, CENTER);
-  //mp_join_enterdPort = new UiText(ui, "V", 640, 205.2, 25, CENTER, CENTER);
   mp_join_ip = new UiText(ui, "IP address", 640, 252, 25, CENTER, CENTER);
-  //mp_join_enterdIp = new UiText(ui, "?V", 640, 284.4, 25, CENTER, CENTER);
   mp_disconnected = new UiText(ui, "Disconnected", 640, 36, 50, CENTER, CENTER);
   mp_dc_reason = new UiText(ui, "V", 640, 216, 25, CENTER, CENTER);
   dev_title = new UiText(ui, "Developer Menue", 640, 36, 50, CENTER, CENTER);
@@ -5163,3 +5460,4 @@ synchronized JSONArray saveLoadJSONArray(JSONArray data,String path,boolean save
 //DO NOT EDIT THEESE LINES, EVER
 //+++++++++++++++++++++++++++++++++++++++++++++++++++
 //===================================================
+//end of skiny_mann.pde

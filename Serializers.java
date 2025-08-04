@@ -1,4 +1,5 @@
-
+/**A collection of functions for turing mostly primitives into bytes
+*/
 public class Serializers {
 
     public final static Identifier STRING_ID = new Identifier("java","String");
@@ -6,25 +7,25 @@ public class Serializers {
 
     //java primitive serializers
 
-    /**converts a short into 2 bytes
-     * @param s the short to be converted
-     * @return an array of 2 bytes representing the short
+    /**Converts a short into 2 bytes
+     * @param s The short to be converted
+     * @return An array of 2 bytes representing the short
      */
     public static byte[] shortToBytes(short s){
         return new byte[]{(byte)((s & 0xFF00) >>> 8), (byte)((s & 0x00FF))};
     }
 
-    /**converts an int into 4 bytes
-     * @param i the int to be converted
-     * @return an array of 4 bytes representing the int
+    /**Converts an int into 4 bytes
+     * @param i The int to be converted
+     * @return An array of 4 bytes representing the int
      */
     public static byte[] intToBytes(int i){
         return new byte[]{(byte)((i & 0xFF000000) >>> 24), (byte)((i & 0x00FF0000) >>> 16), (byte)((i & 0x0000FF00) >>> 8), (byte)((i & 0x000000FF))};
     }
 
-    /**converts a long into 8 bytes
-     * @param l the long to be converted
-     * @return an array of 8 bytes representing the long
+    /**Converts a long into 8 bytes
+     * @param l The long to be converted
+     * @return An array of 8 bytes representing the long
      */
     public static byte[] longToBytes(long l){
         return new byte[]{
@@ -39,34 +40,34 @@ public class Serializers {
         };
     }
 
-    /**converts a float into 4 bytes
-     * @param f the float to be converted
-     * @return an array of 4 bytes representing the float
+    /**Converts a float into 4 bytes
+     * @param f The float to be converted
+     * @return An array of 4 bytes representing the float
      */
     public static byte[] floatToBytes(float f){
         return intToBytes(Float.floatToRawIntBits(f));
     }
 
-    /**converts a double into 8 bytes
-     * @param d the double to be converted
-     * @return an array of 8 bytes representing the double
+    /**Converts a double into 8 bytes
+     * @param d The double to be converted
+     * @return An array of 8 bytes representing the double
      */
     public static byte[] doubleToBytes(double d){
         return longToBytes(Double.doubleToLongBits(d));
     }
 
-    /**converts a char into 2 bytes
-     * @param c the char to be converted
-     * @return an array of 2 bytes representing the char
+    /**Converts a char into 2 bytes
+     * @param c The char to be converted
+     * @return An array of 2 bytes representing the char
      */
     public static byte[] charToBytes(char c){
         return shortToBytes((short)c);
     }
 
-    /** converts a boolean into a byte with the value of 1 or 0
-     * seriously why do you need to use this
-     * @param b the boolean to convert
-     * @return a byte with the value of 1 or 0
+    /**Converts a boolean into a byte with the value of 1 or 0<br>
+     * Seriously why do you need to use this
+     * @param b The boolean to convert
+     * @return A byte with the value of 1 or 0
      */
     public static byte booleanToByte(boolean b){
         return b? (byte)1:(byte)0;

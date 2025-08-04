@@ -1,13 +1,15 @@
 import java.util.ArrayList;
-
+/**This class contains methods for taking binarry data and converting it into java primitives and objects.<br>
+NOTE: It is reccomended that you use the modthods from SerialIterator instead of using this class directly
+*/
 public class Deserializers {
 
     //Utility methods
 
-    /** gets the index of the next null byte in the byte array
-     * @param bytes the array of bytes to search
-     * @param offset the index of the array to start the search at
-     * @return the index of the next null byte after the offset index, or -1 if no null byte exists between the offset and end of the array
+    /** Gets the index of the next null byte in the byte array
+     * @param bytes The array of bytes to search
+     * @param offset The index of the array to start the search at
+     * @return The index of the next null byte after the offset index, or -1 if no null byte exists between the offset and end of the array
      */
     public static int indexOfNextNull(byte[] bytes, int offset){
         for(int i=offset;i<bytes.length;i++){
@@ -20,10 +22,10 @@ public class Deserializers {
 
     //java primitive deserializers
 
-    /**converts 2 bytes to a java short
-     * @param bytes the array of bytes to read the short from
-     * @param iterator the position in the array to read the short from. automatically advances to the position at the end of the identifier
-     * @return a short decoded from the byte array
+    /**Converts 2 bytes to a java short
+     * @param bytes The array of bytes to read the short from
+     * @param iterator The position in the array to read the short from. automatically advances to the position at the end of the identifier
+     * @return A short decoded from the byte array
      */
     public static short bytesToShort(byte[] bytes,SerialIterator iterator){
         short value=0;
@@ -33,10 +35,10 @@ public class Deserializers {
         return value;
     }
 
-    /**converts 4 bytes to a java int
-     * @param bytes the array of bytes to read the int from
-     * @param iterator the position in the array to read the int from. automatically advances to the position at the end of the identifier
-     * @return an int decoded from the byte array
+    /**Converts 4 bytes to a java int
+     * @param bytes The array of bytes to read the int from
+     * @param iterator The position in the array to read the int from. automatically advances to the position at the end of the identifier
+     * @return An int decoded from the byte array
      */
     public static int bytesToInt(byte[] bytes,SerialIterator iterator){
         int value=0;
@@ -49,10 +51,10 @@ public class Deserializers {
         return value;
     }
 
-    /**converts 8 bytes to a java long
-     * @param bytes the array of bytes to read the long from
-     * @param iterator the position in the array to read the long from. automatically advances to the position at the end of the identifier
-     * @return a long decoded from the byte array
+    /**Converts 8 bytes to a java long
+     * @param bytes The array of bytes to read the long from
+     * @param iterator The position in the array to read the long from. automatically advances to the position at the end of the identifier
+     * @return A long decoded from the byte array
      */
     public static long bytesToLong(byte[] bytes,SerialIterator iterator){
         long value=0;
@@ -68,37 +70,37 @@ public class Deserializers {
         return value;
     }
 
-    /**converts 4 bytes to a java float
-     * @param bytes the array of bytes to read the float from
-     * @param iterator the position in the array to read the float from. automatically advances to the position at the end of the identifier
-     * @return a float decoded from the byte array
+    /**Converts 4 bytes to a java float
+     * @param bytes The array of bytes to read the float from
+     * @param iterator The position in the array to read the float from. automatically advances to the position at the end of the identifier
+     * @return A float decoded from the byte array
      */
     public static float bytesToFloat(byte[] bytes, SerialIterator iterator){
         return Float.intBitsToFloat(bytesToInt(bytes, iterator));
     }
 
-    /**converts 8 bytes to a java double
-     * @param bytes the array of bytes to read the double from
-     * @param iterator the position in the array to read the double from. automatically advances to the position at the end of the identifier
-     * @return a double decoded from the byte array
+    /**Converts 8 bytes to a java double
+     * @param bytes The array of bytes to read the double from
+     * @param iterator The position in the array to read the double from. automatically advances to the position at the end of the identifier
+     * @return A double decoded from the byte array
      */
     public static double bytesToDouble(byte[] bytes,SerialIterator iterator){
         return Double.longBitsToDouble(bytesToLong(bytes,iterator));
     }
 
-    /**converts 2 bytes to a java char
-     * @param bytes the array of bytes to read the char from
-     * @param iterator the position in the array to read the char from. automatically advances to the position at the end of the identifier
-     * @return a short decoded from the char array
+    /**Converts 2 bytes to a java char
+     * @param bytes The array of bytes to read the char from
+     * @param iterator The position in the array to read the char from. automatically advances to the position at the end of the identifier
+     * @return A short decoded from the char array
      */
     public static char bytesToChar(byte[] bytes,SerialIterator iterator){
         return (char)bytesToShort(bytes,iterator);
     }
 
-    /** get a boolean from a byte. Why are you using this?
-     * @param bytes the array of bytes to read the boolean from
-     * @param iterator the position in the array to read the boolean from. automatically advances to the position at the end of the identifier
-     * @return weather the byte specified by offset is not equal to 0
+    /** Get a boolean from a byte. Why are you using this?
+     * @param bytes The array of bytes to read the boolean from
+     * @param iterator The position in the array to read the boolean from. automatically advances to the position at the end of the identifier
+     * @return weather The byte specified by offset is not equal to 0
      */
     public static boolean byteToBoolean(byte[] bytes,SerialIterator iterator){
 
@@ -109,11 +111,11 @@ public class Deserializers {
 
     //Java Object deserializers
 
-    /**convert bytes in the form of a serialized data string into a string object
+    /**Convert bytes in the form of a serialized data string into a string object
      * NOTE: this method is intended to be used on bytes that have been produced by the SerializedData class acting on a string
-     * @param bytes the bytes to read from
-     * @param iterator the position in the array to read the string from, NOTE: the 4 bytes before this will be read as thr string bytes length
-     * @return the string made from the bytes
+     * @param bytes The bytes to read from
+     * @param iterator The position in the array to read the string from, NOTE: the 4 bytes before this will be read as thr string bytes length
+     * @return The string made from the bytes
      */
     public static String deserializeStringFromSerializedData(byte[] bytes, SerialIterator iterator){
         int length = bytesToInt(bytes,new SerialIterator(iterator.value()-4,bytes));
@@ -122,12 +124,12 @@ public class Deserializers {
         return s;
     }
 
-    /**deserialize an array list from an array of bytes
+    /**Deserialize an array list from an array of bytes
      *
-     * @param bytes the bytes to read from
-     * @param offset the index of the start of the array list bytes
-     * @return an array list containing deserialized objects
-     * @param <E> the type of the output array list
+     * @param bytes The bytes to read from
+     * @param iterator The index of the start of the array list bytes
+     * @return An array list containing deserialized objects
+     * @param <E> The type of the output array list
      */
     @SuppressWarnings("all")//for the type cast
     public static <E> ArrayList<E> deserializeArrayList(byte[] bytes, SerialIterator iterator){
@@ -153,11 +155,11 @@ public class Deserializers {
         return list;
     }
 
-    /** deserialize an identifier
+    /** Deserialize an identifier
      * NOTE: the iterator should point to the length bytes before the actual identifier data
-     * @param bytes the bytes to read from
-     * @param iterator the position in the array to read the ID from. automatically advances to the position at the end of the identifier
-     * @return an identifier deserialized from the inputted bytes
+     * @param bytes The bytes to read from
+     * @param iterator The position in the array to read the ID from. automatically advances to the position at the end of the identifier
+     * @return An identifier deserialized from the inputted bytes
      */
     public static Identifier deserializeIdentifier(byte[] bytes, SerialIterator iterator){
         int length = bytesToInt(bytes,iterator);
@@ -167,10 +169,10 @@ public class Deserializers {
     }
 
 
-    /**deserialize an object
-     * @param bytes the bytes to read from
-     * @param iterator the position in the array to read the object from. automatically advances to the position at the end of the object
-     * @return an object deserialize from the input data
+    /**Deserialize an object
+     * @param bytes The bytes to read from
+     * @param iterator The position in the array to read the object from. automatically advances to the position at the end of the object
+     * @return An object deserialize from the input data
      */
     public static Object deserializeObject(byte[] bytes,SerialIterator iterator){
         Identifier oid = deserializeIdentifier(bytes,iterator);

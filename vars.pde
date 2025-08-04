@@ -1,3 +1,5 @@
+//start of vars.pde
+//this file is just a mass of global vars
 PShader shadowShader;
 PShader depthBufferShader;
 
@@ -17,6 +19,10 @@ PShape greenScaler;
 PShape blueScaler;
 PShape yellowScaler;
 PShape LevelCreatorLogo;
+PShape rotateCircleX;
+PShape rotateCircleY;
+PShape rotateCircleZ;
+PShape rotateCircleHilight;
 
 boolean requestDepthBufferInit = false ;
 boolean showDepthBuffer = false;
@@ -63,50 +69,17 @@ boolean loaded = false;
 boolean reachedEnd = false;
 boolean editingStage = false;
 boolean simulating = false;
-boolean ground = false;
-boolean check_point = false;
-boolean goal = false;
 boolean deleteing = false;
 boolean moving_player = false;
 boolean grid_mode = false;
-boolean holo_gram = false;
-boolean drawCoins = false;
 boolean drawingPortal = false;
-boolean sloap = false;
-boolean holoTriangle = false;
-boolean dethPlane = false;
 boolean selectingBlueprint = false;
-boolean placingSound = false;
-boolean drawingSign = false;
-boolean placingLogicButton = false;
-boolean draw3DSwitch1 = false;
-boolean draw3DSwitch2 = false;
 boolean editinglogicBoard = false;
 boolean connectingLogic = false;
 boolean moveLogicComponents = false;
-boolean placingAndGate = false;
-boolean placingOrGate = false;
-boolean placingXorGate = false;
-boolean placingNandGate = false;
-boolean placingNorGate = false;
-boolean placingXnorGate = false;
-boolean placingOnSingal = false;
-boolean placingReadVariable = false;
-boolean placingSetVaravle = false;
-boolean placingSetVisibility = false;
-boolean placingXOffset = false;
-boolean placingYOffset = false;
-boolean placingDelay = false;
-boolean placingZOffset = false;
-boolean placing3Dsetter = false;
-boolean placing3Dreader = false;
-boolean placingPlaySoundLogic = false;
-boolean placingPulse = false;
-boolean placingRandom = false;
 boolean saveColors = false;
 boolean levelOverview = false;
 boolean drawingPortal3 = false;
-boolean placingTestLogic = false;
 boolean settingPlayerSpawn = false;
 boolean levelCreator = false;
 boolean drawing = false;
@@ -131,14 +104,16 @@ boolean transitioningMenu = false;
 boolean newSoundAsNarration = false;
 boolean newBlueprintIs3D = false;
 boolean placingGoon = false;
+boolean rotating = false;
 ArrayList<Boolean> compatibles;
 ArrayList<Boolean> coins;
 
 PVector lightDir = new PVector();
+PVector currentComponentRotation = new PVector();
 
 String Menue = "creds";
-String version = "0.9.2_Early_Access";
-String EDITOR_version = "0.2.1_EAc";
+String version = "0.10.0_Early_Access";
+String EDITOR_version = "0.3.0_EAc";
 String ip = "localhost";
 String name = "can't_be_botherd_to_chane_it";
 String rootPath;
@@ -162,7 +137,7 @@ ArrayList<String> playerNames=new ArrayList<>();
 
 //String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"};
 //String[] sfxTracks={"data/sounds/level complete.wav"};
-String[] compatibleVersions={"0.7.0_Early_Access", "0.7.1_Early_Access","0.8.0_Early_Access","0.8.1_Early_Access","0.8.2_Early_Access","0.9.0_Early_Access","0.9.1_Early_Access"};
+String[] compatibleVersions={"0.10.0_Early_Access"};
 
 float Scale;
 float gravity = 0.001;
@@ -235,6 +210,9 @@ int connectingFromIndex = 0;
 int movingLogicIndex = 0;
 int loadProgress = 0;
 int totalLoad = 55;
+int curMills = 0;
+int lasMills = 0;
+int mspc = 0;
 int[][] tutorialNarration=new int[2][17];
 
 JSONArray colors;
@@ -303,6 +281,8 @@ Button dev_tutorial;
 Button dev_settings;
 Button dev_UGC;
 Button dev_multiplayer;
+Button dev_levelCreator;
+Button dev_testLevel;
 Button multyplayerJoin;
 Button multyplayerHost;
 Button multyplayerExit;
@@ -336,7 +316,6 @@ Button overviewDown;
 Button chooseFileButton;
 Button lcLoadLevelButton;
 Button lcNewLevelButton;
-Button dev_levelCreator;
 Button lc_backButton;
 Button lcOverviewExitButton;
 Button lc_exitConfirm;
@@ -356,6 +335,8 @@ Button disableMenuTransistionsButton;
 Button enableMenuTransitionButton;
 Button select_lvl_13;
 Button select_lvl_14;
+Button select_lvl_15;
+Button select_lvl_16;
 Button select_lvl_next;
 
 UiFrame ui;
@@ -407,16 +388,11 @@ UiText st_other;
 UiText initMultyplayerScreenTitle;
 UiText mp_hostSeccion;
 UiText mp_host_Name;
-//UiText mp_host_enterdName;
 UiText mp_host_port;
-//UiText mp_host_endterdPort;
 UiText mp_joinSession;
 UiText mp_join_name;
-//UiText mp_join_enterdName;
 UiText mp_join_port;
-//UiText mp_join_enterdPort;
 UiText mp_join_ip;
-//UiText mp_join_enterdIp;
 UiText mp_disconnected;
 UiText mp_dc_reason;
 UiText dev_title;
@@ -492,8 +468,6 @@ PlayerMovementManager playerMovementManager = new PlayerMovementManager();
 
 CollisionDetection collisionDetection = new CollisionDetection();
 
-HashMap<String,StageEntity> entityRegistry = new HashMap<>();//This is gogin to be repalced in the next Update
-
 StatisticManager stats;
 
 SoundHandler soundHandler;
@@ -507,6 +481,8 @@ Stage displayBlueprint;
 LogicThread logicTickingThread = new LogicThread();
 
 ToolBox scr2;
+
+Identifier currentlyPlaceing = null;
 
 
 //DO NOT EDIT BELOW THIS LINE ON THE MAIN PROJECT!
@@ -547,3 +523,7 @@ HashMap<String,ButtonMenuConfig> buttonMenuConfigMapping = new HashMap<>();
 //+++++++++++++++++++++++++++++++++++++++++++++++++++
 //===================================================
 //reserverd for other external var decaliresion
+
+
+
+//end of vars.pde

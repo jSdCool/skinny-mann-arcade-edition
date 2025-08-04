@@ -1,3 +1,6 @@
+//start of stage_editor.pde
+/**Render the GUI for the stage editor. Note: this is also generaly responcable for component placement
+*/
 void stageEditGUI() {
 
   textAlign(LEFT, BOTTOM);
@@ -9,41 +12,35 @@ void stageEditGUI() {
   } else {
     adj=0;
   }
-  Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;
+  Color=(int)(RC*Math.pow(16, 4)+GC*Math.pow(16, 2)+BC+adj)-16777215;//calculate the color from the level creator, this may be useless
   Color=scr2.CC;
 
   Stage current=null;//setup a varable that can be used for the current stage or blueprint
-  if (editingStage) {
+  if (editingStage) {//if editing a stage
     current=level.stages.get(currentStageIndex);
   }
-  if (editingBlueprint) {
+  if (editingBlueprint) {//if editing a blueprint
     current=workingBlueprint;
   }
 
-  if (current.type.equals("stage")||current.type.equals("blueprint")) {//if current is a steg or blueprint
+  if (current.type.equals("stage")||current.type.equals("blueprint")) {//if current is a 2D stage or blueprint
   
-  if (grid_mode) {//grid mode position box
-    int X2=0, Y2=0, X1=0, Y1=0;
-    X1=(int)(((floor((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale);
-    X2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale)-X1;
-    Y1=(int)(((floor((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale);
-    Y2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale)-abs(Y1);\
-    fill(#AAAA00,120);
-    rect(X1,Y1,X2,Y2);
+    if (grid_mode) {//grid mode position box
+      int X2=0, Y2=0, X1=0, Y1=0;
+      X1=(int)(((floor((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale);
+      X2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale)-X1;
+      Y1=(int)(((floor((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale);
+      Y2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale)-abs(Y1);\
+      fill(#AAAA00,120);
+      rect(X1,Y1,X2,Y2);
+    }
 
-    
-  }
-
-    if (drawing) {//if drawing a dragable shape
-      fill(Color);
-      stroke(Color);
-      if (dethPlane) {//overide coustome color if the current tool is deathplane
-        fill(-114431);
-        stroke(-114431);
-      }
-
+    if (drawing && currentlyPlaceing != null && StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if drawing a dragable shape
+      StageComponentRegistry.DraggablePlacementPreview preview = StageComponentRegistry.getDragPreview(currentlyPlaceing);
+      boolean isSloap = currentlyPlaceing.equals(Sloap.ID) || currentlyPlaceing.equals(HoloTriangle.ID);//figure out if the thing currently being placed is a slope type
+      //becasue slopes are special and palce alightly diffrently
       if (grid_mode) {//if gridmode is on
-        if (sloap||holoTriangle) {//if your currenly drawing a triangle type
+        if (isSloap) {//if your currenly drawing a triangle type
           int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size-camPos;
@@ -61,18 +58,8 @@ void stageEditGUI() {
             Y1=(int)Math.floor((mouseY/Scale-camPosY)/grid_size)*grid_size+camPosY;
             Y2=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)+camPosY;
           }
-          if (triangleMode==0) {//display the triangle that will be created
-            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
-          if (triangleMode==1) {
-            triangle(X1*Scale, Y1*Scale, X1*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
-          if (triangleMode==2) {
-            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X1*Scale, Y2*Scale);
-          }
-          if (triangleMode==3) {
-            triangle(X1*Scale, Y2*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
+          
+          preview.draw(g, X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, Color, triangleMode, Scale);
         } else {//if the type is not a triangle
           int XD=0, YD=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
@@ -94,10 +81,10 @@ void stageEditGUI() {
           }
           strokeWeight(0);
 
-          rect(X1*Scale, Y1*Scale, XD*Scale, YD*Scale);//display the rectangle that is being drawn
+          preview.draw(g, X1*Scale, Y1*Scale, XD*Scale, YD*Scale, Color, triangleMode, Scale);//display the rectangle that is being drawn
         }
       } else {//if grid mode is off
-        if (sloap||holoTriangle) {
+        if (isSloap) {
           int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)Math.floor((downX/Scale));
@@ -115,28 +102,20 @@ void stageEditGUI() {
             Y1=(int)Math.floor(mouseY/Scale);
             Y2=(int)Math.floor(Math.ceil(downY/Scale));
           }
-          if (triangleMode==0) {//display the triangle that will be created
-            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
-          if (triangleMode==1) {
-            triangle(X1*Scale, Y1*Scale, X1*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
-          if (triangleMode==2) {
-            triangle(X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, X1*Scale, Y2*Scale);
-          }
-          if (triangleMode==3) {
-            triangle(X1*Scale, Y2*Scale, X2*Scale, Y2*Scale, X2*Scale, Y1*Scale);
-          }
+          
+            
+          preview.draw(g, X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, Color, triangleMode, Scale);//draw the preview of that os being placed
+              
         } else {
           strokeWeight(0);
           float xdif=(int)((mouseX-downX)/Scale)*Scale, ydif=(int)((mouseY-downY)/Scale)*Scale;//calcaute the location of the mouese press and unpress location
-
-          rect((int)(downX/Scale)*Scale, (int)(downY/Scale)*Scale, xdif, ydif);//display the rectangle that is being drawn
+           preview.draw(g, (int)(downX/Scale)*Scale, (int)(downY/Scale)*Scale, xdif, ydif, Color, triangleMode, Scale);//display the rectangle that is being drawn
         }
       }
     }
 
-    if (draw&&ground) {//add new ground element to the level
+    //if placing a draggable and it is time to add it to the level
+    if (draw && StageComponentRegistry.isDraggable(currentlyPlaceing)) {
 
       float xdif=upX-downX, ydif=upY-downY;
       int X1=0, XD=0, Y1=0, YD=0;
@@ -159,7 +138,7 @@ void stageEditGUI() {
           Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
           YD=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
         }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+        if (downX==upX) {//if there was no change is mouse position then don't create a new component
           draw=false;
           return ;
         }
@@ -186,7 +165,7 @@ void stageEditGUI() {
           Y1 = (int)(upY/Scale)-camPosY;
           YD = (int)abs(downY/Scale-upY/Scale);
         }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+        if (downX==upX) {//if there was no change is mouse position then don't create a new component
           draw=false;
           return ;
         }
@@ -195,383 +174,147 @@ void stageEditGUI() {
           return;
         }
       }
-
-      current.parts.add(new Ground(X1, Y1, XD, YD, Color));//add the new element to the stage
-      draw=false;
-    }//end of add ground
-
-    if (draw&&holo_gram) {//add new holo element to the level
-      float xdif=upX-downX, ydif=upY-downY;
-      int X1=0, XD=0, Y1=0, YD=0;
-      if (grid_mode) {
-
-
-        if (upX>downX) {//calculate corder position
-          X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size;
-          XD=(int)Math.floor(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size)-X1;
-        }
-        if (upX<downX) {
-          X1=(int)Math.floor((upX/Scale+camPos)/grid_size)*grid_size;
-          XD=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-X1;
-        }
-        if (upY>downY) {
-          Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size;
-          YD=(int)Math.floor(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-        }
-        if (upY<downY) {
-          Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
-          YD=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      } else {
-
-
-        if (upX>downX) {//calculate corder position
-          X1 = (int)(downX/Scale)+camPos;
-          XD = (int)abs(xdif/Scale);
-        }
-        if (upX<downX) {
-          X1 = (int)(upX/Scale)+camPos;
-          XD = (int)abs(downX/Scale-upX/Scale);
-        }
-        if (upY>downY) {
-          Y1 = (int)(downY/Scale)-camPosY;
-          YD =  (int)abs(ydif/Scale);
-        }
-        if (upY<downY) {
-          Y1 = (int)(upY/Scale)-camPosY;
-          YD = (int)abs(downY/Scale-upY/Scale);
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
+      //get the drag constructor of the component
+      Function<StageComponentDragPlacementContext, StageComponent> constructor = StageComponentRegistry.getDragConstructor(currentlyPlaceing);
+      if(constructor == null){
+        throw new RuntimeException("Constructor not found for dragagble: "+currentlyPlaceing);
       }
-      current.parts.add(new Holo(X1, Y1, XD, YD, Color));//add the new element to the stage
+      StageComponentDragPlacementContext placementContext = new StageComponentDragPlacementContext(X1, Y1, XD, YD, Color, triangleMode);
+      //create the new component
+      current.add(constructor.apply(placementContext));//add the new element to the stage
       draw=false;
-    }//end of add holo
-
-    if (draw&&dethPlane) {//add new deathplane element to the level
-      float xdif=upX-downX, ydif=upY-downY;
-      int X1=0, XD=0, Y1=0, YD=0;
-      if (grid_mode) {
-
-
-        if (upX>downX) {//calculate corder position
-          X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size;
-          XD=(int)Math.floor(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size)-X1;
-        }
-        if (upX<downX) {
-          X1=(int)Math.floor((upX/Scale+camPos)/grid_size)*grid_size;
-          XD=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-X1;
-        }
-        if (upY>downY) {
-          Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size;
-          YD=(int)Math.floor(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-        }
-        if (upY<downY) {
-          Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
-          YD=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      } else {
-
-
-        if (upX>downX) {//calculate corder position
-          X1 = (int)(downX/Scale)+camPos;
-          XD = (int)(xdif/Scale);
-        }
-        if (upX<downX) {
-          X1 = (int)(upX/Scale)+camPos;
-          XD = (int)(downX/Scale-upX/Scale);
-        }
-        if (upY>downY) {
-          Y1 = (int)(downY/Scale)-camPosY;
-          YD =  (int)(ydif/Scale);
-        }
-        if (upY<downY) {
-          Y1 = (int)(upY/Scale);
-          YD = (int)(downY/Scale-upY/Scale-camPosY);
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      }
-      current.parts.add(new DethPlane(X1, Y1, XD, YD));//add new death plane elemtn to the stage
-      draw=false;
-    }//end of new deathplane
-
-
-    if (check_point&&draw) {//creating new checkpoint
-      if (grid_mode) {//if grid mode is on
-        current.parts.add(new CheckPoint(Math.round(((int)Math.floor(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)Math.floor(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size));//add new checkpoint to the stage
-      } else {
-        current.parts.add(new CheckPoint((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));//add new checkpoint to the stage
-      }
-      draw=false;
-    }//end of create new checkpoint
-    if (goal&&draw) {//create new finishline
-      if (grid_mode) {//if grid mode is on
-        current.parts.add(new Goal(Math.round(((int)Math.floor(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)Math.floor(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size));//add new finishline to the stage
-      } else {
-        current.parts.add(new Goal((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));//add new finishline to the stage
-      }
-      draw=false;
-    }//end of new finishline
+    }//end of add draggable to stage
 
     if (deleteing&&delete) {//if attempting to delete something
-      int index=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, current);//get the index of the elemtn the mouse is currently over
+      int index=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, current);//get the index of the element the mouse is currently over
       if (index==-1) {//if the mouse was over nothing then do nothing
         Collider2D c2D = Collider2D.createRectHitbox(mouseX/Scale+camPos-0.5f,mouseY/Scale-camPosY-0.5f,1,1);
         //check for collision with entities
         for(int i=0;i<current.entities.size();i++){
-          if(collisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){
-            current.entities.remove(i);
+          if(CollisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){//if clicking on a entity
+            current.entities.remove(i);//remove that entity
             break;
           }
         }
-      } else {
+      } else {//if a stage component was clicked
         StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
         if (current.interactables.contains(removed)) {
           current.interactables.remove(removed);
         }
       }
-      delete=false;
+      delete=false;//stop deleteing
     }//end of delete
-
-    if (drawCoins) {//if adding coins
-      if (grid_mode) {//if grid mode is on
-        drawCoin((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, 3*Scale,g);//draw gid aligmed coin
-      } else {
-        drawCoin((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, 3*Scale,g);//draw coin
+    
+    //draw placeable preview
+    if(currentlyPlaceing != null && !StageComponentRegistry.isDraggable(currentlyPlaceing)){//if currently placing something, that is not a draggable
+      StageComponentRegistry.PlacementPreview preview = StageComponentRegistry.getPreview(currentlyPlaceing);//get the preview renderer for this component
+      if(preview != null){//if it has a preview
+        if (grid_mode) {//display the preview with the appropriate respect to grid mode
+          preview.draw(g, (Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY), Scale);
+        } else {
+          preview.draw(g, (int)(mouseX/Scale), (int)(mouseY/Scale), Scale);
+        }
       }
     }
-
-    if (drawingPortal) {//if adding portal part 1
+    //portals are special
+    if (drawingPortal || drawingPortal3) {//if adding portal part 1 reder a portal
       if (grid_mode) {//if gridmode is on
         drawPortal((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, 1*Scale,g);//draw a grid aligned portal
       } else {
         drawPortal((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, 1*Scale,g);//draw a portal
       }
     }
-
-    if (drawingPortal3) {//if drawing portal part 3
-      if (grid_mode) {//if gridmode is on
-        drawPortal((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale,g);//draw a grid aligned portal
-      } else {
-        drawPortal((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, 1,g);//draw a portal
-      }
-    }
-
-    if (sloap&&draw) {//if drawing a triangle
-      int X1=0, X2=0, Y1=0, Y2=0;
-      if (grid_mode) {//if gridmode is on
-
-
-        if (upX>downX) {//calcualte corner positions
-          X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size;
-          X2=(int)Math.floor(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size);
+    
+    //2D Component Transformations
+    if (selectedIndex!=-1) {//if something is selected
+      StageComponent ct=current.parts.get(selectedIndex);//get the selected componenet
+      //2D Rotation
+      if(current3DTransformMode==3 && ct instanceof Rotatable){//if rotating
+        //prepair the visual center pos
+        PVector center = ct.getCenter();
+        center.z=0;
+        center.mult(Scale);
+        center.x -= drawCamPosX*Scale;
+        center.y += drawCamPosY*Scale;
+        float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2))*2.5;//calculate the circle size
+        
+        //draw the circle
+        fill(0,0);
+        if(dist(mouseX,mouseY,center.x,center.y) <= sze/2*Scale){
+          stroke(255,255,0);
+        }else{
+          stroke(0,0,255);
         }
-        if (upX<downX) {
-          X1=(int)Math.floor((upX/Scale+camPos)/grid_size)*grid_size;
-          X2=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size);
+        strokeWeight(4);
+        circle(center.x,center.y,sze*Scale);
+        noStroke();
+        
+        //rotation functionality
+        if(translateZaxis){
+          //basically just get the angle between where the mouse is now and where it was when the rotation started
+          Rotatable rotb = (Rotatable)ct;
+          PVector AB = PVector.sub(initalMousePoint.toPVector(),center,null);
+          PVector BC = PVector.sub(center, new PVector(mouseX,mouseY),null);
+          AB.normalize();
+          BC.normalize();
+          BC.mult(-1);//make both face the smae direction if the start and current points are the same place
+          float angleDiff = acos(AB.dot(BC));
+          //this is some math shit I do not completely
+          if(PVector.cross(AB,BC,null).dot(rotb.getZRotationAxis()) <= 0){
+            angleDiff*=-1;
+          }
+          //then apply it to the correct axis
+          if(grid_mode){
+            rotb.rotateZ(radians(Math.round(degrees(currentComponentRotation.z+angleDiff)/grid_size)*grid_size));
+          }else{
+            rotb.rotateZ(currentComponentRotation.z+angleDiff);
+          }
+          
         }
-        if (upY>downY) {
-          Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size;
-          Y2=(int)Math.floor(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size);
-        }
-        if (upY<downY) {
-          Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
-          Y2=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size);
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      } else {//if gridmode is off
-
-        if (upX>downX) {
-          X1 = (int)(downX/Scale)+camPos;//calculate corder position
-          X2 = (int)(upX/Scale)+camPos;
-        }
-        if (upX<downX) {
-          X1 = (int)(upX/Scale)+camPos;
-          X2 = (int)(downX/Scale+camPos);
-        }
-        if (upY>downY) {
-          Y1 = (int)(downY/Scale)-camPosY;
-          Y2 = (int)(upY/Scale)-camPosY;
-        }
-        if (upY<downY) {
-          Y1 = (int)(upY/Scale)-camPosY;
-          Y2 = (int)(downY/Scale)-camPosY;
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      }
-
-      current.parts.add(new Sloap(X1, Y1, X2, Y2, triangleMode, Color));//add new sloap to the stage
-      draw=false;
-    }
-
-    if (holoTriangle&&draw) {//if drawing a holo triangle
-      int X1=0, X2=0, Y1=0, Y2=0;
-      if (grid_mode) {//if gridmode is on
-
-
-        if (upX>downX) {//calculate corder position
-          X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size;
-          X2=(int)Math.floor(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size);
-        }
-        if (upX<downX) {
-          X1=(int)Math.floor((upX/Scale+camPos)/grid_size)*grid_size;
-          X2=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size);
-        }
-        if (upY>downY) {
-          Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size;
-          Y2=(int)Math.floor(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size);
-        }
-        if (upY<downY) {
-          Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
-          Y2=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size);
-        }
-        if (downX==upX) {
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      } else {//if grid mode is off
-
-
-        if (upX>downX) {//calculate corder position
-          X1 = (int)(downX/Scale)+camPos;
-          X2 = (int)(upX/Scale)+camPos;
-        }
-        if (upX<downX) {
-          X1 = (int)(upX/Scale)+camPos;
-          X2 = (int)(downX/Scale+camPos);
-        }
-        if (upY>downY) {
-          Y1 = (int)(downY/Scale)-camPosY;
-          Y2 = (int)(upY/Scale)-camPosY;
-        }
-        if (upY<downY) {
-          Y1 = (int)(upY/Scale)-camPosY;
-          Y2 = (int)(downY/Scale)-camPosY;
-        }
-        if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-          draw=false;
-          return ;
-        }
-        if (downY==upY) {
-          draw=false;
-          return;
-        }
-      }
-      current.parts.add(new HoloTriangle(X1, Y1, X2, Y2, triangleMode, Color));//add new holor triangle to the stage
-      draw=false;
-    }
-    if (check_point) {//if  checkpoint
-      if (grid_mode) {//draw checkoint
-        drawCheckPoint((Math.round((mouseX/Scale+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round((mouseY/Scale-camPosY)*1.0/grid_size)*grid_size+camPosY),g);
-      } else {
-        drawCheckPoint((int)(mouseX/Scale), (int)(mouseY/Scale),g);
-      }
-    }
-    if (drawingSign) {//if sign
-      if (grid_mode) {//draw a sign
-        drawSign((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale,g);
-      } else {
-        drawSign((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale,g);
-      }
-    }
-    if (placingSound) {//if placing soundboxes
-      if (grid_mode) {//draw a sound box
-        drawSoundBox((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale,g);
-      } else {
-        drawSoundBox((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale,g);
-      }
-    }
-    if (placingLogicButton) {//if placing a logic button
-      if (grid_mode) {//draw the switch
-        drawLogicButton((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale, false,g);
-      } else {
-        drawLogicButton((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale, false,g);
-      }
-    }
-    if (placingLogicButton&&draw) {//if attempting to add a logic button
-      if (grid_mode) {//add the button to the stage
-        current.parts.add(new LogicButton(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size));
-      } else {
-        current.parts.add(new LogicButton((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));
-      }
-      current.interactables.add(current.parts.get(current.parts.size()-1));
-      draw=false;
-    }
-
-
-    //the accual gut part
-  }
+      }//end of rotating
+      
+    }//end of transformations
+  }//end of 2D stage edit gui
 
   if (current.type.equals("3Dstage") || current.type.equals("3D blueprint")) {//if in a 3D stage
 
     if (!e3DMode) {//if 3D mode is off
-      if (grid_mode) {//grid mode position box
+      if (grid_mode) {//grid mode position box for 2D
         int X2=0, Y2=0, X1=0, Y1=0;
         X1=(int)(((floor((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale);
-        X2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos)*Scale)-X1;
+        X2=(int)(grid_size*Scale);
         Y1=(int)(((floor((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale);
-        Y2=(int)(grid_size*Scale);//(int)(((int)(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY)*Scale)-abs(Y1);\
+        Y2=(int)(grid_size*Scale);
         fill(#AAAA00,120);
         rect(X1,Y1,X2,Y2);
       }
 
-      if (drawing) {//if drawing something
-        fill(Color);
-        stroke(Color);
-        if (dethPlane) {
-          fill(-114431);
-          stroke(-114431);
-        }
-
-        if (grid_mode||holo_gram) {//if drawing something that is a rectangle
-          int XD=0, YD=0, X1=0, Y1=0;//calc the corner positions
+      if (drawing && currentlyPlaceing != null && StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if drawing a dragable shape
+      StageComponentRegistry.DraggablePlacementPreview preview = StageComponentRegistry.getDragPreview(currentlyPlaceing);//get the preview for that shape
+      boolean isSloap = currentlyPlaceing.equals(Sloap.ID) || currentlyPlaceing.equals(HoloTriangle.ID);//hard coded shit for sloapes (lol no idea why I still need this)
+      if (grid_mode) {//if gridmode is on
+        if (isSloap) {//if your currenly drawing a triangle type
+          int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
+          if (mouseX>downX) {
+            X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size-camPos;
+            X2=(int)Math.floor(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-camPos;
+          }
+          if (mouseX<downX) {
+            X1=(int)Math.floor((mouseX/Scale+camPos)/grid_size)*grid_size-camPos;
+            X2=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-camPos;
+          }
+          if (mouseY>downY) {
+            Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            Y2=(int)Math.floor(Math.ceil((mouseY/Scale-camPosY)/grid_size)*grid_size)+camPosY;
+          }
+          if (mouseY<downY) {
+            Y1=(int)Math.floor((mouseY/Scale-camPosY)/grid_size)*grid_size+camPosY;
+            Y2=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)+camPosY;
+          }
+          
+          preview.draw(g, X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, Color, triangleMode, Scale);//render its preview
+        } else {//if the type is not a triangle
+          int XD=0, YD=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
           if (mouseX>downX) {
             X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size-camPos;
             XD=(int)Math.floor(Math.ceil((mouseX/Scale+camPos)/grid_size)*grid_size)-X1-camPos;
@@ -591,15 +334,40 @@ void stageEditGUI() {
           }
           strokeWeight(0);
 
-          rect(X1*Scale, Y1*Scale, XD*Scale, YD*Scale);//draw the rectangle preview
-        } else {//end of grid mode
-          strokeWeight(0);
-          float xdif=mouseX-downX, ydif=mouseY-downY;
-          rect((int)(downX/Scale)*Scale, (int)(downY/Scale)*Scale, (int)(xdif/Scale)*Scale, (int)(ydif/Scale)*Scale);//draw the preview
+          preview.draw(g, X1*Scale, Y1*Scale, XD*Scale, YD*Scale, Color, triangleMode, Scale);//display the shape that is being drawn
         }
-      }//end of drawing
+      } else {//if grid mode is off
+        if (isSloap) {
+          int X2=0, Y2=0, X1=0, Y1=0;//calcaute the location of the mouese press and unpress location
+          if (mouseX>downX) {
+            X1=(int)Math.floor((downX/Scale));
+            X2=(int)Math.floor(Math.ceil((mouseX/Scale)));
+          }
+          if (mouseX<downX) {
+            X1=(int)Math.floor((mouseX/Scale));
+            X2=(int)Math.floor(Math.ceil((downX/Scale)));
+          }
+          if (mouseY>downY) {
+            Y1=(int)Math.floor(downY/Scale);
+            Y2=(int)Math.floor(Math.ceil(mouseY/Scale));
+          }
+          if (mouseY<downY) {
+            Y1=(int)Math.floor(mouseY/Scale);
+            Y2=(int)Math.floor(Math.ceil(downY/Scale));
+          }
+          
+            
+          preview.draw(g, X1*Scale, Y1*Scale, X2*Scale, Y2*Scale, Color, triangleMode, Scale);//preview the triangle
+              
+        } else {
+          strokeWeight(0);
+          float xdif=(int)((mouseX-downX)/Scale)*Scale, ydif=(int)((mouseY-downY)/Scale)*Scale;//calcaute the location of the mouese press and unpress location
+           preview.draw(g, (int)(downX/Scale)*Scale, (int)(downY/Scale)*Scale, xdif, ydif, Color, triangleMode, Scale);//display the shape that is being drawn
+        }
+      }
+    }
 
-      if (draw&&ground) {//if drawing ground
+      if (draw && StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if placeing a draggable 
         float xdif=upX-downX, ydif=upY-downY;
         int X1=0, XD=0, Y1=0, YD=0;
         if (grid_mode) {//if gridmode is on
@@ -621,7 +389,7 @@ void stageEditGUI() {
             Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
             YD=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
           }
-          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+          if (downX==upX) {//if there was no change is mouse position then don't create a new componenet
             draw=false;
             return ;
           }
@@ -648,7 +416,7 @@ void stageEditGUI() {
             Y1 = (int)(upY/Scale);
             YD = (int)(downY/Scale-upY/Scale-camPosY);
           }
-          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
+          if (downX==upX) {//if there was no change is mouse position then don't create a new component
             draw=false;
             return ;
           }
@@ -657,70 +425,16 @@ void stageEditGUI() {
             return;
           }
         }
-        current.parts.add(new Ground(X1, Y1, startingDepth, XD, YD, totalDepth, Color));//add new ground to the stage
-        draw=false;
-      }
-      if (draw&&holo_gram) {//if drawing holo
-        float xdif=upX-downX, ydif=upY-downY;
-        int X1=0, XD=0, Y1=0, YD=0;
-        if (grid_mode) {//if grid mode is on
-
-
-          if (upX>downX) {//calc corner position
-            X1=(int)Math.floor((downX/Scale+camPos)/grid_size)*grid_size;
-            XD=(int)Math.floor(Math.ceil((upX/Scale+camPos)/grid_size)*grid_size)-X1;
-          }
-          if (upX<downX) {
-            X1=(int)Math.floor((upX/Scale+camPos)/grid_size)*grid_size;
-            XD=(int)Math.floor(Math.ceil((downX/Scale+camPos)/grid_size)*grid_size)-X1;
-          }
-          if (upY>downY) {
-            Y1=(int)Math.floor((downY/Scale-camPosY)/grid_size)*grid_size;
-            YD=(int)Math.floor(Math.ceil((upY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-          }
-          if (upY<downY) {
-            Y1=(int)Math.floor((upY/Scale-camPosY)/grid_size)*grid_size;
-            YD=(int)Math.floor(Math.ceil((downY/Scale-camPosY)/grid_size)*grid_size)-Y1;
-          }
-          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-            draw=false;
-            return ;
-          }
-          if (downY==upY) {
-            draw=false;
-            return;
-          }
-        } else {
-
-
-          if (upX>downX) {//calc corner position
-            X1 = (int)(downX/Scale)+camPos;
-            XD = (int)(xdif/Scale);
-          }
-          if (upX<downX) {
-            X1 = (int)(upX/Scale)+camPos;
-            XD = (int)(downX/Scale-upX/Scale);
-          }
-          if (upY>downY) {
-            Y1 = (int)(downY/Scale)-camPosY;
-            YD =  (int)(ydif/Scale);
-          }
-          if (upY<downY) {
-            Y1 = (int)upY;
-            YD = (int)(downY/Scale-upY/Scale-camPosY);
-          }
-          if (downX==upX) {//if there was no change is mouse position then don't create a new segment
-            draw=false;
-            return ;
-          }
-          if (downY==upY) {
-            draw=false;
-            return;
-          }
+        
+        Function<StageComponentDragPlacementContext, StageComponent> constructor = StageComponentRegistry.getDragConstructor(currentlyPlaceing);//get the constructor for this component
+        if(constructor == null){
+          throw new RuntimeException("Constructor not found for dragagble: "+currentlyPlaceing);
         }
-        current.parts.add(new Holo(X1, Y1, startingDepth, XD, YD, totalDepth, Color));//add new holo to the stage
+        StageComponentDragPlacementContext placementContext = new StageComponentDragPlacementContext(X1, Y1, startingDepth, XD, YD, totalDepth, Color, triangleMode);
+        //create the new component
+        current.add(constructor.apply(placementContext));//add the new element to the stage
         draw=false;
-      }
+      }//end of placeing draggable
 
       if (deleteing&&delete) {//if deleting things
         int index=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, level.stages.get(currentStageIndex));//figure out what thing the mouse is over
@@ -728,12 +442,12 @@ void stageEditGUI() {
           Collider2D c2D = Collider2D.createRectHitbox(mouseX/Scale+camPos-0.5f,mouseY/Scale-camPosY-0.5f,1,1);
           //check for collision with entities
           for(int i=0;i<current.entities.size();i++){
-            if(collisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){
-              current.entities.remove(i);
+            if(CollisionDetection.collide2D(current.entities.get(i).getHitBox2D(0,0),c2D)){//if over an entity
+              current.entities.remove(i);//delete the entity
               break;
             }
           }
-        } else {
+        } else {//if over a component
           StageComponent removed = current.parts.remove(index);//remove the object the mosue was over
           if (current.interactables.contains(removed)) {
             current.interactables.remove(removed);
@@ -741,350 +455,542 @@ void stageEditGUI() {
         }
         delete=false;
       }
-      if (draw3DSwitch1) {//if drawing a 3d switch
-        if (grid_mode) {//draw the switch
-          draw3DSwitch1((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY), Scale,g);
-        } else {
-          draw3DSwitch1((int)(mouseX/Scale), (int)(mouseY/Scale), Scale,g);
-        }
+      
+      //draw placeable preview
+      if(currentlyPlaceing != null && !StageComponentRegistry.isDraggable(currentlyPlaceing)){//if currently placing a placeable
+        StageComponentRegistry.PlacementPreview preview = StageComponentRegistry.getPreview(currentlyPlaceing);//get the preview renderer for this component
+        if (grid_mode) {//render it appropriatly 
+            preview.draw(g, (Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY), Scale);
+          } else {
+            preview.draw(g, (int)(mouseX/Scale), (int)(mouseY/Scale), Scale);
+          }
       }
-      if (draw3DSwitch2) {//if drawing a 3d switch
-        if (grid_mode) {//draw the switch
-          draw3DSwitch2((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY), Scale,g);
-        } else {
-          draw3DSwitch2((int)(mouseX/Scale), (int)(mouseY/Scale), Scale,g);
-        }
-      }
-      if (draw3DSwitch1&&draw) {//if attempting to add a 3D switch
-        if (grid_mode) {//add the switch to the stage
-          current.parts.add(new SWon3D(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth));
-        } else {
-          current.parts.add(new SWon3D((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth));
-        }
-        draw=false;
-      }
-
-      if (draw3DSwitch2&&draw) {//if attempting to add a 3D switch
-        if (grid_mode) {//add the 3D switch to the stage
-          current.parts.add(new SWoff3D(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth));
-        } else {
-          current.parts.add(new SWoff3D((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth));
-        }
-        draw=false;
-      }
-
-      if (check_point&&draw) {//if adding a checkpoint
-        if (grid_mode) {//add a checkoint to the stage
-          current.parts.add(new CheckPoint(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth));
-        } else {
-          current.parts.add(new CheckPoint((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth));
-        }
-        draw=false;
-      }
-
-      if (drawingPortal) {//if placing a portal
+     
+      if (drawingPortal || drawingPortal3) {//if placing a portal
         if (grid_mode) {//diaply the portal
           drawPortal((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale,g);
         } else {
           drawPortal((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale,g);
         }
       }
-
-      if (drawingPortal3) {//if placing a portal part 3
-        if (grid_mode) {//display the portal
-          drawPortal((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale,g);
-        } else {
-          drawPortal((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale,g);
-        }
-      }
-      if (check_point) {//if adding checkoint
-        if (grid_mode) {//display a checkoint
-          drawCheckPoint((Math.round((mouseX/Scale+camPos)*1.0/grid_size)*grid_size-camPos), (Math.round((mouseY/Scale-camPosY)*1.0/grid_size)*grid_size+camPosY),g);
-        } else {
-          drawCheckPoint((int)(mouseX/Scale), (int)(mouseY/Scale),g);
-        }
-      }
-      if (drawCoins) {//if adding coins
-        if (grid_mode) {//display a coin
-          drawCoin((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale*3,g);
-        } else {
-          drawCoin((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale*3,g);
-        }
-      }
-      if (drawingSign) {//if adding coins
-        if (grid_mode) {//display a coin
-          drawSign((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale,g);
-        } else {
-          drawSign((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale,g);
-        }
-      }
-      if (placingLogicButton) {//if placing a logic button
-        if (grid_mode) {//draw the switch
-          drawLogicButton((Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size-camPos)*Scale, (Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size+camPosY)*Scale, Scale, false,g);
-        } else {
-          drawLogicButton((int)(mouseX/Scale)*Scale, (int)(mouseY/Scale)*Scale, Scale, false,g);
-        }
-      }
-      if (placingLogicButton&&draw) {//if attempting to add a logic button
-        if (grid_mode) {//add the button to the stage
-          current.parts.add(new LogicButton(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth));
-        } else {
-          current.parts.add(new LogicButton((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth));
-        }
-        draw=false;
-      }
-    }//end of is 3d mode off if statment
-    else {//if 3dmode is on
-      if (selectedIndex!=-1) {
-        //wether the red/green/blue arrows are currrntly being hoverd over
-        boolean b1=false, b2=false, r1=false, r2=false, g1=false, g2=false;
-        StageComponent ct=current.parts.get(selectedIndex);
-        //check if the mouse is hovering over an arrow
-        for (int i=0; i<5000; i++) {
-          Point3D testPoint=genMousePoint(i);
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z+ct.dz && testPoint.z <= ct.z+ct.dz+60) {
-            b1=true;
-            break;
+      
+      //2D 3D Component transformations
+      if (selectedIndex!=-1) {//if selecting somethings
+        StageComponent ct = current.parts.get(selectedIndex);
+        //2D Rotation
+        if(current3DTransformMode==3 && ct instanceof Rotatable){//if rotating
+          //prepair the visual center pos
+          PVector center = ct.getCenter();
+          center.z=0;
+          center.mult(Scale);
+          center.x -= drawCamPosX*Scale;
+          center.y += drawCamPosY*Scale;
+          float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2))*2.5;//calulcate the size of the circle
+          
+          //draw the circle
+          fill(0,0);
+          if(dist(mouseX,mouseY,center.x,center.y) <= sze/2*Scale){
+            stroke(255,255,0);
+          }else{
+            stroke(0,0,255);
           }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= ct.z-60 && testPoint.z <= ct.z) {
-            b2=true;
-            break;
-          }
-
-          if (testPoint.x >= ct.x-60 && testPoint.x <= ct.x && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            r1=true;
-            break;
-          }
-
-          if (testPoint.x >= ct.x+ct.dx && testPoint.x <= ct.x+ct.dx+60 && testPoint.y >= (ct.y+ct.dy/2)-5 && testPoint.y <= (ct.y+ct.dy/2)+5 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            r2=true;
-            break;
-          }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y-60 && testPoint.y <= ct.y && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            g1=true;
-            break;
-          }
-
-          if (testPoint.x >= (ct.x+ct.dx/2)-5 && testPoint.x <= (ct.x+ct.dx/2)+5 && testPoint.y >= ct.y+ct.dy && testPoint.y <= ct.y+ct.dy+60 && testPoint.z >= (ct.z+ct.dz/2)-5 && testPoint.z <= (ct.z+ct.dz/2)+5) {
-            g2=true;
-            break;
+          strokeWeight(4);
+          circle(center.x,center.y,sze*Scale);
+          noStroke();
+          
+          //rotation functionality
+          if(translateZaxis){
+            Rotatable rotb = (Rotatable)ct;
+            //calculate the angle between the mouse and the origional mouse pos
+            PVector AB = PVector.sub(initalMousePoint.toPVector(),center,null);
+            PVector BC = PVector.sub(center, new PVector(mouseX,mouseY),null);
+            AB.normalize();
+            BC.normalize();
+            BC.mult(-1);//make both face the smae direction if the start and current points are the same place
+            float angleDiff = acos(AB.dot(BC));
+            //println(angleDiff+" "+initalMousePoint+" "+objectCenter+" "+inPlane);
+            if(PVector.cross(AB,BC,null).dot(rotb.getZRotationAxis()) <= 0){
+              angleDiff*=-1;
+            }
+            //then apply it to the correct axis
+            if(grid_mode){
+              rotb.rotateZ(radians(Math.round(degrees(currentComponentRotation.z+angleDiff)/grid_size)*grid_size));
+            }else{
+              rotb.rotateZ(currentComponentRotation.z+angleDiff);
+            }
+            
           }
         }
         
-        //render the arrow
+      }
+      
+      
+    }//end of is 3d mode off if statment
+    else {//if 3dmode is on
+    
+      //3D Component transformations
+      if (selectedIndex!=-1) {//if something is selected
+        //wether the red/green/blue arrows are currrntly being hoverd over
+        boolean b1=false, b2=false, r1=false, r2=false, g1=false, g2=false, rix=false,riy=false,riz=false;
+        StageComponent ct=current.parts.get(selectedIndex);
+        //check if the mouse is hovering over an arrow
+        for (int i=0; i<5000; i++) {//ray cast
+          Point3D testPoint=genMousePoint(i);//get the point that is i units from the camera where the mouse is
+          if(!(current3DTransformMode==3 && ct instanceof Rotatable)){//if not rotating
+            //check if the current mouse point is inside of one of the translation arrows / scaling stocks
+            if (testPoint.x >= (ct.getX()+ct.getWidth()/2)-5 && testPoint.x <= (ct.getX()+ct.getWidth()/2)+5 && testPoint.y >= (ct.getY()+ct.getHeight()/2)-5 && testPoint.y <= (ct.getY()+ct.getHeight()/2)+5 && testPoint.z >= ct.getZ()+ct.getDepth() && testPoint.z <= ct.getZ()+ct.getDepth()+60) {
+              b1=true;
+              break;
+            }
+  
+            if (testPoint.x >= (ct.getX()+ct.getWidth()/2)-5 && testPoint.x <= (ct.getX()+ct.getWidth()/2)+5 && testPoint.y >= (ct.getY()+ct.getHeight()/2)-5 && testPoint.y <= (ct.getY()+ct.getHeight()/2)+5 && testPoint.z >= ct.getZ()-60 && testPoint.z <= ct.getZ()) {
+              b2=true;
+              break;
+            }
+  
+            if (testPoint.x >= ct.getX()-60 && testPoint.x <= ct.getX() && testPoint.y >= (ct.getY()+ct.getHeight()/2)-5 && testPoint.y <= (ct.getY()+ct.getHeight()/2)+5 && testPoint.z >= (ct.getZ()+ct.getDepth()/2)-5 && testPoint.z <= (ct.getZ()+ct.getDepth()/2)+5) {
+              r1=true;
+              break;
+            }
+  
+            if (testPoint.x >= ct.getX()+ct.getWidth() && testPoint.x <= ct.getX()+ct.getWidth()+60 && testPoint.y >= (ct.getY()+ct.getHeight()/2)-5 && testPoint.y <= (ct.getY()+ct.getHeight()/2)+5 && testPoint.z >= (ct.getZ()+ct.getDepth()/2)-5 && testPoint.z <= (ct.getZ()+ct.getDepth()/2)+5) {
+              r2=true;
+              break;
+            }
+  
+            if (testPoint.x >= (ct.getX()+ct.getWidth()/2)-5 && testPoint.x <= (ct.getX()+ct.getWidth()/2)+5 && testPoint.y >= ct.getY()-60 && testPoint.y <= ct.getY() && testPoint.z >= (ct.getZ()+ct.getDepth()/2)-5 && testPoint.z <= (ct.getZ()+ct.getDepth()/2)+5) {
+              g1=true;
+              break;
+            }
+  
+            if (testPoint.x >= (ct.getX()+ct.getWidth()/2)-5 && testPoint.x <= (ct.getX()+ct.getWidth()/2)+5 && testPoint.y >= ct.getY()+ct.getHeight() && testPoint.y <= ct.getY()+ct.getHeight()+60 && testPoint.z >= (ct.getZ()+ct.getDepth()/2)-5 && testPoint.z <= (ct.getZ()+ct.getDepth()/2)+5) {
+              g2=true;
+              break;
+            }
+          }
+        }
+        
+        if(current3DTransformMode==3 && ct instanceof Rotatable){//if rotating
+          //figure out what circle to hilight
+          if(!(translateXaxis || translateYaxis || translateZaxis)){
+            PVector center = ct.getCenter();
+            float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2)+pow(ct.getDepth()/2,2))/28;
+            sze*=31;//scale factor to make the cyleners the right size
+            Rotatable rota = (Rotatable)ct;
+            PVector cameraVec = new PVector(cam3Dx+DX,cam3Dy-DY,cam3Dz-DZ), mousePointVec = new PVector(mousePoint.x,mousePoint.y,mousePoint.z);
+            //calculate the position on the rotation plane that intersects with the mouse
+            PVector inPlaneX = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getXRotationAxis());
+            PVector inPlaneY = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getYRotationAxis());
+            PVector inPlaneZ = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rota.getZRotationAxis());
+            
+            PVector distToCenterX = new PVector(),distToCenterY = new PVector(),distToCenterZ = new PVector();
+            PVector distToCamX = new PVector(),distToCamY = new PVector(),distToCamZ = new PVector();
+            
+            //calculate the distance from to center of the object to the point
+            PVector.sub(inPlaneX,center,distToCenterX);
+            PVector.sub(inPlaneY,center,distToCenterY);
+            PVector.sub(inPlaneZ,center,distToCenterZ);
+            
+            //calculate the distance fron the point to the camera
+            PVector.sub(inPlaneX,cameraVec,distToCamX);
+            PVector.sub(inPlaneY,cameraVec,distToCamY);
+            PVector.sub(inPlaneZ,cameraVec,distToCamZ);
+            
+            
+            //find out what circles the mouse could be over
+            if(distToCenterX.mag() <= sze){
+              rix=true;
+            }
+            if(distToCenterY.mag() <= sze){
+              riy=true;
+            }
+            if(distToCenterZ.mag() <= sze){
+              riz=true;
+            }
+            
+            
+            //if multiple are selcted then only select the one that is closested to the camera
+            if(rix && riy){
+              if(distToCamX.mag() < distToCamY.mag()){
+                riy = false;
+              }else{
+                rix = false;
+              }
+            }
+            if(rix && riz){
+              if(distToCamX.mag() < distToCamZ.mag()){
+                riz = false;
+              }else{
+                rix = false;
+              }
+            }
+            if(riy && riz){
+              if(distToCamY.mag() < distToCamZ.mag()){
+                riz = false;
+              }else{
+                riy = false;
+              }
+            }
+          }else{
+            //if actively rotatin then hilight that specific cirlce
+            rix = translateXaxis;
+            riy = translateYaxis;
+            riz = translateZaxis;
+          }
+        }
+        
+        //render the arrow for translation
         if (current3DTransformMode==1) {
-          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z+ct.dz);
-          if (b1)
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth());
+          if (b1) {
             shape(yellowArrow);
-          else
+          } else {
             shape(blueArrow);
+          }
 
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z+ct.dz));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()));
 
-          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight()/2, ct.getZ());
           rotateY(radians(180));
-          if (b2)
+          if (b2) {
             shape(yellowArrow);
-          else
+          } else {
             shape(blueArrow);
+          }
           rotateY(-radians(180));
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()));
 
-          translate(ct.x, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          translate(ct.getX(), ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth()/2);
           rotateY(-radians(90));
-          if (r1)
+          if (r1) {
             shape(yellowArrow);
-          else
+          } else {
             shape(redArrow);
+          }
           rotateY(radians(90));
-          translate(-(ct.x), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth(), ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth()/2);
           rotateY(radians(90));
-          if (r2)
+          if (r2) {
             shape(yellowArrow);
-          else
+          } else {
             shape(redArrow);
+          }
           rotateY(-radians(90));
-          translate(-(ct.x+ct.dx), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx/2, ct.y, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY(), ct.getZ()+ct.getDepth()/2);
           rotateX(radians(90));
-          if (g1)
+          if (g1) {
             shape(yellowArrow);
-          else
+          } else {
             shape(greenArrow);
+          }
           rotateX(-radians(90));
-          translate(-(ct.x+ct.dx/2), -(ct.y), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx/2, ct.y+ct.dy, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight(), ct.getZ()+ct.getDepth()/2);
           rotateX(-radians(90));
-          if (g2)
+          if (g2) {
             shape(yellowArrow);
-          else
+          } else {
             shape(greenArrow);
+          }
           rotateX(radians(90));
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()), -(ct.getZ()+ct.getDepth()/2));
+          //end of rendering arrows
 
-          //translte objects in 3D
-          if (grid_mode) {//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
+          //translte objects in 3D functionality
+          //calculate how far the thing has been moved in the axis of translation and set its new position acordingly
+          if (grid_mode) {//if in grid mode
             if (translateZaxis) {
-              ct.z=(int)Math.round((initalObjectPos.z-initalMousePoint.z+mousePoint.z)*1.0/grid_size)*grid_size;
+              ct.setZ((int)Math.round((initalObjectPos.z-initalMousePoint.z+mousePoint.z)*1.0/grid_size)*grid_size);
             }
             if (translateXaxis) {
-              ct.x=(int)Math.round((initalObjectPos.x-initalMousePoint.x+mousePoint.x)*1.0/grid_size)*grid_size;
-              ;
+              ct.setX((int)Math.round((initalObjectPos.x-initalMousePoint.x+mousePoint.x)*1.0/grid_size)*grid_size);
             }
             if (translateYaxis) {
-              ct.y=(int)Math.round((initalObjectPos.y-initalMousePoint.y+mousePoint.y)*1.0/grid_size)*grid_size;
-              ;
+              ct.setY((int)Math.round((initalObjectPos.y-initalMousePoint.y+mousePoint.y)*1.0/grid_size)*grid_size);
             }
           } else {//if not in grid mdoe
             if (translateZaxis) {
-              ct.z=(int)initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+              ct.setZ((int)initalObjectPos.z-(initalMousePoint.z-mousePoint.z));
             }
             if (translateXaxis) {
-              ct.x=(int)initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+              ct.setX((int)initalObjectPos.x-(initalMousePoint.x-mousePoint.x));
             }
             if (translateYaxis) {
-              ct.y=(int)initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+              ct.setY((int)initalObjectPos.y-(initalMousePoint.y-mousePoint.y));
             }
           }
         }//end of 3d transform mode is move
 
-        if (current3DTransformMode==2&&(ct instanceof Ground || ct instanceof Holo)) {
-          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z+ct.dz);
-          if (b1)
+        if (current3DTransformMode == 2 && ct instanceof Resizeable) {//if resizing a component
+        //render the scaling stocks
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth());
+          if (b1) {
             shape(yellowScaler);
-          else
+          } else {
             shape(blueScaler);
+          }
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()));
 
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z+ct.dz));
-
-          translate(ct.x+ct.dx/2, ct.y+ct.dy/2, ct.z);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight()/2, ct.getZ());
           rotateY(radians(180));
-          if (b2)
+          if (b2) {
             shape(yellowScaler);
-          else
+          } else {
             shape(blueScaler);
+          }
           rotateY(-radians(180));
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy/2), -(ct.z));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()));
 
-          translate(ct.x, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          translate(ct.getX(), ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth()/2);
           rotateY(-radians(90));
-          if (r1)
+          if (r1) {
             shape(yellowScaler);
-          else
+          } else {
             shape(redScaler);
+          }
           rotateY(radians(90));
-          translate(-(ct.x), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx, ct.y+ct.dy/2, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth(), ct.getY()+ct.getHeight()/2, ct.getZ()+ct.getDepth()/2);
           rotateY(radians(90));
-          if (r2)
+          if (r2) {
             shape(yellowScaler);
-          else
+          } else {
             shape(redScaler);
+          }
           rotateY(-radians(90));
-          translate(-(ct.x+ct.dx), -(ct.y+ct.dy/2), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()), -(ct.getY()+ct.getHeight()/2), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx/2, ct.y, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY(), ct.getZ()+ct.getDepth()/2);
           rotateX(radians(90));
-          if (g1)
+          if (g1) {
             shape(yellowScaler);
-          else
+          } else {
             shape(greenScaler);
+          }
           rotateX(-radians(90));
-          translate(-(ct.x+ct.dx/2), -(ct.y), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()), -(ct.getZ()+ct.getDepth()/2));
 
-          translate(ct.x+ct.dx/2, ct.y+ct.dy, ct.z+ct.dz/2);
+          translate(ct.getX()+ct.getWidth()/2, ct.getY()+ct.getHeight(), ct.getZ()+ct.getDepth()/2);
           rotateX(-radians(90));
-          if (g2)
+          if (g2) {
             shape(yellowScaler);
-          else
+          } else {
             shape(greenScaler);
+          }
           rotateX(radians(90));
-          translate(-(ct.x+ct.dx/2), -(ct.y+ct.dy), -(ct.z+ct.dz/2));
+          translate(-(ct.getX()+ct.getWidth()/2), -(ct.getY()+ct.getHeight()), -(ct.getZ()+ct.getDepth()/2));
 
-          //scaling of objects in 3D
+          //scaling of objects in 3D functionality
           if (grid_mode) {
-            if (transformComponentNumber==1) {
+            if (transformComponentNumber==1) {//if the first set of stocker was clicked
+              //resize the approtiate axis within the allowed limits
               if (translateZaxis) {
-                if (initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size > 0)
-                  ct.dz=initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
+                if (initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size > 0){
+                  ct.setDepth(initialObjectDim.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size);
+                }
               }
               if (translateXaxis) {
-                if (initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size > 0)
-                  ct.dx=initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
+                if (initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size > 0){
+                  ct.setWidth(initialObjectDim.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size);
+                }
               }
               if (translateYaxis) {
-                if (initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size > 0)
-                  ct.dy=initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
+                if (initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size > 0){
+                  ct.setHeight(initialObjectDim.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size);
+                }
               }
             }
-            if (transformComponentNumber==2) {
+            
+            if (transformComponentNumber==2) {//if the second set of stocks was clicked
+              //resize the approtiate axis within the allowed limits
               if (translateZaxis) {
                 if (initialObjectDim.z+Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size > 0) {
-                  ct.dz=initialObjectDim.z+Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size;
-                  ct.z=(initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size);
+                  ct.setDepth(initialObjectDim.z+Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size);
+                  ct.setZ((initalObjectPos.z-Math.round((initalMousePoint.z-mousePoint.z)*1.0/grid_size)*grid_size));
                 }
               }
               if (translateXaxis) {
                 if (initialObjectDim.x+Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size > 0) {
-                  ct.dx=initialObjectDim.x+Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size;
-                  ct.x=(initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size);
+                  ct.setWidth(initialObjectDim.x+Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size);
+                  ct.setX((initalObjectPos.x-Math.round((initalMousePoint.x-mousePoint.x)*1.0/grid_size)*grid_size));
                 }
               }
               if (translateYaxis) {
                 if (initialObjectDim.y+Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size > 0) {
-                  ct.dy=initialObjectDim.y+Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size;
-                  ct.y=(initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size);
+                  ct.setHeight(initialObjectDim.y+Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size);
+                  ct.setY((initalObjectPos.y-Math.round((initalMousePoint.y-mousePoint.y)*1.0/grid_size)*grid_size));
                 }
               }
             }
           } else {//if not in grid mode
-            if (transformComponentNumber==1) {
+            if (transformComponentNumber==1) { //if the first set of stocker was clicked
+              //resize the approtiate axis within the allowed limits
               if (translateZaxis) {
-                if (initialObjectDim.z-(initalMousePoint.z-mousePoint.z) > 0)
-                  ct.dz=initialObjectDim.z-(initalMousePoint.z-mousePoint.z);
+                if (initialObjectDim.z-(initalMousePoint.z-mousePoint.z) > 0){
+                  ct.setDepth(initialObjectDim.z-(initalMousePoint.z-mousePoint.z));
+                }
               }
               if (translateXaxis) {
-                if (initialObjectDim.x-(initalMousePoint.x-mousePoint.x) > 0)
-                  ct.dx=initialObjectDim.x-(initalMousePoint.x-mousePoint.x);
+                if (initialObjectDim.x-(initalMousePoint.x-mousePoint.x) > 0){
+                  ct.setWidth(initialObjectDim.x-(initalMousePoint.x-mousePoint.x));
+                }
               }
               if (translateYaxis) {
-                if (initialObjectDim.y-(initalMousePoint.y-mousePoint.y) > 0);
-                ct.dy=initialObjectDim.y-(initalMousePoint.y-mousePoint.y);
+                if (initialObjectDim.y-(initalMousePoint.y-mousePoint.y) > 0){
+                  ct.setHeight(initialObjectDim.y-(initalMousePoint.y-mousePoint.y));
+                }
               }
             }
-            if (transformComponentNumber==2) {
+            if (transformComponentNumber==2) {//if the second set of stocks was clicked
+              //resize the approtiate axis within the allowed limits
               if (translateZaxis) {
                 if (initialObjectDim.z+(initalMousePoint.z-mousePoint.z) > 0) {
-                  ct.dz=initialObjectDim.z+(initalMousePoint.z-mousePoint.z);
-                  ct.z=initalObjectPos.z-(initalMousePoint.z-mousePoint.z);
+                  ct.setDepth(initialObjectDim.z+(initalMousePoint.z-mousePoint.z));
+                  ct.setZ(initalObjectPos.z-(initalMousePoint.z-mousePoint.z));
                 }
               }
               if (translateXaxis) {
                 if (initialObjectDim.x+(initalMousePoint.x-mousePoint.x) > 0) {
-                  ct.dx=initialObjectDim.x+(initalMousePoint.x-mousePoint.x);
-                  ct.x=initalObjectPos.x-(initalMousePoint.x-mousePoint.x);
+                  ct.setWidth(initialObjectDim.x+(initalMousePoint.x-mousePoint.x));
+                  ct.setX(initalObjectPos.x-(initalMousePoint.x-mousePoint.x));
                 }
               }
               if (translateYaxis) {
                 if (initialObjectDim.y+(initalMousePoint.y-mousePoint.y) > 0) {
-                  ct.dy=initialObjectDim.y+(initalMousePoint.y-mousePoint.y);
-                  ct.y=initalObjectPos.y-(initalMousePoint.y-mousePoint.y);
+                  ct.setHeight(initialObjectDim.y+(initalMousePoint.y-mousePoint.y));
+                  ct.setY(initalObjectPos.y-(initalMousePoint.y-mousePoint.y));
                 }
               }
             }
           }
         }//end of 3d transform mode is scale
-      }//end of 3d tranform is move mode
-      
-      if (e3DMode && selectingBlueprint && blueprints.length!=0){
+        
+        if(current3DTransformMode==3 && ct instanceof Rotatable){//if rotating something
+          Rotatable rotb = (Rotatable)ct;
+          PVector center = ct.getCenter();
+          PVector cameraVec = new PVector(cam3Dx+DX,cam3Dy-DY,cam3Dz-DZ), mousePointVec = new PVector(mousePoint.x,mousePoint.y,mousePoint.z);
+          //calculate the position on the rotation plane that intersects with the mouse
+          PVector inPlaneX = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rotb.getXRotationAxis());
+          PVector inPlaneY = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rotb.getYRotationAxis());
+          PVector inPlaneZ = Util.intersectPlaneAndLine(cameraVec,mousePointVec,center,rotb.getZRotationAxis());
+          
+          float sze = sqrt(pow(ct.getWidth()/2,2)+pow(ct.getHeight()/2,2)+pow(ct.getDepth()/2,2))/28;//calculate the scale factor for the rotation rings
+          rotateCircleX.scale(sze);
+          rotateCircleY.scale(sze);
+          rotateCircleZ.scale(sze);
+          rotateCircleHilight.scale(sze);
+          translate(center.x, center.y, center.z);
+          
+          //render each ring with the correct color and rotation
+          rotateZ(rotb.getRotateZ());
+          rotateY(rotb.getRotateY());
+          rotateX(rotb.getRotateX());
+          
+          //x - ring
+          rotateY(HALF_PI);
 
+          if (rix) {
+            shape(rotateCircleHilight);
+          }else{
+             shape(rotateCircleX); 
+          }
+          rotateY(-HALF_PI);
+          rotateX(-rotb.getRotateX());
+          // y- ring
+          rotateX(HALF_PI);
+          
+          if (riy) {
+            shape(rotateCircleHilight);
+          }else{
+            shape(rotateCircleY);   
+          }
+          
+          rotateX(-HALF_PI);
+          rotateY(-rotb.getRotateY());
+          // z-ring
+          
+          if (riz) {
+            shape(rotateCircleHilight);
+          }else{
+             shape(rotateCircleZ); 
+          }
+          
+          
+          
+          rotateZ(-rotb.getRotateZ());
+          //un translate and rescale everying
+          translate(-center.x, -center.y, -center.z);
+          rotateCircleX.scale(1/sze);
+          rotateCircleY.scale(1/sze);
+          rotateCircleZ.scale(1/sze);
+          rotateCircleHilight.scale(1/sze);
+          
+          //now for the funtional part of rotating
+          if(translateXaxis||translateYaxis||translateZaxis){//if rotating in an axis
+            PVector inPlane;
+            PVector aNoraml;
+            //calculate the plane the roation is happning in and the location of the mouse pointer in that plane
+            if(translateXaxis){
+              inPlane = inPlaneX;
+              aNoraml = rotb.getXRotationAxis();
+            }else if(translateYaxis){
+              inPlane = inPlaneY;
+              aNoraml = rotb.getYRotationAxis();
+            }else if(translateZaxis){
+              inPlane = inPlaneZ;
+              aNoraml = rotb.getZRotationAxis();
+            }else{
+              throw new RuntimeException("Attepmpted to compute rotation when no rotation axsi was selected");
+            }
+            
+            if(!Float.isNaN(inPlane.x)){//only do the next part if the mouse if not parellel to the plane in question
+              //start by finding the ange of rotation:
+              PVector objectCenter = ct.getCenter();
+              PVector AB = PVector.sub(initalMousePoint.toPVector(),objectCenter,null);
+              PVector BC = PVector.sub(objectCenter, inPlane,null);
+              AB.normalize();
+              BC.normalize();
+              BC.mult(-1);//make both face the smae direction if the start and current points are the same place
+              float angleDiff = acos(AB.dot(BC));
+              //correct the sign of the rotation if nessarry
+              if(PVector.cross(AB,BC,null).dot(aNoraml) <= 0){
+                angleDiff*=-1;
+              }
+              //then apply it to the correct axis of rotation
+              if(translateXaxis){
+                if(grid_mode){
+                  rotb.rotateX(radians(Math.round(degrees(currentComponentRotation.x+angleDiff)/grid_size)*grid_size));
+                }else{
+                  rotb.rotateX(currentComponentRotation.x+angleDiff);
+                }
+              }
+              if(translateYaxis){
+                if(grid_mode){
+                  rotb.rotateY(radians(Math.round(degrees(currentComponentRotation.y+angleDiff)/grid_size)*grid_size));
+                }else{
+                  rotb.rotateY(currentComponentRotation.y+angleDiff);
+                }
+              }
+              if(translateZaxis){
+                if(grid_mode){
+                  rotb.rotateZ(radians(Math.round(degrees(currentComponentRotation.z+angleDiff)/grid_size)*grid_size));
+                }else{
+                  rotb.rotateZ(currentComponentRotation.z+angleDiff);
+                }
+              }
+            }
+          }
+        }
+      }//end of something is selected
+      
+      if (e3DMode && selectingBlueprint && blueprints.length!=0){//if placing a blueprint
+        //the movement arrows for the 3D blueprint placement
         if (grid_mode) {//Math.round(((int)mouseX+camPos)*1.0/grid_size)*grid_size
             if (translateZaxis) {
               blueprintPlacemntZ=(int)Math.round((initalObjectPos.z-initalMousePoint.z+mousePoint.z)*1.0/grid_size)*grid_size;
@@ -1108,18 +1014,19 @@ void stageEditGUI() {
           }
       }//end of moving blueprint in 3D
       
-      engageHUDPosition();//move the draw position to align with the camera
+      //engageHUDPosition();//move the draw position to align with the camera
 
+      ////hmm apperenrly we are not drawing anything here
 
-      disEngageHUDPosition();//move the draw position back to 0 0 0
+      //disEngageHUDPosition();//move the draw position back to 0 0 0
     }//end of 3d mode on
   }
 }
 
+/**Processes mouse clicks for the stage edit GUI
+*/
 void GUImouseClicked() {
   if (editingStage||editingBlueprint) {//if edditing a stage or blueprint
-
-
 
     Stage current=null;//figure out what your edditing
     if (editingStage) {
@@ -1128,73 +1035,122 @@ void GUImouseClicked() {
     if (editingBlueprint) {
       current=workingBlueprint;
     }
+    
+    if (deleteing) {//if the delete tool is selected
+      delete=true;//set tring to delet the current thing to true
+      //no idea why the processing for this is not here
+    }
 
-
-    if (check_point) {//if checkoint
-      draw=true;
-    }
-    if (goal) {//if placing finishline
-      draw=true;
-    }
-    if (placingLogicButton) {//if placing logic button
-      draw=true;
-    }
-    if (deleteing) {//if deleteing
-      delete=true;
-    }
+    if(currentlyPlaceing !=null && (current.type.equals("stage") || current.type.equals("blueprint")) && !currentlyPlaceing.equals(Interdimentional_Portal.ID)){//if currently placing something that is not a portal and the stage type is 2D
+      if (!StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if the currenly palceing thing is not draggable
+        //get the constructor for this component
+        Function<StageComponentPlacementContext, StageComponent> constructor = StageComponentRegistry.getPlacementConstructor(currentlyPlaceing);
+        if(constructor == null){//if for some reason it does not have one
+          //it must be an entity, so get the entity constructor
+          Function<StageEntityPlacementContext, StageEntity> entityConstructor = EntityRegistry.getPlacementConstructor(currentlyPlaceing);
+          if(entityConstructor == null){//if that does not have one,
+            throw new RuntimeException("Constrructor not found for plaeable: "+currentlyPlaceing);//PANIC!!!!!!
+          }
+          //create the placement context
+          StageEntityPlacementContext placementContext;
+          if (grid_mode) {//if grid mode is on
+            placementContext = new StageEntityPlacementContext(Math.round(((int)Math.floor(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)Math.floor(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size,0);
+          } else {
+            placementContext = new StageEntityPlacementContext((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY,0);//add new checkpoint to the stage
+          }
+          //create the entity
+          current.entities.add(entityConstructor.apply(placementContext));
+        } else {//if we have the constructor for the component
+          //check special case here, mostly just things for the coins
+          boolean isCoin = currentlyPlaceing.equals(Coin.ID);
+          int numCoins = 0;
+          if(current.type.equals("stage")){//if not in a blueprint
+            numCoins = level.numOfCoins;//update the number of coins in the level
+          }
+          
+          //create the placement context
+          StageComponentPlacementContext placementContext;
+          if (grid_mode) {//if grid mode is on
+            placementContext = new StageComponentPlacementContext(Math.round(((int)Math.floor(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)Math.floor(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size);
+          } else {
+            placementContext = new StageComponentPlacementContext((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY);//add new checkpoint to the stage
+          }
+          if(isCoin){//overide that for a coin
+            if (grid_mode) {//if grid mode is on
+              placementContext = new StageComponentPlacementContext(Math.round(((int)Math.floor(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)Math.floor(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size,numCoins);
+            } else {
+              placementContext = new StageComponentPlacementContext((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY,numCoins);//add new checkpoint to the stage
+            }
+            if (editingStage) {//if edditng stage the increase the coin counter
+              level.numOfCoins++;
+              level.reloadCoins();
+            }
+          }
+          //create the new component and add it to the stage
+          current.add(constructor.apply(placementContext));
+        }//end of constructor not being null
+        draw=false;
+      }//end of add placeable to stage
+    }else if(currentlyPlaceing !=null && (current.type.equals("3Dstage") || current.type.equals("3D blueprint")) && !currentlyPlaceing.equals(Interdimentional_Portal.ID)){//if curretnly placing something that is not a portal and the stage is a 3D type
+      if (!StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if the component is not a draggable
+        Function<StageComponentPlacementContext, StageComponent> constructor = StageComponentRegistry.getPlacementConstructor(currentlyPlaceing);//get the constructor for this component
+        if(constructor == null){//if no consctor was found
+          throw new RuntimeException("Constrructor not found for plaeable: "+currentlyPlaceing);//PANIC!!!!
+        }
+        
+        //check special case here, the coin case
+        boolean isCoin = currentlyPlaceing.equals(Coin.ID);
+        int numCoins = 0;
+        if(current.type.equals("3Dstage")){
+          numCoins = level.numOfCoins;
+        }
+        
+        //create the placement contextr
+        StageComponentPlacementContext placementContext;
+        if (grid_mode) {//if grid mode is on
+          placementContext = new StageComponentPlacementContext(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, (float)startingDepth);
+        } else {
+          placementContext = new StageComponentPlacementContext((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, (float)startingDepth);//add new checkpoint to the stage
+        }
+        if(isCoin){//coins fuck everything up
+          if (grid_mode) {//if grid mode is on
+            placementContext = new StageComponentPlacementContext(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, (float)startingDepth, numCoins);
+          } else {
+            placementContext = new StageComponentPlacementContext((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, (float)startingDepth, numCoins);//add new checkpoint to the stage
+          }
+          if (editingStage) {//if edditng stage the increase the coin counter
+            level.numOfCoins++;
+            level.reloadCoins();
+          }
+        }
+        //create the new component and add it to the stage
+        current.add(constructor.apply(placementContext));
+        
+        draw=false;
+      }//end of add placeable to stage
+    }//end of 3D
+    
     if (moving_player) {//if moving the player
       //set the players new position
       players[currentPlayer].setX(mouseX/Scale+camPos);
       players[currentPlayer].setY(mouseY/Scale-camPosY);
-      if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
+      if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {//and the z pos if in 3D
         players[currentPlayer].z=startingDepth;
       }
-      tpCords[0]=mouseX/Scale+camPos;
+      tpCords[0]=mouseX/Scale+camPos;//other more diffrent place position setting
       tpCords[1]=mouseY/Scale-camPosY;
       tpCords[2]=startingDepth;
 
       setPlayerPosTo=true;
     }
-    if (drawCoins) {//if drawing coin
-      String tpe = current.type;
-      if (grid_mode) {//add coins with data accorinding to how it needs to be integrated
-        if (tpe.equals("stage")) {
-          current.parts.add(new Coin(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, level.numOfCoins));
-        }
-        if (tpe.equals("3Dstage")) {
-          current.parts.add(new Coin(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth, level.numOfCoins));
-        }
-        if (tpe.equals("blueprint")) {
-          current.parts.add(new Coin(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, 0));
-        }
-        if (tpe.equals("3D blueprint")) {
-          current.parts.add(new Coin(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth, 0));
-        }
-      } else {
-        if (tpe.equals("stage")) {
-          current.parts.add(new Coin((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, level.numOfCoins));
-        }
-        if (tpe.equals("3Dstage")) {
-          current.parts.add(new Coin((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth, level.numOfCoins));
-        }
-        if (tpe.equals("blueprint")) {
-          current.parts.add(new Coin((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, 0));
-        }
-        if (tpe.equals("3D blueprint")) {
-          current.parts.add(new Coin((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth, 0));
-        }
-      }
-      if (editingStage) {//if edditng stage the increwase the coin counter
-        level.numOfCoins++;
-        level.reloadCoins();
-      }
-    }
+
     if (drawingPortal) {//if drawing portal part 1
 
-      portalStage1=new JSONObject();//create and store data needed for the proper function of the portals
+      portalStage1=new JSONObject();//create and store data needed for the proper function of both portals
       portalStage2=new JSONObject();
       portalStage1.setString("type", "interdimentional Portal");
       portalStage2.setString("type", "interdimentional Portal");
+      //set the data we currently know about this half of the portals
       if (grid_mode) {
         portalStage1.setInt("x", Math.round(((int)(mouseX)/Scale+camPos)*1.0/grid_size)*grid_size);
         portalStage1.setInt("y", Math.round(((int)(mouseY)/Scale-camPosY)*1.0/grid_size)*grid_size);
@@ -1218,7 +1174,7 @@ void GUImouseClicked() {
     }
     if (drawingPortal3) {//if drawing portal part 3
 
-      if (grid_mode) {//gathe the remaining data required and then add the portal to the correct stages
+      if (grid_mode) {//gather the remaining data required and then add the portal to the correct stages
         portalStage2.setInt("x", Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size);
         portalStage2.setInt("y", Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size);
         portalStage1.setInt("linkX", Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size);
@@ -1234,44 +1190,25 @@ void GUImouseClicked() {
         portalStage2.setInt("z", startingDepth);
         portalStage1.setInt("linkZ", startingDepth);
       }
-      level.stages.get(currentStageIndex).parts.add(new Interdimentional_Portal(portalStage2, level.stages.get(currentStageIndex).is3D));
-      level.stages.get(preSI).parts.add(new Interdimentional_Portal(portalStage1, level.stages.get(preSI).is3D));
+      portalStage2.setBoolean("s3d", level.stages.get(currentStageIndex).is3D);
+      portalStage1.setBoolean("s3d", level.stages.get(preSI).is3D);
+      //done collecting data
+      //create both of the portals and add them to the corresponding stage
+      level.stages.get(currentStageIndex).add(new Interdimentional_Portal(portalStage2));
+      level.stages.get(preSI).add(new Interdimentional_Portal(portalStage1));
       portalStage2=null;
       portalStage1=null;
       drawingPortal3=false;
-    }
-    //add switches
-    if (draw3DSwitch1) {
-      draw=true;
-    }
-    if (draw3DSwitch2) {
-      draw=true;
-    }
-    if (drawingSign&&!e3DMode) {//if drawing sign then add the sign to the stage
-      String tpe = level.stages.get(currentStageIndex).type;
-      if (tpe.equals("stage")) {
-        if (grid_mode) {
-          current.parts.add(new WritableSign(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size));
-        } else {
-          current.parts.add(new WritableSign((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));
-        }
-      }
-      if (tpe.equals("3Dstage")) {
-        if (grid_mode) {
-          current.parts.add(new WritableSign(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size, startingDepth));
-        } else {
-          current.parts.add(new WritableSign((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY, startingDepth));
-        }
-      }
     }
 
     if (selecting) {//if selecting figureout what is being selected
       selectedIndex=colid_index(mouseX/Scale+camPos, mouseY/Scale-camPosY, current);
     }
-    if (selectingBlueprint&&blueprints.length!=0) {//place selectedb bluepring and paste it into the stage
+    if (selectingBlueprint && blueprints.length != 0) {//place selected bluepring and paste it into the stage
       boolean type3d = blueprints[currentBluieprintIndex].type.equals("3D blueprint");
       StageComponent tmp;
       int ix, iy, iz = startingDepth;
+      //calculate the base position
       if (grid_mode) {
         ix=Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size;
         iy=Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size;
@@ -1280,7 +1217,7 @@ void GUImouseClicked() {
         iy=(int)(mouseY/Scale)-camPosY;
       }
       for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
-        tmp=blueprints[currentBluieprintIndex].parts.get(i);
+        tmp = blueprints[currentBluieprintIndex].parts.get(i);//get the current component  of this blueprint
         //coins are special
         if (tmp instanceof Coin) {
           Coin g;
@@ -1299,57 +1236,61 @@ void GUImouseClicked() {
           continue;
         }
         
+        //create an offset copy of the component and put it in the stage,
+        //TODO: repalce this terrible copy shit with use of the serial constructor
         if(type3d){//if the bluepint is 3D
-          current.parts.add(tmp.copy(ix,iy,iz));//preform a 3D copy on the curernt part and add it to the stage
+          current.add(tmp.copy(ix,iy,iz));//preform a 3D copy on the curernt part and add it to the stage
         }else{
-          current.parts.add(tmp.copy(ix,iy));//preform a 2D copy on a part and add it to the stage
+          current.add(tmp.copy(ix,iy));//preform a 2D copy on a part and add it to the stage
         }
         
       }
     }
-    if (placingSound) {
-      if (grid_mode) {
-        current.parts.add(new SoundBox(Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size, Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size));
-      } else {
-        current.parts.add(new SoundBox((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY));
-      }
-    }
-    
-    if(placingGoon){
-      current.entities.add(new Goon((int)(mouseX/Scale)+camPos, (int)(mouseY/Scale)-camPosY,0,current));
-    }
   }//end of eddit stage
-}
+}//end of mouse clicked stage edit gui
 
+/**Process mouse pressed down event for the stage edit gui
+*/
 void GUImousePressed() {
-  if (mouseButton==LEFT) {
-    if (ground||holo_gram||sloap||holoTriangle||dethPlane) {
+  if (mouseButton==LEFT) {//if the button was the left button
+    if (StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if currently placeing a draggable
 
-      downX=mouseX;
+      downX=mouseX;//record that posstion
       downY=mouseY;
       drawing=true;
     }
   }
 }
-
+/**Process mouse released event for the stage edit gui
+*/
 void GUImouseReleased() {
-  if (mouseButton==LEFT) {
-    if ((ground||holo_gram||sloap||holoTriangle||dethPlane)&&drawing) {
+  if (mouseButton==LEFT) {//if the button was the left button
+    if ((StageComponentRegistry.isDraggable(currentlyPlaceing)) && drawing) {//if currently placing a draggable and allreaddy pressed the mouse button
 
-      upX=mouseX;
+      upX=mouseX;//record the up position
       upY=mouseY;
       drawing=false;
-      draw=true;
+      draw=true;//trigger the component to be placed in the next frame
     }
   }
 }
 
+/**Render the 3D arrows for translating a 3D object.
+Note: ckecks the current mouse position to determine if the arrows should be renderd yellow
+@param x The lower x coordinate of the component bounding box
+@param y The lower y coordinate of the component bounding box
+@param z The lower z coordinate of the component bounding box
+@param dx The width of the component bounding box
+@param dy The height of the component bounding box
+@param dz The depth of the component bounding box
+*/
 void renderTranslationArrows(float x,float y,float z,float dx, float dy,float dz){
   //wether the red/green/blue arrows are currrntly being hoverd over
   boolean b1=false, b2=false, r1=false, r2=false, g1=false, g2=false;
   //check if the mouse is hovering over an arrow
-  for (int i=0; i<5000; i++) {
+  for (int i=0; i<5000; i++) {//ray cast
     Point3D testPoint=genMousePoint(i);
+    //see what arrows (if any) the mouse is over
     if (testPoint.x >= (x+dx/2)-5 && testPoint.x <= (x+dx/2)+5 && testPoint.y >= (y+dy/2)-5 && testPoint.y <= (y+dy/2)+5 && testPoint.z >= z+dz && testPoint.z <= z+dz+60) {
       b1=true;
       break;
@@ -1384,92 +1325,112 @@ void renderTranslationArrows(float x,float y,float z,float dx, float dy,float dz
   //render the arrows
   if (current3DTransformMode==1) {
     translate(x+dx/2, y+dy/2, z+dz);
-    if (b1)
+    if (b1){
       shape(yellowArrow);
-    else
+    } else {
       shape(blueArrow);
+    }
 
     translate(-(x+dx/2), -(y+dy/2), -(z+dz));
 
     translate(x+dx/2, y+dy/2, z);
     rotateY(radians(180));
-    if (b2)
+    if (b2) {
       shape(yellowArrow);
-    else
+    } else {
       shape(blueArrow);
+    }
     rotateY(-radians(180));
     translate(-(x+dx/2), -(y+dy/2), -(z));
 
     translate(x, y+dy/2, z+dz/2);
     rotateY(-radians(90));
-    if (r1)
+    if (r1) {
       shape(yellowArrow);
-    else
+    } else {
       shape(redArrow);
+    }
     rotateY(radians(90));
     translate(-(x), -(y+dy/2), -(z+dz/2));
 
     translate(x+dx, y+dy/2, z+dz/2);
     rotateY(radians(90));
-    if (r2)
+    if (r2) {
       shape(yellowArrow);
-    else
+    } else {
       shape(redArrow);
+    }
     rotateY(-radians(90));
     translate(-(x+dx), -(y+dy/2), -(z+dz/2));
 
     translate(x+dx/2, y, z+dz/2);
     rotateX(radians(90));
-    if (g1)
+    if (g1) {
       shape(yellowArrow);
-    else
+    } else {
       shape(greenArrow);
+    }
     rotateX(-radians(90));
     translate(-(x+dx/2), -(y), -(z+dz/2));
 
     translate(x+dx/2, y+dy, z+dz/2);
     rotateX(-radians(90));
-    if (g2)
+    if (g2) {
       shape(yellowArrow);
-    else
+    } else {
       shape(greenArrow);
+    }
     rotateX(radians(90));
     translate(-(x+dx/2), -(y+dy), -(z+dz/2));
   }
 }
 
-
+/**Process stage editor 3D mode mouse clicks
+*/
 void mouseClicked3D() {
   Stage current=null;//figure out what your edditing
-    if (editingStage) {
-      current=level.stages.get(currentStageIndex);
-    }
-    if (editingBlueprint) {
-      current=workingBlueprint;
-    }
-  if (selecting)
-    for (int i=0; i<5000; i++) {
+  if (editingStage) {
+    current=level.stages.get(currentStageIndex);
+  }
+  if (editingBlueprint) {
+    current=workingBlueprint;
+  }
+    
+  if (selecting) {//if the selecting tool(and translations) is selected
+    for (int i=0; i<5000; i++) {//ray cast to find what is being clicked on
       Point3D testPoint = genMousePoint(i);
       selectedIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, current);
-      if (selectedIndex!=-1)
-        break;
+      if (selectedIndex != -1){//if you found something
+        break;//stop looking
+      }
     }
-  if (ground) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
+  }
+   
+  //place draggable
+  if (currentlyPlaceing != null && StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if currenly placing something and that thing is a draggable
+    
+    calcMousePoint();//calculate a fresh mouse location
+    Point3D omp=genMousePoint(0);//get the point that is 0 distance from the camera, wait 0 distance? is that not just the fucking camera eye position?   why are we even calculaing this?
     float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
     float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
     float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+    
+    Function<StageComponentDragPlacementContext, StageComponent> constructor = StageComponentRegistry.getDragConstructor(currentlyPlaceing);//get the constructor of this components
+    if(constructor == null){
+      throw new RuntimeException("Constructor not found for dragagble: "+currentlyPlaceing);
+    }
+    //calculate a point in 3D space in line with the mouse pointer that is on a solid object
     for (int i=0; i<5000; i++) {//ray cast
       Point3D testPoint = genMousePoint(i);
-
+      
       omp.x=testPoint.x;//change the current testing x avlue
       if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
         float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        current.parts.add(new Ground((int)(testPoint.x-5+5*direction), (int)(testPoint.y-5), (int)(testPoint.z-5), 10, 10, 10, Color));//create the new object
+        StageComponentDragPlacementContext placementContext = new StageComponentDragPlacementContext((int)(testPoint.x-5+5*direction), (int)(testPoint.y-5), (int)(testPoint.z-5), 10, 10, 10, Color);
+        current.add(constructor.apply(placementContext));//create the new object
         break;
       }
       omp.y=testPoint.y;//change the current testing y value
@@ -1478,7 +1439,8 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        current.parts.add(new Ground((int)(testPoint.x-5), (int)(testPoint.y-5+5*direction), (int)(testPoint.z-5), 10, 10, 10, Color));//create the new object
+        StageComponentDragPlacementContext placementContext = new StageComponentDragPlacementContext((int)(testPoint.x-5), (int)(testPoint.y-5+5*direction), (int)(testPoint.z-5), 10, 10, 10, Color);
+        current.add(constructor.apply(placementContext));//create the new object
         break;
       }
       omp.z=testPoint.z;//change the current testing z value
@@ -1487,56 +1449,32 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the diretion is nan
           direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
         }
-        current.parts.add(new Ground((int)(testPoint.x-5), (int)(testPoint.y-5), (int)(testPoint.z-5+5*direction), 10, 10, 10, Color));//create the new object
+        StageComponentDragPlacementContext placementContext = new StageComponentDragPlacementContext((int)(testPoint.x-5), (int)(testPoint.y-5), (int)(testPoint.z-5+5*direction), 10, 10, 10, Color);
+        current.add(constructor.apply(placementContext));//create the new object
         break;
       }
     }
   }
-  if (holo_gram) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane    used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);
-        if (Float.isNaN(direction)) {
-          direction=cos(rx_z)/abs(cos(rx_z));
-        }
-        current.parts.add(new Holo((int)(testPoint.x-5+5*direction), (int)(testPoint.y-5), (int)(testPoint.z-5), 10, 10, 10, Color));
-        break;
-      }
-      omp.y=testPoint.y;
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);
-        if (Float.isNaN(direction)) {
-          direction=sin(ry_xz)/abs(sin(ry_xz));
-        }
-        current.parts.add(new Holo((int)(testPoint.x-5), (int)(testPoint.y-5+5*direction), (int)(testPoint.z-5), 10, 10, 10, Color));
-        break;
-      }
-      omp.z=testPoint.z;
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);
-        if (Float.isNaN(direction)) {
-          direction=sin(rx_z)/abs(sin(rx_z));
-        }
-        current.parts.add(new Holo((int)(testPoint.x-5), (int)(testPoint.y-5), (int)(testPoint.z-5+5*direction), 10, 10, 10, Color));
-        break;
-      }
-    }
-  }
-  if (check_point) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
+  
+  if (currentlyPlaceing != null && !StageComponentRegistry.isDraggable(currentlyPlaceing)) {//if currently placeing something and that things is a placeable
+    calcMousePoint();//calculate a fresh mouse location
+    Point3D omp=genMousePoint(0);//get the point that is 0 distance from the camera, wait 0 distance? is that not just the fucking camera eye position?   why are we even calculaing this?
     float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
     float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
     float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
+   
+    Function<StageComponentPlacementContext, StageComponent> constructor = StageComponentRegistry.getPlacementConstructor(currentlyPlaceing);//get the constructor of this components
+    //coins are special so do special things
+    int numCoins = 0;
+    boolean isCoin = currentlyPlaceing.equals(Coin.ID);
+    if(isCoin){
+      if(!editingBlueprint){
+        numCoins = level.numOfCoins;
+      }
+    }
+    
     for (int i=0; i<5000; i++) {//ray cast
+    //search for a surface to place the component on
       Point3D testPoint = genMousePoint(i);
 
       omp.x=testPoint.x;//change the current testing x avlue
@@ -1545,51 +1483,18 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//ckeck if the direction is NaN
           direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
         }
-        current.parts.add(new CheckPoint((int)(testPoint.x+5*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        break;
-      }
-      omp.y=testPoint.y;//change the current testing y value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new ypoint colides with something
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
-        if (Float.isNaN(direction)) {//if the direction is NaN
-          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
-        }
-        current.parts.add(new CheckPoint((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new CheckPoint((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+5*direction)));//create the new object
-        break;
-      }
-    }
-  }
-  if (drawCoins) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {//ray cast
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;//change the current testing x avlue
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
-        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
-          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
-        }
-        if(editingBlueprint){
-          current.parts.add(new Coin((int)(testPoint.x+30*direction), (int)(testPoint.y), (int)(testPoint.z), 0));//create the new object
+        
+        StageComponentPlacementContext placementContext;
+        if(isCoin){//fancy coin placement things
+          placementContext = new StageComponentPlacementContext((int)(testPoint.x+5*direction), (int)(testPoint.y), (float)(int)(testPoint.z), numCoins);
+          if(!editingBlueprint){
+             level.numOfCoins++;
+             level.reloadCoins();
+           }
         }else{
-          current.parts.add(new Coin((int)(testPoint.x+30*direction), (int)(testPoint.y), (int)(testPoint.z), level.numOfCoins));//create the new object
-          coins.add(false);
-          level.numOfCoins++;
+          placementContext = new StageComponentPlacementContext((int)(testPoint.x+5*direction), (int)(testPoint.y), (float)(int)(testPoint.z));
         }
+        current.add(constructor.apply(placementContext));//create the new object
         break;
       }
       omp.y=testPoint.y;//change the current testing y value
@@ -1598,219 +1503,53 @@ void mouseClicked3D() {
         if (Float.isNaN(direction)) {//if the direction is NaN
           direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
         }
-        if(editingBlueprint){
-          current.parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y+30*direction), (int)(testPoint.z), 0));//create the new object
+         StageComponentPlacementContext placementContext;
+         if(isCoin){//fancy coin placement things
+           placementContext = new StageComponentPlacementContext((int)(testPoint.x), (int)(testPoint.y), (float)(int)(testPoint.z), numCoins);
+           if(!editingBlueprint){
+             level.numOfCoins++;
+             level.reloadCoins();
+           }
+         }else{
+           placementContext = new StageComponentPlacementContext((int)(testPoint.x), (int)(testPoint.y), (float)(int)(testPoint.z));
+         }
+         current.add(constructor.apply(placementContext));//create the new object
+        break;
+      }
+      omp.z=testPoint.z;//change the current testing z value
+      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
+        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
+        if (Float.isNaN(direction)) {//if the diretion is nan
+          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
+        }
+        StageComponentPlacementContext placementContext ;
+        if(isCoin){//fancy coin placement things
+          placementContext = new StageComponentPlacementContext((int)(testPoint.x), (int)(testPoint.y), (float)(int)(testPoint.z+5*direction), numCoins);
+          if(!editingBlueprint){
+             level.numOfCoins++;
+             level.reloadCoins();
+           }
         }else{
-          current.parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y+30*direction), (int)(testPoint.z), level.numOfCoins));//create the new object
-          coins.add(false);
-          level.numOfCoins++;
+          placementContext = new StageComponentPlacementContext((int)(testPoint.x), (int)(testPoint.y), (float)(int)(testPoint.z+5*direction));
         }
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        if(editingBlueprint){
-          current.parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+30*direction), 0));//create the new object
-        }else{
-          current.parts.add(new Coin((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+30*direction), level.numOfCoins));//create the new object
-          coins.add(false);
-          level.numOfCoins++;
-        }
+        current.add(constructor.apply(placementContext));//create the new object
         break;
       }
     }
   }
-  if (draw3DSwitch1) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {//ray cast
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;//change the current testing x avlue
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
-        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
-          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new SWon3D((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.y=testPoint.y;//change the current testing y value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new ypoint colides with something
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
-        if (Float.isNaN(direction)) {//if the direction is NaN
-          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
-        }
-        current.parts.add(new SWon3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new SWon3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-    }
-  }
-  if (draw3DSwitch2) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {//ray cast
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;//change the current testing x avlue
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
-        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
-          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new SWoff3D((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.y=testPoint.y;//change the current testing y value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new ypoint colides with something
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
-        if (Float.isNaN(direction)) {//if the direction is NaN
-          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
-        }
-        current.parts.add(new SWoff3D((int)testPoint.x, (int)testPoint.y, (int)testPoint.z));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new SWoff3D((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-    }
-  }
-  if (drawingSign) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {//ray cast
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;//change the current testing x avlue
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
-        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
-          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new WritableSign((int)(testPoint.x+35*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.y=testPoint.y;//change the current testing y value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new ypoint colides with something
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
-        if (Float.isNaN(direction)) {//if the direction is NaN
-          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
-        }
-        current.parts.add(new WritableSign((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new WritableSign((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+5*direction)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-    }
-  }
-  if (placingLogicButton) {
-    calcMousePoint();
-    Point3D omp=genMousePoint(0);
-    float xzh=dist(cam3Dx+DX, cam3Dz-DZ, mousePoint.x, mousePoint.z);//calcuate the original displacment distance on the x-z plane   used in case the direction calculation return NAN
-    float ry_xz=atan2((cam3Dy-DY)-mousePoint.y, xzh);//find the rotation of the orignal line to the x-z plane
-    float rx_z=atan2((cam3Dz-DZ)-mousePoint.z, (cam3Dx+DX)-mousePoint.x);//find the rotation of the x-z component of the prevous line
-    for (int i=0; i<5000; i++) {//ray cast
-      Point3D testPoint = genMousePoint(i);
-
-      omp.x=testPoint.x;//change the current testing x avlue
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new xpoint colides with something
-        float direction=((cam3Dx+DX)-testPoint.x)/abs((cam3Dx+DX)-testPoint.x);//figure out what diretion the cast was going in
-        if (Float.isNaN(direction)) {//ckeck if the direction is NaN
-          direction=cos(rx_z)/abs(cos(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new LogicButton((int)(testPoint.x+20*direction), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.y=testPoint.y;//change the current testing y value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new ypoint colides with something
-        float direction=((cam3Dy-DY)-testPoint.y)/abs((cam3Dy-DY)-testPoint.y);//figure out what direction the case was going in
-        if (Float.isNaN(direction)) {//if the direction is NaN
-          direction=sin(ry_xz)/abs(sin(ry_xz));//use another silly method to get the direction
-        }
-        current.parts.add(new LogicButton((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-      omp.z=testPoint.z;//change the current testing z value
-      if (colid_index(omp.x, omp.y, omp.z, current)!=-1) {//check if the new zpoint colies with something
-        float direction=((cam3Dz-DZ)-testPoint.z)/abs((cam3Dz-DZ)-testPoint.z);//figure out the direction the cast was going in
-        if (Float.isNaN(direction)) {//if the diretion is nan
-          direction=sin(rx_z)/abs(sin(rx_z));//use another silly method to get the direction
-        }
-        current.parts.add(new LogicButton((int)(testPoint.x), (int)(testPoint.y), (int)(testPoint.z+20*direction)));//create the new object
-        coins.add(false);
-        level.numOfCoins++;
-        break;
-      }
-    }
-  }
-  if (deleteing) {
-    for (int i=0; i<5000; i++) {
+  
+  if (deleteing) {//if deleting things
+    for (int i=0; i<5000; i++) {//ray cast to find things
       Point3D testPoint = genMousePoint(i);
       int deleteIndex=colid_index(testPoint.x, testPoint.y, testPoint.z, current);
-      if (deleteIndex!=-1) {
+      if (deleteIndex!=-1) {//if a thing was found
+        //delet the thing
         StageComponent removed = current.parts.remove(deleteIndex);
         if (current.interactables.contains(removed)) {
           current.interactables.remove(removed);
         }
         break;
-      }else{
+      }else{//other wize, check if there is an entity that can be deleted
         Collider3D c3D = Collider3D.createBoxHitBox(testPoint.x-0.5, testPoint.y-0.5, testPoint.z-0.5,1,1,1);
         for(int j=0;j<current.entities.size();j++){
           if(collisionDetection.collide3D(current.entities.get(j).getHitBox3D(0,0,0),c3D)){
@@ -1826,14 +1565,14 @@ void mouseClicked3D() {
 
 
 
-/**coppy the blueprint so it can be correctly positoned on top of the stage for viewing
- 
+/**Coppy the currently selected blueprint so it can be correctly positoned on top of the stage for viewing
  */
 void generateDisplayBlueprint() {
   String type = blueprints[currentBluieprintIndex].type;
   boolean type3d = type.equals("3D blueprint");
-  displayBlueprint=new Stage("tmp", type);
+  displayBlueprint=new Stage("tmp", type);//create the display blueprint
   int ix, iy, iz =startingDepth;
+  //calculate the base position for the blueprint
   if (grid_mode) {
     ix=Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size;
     iy=Math.round(((int)(mouseY/Scale)-camPosY)*1.0/grid_size)*grid_size;
@@ -1842,35 +1581,45 @@ void generateDisplayBlueprint() {
     iy=(int)(mouseY/Scale)-camPosY;
   }
 
-
+  //for each part in the blueprint
   for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
-    displayBlueprint.parts.add(blueprints[currentBluieprintIndex].parts.get(i).copy());
+    //TODO replace the stuipid copy thing with use of the serial constructor
+    displayBlueprint.parts.add(blueprints[currentBluieprintIndex].parts.get(i).copy());//add a copy of the blueprint object to the display blueprint
+    
+    //TODO change this to use the simpler proper movemnt methods
+    //if this component is a trangular one
     if (displayBlueprint.parts.get(i).type.equals("sloap")||displayBlueprint.parts.get(i).type.equals("holoTriangle")) {
+      //translate it over to the correct visual positin  
       displayBlueprint.parts.get(i).dx+=ix;
       displayBlueprint.parts.get(i).dy+=iy;
       if(type3d){
         displayBlueprint.parts.get(i).dz+=iz;
       }
     }
+    //translate the component over to the display position
     displayBlueprint.parts.get(i).x+=ix;
     displayBlueprint.parts.get(i).y+=iy;
     if(type3d){
       displayBlueprint.parts.get(i).z+=iz;
     }
-    //System.out.println(displayBlueprint.parts.get(i).x);
   }
 }
 
+/**Coppy the currently selected blueprint so it can be correctly displayed in 3D
+*/
 void generateDisplayBlueprint3D() {
   String type = blueprints[currentBluieprintIndex].type;
   displayBlueprint=new Stage("tmp", type);
   float ix = blueprintPlacemntX, iy = blueprintPlacemntY, iz = blueprintPlacemntZ;
+  //calculate the min and max locations of the blueprint (for the arrows render)
   blueprintMax=new float[]{-66666666,-66666666,-66666666};
   blueprintMin=new float[]{66666666,66666666,66666666};
+  //for each part of the blueprint
   for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
+    //TODO replace stupid copy thing with use of the serial constructor
     StageComponent part = blueprints[currentBluieprintIndex].parts.get(i).copy(ix,iy,iz);
-    displayBlueprint.parts.add(part);
-    //NOTE this will have to be reworked when sloaps are added to 3D
+    displayBlueprint.parts.add(part);//add the coppied part to the display blueprint
+    //NOTE this will have to be reworked when sloaps are added to 3D. oops forgot to do this
     blueprintMax[0]=max(blueprintMax[0],part.x+part.dx);
     blueprintMax[1]=max(blueprintMax[1],part.y+part.dy);
     blueprintMax[2]=max(blueprintMax[2],part.z+part.dz);
@@ -1880,31 +1629,38 @@ void generateDisplayBlueprint3D() {
   }
 }
 
-void renderBlueprint() {//render the blueprint on top of the stage
+/**render the currently selected blueprint on top of the stage
+*/
+void renderBlueprint() {
   for (int i=0; i<displayBlueprint.parts.size(); i++) {
     displayBlueprint.parts.get(i).draw(g);
   }
 }
 
-void renderBlueprint3D() {//render the blueprint on top of the stage
+/**render the currently selected blueprint in 3D
+*/
+void renderBlueprint3D() {
   for (int i=0; i<displayBlueprint.parts.size(); i++) {
     displayBlueprint.parts.get(i).draw3D(g);
   }
 }
 
+//hmmmm apperently theese are global vars
 //dfa=default aspect ratio car=current aspect ratio
 float dfa=1280.0/720, car=1.0*width/height;
 Point3D mousePoint=new Point3D(0, 0, 0);
-void calcMousePoint() {//get a 3d point that is at the same postition as the mouse curser
+/**Calculate a 3D point that is at the same postition as the mouse curser in real 3D space
+*/
+void calcMousePoint() {
+  //processing camera values deffinition
+  //camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0);
+  //defCameraX = width/2;
+  //defCameraY = height/2;
+  //defCameraFOV = 60 * DEG_TO_RAD;
+  //defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
 
-//camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0);
-//defCameraX = width/2;
-//defCameraY = height/2;
-//defCameraFOV = 60 * DEG_TO_RAD;
-//defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
-
-  car=1.0*width/height;
-  float planeDist = 360.0 / tan(settings.getFOV()/2);
+  car=1.0*width/height;//calculate the current aspect ratio
+  float planeDist = 360.0 / tan(settings.getFOV()/2);//calulcate the 720p default render plane for the given FOV
   float camCentercCalcX, camCentercCalcY, camCentercCalcZ;//get a point that is a certain distance from where the camera eyes are in the center if the screen
   camCentercCalcY=sin(radians(yangle))*planeDist+cam3Dy-DY;//calculate the center point of the camera on the plane that is a distacne from the eye point of the camera
   float hd2=cos(radians(yangle))*-planeDist;//calcualte a new hypotenuse for the x/z axis where the result from the calculation of the Y coord is taken into account
@@ -1921,7 +1677,11 @@ void calcMousePoint() {//get a 3d point that is at the same postition as the mou
   mousePoint=new Point3D(camCentercCalcX+nx, camCentercCalcY+ny, camCentercCalcZ-nz);
 }
 
-Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is in line through the mouse pointer at a set distance from the camera
+/**Calcualte the coords of a new point that is in line through the mouse pointer at a set distance from the camera.
+note: calls calcMousePoint automcatially
+@param hyp The distance from the camrea eye the point should be
+*/
+Point3D genMousePoint(float hyp) {
   calcMousePoint();//make shure the mouse position is up to date
   float x, y, z, ry_xz, rx_z, xzh;//define variables that will be used
   hyp*=-1;//invert the inputed distance
@@ -1935,15 +1695,40 @@ Point3D genMousePoint(float hyp) {//calcualte the coords of a new point that is 
 
   return new Point3D(x, y, z);
 }
+
+//TODO: replace every instance of this class with PVector
+/**A 3D point. this should not be used if possible
+*/
 class Point3D {
   float x, y, z;
+  /**Create a new 3D point
+  @param x x
+  @param y y
+  @param z z
+  */
   Point3D(float x, float y, float z) {
     this.x=x;
     this.y=y;
     this.z=z;
   }
+  /**Create a new 3D point from a PVector
+  @param p The position to copy
+  */
+  Point3D(PVector p) {
+    this.x=p.x;
+    this.y=p.y;
+    this.z=p.z;
+  }
 
   public String toString() {
     return x+" "+y+" "+z;
   }
+  
+  /**Get this point as a PVector
+  */
+  public PVector toPVector(){
+    return new PVector(x,y,z);
+  }
 }
+
+//end of stage_editor.pde

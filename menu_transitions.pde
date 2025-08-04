@@ -1,87 +1,97 @@
+//start of menu_transitions.pde
+//this file handles menu to menu transition animations
+/**Process and render currently on going menu transition
+*/
 void menuTransition() {
-  if(settings.getDisableMenuTransitions()){
-    transitionProgress=1;
+  if(settings.getDisableMenuTransitions()){//if transitions are disabled
+    transitionProgress=1;//imediatly end the current one
     transitioningMenu=false;
     menue=true;
     return;
   }
+  //process each specific transition
   switch(currentTransition) {
-  case LOGO_TO_MAIN:
-    transition_logoToMain();
-    break;
-
-  case LOGO_TO_SETTINGS:
-    transition_logoToSettings();
-    break;
-
-  case MAIN_TO_SETTINGS:
-    transition_mainToSettings();
-    break;
-
-  case SETTINGS_TO_MAIN:
-    transition_settingsToMain();
-    break;
-
-  case MAIN_TO_LEVEL_SELECT:
-    transition_mainToLevelSelect();
-    break;
-
-  case LEVEL_SELECT_TO_MAIN:
-    transition_levelSelectToMain();
-    break;
-
-  case LEVEL_SELECT_TO_UGC:
-    transition_levelSelectToUGC();
-    break;
-
-  case UGC_TO_LEVEL_SELECT:
-    transition_UGCToLevelSelect();
-    break;
-    
-  case LEVEL_SELECT_TO_LEVEL_SELECT_2:
-    transition_levelSelectToLevelSelect2();
-    break;
-    
-  case LEVEL_SELECT_2_TO_LEVEL_SELECT:
-    transition_levelSelect2ToLevelSelect();
-    break;
-
-  default:
-    transitionProgress=1;
+    case LOGO_TO_MAIN:
+      transition_logoToMain();
+      break;
+  
+    case LOGO_TO_SETTINGS:
+      transition_logoToSettings();
+      break;
+  
+    case MAIN_TO_SETTINGS:
+      transition_mainToSettings();
+      break;
+  
+    case SETTINGS_TO_MAIN:
+      transition_settingsToMain();
+      break;
+  
+    case MAIN_TO_LEVEL_SELECT:
+      transition_mainToLevelSelect();
+      break;
+  
+    case LEVEL_SELECT_TO_MAIN:
+      transition_levelSelectToMain();
+      break;
+  
+    case LEVEL_SELECT_TO_UGC:
+      transition_levelSelectToUGC();
+      break;
+  
+    case UGC_TO_LEVEL_SELECT:
+      transition_UGCToLevelSelect();
+      break;
+      
+    case LEVEL_SELECT_TO_LEVEL_SELECT_2:
+      transition_levelSelectToLevelSelect2();
+      break;
+      
+    case LEVEL_SELECT_2_TO_LEVEL_SELECT:
+      transition_levelSelect2ToLevelSelect();
+      break;
+  
+    default:
+      transitionProgress=1;
   }
-  if (transitionProgress>=1) {
+  if (transitionProgress>=1) {//end the transition if at end
     transitioningMenu=false;
     menue=true;
   }
 }
-
+/**The hard coded menu transitions
+*/
 enum Transitions {
   LOGO_TO_MAIN,
-    LOGO_TO_SETTINGS,
-    MAIN_TO_SETTINGS,
-    SETTINGS_TO_MAIN,
-    MAIN_TO_LEVEL_SELECT,
-    LEVEL_SELECT_TO_MAIN,
-    LEVEL_SELECT_TO_UGC,
-    UGC_TO_LEVEL_SELECT,
-    LEVEL_SELECT_TO_LEVEL_SELECT_2,
-    LEVEL_SELECT_2_TO_LEVEL_SELECT
+  LOGO_TO_SETTINGS,
+  MAIN_TO_SETTINGS,
+  SETTINGS_TO_MAIN,
+  MAIN_TO_LEVEL_SELECT,
+  LEVEL_SELECT_TO_MAIN,
+  LEVEL_SELECT_TO_UGC,
+  UGC_TO_LEVEL_SELECT,
+  LEVEL_SELECT_TO_LEVEL_SELECT_2,
+  LEVEL_SELECT_2_TO_LEVEL_SELECT
 };
 
+//some global vars
 Transitions currentTransition;
 float transitionProgress;
 int transitionStartMillis;
-
+/**Start a new menu transition
+@param transition The transition to start
+*/
 void initMenuTransition(Transitions transition) {
   currentTransition=transition;
   transitionProgress=0;
-  transitionStartMillis=millis();
+  transitionStartMillis=millis();//set the transition start time 
   println("starting transition: "+transition);
   transitioningMenu=true;
 }
 
 ArrayList<Star> startupStars = new ArrayList<Star>();
-
+/**Render the logo to main transition
+*/
 void transition_logoToMain() {
 
   if (transitionProgress<0.4) {
@@ -129,7 +139,8 @@ void transition_logoToMain() {
   transitionProgress=(float)(millis()-transitionStartMillis)/5000.0;
 }
 
-
+/**Render the logo to settings transition
+*/
 void transition_logoToSettings() {
 
   if (transitionProgress<0.4) {
@@ -177,6 +188,8 @@ void transition_logoToSettings() {
   transitionProgress=(float)(millis()-transitionStartMillis)/5000.0;
 }
 
+/**Render the main to settings transition
+*/
 void transition_mainToSettings() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -195,6 +208,8 @@ void transition_mainToSettings() {
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
 
+/**Render the settings to main transition
+*/
 void transition_settingsToMain() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -212,7 +227,8 @@ void transition_settingsToMain() {
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
-
+/**Render the main to level select transition
+*/
 void transition_mainToLevelSelect() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -236,7 +252,8 @@ void transition_mainToLevelSelect() {
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
-
+/**Render the level select to main transition
+*/
 void transition_levelSelectToMain() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -261,6 +278,8 @@ void transition_levelSelectToMain() {
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
 
+/**Render the level select to UGC transition
+*/
 void transition_levelSelectToUGC() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -278,7 +297,8 @@ void transition_levelSelectToUGC() {
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
-
+/**Render the UGC to level select transition
+*/
 void transition_UGCToLevelSelect() {
   if (transitionProgress<0.5) {
     float senctionProgress = (transitionProgress)/0.5;
@@ -296,7 +316,8 @@ void transition_UGCToLevelSelect() {
 
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
-
+/**Render the level select 2 to level select transition
+*/
 void transition_levelSelect2ToLevelSelect() {
   int groundCOlor = -16732415;
   if(transitionProgress<0.75){
@@ -322,6 +343,8 @@ void transition_levelSelect2ToLevelSelect() {
   transitionProgress=(float)(millis()-transitionStartMillis)/2000.0;
 }
 
+/**Render the level select to level select 2 transition
+*/
 void transition_levelSelectToLevelSelect2() {
   int groundCOlor = -16732415;
   if(transitionProgress>0.25){
@@ -348,28 +371,34 @@ void transition_levelSelectToLevelSelect2() {
 }
 
 
-
+//why is this here?
 //camera() = camera(defCameraX, defCameraY, defCameraZ,    defCameraX, defCameraY, 0,    0, 1, 0);
 //defCameraX = width/2;
 //defCameraY = height/2;
 //defCameraFOV = 60 * DEG_TO_RAD;
 //defCameraZ = defCameraY / ((float) Math.tan(defCameraFOV / 2.0f));
-
+/**A simple representation of a start for the startup animation
+*/
 class Star {
   int x, y;
+  /**Create a new star
+  */
   Star() {
     x=(int)random(0, width);
     y=(int)random(0, 2880);
   }
-
+  /**Draw the star
+  */
   void draw() {
     fill(255);
     circle(x, y, 2);
   }
 }
-
+/**Create new start and add them to the startup stars list
+*/
 void addStars() {
   for (int i=0; i<10; i++) {
     startupStars.add(new Star());
   }
 }
+//end of menu_transitions.pde

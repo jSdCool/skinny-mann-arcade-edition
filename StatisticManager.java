@@ -2,9 +2,8 @@ import processing.data.*;
 import processing.core.*;
 import java.io.File;
 /** class to store and manage statistics 
-
 */
-class StatisticManager {
+public class StatisticManager {
   static StatisticManager instace;
   
   final String statsFileName;
@@ -21,14 +20,18 @@ class StatisticManager {
   private int signsRead;
   private int soundBoxesUsed;
 
-  PApplet source;
-
+  private PApplet source;
+  
+  /**Create a ststaictics manager and load current stats
+  @param fileName The file path of the stats file
+  @param source Local context for saving stats
+  */
   StatisticManager(String fileName, PApplet source) {
     statsFileName = fileName;
     this.source=source;
-    if (new File(fileName).exists()) {
+    if (new File(fileName).exists()) {//if there is an exsisting stats file
       JSONObject statsObject = source.loadJSONObject(fileName);
-
+      //load stats here
       coinsColected = statsObject.getInt("coins collected");
       settingsChnaged = statsObject.getInt("settings changed");
       portalsUsed = statsObject.getInt("portals used");
@@ -40,16 +43,20 @@ class StatisticManager {
       deactivated3D = statsObject.getInt("3d mode deactivated");
       signsRead = statsObject.getInt("sings read");
       soundBoxesUsed = statsObject.getInt("sound boxes used");
-      //load stats here
+      
     }
-    instace = this;
+    instace = this;//set this object as the global stats object
   }
   
-  static StatisticManager getInstace(){
+  /**Get the global instace of the stats manager
+  @return The global stats manager
+  */
+  public static StatisticManager getInstace(){
     return instace;
   } 
-
-  void save() {
+  /**Save current statistics to a file
+  */
+  public void save() {
     JSONObject statsObject = new JSONObject();
 
     //save stats here
@@ -68,38 +75,60 @@ class StatisticManager {
     source.saveJSONObject(statsObject, statsFileName);
   }
 
-//functions to handle increasing all the values
-  void incrementCollectedCoins() {
+  //functions to handle increasing all the values
+  /**Increase the coins collected stat
+  */
+  public void incrementCollectedCoins() {
     coinsColected++;
   }
-  void incrementSettingsChnaged() {
+  /**Increase the coins collected stat
+  */
+  public void incrementSettingsChnaged() {
     settingsChnaged++;
   }
-  void incrementPortalsUsed() {
+  /**Increase the portals used stat
+  */
+  public void incrementPortalsUsed() {
     portalsUsed++;
   }
-  void incrementButtonsActivated() {
+  /**Increase the (stage)buttons activated stat
+  */
+  public void incrementButtonsActivated() {
     buttonsActivated++;
   }
-  void incrementGamesQuit() {
+  /**Increase the games quit stat
+  */
+  public void incrementGamesQuit() {
     gamesQuit++;
   }
-  void incrementLevelsCompleted() {
+  /**Increase the levels completed stat
+  */
+  public void incrementLevelsCompleted() {
     levelsCompleted++;
   }
-  void incrementTimesDied() {
+  /**Increase the number of deaths stat
+  */
+  public void incrementTimesDied() {
     timesDied++;
   }
-  void incrementActivated3D() {
+  /**Increase the number of times 3D got activated stat
+  */
+  public void incrementActivated3D() {
     activated3D++;
   }
-  void incrementDeactivated3D() {
+  /**Increase the number of times 3D got deactivated stat
+  */
+  public void incrementDeactivated3D() {
     deactivated3D++;
   }
-  void incrementSignsRead(){
+  /**Increase the signs read stat
+  */
+  public void incrementSignsRead(){
     signsRead++;
   }
-  void incrementSoundBoxesUsed(){
+  /**Increase the sound boxes used stat
+  */
+  public void incrementSoundBoxesUsed(){
     soundBoxesUsed++;
   }
 }

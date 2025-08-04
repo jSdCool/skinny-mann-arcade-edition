@@ -1,10 +1,19 @@
-class LevelDownloadInfo extends DataPacket {
+/**A network data packet contianing info about a level download
+*/
+public class LevelDownloadInfo extends DataPacket {//feels a bit unfair to call this a single packet given its potential size, oh well
   
   public static final Identifier ID = new Identifier("LevelDownloadInfo");
   
   public Level level;
   public String files[];
   public int fileSizes[], blockSize, realSize[];
+  /**Create a packet containiong data related to downloading a level
+  @param level The level to download
+  @param files A list of other files that need to be downloaded
+  @param fileSizes The sizes of the other files that need to be downloaded(blocks)
+  @param blockSize The size of a single data download block
+  @param realSize the real size of all the additional files that need to be downloaded (bytes)
+  */
   public LevelDownloadInfo(Level level, String files[], int fileSizes[], int blockSize, int realSize[]) {
     this.level=level;
     this.files=files;
@@ -13,6 +22,9 @@ class LevelDownloadInfo extends DataPacket {
     this.realSize=realSize;
   }
   
+  /**Recreate the level download info from Serialized binarry data
+  @param iterator The source of the binarry data
+  */
   public LevelDownloadInfo(SerialIterator iterator){
     level = (Level)iterator.getObject(Level::new);
     files = new String[iterator.getInt()];
@@ -32,6 +44,9 @@ class LevelDownloadInfo extends DataPacket {
     
   }
   
+  /**Convert this packet to a byte representation that can be sent over the network or saved to a file.<br>
+  @return This packet as a binarry representation
+  */
   @Override
   public SerializedData serialize() {
     SerializedData data = new SerializedData(id());
@@ -56,6 +71,9 @@ class LevelDownloadInfo extends DataPacket {
     return data;
   }
   
+  /**Get the id of this objet
+  @return The Identifier representing this object
+  */
   @Override
   public Identifier id() {
     return ID;

@@ -1,6 +1,20 @@
 if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
+0.10.1_Early_Access
+
+
+0.10.0_Early_Access
+-changed: refactored many systems relating to component placement and loading, including stage components, logic components and entitiies
+-changed: the order of buttons in the level creator tool box has changed
+-changed: tool box buttons for logic components have had the text on them replaced with pictographic icons
++added: a new icon for the goon entity button
++added: ability to rotate usualy solid level components
++added: sloaps in 3D mode
++added: new save icon for level creator
++added: level-15
++added: level-16
+
 0.9.2_Early_Access
 -fixed: changing the resolution setting would save the incorrect values for screen width and height
 -changed: text boxes in level creator have been updated to the new text box system

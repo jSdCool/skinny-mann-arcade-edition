@@ -1,24 +1,47 @@
-class ToolBox extends PApplet {
+//start of tool_box_window.pde
 
+/**Primarry object responcable for the level creator tool box window
+*/
+class ToolBox extends PApplet {
+  
+  /**Create a new tool box window,
+  please only create one of theese 
+  @param miliOffset The millis time of the main program when this window is created
+  */
   public ToolBox(int miliOffset) {
-    super();
+    super();//setup the papplet
+    //create the new window using this as the base for that window
     PApplet.runSketch(new String[]{this.getClass().getName()}, this);
     millisOffset=miliOffset;
   }
 
+  //oh fuck all the variables
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage, draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, toggle3DMode, switch3D1, switch3D2, saveLevel, exitStageEdit, sign, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, playSound, nextSound, prevSound, checkpointButton, playPauseButton, groundButton, goalButton, deleteButton, movePlayerButton, gridModeButton, holoButton, connectLogicButton, moveComponentsButton, andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, logicButtonButton, runLoad, delayButton, zOffsetButton, logicHelpButton, move3DButton, size3DButton, set3DButton, read3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, playLogicSoundButton, pulseButton, randomButton, tickLogicButton,placeBlueprint3DButton,respawnEntitiesButton;
-  Button goonEntity;
+  Button colorPage, toolsPage,  toggle3DMode, saveLevel, exitStageEdit, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, nextSound, prevSound,  playPauseButton,  deleteButton, movePlayerButton, gridModeButton, connectLogicButton, moveComponentsButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, runLoad, logicHelpButton, move3DButton, size3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, tickLogicButton,placeBlueprint3DButton,respawnEntitiesButton, rotateButton;
+  //thank goodness we do not need theese anymore
+  //Button draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, switch3D1, switch3D2, sign, checkpointButton, groundButton, goalButton, holoButton, logicButtonButton, playSound;
+  //Button andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, delayButton, zOffsetButton, set3DButton, read3DButton, playLogicSoundButton, pulseButton, randomButton;
+  Button[] stageComponetButtons, logicComponentButtons, entityButtons;
+  StageComponentRegistry.ComponentButtonIconDraw componentIcons[];
+  LogicComponentRegistry.ComponentButtonIconDraw logicComponentIcons[];
+  EntityRegistry.EntityButtonIconDraw entityIcons[];
+  Boolean[][] componentAllowedDimentions;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
 
+  /**Processing's settings method.
+  sets the size of the new window
+  */
   public void settings() {
-    size(1280, 720, P2D);//mac os requires a render to be specified
+    //not resizable for now, or perhaps ever
+    size(1280, 720, P2D);//mac os requires a render to be specified, because for some reason JAVA2D does not work on mac
     smooth();
   }
+  /**Processing's setup function
+  */
   void setup() {
-    textSize(50);
+    textSize(50);//set the inital text size
     //all page buttons
     colorPage=new Button(this, 50, 50, 100, 50, "colors/depth");
     toolsPage=new Button(this, 155, 50, 100, 50, "tools");
@@ -31,64 +54,82 @@ class ToolBox extends PApplet {
     nextPlayerButton=new Button(this, 400, 105, 28, 28, ">");
     
     //stage editing tools
-    toggle3DMode=new Button(this, 820, 40+100, 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
-    switch3D1=new Button(this, 880, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D on switch");
-    switch3D2=new Button(this, 940, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("turn 3D off switch");
-    saveLevel=new Button(this, 1000, 40+100, 50, 50, "save", 255, 203).setStrokeWeight(5).setHoverText("save level");
-    draw_sloap=new Button(this, 700, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sloap");
-    draw_holoTriangle=new Button(this, 760, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("holographic sloap(no colision)");
-    draw_dethPlane=new Button(this, 820, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("death plane");
-    draw_coin=new Button(this, 580, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("coin");
-    draw_portal=new Button(this, 640, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("interdimentional portal");
-    exitStageEdit= new Button(this, 520, 40+100, 50, 50, " < ", 255, 203).setStrokeWeight(5).setHoverText("exit to overview");
-    sign=new Button(this, 1060, 140, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("sign");
-    select=new Button(this, 1120, 140, 50, 50, "select", 255, 203).setStrokeWeight(5).setHoverText("select");
-    skyColorB1=new Button(this, 150, 165, 40, 40, 255, 203).setStrokeWeight(0);
-    setSkyColor=new Button(this, 300, 580, 100, 30, "set sky color").setStrokeWeight(2);
-    resetSkyColor=new Button(this, 200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
-    placeBlueprint=new Button(this, 1180, 140, 50, 50, #0F1AD3, 203).setStrokeWeight(5).setHoverText("place blurprint");
+    int buttonPosIndex = 0;
+    int[] buttonPos = calcButtonPos(buttonPosIndex++);
+    //NOTE: save, back to overiew, delete and select are common between level and logic tools
+    saveLevel=new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText("save level");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    exitStageEdit= new Button(this, buttonPos[0], buttonPos[1], 50, 50, " < ", 255, 203).setStrokeWeight(5).setHoverText("exit to overview");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    select=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "select", 255, 203).setStrokeWeight(5).setHoverText("select");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    deleteButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText("delete");
+    //end of common tool buttons    
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    playPauseButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play/pause the simulation");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    gridModeButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    movePlayerButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText("move player");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    toggle3DMode=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "  3D  ", 255, 203).setStrokeWeight(5).setHoverText("toggle 3D mode");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    move3DButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    size3DButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    rotateButton = new Button(this, buttonPos[0], buttonPos[1], 50, 50, "Rotate", 255, 203).setStrokeWeight(5).setHoverText("rotate thigns");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    placeBlueprint=new Button(this, buttonPos[0], buttonPos[1], 50, 50, #0F1AD3, 203).setStrokeWeight(5).setHoverText("place blurprint");
+    
+    
+    stageComponetButtons = new Button[StageComponentRegistry.size()];
+    componentIcons = new StageComponentRegistry.ComponentButtonIconDraw[stageComponetButtons.length];
+    componentAllowedDimentions = new Boolean[stageComponetButtons.length][];
+    //generate all the component tool buttons from what is registerd in the registries
+    for(int i=0;i<stageComponetButtons.length;i++){
+      Identifier component = StageComponentRegistry.get(i);
+      buttonPos = calcButtonPos(buttonPosIndex++);//calculate the locaion of this button
+      stageComponetButtons[i] = new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText(StageComponentRegistry.getDescription(component));//create the button
+      componentIcons[i] = StageComponentRegistry.getIcon(component);
+      componentAllowedDimentions[i] = StageComponentRegistry.getAllowedDimentions(component);
+    }
+    
+    entityButtons = new Button[EntityRegistry.size()];
+    entityIcons = new EntityRegistry.EntityButtonIconDraw[entityButtons.length];
+    //generate entitie buttons
+    for(int i=0;i<entityButtons.length;i++){
+      Identifier component = EntityRegistry.get(i);
+      buttonPos = calcButtonPos(buttonPosIndex++);
+      entityButtons[i] = new Button(this,buttonPos[0], buttonPos[1],50,50,255,203).setStrokeWeight(5).setHoverText(EntityRegistry.getDescription(component));
+      entityIcons[i] = EntityRegistry.getIcon(component);
+    }
+    
+    //blueprint and sound things
     nexBlueprint=new Button(this, width/2+200, height*0.7-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevBlueprint=new Button(this, width/2-200, height*0.7-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    playSound=new Button(this, 40, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place sound");
     nextSound=new Button(this, width/2+300, height*0.4-25, 50, 50, ">", 255, 203).setStrokeWeight(5);
     prevSound=new Button(this, width/2-300, height*0.4-25, 50, 50, "<", 255, 203).setStrokeWeight(5);
-    checkpointButton=new Button(this, 160, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("check point");
-    playPauseButton=new Button(this, 40, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play/pause the simulation");
-    groundButton=new Button(this, 100, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("solid ground");
-    goalButton=new Button(this, 220, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("finish line");
-    deleteButton=new Button(this, 280, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("delete");
-    movePlayerButton=new Button(this, 340, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("move player");
-    gridModeButton=new Button(this, 400, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("grid mode");
-    holoButton=new Button(this, 460, 40+100, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("hologram (no collision)");
-    logicButtonButton=new Button(this, 100, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("place button");
-    move3DButton=new Button(this, 160, 200, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move things in 3D");
-    size3DButton=new Button(this, 220, 200, 50, 50, "size", 255, 203).setStrokeWeight(5).setHoverText("resize things in 3D");
-    goonEntity = new Button(this,280,200,50,50,255,203).setStrokeWeight(5).setHoverText("Goon");
 
     //logic editor tools
-    connectLogicButton=new Button(this, 40, 40+100, 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
-    moveComponentsButton=new Button(this, 100, 40+100, 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
-    andGateButton=new Button(this, 160, 40+100, 50, 50, "AND", 255, 203).setStrokeWeight(5).setHoverText("and gate");
-    orGateButton=new Button(this, 220, 40+100, 50, 50, "OR", 255, 203).setStrokeWeight(5).setHoverText("or gate");
-    xorGateButton=new Button(this, 340, 40+100, 50, 50, "XOR", 255, 203).setStrokeWeight(5).setHoverText("exclucuve or gate");
-    nandGateButton=new Button(this, 400, 40+100, 50, 50, "NAND", 255, 203).setStrokeWeight(5).setHoverText("inverted and gate");
-    norGateButton=new Button(this, 460, 40+100, 50, 50, "NOR", 255, 203).setStrokeWeight(5).setHoverText("inverted or gate");
-    xnorGateButton=new Button(this, 580, 40+100, 50, 50, "XNOR", 255, 203).setStrokeWeight(5).setHoverText("inverted exclucive or gate");
-    testLogicPlaceButton=new Button(this, 40, 100+100, 50, 50, "test", 255, 203).setStrokeWeight(5).setHoverText("this should not exsist");
-    constantOnButton=new Button(this, 640, 40+100, 50, 50, "ON", 255, 203).setStrokeWeight(5).setHoverText("constant on signal");
-    readVariableButton=new Button(this, 700, 40+100, 50, 50, "read", 255, 203).setStrokeWeight(5).setHoverText("read the state of a variable");
-    setVariableButton=new Button(this, 760, 40+100, 50, 50, "set", 255, 203).setStrokeWeight(5).setHoverText("set the state of a varable");
-    setVisabilityButton=new Button(this, 820, 40+100, 50, 50, "vis", 255, 203).setStrokeWeight(5).setHoverText("set visability of a group");
-    xOffsetButton=new Button(this, 880, 40+100, 50, 50, "offset X", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the x-axis");
-    yOffsetButton=new Button(this, 940, 40+100, 50, 50, "offset y", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the y-axis");
-    delayButton=new Button(this, 1060, 140, 50, 50, "delay", 255, 203).setStrokeWeight(5).setHoverText("delay a pulse in your logic");
-    zOffsetButton=new Button(this, 40, 200, 50, 50, "offset z", 255, 203).setStrokeWeight(5).setHoverText("offset a group in the z-axis");
-    logicHelpButton=new Button(this, 100, 200, 50, 50, "?", 255, 203).setStrokeWeight(5).setHoverText("help");
-    set3DButton=new Button(this, 160, 200, 50, 50, "s 3D", 255, 203).setStrokeWeight(5).setHoverText("set the state of 3D mode");
-    read3DButton=new Button(this, 220, 200, 50, 50, "r 3D", 255, 203).setStrokeWeight(5).setHoverText("read the state of 3D mode");
-    playLogicSoundButton=new Button(this, 280, 200, 50, 50, 255, 203).setStrokeWeight(5).setHoverText("play sounds woth logic");
-    pulseButton=new Button(this, 340, 200, 50, 50, "pulse", 255, 203).setStrokeWeight(5).setHoverText("generates a 1 tick pulse");
-    randomButton= new Button(this, 400, 200, 50, 50, "random", 255, 203).setStrokeWeight(5).setHoverText("sets its output randomly each tick");
+    buttonPosIndex = 4;
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    connectLogicButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "connect", 255, 203).setStrokeWeight(5).setHoverText("connect logic nodes");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    moveComponentsButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "move", 255, 203).setStrokeWeight(5).setHoverText("move components arround");
+    buttonPos = calcButtonPos(buttonPosIndex++);
+    logicHelpButton=new Button(this, buttonPos[0], buttonPos[1], 50, 50, "?", 255, 203).setStrokeWeight(5).setHoverText("help");
+    
+    logicComponentButtons = new Button[LogicComponentRegistry.size()];
+    logicComponentIcons = new LogicComponentRegistry.ComponentButtonIconDraw[logicComponentButtons.length];
+    //generate the logic component tools
+    for(int i=0;i<logicComponentButtons.length;i++){
+      Identifier compId = LogicComponentRegistry.get(i);
+      buttonPos = calcButtonPos(buttonPosIndex++);
+      logicComponentButtons[i] = new Button(this, buttonPos[0], buttonPos[1], 50, 50, 255, 203).setStrokeWeight(5).setHoverText(LogicComponentRegistry.getDescription(compId));
+      logicComponentIcons[i] = LogicComponentRegistry.getIcon(compId);
+    }
+    
     
     //variables and groups buttons
     increase=new Button(this, width/2+180, height*0.5, 50, 50, "+", 255, 203).setStrokeWeight(5);
@@ -118,25 +159,44 @@ class ToolBox extends PApplet {
     maxplayersIncrease=new Button(this, 230, 290, 30, 30, ">");
     maxplayersDecrease=new Button(this, 160, 290, 30, 30, "<");
     respawnEntitiesButton = new Button(this, 160,340, 80,30,"Respawn Entities",255,100);
+    skyColorB1=new Button(this, 150, 165, 40, 40, 255, 203).setStrokeWeight(0);
+    setSkyColor=new Button(this, 300, 580, 100, 30, "set sky color").setStrokeWeight(2);
+    resetSkyColor=new Button(this, 200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
   }
 
+  /**Calculate the XY positions of a given tool button
+  @param index The index of the button.
+  @return An array of 2 elements that represent the x and y positions of the button
+  */
+  private int[] calcButtonPos(int index){
+    final int numPerRow= 20;
+    int x = 40+60*(index%numPerRow);
+    int y = 140+ 60*(index/numPerRow);
+    return new int[]{x,y};
+  }
 
+  /**The main render loop for the toolbox
+  */
   public void draw() {
-    if (levelCreator) {
+    if (levelCreator) {//if in the level creator
+      //calculate the color selector RGB values
+      //This may be unused now
       redVal=(int)((rsp/1080.0)*255);
       greenVal=(int)((gsp/1080.0)*255);
       blueVal=(int)((bsp/1080.0)*255);
 
 
-      if (blueVal==255) {
+      if (blueVal==255) {//limit the blue val becasuse if it is 255 it does not work for some reason
         blueVal=254;
       }
+      //calculate the final color
       CC=(int)(Math.pow(16, 4)*redVal+Math.pow(16, 2)*greenVal+blueVal);
       CC=CC-16777215;
 
-      if (page.equals("colors")) {
+      if (page.equals("colors")) {//if on the colors page
         stroke(0);
         background(CC);
+        //render the color selector
         fill(255);
         strokeWeight(10);
         rect(100, 150, 1080, 50);
@@ -158,7 +218,7 @@ class ToolBox extends PApplet {
         text(greenVal, 640, 250);
         text(blueVal, 640, 400);
         JSONObject colo=colors.getJSONObject(selectedColor);
-        fill((int)(colo.getInt("red")*Math.pow(16, 4)+colo.getInt("green")*Math.pow(16, 2)+colo.getInt("blue"))-16777215);
+        fill((int)(colo.getInt("red")*Math.pow(16, 4)+colo.getInt("green")*Math.pow(16, 2)+colo.getInt("blue"))-16777215);//calculate the fill color for the given saved color
         rect(600, 600, 80, 80);
         fill(180);
         rect(500, 600, 50, 80);
@@ -170,8 +230,9 @@ class ToolBox extends PApplet {
         fill(0);
         textSize(15);
         text("save color", 640, 570);
-        if ((level!=null&&level.stages.size()>0&&currentStageIndex!=-1&&level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
-
+        //if in 3D mode
+        if ((level != null && level.stages.size() > 0 && currentStageIndex != -1 && level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
+          //draw the depth stuff
           fill(255);
           rect(100, 550, 200, 150);
           rect(950, 550, 200, 150);
@@ -182,17 +243,21 @@ class ToolBox extends PApplet {
           text(startingDepth, 200, 650);
           text(totalDepth, 1050, 650);
         }
+        //draw the page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
         stageSettings.draw();
         variablesAndGroups.draw();
         levelSettingsPage.draw();
-        if (settingSkyColor)
+        if (settingSkyColor) {//if setting the sky color, show the set sky color button
           setSkyColor.draw();
+        }
       }//end of if page is colors
-      if (page.equals("tools")) {
+      
+      if (page.equals("tools")) {//if the page is the tools page
         background(255*0.5);
+        //draw the page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
@@ -200,84 +265,42 @@ class ToolBox extends PApplet {
         variablesAndGroups.draw();
         levelSettingsPage.draw();
 
-        if (editingStage) {
+        if (editingStage) {//if editing a stage
+          boolean stageIs3D = level.stages.get(currentStageIndex).type.equals("3Dstage");//get if this stage is 3D
 
-
+          //Tools
+          //play pause button
           playPauseButton.draw();
           fill(0);
           stroke(0);
           strokeWeight(0);
           if (simulating) {
-            rect(50, 50+100, 8, 30);
-            rect(70, 50+100, 8, 30);
+            rect(playPauseButton.x+10, playPauseButton.y+10, 8, 30);
+            rect(playPauseButton.x+30, playPauseButton.y+10, 8, 30);
           } else {
-            triangle(50, 50+100, 75, 65+100, 50, 80+100);
+            triangle(playPauseButton.x+10, playPauseButton.y+10, playPauseButton.x+35, playPauseButton.y+25, playPauseButton.x+10, playPauseButton.y+40);
           }
+          //delete button
+          if (deleteing) {
+            deleteButton.setColor(255, #F2F258);
+          } else {
+            deleteButton.setColor(255, 203);
+          }
+          deleteButton.draw();
+          fill(203);
+          stroke(203);
+          strokeWeight(0);
+          //trash can
+          rect(deleteButton.x+5, deleteButton.y+15, 40, 5);
+          rect(deleteButton.x+20, deleteButton.y+10, 10, 5);
+          rect(deleteButton.x+10, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+10, deleteButton.y+40, 30, 5);
+          rect(deleteButton.x+35, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+18, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+27, deleteButton.y+20, 5, 20);
 
-          if (!e3DMode) {
-            strokeWeight(0);
-            if (ground) {
-              groundButton.setColor(255, #F2F258);
-            } else {
-              groundButton.setColor(255, 203);
-            }
-            groundButton.draw();
-            fill(-7254783);
-            stroke(-7254783);
-            rect(100, 70+100, 50, 20);
-            fill(-16732415);
-            stroke(-16732415);
-            rect(100, 60+100, 50, 10);
-
-            strokeWeight(0);
-            if (check_point) {
-              checkpointButton.setColor(255, #F2F258);
-            } else {
-              checkpointButton.setColor(255, 203);
-            }
-            checkpointButton.draw();
-            fill(#B9B9B9);
-            strokeWeight(0);
-            rect(168, 45+100, 5, 40);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
-            strokeWeight(0);
-
-            if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-              if (goal) {
-                goalButton.setColor(255, #F2F258);
-              } else {
-                goalButton.setColor(255, 203);
-              }
-              goalButton.draw();
-              fill(0);
-              stroke(0);
-              strokeWeight(0);
-              rect(223, 43+100, 15, 15);
-              rect(253, 43+100, 15, 15);
-              rect(238, 58+100, 15, 15);
-              rect(223, 73+100, 15, 15);
-              rect(253, 73+100, 15, 15);
-            }
-            if (deleteing) {
-              deleteButton.setColor(255, #F2F258);
-            } else {
-              deleteButton.setColor(255, 203);
-            }
-            deleteButton.draw();
-            fill(203);
-            stroke(203);
-            strokeWeight(0);
-            rect(285, 55+100, 40, 5);
-            rect(300, 50+100, 10, 5);
-            rect(290, 60+100, 5, 20);
-            rect(290, 80+100, 30, 5);
-            rect(315, 60+100, 5, 20);
-            rect(298, 60+100, 5, 20);
-            rect(307, 60+100, 5, 20);
-
+          //move player button
+          if(!e3DMode){//only render when not in 3D
             if (moving_player) {
               movePlayerButton.setColor(255, #F2F258);
             } else {
@@ -285,504 +308,157 @@ class ToolBox extends PApplet {
             }
             movePlayerButton.draw();
             strokeWeight(0);
-            draw_mann(365, 88+100, 1, 0.6, "red");
-
-            if (grid_mode) {
-              gridModeButton.setColor(255, #F2F258);
-            } else {
-              gridModeButton.setColor(255, 203);
-            }
-            gridModeButton.draw();
-            textSize(20);
-            fill(0);
-            stroke(0);
-            strokeWeight(1);
-            line(410, 42+100, 410, 87+100);
-            line(420, 42+100, 420, 87+100);
-            line(430, 42+100, 430, 87+100);
-            line(440, 42+100, 440, 87+100);
-            line(402, 50+100, 448, 50+100);
-            line(402, 60+100, 448, 60+100);
-            line(402, 70+100, 448, 70+100);
-            line(402, 80+100, 448, 80+100);
-            text(grid_size, 410, 80+100);
-            strokeWeight(0);
-            if (holo_gram) {
-              holoButton.setColor(255, #F2F258);
-            } else {
-              holoButton.setColor(255, 203);
-            }
-            holoButton.draw();
-            exitStageEdit.draw();
-
-            if (drawCoins) {
-              draw_coin.setColor(255, #F2F258);
-            } else {
-              draw_coin.setColor(255, 203);
-            }
-            draw_coin.draw();
-            drawCoin(605, 65+100, 4);
-            if (drawingPortal) {
-              draw_portal.setColor(255, #F2F258);
-            } else {
-              draw_portal.setColor(255, 203);
-            }
-            draw_portal.draw();
-            drawPortal(665, 65+100, 0.45);
-
-            if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-              if (sloap) {
-                draw_sloap.setColor(255, #F2F258);
-              } else {
-                draw_sloap.setColor(255, 203);
-              }//draw_holoTriangle
-              draw_sloap.draw();
-              fill(-7254783);
-              stroke(-7254783);
-              strokeWeight(0);
-              triangle(705, 85+100, 745, 85+100, 745, 45+100);
-              if (holoTriangle) {
-                draw_holoTriangle.setColor(255, #F2F258);
-              } else {
-                draw_holoTriangle.setColor(255, 203);
-              }//draw_holoTriangle
-              draw_holoTriangle.draw();
-              fill(-4623063);
-              stroke(-4623063);
-              strokeWeight(0);
-              triangle(765, 85+100, 805, 85+100, 805, 45+100);
-
-
-              if (dethPlane) {
-                draw_dethPlane.setColor(255, #F2F258);
-              } else {
-                draw_dethPlane.setColor(255, 203);
-              }//draw_holoTriangle
-              draw_dethPlane.draw();
-              fill(-114431);
-              stroke(-114431);
-              rect(825, 65+100, 40, 20);
-
-              if (selectingBlueprint) {
-                placeBlueprint.setColor(#0F1AD3, #F2F258);
-              } else {
-                placeBlueprint.setColor(#0F1AD3, 203);
-              }
-              placeBlueprint.draw();
-
-              if (placingSound) {
-                playSound.setColor(255, #F2F258);
-              } else {
-                playSound.setColor(255, 203);
-              }
-              playSound.draw();
-              drawSpeakericon(playSound.x+playSound.lengthX/2, playSound.y+playSound.lengthY/2, 0.5,g);
-              
-              //tmp
-              if(placingGoon){
-                goonEntity.setColor(255, #F2F258);
-              } else {
-                goonEntity.setColor(255, 203);
-              }
-              goonEntity.draw();
-            }//end of level is not 3D
-
-            if (drawingSign) {
-              sign.setColor(255, #F2F258);
-            } else {
-              sign.setColor(255, 203);
-            }
-            sign.draw();
-            drawSign(sign.x+sign.lengthX/2, sign.y+sign.lengthY, 0.6);
-
+            draw_mann(movePlayerButton.x+25, movePlayerButton.y+48, 1, 0.6, 0,g);
+          }
+          //grid mode button
+          if (grid_mode) {
+            gridModeButton.setColor(255, #F2F258);
+          } else {
+            gridModeButton.setColor(255, 203);
+          }
+          gridModeButton.draw();
+          textSize(20);
+          fill(0);
+          stroke(0);
+          strokeWeight(1);
+          line(gridModeButton.x+10, gridModeButton.y+2, gridModeButton.x+10, gridModeButton.y+47);
+          line(gridModeButton.x+20, gridModeButton.y+2, gridModeButton.x+20, gridModeButton.y+47);
+          line(gridModeButton.x+30, gridModeButton.y+2, gridModeButton.x+30, gridModeButton.y+47);
+          line(gridModeButton.x+40, gridModeButton.y+2, gridModeButton.x+40, gridModeButton.y+47);
+          line(gridModeButton.x+2, gridModeButton.y+10, gridModeButton.x+48, gridModeButton.y+10);
+          line(gridModeButton.x+2, gridModeButton.y+20, gridModeButton.x+48, gridModeButton.y+20);
+          line(gridModeButton.x+2, gridModeButton.y+30, gridModeButton.x+48, gridModeButton.y+30);
+          line(gridModeButton.x+2, gridModeButton.y+40, gridModeButton.x+48, gridModeButton.y+40);
+          text(grid_size, gridModeButton.x+10, gridModeButton.y+40);
+          strokeWeight(0);
+          //blueprint button
+          if (selectingBlueprint) {
+            placeBlueprint.setColor(#0F1AD3, #F2F258);
+          } else {
+            placeBlueprint.setColor(#0F1AD3, 203);
+          }
+          placeBlueprint.draw();
+          //select button and 3D move/size button
+          if(!e3DMode){//only render when not in 3D
             if (selecting) {
               select.setColor(255, #F2F258);
             } else {
               select.setColor(255, 203);
             }
             select.draw();
-            if (placingLogicButton) {
-              logicButtonButton.setColor(255, #F2F258);
+          }else{
+            if (current3DTransformMode==2&&selecting) {
+              size3DButton.setColor(255, #F2F258);
             } else {
-              logicButtonButton.setColor(255, 203);
+              size3DButton.setColor(255, 203);
             }
-            logicButtonButton.draw();
-            drawLogicButton(logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false,g);
-          }//end of not in 3D mode
-
+            size3DButton.draw();
+            if (current3DTransformMode==1&&selecting) {
+              move3DButton.setColor(255, #F2F258);
+            } else {
+              move3DButton.setColor(255, 203);
+            }
+            move3DButton.draw();
+          }
+          //save button
           saveLevel.draw();
-
-
-          //button hover text
-          textAlign(LEFT, BOTTOM);
-          playPauseButton.drawHoverText();
-          if (!e3DMode) {
-            groundButton.drawHoverText();
-            checkpointButton.drawHoverText();
-            if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-              goalButton.drawHoverText();
-            }
-
-            deleteButton.drawHoverText();
-            movePlayerButton.drawHoverText();
-            gridModeButton.drawHoverText();
-            holoButton.drawHoverText();
-            exitStageEdit.drawHoverText();
-            draw_coin.drawHoverText();
-            draw_portal.drawHoverText();
-            if (!level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-              draw_sloap.drawHoverText();
-              draw_holoTriangle.drawHoverText();
-              draw_dethPlane.drawHoverText();
-              placeBlueprint.drawHoverText();
-              goonEntity.drawHoverText();
-            }//end of level is not 3D
-            playSound.drawHoverText();
-
-            sign.drawHoverText();
-            select.drawHoverText();
-            logicButtonButton.drawHoverText();
-            
-          }//end of not 3d mode
-
-          saveLevel.drawHoverText();
-
-
-          if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-
-            if (!e3DMode) {
-              toggle3DMode.setColor(255, 203);
-              toggle3DMode.draw();
-
-              playPauseButton.draw();
-              fill(0);
-              stroke(0);
-              strokeWeight(0);
-              if (simulating) {
-                rect(50, 50+100, 8, 30);
-                rect(70, 50+100, 8, 30);
-              } else {
-                triangle(50, 50+100, 75, 65+100, 50, 80+100);
-              }
-
-              strokeWeight(0);
-              if (ground) {
-                groundButton.setColor(255, #F2F258);
-              } else {
-                groundButton.setColor(255, 203);
-              }
-              groundButton.draw();
-              fill(-7254783);
-              stroke(-7254783);
-              rect(100, 70+100, 50, 20);
-              fill(-16732415);
-              stroke(-16732415);
-              rect(100, 60+100, 50, 10);
-              exitStageEdit.draw();
-              textAlign(LEFT, BOTTOM);
-
-              if (grid_mode) {
-                gridModeButton.setColor(255, #F2F258);
-              } else {
-                gridModeButton.setColor(255, 203);
-              }
-              gridModeButton.draw();
-              textSize(20);
-              fill(0);
-              stroke(0);
-              strokeWeight(1);
-              line(410, 42+100, 410, 87+100);
-              line(420, 42+100, 420, 87+100);
-              line(430, 42+100, 430, 87+100);
-              line(440, 42+100, 440, 87+100);
-              line(402, 50+100, 448, 50+100);
-              line(402, 60+100, 448, 60+100);
-              line(402, 70+100, 448, 70+100);
-              line(402, 80+100, 448, 80+100);
-              text(grid_size, 410, 80+100);
-              strokeWeight(0);
-              if (deleteing) {
-                deleteButton.setColor(255, #F2F258);
-              } else {
-                deleteButton.setColor(255, 203);
-              }
-              deleteButton.draw();
-              fill(203);
-              stroke(203);
-              strokeWeight(0);
-              rect(285, 55+100, 40, 5);
-              rect(300, 50+100, 10, 5);
-              rect(290, 60+100, 5, 20);
-              rect(290, 80+100, 30, 5);
-              rect(315, 60+100, 5, 20);
-              rect(298, 60+100, 5, 20);
-              rect(307, 60+100, 5, 20);
-
-              if (moving_player) {
-                movePlayerButton.setColor(255, #F2F258);
-              } else {
-                movePlayerButton.setColor(255, 203);
-              }
-              movePlayerButton.draw();
-              strokeWeight(0);
-              draw_mann(365, 88+100, 1, 0.6, "red");
-
-
-
-
-
-
-              if (check_point) {
-                checkpointButton.setColor(255, #F2F258);
-              } else {
-                checkpointButton.setColor(255, 203);
-              }
-              checkpointButton.draw();
-              fill(#B9B9B9);
-              strokeWeight(0);
-              rect(168, 45+100, 5, 40);
-              fill(#EA0202);
-              stroke(#EA0202);
-              strokeWeight(0);
-              triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
-
-
-
-              if (holo_gram) {
-                holoButton.setColor(255, #F2F258);
-              } else {
-                holoButton.setColor(255, 203);
-              }
-              holoButton.draw();
-
-              if (draw3DSwitch1) {
-                switch3D1.setColor(255, #F2F258);
-              } else {
-                switch3D1.setColor(255, 203);
-              }
-              switch3D1.draw();
-              draw3DSwitch1(905, 80+100, 1);
-
-              if (draw3DSwitch2) {
-                switch3D2.setColor(255, #F2F258);
-              } else {
-                switch3D2.setColor(255, 203);
-              }
-              switch3D2.draw();
-              draw3DSwitch2(965, 80+100, 1);
-
-              if (drawingPortal) {
-                draw_portal.setColor(255, #F2F258);
-              } else {
-                draw_portal.setColor(255, 203);
-              }
-              draw_portal.draw();
-              drawPortal(665, 65+100, 0.45);
-
-              if (drawCoins) {
-                draw_coin.setColor(255, #F2F258);
-              } else {
-                draw_coin.setColor(255, 203);
-              }
-              draw_coin.draw();
-              drawCoin(605, 65+100, 4);
-
-              saveLevel.draw();
-              
-              if (selectingBlueprint) {
-                placeBlueprint.setColor(#0F1AD3, #F2F258);
-              } else {
-                placeBlueprint.setColor(#0F1AD3, 203);
-              }
-              placeBlueprint.draw();
-              
-              
-              textAlign(LEFT, BOTTOM);
-              toggle3DMode.drawHoverText();
-              switch3D1.drawHoverText();
-              switch3D2.drawHoverText();
-              checkpointButton.drawHoverText();
-              draw_portal.drawHoverText();
-              if (holoButton.isMouseOver()) {//this one has to stay
-                stroke(0);
-                fill(200);
-                strokeWeight(2);
-                rect(mouseX-4, mouseY-13, 165, 16);
-                fill(0);
-                textSize(15);
-                text("hologram (solid in 3D)", mouseX, mouseY+5);
-              }
-              draw_coin.drawHoverText();
-              saveLevel.drawHoverText();
-              textAlign(LEFT, BOTTOM);
-              playPauseButton.drawHoverText();
-              groundButton.drawHoverText();
-              exitStageEdit.drawHoverText();
-              gridModeButton.drawHoverText();
-              deleteButton.drawHoverText();
-              placeBlueprint.drawHoverText();
-            }//end of if not in 3D mode
-            else {
+          saveIcon(saveLevel.x+saveLevel.lengthX/2,saveLevel.y+saveLevel.lengthY/2,1,g);
+          //toggle 3D button
+          if(stageIs3D){
+            if (e3DMode) {
               toggle3DMode.setColor(255, #F2F258);
-              toggle3DMode.draw();
-              if (grid_mode) {
-                gridModeButton.setColor(255, #F2F258);
-              } else {
-                gridModeButton.setColor(255, 203);
-              }
-              gridModeButton.draw();
-              textSize(20);
-              fill(0);
-              stroke(0);
-              strokeWeight(1);
-              line(410, 42+100, 410, 87+100);
-              line(420, 42+100, 420, 87+100);
-              line(430, 42+100, 430, 87+100);
-              line(440, 42+100, 440, 87+100);
-              line(402, 50+100, 448, 50+100);
-              line(402, 60+100, 448, 60+100);
-              line(402, 70+100, 448, 70+100);
-              line(402, 80+100, 448, 80+100);
-              text(grid_size, 410, 80+100);
-              strokeWeight(0);
-
-              if (current3DTransformMode==2&&selecting) {
-                size3DButton.setColor(255, #F2F258);
-              } else {
-                size3DButton.setColor(255, 203);
-              }
-              size3DButton.draw();
-              if (current3DTransformMode==1&&selecting) {
-                move3DButton.setColor(255, #F2F258);
-              } else {
-                move3DButton.setColor(255, 203);
-              }
-              move3DButton.draw();
-              strokeWeight(0);
-              if (ground) {
-                groundButton.setColor(255, #F2F258);
-              } else {
-                groundButton.setColor(255, 203);
-              }
-              groundButton.draw();
-              fill(-7254783);
-              stroke(-7254783);
-              rect(100, 70+100, 50, 20);
-              fill(-16732415);
-              stroke(-16732415);
-              rect(100, 60+100, 50, 10);
-              if (holo_gram) {
-                holoButton.setColor(255, #F2F258);
-              } else {
-                holoButton.setColor(255, 203);
-              }
-              holoButton.draw();
-              if (check_point) {
-                checkpointButton.setColor(255, #F2F258);
-              } else {
-                checkpointButton.setColor(255, 203);
-              }
-              checkpointButton.draw();
-              fill(#B9B9B9);
-              strokeWeight(0);
-              rect(168, 45+100, 5, 40);
-              fill(#EA0202);
-              stroke(#EA0202);
-              strokeWeight(0);
-              triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
-              if (drawCoins) {
-                draw_coin.setColor(255, #F2F258);
-              } else {
-                draw_coin.setColor(255, 203);
-              }
-              draw_coin.draw();
-              drawCoin(605, 65+100, 4);
-              if (draw3DSwitch1) {
-                switch3D1.setColor(255, #F2F258);
-              } else {
-                switch3D1.setColor(255, 203);
-              }
-              switch3D1.draw();
-              draw3DSwitch1(905, 80+100, 1);
-
-              if (draw3DSwitch2) {
-                switch3D2.setColor(255, #F2F258);
-              } else {
-                switch3D2.setColor(255, 203);
-              }
-              switch3D2.draw();
-              draw3DSwitch2(965, 80+100, 1);
-              if (drawingSign) {
-                sign.setColor(255, #F2F258);
-              } else {
-                sign.setColor(255, 203);
-              }
-              sign.draw();
-              drawSign(sign.x+sign.lengthX/2, sign.y+sign.lengthY, 0.6);
-              if (placingLogicButton) {
-                logicButtonButton.setColor(255, #F2F258);
-              } else {
-                logicButtonButton.setColor(255, 203);
-              }
-              logicButtonButton.draw();
-              drawLogicButton(logicButtonButton.x+logicButtonButton.lengthX/2, logicButtonButton.y+logicButtonButton.lengthY/2, 1, false,g);
-              if (deleteing) {
-                deleteButton.setColor(255, #F2F258);
-              } else {
-                deleteButton.setColor(255, 203);
-              }
-              deleteButton.draw();
-              fill(203);
-              stroke(203);
-              strokeWeight(0);
-              rect(285, 55+100, 40, 5);
-              rect(300, 50+100, 10, 5);
-              rect(290, 60+100, 5, 20);
-              rect(290, 80+100, 30, 5);
-              rect(315, 60+100, 5, 20);
-              rect(298, 60+100, 5, 20);
-              rect(307, 60+100, 5, 20);
-              
-              if (selectingBlueprint) {
-                placeBlueprint.setColor(#0F1AD3, #F2F258);
-                if(blueprints.length!=0)
-                  placeBlueprint3DButton.draw();
-              } else {
-                placeBlueprint.setColor(#0F1AD3, 203);
-              }
-              placeBlueprint.draw();
-              
-
-              move3DButton.drawHoverText();
-              size3DButton.drawHoverText();
-              gridModeButton.drawHoverText();
-              toggle3DMode.drawHoverText();
-              groundButton.drawHoverText();
-              if (holoButton.isMouseOver()) {//this one has to stay
-                stroke(0);
-                fill(200);
-                strokeWeight(2);
-                rect(mouseX-4, mouseY-13, 165, 16);
-                fill(0);
-                textSize(15);
-                textAlign(LEFT, BOTTOM);
-                text("hologram (solid in 3D)", mouseX, mouseY+5);
-              }
-              checkpointButton.drawHoverText();
-              draw_coin.drawHoverText();
-              switch3D1.drawHoverText();
-              switch3D2.drawHoverText();
-              sign.drawHoverText();
-              logicButtonButton.drawHoverText();
-              deleteButton.drawHoverText();
-              placeBlueprint.drawHoverText();
-              if (selectingBlueprint && blueprints.length != 0) {
-                placeBlueprint3DButton.drawHoverText();
-              }
-              
+            } else {
+              toggle3DMode.setColor(255, 203);
             }
-          }//end of if stage is 3D
-
+            toggle3DMode.draw();
+          }
+          //exit stage button
+          if(!e3DMode){//only render when not in 3D
+            exitStageEdit.draw();
+          }
+          //rotate button
+          if(rotating){
+            rotateButton.setColor(255, #F2F258);
+          } else {
+            rotateButton.setColor(255, 203);
+          }
+          rotateButton.draw();
+          
+          
+          //Components
+          for(int i=0;i<stageComponetButtons.length;i++){
+            //check allowed dimentions
+            //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+            if(/*can beplaced in 2D and stage is 2D*/(componentAllowedDimentions[i][0] && !stageIs3D) || /*can be palced in a 3D stage an is a 3D stage*/(componentAllowedDimentions[i][1] && stageIs3D)){
+              //check can be placed in 3D mdoe
+              if(!stageIs3D || !e3DMode || componentAllowedDimentions[i].length < 3 || (componentAllowedDimentions[i].length >=3 && componentAllowedDimentions[i][2])){
+                //check if currently active to change the color
+                if(StageComponentRegistry.get(i).equals(currentlyPlaceing) || (Interdimentional_Portal.ID.equals(StageComponentRegistry.get(i)) && drawingPortal)){
+                   stageComponetButtons[i].setColor(255, #F2F258);
+                }else{
+                   stageComponetButtons[i].setColor(255, 203);
+                }
+                stageComponetButtons[i].draw();
+                componentIcons[i].draw(g, stageComponetButtons[i].x, stageComponetButtons[i].y);
+              
+              }
+            }
+          }
+          
+          if(!stageIs3D){
+            //Entities
+            for(int i=0;i<entityButtons.length;i++){
+              Identifier component = EntityRegistry.get(i);
+              if(EntityRegistry.get(i).equals(currentlyPlaceing)){
+                 entityButtons[i].setColor(255, #F2F258);
+              }else{
+                 entityButtons[i].setColor(255, 203);
+              }
+              entityButtons[i].draw();
+              entityIcons[i].draw(g, entityButtons[i].x,entityButtons[i].y);
+            }
+          }
+          
+          //Hover Text
+          deleteButton.drawHoverText();
+          if(!e3DMode){
+            movePlayerButton.drawHoverText();
+          }
+          gridModeButton.drawHoverText();
+          if(!e3DMode){
+            exitStageEdit.drawHoverText();
+          }
+          playPauseButton.drawHoverText();
+          placeBlueprint.drawHoverText();
+          if(!stageIs3D){
+            for(int i=0;i<entityButtons.length;i++){
+              entityButtons[i].drawHoverText();
+            }
+          }
+          if(!e3DMode){
+            select.drawHoverText();
+          }else{
+            move3DButton.drawHoverText();
+          size3DButton.drawHoverText();
+          }
+          saveLevel.drawHoverText();
+          if(stageIs3D){
+            toggle3DMode.drawHoverText();
+          }
+          rotateButton.drawHoverText();
+          //component hover text
+          for(int i=0;i<stageComponetButtons.length;i++){
+            //check allowed dimentions
+            //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+            if(/*can beplaced in 2D and stage is 2D*/(componentAllowedDimentions[i][0] && !stageIs3D) || /*can be palced in a 3D stage an is a 3D stage*/(componentAllowedDimentions[i][1] && stageIs3D)){
+              //check can be placed in 3D mdoe
+              if(!stageIs3D || !e3DMode || componentAllowedDimentions[i].length < 3 || (componentAllowedDimentions[i].length >=3 && componentAllowedDimentions[i][2])){
+                stageComponetButtons[i].drawHoverText();
+              }
+            }
+          }
+          
+          //blueprint selection stuff
           if (selectingBlueprint) {
             textAlign(CENTER, CENTER);
             if (blueprints.length==0) {
@@ -793,57 +469,51 @@ class ToolBox extends PApplet {
               fill(0);
               textSize(25);
               text(blueprints[currentBluieprintIndex].name, width/2, height*0.7);
-              if (currentBluieprintIndex>0)
+              if (currentBluieprintIndex>0) {
                 prevBlueprint.draw();
-              if (currentBluieprintIndex<blueprints.length-1)
+              }
+              if (currentBluieprintIndex<blueprints.length-1) {
                 nexBlueprint.draw();
+              }
+              
+              //TODO: place blueprint button for 3D
             }
           }
+          //co op mode player switcher
           if (level.multyplayerMode==2) {
             fill(0);
             textSize(20);
             textAlign(LEFT, CENTER);
             text("current player:            "+currentPlayer, 200, 120);
-            if (currentPlayer>0)
+            if (currentPlayer > 0) {
               prevousPlayerButton.draw();
-            if (currentPlayer<level.maxPLayers-1)
+            }
+            if (currentPlayer<level.maxPLayers-1) {
               nextPlayerButton.draw();
+            }
           }
         }//end of if edditing
-        else if (editingBlueprint) {
-          if (workingBlueprint.type.equals("blueprint")) {
-            strokeWeight(0);
-            if (ground) {
-              groundButton.setColor(255, #F2F258);
+        else if (editingBlueprint) {//if editing a Blueprint
+          if (workingBlueprint.type.equals("blueprint")) {//if its a 2D blueprint
+            
+            //deleteing button
+            if (deleteing) {
+              deleteButton.setColor(255, #F2F258);
             } else {
-              groundButton.setColor(255, 203);
+              deleteButton.setColor(255, 203);
             }
-            groundButton.draw();
-            fill(-7254783);
-            stroke(-7254783);
-            rect(100, 70+100, 50, 20);
-            fill(-16732415);
-            stroke(-16732415);
-            rect(100, 60+100, 50, 10);
-
+            deleteButton.draw();
+            fill(203);
+            stroke(203);
             strokeWeight(0);
-            if (check_point) {
-              checkpointButton.setColor(255, #F2F258);
-            } else {
-              checkpointButton.setColor(255, 203);
-            }
-            checkpointButton.draw();
-            fill(#B9B9B9);
-            strokeWeight(0);
-            rect(168, 45+100, 5, 40);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
-            strokeWeight(0);
-
-            textAlign(LEFT, BOTTOM);
-
+            rect(deleteButton.x+5, deleteButton.y+15, 40, 5);
+            rect(deleteButton.x+20, deleteButton.y+10, 10, 5);
+            rect(deleteButton.x+10, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+10, deleteButton.y+40, 30, 5);
+            rect(deleteButton.x+35, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+18, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+27, deleteButton.y+20, 5, 20);
+            //gid mode button
             if (grid_mode) {
               gridModeButton.setColor(255, #F2F258);
             } else {
@@ -854,115 +524,78 @@ class ToolBox extends PApplet {
             fill(0);
             stroke(0);
             strokeWeight(1);
-            line(410, 42+100, 410, 87+100);
-            line(420, 42+100, 420, 87+100);
-            line(430, 42+100, 430, 87+100);
-            line(440, 42+100, 440, 87+100);
-            line(402, 50+100, 448, 50+100);
-            line(402, 60+100, 448, 60+100);
-            line(402, 70+100, 448, 70+100);
-            line(402, 80+100, 448, 80+100);
-            text(grid_size, 410, 80+100);
+            line(gridModeButton.x+10, gridModeButton.y+2, gridModeButton.x+10, gridModeButton.y+47);
+            line(gridModeButton.x+20, gridModeButton.y+2, gridModeButton.x+20, gridModeButton.y+47);
+            line(gridModeButton.x+30, gridModeButton.y+2, gridModeButton.x+30, gridModeButton.y+47);
+            line(gridModeButton.x+40, gridModeButton.y+2, gridModeButton.x+40, gridModeButton.y+47);
+            line(gridModeButton.x+2, gridModeButton.y+10, gridModeButton.x+48, gridModeButton.y+10);
+            line(gridModeButton.x+2, gridModeButton.y+20, gridModeButton.x+48, gridModeButton.y+20);
+            line(gridModeButton.x+2, gridModeButton.y+30, gridModeButton.x+48, gridModeButton.y+30);
+            line(gridModeButton.x+2, gridModeButton.y+40, gridModeButton.x+48, gridModeButton.y+40);
+            text(grid_size, gridModeButton.x+10, gridModeButton.y+40);
             strokeWeight(0);
-            if (deleteing) {
-              deleteButton.setColor(255, #F2F258);
-            } else {
-              deleteButton.setColor(255, 203);
-            }
-            deleteButton.draw();
-            fill(203);
-            stroke(203);
-            strokeWeight(0);
-            rect(285, 55+100, 40, 5);
-            rect(300, 50+100, 10, 5);
-            rect(290, 60+100, 5, 20);
-            rect(290, 80+100, 30, 5);
-            rect(315, 60+100, 5, 20);
-            rect(298, 60+100, 5, 20);
-            rect(307, 60+100, 5, 20);
-
-            if (drawCoins) {
-              draw_coin.setColor(255, #F2F258);
-            } else {
-              draw_coin.setColor(255, 203);
-            }
-            draw_coin.draw();
-            drawCoin(605, 65+100, 4);
-
-            if (sloap) {
-              draw_sloap.setColor(255, #F2F258);
-            } else {
-              draw_sloap.setColor(255, 203);
-            }//draw_holoTriangle
-            draw_sloap.draw();
-            fill(-7254783);
-            stroke(-7254783);
-            strokeWeight(0);
-            triangle(705, 85+100, 745, 85+100, 745, 45+100);
-            if (holoTriangle) {
-              draw_holoTriangle.setColor(255, #F2F258);
-            } else {
-              draw_holoTriangle.setColor(255, 203);
-            }//draw_holoTriangle
-            draw_holoTriangle.draw();
-            fill(-4623063);
-            stroke(-4623063);
-            strokeWeight(0);
-            triangle(765, 85+100, 805, 85+100, 805, 45+100);
-            if (holo_gram) {
-              holoButton.setColor(255, #F2F258);
-            } else {
-              holoButton.setColor(255, 203);
-            }
-            holoButton.draw();
+            //save button
             saveLevel.draw();
+            saveIcon(saveLevel.x+saveLevel.lengthX/2,saveLevel.y+saveLevel.lengthY/2,1,g);
             exitStageEdit.draw();
-
-            textAlign(LEFT, BOTTOM);
-            groundButton.drawHoverText();
-            gridModeButton.drawHoverText();
+            
+            //Components
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 2D and stage is 2D*/(componentAllowedDimentions[i][0])){
+                //check can be placed in 3D mdoe
+                if(componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]){
+                  //check if currently active to change the color
+                  if(StageComponentRegistry.get(i).equals(currentlyPlaceing)){
+                     stageComponetButtons[i].setColor(255, #F2F258);
+                  }else{
+                     stageComponetButtons[i].setColor(255, 203);
+                  }
+                  stageComponetButtons[i].draw();
+                  componentIcons[i].draw(g, stageComponetButtons[i].x, stageComponetButtons[i].y);
+                
+                }
+              }
+            }
+            
+            //hover text
             deleteButton.drawHoverText();
-            holoButton.drawHoverText();
-            draw_coin.drawHoverText();
+            gridModeButton.drawHoverText();
             saveLevel.drawHoverText();
-            checkpointButton.drawHoverText();
-            draw_sloap.drawHoverText();
-            draw_holoTriangle.drawHoverText();
             exitStageEdit.drawHoverText();
-          }//end of type is blueprint
-          else if (workingBlueprint.type.equals("3D blueprint")) {
-            strokeWeight(0);
-            if (ground) {
-              groundButton.setColor(255, #F2F258);
-            } else {
-              groundButton.setColor(255, 203);
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 2D and stage is 2D*/(componentAllowedDimentions[i][0])){
+                //check can be placed in 3D mdoe
+                if(componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]){
+                  stageComponetButtons[i].drawHoverText();
+                
+                }
+              }
             }
-            groundButton.draw();
-            fill(-7254783);
-            stroke(-7254783);
-            rect(100, 70+100, 50, 20);
-            fill(-16732415);
-            stroke(-16732415);
-            rect(100, 60+100, 50, 10);
-
-            strokeWeight(0);
-            if (check_point) {
-              checkpointButton.setColor(255, #F2F258);
+            
+          }//end of type is 2D blueprint
+          else if (workingBlueprint.type.equals("3D blueprint")) {//if its a 3D blueprint
+            //delete button
+            if (deleteing) {
+              deleteButton.setColor(255, #F2F258);
             } else {
-              checkpointButton.setColor(255, 203);
+              deleteButton.setColor(255, 203);
             }
-            checkpointButton.draw();
-            fill(#B9B9B9);
+            deleteButton.draw();
+            fill(203);
+            stroke(203);
             strokeWeight(0);
-            rect(168, 45+100, 5, 40);
-            fill(#EA0202);
-            stroke(#EA0202);
-            strokeWeight(0);
-            triangle(170, 85-60+20+100, 170, 85-40+20+100, 170+30, 85-50+20+100);
-            strokeWeight(0);
-
-            textAlign(LEFT, BOTTOM);
-
+            rect(deleteButton.x+5, deleteButton.y+15, 40, 5);
+            rect(deleteButton.x+20, deleteButton.y+10, 10, 5);
+            rect(deleteButton.x+10, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+10, deleteButton.y+40, 30, 5);
+            rect(deleteButton.x+35, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+18, deleteButton.y+20, 5, 20);
+            rect(deleteButton.x+27, deleteButton.y+20, 5, 20);
+            //gridmode button
             if (grid_mode) {
               gridModeButton.setColor(255, #F2F258);
             } else {
@@ -973,60 +606,24 @@ class ToolBox extends PApplet {
             fill(0);
             stroke(0);
             strokeWeight(1);
-            line(410, 42+100, 410, 87+100);
-            line(420, 42+100, 420, 87+100);
-            line(430, 42+100, 430, 87+100);
-            line(440, 42+100, 440, 87+100);
-            line(402, 50+100, 448, 50+100);
-            line(402, 60+100, 448, 60+100);
-            line(402, 70+100, 448, 70+100);
-            line(402, 80+100, 448, 80+100);
-            text(grid_size, 410, 80+100);
+            line(gridModeButton.x+10, gridModeButton.y+2, gridModeButton.x+10, gridModeButton.y+47);
+            line(gridModeButton.x+20, gridModeButton.y+2, gridModeButton.x+20, gridModeButton.y+47);
+            line(gridModeButton.x+30, gridModeButton.y+2, gridModeButton.x+30, gridModeButton.y+47);
+            line(gridModeButton.x+40, gridModeButton.y+2, gridModeButton.x+40, gridModeButton.y+47);
+            line(gridModeButton.x+2, gridModeButton.y+10, gridModeButton.x+48, gridModeButton.y+10);
+            line(gridModeButton.x+2, gridModeButton.y+20, gridModeButton.x+48, gridModeButton.y+20);
+            line(gridModeButton.x+2, gridModeButton.y+30, gridModeButton.x+48, gridModeButton.y+30);
+            line(gridModeButton.x+2, gridModeButton.y+40, gridModeButton.x+48, gridModeButton.y+40);
+            text(grid_size, gridModeButton.x+10, gridModeButton.y+40);
             strokeWeight(0);
-            if (deleteing) {
-              deleteButton.setColor(255, #F2F258);
-            } else {
-              deleteButton.setColor(255, 203);
-            }
-            deleteButton.draw();
-            fill(203);
-            stroke(203);
-            strokeWeight(0);
-            rect(285, 55+100, 40, 5);
-            rect(300, 50+100, 10, 5);
-            rect(290, 60+100, 5, 20);
-            rect(290, 80+100, 30, 5);
-            rect(315, 60+100, 5, 20);
-            rect(298, 60+100, 5, 20);
-            rect(307, 60+100, 5, 20);
-
-            if (drawCoins) {
-              draw_coin.setColor(255, #F2F258);
-            } else {
-              draw_coin.setColor(255, 203);
-            }
-            draw_coin.draw();
-            drawCoin(605, 65+100, 4);
-            
-            if (holo_gram) {
-              holoButton.setColor(255, #F2F258);
-            } else {
-              holoButton.setColor(255, 203);
-            }
-            holoButton.draw();
+            //save button
             saveLevel.draw();
-            
-            
-            if (!e3DMode) {
-              toggle3DMode.setColor(255, 203);
-              toggle3DMode.draw();
+            saveIcon(saveLevel.x+saveLevel.lengthX/2,saveLevel.y+saveLevel.lengthY/2,1,g);
+            if(!e3DMode){
               exitStageEdit.draw();
-              
-              exitStageEdit.drawHoverText();
-              //end of not in 3D mode
-            }else{
-              toggle3DMode.setColor(255, #F2F258);
-              toggle3DMode.draw();
+            }
+            //move and size buttons
+            if(e3DMode){//only render when not in 3D
               if (current3DTransformMode==2&&selecting) {
                 size3DButton.setColor(255, #F2F258);
               } else {
@@ -1039,22 +636,59 @@ class ToolBox extends PApplet {
                 move3DButton.setColor(255, 203);
               }
               move3DButton.draw();
-              
+            }
+            //3D button
+            if (e3DMode) {
+              toggle3DMode.setColor(255, #F2F258);
+            } else {
+              toggle3DMode.setColor(255, 203);
+            }
+            toggle3DMode.draw();
+            
+            //Components
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 3D and stage is 3D*/(componentAllowedDimentions[i][1])){
+                //check can be placed in 3D mdoe
+                if((componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]) && (!e3DMode || componentAllowedDimentions[i].length < 3 || componentAllowedDimentions[i][2])){
+                  //check if currently active to change the color
+                  if(StageComponentRegistry.get(i).equals(currentlyPlaceing)){
+                     stageComponetButtons[i].setColor(255, #F2F258);
+                  }else{
+                     stageComponetButtons[i].setColor(255, 203);
+                  }
+                  stageComponetButtons[i].draw();
+                  componentIcons[i].draw(g, stageComponetButtons[i].x, stageComponetButtons[i].y);
+                
+                }
+              }
+            }
+            
+            //hover text
+            deleteButton.drawHoverText();
+            gridModeButton.drawHoverText();
+            saveLevel.drawHoverText();
+            if(!e3DMode){
+              exitStageEdit.drawHoverText();
+            }else{
               move3DButton.drawHoverText();
               size3DButton.drawHoverText();
-            }//end of 3D mode
-            textAlign(LEFT, BOTTOM);
+            }
             toggle3DMode.drawHoverText();
-            groundButton.drawHoverText();
-            gridModeButton.drawHoverText();
-            deleteButton.drawHoverText();
-            holoButton.drawHoverText();
-            draw_coin.drawHoverText();
-            saveLevel.drawHoverText();
-            checkpointButton.drawHoverText();
-            
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 3D and stage is 3D*/(componentAllowedDimentions[i][1])){
+                //check can be placed in 3D mdoe
+                if((componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]) && (!e3DMode || componentAllowedDimentions[i].length < 3 || componentAllowedDimentions[i][2])){
+                  stageComponetButtons[i].drawHoverText();
+                
+                }
+              }
+            }
           }//end of type is 3D blueprint
-        } else if (editinglogicBoard) {
+        } else if (editinglogicBoard) {//if editing a logic board
           //draw buttons
           if (connectingLogic) {
             connectLogicButton.setColor(255, #F2F258);
@@ -1077,181 +711,57 @@ class ToolBox extends PApplet {
           fill(203);
           stroke(203);
           strokeWeight(0);
-          rect(285, 55+100, 40, 5);
-          rect(300, 50+100, 10, 5);
-          rect(290, 60+100, 5, 20);
-          rect(290, 80+100, 30, 5);
-          rect(315, 60+100, 5, 20);
-          rect(298, 60+100, 5, 20);
-          rect(307, 60+100, 5, 20);
-          if (placingAndGate) {
-            andGateButton.setColor(255, #F2F258);
-          } else {
-            andGateButton.setColor(255, 203);
-          }
-          andGateButton.draw();
-          if (placingOrGate) {
-            orGateButton.setColor(255, #F2F258);
-          } else {
-            orGateButton.setColor(255, 203);
-          }
-          orGateButton.draw();
-          if (placingXorGate) {
-            xorGateButton.setColor(255, #F2F258);
-          } else {
-            xorGateButton.setColor(255, 203);
-          }
-          xorGateButton.draw();
+          rect(deleteButton.x+5, deleteButton.y+15, 40, 5);
+          rect(deleteButton.x+20, deleteButton.y+10, 10, 5);
+          rect(deleteButton.x+10, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+10, deleteButton.y+40, 30, 5);
+          rect(deleteButton.x+35, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+18, deleteButton.y+20, 5, 20);
+          rect(deleteButton.x+27, deleteButton.y+20, 5, 20);
+          
           saveLevel.draw();
+          saveIcon(saveLevel.x+saveLevel.lengthX/2,saveLevel.y+saveLevel.lengthY/2,1,g);
           exitStageEdit.draw();
-          if (placingNandGate) {
-            nandGateButton.setColor(255, #F2F258);
-          } else {
-            nandGateButton.setColor(255, 203);
-          }
-          nandGateButton.draw();
-          if (placingNorGate) {
-            norGateButton.setColor(255, #F2F258);
-          } else {
-            norGateButton.setColor(255, 203);
-          }
-          norGateButton.draw();
-          if (placingXnorGate) {
-            xnorGateButton.setColor(255, #F2F258);
-          } else {
-            xnorGateButton.setColor(255, 203);
-          }
-          xnorGateButton.draw();
-          //if(placingTestLogic){///////////////////////////////////////////////////////////////////////
-          //  testLogicPlaceButton.setColor(255, #F2F258);
-          //}else{
-          //  testLogicPlaceButton.setColor(255, 203);
-          //}
-          //testLogicPlaceButton.draw();
-          if (placingOnSingal) {
-            constantOnButton.setColor(255, #F2F258);
-          } else {
-            constantOnButton.setColor(255, 203);
-          }
-          constantOnButton.draw();
-          if (placingReadVariable) {
-            readVariableButton.setColor(255, #F2F258);
-          } else {
-            readVariableButton.setColor(255, 203);
-          }
-          readVariableButton.draw();
-          if (placingSetVaravle) {
-            setVariableButton.setColor(255, #F2F258);
-          } else {
-            setVariableButton.setColor(255, 203);
-          }
-          setVariableButton.draw();
+          
           if (selecting) {
             select.setColor(255, #F2F258);
           } else {
             select.setColor(255, 203);
           }
           select.draw();
-          if (placingSetVisibility) {
-            setVisabilityButton.setColor(255, #F2F258);
-          } else {
-            setVisabilityButton.setColor(255, 203);
-          }
-          setVisabilityButton.draw();
-          if (placingXOffset) {
-            xOffsetButton.setColor(255, #F2F258);
-          } else {
-            xOffsetButton.setColor(255, 203);
-          }
-          xOffsetButton.draw();
-          if (placingYOffset) {
-            yOffsetButton.setColor(255, #F2F258);
-          } else {
-            yOffsetButton.setColor(255, 203);
-          }
-          yOffsetButton.draw();
-          if (placingDelay) {
-            delayButton.setColor(255, #F2F258);
-          } else {
-            delayButton.setColor(255, 203);
-          }
-          delayButton.draw();
-          if (placingZOffset) {
-            zOffsetButton.setColor(255, #F2F258);
-          } else {
-            zOffsetButton.setColor(255, 203);
-          }
-          zOffsetButton.draw();
+          
           logicHelpButton.draw();
-          if (placing3Dsetter) {
-            set3DButton.setColor(255, #F2F258);
-          } else {
-            set3DButton.setColor(255, 203);
+          
+          for(int i=0;i<logicComponentButtons.length;i++){
+            if(LogicComponentRegistry.get(i).equals(currentlyPlaceing)){
+              logicComponentButtons[i].setColor(255, #F2F258);
+            }else{
+              logicComponentButtons[i].setColor(255, 203);
+            }
+            logicComponentButtons[i].draw();
+            logicComponentIcons[i].draw(g, logicComponentButtons[i].x,logicComponentButtons[i].y);
           }
-          set3DButton.draw();
-          if (placing3Dreader) {
-            read3DButton.setColor(255, #F2F258);
-          } else {
-            read3DButton.setColor(255, 203);
-          }
-          read3DButton.draw();
-          if (placingPlaySoundLogic) {
-            playLogicSoundButton.setColor(255, #F2F258);
-          } else {
-            playLogicSoundButton.setColor(255, 203);
-          }
-          playLogicSoundButton.draw();
-          drawSpeakericon(playLogicSoundButton.x+playLogicSoundButton.lengthX/2, playLogicSoundButton.y+playLogicSoundButton.lengthY/2, 0.5,g);
-
-          if (placingPulse) {
-            pulseButton.setColor(255, #F2F258);
-          } else {
-            pulseButton.setColor(255, 203);
-          }
-          pulseButton.draw();
-
-          if (placingRandom) {
-            randomButton.setColor(255, #F2F258);
-          } else {
-            randomButton.setColor(255, 203);
-          }
-          randomButton.draw();
 
           //draw hover text
           connectLogicButton.drawHoverText();
           moveComponentsButton.drawHoverText();
           deleteButton.drawHoverText();
-          andGateButton.drawHoverText();
-          orGateButton.drawHoverText();
-          xorGateButton.drawHoverText();
           exitStageEdit.drawHoverText();
           saveLevel.drawHoverText();
-          nandGateButton.drawHoverText();
-          norGateButton.drawHoverText();
-          xnorGateButton.drawHoverText();
-          // testLogicPlaceButton.drawHoverText();
-          constantOnButton.drawHoverText();
-          readVariableButton.drawHoverText();
-          setVariableButton.drawHoverText();
-          setVisabilityButton.drawHoverText();
-          xOffsetButton.drawHoverText();
-          yOffsetButton.drawHoverText();
-          delayButton.drawHoverText();
-          zOffsetButton.drawHoverText();
           logicHelpButton.drawHoverText();
-          read3DButton.drawHoverText();
-          set3DButton.drawHoverText();
-          playLogicSoundButton.drawHoverText();
-          pulseButton.drawHoverText();
-          randomButton.drawHoverText();
+          for(int i=0;i<logicComponentButtons.length;i++){
+            logicComponentButtons[i].drawHoverText();
+          }
         } else {
           fill(0);
           textSize(20);
           text("you are not currently editing a stage", 300, 300);
         }
       }//end of if page is tools
-      if (page.equals("selection")) {
+      
+      if (page.equals("selection")) {//if the page is a selection page
         background(#790101);
+        //page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
@@ -1265,9 +775,13 @@ class ToolBox extends PApplet {
           textAlign(CENTER, CENTER);
           text("nothing is selected", width/2, height/2);
         } else {
+          //TODO replace this with a completely modular system
+          //due to this i can not be fucked to document this further
           String type="";
+          //theese are assigned to things so that I do not get pesterd about them having the potential to be null
+          //this stuf has to so with thigns being selected
           StageComponent thing= new GenericStageComponent();
-          LogicComponent logicThing=new GenericLogicComponent(-10, -10, null);
+          LogicComponent logicThing=new GenericLogicComponent(new LogicCompoentnPlacementContext(-10000,-10000,null));
           if (editingStage) {
             thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
             type=thing.type;
@@ -1461,18 +975,23 @@ class ToolBox extends PApplet {
           }
         }//end of thing is selected
       }//end of selection page
-      if (page.equals("stage settings")) {
+      
+      
+      if (page.equals("stage settings")) {//if the page is stage settings
         background(#92CED8);
+        //page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
         stageSettings.draw();
         variablesAndGroups.draw();
         levelSettingsPage.draw();
-        if (editingStage) {
+        
+        if (editingStage) {//if editing a stage
           fill(0);
           textSize(25);
           textAlign(LEFT, CENTER);
+          //display the name and sky color button
           text("stage name: "+level.stages.get(currentStageIndex).name, 50, 150);
           text("sky color: ", 50, 180);
           skyColorB1.setColor(level.stages.get(currentStageIndex).skyColor, 0);
@@ -1485,8 +1004,11 @@ class ToolBox extends PApplet {
           text("you are not currently editing a stage", width/2, height/2);
         }//end of not editing stage
       }//end of stage settings page
-      if (page.equals("variables and groups")) {
+      
+      
+      if (page.equals("variables and groups")) {//if the page is variables and groups
         background(#FCC740);
+        //page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
@@ -1496,9 +1018,11 @@ class ToolBox extends PApplet {
         fill(0);
         textSize(25);
         textAlign(LEFT, CENTER);
+        //if there is a level
         if (level!=null) {
           text("variables", 80, 200);
           text("groups", 560, 200);
+          //show the state of each variable
           for (int i=0; i<10&&i+variableScroll<level.variables.size(); i++) {
             fill(0);
             text("b"+(i+variableScroll), 90, 230+i*21);
@@ -1509,20 +1033,25 @@ class ToolBox extends PApplet {
             }
             rect(70, 225+i*21, 20, 20);
           }
-          if (variableScroll>0)
+          if (variableScroll>0) {
             variablesUP.draw();
-          if (variableScroll+10<level.variables.size())
+          }
+          if (variableScroll+10<level.variables.size()) {
             variablesDOWN.draw();
+          }
           textSize(25);
           textAlign(LEFT, CENTER);
+          //display the name of each group
           for (int i=0; i+groupScroll<level.groupNames.size()&&i<10; i++) {
             fill(0);
             text(level.groupNames.get(i+groupScroll), 565, 230+i*21);
           }
-          if (groupScroll>0)
+          if (groupScroll>0) {
             groupsUP.draw();
-          if (groupScroll+10<level.groupNames.size())
+          }
+          if (groupScroll+10<level.groupNames.size()) {
             groupsDOWN.draw();
+          }
           addVariable.draw();
           addGroup.draw();
           fill(0);
@@ -1530,21 +1059,24 @@ class ToolBox extends PApplet {
           rect(680, 220, 400, 1);
           textSize(20);
           textAlign(LEFT, BOTTOM);
-          if (typingGroopName)
+          if (typingGroopName) {
             text(newGroopName+coursorr, 680, 218);
-          else
+          } else {
             text(newGroopName, 680, 218);
+          }
           runLoad.draw();
 
-          if (editinglogicBoard) {
+          if (editinglogicBoard) {//if on a logic board show the tick button
             tickLogicButton.draw();
             tickLogicButton.drawHoverText();
           }
           runLoad.drawHoverText();
         }//end of editing level
       }//end of variables and groups
-      if (page.equals("level settings")) {
+      
+      if (page.equals("level settings")) {//if the page is level settings
         background(#BA90FF);
+        //page buttons
         colorPage.draw();
         toolsPage.draw();
         selectionPage.draw();
@@ -1552,17 +1084,19 @@ class ToolBox extends PApplet {
         variablesAndGroups.draw();
         levelSettingsPage.draw();
 
-        if (level==null||!(editingStage||levelOverview)) {
+        if (level==null || !(editingStage || levelOverview)) {//if there is no level or your not editing a level
+          //display an error
           textAlign(CENTER, CENTER);
           fill(0);
           textSize(25);
           text("no level loaded", width/2, height/2);
-        } else {
+        } else {//if you are editing a level
           textSize(20);
           fill(0);
           textAlign(LEFT, CENTER);
           text("level name: "+level.name, 50, 150);
           text("multyplayer mode:", 50, 200);
+          //multyplayer mode buttons
           if (level.multyplayerMode==1) {
             multyplayerModeCoOpButton.setColor(255, 100);
             multyplayerModeSpeedrunButton.setColor(255, #F6FF03);
@@ -1576,7 +1110,8 @@ class ToolBox extends PApplet {
           multyplayerModeCoOpButton.draw();
           multyplayerModeSpeedrunButton.draw();
 
-          if (level.multyplayerMode==2) {
+          if (level.multyplayerMode==2) {//if level is set to co op mode
+            //show the number of players selector
             textSize(20);
             fill(0);
             textAlign(LEFT, CENTER);
@@ -1585,19 +1120,25 @@ class ToolBox extends PApplet {
             text(level.minPlayers, 200, 250);
             text(level.maxPLayers, 200, 300);
             currentNumberOfPlayers=level.maxPLayers;
-            if (level.minPlayers<level.maxPLayers)
+            if (level.minPlayers<level.maxPLayers) {
               minplayersIncrease.draw();
-            if (level.minPlayers>2)
+            }
+            if (level.minPlayers > 2) {
               minPlayersDecrease.draw();
-            if (level.maxPLayers<10)
+            }
+            if (level.maxPLayers < 10) {
               maxplayersIncrease.draw();
-            if (level.maxPLayers>level.minPlayers)
+            }
+            if (level.maxPLayers > level.minPlayers) {
               maxplayersDecrease.draw();
+            }
           }
           respawnEntitiesButton.draw();
         }
       }//end of page is level settings
-    } else {
+      
+    } else {//if not in the level creator
+      //show the API limitation screen
       background(200);
       fill(0);
       textAlign(CENTER, CENTER);
@@ -1606,9 +1147,12 @@ class ToolBox extends PApplet {
     }
   }//end of draw
 
+  /**Processings mouse clicked function
+  */
   public void mouseClicked() {
-    if (levelCreator) {
+    if (levelCreator) {//if in the level creator
       if (page.equals("colors")) {
+        //if the mouse is in the range for one of the sliders
         if (mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 150 && mouseY <= 200) {
           rsp=mouseX-75;
         }
@@ -1618,19 +1162,22 @@ class ToolBox extends PApplet {
         if (mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 450 && mouseY <= 500) {
           bsp=mouseX-75;
         }
+        //load a saved color button
         if (mouseX >= 600 && mouseX <=680 && mouseY >= 600 && mouseY <=680) {
           JSONObject colo=colors.getJSONObject(selectedColor);
           rsp=(int)Math.ceil(colo.getInt("red")/255.0*1080);
           gsp=(int)Math.ceil(colo.getInt("green")/255.0*1080);
           bsp=(int)Math.ceil(colo.getInt("blue")/255.0*1080);
         }
+        //change selected saved color button
         if (mouseX >= 500 && mouseX <= 550 && mouseY >= 600 && mouseY <=680&&selectedColor>0) {
           selectedColor--;
         }
-
+        //chnage selected saved color button
         if (mouseX >= 730 && mouseX <= 780 && mouseY >= 600 && mouseY <=680&&selectedColor<colors.size()-1) {
           selectedColor++;
         }
+        //save the current color button
         if (mouseX >= 600 && mouseX <=680  && mouseY >= 560 && mouseY <=590) {
           JSONObject colo=new JSONObject();
           colo.setInt("red", redVal);
@@ -1639,15 +1186,18 @@ class ToolBox extends PApplet {
           colors.setJSONObject(colors.size(), colo);
           saveColors=true;
         }
+        //if setting sky color
         if (settingSkyColor) {
-          if (setSkyColor.isMouseOver()) {
+          if (setSkyColor.isMouseOver()) {//if the setting sky color button has been clicked on
             settingSkyColor=false;
             page="stage settings";
             level.stages.get(currentStageIndex).skyColor=CC;
+            //set this stage's sky color to the current color
           }
         }
       }//end of if pages is colors
 
+      //page buttons 
       if (colorPage.isMouseOver()) {
         page="colors";
       }
@@ -1667,64 +1217,51 @@ class ToolBox extends PApplet {
         page="level settings";
       }
 
+      //if on the tools page
       if (page.equals("tools")) {
-        if (editingStage) {
-          if (level.stages.get(currentStageIndex).type.equals("stage")) {
-            if (draw_coin.isMouseOver()) {
-              turnThingsOff();
-              drawCoins=true;
+        if (editingStage) {//and editing a stage
+          boolean stageIs3D = level.stages.get(currentStageIndex).type.equals("3Dstage");
+          
+          //mouse clicked processing for stage compoentns
+          for(int i=0;i<stageComponetButtons.length;i++){
+            //check allowed dimentions
+            //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+            if(/*can beplaced in 2D and stage is 2D*/(componentAllowedDimentions[i][0] && !stageIs3D) || /*can be palced in a 3D stage an is a 3D stage*/(componentAllowedDimentions[i][1] && stageIs3D)){
+              //check can be placed in 3D mdoe
+              if(!stageIs3D || !e3DMode || componentAllowedDimentions[i].length < 3 || (componentAllowedDimentions[i].length >=3 && componentAllowedDimentions[i][2])){
+                
+                if(stageComponetButtons[i].isMouseOver()){
+                  turnThingsOff();
+                  Identifier compoenntId = StageComponentRegistry.get(i);
+                  //special case for portals
+                  if(compoenntId.equals(Interdimentional_Portal.ID)){
+                    drawingPortal = true;
+                  }else{
+                    currentlyPlaceing = compoenntId;
+                  }
+                }
+              }
             }
-            if (draw_portal.isMouseOver()) {
-              turnThingsOff();
-              drawingPortal=true;
-            }
-            if (draw_sloap.isMouseOver()) {
-              turnThingsOff();
-              sloap=true;
-            }
-            if (draw_holoTriangle.isMouseOver()) {
-              turnThingsOff();
-              holoTriangle=true;
-            }
-            if (draw_dethPlane.isMouseOver()) {
-              turnThingsOff();
-              dethPlane=true;
-            }
-
-            if (playPauseButton.isMouseOver()) {
-              simulating=!simulating;
-            }
-
-
-            if (groundButton.isMouseOver()) {
-              turnThingsOff();
-              ground=true;
-            }
-            if (checkpointButton.isMouseOver()) {
-              turnThingsOff();
-              check_point=true;
-            }
-            if (goalButton.isMouseOver()) {
-              turnThingsOff();
-              goal=true;
-            }
-            if (deleteButton.isMouseOver()) {
-              turnThingsOff();
-              deleteing=true;
-            }
+          }
+          //everything else that is hard coded
+          //dont feel like going into specifics
+          if (playPauseButton.isMouseOver()) {
+            simulating=!simulating;
+          }
+          if (deleteButton.isMouseOver()) {
+            turnThingsOff();
+            deleteing=true;
+          }
+          if(!e3DMode){
             if (movePlayerButton.isMouseOver()) {
               turnThingsOff();
               moving_player=true;
             }
-            if (gridModeButton.isMouseOver()) {
-              grid_mode=!grid_mode;
-            }
-
-            if (holoButton.isMouseOver()) {
-              turnThingsOff();
-              holo_gram=true;
-            }
-
+          }
+          if (gridModeButton.isMouseOver()) {
+            grid_mode=!grid_mode;
+          }
+          if(!e3DMode){
             if (exitStageEdit.isMouseOver()) {
               turnThingsOff();
               levelOverview=true;
@@ -1732,274 +1269,127 @@ class ToolBox extends PApplet {
               level_complete=false;
               viewingItemContents=false;
             }
-            if (sign.isMouseOver()) {
-              turnThingsOff();
-              drawingSign=true;
-            }
-
             if (select.isMouseOver()) {
               turnThingsOff();
               selecting=true;
             }
-            if (logicButtonButton.isMouseOver()) {
-              turnThingsOff();
-              placingLogicButton=true;
-            }
-            if (placeBlueprint.isMouseOver()) {
-              turnThingsOff();
+          }
 
-              String[] files=new File(appdata+"/CBi-games/skinny mann level creator/blueprints").list();
-              int numofjsons=0;
-              for (int i=0; i<files.length; i++) {
-                if (files[i].contains(".json")) {
-                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
-                  if(bpType.equals("blueprint"))
-                    numofjsons++;
+          if (placeBlueprint.isMouseOver()) {
+            turnThingsOff();
+            //blueprint things are complicated
+            String blueprintType = stageIs3D ? "3D blueprint" : "blueprint";
+            //start by finding all valid blueprints
+            String[] files=new File(appdata+"/CBi-games/skinny mann level creator/blueprints").list();
+            int numofjsons=0;
+            //count the number of valid blueprints
+            for (int i=0; i<files.length; i++) {
+              if (files[i].contains(".json")) {
+                String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                if(bpType.equals(blueprintType))
+                  numofjsons++;
+              }
+            }
+            blueprints=new Stage[numofjsons];
+            int pointer=0;
+            //load the valid blueprints
+            for (int i=0; i<files.length; i++) {
+              if (files[i].contains(".json")) {
+                String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
+                if(bpType.equals(blueprintType)){
+                  blueprints[pointer]=new Stage(loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
+                  pointer++;
                 }
               }
-              blueprints=new Stage[numofjsons];
-              int pointer=0;
-              for (int i=0; i<files.length; i++) {
-                if (files[i].contains(".json")) {
-                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
-                  if(bpType.equals("blueprint")){
-                    blueprints[pointer]=new Stage(loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
-                    pointer++;
-                  }
-                }
+            }
+            System.out.println("loaded "+blueprints.length+" blueprints");
+            selectingBlueprint=true;
+            currentBluieprintIndex=0;
+            //setup the placement
+            blueprintPlacemntX=cam3Dx;
+            blueprintPlacemntY=cam3Dy;
+            blueprintPlacemntZ=cam3Dz;
+          }
+          
+          if (selectingBlueprint) { //if the blurprint is being selected
+            //blueprint selection things
+            if (currentBluieprintIndex > 0 && prevBlueprint.isMouseOver()) {
+              currentBluieprintIndex--;
+            }
+            if (currentBluieprintIndex < blueprints.length - 1 && nexBlueprint.isMouseOver()) {
+              currentBluieprintIndex++;
+            }
+          }
+          
+          //entity buttons
+          if(!stageIs3D){
+            for(int i=0;i<entityButtons.length;i++){
+              Identifier component = EntityRegistry.get(i);
+              if(entityButtons[i].isMouseOver()){
+                turnThingsOff();
+                currentlyPlaceing = component;
               }
-              System.out.println(blueprints.length);
-              selectingBlueprint=true;
-              currentBluieprintIndex=0;
             }
-            if (selectingBlueprint) {
-              if (currentBluieprintIndex>0&&prevBlueprint.isMouseOver())
-                currentBluieprintIndex--;
-              if (currentBluieprintIndex<blueprints.length-1&&nexBlueprint.isMouseOver())
-                currentBluieprintIndex++;
-            }
-            if (playSound.isMouseOver()) {
+          }
+          
+          //3D buttons
+          if(stageIs3D){
+            if (toggle3DMode.isMouseOver()) {
+              e3DMode =! e3DMode;
               turnThingsOff();
-              placingSound=true;
+              if(e3DMode){
+                selecting=true;
+              }
+              return;
             }
-            if(goonEntity.isMouseOver()){
+          }
+          
+          if(rotateButton.isMouseOver()){
+            current3DTransformMode=3;
+            turnThingsOff();
+            rotating = true;
+            selecting=true;
+          }
+          
+          if(e3DMode){
+            if (size3DButton.isMouseOver()) {
+              current3DTransformMode=2;
               turnThingsOff();
-              placingGoon=true;
+              selecting=true;
+            }
+            if (move3DButton.isMouseOver()) {
+              current3DTransformMode=1;
+              turnThingsOff();
+              selecting=true;
+            }
+          
+            //place a blueprint when in 3D mode
+            if (selectingBlueprint && blueprints.length != 0 && placeBlueprint3DButton.isMouseOver()) {
+              StageComponent tmp;
+              Stage current=level.stages.get(currentStageIndex);
+              for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
+                tmp=blueprints[currentBluieprintIndex].parts.get(i);
+                //coins are special
+                if (tmp instanceof Coin) {
+                  Coin g;
+                  //make a copy of the coin for the apprirate dimention 
+                  g=(Coin)tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ);
+  
+                  //set the correct ID for the coin
+                  g.coinId = level.numOfCoins;
+                  //add the coin to the stage
+                  current.parts.add(g);
+                  coins.add(false);
+                  level.numOfCoins++;
+                  continue;
+                }
+                current.parts.add(tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ));//preform a 3D copy on the curernt part and add it to the stage
+              }
+                
             }
           }
 
-          if (level.stages.get(currentStageIndex).type.equals("3Dstage")) {
-
-            if (!e3DMode) {
-
-              if (playPauseButton.isMouseOver()) {
-                simulating=!simulating;
-              }
-
-
-              if (groundButton.isMouseOver()) {
-                turnThingsOff();
-                ground=true;
-              }
-
-              if (deleteButton.isMouseOver()) {
-                turnThingsOff();
-                deleteing=true;
-              }
-
-              if (gridModeButton.isMouseOver()) {
-                grid_mode=!grid_mode;
-              }
-
-              if (movePlayerButton.isMouseOver()) {
-                turnThingsOff();
-                moving_player=true;
-              }
-
-              if (exitStageEdit.isMouseOver()) {
-                turnThingsOff();
-                levelOverview=true;
-                editingStage=false;
-                viewingItemContents=false;
-              }
-
-
-
-              if (checkpointButton.isMouseOver()) {
-                turnThingsOff();
-                check_point=true;
-              }
-
-              if (toggle3DMode.isMouseOver()) {
-                e3DMode=true;
-                turnThingsOff();
-                selecting=true;
-                return;
-              }
-              if (switch3D1.isMouseOver()) {
-                turnThingsOff();
-                draw3DSwitch1=true;
-              }
-              if (switch3D2.isMouseOver()) {
-                turnThingsOff();
-                draw3DSwitch2=true;
-              }
-              if (draw_portal.isMouseOver()) {
-                turnThingsOff();
-                drawingPortal=true;
-              }
-              if (holoButton.isMouseOver()) {
-                turnThingsOff();
-                holo_gram=true;
-              }
-              if (draw_coin.isMouseOver()) {
-                turnThingsOff();
-                drawCoins=true;
-              }
-              if (sign.isMouseOver()) {
-                turnThingsOff();
-                drawingSign=true;
-              }
-              if (select.isMouseOver()) {
-                turnThingsOff();
-                selecting=true;
-              }
-              if (logicButtonButton.isMouseOver()) {
-                turnThingsOff();
-                placingLogicButton=true;
-              }
-             
-              if(goonEntity.isMouseOver()){
-                turnThingsOff();
-                placingGoon=true;
-              }
-            } else {
-              if (toggle3DMode.isMouseOver()) {
-                e3DMode=false;
-                turnThingsOff();
-              }
-
-              if (playPauseButton.isMouseOver()) {
-                simulating=!simulating;
-              }
-
-              if (sign.isMouseOver()) {
-                turnThingsOff();
-                drawingSign=true;
-              }
-              if (select.isMouseOver()) {
-                turnThingsOff();
-                selecting=true;
-              }
-              if (gridModeButton.isMouseOver()) {
-                grid_mode=!grid_mode;
-              }
-              if (size3DButton.isMouseOver()) {
-                current3DTransformMode=2;
-                turnThingsOff();
-                selecting=true;
-              }
-              if (move3DButton.isMouseOver()) {
-                current3DTransformMode=1;
-                turnThingsOff();
-                selecting=true;
-              }
-              if (groundButton.isMouseOver()) {
-                turnThingsOff();
-                ground=true;
-              }
-              if (holoButton.isMouseOver()) {
-                turnThingsOff();
-                holo_gram=true;
-              }
-              if (checkpointButton.isMouseOver()) {
-                turnThingsOff();
-                check_point=true;
-              }
-              if (draw_coin.isMouseOver()) {
-                turnThingsOff();
-                drawCoins=true;
-              }
-              if (switch3D1.isMouseOver()) {
-                turnThingsOff();
-                draw3DSwitch1=true;
-              }
-              if (switch3D2.isMouseOver()) {
-                turnThingsOff();
-                draw3DSwitch2=true;
-              }
-              if (sign.isMouseOver()) {
-                turnThingsOff();
-                drawingSign=true;
-              }
-              if (logicButtonButton.isMouseOver()) {
-                turnThingsOff();
-                placingLogicButton=true;
-              }
-              if (deleteButton.isMouseOver()) {
-                turnThingsOff();
-                deleteing=true;
-              }
-              
-              if (selectingBlueprint && blueprints.length != 0 && placeBlueprint3DButton.isMouseOver()) {
-                StageComponent tmp;
-                Stage current=level.stages.get(currentStageIndex);
-                for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
-                  tmp=blueprints[currentBluieprintIndex].parts.get(i);
-                  //coins are special
-                  if (tmp instanceof Coin) {
-                    Coin g;
-                    //make a copy of the coin for the apprirate dimention 
-                    g=(Coin)tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ);
-
-                    //set the correct ID for the coin
-                    g.coinId = level.numOfCoins;
-                    //add the coin to the stage
-                    current.parts.add(g);
-                    coins.add(false);
-                    level.numOfCoins++;
-                    continue;
-                  }
-                  
-                  
-                  current.parts.add(tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ));//preform a 3D copy on the curernt part and add it to the stage
-                }
-                  
-              }
-            }//end of 3D mode is on
-            
-            if (placeBlueprint.isMouseOver()) {
-              turnThingsOff();
-
-              String[] files=new File(appdata+"/CBi-games/skinny mann level creator/blueprints").list();
-              int numofjsons=0;
-              for (int i=0; i<files.length; i++) {
-                if (files[i].contains(".json")) {
-                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
-                  if(bpType.equals("3D blueprint"))
-                    numofjsons++;
-                }
-              }
-              blueprints=new Stage[numofjsons];
-              int pointer=0;
-              for (int i=0; i<files.length; i++) {
-                if (files[i].contains(".json")) {
-                  String bpType = loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]).getJSONObject(0).getString("type");
-                  if(bpType.equals("3D blueprint")){
-                    blueprints[pointer]=new Stage(loadJSONArray(appdata+"/CBi-games/skinny mann level creator/blueprints/"+files[i]));
-                    pointer++;
-                  }
-                }
-              }
-              System.out.println(blueprints.length);
-              selectingBlueprint=true;
-              currentBluieprintIndex=0;
-              blueprintPlacemntX=cam3Dx;
-              blueprintPlacemntY=cam3Dy;
-              blueprintPlacemntZ=cam3Dz;
-            }
-          }
-
+          //save button
           if (saveLevel.isMouseOver()) {
             System.out.println("saving level");
             level.save(true);
@@ -2007,26 +1397,24 @@ class ToolBox extends PApplet {
             System.out.println("save complete"+gmillis);
           }
 
-          if (level.multyplayerMode==2) {
-            if (currentPlayer>0&&prevousPlayerButton.isMouseOver()) {
+          //player swithing buttons
+          if (level.multyplayerMode == 2) {
+            if (currentPlayer > 0 && prevousPlayerButton.isMouseOver()) {
               currentPlayer--;
               currentStageIndex=players[currentPlayer].stage;
               e3DMode=players[currentPlayer].in3D;
             }
-            if (currentPlayer<level.maxPLayers-1&&nextPlayerButton.isMouseOver()) {
+            if (currentPlayer < level.maxPLayers - 1 && nextPlayerButton.isMouseOver()) {
               currentPlayer++;
               currentStageIndex=players[currentPlayer].stage;
               e3DMode=players[currentPlayer].in3D;
             }
           }
         }//end of edditing stage
-        else if (editingBlueprint) {
+        else if (editingBlueprint) {//if editing blueprint
           if (workingBlueprint.type.equals("blueprint")) {
-            if (groundButton.isMouseOver()) {
-              turnThingsOff();
-              ground=true;
-            }
-
+            
+            //bla bla bla very similar things
             if (deleteButton.isMouseOver()) {
               turnThingsOff();
               deleteing=true;
@@ -2035,26 +1423,7 @@ class ToolBox extends PApplet {
             if (gridModeButton.isMouseOver()) {
               grid_mode=!grid_mode;
             }
-            if (holoButton.isMouseOver()) {
-              turnThingsOff();
-              holo_gram=true;
-            }
-            if (draw_coin.isMouseOver()) {
-              turnThingsOff();
-              drawCoins=true;
-            }
-            if (checkpointButton.isMouseOver()) {
-              turnThingsOff();
-              check_point=true;
-            }
-            if (draw_sloap.isMouseOver()) {
-              turnThingsOff();
-              sloap=true;
-            }
-            if (draw_holoTriangle.isMouseOver()) {
-              turnThingsOff();
-              holoTriangle=true;
-            }
+            
             if (saveLevel.isMouseOver()) {
               System.out.println("saving blueprint");
               workingBlueprint.save();
@@ -2065,13 +1434,26 @@ class ToolBox extends PApplet {
               levelCreator=false;
               editingBlueprint=false;
             }
+            //component buttons
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 2D and stage is 2D*/componentAllowedDimentions[i][0]){
+                //check can be placed in 3D mdoe
+                if(componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]){
+                  
+                  if(stageComponetButtons[i].isMouseOver()){
+                    turnThingsOff();
+                    Identifier compoenntId = StageComponentRegistry.get(i);
+                    //special case for portals
+                    currentlyPlaceing = compoenntId;
+                  }
+                }
+              }
+            }
           }//end of type is blueprint
           else if (workingBlueprint.type.equals("3D blueprint")) {
-            if (groundButton.isMouseOver()) {
-              turnThingsOff();
-              ground=true;
-            }
-
+            
             if (deleteButton.isMouseOver()) {
               turnThingsOff();
               deleteing=true;
@@ -2080,19 +1462,6 @@ class ToolBox extends PApplet {
             if (gridModeButton.isMouseOver()) {
               grid_mode=!grid_mode;
             }
-            if (holoButton.isMouseOver()) {
-              turnThingsOff();
-              holo_gram=true;
-            }
-            if (draw_coin.isMouseOver()) {
-              turnThingsOff();
-              drawCoins=true;
-            }
-            if (checkpointButton.isMouseOver()) {
-              turnThingsOff();
-              check_point=true;
-            }
-            
             if (saveLevel.isMouseOver()) {
               System.out.println("saving blueprint");
               workingBlueprint.save();
@@ -2129,9 +1498,29 @@ class ToolBox extends PApplet {
                 selecting=true;
               }
             }//end of 3D mode on
+            
+            //component buttons
+            
+            for(int i=0;i<stageComponetButtons.length;i++){
+              //check allowed dimentions
+              //[0] = allow in 2D stage [1] = allow in 3D stage [2] = allow place in 3D mode in 3D stage (default true) [3] allow in blueprints (default true)
+              if(/*can beplaced in 3D and stage is 3D*/componentAllowedDimentions[i][1]){
+                //check can be placed in 3D mdoe
+                if((componentAllowedDimentions[i].length < 4 || componentAllowedDimentions[i][3]) && (!e3DMode || componentAllowedDimentions[i].length < 3 || componentAllowedDimentions[i][2])){
+                  
+                  if(stageComponetButtons[i].isMouseOver()){
+                    turnThingsOff();
+                    Identifier compoenntId = StageComponentRegistry.get(i);
+                    //special case for portals
+                    currentlyPlaceing = compoenntId;
+                  }
+                }
+              }
+            }
           }
         }//end of editing blueprint
         else if (editinglogicBoard) {
+          //hard coded logic board buttons
           if (connectLogicButton.isMouseOver()) {
             turnThingsOff();
             connectingLogic=true;
@@ -2140,21 +1529,9 @@ class ToolBox extends PApplet {
             turnThingsOff();
             moveLogicComponents=true;
           }
-          if (andGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingAndGate=true;
-          }
-          if (orGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingOrGate=true;
-          }
           if (deleteButton.isMouseOver()) {
             turnThingsOff();
             deleteing=true;
-          }
-          if (xorGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingXorGate=true;
           }
           if (saveLevel.isMouseOver()) {
             System.out.println("saving level");
@@ -2169,89 +1546,32 @@ class ToolBox extends PApplet {
             camPos=0;
             camPosY=0;
           }
-          if (nandGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingNandGate=true;
-          }
-          if (norGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingNorGate=true;
-          }
-          if (xnorGateButton.isMouseOver()) {
-            turnThingsOff();
-            placingXnorGate=true;
-          }
-          if (testLogicPlaceButton.isMouseOver()) {/////////////////////////////////
-            turnThingsOff();
-            placingTestLogic=true;
-          }
-          if (constantOnButton.isMouseOver()) {
-            turnThingsOff();
-            placingOnSingal=true;
-          }
-          if (readVariableButton.isMouseOver()) {
-            turnThingsOff();
-            placingReadVariable=true;
-          }
-          if (setVariableButton.isMouseOver()) {
-            turnThingsOff();
-            placingSetVaravle=true;
-          }
           if (select.isMouseOver()) {
             turnThingsOff();
             selecting=true;
           }
-          if (setVisabilityButton.isMouseOver()) {
-            turnThingsOff();
-            placingSetVisibility=true;
-          }
-          if (xOffsetButton.isMouseOver()) {
-            turnThingsOff();
-            placingXOffset=true;
-          }
-          if (yOffsetButton.isMouseOver()) {
-            turnThingsOff();
-            placingYOffset=true;
-          }
-          if (delayButton.isMouseOver()) {
-            turnThingsOff();
-            placingDelay=true;
-          }
-          if (zOffsetButton.isMouseOver()) {
-            turnThingsOff();
-            placingZOffset=true;
-          }
+          //help link
           if (logicHelpButton.isMouseOver()) {
-            link("https://youtu.be/3ac1G1qWK6g");
+            link("https://youtu.be/RIgViL-a3zs");//logic tutorial video
           }
-          if (read3DButton.isMouseOver()) {
-            turnThingsOff();
-            placing3Dreader=true;
-          }
-          if (set3DButton.isMouseOver()) {
-            turnThingsOff();
-            placing3Dsetter=true;
-          }
-          if (playLogicSoundButton.isMouseOver()) {
-            turnThingsOff();
-            placingPlaySoundLogic=true;
-          }
-          if (pulseButton.isMouseOver()) {
-            turnThingsOff();
-            placingPulse=true;
-          }
-          if (randomButton.isMouseOver()) {
-            turnThingsOff();
-            placingRandom=true;
+          //component buttons
+          for(int i=0;i<logicComponentButtons.length;i++){             
+            if(logicComponentButtons[i].isMouseOver()){
+              turnThingsOff();
+              Identifier compoenntId = LogicComponentRegistry.get(i);
+              //special case for portals
+              currentlyPlaceing = compoenntId;
+            }
           }
         }//end of edditing logic board
       }//end of tools
 
-      if (page.equals("selection")) {
-        if (selectedIndex!=-1) {
+      if (page.equals("selection")) {//if the page is the selection page
+        if (selectedIndex!=-1) {//if something is elected
           String type="";
           StageComponent thing= new GenericStageComponent();
-          LogicComponent logicThing=new GenericLogicComponent(-10, -10, null);
+          LogicComponent logicThing=new GenericLogicComponent(new LogicCompoentnPlacementContext(-10000,-10000,null));
+          //get the thing that is being editied
           if (editingStage) {
             thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
             type=thing.type;
@@ -2260,6 +1580,8 @@ class ToolBox extends PApplet {
             logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
             type=logicThing.type;
           }
+          //component specific hard coded actions
+          //not going to document this shit as this will be replaced with a better system in the near future
           if (type.equals("WritableSign")) {//if the current selected object is a sign
             if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {//place to click to start typing
               typingSign=true;
@@ -2421,85 +1743,97 @@ class ToolBox extends PApplet {
           }
         }//if something is selected
       }//end of page is selection
-      if (page.equals("stage settings")) {
+      
+      if (page.equals("stage settings")) {//if page is stage settings
         if (editingStage) {
+          //sky color button
           if (skyColorB1.isMouseOver()) {
             settingSkyColor=true;
             page="colors";
           }//end of clicked on skyColorB1
+          //reset sky color button
           if (resetSkyColor.isMouseOver()) {
             level.stages.get(currentStageIndex).skyColor=#74ABFF;
             println(#74ABFF);
           }//end of clicked on reset sky color
         }//end of editing stage
       }//end of page is stage settings
-      if (page.equals("variables and groups")) {
-        if (level!=null) {
-          if (variablesUP.isMouseOver()&&variableScroll>0) {
+      
+      if (page.equals("variables and groups")) {//varaibles and groups page
+        if (level != null) {//if in a level
+          //variable scrolling buttons
+          if (variablesUP.isMouseOver() && variableScroll > 0) {
             variableScroll--;
           }
-          if (variablesDOWN.isMouseOver()&&variableScroll+10<level.variables.size()) {
+          if (variablesDOWN.isMouseOver() && variableScroll + 10 < level.variables.size()) {
             variableScroll++;
           }
-          //rect(70,225+i*21,20,20);
+          //change varaible state buttons
           if (mouseX>=20&&mouseX<=90&&mouseY>=225&&mouseY<=435) {//if clicking on a variable state
-            int varSel=((mouseY-225)/21)+variableScroll;
-            if (varSel<level.variables.size()) {
-              level.variables.set(varSel, !level.variables.get(varSel));
+            int varSel = ((mouseY-225)/21)+variableScroll;//figure out what var is being clicked on
+            if (varSel < level.variables.size()) {
+              level.variables.set(varSel, !level.variables.get(varSel));//flip the state of the varaible
             }
           }
+          //group scrolling
           if (groupsUP.isMouseOver()&&groupScroll>0) {
             groupScroll--;
           }
           if (groupsDOWN.isMouseOver()&&groupScroll+10<level.groupNames.size()) {
             groupScroll++;
           }
+          //new group name typing stuff
           if (typeGroopName.isMouseOver()) {
             typingGroopName=true;
           }
           if (addVariable.isMouseOver()) {
             level.variables.add(false);
           }
-          if (addGroup.isMouseOver()&&!newGroopName.equals("")) {
+          //add new group button
+          if (addGroup.isMouseOver() && !newGroopName.equals("")) {
             level.groupNames.add(newGroopName);
             level.groups.add(new Group());
             newGroopName="";
             typingGroopName=false;
           }
+          //run the load board button
           if (runLoad.isMouseOver()) {
             level.logicBoards.get(level.loadBoard).superTick();
           }
+          //tick current board by 1 button
           if (editinglogicBoard && tickLogicButton.isMouseOver()) {
             level.logicBoards.get(logicBoardIndex).tick();
           }
         }//end of editing a level
       }//end if page is varioables and groups
-      if (page.equals("level settings")) {
+      
+      if (page.equals("level settings")) {//if the page is level settings
         if(editingStage||levelOverview){
-        if (multyplayerModeSpeedrunButton.isMouseOver()) {
-          level.multyplayerMode=1;
-        }
-        if (multyplayerModeCoOpButton.isMouseOver()) {
-          level.multyplayerMode=2;
-        }
-        if (level.multyplayerMode==2) {
-
-          if (level.minPlayers<level.maxPLayers&&minplayersIncrease.isMouseOver()) {
-            level.minPlayers++;
+          //the things for level settings very basic and eazy to under stand
+          if (multyplayerModeSpeedrunButton.isMouseOver()) {
+            level.multyplayerMode=1;
           }
-          if (level.minPlayers>2&&minPlayersDecrease.isMouseOver()) {
-            level.minPlayers--;
+          if (multyplayerModeCoOpButton.isMouseOver()) {
+            level.multyplayerMode=2;
           }
-          if (level.maxPLayers<10&&maxplayersIncrease.isMouseOver()) {
-            level.maxPLayers++;
+          if (level.multyplayerMode==2) {
+  
+            if (level.minPlayers < level.maxPLayers && minplayersIncrease.isMouseOver()) {
+              level.minPlayers++;
+            }
+            if (level.minPlayers > 2 && minPlayersDecrease.isMouseOver()) {
+              level.minPlayers--;
+            }
+            if (level.maxPLayers < 10 && maxplayersIncrease.isMouseOver()) {
+              level.maxPLayers++;
+            }
+            if (level.maxPLayers > level.minPlayers && maxplayersDecrease.isMouseOver()) {
+              level.maxPLayers--;
+            }
           }
-          if (level.maxPLayers>level.minPlayers&&maxplayersDecrease.isMouseOver()) {
-            level.maxPLayers--;
+          if(respawnEntitiesButton.isMouseOver()){
+            level.respawnEntities();
           }
-        }
-        if(respawnEntitiesButton.isMouseOver()){
-          level.respawnEntities();
-        }
         }
       }//end of page is level settings
       
@@ -2507,9 +1841,12 @@ class ToolBox extends PApplet {
     }
   }
 
+  /**Processings mouse dragged button
+  */
   public void mouseDragged() {
     if (levelCreator) {
       if (page.equals("colors")) {
+        //color selector sliders
         if (mouseX >= 100-25 && mouseX <= 1180-25 && mouseY >= 150 && mouseY <= 200) {
           rsp=mouseX-75;
         }
@@ -2523,35 +1860,44 @@ class ToolBox extends PApplet {
     }
   }
 
+  /**Processings mouse wheel function
+  @param event Mouse event information
+  */
   void mouseWheel(MouseEvent event) {
     if (levelCreator) {
       if (page.equals("colors")) {
         float wheel_direction = event.getCount()*-1;
-
-        if ((level!=null&&level.stages.size()>0&&currentStageIndex!=-1&&level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
+        //if in a level and there are stages and there is a current stage and this stage is a 3D stage or blueprint
+        if ((level != null && level.stages.size() > 0 && currentStageIndex != -1 && level.stages.get(currentStageIndex).type.equals("3Dstage")) || (workingBlueprint!=null && workingBlueprint.type.equals("3D blueprint"))) {
+          //if scrolling in the starting depth box
           if (mouseX>=100&&mouseX<=300&&mouseY>=550&&mouseY<=700) {
             startingDepth+=wheel_direction*5;
-            if (startingDepth<0) {
+            if (startingDepth<0) {//limit min to 0
               startingDepth=0;
             }
           }
+          //if scrolling in the total depth box
           if (mouseX>=950&&mouseX<=1150&&mouseY>=550&&mouseY<=700) {
             totalDepth+=wheel_direction*5;
-            if (totalDepth<5) {
+            if (totalDepth<5) {//limit min to 5
               totalDepth=5;
             }
           }
         }
       }//end of if page is colors
-      if (page.equals("tools")) {
+      
+      if (page.equals("tools")) {//if on the tools page
         float wheel_direction = event.getCount()*-1;
+        //addjust the grid size value if grid mode is on
         if (grid_mode) {//if grid mode is active
-          if (grid_size==10&&wheel_direction<0) {
+          if (grid_size==10 && wheel_direction < 0) {//id the grid size is 10 and the wheel whent in the down direction
+            //uhhhhhhhhhh do nothing
           } else {
-
+            //otherize
             grid_size+=wheel_direction*10;//change the grid size
           }
-          if (grid_size<10) {
+          
+          if (grid_size<10) {//enforce a minimum of 10
             grid_size=10;
           }
         }
@@ -2559,22 +1905,26 @@ class ToolBox extends PApplet {
     }
   }
 
-
+  /**Processing's key pressed function
+  */
   void keyPressed() {
     if (levelCreator) {
       if (page.equals("selection")) {
+        //sign selection text entering
+        //this will be modularized in the near future
         if (selectedIndex!=-1&&editingStage) {
-          StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+          StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);//get the component
           String type=thing.type;
           if (type.equals("WritableSign")) {//if the current selected object is a sign
             if (typingSign) {
-
               thing.setData(getInput(thing.getData(), 3, keyCode, key));
             }
           }
         }
       }//end of page is selection
+      
       if (page.equals("variables and groups")) {
+        //new group name typing
         if (level!=null) {
           if (typingGroopName) {
             newGroopName=getInput(newGroopName, 0, keyCode, key);
@@ -2583,88 +1933,6 @@ class ToolBox extends PApplet {
       }//end of page is variables and groops
     }
   }//end of keypressed
+}//end of ToolBox class
 
-
-  void drawCoin(float x, float y, float Scale) {
-    strokeWeight(0);
-    fill(#FCC703);
-    circle(x, y, 12*Scale);
-    fill(255, 255, 0);
-    circle(x, y, 10*Scale);
-    fill(#FCC703);
-    rect(x-2*Scale, y-3*Scale, 4*Scale, 6*Scale);
-  }
-
-  void drawPortal(float x, float y, float scale) {
-    fill(0);
-    strokeWeight(0);
-    ellipse(x, y, 50*scale, 100*scale);
-    fill(#AE00FA);
-    ellipse(x, y, 35*scale, 80*scale);
-    fill(0);
-    ellipse(x, y, 20*scale, 60*scale);
-    fill(#AE00FA);
-    ellipse(x, y, 5*scale, 40*scale);
-  }
-
-  void draw3DSwitch1(float x, float y, float Scale) {
-    fill(196);
-    strokeWeight(0);
-    rect((x-20)*Scale, (y-5)*Scale, 40*Scale, 5*Scale);
-    fill(#FAB800);
-    rect((x-10)*Scale, (y-10)*Scale, 20*Scale, 5*Scale);
-  }
-
-  void draw3DSwitch2(float x, float y, float Scale) {
-    fill(196);
-    strokeWeight(0);
-    rect((x-20)*Scale, (y-5)*Scale, 40*Scale, 5*Scale);
-  }
-
-  void drawCheckPoint(float x, float y) {
-    fill(#B9B9B9);
-    strokeWeight(0);
-    rect((x-3)*Scale, (y-60)*Scale, 5*Scale, 60*Scale);
-    fill(#EA0202);
-    stroke(#EA0202);
-    strokeWeight(0);
-    triangle(x*Scale, (y-60)*Scale, x*Scale, (y-40)*Scale, (x+30)*Scale, (y-50)*Scale);
-  }
-
-  void drawSign(float x, float y, float Scale) {
-    fill(#A54A00);
-    rect(x-5*Scale, y-30*Scale, 10*Scale, 30*Scale);
-    rect(x-35*Scale, y-65*Scale, 70*Scale, 40*Scale);
-    fill(#C4C4C4);
-    rect(x-33*Scale, y-63*Scale, 66*Scale, 36*Scale);
-    fill(#767675);
-    rect(x-30*Scale, y-58*Scale, 60*Scale, 2*Scale);
-    rect(x-30*Scale, y-52*Scale, 60*Scale, 2*Scale);
-    rect(x-30*Scale, y-46*Scale, 60*Scale, 2*Scale);
-    rect(x-30*Scale, y-40*Scale, 60*Scale, 2*Scale);
-    rect(x-30*Scale, y-34*Scale, 60*Scale, 2*Scale);
-  }
-
-  void draw_mann(float x, float y, int pose, float scale, String shirt_color) {
-    strokeWeight(0);
-    if (shirt_color.equals("red")) {
-      fill(255, 0, 0);
-      stroke(255, 0, 0);
-    }
-
-    if (pose==1) {
-      rect(x-10*scale, y-55*scale, scale*20, scale*25);
-      fill(-17813);
-      stroke(-17813);
-      rect(x-15*scale, y-75*scale, scale*30, scale*20);
-      fill(-16763137);
-      stroke(-16763137);
-      rect(x-10*scale, y-30*scale, scale*6, scale*10);
-      rect(x+4*scale, y-30*scale, scale*6, scale*10);
-      rect(x-10*scale, y-20*scale, scale*6, scale*10);
-      rect(x+4*scale, y-20*scale, scale*6, scale*10);
-      rect(x-10*scale, y-10*scale, scale*6, scale*10);
-      rect(x+4*scale, y-10*scale, scale*6, scale*10);
-    }
-  }
-}//end of ColorSelectorScreen class
+//end of tool_box_window.pde
