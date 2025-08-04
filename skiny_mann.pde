@@ -89,9 +89,6 @@ void setup() {//seccond function called
     //generate the PSahoe for the sphere and apply the texture to it
     textureSphere(200, 200, 200, CBi);
 
-    //add entites to the entity regisrty
-    entityRegistry.put("simple entity",new SimpleEntity(0,0,0,null));
-    entityRegistry.put("goon",new Goon(0,0,0,null));
     //start the load thread
     thread("programLoad");
 	
@@ -202,7 +199,7 @@ void draw() {// the function that is called every frame
 
               inver =inver.substring(0, inver.length()-1);//remove the last char from the string (its a new line)
               internetVersion=inver;//not sure why this is here
-              if (false)) {//if an update exists, in the arcade edition we do not care about this so just ignoore it
+              if (false) {//if an update exists, in the arcade edition we do not care about this so just ignoore it
                 Menue="update";//go to update menu
               } else {//if no update exists go to main menu
                 if (settings.getSettingsAfterStart()) {//if no settings file exsisted or was the wrong version,
