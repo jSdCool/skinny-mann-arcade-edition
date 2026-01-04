@@ -2,14 +2,19 @@ if you get a trojan waring from windows defender check this link
 https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-trojans
 
 0.10.1_Early_Access
+-changed: made multiplayer networking faster
+-changed: component property configuration is now modular, the select tab in the tool box will look slightly different
+-changed: editing a signs text now lets you set the number of lines as well as individually edit the content on each line. Additionally editing the signs text is now done in the modern text box system
+-added: Alien entity. Moves over a limited distance. Will "see" a player that is within a certain distance and attempt to reach them. Will only attack the player in the direction it is facing.
+-added: Alien entity to levels 15 and 16
 
 
 0.10.0_Early_Access
--changed: refactored many systems relating to component placement and loading, including stage components, logic components and entitiies
+-changed: refactored many systems relating to component placement and loading, including stage components, logic components and entities
 -changed: the order of buttons in the level creator tool box has changed
 -changed: tool box buttons for logic components have had the text on them replaced with pictographic icons
 +added: a new icon for the goon entity button
-+added: ability to rotate usualy solid level components
++added: ability to rotate usually solid level components
 +added: sloaps in 3D mode
 +added: new save icon for level creator
 +added: level-15
@@ -30,7 +35,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: new debug info line, current multiplayer ping
 -changed: Collision hitboxes are now pre grouped into combo boxes before collisions are calculated 
 -changed: 3D camera now collides with things between its default position and the player
--fixed: moving in and out in 3D mode remaining active when the corresponding button was held as the player was transitioning out of 3D moe
+-fixed: moving in and out in 3D mode remaining active when the corresponding button was held as the player was transitioning out of 3D mode
 -fixed: most font glyphs disappearing when certain letters were typed in a text box (may not have effected release builds)
 -changed: updated many text entering fields to now be text boxes
 +added: adjustable 3D FOV
@@ -45,7 +50,7 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: NPC enemy Goon
 +added: level 13
 -fixed: check point preview no being in correct position while on 3D stage
--fixed: HUD not being renderd on top of level in 3D while in the level creator
+-fixed: HUD not being rendered on top of level in 3D while in the level creator
 +added: level 14
 -fixed: game sounds ignoring the set sound volume
 
@@ -53,14 +58,14 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -fixed: coin placement preview was too small in 3D stages
 +changed: automatic update installer is now available on Mac OS for future versions
 -fixed: settings menu titles attempting to displaying above the window
--fixed: default level creator author name not being presistant through game restarts
--changed: capitlized text on certan buttons
--changed: reduced certain strage components overscan
+-fixed: default level creator author name not being persistent through game restarts
+-changed: capitalized text on certain buttons
+-changed: reduced certain strange components over scan
 
 0.8.1_Early_Access
 +added: Universal error handler (crashes will now always show an error window)
 +added: grid mode indicator in level creator
--fixed: tutorial crashing on unix based systems
+-fixed: tutorial crashing on Unix based systems
 +added: new sound type: narration
 -changed: setting version is now 4
 +added: new setting narration volume
@@ -105,21 +110,21 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 -added: level-12
 
 0.7.1_Early_Access
--fixed: max and min players werer reversed level info display for co-op levels
+-fixed: max and min players were reversed level info display for co-op levels
 -fixed: level complete would still show in new levels once a CO-PO level was completed
-+added: waiting for clients message after play is clicked in multyplayer
-+added: support for UGC levels in multyplayer
--fixed: game would crash if while entering the multyplayer port you tried to backspace while the port was set to 0
++added: waiting for clients message after play is clicked in multiplayer
++added: support for UGC levels in multiplayer
+-fixed: game would crash if while entering the multiplayer port you tried to backspace while the port was set to 0
 
 0.7.0_Early_Access
--fixed: verticle blipping. as a consequence the max verticle scroll location is now 320
+-fixed: vertical blipping. as a consequence the max vertical scroll location is now 320
 -changed: CBI sphere texture
 -fixed: 3D switches not scaling properly with resolutions
--changed: settings/progrss/UGC is now stored in users home directory on mac/linux
-+added: multyplayer. now with 2 modes
-+added: co-op_1 multyplayer level
-+added: co-op_2 multyplayer level
--changed: prbly some outher things I don't remember
+-changed: settings/progress/UGC is now stored in users home directory on mac/linux
++added: multiplayer. now with 2 modes
++added: co-op_1 multiplayer level
++added: co-op_2 multiplayer level
+-changed: prbly some other things I don't remember
 
 0.6.2_Early_Access
 -fixed: final audio clip in tutorial could be played in stage 1 if you died
@@ -127,8 +132,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 0.6.1_Early_Access
 +added: update installer(windows only)
--fixed: player being able to move in the z-axis when dide in stage 2 before getting the checkpoint
-+added: 3D logic controlls
+-fixed: player being able to move in the z-axis when died in stage 2 before getting the checkpoint
++added: 3D logic controls
 -changed: removed giant triangle at start of level-2
 -changed: spawn position in level 5
 
@@ -140,25 +145,25 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: level-9
 +added: level-10
 +added: logic interactive buttons
--changed: fatal error handling imporoved
--changed: improved main menue buttons
+-changed: fatal error handling improved
+-changed: improved main menu buttons
 
 
 0.5.0_Early_Access
--changed: doubled movemet speed
--changed: jumping/gravity is now more reslistic 
+-changed: doubled movement speed
+-changed: jumping/gravity is now more realistic 
 +added: signs
-+added: changable sky color
++added: changeable sky color
 +added: sound hit boxes
 +added: level-7
 +added: level-8
--fixed: parts of levels randomly bliping up
+-fixed: parts of levels randomly blipping up
 -fixed: sound file would not get set while loading settings
 +added: sign to level 5 explaining how to move back and forth in 3D
 +added: platform in level 4 to assist with first jump
-+added: user generated levels now muct be of a compatible game version
--changed: default screen srcolling locations+
-+added: information to the "options" menue during the tutorial
++added: user generated levels now must be of a compatible game version
+-changed: default screen scrolling locations+
++added: information to the "options" menu during the tutorial
 
 0.4.3_Early_Access
 -changed: file paths now compatible with linux
@@ -167,8 +172,8 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 
 0.4.2_Early_Access
--fixed: game crash when trying to view UGC levels when the folder does not exsist.
-+added: if a fatal error occors then a window will pop up with the error
+-fixed: game crash when trying to view UGC levels when the folder does not exist.
++added: if a fatal error occurs then a window will pop up with the error
 
 0.4.1_Early_Access
 -fixed: tutorial no longer contributes to progress
@@ -192,14 +197,14 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 +added: 3D stages
 +added: level-5
 +added: level-6
--fixed: seccond jump in level-2 was sometimes imposible
+-fixed: second jump in level-2 was sometimes impossible
 =updated to processing 4.0b1
 =updated to java 11, open JDK 11 or higher will be required to run the game without java included
 +added: glitch effect
 -changed: startup screen is now 3D
--changed: settings menue now has multple screens
+-changed: settings menu now has multiple screens
 -removed: screen scrolling location setting
-+added: horozontal screen scrolling location setting
++added: horizontal screen scrolling location setting
 +added: vertical screen scrolling location setting
 +added: music
 +added: music volume slider
@@ -255,14 +260,14 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 
 0.0.2_bata
--added: level 5, bewhare the lava
+-added: level 5, beware the lava
 -note: this is the last update before ALFA
 
 0.0.1_bata
--added: boxes that dont have collision
+-added: boxes that don't have collision
 -added: level 4, through the trees
 -changed: checkpoints have slightly larger rages
--changed: spaces can now be used in multyplayer names
+-changed: spaces can now be used in multiplayer names
 
 
 
@@ -271,9 +276,9 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 
 0.0.0.5_bata the resolution update
--added: verticle resolution setting
--added: fullscreen mode (milage may varry)
--changed: every time something neede to be drawn it now also neede to be scaled
+-added: vertical resolution setting
+-added: full screen mode (milage may vary)
+-changed: every time something needed to be drawn it now also needed to be scaled
 
 
 
@@ -287,8 +292,12 @@ https://github.com/processing/processing4/wiki/Troubleshooting#viruses-and-troja
 
 0.0.0.4_bata
 -added: level 3
--added: how to play menue
--changed: gravity now allows you to land on platform thet dont have a y value divisible by 5 level 3+
+-added: how to play menu
+-changed: gravity now allows you to land on platform that doesn't have a y value divisible by 5 level 3+
 -changed: slightly wider range for checkpoint activation level 3+
--changed: imporoved backend networing for multyplayer 
--fixed: hosting player name nolonger displays as blue
+-changed: improved backend networking for multiplayer 
+-fixed: hosting player name no longer displays as blue
+
+
+Welcome to the Skinny Mann change log!
+who knows what changed before 0.0.0.4

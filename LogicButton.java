@@ -3,7 +3,7 @@ import processing.data.*;
 import java.util.ArrayList;
 /**The stage component for the in level button that can interact with logic
 */
-public class LogicButton extends StageComponent implements Interactable {
+public class LogicButton extends StageComponent implements Interactable, Configurable {
   
   public static final Identifier ID = new Identifier("logic_button");
 
@@ -35,18 +35,7 @@ public class LogicButton extends StageComponent implements Interactable {
       z = context.getZ();
     }
   }
-  
-  public StageComponent copy() {
-    return new LogicButton(new StageComponentPlacementContext(x, y, z));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return new LogicButton(new StageComponentPlacementContext(x+offsetX,y+offsetY));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    return new LogicButton(new StageComponentPlacementContext(x+offsetX,y+offsetY,z+offsetZ));
-  }
+
   /**Create a logic button from serialized binarry data
   @param iterator The source of the data
   */
@@ -177,22 +166,6 @@ public class LogicButton extends StageComponent implements Interactable {
     return false;
   }
 
-  /**set the value of an in data proerty<br>
-  In this case the variable index
-  @param data The new data value
-  */
-  public void setData(int data) {
-    variable=data;
-  }
-
-  /**Get the value of an integer data proerty<br>
-  In this case the variable index
-  @return The value of the int data
-  */
-  public int getDataI() {
-    return variable;
-  }
-
   /**this instance of this function allows the portal to test if a player is standing on it
    @param data the index of the stage the button is in
    */
@@ -251,6 +224,16 @@ public class LogicButton extends StageComponent implements Interactable {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{
+      new BooleanVariableProperty(() -> variable, (value) -> {variable = value;}, "Current Variable")
+    };
   }
   
 }

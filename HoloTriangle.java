@@ -79,17 +79,6 @@ public class HoloTriangle extends StageComponent implements Rotatable,Resizeable
     updateVerticies();
   }
   
-  public StageComponent copy() {
-    return new HoloTriangle(new StageComponentDragPlacementContext(x, y, getWidth(), getHeight(), ccolor, direction));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return new HoloTriangle(new StageComponentDragPlacementContext(x+offsetX,y+offsetY,getWidth(),getHeight(),ccolor,direction));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    return new HoloTriangle(new StageComponentDragPlacementContext(x+offsetX,y+offsetY,z+offsetZ,getWidth(),getHeight(),getDepth(),ccolor,direction));
-  }
   /**Get a JSONObject representation of this component that can be saved to a file
   @param stage_3D Wether this stage is a 3D stage
   @return JSONObject representation of this object

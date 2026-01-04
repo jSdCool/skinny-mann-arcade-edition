@@ -1,6 +1,10 @@
 import processing.core.PMatrix3D;
 import processing.core.PVector;
 import processing.core.PGraphics;
+import java.awt.Desktop;
+import java.io.File;
+import java.lang.reflect.Method;
+
 /**Various utility methods
 */
 public class Util{
@@ -145,5 +149,19 @@ public class Util{
   */
   public static void shapeVertex(PGraphics g, PVector v,float offsetX, float offsetY, float scale){
     g.vertex((v.x+offsetX)*scale,(v.y+offsetY)*scale,v.z*scale);
+  }
+  
+  /**Open a folder in the systems file explorer.<br>
+  This is a reflection wrapper for the java desktop open method becasue for some reason processing 4.4.7+ does not think the method exsists.
+  @param desktop The desktop to open the folder on
+  @param folder The folder to open
+  */
+  public static void desktopOpen(Desktop desktop,File folder){
+      try {
+          Method openMethod = Desktop.class.getDeclaredMethod("open",File.class);
+          openMethod.invoke(desktop,folder);
+      } catch (Exception e) {
+          throw new RuntimeException(e);
+      }
   }
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**A signal delay logic component
 */
-public class Delay extends LogicComponent {
+public class Delay extends LogicComponent implements Configurable{
   
   public static final Identifier ID = new Identifier("delay");
   
@@ -45,7 +45,7 @@ public class Delay extends LogicComponent {
     super.draw();
     source.fill(0);
     source.textSize(15);
-    source.textAlign(source.LEFT, source.CENTER);
+    source.textAlign(PConstants.LEFT, PConstants.CENTER);
     source.text("input", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
     source.text("clear", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
@@ -62,23 +62,7 @@ public class Delay extends LogicComponent {
     mem.add(inputTerminal1);
     //System.out.println(mem);
   }
-  /**set an integer data field
-  @param data The data to set
-  */
-  public void setData(int data) {
-    time=data;
-    button.setText("delay "+time+" ticks  ");
-    mem=new ArrayList<>();
-    for (int i=0; i<time; i++) {
-      mem.add(false);
-    }
-  }
-  /**Get an integer data field
-  @return the value of that data
-  */
-  public int getData() {
-    return time;
-  }
+  
   /**Get a JSONObject representation of this component that can be saved to a file
   @return JSONObject representation of this object
   */
@@ -104,5 +88,15 @@ public class Delay extends LogicComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{
+      new IntegerProperty(() -> time, (value) -> {time = value; button.setText("delay "+time+" ticks  ");}, "Delay in Ticks (50tps)")
+    };
   }
 }

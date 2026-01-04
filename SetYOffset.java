@@ -3,7 +3,7 @@ import processing.data.*;
 import java.util.ArrayList;
 /**A logic component to set the y offset of a group
 */
-public class SetYOffset extends LogicOutputComponent {
+public class SetYOffset extends LogicOutputComponent implements Configurable{
   
   public static final Identifier ID = new Identifier("y-offset");
   
@@ -53,19 +53,6 @@ public class SetYOffset extends LogicOutputComponent {
     component.setFloat("offset", offset);
     return component;
   }
-  /**set an integer data field
-  @param data The data to set
-  */
-  public void setData(int data) {
-    groupNumber=data;
-    button.setText("y-offset "+source.level.groupNames.get(groupNumber)+" by "+offset);
-  }
-  /**Get an integer data field
-  @return the value of that data
-  */
-  public int getData() {
-    return groupNumber;
-  }
   /**renders the logic component a long with its I/O terminals
   */
   public void draw() {
@@ -76,7 +63,7 @@ public class SetYOffset extends LogicOutputComponent {
     super.draw();
     source.fill(0);
     source.textSize(15*source.Scale);
-    source.textAlign(source.LEFT, source.CENTER);
+    source.textAlign(PConstants.LEFT, PConstants.CENTER);
     source.text("set", (x+5-source.camPos)*source.Scale, (y+16-source.camPosY)*source.Scale);
     source.text("reset", (x+5-source.camPos)*source.Scale, (y+56-source.camPosY)*source.Scale);
   }
@@ -110,6 +97,17 @@ public class SetYOffset extends LogicOutputComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{
+      new GroupProperty(() -> groupNumber, (value) -> {groupNumber=value;reText = true;},"Current Group"),
+      new IntegerProperty(() -> (int)offset, (value) -> {offset = value; reText=true;}, "Offset")
+    };
   }
   
 }

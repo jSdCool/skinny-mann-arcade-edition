@@ -73,17 +73,6 @@ public class Holo extends StageComponent implements Rotatable,Resizeable{//groun
     updateVerticies();
   }
   
-  public StageComponent copy() {
-    return new Holo(new StageComponentDragPlacementContext(x, y, z, dx, dy, dz, ccolor));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return new Holo(new StageComponentDragPlacementContext(x+offsetX,y+offsetY,dx,dy,ccolor));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    return new Holo(new StageComponentDragPlacementContext(x+offsetX,y+offsetY,z+offsetZ,dx,dy,dz,ccolor));
-  }
   /**Get a JSONObject representation of this component that can be saved to a file
   @param stage_3D Wether this stage is a 3D stage
   @return JSONObject representation of this object

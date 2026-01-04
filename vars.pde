@@ -112,8 +112,8 @@ PVector lightDir = new PVector();
 PVector currentComponentRotation = new PVector();
 
 String Menue = "creds";
-String version = "0.10.0_Early_Access";
-String EDITOR_version = "0.3.0_EAc";
+String version = "0.10.1_Early_Access";
+String EDITOR_version = "0.3.1_EAc";
 String ip = "localhost";
 String name = "can't_be_botherd_to_chane_it";
 String rootPath;
@@ -137,7 +137,7 @@ ArrayList<String> playerNames=new ArrayList<>();
 
 //String[] musicTracks ={"data/music/track1.wav", "data/music/track2.wav", "data/music/track3.wav"};
 //String[] sfxTracks={"data/sounds/level complete.wav"};
-String[] compatibleVersions={"0.10.0_Early_Access"};
+String[] compatibleVersions={"0.10.0_Early_Access","0.10.1_Early_Access"};
 
 float Scale;
 float gravity = 0.001;
@@ -484,6 +484,7 @@ ToolBox scr2;
 
 Identifier currentlyPlaceing = null;
 
+ArrayList<PropertyConfigUi.PropConfigUiFactory> propertyConfigRegistry = new ArrayList<>();
 
 //DO NOT EDIT BELOW THIS LINE ON THE MAIN PROJECT!
 //===================================================

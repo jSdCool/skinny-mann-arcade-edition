@@ -40,18 +40,6 @@ class Goal extends StageComponent {//ground component
     deserial(iterator);
   }
 
-  public StageComponent copy() {
-    return new Goal(new StageComponentPlacementContext(x, y));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return new Goal(new StageComponentPlacementContext(x+offsetX,y+offsetY));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    System.err.println("attempted to copy a goal in 3D. This opperation is not supported");
-    return null;
-  }
   /**Get a JSONObject representation of this component that can be saved to a file
   @param stage_3D Wether this stage is a 3D stage
   @return JSONObject representation of this object

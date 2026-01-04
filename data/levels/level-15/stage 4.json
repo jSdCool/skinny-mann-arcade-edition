@@ -546,13 +546,6 @@
     "group": -1
   },
   {
-    "contents": "IOU\n1 Alian Enemy",
-    "x": 3620,
-    "y": -1010,
-    "type": "WritableSign",
-    "group": -1
-  },
-  {
     "dx": 800,
     "color": -1973790,
     "dy": 700,
@@ -1559,24 +1552,45 @@
     "x": 1060,
     "y": 350,
     "z": 1060,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 1460,
     "y": 350,
     "z": 1460,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 2720,
     "y": -970,
     "z": 2720,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 3050,
     "y": -980,
     "z": 3050,
-    "type": "goon"
+    "type": "skinny_mann:goon"
+  },
+  {
+    "maxWanderDistance": 300,
+    "x": 3420,
+    "y": -1040,
+    "z": 0,
+    "type": "skinny_mann:alien"
+  },
+  {
+    "maxWanderDistance": 300,
+    "x": 3880,
+    "y": -1030,
+    "z": 0,
+    "type": "skinny_mann:alien"
+  },
+  {
+    "maxWanderDistance": 300,
+    "x": 7720,
+    "y": -950,
+    "z": 0,
+    "type": "skinny_mann:alien"
   }
 ]

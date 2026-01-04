@@ -21,17 +21,6 @@ class GenericStageComponent extends StageComponent {
     
   }
   
-  public StageComponent copy() {
-    return this;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return this;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    return this;
-  }
   /**No placement nessarry
   @param context There is no context here
   */

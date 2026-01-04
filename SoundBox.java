@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import processing.sound.*;
 /**Stage component that allow the player to trigger a sound while standing inside of it
 */
-public class SoundBox extends StageComponent {
+public class SoundBox extends StageComponent implements Configurable{
   
   public static final Identifier ID = new Identifier("sound_box");
   
@@ -112,34 +112,6 @@ public class SoundBox extends StageComponent {
     return part;
   }
 
-  public StageComponent copy() {
-    SoundBox e=new SoundBox(new StageComponentPlacementContext(x, y));
-    e.soundKey=soundKey;
-    return  e;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    SoundBox e = new SoundBox(new StageComponentPlacementContext(x+offsetX,y+offsetY));
-    e.soundKey=soundKey;
-    return e;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    System.err.println("Attempted to copy sound box in 3D. This opperation is not allowed");
-    return null;
-  }
-  /**Set a string data property
-  @param data The data to set
-  */
-  public void setData(String data) {
-    soundKey=data;
-  }
-  /**Get the value of a string data proerty
-  @return The value of the string data
-  */
-  public String getData() {
-    return soundKey;
-  }
   /**Get the 2D collision box for entitiy collisions
   @return 2D hitbox for this component or null for none
   */
@@ -168,5 +140,13 @@ public class SoundBox extends StageComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{new SoundProperty( ()->soundKey, (value) -> soundKey = value, "Current Sound")};
   }
 }

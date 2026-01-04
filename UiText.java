@@ -55,7 +55,12 @@ public class UiText {
     y=ui.topY()+iy*ui.scale();
     size=isize*ui.scale();
   }
-  
+
+  public void setY(float newY){
+    iy = newY;
+    y=ui.topY()+newY*ui.scale();
+  }
+
   String getText(){
     return text;
   }

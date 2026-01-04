@@ -1318,30 +1318,30 @@
     "x": 1040,
     "y": 430,
     "z": 1040,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 2020,
     "y": 430,
     "z": 2020,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 2240,
     "y": 400,
     "z": 2240,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 3040,
     "y": 390,
     "z": 3040,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 3480,
     "y": 440,
     "z": 3480,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   }
 ]
