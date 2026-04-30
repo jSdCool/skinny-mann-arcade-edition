@@ -11,44 +11,25 @@ public class Goon extends StageEntity{
   @param context The context for the placement
   */
   public Goon(StageEntityPlacementContext context){
-    this.x=context.getX();
-    this.y=context.getY();
-    this.z=context.getX();
-    ix = x;
-    iy = y;
-    iz = z;
+    super(context);
   }
   
   /**Load a goon from saved JSON data
   @param data The saved JSON data
   */
   public Goon(JSONObject data){
-    x = data.getFloat("x");
-    y = data.getFloat("y");
-    z = data.getFloat("z");
-    ix=x;
-    iy=y;
-    iz=z;
+    super(data);
   }
   
   /**Recreate a goon from serialized binarry data
   @param iterator The source of the binarry data
   */
   public Goon(SerialIterator iterator){
-    x = iterator.getFloat();
-    y = iterator.getFloat();
-    z = iterator.getFloat();
-    ix = iterator.getFloat();
-    iy = iterator.getFloat();
-    iz = iterator.getFloat();
-    verticalVelocity = iterator.getFloat();
+    super(iterator);
     dead = iterator.getBoolean();
     in3D = iterator.getBoolean();
   }
   
-  float x,y,z;
-  float ix,iy,iz;
-  float verticalVelocity=0;
   boolean dead=false,in3D =false;
   GoonMovementManager mm= new GoonMovementManager(this);
   
@@ -75,64 +56,6 @@ public class Goon extends StageEntity{
   */
   public Collider3D getHitBox3D(float offsetX, float offsetY, float offsetZ){
     return null;
-  }
-
-  /**set the entities' x position
-  @param x The new x position
-  @return this
-  */
-  public Entity setX(float x){
-    this.x=x;
-    return this;
-  }
-  /**set the entities' y position
-  @param y The new y position
-  @return this
-  */
-  public Entity setY(float y){
-    this.y=y;
-    return this;
-  }
-  /**set the entities' z position
-  @param z The new z position
-  @return this
-  */
-  public Entity setZ(float z){
-    this.z=z;
-    return this;
-  }
-  /**Get the current x position of the entity
-  @return the current x position
-  */
-  public float getX(){
-    return x;
-  }
-  /**Get the current y position of the entity
-  @return the current y position
-  */
-  public float getY(){
-    return y;
-  }
-  /**Get the current z position of the entity
-  @return the current z position
-  */
-  public float getZ(){
-    return z;
-  }
-  
-  /**Gets the current vertical velocity of this entity
-  @return the current vertical velocity
-  */
-  public float getVerticalVelocity(){
-    return verticalVelocity;
-  }
-  /**Set the current vertical velocity of this entity
-  @param v The new velocity
-  @return this
-  */
-  public Entity setVerticalVelocity(float v){
-    verticalVelocity = v;
-    return this;
   }
   
   /**Get wether or not this entity colides with outher entities
@@ -209,9 +132,9 @@ public class Goon extends StageEntity{
   */
   public void respawn(){
     dead=false;
-    x=ix;
-    y=iy;
-    z=iz;
+    x=respawnX;
+    y=respawnY;
+    z=respawnZ;
     mm.reset();
   }
   
@@ -226,11 +149,7 @@ public class Goon extends StageEntity{
   @return JSONObject representation of this object
   */
   public JSONObject save(){
-    JSONObject data = new JSONObject();
-    data.setFloat("x",ix);
-    data.setFloat("y",iy);
-    data.setFloat("z",iz);
-    data.setString("type","goon");
+    JSONObject data = saveInternal();
     return data;
   }
   
@@ -259,11 +178,10 @@ public class Goon extends StageEntity{
   }
   
   /**Process an entity AI update
-  @param dt The number of milliseconds Since the last update
-  @param stageHitBoxes The hitboxes of the stage this entity is in
+  @param context Context used to do AI things
   */
-  public void update(float dt, ArrayList<Collider2D> stageHitBoxes){
-    mm.recalculateMovements(stageHitBoxes);
+  public void update(EntityAgentContext context){
+    mm.recalculateMovements(context.get2DCollisions());
   }
   
   /**Convert this entity to a byte representation that can be sent over the network or saved to a file.<br>
@@ -271,15 +189,7 @@ public class Goon extends StageEntity{
   */
   @Override
   public SerializedData serialize() {
-    SerializedData data = new SerializedData(id());
-  
-    data.addFloat(x);
-    data.addFloat(y);
-    data.addFloat(z);
-    data.addFloat(ix);
-    data.addFloat(iy);
-    data.addFloat(iz);
-    data.addFloat(verticalVelocity);
+    SerializedData data = serializeInternal();
     data.addBool(dead);
     data.addBool(in3D);
     return data;

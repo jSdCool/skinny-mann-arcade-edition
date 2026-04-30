@@ -42,18 +42,6 @@ public class DethPlane extends StageComponent {//ground component
     }
   }
   
-  public StageComponent copy() {
-    return new DethPlane(new StageComponentDragPlacementContext(x, y, dx, dy,0));
-  }
-
-  public StageComponent copy(float offsetX, float offsetY) {
-    return new DethPlane(new StageComponentDragPlacementContext(x+offsetX, y+offsetY, dx, dy,0));
-  }
-
-  public StageComponent copy(float offsetX, float offsetY, float offsetZ) {
-    System.err.println("Attempted to create a 3D copy of a deth plane. This opperation is not supported");
-    return null;
-  }
   /**Create a deth plane from serialized binarry data
   @param iterator The source of the data
   */

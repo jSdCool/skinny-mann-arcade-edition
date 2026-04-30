@@ -3,7 +3,7 @@ import processing.data.*;
 import java.util.ArrayList;
 /**A loigc componet that reads the state of a level varaible
 */
-public class ReadVariable extends LogicInputComponent {
+public class ReadVariable extends LogicInputComponent implements Configurable{
   
   public static final Identifier ID = new Identifier("read_var");
   
@@ -13,7 +13,7 @@ public class ReadVariable extends LogicInputComponent {
   */
   public ReadVariable(LogicCompoentnPlacementContext context) {
     super(context.getX(), context.getY(), "read var", context.getLogicBoard());
-    button.setText("read var b"+variableNumber+"  ");
+    button.setText("Read var b"+variableNumber+"  ");
   }
   /**Create a new read varaible from saved json data
   @param data The saved json data
@@ -43,19 +43,6 @@ public class ReadVariable extends LogicInputComponent {
     component.setInt("variable number", variableNumber);
     return component;
   }
-  /**set an integer data field
-  @param data The data to set
-  */
-  public void setData(int data) {
-    variableNumber=data;
-    button.setText("read var b"+variableNumber+"  ");
-  }
-  /**Get an integer data field
-  @return the value of that data
-  */
-  public int getData() {
-    return variableNumber;
-  }
   /**Convert this component to a byte representation that can be sent over the network or saved to a file.<br>
   @return This component as a binarry representation
   */
@@ -72,5 +59,13 @@ public class ReadVariable extends LogicInputComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{new BooleanVariableProperty(() -> variableNumber, (value) -> {variableNumber=value;button.setText("Read var b"+variableNumber+"  ");},"Current Variable")};
   }
 }

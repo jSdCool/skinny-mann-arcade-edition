@@ -3867,6 +3867,7 @@ void openUGCFolder() {
   File dirToOpen = null;
   try {
     dirToOpen = new File(appdata+"/CBi-games/skinny mann/UGC/levels");
+    Util.desktopOpen(desktop,dirToOpen);
     //desktop.open(dirToOpen);
   }
   catch (Throwable iae) {
@@ -3883,6 +3884,7 @@ void openLevelCreatorLevelsFolder() {
   File dirToOpen = null;
   try {
     dirToOpen = new File(appdata+"/CBi-games/skinny mann level creator/levels");
+    Util.desktopOpen(desktop,dirToOpen);
     //desktop.open(dirToOpen);
   }
   catch (Throwable iae) {

@@ -3545,24 +3545,24 @@
     "x": 2375,
     "y": 421,
     "z": 0,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 3774,
     "y": 317,
     "z": 0,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 5760,
     "y": 298,
     "z": 0,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   },
   {
     "x": 7497,
     "y": 484,
     "z": 0,
-    "type": "goon"
+    "type": "skinny_mann:goon"
   }
 ]

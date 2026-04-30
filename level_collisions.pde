@@ -229,7 +229,8 @@ void stageLevelDraw() {
     engageHUDPosition();//engage the HUD position in case of 3D mode to make shure it renders on top
     StageComponent item = level.stages.get(currentStageIndex).parts.get(viewingItemIndex);//get the thing that is being viewed
     //TODO make this modular
-    if (item.type.equals("WritableSign")) {//if your are reeding a sign then show the contents of the sign
+    if (item instanceof WritableSign) {//if your are reeding a sign then show the contents of the sign
+      WritableSign sign = (WritableSign)item;
       fill(#A54A00);
       rect(width*0.05, height*0.05, width*0.9, height*0.9);//background of the sign
       fill(#C4C4C4);
@@ -237,7 +238,7 @@ void stageLevelDraw() {
       textAlign(CENTER, CENTER);
       textSize(50*Scale);
       fill(0);
-      text(item.getData(), width/2, height/2);//the text of the sign
+      text(sign.getContent(), width/2, height/2);//the text of the sign
       textSize(20*Scale);
       text("press B to continue", width/2, height*0.85);//closing instructions
       displayTextUntill = millis()-1;//make shure that "Press B" is not displayed on the screen while in the sign
@@ -801,7 +802,7 @@ void playerPhysics() {
         }
       }
       
-      if (level.multyplayerMode==2 && !isHost) {//if in co op mode or not hosting
+      if (level.multyplayerMode==2 && !isHost && clients.size() > 0 /*dont try to do this if in the level creator*/) {//if in co op mode or not hosting
         //if the entitie was killed
         if (level.stages.get(currentStageIndex).entities.get(i).isDead()) {
           //inform the server of the death
@@ -844,14 +845,32 @@ void playerPhysics() {
         entityStageBoxes = generateLevel2DComboBox(stage);
         entityStageBoxes3D = generateLevel3DComboBox(stage);
       }
+      int stageIndex;
+      //figure out the index of this stage
+      for(stageIndex = 0;stageIndex < level.stages.size();stageIndex++){
+        if(level.stages.get(stageIndex) == stage){
+          break;
+        }
+      }
+      ArrayList<Player> playerOnStage = new ArrayList<>();
+      //collect all the players on the current stage
+      for(int i=0;i<players.length;i++){
+        if(players[i].stage == stageIndex){
+          playerOnStage.add(players[i]);
+        }
+      }
+      EntityAgentContext agentContext = new EntityAgentContext(mspc,entityStageBoxes,entityStageBoxes3D,playerOnStage.toArray(Player[]::new),stage.entities);
       //calculate the physics for each entity in this stage
       for (int i=0; i<stage.entities.size(); i++) {
+        stage.entities.get(i).update(agentContext);
         entityPhysics(stage.entities.get(i), stage, entityStageBoxes,entityStageBoxes3D);
       }
     }
   } else if (level.multyplayerMode!=2) {//if the level is not in co-op mode
     //calculate the physics for only the entites on this stage
+    EntityAgentContext agentContext = new EntityAgentContext(mspc,stageBoxes,stageBoxes3D,new Player[]{players[currentPlayer]},level.stages.get(currentStageIndex).entities);
     for (int i=0; i<level.stages.get(currentStageIndex).entities.size(); i++) {
+      level.stages.get(currentStageIndex).entities.get(i).update(agentContext);
       entityPhysics(level.stages.get(currentStageIndex).entities.get(i), level.stages.get(currentStageIndex),stageBoxes,stageBoxes3D);
     }
   }
@@ -890,12 +909,6 @@ void entityPhysics(Entity entity, Stage stage, ArrayList<Collider2D> stageHitBox
     if (k.isDead()) {
       return;
     }
-  }
-  
-  //if this entity is a stage entity (not a player)
-  if(entity instanceof StageEntity){
-    StageEntity stageEnt = (StageEntity)entity;
-    stageEnt.update(mspc, stageHitBoxs2D);//run and AI update on the entity
   }
 
   if (viewingItemContents && movement instanceof PlayerMovementManager) {//if this entity is a player then stop movment while intertacting with an object, but still process gravity

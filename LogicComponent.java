@@ -188,21 +188,6 @@ public abstract class LogicComponent implements Serialization {//the base of all
     component.setJSONArray("connections", connections);
     return component;
   }
-
-  /**set an integer data field
-  @param data The data to set
-  */
-  @Deprecated
-  public void setData(int data) {
-  }
-  
-  /**Get an integer data field
-  @return the value of that data
-  */
-  @Deprecated
-  public int getData() {
-    return 0;
-  }
   
   /**Convert this component to a byte representation that can be sent over the network or saved to a file.<br>
   This representation is contained inside of the passed in object

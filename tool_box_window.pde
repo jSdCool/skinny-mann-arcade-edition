@@ -19,7 +19,7 @@ class ToolBox extends PApplet {
   public int redVal=0, greenVal=0, blueVal=0, CC=0;
   int rsp=0, gsp=0, bsp=0, selectedColor=0, millisOffset, variableScroll=0, groupScroll=0;
   String page="colors", newGroopName="";
-  Button colorPage, toolsPage,  toggle3DMode, saveLevel, exitStageEdit, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, nextSound, prevSound,  playPauseButton,  deleteButton, movePlayerButton, gridModeButton, connectLogicButton, moveComponentsButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, runLoad, logicHelpButton, move3DButton, size3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, tickLogicButton,placeBlueprint3DButton,respawnEntitiesButton, rotateButton;
+  Button colorPage, toolsPage,  toggle3DMode, saveLevel, exitStageEdit, select, selectionPage, stageSettings, skyColorB1, setSkyColor, resetSkyColor, placeBlueprint, nexBlueprint, prevBlueprint, nextSound, prevSound,  playPauseButton,  deleteButton, movePlayerButton, gridModeButton, connectLogicButton, moveComponentsButton, increase, increaseMore, increaseAlot, decrease, decreaseMore, decreaseAlot, nextGroup, prevGroup, variablesAndGroups, variablesUP, variablesDOWN, groupsUP, groupsDOWN, addVariable, addGroup, typeGroopName, runLoad, logicHelpButton, move3DButton, size3DButton, levelSettingsPage, multyplayerModeSpeedrunButton, multyplayerModeCoOpButton, minplayersIncrease, minPlayersDecrease, maxplayersIncrease, maxplayersDecrease, prevousPlayerButton, nextPlayerButton, tickLogicButton,placeBlueprint3DButton,respawnEntitiesButton, rotateButton, nextPropertyPageButton, prevPropertyPageButton;
   //thank goodness we do not need theese anymore
   //Button draw_coin, draw_portal, draw_sloap, draw_holoTriangle, draw_dethPlane, switch3D1, switch3D2, sign, checkpointButton, groundButton, goalButton, holoButton, logicButtonButton, playSound;
   //Button andGateButton, orGateButton, xorGateButton, nandGateButton, norGateButton, xnorGateButton, testLogicPlaceButton, constantOnButton, setVariableButton, readVariableButton, setVisabilityButton, xOffsetButton, yOffsetButton, delayButton, zOffsetButton, set3DButton, read3DButton, playLogicSoundButton, pulseButton, randomButton;
@@ -29,6 +29,10 @@ class ToolBox extends PApplet {
   EntityRegistry.EntityButtonIconDraw entityIcons[];
   Boolean[][] componentAllowedDimentions;
   boolean typingSign=false, settingSkyColor=false, typingGroopName=false;
+  UiFrame toolBoxUi;
+  
+  int selectionPropertiesPage = 0;
+  int PROPERTIES_PER_PAGE = 4;
 
   /**Processing's settings method.
   sets the size of the new window
@@ -41,6 +45,7 @@ class ToolBox extends PApplet {
   /**Processing's setup function
   */
   void setup() {
+    toolBoxUi = new UiFrame(this,1280,720);
     textSize(50);//set the inital text size
     //all page buttons
     colorPage=new Button(this, 50, 50, 100, 50, "colors/depth");
@@ -162,6 +167,16 @@ class ToolBox extends PApplet {
     skyColorB1=new Button(this, 150, 165, 40, 40, 255, 203).setStrokeWeight(0);
     setSkyColor=new Button(this, 300, 580, 100, 30, "set sky color").setStrokeWeight(2);
     resetSkyColor=new Button(this, 200, 165, 40, 40, "reset", 255, 203).setStrokeWeight(0);
+    
+    
+    //create all the property Uis
+    for(PropertyConfigUi.PropConfigUiFactory propUi:propertyConfigRegistry){
+      propUi.create(g, toolBoxUi);
+    }
+    
+    hint(ENABLE_KEY_REPEAT);//allow keys to be held down to repeat that letter while typing
+    nextPropertyPageButton = new Button(this,977, 548, 200,50,"Next Page");
+    prevPropertyPageButton = new Button(this,102, 548, 200, 50,"Prev Page");
   }
 
   /**Calculate the XY positions of a given tool button
@@ -359,6 +374,10 @@ class ToolBox extends PApplet {
               move3DButton.setColor(255, 203);
             }
             move3DButton.draw();
+            
+            if (selectingBlueprint && blueprints.length != 0){//ony render this when placeing a blueprint in 3D mdoe and there is a blueprint to place
+              placeBlueprint3DButton.draw();
+            }
           }
           //save button
           saveLevel.draw();
@@ -780,183 +799,47 @@ class ToolBox extends PApplet {
           String type="";
           //theese are assigned to things so that I do not get pesterd about them having the potential to be null
           //this stuf has to so with thigns being selected
+          Configurable configComponent = null;
+          
           StageComponent thing= new GenericStageComponent();
           LogicComponent logicThing=new GenericLogicComponent(new LogicCompoentnPlacementContext(-10000,-10000,null));
           if (editingStage) {
             thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
             type=thing.type;
+            if(thing instanceof Configurable){
+              configComponent = (Configurable)thing;
+            }
           }
           if (editinglogicBoard) {
             logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
             type=logicThing.type;
+            if(logicThing instanceof Configurable){
+              configComponent = (Configurable)logicThing;
+            }
           }
-          if (type.equals("WritableSign")) {//if the current selected object is a sign
-            fill(0);
-            textSize(25);
-            textAlign(CENTER, CENTER);
-            text("sign contents", width/2, height*0.2);
-            textAlign(CENTER, TOP);
-            String contents=thing.getData();
-            if (typingSign) {
-              contents+=coursorr;
+          
+          
+          
+          if(configComponent != null){
+            Property<?,?> properties[] = configComponent.getProperties();
+            if(selectionPropertiesPage > (properties.length-1)/PROPERTIES_PER_PAGE){
+              selectionPropertiesPage = 0;
             }
-            text(contents, width/2, height*0.25);
-            rect(width*0.05, height*0.29, width*0.9, 2);
-          } else if (type.equals("sound box")) {
-            if (level.sounds.size()==0) {
-              fill(0);
-              textSize(20);
-              textAlign(CENTER, CENTER);
-              text("this level does not have any sounds currently", width/2, height/2);
-            } else {
-              int fileind=0;
-              String[] keys=new String[0];
-              keys=level.sounds.keySet().toArray(keys);
-              String current=thing.getData();
-              for (int i=0; i<keys.length; i++) {
-                if (keys[i].equals(current)) {
-                  fileind=i;
-                  break;
-                }
-              }
-              fill(0);
-              textSize(25);
-              text("current sound: "+keys[fileind], width/2, height*0.4);
-              thing.setData(keys[fileind]);
-              if (fileind>0)
-                prevSound.draw();
-              if (fileind<keys.length-1)
-                nextSound.draw();
+            PropertyConfigEnviormentContext context = createPropertyConfigContext();
+            for(int i=PROPERTIES_PER_PAGE*selectionPropertiesPage;i<properties.length && i < PROPERTIES_PER_PAGE * selectionPropertiesPage +PROPERTIES_PER_PAGE;i++){
+              properties[i].draw(i%PROPERTIES_PER_PAGE,context);
             }
-          } else if (type.equals("read var")||type.equals("set var")) {
-            int curvar=logicThing.getData();
-            if (curvar>0)
-              prevSound.draw();
-            if (curvar<level.variables.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            text("b"+curvar, width/2, height*0.4);
-            text("current variable", width/2, height*0.36);
-          } else if (type.equals("set visable")) {
-            int curgroop=logicThing.getData();
-            if (curgroop>0)
-              prevSound.draw();
-            if (curgroop<level.groups.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            text(level.groupNames.get(curgroop), width/2, height*0.4);
-            text("current group", width/2, height*0.36);
-          } else if (type.equals("x-offset")) {
-            int curgroop=logicThing.getData();
-            if (curgroop>0)
-              prevSound.draw();
-            if (curgroop<level.groups.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            text(level.groupNames.get(curgroop), width/2, height*0.4);
-            text("current group", width/2, height*0.36);
-            text("offset", width/2, height*0.46);
-            text(((SetXOffset)logicThing).getOffset(), width/2, height*0.53);
-            increase.draw();
-            increaseMore.draw();
-            increaseAlot.draw();
-            decrease.draw();
-            decreaseMore.draw();
-            decreaseAlot.draw();
-          } else if (type.equals("y-offset")) {
-            int curgroop=logicThing.getData();
-            if (curgroop>0)
-              prevSound.draw();
-            if (curgroop<level.groups.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            text(level.groupNames.get(curgroop), width/2, height*0.4);
-            text("current group", width/2, height*0.36);
-            text("offset", width/2, height*0.46);
-            text(((SetYOffset)logicThing).getOffset(), width/2, height*0.53);
-            increase.draw();
-            increaseMore.draw();
-            increaseAlot.draw();
-            decrease.draw();
-            decreaseMore.draw();
-            decreaseAlot.draw();
-          } else if (type.equals("z-offset")) {
-            int curgroop=logicThing.getData();
-            if (curgroop>0)
-              prevSound.draw();
-            if (curgroop<level.groups.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            text(level.groupNames.get(curgroop), width/2, height*0.4);
-            text("current group", width/2, height*0.36);
-            text("offset", width/2, height*0.46);
-            text(((SetZOffset)logicThing).getOffset(), width/2, height*0.53);
-            increase.draw();
-            increaseMore.draw();
-            increaseAlot.draw();
-            decrease.draw();
-            decreaseMore.draw();
-            decreaseAlot.draw();
-          } else if (type.equals("logic button")) {
-            int curvar=thing.getDataI();
-            if (curvar>0)
-              prevSound.draw();
-            if (curvar<level.variables.size()-1)
-              nextSound.draw();
-            fill(0);
-            textSize(25);
-            if (curvar==-1) {
-              text("none", width/2, height*0.4);
-            } else {
-              text("b"+curvar, width/2, height*0.4);
+            if(selectionPropertiesPage < (properties.length-1)/PROPERTIES_PER_PAGE){
+              nextPropertyPageButton.draw();
             }
-            text("current variable", width/2, height*0.36);
-          } else if (type.equals("delay")) {
-            fill(0);
-            textSize(25);
-            text("delay in ticks (50tps)", width/2, height*0.46);
-            text(logicThing.getData(), width/2, height*0.53);
-            increase.draw();
-            increaseMore.draw();
-            increaseAlot.draw();
-            if (logicThing.getData()>1)
-              decrease.draw();
-            if (logicThing.getData()>10)
-              decreaseMore.draw();
-            if (logicThing.getData()>100)
-              decreaseAlot.draw();
-          } else if (type.equals("play sound")) {
-            if (level.sounds.size()==0) {
-              fill(0);
-              textSize(20);
-              textAlign(CENTER, CENTER);
-              text("this level does not have any sounds currently", width/2, height/2);
-            } else {
-              String[] keys=new String[0];
-              keys=level.sounds.keySet().toArray(keys);
-              int currenti=logicThing.getData();
-              fill(0);
-              textSize(25);
-              if (currenti<0) {
-                text("no sound selected", width/2, height*0.4);
-              } else {
-                text("current sound: "+keys[currenti], width/2, height*0.4);
-              }
-              if (currenti>0)
-                prevSound.draw();
-              if (currenti<keys.length-1)
-                nextSound.draw();
+            if(selectionPropertiesPage > 0){
+              prevPropertyPageButton.draw();
             }
           } else {
             fill(0);
             textSize(20);
             textAlign(CENTER, CENTER);
-            text("this object does not have any outher\nproperties that can be changed", width/2, height/2);
+            text("This object does not have any outher\nproperties that can be changed", width/2, height/2);
           }
           if (editingStage) {//component group selector
             fill(0);
@@ -1367,13 +1250,23 @@ class ToolBox extends PApplet {
             if (selectingBlueprint && blueprints.length != 0 && placeBlueprint3DButton.isMouseOver()) {
               StageComponent tmp;
               Stage current=level.stages.get(currentStageIndex);
-              for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
-                tmp=blueprints[currentBluieprintIndex].parts.get(i);
+              
+              //make a clone of the blueprint
+              SerializedData serializedBlueprintData = blueprints[currentBluieprintIndex].serialize();
+              byte[] serialBytes = serializedBlueprintData.getSerializedData();
+              Stage tmpBlueprint = (Stage)Deserializers.deserializeObject(serialBytes,new SerialIterator(0,serialBytes));
+              
+              for (int i=0; i<tmpBlueprint.parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
+                tmp=tmpBlueprint.parts.get(i);
+                //modify the posstion of the component to be correct
+                tmp.setX(tmp.getX()+blueprintPlacemntX);
+                tmp.setY(tmp.getY()+blueprintPlacemntY);
+                tmp.setZ(tmp.getZ()+blueprintPlacemntZ);
                 //coins are special
                 if (tmp instanceof Coin) {
                   Coin g;
                   //make a copy of the coin for the apprirate dimention 
-                  g=(Coin)tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ);
+                  g =(Coin)tmp;
   
                   //set the correct ID for the coin
                   g.coinId = level.numOfCoins;
@@ -1383,7 +1276,7 @@ class ToolBox extends PApplet {
                   level.numOfCoins++;
                   continue;
                 }
-                current.parts.add(tmp.copy(blueprintPlacemntX,blueprintPlacemntY,blueprintPlacemntZ));//preform a 3D copy on the curernt part and add it to the stage
+                current.parts.add(tmp);
               }
                 
             }
@@ -1567,172 +1460,53 @@ class ToolBox extends PApplet {
       }//end of tools
 
       if (page.equals("selection")) {//if the page is the selection page
-        if (selectedIndex!=-1) {//if something is elected
+        if (selectedIndex!=-1) {//if something is selected
+          
+          
           String type="";
+          Configurable configComponent = null;
+          
           StageComponent thing= new GenericStageComponent();
           LogicComponent logicThing=new GenericLogicComponent(new LogicCompoentnPlacementContext(-10000,-10000,null));
-          //get the thing that is being editied
           if (editingStage) {
             thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
             type=thing.type;
+            if(thing instanceof Configurable){
+              configComponent = (Configurable)thing;
+            }
           }
           if (editinglogicBoard) {
             logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
             type=logicThing.type;
-          }
-          //component specific hard coded actions
-          //not going to document this shit as this will be replaced with a better system in the near future
-          if (type.equals("WritableSign")) {//if the current selected object is a sign
-            if (mouseX>=width*0.05&&mouseX<=width*0.9&&mouseY>=height*0.21&&mouseY<=height*0.29) {//place to click to start typing
-              typingSign=true;
-            } else {
-              typingSign=false;
+            if(logicThing instanceof Configurable){
+              configComponent = (Configurable)logicThing;
             }
-          } else if (type.equals("sound box")) {
-            if (level.sounds.size()==0) {
-            } else {
-              int fileind=0;
-              String[] keys=new String[0];
-              keys=level.sounds.keySet().toArray(keys);
-              String current=thing.getData();
-              for (int i=0; i<keys.length; i++) {
-                if (keys[i].equals(current)) {
-                  fileind=i;
-                  break;
-                }
+          }
+          
+          if(configComponent != null){
+            Property<?,?> properties[] = configComponent.getProperties();
+            if(selectionPropertiesPage > (properties.length-1)/PROPERTIES_PER_PAGE){
+              selectionPropertiesPage = 0;
+            }
+            //procees clicks for the properties them selfs
+            PropertyConfigEnviormentContext context = createPropertyConfigContext();
+            for(int i = PROPERTIES_PER_PAGE * selectionPropertiesPage; i < properties.length && i < PROPERTIES_PER_PAGE * selectionPropertiesPage + PROPERTIES_PER_PAGE;i++){
+              properties[i].mouseClicked(i%PROPERTIES_PER_PAGE, context);
+            }
+            
+            //property page buttons
+            if(selectionPropertiesPage < (properties.length-1)/PROPERTIES_PER_PAGE){
+              if(nextPropertyPageButton.isMouseOver()){
+                selectionPropertiesPage++;
               }
-
-              if (fileind>0&&prevSound.isMouseOver())
-                thing.setData(keys[fileind-1]);
-              if (fileind<keys.length-1&&nextSound.isMouseOver())
-                thing.setData(keys[fileind+1]);
             }
-          } else if (type.equals("read var")||type.equals("set var")) {
-            int curvar=logicThing.getData();
-            if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-          } else if (type.equals("set visable")) {
-            int curvar=logicThing.getData();
-            if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-          } else if (type.equals("x-offset")) {
-            SetXOffset r=(SetXOffset)logicThing;
-            if (increase.isMouseOver()) {
-              r.setOffset(r.getOffset()+1);
-            }
-            if (increaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()+10);
-            }
-            if (increaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()+100);
-            }
-            if (decrease.isMouseOver()) {
-              r.setOffset(r.getOffset()-1);
-            }
-            if (decreaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()-10);
-            }
-            if (decreaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()-100);
-            }
-            int curvar=logicThing.getData();
-            if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-          } else if (type.equals("y-offset")) {
-            SetYOffset r=(SetYOffset)logicThing;
-            if (increase.isMouseOver()) {
-              r.setOffset(r.getOffset()+1);
-            }
-            if (increaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()+10);
-            }
-            if (increaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()+100);
-            }
-            if (decrease.isMouseOver()) {
-              r.setOffset(r.getOffset()-1);
-            }
-            if (decreaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()-10);
-            }
-            if (decreaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()-100);
-            }
-            int curvar=logicThing.getData();
-            if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-          } else if (type.equals("z-offset")) {
-            SetZOffset r=(SetZOffset)logicThing;
-            if (increase.isMouseOver()) {
-              r.setOffset(r.getOffset()+1);
-            }
-            if (increaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()+10);
-            }
-            if (increaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()+100);
-            }
-            if (decrease.isMouseOver()) {
-              r.setOffset(r.getOffset()-1);
-            }
-            if (decreaseMore.isMouseOver()) {
-              r.setOffset(r.getOffset()-10);
-            }
-            if (decreaseAlot.isMouseOver()) {
-              r.setOffset(r.getOffset()-100);
-            }
-            int curvar=logicThing.getData();
-            if (curvar>0&&prevSound.isMouseOver())
-              logicThing.setData(curvar-1);
-            if (curvar<level.groups.size()-1&&nextSound.isMouseOver())
-              logicThing.setData(curvar+1);
-          } else if (type.equals("logic button")) {
-            int curvar=thing.getDataI();
-            if (curvar>0&&prevSound.isMouseOver())
-              thing.setData(curvar-1);
-            if (curvar<level.variables.size()-1&&nextSound.isMouseOver())
-              thing.setData(curvar+1);
-          } else if (type.equals("delay")) {
-            int curval=logicThing.getData();
-            if (increase.isMouseOver()) {
-              logicThing.setData(logicThing.getData()+1);
-            }
-            if (increaseMore.isMouseOver()) {
-              logicThing.setData(logicThing.getData()+10);
-            }
-            if (increaseAlot.isMouseOver()) {
-              logicThing.setData(logicThing.getData()+100);
-            }
-            if (decrease.isMouseOver()&&curval>1) {
-              logicThing.setData(logicThing.getData()-1);
-            }
-            if (decreaseMore.isMouseOver()&&curval>10) {
-              logicThing.setData(logicThing.getData()-10);
-            }
-            if (decreaseAlot.isMouseOver()&&curval>100) {
-              logicThing.setData(logicThing.getData()-100);
-            }
-          } else if (type.equals("play sound")) {
-            if (level.sounds.size()==0) {
-            } else {
-              String[] keys=new String[0];
-              keys=level.sounds.keySet().toArray(keys);
-              int current=logicThing.getData();
-
-              if (current>0&&prevSound.isMouseOver())
-                logicThing.setData(current-1);
-              if (current<keys.length-1&&nextSound.isMouseOver())
-                logicThing.setData(current+1);
+            if(selectionPropertiesPage > 0){
+              if(prevPropertyPageButton.isMouseOver()){
+                selectionPropertiesPage--;
+              }
             }
           }
+          
           if (editingStage) {
             if (thing.group<level.groups.size()-1&&nextGroup.isMouseOver()) {
               thing.group++;
@@ -1912,27 +1686,123 @@ class ToolBox extends PApplet {
       if (page.equals("selection")) {
         //sign selection text entering
         //this will be modularized in the near future
-        if (selectedIndex!=-1&&editingStage) {
-          StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);//get the component
-          String type=thing.type;
-          if (type.equals("WritableSign")) {//if the current selected object is a sign
-            if (typingSign) {
-              thing.setData(getInput(thing.getData(), 3, keyCode, key));
+        if (selectedIndex!=-1) {
+          
+          Configurable configComponent = null;
+          if (editingStage) {
+            StageComponent thing = level.stages.get(currentStageIndex).parts.get(selectedIndex);
+            if(thing instanceof Configurable){
+              configComponent = (Configurable)thing;
             }
           }
-        }
+          if (editinglogicBoard) {
+            LogicComponent logicThing = level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
+            if(logicThing instanceof Configurable){
+              configComponent = (Configurable)logicThing;
+            }
+          }
+          
+          if(configComponent != null){
+            Property<?,?> properties[] = configComponent.getProperties();
+            if(selectionPropertiesPage > (properties.length-1)/PROPERTIES_PER_PAGE){
+              selectionPropertiesPage = 0;
+            }
+            PropertyConfigEnviormentContext context = createPropertyConfigContext();
+            for(int i=PROPERTIES_PER_PAGE*selectionPropertiesPage;i<properties.length && i < PROPERTIES_PER_PAGE * selectionPropertiesPage +PROPERTIES_PER_PAGE;i++){
+              properties[i].keyPressed(i%PROPERTIES_PER_PAGE, context);
+            }
+          }
+        }//end of something is selected
       }//end of page is selection
       
       if (page.equals("variables and groups")) {
         //new group name typing
         if (level!=null) {
           if (typingGroopName) {
-            newGroopName=getInput(newGroopName, 0, keyCode, key);
+            newGroopName = getInput(newGroopName, 0, keyCode, key);
           }
         }
       }//end of page is variables and groops
     }
   }//end of keypressed
+  
+  void keyReleased(){
+    if (levelCreator) {
+      if (page.equals("selection")) {
+        //sign selection text entering
+        //this will be modularized in the near future
+        if (selectedIndex!=-1) {
+          Configurable configComponent = null;
+          if (editingStage) {
+            StageComponent thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+            if(thing instanceof Configurable){
+              configComponent = (Configurable)thing;
+            }
+          }
+          if (editinglogicBoard) {
+            LogicComponent logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
+            if(logicThing instanceof Configurable){
+              configComponent = (Configurable)logicThing;
+            }
+          }
+          
+          if(configComponent != null){
+            Property<?,?> properties[] = configComponent.getProperties();
+            if(selectionPropertiesPage > (properties.length-1)/PROPERTIES_PER_PAGE){
+              selectionPropertiesPage = 0;
+            }
+           
+            PropertyConfigEnviormentContext context = createPropertyConfigContext();
+            for(int i = PROPERTIES_PER_PAGE * selectionPropertiesPage; i < properties.length && i < PROPERTIES_PER_PAGE * selectionPropertiesPage + PROPERTIES_PER_PAGE;i++){
+              properties[i].keyReleased(i%PROPERTIES_PER_PAGE, context);
+            }
+          }
+        }
+      }
+    }
+  }//end of key released
+  
+  void keyTyped(){
+    if (levelCreator) {
+      if (page.equals("selection")) {
+        //sign selection text entering
+        //this will be modularized in the near future
+        if (selectedIndex!=-1) {
+          Configurable configComponent = null;
+          if (editingStage) {
+            StageComponent thing= level.stages.get(currentStageIndex).parts.get(selectedIndex);
+            if(thing instanceof Configurable){
+              configComponent = (Configurable)thing;
+            }
+          }
+          if (editinglogicBoard) {
+            LogicComponent logicThing=level.logicBoards.get(logicBoardIndex).components.get(selectedIndex);
+            if(logicThing instanceof Configurable){
+              configComponent = (Configurable)logicThing;
+            }
+          }
+          
+          if(configComponent != null){
+            Property<?,?> properties[] = configComponent.getProperties();
+            if(selectionPropertiesPage > (properties.length-1)/PROPERTIES_PER_PAGE){
+              selectionPropertiesPage = 0;
+            }
+            PropertyConfigEnviormentContext context = createPropertyConfigContext();
+            for(int i = PROPERTIES_PER_PAGE * selectionPropertiesPage; i < properties.length && i < PROPERTIES_PER_PAGE * selectionPropertiesPage + PROPERTIES_PER_PAGE; i++){
+              properties[i].keyTyped(i%PROPERTIES_PER_PAGE, context);
+            }
+          }
+        }
+      }
+    }
+  }//end of key typed
+  
+  /**Create a new config property context with all the required info
+  @return a new property config context object
+  */
+  private PropertyConfigEnviormentContext createPropertyConfigContext(){
+    return new PropertyConfigEnviormentContext(level.variables.size(),level.groupNames.toArray(String[]::new),level.sounds.keySet().toArray(String[]::new));
+  }
 }//end of ToolBox class
 
 //end of tool_box_window.pde

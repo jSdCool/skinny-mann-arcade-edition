@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**Sign stage component
 */
-public class WritableSign extends StageComponent {
+public class WritableSign extends StageComponent implements Configurable {
   
   public static final Identifier ID = new Identifier("WritableSign");
   
@@ -46,25 +46,7 @@ public class WritableSign extends StageComponent {
     deserial(iterator);
     contents = iterator.getString();
   }
-  
-  public StageComponent copy() {
-    WritableSign e=new WritableSign(new StageComponentPlacementContext(x, y, z));
-    e.contents=contents;
-    return  e;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    WritableSign e = new WritableSign(new StageComponentPlacementContext(x+offsetX,y+offsetY));
-    e.contents = contents;
-    return e;
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    WritableSign e = new WritableSign(new StageComponentPlacementContext(x+offsetX,y+offsetY,z+offsetZ));
-    e.contents = contents;
-    return e;
-  }
-  
+
   /**Render the 2D representation of this component.<br>
   NOTE: this method may be called more then once per frame
   @param render The surface to draw to
@@ -76,9 +58,7 @@ public class WritableSign extends StageComponent {
     source.drawSign(source.Scale*((x+group.xOffset)-source.drawCamPosX), source.Scale*((y+group.yOffset)+source.drawCamPosY), source.Scale,render);
 
     Collider2D playerHitBox = source.players[source.currentPlayer].getHitBox2D(0,0);
-    if (source.collisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x-35,y-40,70,40))) {//display the press e message to the player
-      source.fill(255);
-      source.textSize(source.Scale*20);
+    if (CollisionDetection.collide2D(playerHitBox,Collider2D.createRectHitbox(x-35,y-40,70,40))) {//display the press e message to the player
       source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
 
@@ -103,9 +83,7 @@ public class WritableSign extends StageComponent {
     source.drawSign((x+group.xOffset), (y+group.yOffset), (z+group.zOffset), source.Scale,render);
 
      Collider3D playerHitBox = source.players[source.currentPlayer].getHitBox3D(0,0,0);
-    if (source.collisionDetection.collide3D(playerHitBox,Collider3D.createBoxHitBox(x-35,y-40,z-20,70,40,40))) {
-      source.fill(255);
-      source.textSize(source.Scale*20);
+    if (CollisionDetection.collide3D(playerHitBox,Collider3D.createBoxHitBox(x-35,y-40,z-20,70,40,40))) {
       source.displayText="Press B";
       source.displayTextUntill=source.millis()+100;
       if (source.E_pressed) {
@@ -171,20 +149,6 @@ public class WritableSign extends StageComponent {
     part.setInt("group", group);
     return part;
   }
-
-  /**Set a string data property
-  @param data The data to set
-  */
-  public void setData(String data) {
-    contents=data;
-  }
-
-  /**Get the value of a string data proerty
-  @return The value of the string data
-  */
-  public String getData() {
-    return contents;
-  }
   
   /**Get the 2D collision box for entitiy collisions
   @return 2D hitbox for this component or null for none
@@ -216,5 +180,56 @@ public class WritableSign extends StageComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  public Property[] getProperties(){
+    String[] lines = contents.split("\n",-1);
+    final int numLines = lines.length;
+    Property[] props = new Property[numLines+1];
+    props[0] = new IntegerProperty( ()-> numLines, (value) -> setNumLines(value), "Number of Lines");
+    for(int i=0;i<lines.length;i++){
+      final int i2 = i;
+      props[i+1] = new StringProperty( ()->lines[i2], (value) -> updateLine(i2,value,lines), "Line "+(i2+1));
+    }
+    return props;
+  }
+
+  /**Set the number of lines on the sign
+  @param num The new number of lines
+  */
+  private void setNumLines(int num){
+    if( num > 0 && num <= 8){
+      String[] lines = contents.split("\n");
+      final int numLines = lines.length;
+      if(num > numLines){//grow
+        contents += "\n";//just add a new line to the end
+      } else if (num < numLines){//shrink
+        String[] newLines = new String[numLines-1];
+        for(int i=0;i<newLines.length;i++){
+          newLines[i] = lines[i];
+        }
+        contents = String.join("\n",newLines);
+      }
+    }
+  }
+
+  /**update a specific line on the sign
+  @param lineNum The index of the line
+  @param content The new content of the line
+  @param lines The current lines of the sign
+  */
+  private void updateLine(int lineNum,String content, String[] lines){
+    content = content.replaceAll("\n","");//filter out any line breaks
+    lines[lineNum] = content;
+    contents = String.join("\n",lines);
+  }
+
+  /**Get the text that is on the sign
+  */
+  public String getContent(){
+    return contents;
   }
 }

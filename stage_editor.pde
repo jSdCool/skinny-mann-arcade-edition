@@ -1216,17 +1216,23 @@ void GUImouseClicked() {
         ix=(int)(mouseX/Scale)+camPos;
         iy=(int)(mouseY/Scale)-camPosY;
       }
-      for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
-        tmp = blueprints[currentBluieprintIndex].parts.get(i);//get the current component  of this blueprint
+      
+      SerializedData blueprintSerialData = blueprints[currentBluieprintIndex].serialize();//get the raw binarry data of the blueprint
+      byte[] serialBytes = blueprintSerialData.getSerializedData();//get the byte array
+      Stage copyedBlueprint = (Stage)Deserializers.deserializeObject(serialBytes, new SerialIterator(0,serialBytes));//reconstruct a copy of that array
+      
+      for (int i=0; i < copyedBlueprint.parts.size(); i++) {//translate the objects from blueprint form into stage readdy form
+        tmp = copyedBlueprint.parts.get(i);//get the current component  of this blueprint
+        //translate each object into its correct position, remember that the current position value is effectivly an offet from the chosen placement position
+        tmp.setX(tmp.getX()+ix);
+        tmp.setY(tmp.getY()+iy);
+        tmp.setZ(tmp.getZ()+iz);
+        
         //coins are special
         if (tmp instanceof Coin) {
           Coin g;
+          g = (Coin)tmp;
           //make a copy of the coin for the apprirate dimention 
-          if(type3d){
-            g=(Coin)tmp.copy(ix,iy,iz);
-          }else{
-            g=(Coin)tmp.copy(ix,iy);
-          }
           //set the correct ID for the coin
           g.coinId = level.numOfCoins;
           //add the coin to the stage
@@ -1236,14 +1242,8 @@ void GUImouseClicked() {
           continue;
         }
         
-        //create an offset copy of the component and put it in the stage,
-        //TODO: repalce this terrible copy shit with use of the serial constructor
-        if(type3d){//if the bluepint is 3D
-          current.add(tmp.copy(ix,iy,iz));//preform a 3D copy on the curernt part and add it to the stage
-        }else{
-          current.add(tmp.copy(ix,iy));//preform a 2D copy on a part and add it to the stage
-        }
-        
+        //add the offsetted copy to the stage
+        current.parts.add(tmp);
       }
     }
   }//end of eddit stage
@@ -1570,8 +1570,7 @@ void mouseClicked3D() {
 void generateDisplayBlueprint() {
   String type = blueprints[currentBluieprintIndex].type;
   boolean type3d = type.equals("3D blueprint");
-  displayBlueprint=new Stage("tmp", type);//create the display blueprint
-  int ix, iy, iz =startingDepth;
+  int ix, iy, iz = startingDepth;
   //calculate the base position for the blueprint
   if (grid_mode) {
     ix=Math.round(((int)(mouseX/Scale)+camPos)*1.0/grid_size)*grid_size;
@@ -1580,28 +1579,19 @@ void generateDisplayBlueprint() {
     ix=(int)(mouseX/Scale)+camPos;
     iy=(int)(mouseY/Scale)-camPosY;
   }
+  
+  //make a clone of the blueprint
+  SerializedData serializedBlueprintData = blueprints[currentBluieprintIndex].serialize();
+  byte[] serialBytes = serializedBlueprintData.getSerializedData();
+  displayBlueprint = (Stage)Deserializers.deserializeObject(serialBytes,new SerialIterator(0,serialBytes));
 
   //for each part in the blueprint
   for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
-    //TODO replace the stuipid copy thing with use of the serial constructor
-    displayBlueprint.parts.add(blueprints[currentBluieprintIndex].parts.get(i).copy());//add a copy of the blueprint object to the display blueprint
-    
-    //TODO change this to use the simpler proper movemnt methods
-    //if this component is a trangular one
-    if (displayBlueprint.parts.get(i).type.equals("sloap")||displayBlueprint.parts.get(i).type.equals("holoTriangle")) {
-      //translate it over to the correct visual positin  
-      displayBlueprint.parts.get(i).dx+=ix;
-      displayBlueprint.parts.get(i).dy+=iy;
-      if(type3d){
-        displayBlueprint.parts.get(i).dz+=iz;
-      }
-    }
-    //translate the component over to the display position
-    displayBlueprint.parts.get(i).x+=ix;
-    displayBlueprint.parts.get(i).y+=iy;
-    if(type3d){
-      displayBlueprint.parts.get(i).z+=iz;
-    }
+    //modify the posstion of the component to be correct
+    StageComponent part = displayBlueprint.parts.get(i);
+    part.setX(part.getX()+ix);
+    part.setY(part.getY()+iy);
+    part.setZ(part.getZ()+iz);
   }
 }
 
@@ -1609,23 +1599,30 @@ void generateDisplayBlueprint() {
 */
 void generateDisplayBlueprint3D() {
   String type = blueprints[currentBluieprintIndex].type;
-  displayBlueprint=new Stage("tmp", type);
   float ix = blueprintPlacemntX, iy = blueprintPlacemntY, iz = blueprintPlacemntZ;
   //calculate the min and max locations of the blueprint (for the arrows render)
   blueprintMax=new float[]{-66666666,-66666666,-66666666};
   blueprintMin=new float[]{66666666,66666666,66666666};
+  
+  //make a clone of the blueprint
+  SerializedData serializedBlueprintData = blueprints[currentBluieprintIndex].serialize();
+  byte[] serialBytes = serializedBlueprintData.getSerializedData();
+  displayBlueprint = (Stage)Deserializers.deserializeObject(serialBytes,new SerialIterator(0,serialBytes));
+  
   //for each part of the blueprint
-  for (int i=0; i<blueprints[currentBluieprintIndex].parts.size(); i++) {
-    //TODO replace stupid copy thing with use of the serial constructor
-    StageComponent part = blueprints[currentBluieprintIndex].parts.get(i).copy(ix,iy,iz);
-    displayBlueprint.parts.add(part);//add the coppied part to the display blueprint
-    //NOTE this will have to be reworked when sloaps are added to 3D. oops forgot to do this
-    blueprintMax[0]=max(blueprintMax[0],part.x+part.dx);
-    blueprintMax[1]=max(blueprintMax[1],part.y+part.dy);
-    blueprintMax[2]=max(blueprintMax[2],part.z+part.dz);
-    blueprintMin[0]=min(blueprintMin[0],part.x);
-    blueprintMin[1]=min(blueprintMin[1],part.y);
-    blueprintMin[2]=min(blueprintMin[2],part.z);
+  for (int i=0; i < displayBlueprint.parts.size(); i++) {
+    //modify the posstion of the component to be correct
+    StageComponent part = displayBlueprint.parts.get(i);
+    part.setX(part.getX()+ix);
+    part.setY(part.getY()+iy);
+    part.setZ(part.getZ()+iz);
+
+    blueprintMax[0]=max(blueprintMax[0],part.getX() + part.getWidth());
+    blueprintMax[1]=max(blueprintMax[1],part.getY() + part.getHeight());
+    blueprintMax[2]=max(blueprintMax[2],part.getZ() + part.getDepth());
+    blueprintMin[0]=min(blueprintMin[0],part.getX());
+    blueprintMin[1]=min(blueprintMin[1],part.getY());
+    blueprintMin[2]=min(blueprintMin[2],part.getZ());
   }
 }
 

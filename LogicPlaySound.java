@@ -3,7 +3,7 @@ import processing.data.*;
 import java.util.ArrayList;
 /**A logic component that can play a stage sound
 */
-public class LogicPlaySound extends LogicComponent {
+public class LogicPlaySound extends LogicComponent implements Configurable{
   
   public static final Identifier ID = new Identifier("play_sound");
   
@@ -21,7 +21,7 @@ public class LogicPlaySound extends LogicComponent {
   public LogicPlaySound(JSONObject data) {
     super(data.getFloat("x"), data.getFloat("y"), "play sound", data.getJSONArray("connections"));
     soundKey=data.getString("sound key");
-    button.setText("  play sound: "+soundKey);
+    button.setText("  play sound: "+soundKey+" ");
   }
   /**Create a play sound component from serialized binarry data
   @param iterator The source of the data
@@ -78,30 +78,6 @@ public class LogicPlaySound extends LogicComponent {
     component.setString("sound key", soundKey);
     return component;
   }
-  /**set an integer data field<br>
-  In this case the id of the sound
-  @param data The data to set
-  */
-  public void setData(int data) {
-    String[] keys=new String[0];
-    keys=source.level.sounds.keySet().toArray(keys);
-    soundKey=keys[data];
-    button.setText("  play sound: "+soundKey);
-  }
-  /**Get an integer data field<br>
-  in this case the id of the sound
-  @return the value of that data
-  */
-  public int getData() {
-    String[] keys=new String[0];
-    keys=source.level.sounds.keySet().toArray(keys);
-    for (int i=0; i<keys.length; i++) {
-      if (keys[i].equals(soundKey)) {
-        return i;
-      }
-    }
-    return -1;
-  }
   /**renders the logic component a long with its I/O terminals
   */
   public void draw() {
@@ -131,5 +107,15 @@ public class LogicPlaySound extends LogicComponent {
   @Override
   public Identifier id() {
     return ID;
+  }
+  
+  /**Get the properties that can be configured on this component
+  @return An array of the properties that can be configured
+  */
+  @Override
+  public Property[] getProperties(){
+    return new Property[]{
+      new SoundProperty(() -> soundKey, (value) -> {soundKey = value; button.setText("  play sound: "+soundKey+" ");}, "Current Sound")
+    };
   }
 }

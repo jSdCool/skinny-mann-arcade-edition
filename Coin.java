@@ -45,17 +45,6 @@ public class Coin extends StageComponent {//ground component
     deserial(iterator);
     coinId = iterator.getInt();
   }
-  public StageComponent copy() {
-    return new Coin(new StageComponentPlacementContext(x, y, z, coinId));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY){
-    return new Coin(new StageComponentPlacementContext(x+offsetX,y+offsetY,coinId));
-  }
-  
-  public StageComponent copy(float offsetX,float offsetY,float offsetZ){
-    return new Coin(new StageComponentPlacementContext(x+offsetX,y+offsetY,z+offsetZ,coinId));
-  }
   
   /**Get a JSONObject representation of this component that can be saved to a file
   @param stage_3D Wether this stage is a 3D stage

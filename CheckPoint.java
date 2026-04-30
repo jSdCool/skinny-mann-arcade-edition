@@ -43,18 +43,6 @@ public class CheckPoint extends StageComponent {
     deserial(iterator);
   }
   
-  public StageComponent copy() {
-    return new CheckPoint(new StageComponentPlacementContext(x, y, z));
-  }
-  
-  public StageComponent copy(float offsetX,float  offsetY){
-    return new CheckPoint(new StageComponentPlacementContext(x+offsetX,y+offsetY));
-  }
-  
-  public StageComponent copy(float offsetX,float  offsetY,float offsetZ){
-    return new CheckPoint(new StageComponentPlacementContext(x+offsetZ,y+offsetY,z+offsetZ));
-  }
-  
   /**Get a JSONObject representation of this component that can be saved to a file
   @param stage_3D Wether this stage is a 3D stage
   @return JSONObject representation of this object

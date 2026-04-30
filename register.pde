@@ -365,6 +365,9 @@ void registerThings(){
     render.rect((localX+5*Scale),(loaclY+5*Scale),5*Scale,10*Scale);
   },"Goon Enemy");
   EntityRegistry.register(SimpleEntity.ID,SimpleEntity::new,SimpleEntity::new,SimpleEntity::new,(render, x, y)->{},"test entity");
+  EntityRegistry.register(AlienEntity.ID,AlienEntity::new,AlienEntity::new,AlienEntity::new,(render,x,y)->{
+    AlienEntity.renderAlien2D(render,x+25,y+20,0.7,1);
+  },"Alien Entity");
   
   //other
   SerialRegistry.register(BackToMenuRequest.ID,BackToMenuRequest::new);
@@ -395,5 +398,12 @@ void registerThings(){
   SerialRegistry.register(SelectedLevelInfo.ID,SelectedLevelInfo::new);
   SerialRegistry.register(Stage.ID,Stage::new);
   SerialRegistry.register(StageSound.ID,StageSound::new);
+  
+  //register the property config UIs
+  propertyConfigRegistry.add(StringPropertyConfigUi::new);
+  propertyConfigRegistry.add(IntPropertyConfigUi::new);
+  propertyConfigRegistry.add(BooleanVariablePropertyConfigUi::new);
+  propertyConfigRegistry.add(GroupPropertyConfigUi::new);
+  propertyConfigRegistry.add(SoundPropertyConfigUi::new);
 }
 //end of register.pde

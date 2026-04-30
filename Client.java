@@ -1,6 +1,7 @@
 import java.net.Socket;
 import java.io.*;
 import java.util.ArrayList;
+import java.net.StandardSocketOptions;
 /**Multyplayer client connection and handler
 */
 public class Client extends Thread {
@@ -46,6 +47,7 @@ public class Client extends Thread {
     System.out.println("creating new client");
     try {
       socket=s;
+      socket.setOption(StandardSocketOptions.TCP_NODELAY, true);
       //get the IO streams
       output=new ObjectSerializingOutputStream(socket.getOutputStream());
       input = new ObjectDeserializingInputStream(socket.getInputStream());

@@ -115,4 +115,11 @@ public class UiButton extends Button {
     }
     return super.isMouseOver();
   }
+  
+  /**Set the inital unscaled Y posion of this butotn. Does not rescale the acutal y value
+  @param y The new inital y value
+  */
+  public void setIy(float y){
+    iY = y;
+  }
 }
