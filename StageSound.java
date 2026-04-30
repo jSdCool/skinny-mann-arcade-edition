@@ -1,7 +1,6 @@
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
-import processing.sound.*;
 /**Level component representation / container of a sound 
 */
 public class StageSound implements Serialization {
