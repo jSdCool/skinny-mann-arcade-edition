@@ -1,4 +1,4 @@
-import processing.sound.*;//import the stuffs
+import ddf.minim.*;//import the stuffs
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

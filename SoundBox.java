@@ -1,7 +1,6 @@
 import processing.core.*;
 import processing.data.*;
 import java.util.ArrayList;
-import processing.sound.*;
 /**Stage component that allow the player to trigger a sound while standing inside of it
 */
 public class SoundBox extends StageComponent {

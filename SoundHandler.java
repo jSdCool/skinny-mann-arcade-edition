@@ -1,13 +1,14 @@
 //version 2.1.0
 import processing.core.*;
-import processing.sound.*;
+import ddf.minim.*;
 import java.util.ArrayList;
 /**The game's sound engine and sound loader
 */
 public class SoundHandler extends Thread {
-  SoundFile[] music[], queue, sounds,narrations;
-  ArrayList<SoundFile> levelSounds = new ArrayList<>(),levelNarrations = new ArrayList<>();
-  private SoundFile []cSound=new SoundFile[3];//sound queue
+  Minim minim;
+  AudioPlayer[] music[], queue, sounds,narrations;
+  ArrayList<AudioPlayer> levelSounds = new ArrayList<>(),levelNarrations = new ArrayList<>();
+  private AudioPlayer []cSound=new AudioPlayer[3];//sound queue
   PApplet ggn;
   private int musNum=0, currentMusicTrack=0, trackToSwitchTo=0;
   private float masterVolume=1, musicVolume=1, sfxVolume=1, prevVol=1,narrationVolume=1;
@@ -21,25 +22,26 @@ public class SoundHandler extends Thread {
   @param X A reffence to the surface the sounds will be played from
   */
   private SoundHandler(String[][] musicFiles, String[] soundsFiles, String[] narrationFiles,PApplet X) {
-    music=new SoundFile[musicFiles.length][];
+    minim = new Minim(X);
+    music=new AudioPlayer[musicFiles.length][];
     for (int i=0; i<musicFiles.length; i++) {//set the size of the music tracks
-      music[i]=new SoundFile[musicFiles[i].length];
+      music[i]=new AudioPlayer[musicFiles[i].length];
     }
-    queue = new SoundFile[8];//create the sound queue
-    sounds=new SoundFile[soundsFiles.length];
+    queue = new AudioPlayer[8];//create the sound queue
+    sounds=new AudioPlayer[soundsFiles.length];
     for (int i =0; i<soundsFiles.length; i++) {//load the included game sounds
-      sounds[i]=new SoundFile(X, soundsFiles[i]);
+      sounds[i]=minim.loadFile(soundsFiles[i]);
     }
     ggn=X;//set the parent application to run sounds through
 
     for (int i =0; i<musicFiles.length; i++) {
       for (int j=0; j<musicFiles[i].length; j++) {
-        music[i][j]=new SoundFile(X, musicFiles[i][j]);//load the music files
+        music[i][j]=minim.loadFile(musicFiles[i][j]);//load the music files
       }
     }
-    narrations = new SoundFile[narrationFiles.length];
+    narrations = new AudioPlayer[narrationFiles.length];
     for(int i=0;i<narrations.length;i++){
-      narrations[i] = new SoundFile(X,narrationFiles[i]);//load the narrations
+      narrations[i] = minim.loadFile(narrationFiles[i]);//load the narrations
     }
     start();//start the independednt sound handler thread
   }
@@ -64,15 +66,19 @@ public class SoundHandler extends Thread {
   private void tick() {
     if (enableSounds) {//if sounds are enabled right now
       if (startMusic) {//if the music should be started
-        music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the next music track
+        music[currentMusicTrack][musNum].rewind();
+        music[currentMusicTrack][musNum].play();
+        music[currentMusicTrack][musNum].setGain(linearToDb(masterVolume * musicVolume));//play the next music track
         startMusic=false;
       }
 
       if (prevVol!=masterVolume*musicVolume) {//if the volume changed
-        music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);//change the volume of the currently playing music track
+        music[currentMusicTrack][musNum].setGain(linearToDb(masterVolume * musicVolume));
+        //music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);//change the volume of the currently playing music track
         prevVol=masterVolume*musicVolume;
         if (musicVolume*masterVolume==0) {//if the new volume is 0
-          music[currentMusicTrack][musNum].stop();//stop the music (so the console does not get spammed with warnings)
+          music[currentMusicTrack][musNum].pause();//stop the music (so the console does not get spammed with warnings)
+          music[currentMusicTrack][musNum].rewind();
         }
       }
 
@@ -81,10 +87,11 @@ public class SoundHandler extends Thread {
         if (musNum==music[currentMusicTrack].length){//if rached the end of the track go back to the start
           musNum=0;
         }
-        music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the music
+        music[currentMusicTrack][musNum].rewind();
+        music[currentMusicTrack][musNum].play();
+        music[currentMusicTrack][musNum].setGain(linearToDb(masterVolume * musicVolume));//play the music
         //there appears to be a bug in the audio librarie that prevents passing the volume as a parameter in play from working
         //so we will manualy set the volume imedatly after
-        music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);
         //what is weird is that play just calls the amp method under the hood 
       }
 
@@ -97,10 +104,11 @@ public class SoundHandler extends Thread {
       //just one of the features of the sound handler we do not currently use, why did i devlop all of this?
       if (switchMusicTrack && trackToSwitchTo != currentMusicTrack) {//if switcing track and the track to switch to is not the current track
         if (trackToSwitchTo>=0 && trackToSwitchTo<music.length) {//bounds check
-          music[currentMusicTrack][musNum].stop();//stop the music on the current track
+          music[currentMusicTrack][musNum].pause();//stop the music on the current track
           currentMusicTrack=trackToSwitchTo;//switch the track to the new one
-          music[currentMusicTrack][musNum].play(1, masterVolume*musicVolume);//play the music on the other track
-          music[currentMusicTrack][musNum].amp(masterVolume*musicVolume);//stupid volume fix
+          music[currentMusicTrack][musNum].rewind();
+          music[currentMusicTrack][musNum].play();//play the music on the other track
+          music[currentMusicTrack][musNum].setGain(linearToDb(masterVolume*musicVolume));//stupid volume fix
         }
       }
     }
@@ -110,7 +118,7 @@ public class SoundHandler extends Thread {
   @param soundNum The numberical Id of the sound to play
   */
   public void addToQueue(int soundNum) {
-    SoundFile sound;
+    AudioPlayer sound;
     if (soundNum<sounds.length) {//if the id is in the range of the global sunds
       sound=sounds[soundNum];//set the sound to the global sound
     } else {//if the id was in the grane of level specific sounds
@@ -156,7 +164,7 @@ public class SoundHandler extends Thread {
   /**Check if a sound is done in the currently playing slot
   @param R The sound to check
   */
-  private boolean moveUp(SoundFile R) {
+  private boolean moveUp(AudioPlayer R) {
     if (R==null){//if the sound is null then return true, null can be moved up
       return true;
     }
@@ -167,18 +175,24 @@ public class SoundHandler extends Thread {
     return false;
   }
   
+  private float linearToDb(float value) {
+  if (value <= 0.0001f) return -80; // effectively silent
+    return 20f * (float)Math.log10(value);
+  }
+  
   /**Try to play a sound
   @param R The list of currently playing sounds
   @param n The index of the slot to process playing for
   */
-  private void playSound(SoundFile[] R, int n) {
+  private void playSound(AudioPlayer[] R, int n) {
     if (moveUp(R[n])) {//if this slot is readdy to get the next sound
 
       R[n]=queue[0];//grab the first element from the queue
       if (R[n]!=null){//if something was grabbed
         if (masterVolume*sfxVolume!=0){//if the sound is turned on
-          R[n].play(1, masterVolume*sfxVolume);//play the sound
-          R[n].amp(masterVolume*sfxVolume);//sound lib is broken so this is nessary to deal with the volume
+          R[n].rewind();
+          R[n].play();
+          R[n].setGain(linearToDb(masterVolume * sfxVolume));
         }
       }
       //move all items in the queue up by 1
@@ -245,7 +259,7 @@ public class SoundHandler extends Thread {
   @return The id of the newly registered sound
   */
   public int registerLevelSound(String path) {
-    SoundFile sound = new SoundFile(ggn, path);
+    AudioPlayer sound = minim.loadFile(path);
     int id =sounds.length+levelSounds.size();
     levelSounds.add(sound);
     return id;
@@ -255,7 +269,7 @@ public class SoundHandler extends Thread {
   @return The id of the newly registered narration
   */
   public int registerLevelNarration(String path){
-    SoundFile sound = new SoundFile(ggn, path);
+    AudioPlayer sound = minim.loadFile(path);
     int id = narrations.length+levelNarrations.size();
     levelNarrations.add(sound);
     return id;
@@ -276,7 +290,7 @@ public class SoundHandler extends Thread {
   @return true if the specified sound is in the sound queue
   */
   public boolean isInQueue(int n) {
-    SoundFile s;
+    AudioPlayer s;
     if (n<sounds.length) {
       s= sounds[n];
     } else {
@@ -293,7 +307,7 @@ public class SoundHandler extends Thread {
   @param n The id of the sound to remove
   */
   public void cancleSound(int n) {
-    SoundFile s;
+    AudioPlayer s;
     //get the sound
     if (n<sounds.length) {
       s = sounds[n];
@@ -303,7 +317,7 @@ public class SoundHandler extends Thread {
     //check if it is currently playing
     if (s.isPlaying()) {
       //if so stop it
-      s.stop();
+      s.pause();
       return;
     }
     //go through the queue and check for the sounds
@@ -320,7 +334,7 @@ public class SoundHandler extends Thread {
   @param n The id of the narration to play
   */
   public void playNarration(int n){
-    SoundFile sound;
+    AudioPlayer sound;
     //get the narration
     if (n<narrations.length) {
       sound=narrations[n];
@@ -328,8 +342,9 @@ public class SoundHandler extends Thread {
       sound=levelNarrations.get(n-narrations.length);
     }
     //play it
-    sound.play(1, masterVolume*narrationVolume);
-    sound.amp(masterVolume*narrationVolume);
+    sound.rewind();
+    sound.play();
+    sound.setGain(linearToDb(masterVolume*narrationVolume));
     //System.out.println(masterVolume*narrationVolume);
   }
   /**Check if a narration is currently playing
@@ -347,12 +362,12 @@ public class SoundHandler extends Thread {
   @return true if any narration is playing
   */
   public boolean anyNarrationPlaying(){
-    for(SoundFile s: narrations){
+    for(AudioPlayer s: narrations){
       if(s.isPlaying()){
         return true;
       }
     }
-    for(SoundFile s: levelNarrations){
+    for(AudioPlayer s: levelNarrations){
       if(s.isPlaying()){
         return true;
       }
@@ -364,7 +379,7 @@ public class SoundHandler extends Thread {
   @param n The id of the narration to stop
   */
   public void stopNarration(int n){
-    SoundFile s;
+    AudioPlayer s;
     if (n<narrations.length) {
       s= narrations[n];
     } else {
@@ -372,7 +387,7 @@ public class SoundHandler extends Thread {
     }
 
     if (s.isPlaying()) {
-      s.stop();
+      s.pause();
       return;
     }
   }
@@ -381,12 +396,12 @@ public class SoundHandler extends Thread {
   Also runs the grabage collector afterwards
   */
   public void dumpLS() {//dump level sounds and allow them to be garbage collected
-    for (int i=0; i<levelSounds.size(); i++) {//go through the level sounds
-      levelSounds.get(i).removeFromCache();
-    }
-    for(int i=0;i<levelNarrations.size();i++){//go through the level narrations
-      levelNarrations.get(i).removeFromCache();
-    }
+    //for (int i=0; i<levelSounds.size(); i++) {//go through the level sounds
+    //  //levelSounds.get(i).removeFromCache();
+    //}
+    //for(int i=0;i<levelNarrations.size();i++){//go through the level narrations
+    //  levelNarrations.get(i).removeFromCache();
+    //}
     //reset both of the array
     levelSounds = new ArrayList<>();
     levelNarrations = new ArrayList<>();
