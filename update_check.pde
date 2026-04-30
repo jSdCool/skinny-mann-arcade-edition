@@ -156,7 +156,7 @@ void downloadUpdateFunction() {
     //execut the script
     if (platform == WINDOWS) {
       //windows has this nice way of running the script
-      Desktop.getDesktop().open(new File(appdata+"/CBi-games/skinny mann updater/run.cmd"));
+      //Desktop.getDesktop().open(new File(appdata+"/CBi-games/skinny mann updater/run.cmd"));
     } else if (platform == LINUX) {
       //linux is a but more involved
       //allow execution because linux is a bitch with file permissions
